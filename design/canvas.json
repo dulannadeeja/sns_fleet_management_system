@@ -1,0 +1,322 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Denied.dc.html": {
+      "h": 1300,
+      "title": "8 · Price change needs admin (scenario 7)",
+      "w": 390,
+      "x": 1880,
+      "y": 5100
+    },
+    "Discrepancy.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "title": "6 · Evening money · drawer and bank",
+      "w": 1440,
+      "x": 0,
+      "y": 8080
+    },
+    "EmployeeDesk.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "title": "10 · Employee home · desktop · 11:30",
+      "w": 1440,
+      "x": 0,
+      "y": 10200
+    },
+    "Handover.dc.html": {
+      "h": 1400,
+      "title": "4 · Handover blocked · 4 / 5",
+      "w": 390,
+      "x": 470,
+      "y": 5100
+    },
+    "Main.dc.html": {
+      "h": 1640,
+      "title": "0 · Directions and the Ratna system",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "NewRental.dc.html": {
+      "h": 1560,
+      "title": "7 · New rental · customer warning (scenario 2)",
+      "w": 390,
+      "x": 1410,
+      "y": 5100
+    },
+    "OwnerDesk.dc.html": {
+      "expand": "fill",
+      "h": 2700,
+      "title": "1 · Owner home · desktop · 11:05",
+      "w": 1440,
+      "x": 0,
+      "y": 1980
+    },
+    "OwnerPhone.dc.html": {
+      "h": 2300,
+      "title": "2 · Owner home · phone · 11:05",
+      "w": 390,
+      "x": 1520,
+      "y": 1980
+    },
+    "Return.dc.html": {
+      "h": 2560,
+      "title": "5 · Return and payment · R-0218",
+      "w": 390,
+      "x": 940,
+      "y": 5100
+    },
+    "Settlement.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "title": "9 · Settlement CBK 4127 (scenario 6)",
+      "w": 1280,
+      "x": 1520,
+      "y": 8080
+    },
+    "StaffPhone.dc.html": {
+      "h": 1900,
+      "title": "3 · Employee home · phone · 11:30",
+      "w": 390,
+      "x": 0,
+      "y": 5100
+    },
+    "VehicleDetail.dc.html": {
+      "x": 0,
+      "y": 13240,
+      "w": 1280,
+      "h": 1720,
+      "title": "11 · Vehicle detail · owner · desktop",
+      "expand": "fill"
+    },
+    "VehicleDetailPhone.dc.html": {
+      "x": 1360,
+      "y": 13240,
+      "w": 390,
+      "h": 2720,
+      "title": "12 · Vehicle detail · owner · phone"
+    },
+    "VehicleDetailStaff.dc.html": {
+      "x": 1830,
+      "y": 13240,
+      "w": 390,
+      "h": 1540,
+      "title": "13 · Vehicle detail · staff · phone"
+    },
+    "VehicleStates.dc.html": {
+      "x": 2300,
+      "y": 13240,
+      "w": 1280,
+      "h": 1420,
+      "title": "14 · Vehicle detail · top block by status"
+    },
+    "Rentals.dc.html": {
+      "x": 0,
+      "y": 16360,
+      "w": 1280,
+      "h": 1400,
+      "title": "15 · Rentals · owner · desktop",
+      "expand": "fill"
+    },
+    "RentalsPhone.dc.html": {
+      "x": 1360,
+      "y": 16360,
+      "w": 390,
+      "h": 1900,
+      "title": "16 · Rentals · staff · phone"
+    },
+    "RentalDetail.dc.html": {
+      "x": 1830,
+      "y": 16360,
+      "w": 1280,
+      "h": 1520,
+      "title": "17 · Rental R‑0218 · owner · desktop",
+      "expand": "fill"
+    },
+    "RentalDetailPhone.dc.html": {
+      "x": 3190,
+      "y": 16360,
+      "w": 390,
+      "h": 2300,
+      "title": "18 · Rental R‑0218 · staff · phone"
+    },
+    "RentalOverdue.dc.html": {
+      "x": 3660,
+      "y": 16360,
+      "w": 1280,
+      "h": 820,
+      "title": "19 · Rental R‑0216 · overdue, still open",
+      "expand": "fill"
+    },
+    "Customers.dc.html": {
+      "x": 0,
+      "y": 19060,
+      "w": 1280,
+      "h": 780,
+      "title": "20 · Customers · owner · desktop",
+      "expand": "fill"
+    },
+    "CustomersPhone.dc.html": {
+      "x": 1360,
+      "y": 19060,
+      "w": 390,
+      "h": 844,
+      "title": "21 · Customers · staff · phone"
+    },
+    "CustomerDetail.dc.html": {
+      "x": 1830,
+      "y": 19060,
+      "w": 1280,
+      "h": 960,
+      "title": "22 · Customer Kasun P. · owner · desktop",
+      "expand": "fill"
+    },
+    "CustomerDetailPhone.dc.html": {
+      "x": 3190,
+      "y": 19060,
+      "w": 390,
+      "h": 2080,
+      "title": "23 · Customer Kasun P. · staff · phone"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-23T10:10:00Z",
+    "v": 1
+  },
+  "designSystems": [
+    {
+      "artifact": "https://claude.ai/artifact/DgvBess7uWYAyy5ProSte8",
+      "copiedAt": "2026-10-23T16:45:00Z",
+      "namespace": "ratna",
+      "title": "SNS Rent Car · Ratna",
+      "version": "1792773781-5204"
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "fonts": {
+      "fill": "blue",
+      "size": 24,
+      "text": "Type: Inter for English and numbers, Noto Sans Sinhala for Sinhala, weights 400/500/600 only. Every board on this canvas was rendered with the real font files and checked for overflow; Impeccable's detector reports no structural findings. Still check on the staff's own phones.",
+      "w": 380,
+      "x": 2350,
+      "y": 5100
+    },
+    "rowMoney": {
+      "kind": "title1",
+      "maxW": 2800,
+      "text": "Owner money — scenarios 5, 6",
+      "w": 240,
+      "x": 0,
+      "y": 7800
+    },
+    "rowOwner": {
+      "kind": "title1",
+      "maxW": 1910,
+      "text": "Owner — the same Concept A home, in Ratna",
+      "w": 240,
+      "x": 0,
+      "y": 1700
+    },
+    "rowStaff": {
+      "kind": "title1",
+      "maxW": 2270,
+      "text": "Staff on the phone — scenarios 2, 3, 4, 7",
+      "w": 240,
+      "x": 0,
+      "y": 4820
+    },
+    "rowStaffDesk": {
+      "kind": "title1",
+      "maxW": 1440,
+      "text": "Employee on a computer — same gallery, no money",
+      "w": 240,
+      "x": 0,
+      "y": 9920
+    },
+    "sample": {
+      "size": 24,
+      "text": "Ratna changes the look only. Screens, steps, words, permissions and money rules are Concept A's. All names, plates and amounts are illustrative sample data from the design briefs (Thu 22 Oct 2026). Sinhala labels are drafts for SNS review. Vehicle pictures are line outlines until real car photos are added.",
+      "w": 380,
+      "x": 1990,
+      "y": 1980
+    },
+    "rowVD": {
+      "x": 0,
+      "y": 12960,
+      "text": "Vehicle detail — every card opens this",
+      "kind": "title1",
+      "maxW": 3580
+    },
+    "vdNote": {
+      "x": 3660,
+      "y": 13240,
+      "w": 400,
+      "text": "Layout B, chosen 23 Oct. Owner sees everything; staff lose the two owner-only sections and the partner’s name, everywhere including history. The action changes with status (board 14). Unknown facts stay unknown: the revenue licence date and the next service were never recorded, so they show as dashed “add” rows, not invented dates.",
+      "fill": "yellow",
+      "size": 24
+    },
+    "rowRent": {
+      "x": 0,
+      "y": 16080,
+      "text": "Rentals — what needs doing, and one rental in full",
+      "kind": "title1",
+      "maxW": 4940
+    },
+    "rentNote": {
+      "x": 5020,
+      "y": 16360,
+      "w": 400,
+      "text": "Layout B, chosen 23 Oct: who and which car on the left, the money on the right. Staff on the phone see the same rental without the owner-only split and without the partner’s name. An open rental (board 19) shows the bill so far: extra km and any late charge stay “at return”, and no late fee runs on its own. Customer names appear only where the sample data has one.",
+      "fill": "yellow",
+      "size": 24
+    },
+    "rowCust": {
+      "x": 0,
+      "y": 18780,
+      "text": "Customers — who owes, and one customer in full",
+      "kind": "title1",
+      "maxW": 3580
+    },
+    "custNote": {
+      "x": 3660,
+      "y": 19060,
+      "w": 400,
+      "text": "Decided 23 Oct: staff see full NIC and phone numbers (no masking). The sample data has no real numbers, so 199012345678 and 077 123 4567 are dummy placeholders, also now on the new-rental screen (board 7). No ratings or trust scores, by the system design. Old debt shows automatically as a warning; flags are added by staff with a reason. Write-off stays with authorised people.",
+      "fill": "yellow",
+      "size": 24
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "OwnerDesk.dc.html",
+    "OwnerPhone.dc.html",
+    "StaffPhone.dc.html",
+    "Handover.dc.html",
+    "Return.dc.html",
+    "NewRental.dc.html",
+    "Denied.dc.html",
+    "Discrepancy.dc.html",
+    "Settlement.dc.html",
+    "EmployeeDesk.dc.html",
+    "VehicleDetail.dc.html",
+    "VehicleDetailPhone.dc.html",
+    "VehicleDetailStaff.dc.html",
+    "VehicleStates.dc.html",
+    "Rentals.dc.html",
+    "RentalsPhone.dc.html",
+    "RentalDetail.dc.html",
+    "RentalDetailPhone.dc.html",
+    "RentalOverdue.dc.html",
+    "Customers.dc.html",
+    "CustomersPhone.dc.html",
+    "CustomerDetail.dc.html",
+    "CustomerDetailPhone.dc.html"
+  ],
+  "pages": [],
+  "title": "SNS Rent Car — Ratna (Concept A redesign)"
+}

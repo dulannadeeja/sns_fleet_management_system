@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>Settlement · CBK 4127</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ratna/tokens.css">
+<link rel="stylesheet" href="ds/ratna/components/bundle.css">
+<script src="ds/ratna/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#f6f4ef}
+a{color:#1d3fbf}a:hover{color:#14298a}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Ratna.NavRail" items="{{rail}}" style="flex: 0 0 128px"></x-import>
+  <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Ratna.AppHeader" title="Partner ගණන් · Settlements" subtitle="Thu 22 Oct 2026" search="අංකය / partner නම හොයන්න" user="S D De Silva" role="Owner · අයිතිකරු" lang="si"></x-import>
+    <main style="padding: 28px 32px 56px; display: flex; flex-direction: column; gap: 24px; max-width: 1360px; width: 100%; box-sizing: border-box">
+      <nav aria-label="Breadcrumb" style="font-size: 15px; line-height: 24px; color: var(--ink-muted)"><a href="#">Partner ගණන්</a> › <a href="#">Sunil Jayasinghe</a> › CBK 4127</nav>
+
+      <section style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; padding: 16px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+        <div style="display: flex; align-items: center; justify-content: center; width: 160px; height: 96px; padding: 8px; background: var(--sunken); border-radius: 12px"><x-import component-from-global-scope="Ratna.VehicleSilhouette" body="hatch" style="width: 100%"></x-import></div>
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 260px">
+          <x-import component-from-global-scope="Ratna.PlateBadge" plate="CBK 4127" size="lg" style="align-self: flex-start"></x-import>
+          <div style="font-size: 16px; line-height: 26px">Wagon R · owner Sunil Jayasinghe · SNS commission 15% · twice a month (1–15, 16–end)</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px; padding-left: 20px; border-left: 1px solid var(--line)">
+          <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Sunil's payable now (all vehicles)</span>
+          <b class="rt-num" style="font-family: var(--font-plate); font-size: 28px; line-height: 34px"><span style="font-size: 15px; color: var(--ink-muted)">LKR </span>7,900</b>
+          <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">CBH 2210 · 01–15 Oct carried forward</span>
+        </div>
+      </section>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 16px; align-items: start">
+        <section style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+            <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">01–15 Oct</h2>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Ratna.StatePill" kind="finalised" by="16 Oct"></x-import><x-import component-from-global-scope="Ratna.StatePill" kind="paid"></x-import></div>
+          </div>
+          <div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Published to Sunil. Locked — corrections go into the next period as dated adjustments.</div>
+          <x-import component-from-global-scope="Ratna.MoneyBlock" label="Statement" icon="file" lines="{{finalLines}}"></x-import>
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: var(--sunken); border-radius: 12px">
+            <div style="font-size: 15px; line-height: 24px; font-weight: 600">ගෙවීම් · Payouts</div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; font-size: 15px; line-height: 24px"><span>16 Oct · paid</span><b class="rt-num">39,400</b><span style="font-weight: 600">Still owed</span><b class="rt-num">0</b></div>
+          </div>
+          <x-import component-from-global-scope="Ratna.Notice" tone="info" title="R-0212: partner paid even though the customer still owed">SNS paid Sunil on 16 Oct; the customer paid the old bill on 22 Oct. Customer debt and partner payments are kept apart.</x-import>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 1.5px dashed var(--line-strong); border-radius: 16px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+            <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">16–31 Oct · so far</h2>
+            <x-import component-from-global-scope="Ratna.StatePill" kind="provisional"></x-import>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 24px; font-weight: 600"><x-import component-from-global-scope="Ratna.Icon" name="eyeOff" size="{{twenty}}"></x-import>Partner ට තවම පේන්නේ නැහැ · Sunil cannot see this yet</div>
+          <x-import component-from-global-scope="Ratna.MoneyBlock" label="As of Thu 22 Oct" icon="clock" lines="{{provLines}}" note="Unfinished-day and rounding rules are still open owner decisions."></x-import>
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: var(--sunken); border-radius: 12px">
+            <div style="font-size: 15px; line-height: 24px; font-weight: 600">මෙහි නැති දේ · Not in this statement</div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; font-size: 15px; line-height: 24px">
+              <span>R-0218 fuel · 100% SNS</span><b class="rt-num">2,400</b>
+              <span>R-0218 air pump · admin decision pending</span><b class="rt-num">2,000</b>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <x-import component-from-global-scope="Ratna.Button" icon="lock" disabled="{{yes}}" style="align-self: flex-start">අවසන් කරන්න · Finalise</x-import>
+            <div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Available after 31 Oct. Before finalising: decide the R-0218 air-pump allocation, and wait for extra km on any rental still running.</div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, twenty: 20,
+      finalLines: [
+        { label: 'R-0201 · 3 days × 4,500', amount: 13500 },
+        { label: 'R-0207 · 4 days × 4,500', amount: 18000 },
+        { label: 'R-0212 · 2 days × 4,500', amount: 9000 },
+        { label: 'R-0215 · 3 days to 15 Oct', amount: 13500 },
+        { label: 'Rental income', amount: 54000, total: true },
+        { label: 'SNS commission 15%', amount: 8100, sign: 'out' },
+        { label: 'Service 09 Oct · owner pays', amount: 6500, sign: 'out' },
+        { label: 'Payable to Sunil', amount: 39400, total: true }
+      ],
+      provLines: [
+        { label: 'R-0215 · day 16', amount: 4500 },
+        { label: 'R-0217 · day 17', amount: 4500 },
+        { label: 'R-0218 · 20–21 Oct · 2 days', amount: 9000 },
+        { label: 'R-0215 · extra km 60 × 25', amount: 1500 },
+        { label: 'R-0218 · extra km 91 × 25', amount: 2275 },
+        { label: 'Shared income', amount: 21775, total: true },
+        { label: 'SNS commission 15%', amount: 3266.25, sign: 'out' },
+        { label: 'Sunil’s share so far', amount: 18508.75, total: true }
+      ],
+      rail: [
+        { icon: 'home', label: 'අද' },
+        { icon: 'car', label: 'වාහන' },
+        { icon: 'clipboard', label: 'කුලී' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ' },
+        { icon: 'wallet', label: 'මුදල්' },
+        { icon: 'handshake', label: 'Partner ගණන්', active: true },
+        { icon: 'stamp', label: 'අනුමැති', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව' },
+        { icon: 'chart', label: 'වාර්තා' },
+        { icon: 'settings', label: 'සැකසුම්' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

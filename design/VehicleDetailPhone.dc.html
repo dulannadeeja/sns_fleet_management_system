@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>Vehicle detail · owner · phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/ratna/tokens.css">
+<link rel="stylesheet" href="ds/ratna/components/bundle.css">
+<script src="ds/ratna/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#f6f4ef}
+a{color:#1d3fbf}a:hover{color:#14298a}
+</style>
+</helmet>
+<div class="rt" style="width: 390px; height: 2720px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: hidden">
+  <header style="display: flex; align-items: center; gap: 4px; min-height: 64px; padding: 0 12px 0 4px; background: var(--card); border-bottom: 1px solid var(--line)">
+    <a href="OwnerPhone.dc.html" aria-label="ආපසු · Back" style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: var(--ink)"><span style="display: inline-flex; transform: rotate(180deg)"><x-import component-from-global-scope="Ratna.Icon" name="arrowRight" size="{{twentytwo}}"></x-import></span></a>
+    <div style="flex: 1"><div style="font-size: 18px; line-height: 26px; font-weight: 600">CBK 4127</div><div style="font-size: 14px; line-height: 20px; color: var(--ink-muted)">S D De Silva · Owner · 11:05</div></div>
+  </header>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px 16px 24px">
+    <div style="display: flex; align-items: center; justify-content: center; height: 150px; padding: 14px 32px; background: var(--sunken); border-radius: 16px"><x-import component-from-global-scope="Ratna.VehicleSilhouette" body="hatch" style="width: 100%; max-width: 260px"></x-import></div>
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+  <x-import component-from-global-scope="Ratna.PlateBadge" plate="CBK 4127" size="lg"></x-import>
+  <x-import component-from-global-scope="Ratna.StatusChip" status="available"></x-import>
+</div>
+<div style="font-size: 16px; line-height: 26px">Wagon R · Partner · Sunil Jayasinghe</div>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">දැන් <span class="rt-en">· Now</span></h2></div>
+  <div style="display: flex; gap: 12px; align-items: flex-start">
+    <span style="display: inline-flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--available-tint); color: var(--available)"><x-import component-from-global-scope="Ratna.Icon" name="returnCar" size="{{twenty}}"></x-import></span>
+    <div style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px; font-weight: 600">අද 9:40 ට ආපසු ආවා <span class="rt-en">· Returned today 9:40</span></span><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">R‑0218 · Kasun P. · bill paid · Nimal</span></div>
+  </div>
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; line-height: 24px">
+    <span style="color: var(--ink-muted)">Odometer · ආපසු එද්දී</span><span class="rt-num" style="font-weight: 600; text-align: right">25,122 km</span><span style="color: var(--ink-muted)">ඔක්තෝබර් කුලී දින · Rental days in Oct so far</span><span class="rt-num" style="font-weight: 600; text-align: right">16</span>
+  </div>
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ලියකියවිලි සහ සර්විස් <span class="rt-en">· Papers and service</span></h2></div>
+  <div style="display: flex; flex-direction: column">
+    <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <x-import component-from-global-scope="Ratna.Icon" name="file" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">රක්ෂණය <span class="rt-en">· Insurance</span></span><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">until 04 Dec 2026 · 43 days left</span></span>
+      <span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600">වලංගුයි</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <x-import component-from-global-scope="Ratna.Icon" name="idcard" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">ආදායම් බලපත්‍රය <span class="rt-en">· Revenue licence</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">දිනය සටහන් කර නැහැ · not recorded</span></span>
+      <a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1.5px dashed var(--line-strong); border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none">දිනය දාන්න</a>
+    </div>
+    <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0">
+      <x-import component-from-global-scope="Ratna.Icon" name="wrench" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">සර්විස් <span class="rt-en">· Service</span></span><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">last 09 Oct 2026 · LKR 6,500 · Sunil's cost · next: not set</span></span>
+      <a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1.5px dashed var(--line-strong); border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none">ඊළඟ එක දාන්න</a>
+    </div>
+  </div>
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">Partner ගණන් <span class="rt-en">· Sunil’s earnings from this car</span></h2><span style="margin-left: auto; padding: 2px 10px; border-radius: 999px; background: var(--sunken); color: var(--ink-muted); font-size: 14px; line-height: 22px; font-weight: 500">අයිතිකරුට පමණයි <span class="rt-en">· owner only</span></span></div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: 12px">
+      <span style="font-size: 15px; line-height: 24px; font-weight: 600">01–15 Oct</span>
+      <span class="rt-num" style="font-family: var(--font-plate); font-size: 24px; line-height: 32px; font-weight: 600"><span style="font-size: 14px; font-weight: 500; color: var(--ink-muted)">LKR </span>39,400</span>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap"><x-import component-from-global-scope="Ratna.StatePill" kind="finalised"></x-import><x-import component-from-global-scope="Ratna.StatePill" kind="paid"></x-import></div>
+      <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Paid 16 Oct</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1.5px dashed var(--line-strong); border-radius: 12px">
+      <span style="font-size: 15px; line-height: 24px; font-weight: 600">16–31 Oct · මේ වෙනකම් <span class="rt-en">· so far</span></span>
+      <span class="rt-num" style="font-family: var(--font-plate); font-size: 24px; line-height: 32px; font-weight: 600"><span style="font-size: 14px; font-weight: 500; color: var(--ink-muted)">LKR </span>18,508.75</span>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap"><x-import component-from-global-scope="Ratna.StatePill" kind="provisional"></x-import></div>
+      <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Sunil ට තවම පේන්නේ නැහැ · not visible to Sunil yet</span>
+    </div>
+  </div>
+  <a href="Settlement.dc.html" style="font-size: 15px; font-weight: 600">ගණන් විස්තර · Open settlement</a>
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">කොන්දේසි <span class="rt-en">· Terms for new rentals</span></h2><span style="margin-left: auto; padding: 2px 10px; border-radius: 999px; background: var(--sunken); color: var(--ink-muted); font-size: 14px; line-height: 22px; font-weight: 500">අයිතිකරුට පමණයි <span class="rt-en">· owner only</span></span></div>
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; font-size: 15px; line-height: 24px">
+    <span style="color: var(--ink-muted)">දවසකට · Daily rate</span><span class="rt-num" style="font-weight: 600; text-align: right">LKR 4,500</span><span style="color: var(--ink-muted)">දිනකට km · Included per day</span><span class="rt-num" style="font-weight: 600; text-align: right">100 km</span><span style="color: var(--ink-muted)">වැඩි km · Extra per km</span><span class="rt-num" style="font-weight: 600; text-align: right">LKR 25</span><span style="color: var(--ink-muted)">SNS commission</span><span class="rt-num" style="font-weight: 600; text-align: right">15%</span><span style="color: var(--ink-muted)">දිගු කුලී · Long-rental surcharge</span><span class="rt-num" style="font-weight: 600; text-align: right">LKR 500 / day from day 6</span><span style="color: var(--ink-muted)">ගණන් බේරීම · Settlement</span><span class="rt-num" style="font-weight: 600; text-align: right">1–15 · 16–end</span>
+  </div>
+  <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">වෙනස් කළොත් අලුත් කුලී වලට පමණයි · changes apply to new rentals only</span>
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ඉතිහාසය <span class="rt-en">· History</span></h2></div>
+  <div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">අද 9:52</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px"><b>Nimal</b> · ගෙවීම සටහන් කළා · R‑0218 · LKR 15,675</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">deposit 10,000 · cash 3,000 · bank 2,675 not yet checked</span></span>
+    </div><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">අද 9:40</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px"><b>Nimal</b> · ආපසු ගත්තා · R‑0218</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">late 1h 40m · charge waived: “under 2 h, regular customer”</span></span>
+    </div><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">20 Oct 10:42</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px">භාර දුන්නා · R‑0218 · Kasun P.</span></span>
+    </div><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">16 Oct</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px">01–15 Oct settlement finalised and paid · LKR 39,400</span></span>
+    </div><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">09 Oct</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px">සර්විස් · Service · LKR 6,500 · Sunil’s cost</span></span>
+    </div></div><a href="#" style="font-size: 15px; font-weight: 600">සියල්ල බලන්න · See full history</a>
+</section>
+  </div>
+  <div style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px; padding: 12px 16px; background: var(--card); border-top: 1px solid var(--line)">
+    <x-import component-from-global-scope="Ratna.Button" icon="swap" variant="secondary">තත්ත්වය</x-import>
+    <x-import component-from-global-scope="Ratna.Button" icon="plus" full="{{yes}}">අලුත් කුලියක්</x-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2720}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද' },
+        { icon: 'car', label: 'වාහන', active: true },
+        { icon: 'clipboard', label: 'කුලී' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ' },
+        { icon: 'wallet', label: 'මුදල්' },
+        { icon: 'handshake', label: 'Partner ගණන්' },
+        { icon: 'stamp', label: 'අනුමැති', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව' },
+        { icon: 'chart', label: 'වාර්තා' },
+        { icon: 'settings', label: 'සැකසුම්' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
