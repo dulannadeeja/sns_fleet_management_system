@@ -179,6 +179,35 @@
       "w": 390,
       "h": 2080,
       "title": "23 · Customer Kasun P. · staff · phone"
+    },
+    "MorningCheck.dc.html": {
+      "x": 0,
+      "y": 21700,
+      "w": 390,
+      "h": 2180,
+      "title": "24 · Morning check · in progress · staff phone"
+    },
+    "MorningCheckDone.dc.html": {
+      "x": 470,
+      "y": 21700,
+      "w": 390,
+      "h": 980,
+      "title": "25 · Morning check · finished · staff phone"
+    },
+    "MorningCheckExtra.dc.html": {
+      "x": 940,
+      "y": 21700,
+      "w": 390,
+      "h": 844,
+      "title": "26 · Another car is here · staff phone"
+    },
+    "MorningCheckDesk.dc.html": {
+      "x": 1410,
+      "y": 21700,
+      "w": 1280,
+      "h": 1440,
+      "title": "27 · Morning check · owner · close the discrepancy",
+      "expand": "fill"
     }
   },
   "createdOnFiles": {
@@ -289,6 +318,21 @@
       "text": "Decided 23 Oct: staff see full NIC and phone numbers (no masking). The sample data has no real numbers, so 199012345678 and 077 123 4567 are dummy placeholders, also now on the new-rental screen (board 7). No ratings or trust scores, by the system design. Old debt shows automatically as a warning; flags are added by staff with a reason. Write-off stays with authorised people.",
       "fill": "yellow",
       "size": 24
+    },
+    "rowMC": {
+      "x": 0,
+      "y": 21420,
+      "text": "Morning check — 7:30, both directions",
+      "kind": "title1",
+      "maxW": 2690
+    },
+    "mcNote": {
+      "x": 2770,
+      "y": 21700,
+      "w": 400,
+      "fill": "yellow",
+      "size": 24,
+      "text": "Built straight from the spec (S6, 23 Oct). List A: the 18 cars the records place at the branch at 7:30, grouped by model so staff walk the yard once; each gets Found / Not here. List B (board 26): a car in the yard whose record says rented, repair or unavailable. The sample day has no such case, so CAA 9083 there is illustrative. Any mismatch opens a discrepancy that needs an explanation plus a confirmed status, closed by a permitted person (a Settings permission, not decided here). The sample data names no checker; Nimal is illustrative, and per-car tap times are not recorded, so none are shown."
     }
   },
   "order": [
@@ -315,7 +359,11 @@
     "Customers.dc.html",
     "CustomersPhone.dc.html",
     "CustomerDetail.dc.html",
-    "CustomerDetailPhone.dc.html"
+    "CustomerDetailPhone.dc.html",
+    "MorningCheck.dc.html",
+    "MorningCheckDone.dc.html",
+    "MorningCheckExtra.dc.html",
+    "MorningCheckDesk.dc.html"
   ],
   "pages": [],
   "title": "SNS Rent Car — Ratna (Concept A redesign)"
