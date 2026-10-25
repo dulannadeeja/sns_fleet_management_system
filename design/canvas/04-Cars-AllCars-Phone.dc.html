@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>04.1 All cars · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+.m-row{grid-template-columns:minmax(0,1fr) fit-content(55%)!important;gap:2px 12px!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important}
+.m-row>*{grid-column:1;text-align:left!important;min-width:0}
+.m-row>:last-child{overflow-wrap:anywhere;grid-column:2;grid-row:1/span 8;align-self:center;text-align:right!important}
+.m-row>:nth-child(n+3):not(:last-child){font-size:14px!important;line-height:22px;color:var(--ink-muted)}
+.m-head{display:none!important}
+.m-g4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.m-g3{grid-template-columns:minmax(0,1fr)!important}
+.m-g1{grid-template-columns:minmax(0,1fr)!important}
+.m-lbl{color:var(--ink-muted);font-weight:400}
+.m-row.m-lastwide>:last-child{grid-column:1/-1;grid-row:auto;text-align:left!important;justify-self:start}
+.m-body h2{font-size:20px!important}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 6857px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="02-Home-OwnerHome-Phone.dc.html" title="30 cars · 19 SNS · 11 partner" subtitle="වාහන · Cars"></x-import>
+  <div class="m-body" style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px; min-width: 0"><div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center"><label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; background: var(--card); border: 1.5px solid var(--line-strong); border-radius: 12px; color: var(--ink-muted); flex: 1 1 280px"><x-import component-from-global-scope="Plate.Icon" name="search" size="{{twenty}}"></x-import><input aria-label="Search cars" placeholder="අංකය / model" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 16px; color: var(--ink)" type="search"/></label><span style="display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; background: var(--ink); color: var(--card); font-weight: 600; font-size: 14px; line-height: 20px">All 30</span><span style="display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; line-height: 20px">SNS 19</span><span style="display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; line-height: 20px">Partner 11</span><span style="margin-left: auto"><a class="rt-btn rt-btn-primary" href="04-Cars-EditCar-Phone.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{twenty}}"></x-import><span>Car එකක් එකතු කරන්න · Add a car</span></a></span></div>
+<section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+<div class="m-row m-head m-lastwide" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; padding: 10px 20px; border-top: 1px solid var(--line); background: var(--sunken)"><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; "></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; ">Car</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; ">Owner</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; text-align: right">Per day</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; text-align: right">km a day</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; text-align: right">Extra km</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; ">Status</span></div><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBC 5409" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="overdue"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner · Sunil J.</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBF 7720" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAX 8834" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row m-lastwide" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBG 2967" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import><span style="font-size: 14px; line-height: 20px; color: var(--warning); font-weight: 600">not found 7:30</span></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBL 0458" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBD 3375" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBE 6612" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAY 3051" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBJ 1186" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Wagon R</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAZ 4490" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Alto</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>17</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBA 1802" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Alto</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>17</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAU 7765" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Alto</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>17</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBH 2210" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Alto</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner · Sunil J.</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>17</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAV 6127" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Alto</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>17</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAA 9083" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Alto</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>17</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" detail="AC fault" size="sm" status="repair"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="PG 7754" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Every</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>5,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="PK 2216" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Every</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>5,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="PH 4521" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Every</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>5,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="PJ 0937" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Every</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>5,000</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" detail="Service" size="sm" status="repair"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAQ 6680" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Prius</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>6,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>27</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAR 2049" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Prius</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>6,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>27</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="KX 5531" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Prius</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>6,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>27</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAP 9912" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Prius</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>6,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>27</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="unavailable"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Axio" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAT 7046" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Axio</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>6,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>27</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Axio" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAN 5521" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Axio</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>6,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>27</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Axio" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CAS 3318" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Axio</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>6,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>27</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Spacia" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBB 8826" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Spacia</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Spacia" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBN 4473" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Spacia</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>SNS</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></span>
+</a><a class="m-row" href="04-Cars-CarDetailsOwner-Phone.dc.html" style="display: grid; grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) 96px 96px 96px minmax(0, 1.2fr); gap: 14px; align-items: center; min-height: 56px; padding: 6px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Spacia" style="width: 100%; height: 100%"></x-import></span>
+<span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="m-lbl">Car · </span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBM 1340" size="sm"></x-import><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Spacia</span></span>
+<span style="font-size: 15px; line-height: 24px"><span class="m-lbl">Owner · </span>Partner</span>
+<span class="rt-num" style="text-align: right; font-size: 15px; font-weight: 600"><span class="m-lbl">Per day · </span>4,500</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">km a day · </span>100</span>
+<span class="rt-num" style="text-align: right; font-size: 15px"><span class="m-lbl">Extra km · </span>25</span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="rented"></x-import></span>
+</a>
+</section>
+<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Prices are the starting packages from the proposal; each car can be changed on its own page. Only Sunil J. is named as a partner owner in the sample data.</div></div>
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6857}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html", "active": true}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html"}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Phone.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

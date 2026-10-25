@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>02.6 Staff · More menu · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <header style="display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 0 16px; background: var(--card); border-bottom: 1px solid var(--line)">
+    <x-import component-from-global-scope="Plate.BrandMark"></x-import>
+    <div style="flex: 1; min-width: 0; font-size: 15px; line-height: 20px"><div style="font-weight: 600">තවත් · More</div><div style="color: var(--ink-muted); font-size: 14px">Nimal · Staff</div></div>
+    <x-import component-from-global-scope="Plate.LanguageSwitch" lang="si" on-light="{{yes}}"></x-import>
+  </header>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 16px"><x-import component-from-global-scope="Plate.LauncherGrid" title="වැඩ · Work" columns="2" items="{{tiles0}}"></x-import><x-import component-from-global-scope="Plate.LauncherGrid" title="මගේ · Mine" columns="2" items="{{tiles1}}"></x-import></div>
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}" fab="{{fabNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { tiles0: [{"icon": "customers", "label": "පාරිභෝගිකයෝ  · Customers", "href": "08-Customers-AllCustomers-Phone.dc.html", "sub": "find, add, flag"}, {"icon": "morning-check", "label": "උදේ check  · Morning check", "href": "03-MorningCheck-InProgress-Phone.dc.html", "sub": "every car, every morning"}, {"icon": "search", "label": "හොයන්න  · Search", "href": "02-Home-Search-Phone.dc.html", "sub": "plate, rental, name, NIC or phone"}, {"icon": "expense", "label": "වියදමක්  · Record expense", "href": "09-Money-RecordExpense-Phone.dc.html", "sub": "cash or bank, who bears it"}], tiles1: [{"icon": "my-payslip", "label": "මගේ පඩිපත  · My payslip", "href": "13-Payroll-MyPayslip-Phone.dc.html", "sub": "only you can see it"}], tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-StaffHome-Phone.dc.html"}, {"icon": "clipboard", "label": "කුලී", "href": "06-Rentals-AllRentals-Phone.dc.html"}, {"icon": "drawer", "label": "ලාච්චුව", "href": "09-Money-Drawer-Phone.dc.html"}, {"icon": "more", "label": "තවත්", "href": "02-Home-StaffMore-Phone.dc.html", "active": true}], fabNav: {"icon": "plus", "label": "අලුත්", "href": "05-NewRental-Customer-Phone.dc.html"},
+      yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26
+    };
+  }
+}
+</script>
+</body>
+</html>

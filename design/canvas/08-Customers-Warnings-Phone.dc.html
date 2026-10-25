@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>08.4 Flag and expired licence warning · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 880px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="08-Customers-AllCustomers-Phone.dc.html" title="පාරිභෝගිකයා · Customer" subtitle="Nimal · Thu 22 Oct"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><section style="display: flex; gap: 12px; align-items: center; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 17px; font-weight: 600">EX</span>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 18px; line-height: 26px; font-weight: 600">Example customer</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">returning customer · 2 earlier rentals</span></span>
+</section>
+<span style="font-size: 16px; line-height: 26px; font-weight: 600">දැනගන්න ඕන දේවල් <span class="rt-en">· Before you continue</span></span>
+<div style="display: flex; gap: 12px; padding: 14px 16px; background: var(--overdue-tint); border-radius: 14px; color: var(--overdue)">
+  <x-import component-from-global-scope="Plate.Icon" name="flag" size="{{twentytwo}}" style="flex: none; margin-top: 2px"></x-import>
+  <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Flag · car damaged</span><span style="font-size: 15px; line-height: 24px; color: var(--ink)">Example text: added by staff with the reason they gave. Staff can still go ahead, with a reason.</span></span>
+</div>
+<div style="display: flex; gap: 12px; padding: 14px 16px; background: var(--warning-tint); border-radius: 14px; color: var(--warning)">
+  <x-import component-from-global-scope="Plate.Icon" name="idcard" size="{{twentytwo}}" style="flex: none; margin-top: 2px"></x-import>
+  <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Licence expired · 03 Sep 2026</span><span style="font-size: 15px; line-height: 24px; color: var(--ink)">Only an authorised person can go ahead, with a reason. Going ahead does not make the licence valid.</span></span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ඉදිරියට යන්නේ ඇයි? <span class="rt-en">· Reason to continue</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><textarea rows="3" placeholder="Why it is OK this time" style="padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; line-height: 26px; resize: vertical"></textarea><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Recorded with your name and the time. The owner sees it in today’s exceptions.</div></div></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><x-import component-from-global-scope="Plate.Button" icon="arrowRight" full="{{yes}}" disabled="{{yes}}">හේතුව සටහන් කර ඉදිරියට · Continue with reason</x-import><a href="02-Home-StaffHome-Phone.dc.html" class="rt-btn rt-btn-quiet rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>නවත්වන්න · Don’t rent</span></a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":880}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

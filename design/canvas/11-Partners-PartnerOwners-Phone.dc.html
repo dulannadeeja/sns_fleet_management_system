@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>11.1 Partner owners · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+.m-row{grid-template-columns:minmax(0,1fr) fit-content(55%)!important;gap:2px 12px!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important}
+.m-row>*{grid-column:1;text-align:left!important;min-width:0}
+.m-row>:last-child{overflow-wrap:anywhere;grid-column:2;grid-row:1/span 8;align-self:center;text-align:right!important}
+.m-row>:nth-child(n+3):not(:last-child){font-size:14px!important;line-height:22px;color:var(--ink-muted)}
+.m-head{display:none!important}
+.m-g4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.m-g3{grid-template-columns:minmax(0,1fr)!important}
+.m-g1{grid-template-columns:minmax(0,1fr)!important}
+.m-lbl{color:var(--ink-muted);font-weight:400}
+.m-row.m-lastwide>:last-child{grid-column:1/-1;grid-row:auto;text-align:left!important;justify-self:start}
+.m-body h2{font-size:20px!important}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="02-Home-OwnerMore-Phone.dc.html" title="Partner owners" subtitle="Partner ගණන් · Partners"></x-import>
+  <div class="m-body" style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px; min-width: 0"><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 20px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">Partner අයිතිකරුවෝ <span class="rt-en">· Partner owners</span></h2><span style="margin-left: auto"><a class="rt-btn rt-btn-primary" href="11-Partners-AddPartner-Phone.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{twenty}}"></x-import><span>Partner කෙනෙක් · Add partner</span></a></span></div>
+<div class="m-row m-head m-lastwide" style="display: grid; grid-template-columns: 48px minmax(0, 1.2fr) minmax(0, 1.4fr) 110px 140px; gap: 14px; padding: 10px 20px; border-top: 1px solid var(--line); background: var(--sunken)"><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500"></span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500">Owner</span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500">Cars</span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500">Commission</span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500">Account</span></div>
+<a class="m-row m-lastwide" href="11-Partners-PartnerDetails-Phone.dc.html" style="display: grid; grid-template-columns: 48px minmax(0, 1.2fr) minmax(0, 1.4fr) 110px 140px; gap: 14px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 15px; font-weight: 600">SJ</span>
+<span style="display: flex; flex-direction: column"><span class="m-lbl">Owner · </span><span style="font-size: 16px; line-height: 24px; font-weight: 600">Sunil Jayasinghe</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">2 cars</span></span>
+<span style="display: flex; gap: 6px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CBH 2210" size="sm"></x-import></span>
+<span class="rt-num" style="font-size: 15px; font-weight: 600"><span class="m-lbl">Commission · </span>15%</span>
+<span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600; justify-self: start">Active</span>
+</a>
+</section>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 16px 20px; border: 1.5px dashed var(--line-strong); border-radius: 16px">
+<span style="font-size: 16px; line-height: 26px; font-weight: 600">Owner එක්ක සම්බන්ධ කරලා නැති partner cars <span class="rt-en">· Partner cars not linked to an owner</span> <span class="rt-num" style="color: var(--ink-muted)">9</span></span>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBC 5409" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CBG 2967" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CAY 3051" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CAZ 4490" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="PJ 0937" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="KX 5531" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CAP 9912" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CAT 7046" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CBM 1340" size="sm"></x-import></div>
+<span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">The sample data does not name these owners. Each partner gets one account for all their cars.</span>
+</section></div>
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html", "active": true}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html', active: true }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Phone.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>12.1 Maintenance and renewals · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railX}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="නඩත්තුව · Maintenance" subtitle="Thu 22 Oct 2026" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 28px 56px; display: flex; flex-direction: column; gap: 20px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box"><p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">Today Thu 22 Oct. Every reminder here comes from a date someone entered; nothing is tracked automatically.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+  <div style="flex: 1.2 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px"><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 14px 20px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">පාරේ නැති වාහන <span class="rt-en">· Off the road now</span> <span class="rt-num" style="color: var(--ink-muted); font-weight: 500">3</span></h2></div><div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px 14px; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line)">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAA 9083" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="repair" size="sm" detail="AC fault"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Alto · SNS · since 21 Oct · return date not set</span></span>
+  <a href="04-Cars-ChangeStatus-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{twenty}}"></x-import><span>ඉවරයි · Repair done</span></a>
+</div><div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px 14px; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line)">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="PJ 0937" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="repair" size="sm" detail="Service"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Every · Partner · service on Fri 23 Oct</span></span>
+  <a href="04-Cars-ChangeStatus-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{twenty}}"></x-import><span>ඉවරයි · Service done</span></a>
+</div><div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px 14px; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line)">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAP 9912" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="unavailable" size="sm"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Prius · Partner · owner use until 25 Oct · reason recorded</span></span>
+  <a href="04-Cars-ChangeStatus-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="returnCar" size="{{twenty}}"></x-import><span>ආපසු ආවා · Back now</span></a>
+</div><div style="padding: 10px 20px 14px; border-top: 1px solid var(--line); font-size: 14px; line-height: 22px; color: var(--ink-muted)">Whether a planned service counts as “under repair” or “temporarily unavailable” is still open; PJ 0937 follows board 1 for now.</div></section><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 14px 20px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">මේ මාසේ වියදම් <span class="rt-en">· October costs on cars</span></h2></div><div style="padding: 0 20px 12px"><a href="12-Maintenance-ServiceRecord-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{twenty}}"></x-import><span>අලුත් · Add a record</span></a></div><div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">09 Oct</span>
+  <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="font-size: 15px; line-height: 24px; font-weight: 500">Service</span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="sm"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Owner pays · Sunil J. · taken from his earnings before cash-out</span></span>
+  <span class="rt-num" style="font-size: 15px; font-weight: 600">6,500</span>
+</div><div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">01–15 Oct</span>
+  <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="font-size: 15px; line-height: 24px; font-weight: 500">Tyre</span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBH 2210" size="sm"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Owner pays · Sunil J. · taken from his earnings before cash-out</span></span>
+  <span class="rt-num" style="font-size: 15px; font-weight: 600">7,700</span>
+</div><div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">22 Oct</span>
+  <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="font-size: 15px; line-height: 24px; font-weight: 500">Tyre repair</span><x-import component-from-global-scope="Plate.PlateBadge" plate="PK 2216" size="sm"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">SNS pays · paid from the drawer</span></span>
+  <span class="rt-num" style="font-size: 15px; font-weight: 600">2,500</span>
+</div><div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">22 Oct</span>
+  <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="font-size: 15px; line-height: 24px; font-weight: 500">Car wash</span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBF 7720" size="sm"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">SNS pays · paid from the drawer</span></span>
+  <span class="rt-num" style="font-size: 15px; font-weight: 600">1,200</span>
+</div></section></div>
+  <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px"><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 14px 20px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ඉදිරියට <span class="rt-en">· Coming up</span></h2></div><div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 64px; padding: 10px 20px; border-top: 1px solid var(--line)">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="wrench" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">PJ 0937 service</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Every · Partner</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink); text-align: right">tomorrow</span>
+</div><div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 64px; padding: 10px 20px; border-top: 1px solid var(--line)">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="pause" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">CAP 9912 back from owner use</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Prius · Partner</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink); text-align: right">in 3 days</span>
+</div><div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 64px; padding: 10px 20px; border-top: 1px solid var(--line)">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="calendar" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">CBK 4127 insurance renewal</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · Partner · Sunil J. · 04 Dec 2026</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink); text-align: right">in 43 days</span>
+</div></section><section style="background: var(--card); border: 1.5px dashed var(--line-strong); border-radius: 16px; overflow: hidden"><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 14px 20px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">දිනයන් නැහැ <span class="rt-en">· Dates not recorded</span></h2></div><div style="padding: 0 20px 12px; font-size: 14px; line-height: 22px; color: var(--ink-muted)">No reminder can fire without a date. Each car’s page has an “add” row for these.</div><div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 64px; padding: 10px 20px; border-top: 1px solid var(--line)">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="file" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Revenue licence expiry</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Not recorded for any of the 30 cars</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--warning); text-align: right">30 cars</span>
+</div><div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 64px; padding: 10px 20px; border-top: 1px solid var(--line)">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="file" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Insurance expiry</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Recorded only for CBK 4127</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--warning); text-align: right">29 cars</span>
+</div><div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 64px; padding: 10px 20px; border-top: 1px solid var(--line)">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="gauge" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Next service · date or km</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Recorded only for PJ 0937</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--warning); text-align: right">29 cars</span>
+</div></section></div>
+</div></main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1280}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html', active: true }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Desktop.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

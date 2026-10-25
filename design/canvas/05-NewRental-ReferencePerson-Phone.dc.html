@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>05.6 Reference person · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1044px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="05-NewRental-ChooseCar-Phone.dc.html" title="Reference කෙනා · Reference person" subtitle="New rental · empty form"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sapphire-tint); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--sapphire-strong)"><x-import component-from-global-scope="Plate.Icon" name="users" size="{{twenty}}" style="flex: none"></x-import><span>Asked only when the rental needs a reference person. Once chosen, every field marked required must be filled before the rental can go on.</span></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">නම <span class="rt-en">· Name as on the NIC</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="Full name" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; border: 2px solid var(--sapphire);"></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">NIC අංකය <span class="rt-en">· NIC number</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="e.g. 12 digits or 9 + V" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; "><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Shown in full to staff.</div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">දුරකථන <span class="rt-en">· Phone</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="07X XXX XXXX" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; "></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">සම්බන්ධය <span class="rt-en">· How they know the customer</span></span><div style="display: flex; gap: 8px; flex-wrap: wrap"><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Family</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Friend</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Employer</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Other</span></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ඡායාරූප <span class="rt-en">· Photos</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 96px; border: 1.5px dashed var(--line-strong); border-radius: 12px; color: var(--sapphire); font-size: 15px; font-weight: 600; text-decoration: none; text-align: center"><x-import component-from-global-scope="Plate.Icon" name="camera" size="{{twentytwo}}"></x-import>NIC · front</a><a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 96px; border: 1.5px dashed var(--line-strong); border-radius: 12px; color: var(--sapphire); font-size: 15px; font-weight: 600; text-decoration: none; text-align: center"><x-import component-from-global-scope="Plate.Icon" name="camera" size="{{twentytwo}}"></x-import>NIC · back</a></div><a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 96px; border: 1.5px dashed var(--line-strong); border-radius: 12px; color: var(--sapphire); font-size: 15px; font-weight: 600; text-decoration: none; text-align: center"><x-import component-from-global-scope="Plate.Icon" name="camera" size="{{twentytwo}}"></x-import>Driving licence</a><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">NIC both sides and the licence. Kept with the customer’s record.</div></div></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><x-import component-from-global-scope="Plate.Button" icon="check" full="{{yes}}" disabled="{{yes}}">Save කරන්න · Save reference</x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">Turns on when the required fields and photos are in.</span></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1044}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

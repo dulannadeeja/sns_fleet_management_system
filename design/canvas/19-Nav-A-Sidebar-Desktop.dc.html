@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>19.1 Navigation A · labelled sidebar + top bar · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+.nv-item:hover{background:var(--sunken)}
+.nv-tab:hover{background:var(--sunken)}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{rail}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="සුබ උදෑසනක් · Good morning" subtitle="Thu 22 Oct 2026 · 11:05" search-href="02-Home-Search-Desktop.dc.html" new-href="05-NewRental-Customer-Desktop.dc.html" user="S D De Silva" role="Owner · අයිතිකරු" lang="si"></x-import>
+    <main style="padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box"><div style="font-size: 15px; line-height: 24px; color: var(--ink-muted)"><span style="border: 1.5px dashed var(--line-strong); border-radius: 8px; padding: 0 8px">උදාහරණ දත්ත · Sample data</span></div><x-import component-from-global-scope="Plate.AttentionBar" items="{{attention}}"></x-import><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">වාහන 30 <span class="rt-en">· Vehicles</span></h2><x-import component-from-global-scope="Plate.FleetStrip" cars="{{fleet}}" hrefs="{{fleetHrefs}}"></x-import></section><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px"><sc-for list="{{cards}}" as="c" hint-placeholder-count="4"><x-import component-from-global-scope="Plate.VehicleCard" plate="{{c.plate}}" model="{{c.model}}" status="{{c.status}}" status-detail="{{c.detail}}" next="{{c.next}}" partner="{{c.partner}}" partner-name="{{c.partnerName}}" warning="{{c.warning}}" lang="si"></x-import></sc-for></div></main>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    function car(plate, model, status, extra) { return Object.assign({ plate: plate, model: model, status: status, detail: null, next: null, partner: false, partnerName: null, warning: null }, extra || {}); }
+    var fleet = [{ plate: 'CBC 5409', status: 'overdue' }, { plate: 'CBG 2967', status: 'available', warn: true }];
+    for (var a = 0; a < 16; a++) fleet.push({ plate: 'A' + a, status: 'available' });
+    for (var r = 0; r < 9; r++) fleet.push({ plate: 'R' + r, status: 'rented' });
+    fleet.push({ plate: 'CAA 9083', status: 'repair' }, { plate: 'PJ 0937', status: 'repair' }, { plate: 'CAP 9912', status: 'unavailable' });
+    return { fleetHrefs: { overdue: '06-Rentals-Overdue-Desktop.dc.html', available: '04-Cars-AllCars-Desktop.dc.html', rented: '06-Rentals-AllRentals-Desktop.dc.html', repair: '12-Maintenance-Maintenance-Desktop.dc.html', unavailable: '04-Cars-AllCars-Desktop.dc.html' },
+      yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html', active: true },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      fleet: fleet,
+      attention: [
+        { label: 'පරක්කු · Overdue', count: 1, tone: 'overdue', icon: 'clockAlert', href: '06-Rentals-Overdue-Desktop.dc.html' },
+        { label: 'විසඳන්න ඕන · Open items', count: 1, tone: 'warning', icon: 'alert', href: '02-Home-NeedsAttention-Desktop.dc.html' },
+        { label: 'Admin බලාපොරොත්තුවෙන් · Waiting for admin', count: 3, tone: 'info', icon: 'hourglass', href: '10-Approvals-Approvals-Desktop.dc.html' },
+        { label: 'අද විශේෂ තීරණ · Today’s decisions', count: 2, tone: 'neutral', icon: 'flag', href: '02-Home-NeedsAttention-Desktop.dc.html' }
+      ],
+      cards: [
+        car('CBC 5409', 'Wagon R', 'overdue', { partner: true, partnerName: 'Sunil J.', detail: '+3h 05m', next: 'Pradeep W. · R-0216' }),
+        car('CBK 4127', 'Wagon R', 'available', { partner: true, partnerName: 'Sunil J.', next: 'Returned 9:40 · R-0218' }),
+        car('CBG 2967', 'Wagon R', 'available', { partner: true, warning: { label: 'not found at 7:30 check', icon: 'question' } }),
+        car('PH 4521', 'Every', 'rented', { next: 'Return · Fri 23 Oct 8:00' })
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>17.2 Design notes · navigation and components</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 1440px; height: 1640px; box-sizing: border-box; padding: 56px 64px; display: flex; flex-direction: column; gap: 40px; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+
+  <header style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 820px">
+      <x-import component-from-global-scope="Plate.BrandMark" with-name="{{yes}}"></x-import>
+      <h1 style="margin: 0; font-size: 40px; line-height: 52px; font-weight: 600">Plate · how SNS Rent Car looks</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 30px; color: var(--ink-muted)">Plate is the current and only visual system, chosen by the owner on 24 Oct 2026. It sets the colours, type, navigation frame, icons and vehicle images; screens, steps, words and money rules come from the system design.</p>
+    </div>
+    <p style="margin: 0; max-width: 360px; font-size: 15px; line-height: 24px; color: var(--ink-muted)">One test for every choice: can Nimal read it on his phone at the yard at noon, and can nothing be mistaken for a vehicle status?</p>
+  </header>
+
+  <section aria-label="Plate in three moves" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px"><article style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="height: 64px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line)"></div><h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">භූමිය <span class="rt-en">· Cool grey ground</span></h3><p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">Paper #eef1f0 under white cards. The warm cream was dropped: it read as a default look, and the grey lets the yellow plate carry the warmth.</p></article><article style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="height: 64px; display: flex; align-items: center"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="lg"></x-import></div><h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">අංකය <span class="rt-en">· The plate is the signature</span></h3><p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">Yellow plate face #f6c343 with ink, only on number plates, the SNS mark and the active nav pill. Staff find a car by its plate before reading a word.</p></article><article style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="height: 64px; border-radius: 12px; background: var(--sapphire)"></div><h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ක්‍රියා <span class="rt-en">· Action blue, never a status</span></h3><p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">Action blue #1756a9 for buttons, links and focus only, 7.1:1 with white text. Status colours outrank it and always carry an icon and a word.</p></article></section>
+
+  <section aria-label="The Plate system" style="display: flex; flex-direction: column; gap: 20px">
+    <h2 style="margin: 0; font-size: 26px; line-height: 36px; font-weight: 600">What Plate is made of</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+
+      <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+        <h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">වර්ණ <span class="rt-en">· Colour</span></h3>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 8px">
+          <div style="height: 88px; border-radius: 12px; background: var(--sapphire); color: var(--on-sapphire); padding: 10px; font-size: 14px; line-height: 20px; font-weight: 600; display: flex; flex-direction: column; justify-content: flex-end">Action blue<br>#1756a9 · actions only</div>
+          <div style="height: 88px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); padding: 10px; font-size: 14px; line-height: 20px; display: flex; align-items: flex-end">Paper</div>
+          <div style="height: 88px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); padding: 10px; font-size: 14px; line-height: 20px; display: flex; align-items: flex-end">Card</div>
+          <div style="height: 88px; border-radius: 12px; background: var(--ink); color: var(--card); padding: 10px; font-size: 14px; line-height: 20px; display: flex; align-items: flex-end">Ink</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <x-import component-from-global-scope="Plate.StatusChip" status="overdue" size="sm"></x-import>
+          <x-import component-from-global-scope="Plate.StatusChip" status="available" size="sm"></x-import>
+          <x-import component-from-global-scope="Plate.StatusChip" status="rented" size="sm"></x-import>
+          <x-import component-from-global-scope="Plate.StatusChip" status="repair" size="sm"></x-import>
+          <x-import component-from-global-scope="Plate.StatusChip" status="unavailable" size="sm"></x-import>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">Status colours outrank the brand. Overdue is the only solid chip; each status keeps its icon and word.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+        <h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">අකුරු <span class="rt-en">· Type</span></h3>
+        <div style="font-size: 30px; line-height: 44px; font-weight: 600">සුබ උදෑසනක් <span class="rt-en">· Good morning</span></div>
+        <div style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Yaldevi for words · Gemunu Libre for plates, money and headings · weights 400, 500, 600 only · line height 1.7 · nothing under 14px</div>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+          <x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127"></x-import>
+          <span class="rt-num" style="font-family: var(--font-plate); font-size: 28px; line-height: 36px; font-weight: 600"><span style="font-size: 15px; font-weight: 500; color: var(--ink-muted)">LKR </span>48,950</span>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">One pair of fonts everywhere. Plates and money use Gemunu Libre with even-width figures, so columns line up. English is a quieter echo of the Sinhala.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+        <h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">වාහන රූප <span class="rt-en">· Vehicle images</span></h3>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px"><div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: var(--sunken); border-radius: 12px"><span style="display: block; width: 100%; aspect-ratio: 4 / 3"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 14px">Wagon R</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: var(--sunken); border-radius: 12px"><span style="display: block; width: 100%; aspect-ratio: 4 / 3"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 14px">Alto</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: var(--sunken); border-radius: 12px"><span style="display: block; width: 100%; aspect-ratio: 4 / 3"><x-import component-from-global-scope="Plate.VehicleImage" model="Spacia" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 14px">Spacia</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: var(--sunken); border-radius: 12px"><span style="display: block; width: 100%; aspect-ratio: 4 / 3"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 14px">Every</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: var(--sunken); border-radius: 12px"><span style="display: block; width: 100%; aspect-ratio: 4 / 3"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 14px">Prius</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: var(--sunken); border-radius: 12px"><span style="display: block; width: 100%; aspect-ratio: 4 / 3"><x-import component-from-global-scope="Plate.VehicleImage" model="Axio" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 14px">Axio</span></div></div>
+        <p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">Each car shows its model’s image from the SNS vehicle pack: soft 3D, front three-quarter, transparent, on the grey ground. A model without its own image shows the generic car. The plate stays the identifier; the image only helps staff spot the kind of car. No other illustration anywhere.</p>
+      </div>
+
+      <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+        <h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">වාහන 30 <span class="rt-en">· The fleet at a glance</span></h3>
+        <x-import component-from-global-scope="Plate.FleetStrip" cars="{{fleet}}"></x-import>
+        <p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">One tick per car, the overdue one first. The ringed green tick is CBG 2967, not found at the 7:30 check. Each legend entry is a link to that group of cars.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+        <h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">සලකුණු <span class="rt-en">· Icons</span></h3>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px">
+          <sc-for list="{{icons}}" as="i" hint-placeholder-count="10">
+            <span style="display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 24px"><x-import component-from-global-scope="Plate.Icon" name="{{i.name}}" size="{{twentytwo}}" style="color: var(--ink)"></x-import>{{i.word}}</span>
+          </sc-for>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">1.75px line, always beside a word. Matched is a link, never a tick.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 264px minmax(0, 1fr) 400px; gap: 24px; align-items: start; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+      <x-import component-from-global-scope="Plate.NavRail" items="{{rail}}" style="height: 760px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden"></x-import>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">සංචලනය <span class="rt-en">· Navigation</span></h3>
+        <p style="margin: 0; font-size: 15px; line-height: 24px">Computer: a 264px labelled sidebar (chosen 25 Oct 2026, after Jobber and Shopify). The logo, then the items grouped by job: today, cars and rentals, money, running SNS, with Settings at the bottom. Items are still trimmed by permission. Counts sit at the end of a line: red only for overdue, dark for things waiting. The top bar holds the page title, search, a “New rental” button for anyone who can rent, the සිං / EN switch and the account (initials only below 1,100px). The sidebar is always on the left and stays in view while the page scrolls; below 1,100px it becomes a 104px rail, icon over the Sinhala label. Phone screens use PageHeader (back link) inside flows and BottomTabBar at the top level.</p>
+        <p style="margin: 0; font-size: 15px; line-height: 24px">Phone: four labelled tabs. Staff also get one raised centre action, "අලුත්" (new rental), because starting a rental is their most frequent task. The owner's phone has no centre action.</p>
+        <p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">The screens behind each item, and the order of steps inside them, follow the system design.</p>
+      </div>
+      <div style="align-self: end; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; padding-top: 30px; background: var(--paper)">
+        <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabs}}" fab="{{fab}}"></x-import>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2410}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var fleet = [{ plate: 'CBC 5409', status: 'overdue' }, { plate: 'CBG 2967', status: 'available', warn: true }];
+    for (var a = 0; a < 16; a++) fleet.push({ plate: 'A' + a, status: 'available' });
+    for (var r = 0; r < 9; r++) fleet.push({ plate: 'R' + r, status: 'rented' });
+    fleet.push({ plate: 'CAA 9083', status: 'repair' }, { plate: 'PJ 0937', status: 'repair' }, { plate: 'CAP 9912', status: 'unavailable' });
+    return {
+      yes: true,
+      twentytwo: 22,
+      fleet: fleet,
+      icons: [
+        { name: 'clockAlert', word: 'පරක්කුයි · overdue' },
+        { name: 'key', word: 'කුලියට · rented' },
+        { name: 'wrench', word: 'අලුත්වැඩියා · repair' },
+        { name: 'question', word: 'හම්බුණේ නැහැ · not found' },
+        { name: 'link', word: 'ගැලපුණා · matched' },
+        { name: 'unlink', word: 'නොගැලපේ · unmatched' },
+        { name: 'lock', word: 'අවසන් · finalised' },
+        { name: 'eyeOff', word: 'තාවකාලික · provisional' },
+        { name: 'drawer', word: 'ලාච්චුව · drawer' },
+        { name: 'camera', word: 'Photo' }
+      ],
+      rail: [
+        { icon: 'home', label: 'අද', active: true },
+        { icon: 'car', label: 'වාහන' },
+        { icon: 'wallet', label: 'මුදල්' },
+        { icon: 'stamp', label: 'අනුමැති', badge: 3 }
+      ],
+      tabs: [
+        { icon: 'car', label: 'වාහන', active: true },
+        { icon: 'clipboard', label: 'කුලී' },
+        { icon: 'drawer', label: 'ලාච්චුව' },
+        { icon: 'more', label: 'තවත්' }
+      ],
+      fab: { icon: 'plus', label: 'අලුත්' }
+    };
+  }
+}
+</script>
+</body>
+</html>

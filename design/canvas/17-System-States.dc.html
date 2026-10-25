@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>17.1 System states · empty, offline, error, permission</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railX}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="Design · States" subtitle="Empty, loading, offline, error and permission states" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" search-href="02-Home-Search-Desktop.dc.html" new-href="05-NewRental-Customer-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 28px 56px; display: flex; flex-direction: column; gap: 20px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box"><div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sapphire-tint); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--sapphire-strong)"><x-import component-from-global-scope="Plate.Icon" name="info" size="{{twenty}}" style="flex: none"></x-import><span>One reference sheet for the states every list, form and page needs. Examples use sample names; “CBX 9” and Sanduni changing R‑0230 are made up to show the state.</span></div><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(max(260px, calc((100% - 32px) / 3)), 1fr)); gap: 16px"><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">EMPTY · NOTHING WAITING</span>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; text-align: center; background: var(--paper); border-radius: 12px; flex: 1">
+    <x-import component-from-global-scope="Plate.GameIcon" name="empty-approvals" size="hero"></x-import>
+    <span style="font-size: 16px; line-height: 24px; font-weight: 600">අනුමැති ඕන දේවල් නැහැ</span>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Nothing is waiting for approval. New requests from staff appear here.</span>
+  </div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">EMPTY · NO RESULTS</span>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; text-align: center; background: var(--paper); border-radius: 12px; flex: 1">
+    <x-import component-from-global-scope="Plate.GameIcon" name="empty-search" size="hero"></x-import>
+    <span style="font-size: 16px; line-height: 24px; font-weight: 600">“CBX 9” හම්බුණේ නැහැ</span>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">No car, rental or customer matches. Check the plate or try a phone number.</span><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><a href="08-Customers-NewCustomer-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><span>අලුත් පාරිභෝගිකයෙක් · New customer</span></a></div>
+  </div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">EMPTY · FIRST DAY</span>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; text-align: center; background: var(--paper); border-radius: 12px; flex: 1">
+    <x-import component-from-global-scope="Plate.GameIcon" name="rentals" size="hero"></x-import>
+    <span style="font-size: 16px; line-height: 24px; font-weight: 600">තවම කුලී නැහැ</span>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">No rentals yet. The system starts with no old records.</span><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><a href="05-NewRental-Customer-Desktop.dc.html" class="rt-btn rt-btn-primary" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{twenty}}"></x-import><span>අලුත් කුලියක් · New rental</span></a></div>
+  </div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">OFFLINE</span>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; text-align: center; background: var(--paper); border-radius: 12px; flex: 1">
+    <x-import component-from-global-scope="Plate.GameIcon" name="offline" size="hero"></x-import>
+    <span style="font-size: 16px; line-height: 24px; font-weight: 600">Internet නැහැ</span>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">This payment is not saved yet. What you typed stays on the screen; save again when the connection is back.</span><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><x-import component-from-global-scope="Plate.Button" variant="secondary">ආයෙත් · Try again</x-import></div>
+  </div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">COULD NOT SAVE</span>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; text-align: center; background: var(--paper); border-radius: 12px; flex: 1">
+    <span style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: var(--overdue-tint); color: var(--overdue)"><x-import component-from-global-scope="Plate.Icon" name="alert" size="{{twentytwo}}"></x-import></span>
+    <span style="font-size: 16px; line-height: 24px; font-weight: 600">Save වුණේ නැහැ</span>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Something went wrong on our side. Nothing was recorded. Try again; if it repeats, tell the owner.</span><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><x-import component-from-global-scope="Plate.Button" variant="secondary">ආයෙත් · Try again</x-import></div>
+  </div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">CHANGED BY SOMEONE ELSE</span>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; text-align: center; background: var(--paper); border-radius: 12px; flex: 1">
+    <span style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: var(--warning-tint); color: var(--warning)"><x-import component-from-global-scope="Plate.Icon" name="swap" size="{{twentytwo}}"></x-import></span>
+    <span style="font-size: 16px; line-height: 24px; font-weight: 600">කවුරුහරි මේක වෙනස් කළා</span>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Sanduni changed R‑0230 while you had it open. Load the latest before saving, so nothing is overwritten.</span><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><x-import component-from-global-scope="Plate.Button" variant="secondary">අලුත් එක බලන්න · Load latest</x-import></div>
+  </div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">NO PERMISSION</span>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; text-align: center; background: var(--paper); border-radius: 12px; flex: 1">
+    <span style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: var(--sapphire-tint); color: var(--sapphire)"><x-import component-from-global-scope="Plate.Icon" name="lock" size="{{twentytwo}}"></x-import></span>
+    <span style="font-size: 16px; line-height: 24px; font-weight: 600">මේකට අවසර නැහැ</span>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">You can’t open this page. Ask the owner if you need it. Links shared by others don’t get around this.</span><div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><a href="02-Home-StaffHome-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><span>ආපසු · Back</span></a></div>
+  </div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">LOADING</span>
+  <div style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px; background: var(--paper); border-radius: 12px; flex: 1" aria-busy="true"><div style="display: flex; gap: 12px; align-items: center"><span style="width: 40px; height: 40px; border-radius: 50%; background: var(--sunken); flex: none"></span><span style="flex: 1; display: flex; flex-direction: column; gap: 8px"><span style="display: block; height: 14px; border-radius: 7px; background: var(--sunken)"></span><span style="display: block; width: 60%; height: 12px; border-radius: 6px; background: var(--sunken)"></span></span></div><div style="display: flex; gap: 12px; align-items: center"><span style="width: 40px; height: 40px; border-radius: 50%; background: var(--sunken); flex: none"></span><span style="flex: 1; display: flex; flex-direction: column; gap: 8px"><span style="display: block; height: 14px; border-radius: 7px; background: var(--sunken)"></span><span style="display: block; width: 60%; height: 12px; border-radius: 6px; background: var(--sunken)"></span></span></div><div style="display: flex; gap: 12px; align-items: center"><span style="width: 40px; height: 40px; border-radius: 50%; background: var(--sunken); flex: none"></span><span style="flex: 1; display: flex; flex-direction: column; gap: 8px"><span style="display: block; height: 14px; border-radius: 7px; background: var(--sunken)"></span><span style="display: block; width: 60%; height: 12px; border-radius: 6px; background: var(--sunken)"></span></span></div>
+  <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">Grey rows in the shape of the list, never a spinner over money.</span></div></section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-muted)">SAVED</span>
+  <div style="display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; padding: 20px 12px; background: var(--paper); border-radius: 12px; flex: 1">
+    <div role="status" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--ink); color: var(--card); border-radius: 12px; font-size: 15px; line-height: 22px"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{twenty}}"></x-import><span style="flex: 1">ගෙවීම save කළා · Payment saved</span></div>
+    <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">Shown at the bottom for a few seconds. Every save is recorded with the person and time.</span>
+  </div></section></div></main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1344}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Desktop.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

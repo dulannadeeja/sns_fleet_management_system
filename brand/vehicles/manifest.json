@@ -1,0 +1,282 @@
+[
+  {
+    "id": "alto",
+    "label": "Compact hatchback",
+    "status": "Proposed illustration; not an exact inventory vehicle",
+    "introduced_in": "v1",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3423,
+    "exports": [
+      "1024/sns-vehicle-alto.png",
+      "256/sns-vehicle-alto.png",
+      "128/sns-vehicle-alto.png",
+      "64/sns-vehicle-alto.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Use this image as the vehicle-shape reference ONLY. Transform it into a simplified soft 3D UI CATEGORY ICON, like a small digitally sculpted miniature, NOT a realistic automotive photograph. Preserve its short compact five-door hatchback silhouette and front-three-quarter view pointing right. Substantially remove realism: opaque charcoal window shapes with no visible interior, smooth broad body surfaces with just a few seams, simple headlamp shapes without internal optics, plain dark wheels with minimal circular silver hubs, no tread texture or tiny trim details. Pearl light grey satin body, soft rounded bevels, controlled matte highlights. Slightly elevated near-orthographic camera, soft upper-left lighting. Make the vehicle occupy 78 percent of the SQUARE canvas width with broad transparent margins, wheels at a common baseline about 75 percent from the top. One centered vehicle, very subtle contact shadow. Genuine transparent alpha background, no floor or backdrop. No text, logos, badges, registration, props or watermark. Readable at 64 pixels. Original SNS illustration, calm and functional."
+  },
+  {
+    "id": "wagon-r",
+    "label": "Tall hatchback",
+    "status": "Proposed illustration; not an exact inventory vehicle",
+    "introduced_in": "v1",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3066,
+    "exports": [
+      "1024/sns-vehicle-wagon-r.png",
+      "256/sns-vehicle-wagon-r.png",
+      "128/sns-vehicle-wagon-r.png",
+      "64/sns-vehicle-wagon-r.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create a matching new vehicle-category illustration using the supplied image as the STYLE reference. Preserve its soft simplified 3D illustration treatment, pearl-grey satin body, opaque charcoal windows, minimal silver disc wheel hubs and black smooth tires, simple headlights, no visible interior and no photorealistic fine details. Same front-three-quarter camera, nose toward lower right, same soft upper-left studio light, transparent alpha background and subtle contact shadow. Single entire vehicle centered on a square canvas with generous clear padding, no cropped parts. No text, manufacturer logos, numbers, badges, people, props, watermarks or backdrop. Change the vehicle silhouette to the following subject; distinguish the category by real body proportions, not body colour. This is an illustrative family icon rather than an exact inventory vehicle.\nSubject: Suzuki Wagon R-inspired tall five-door hatchback: clearly tall upright cabin, high near-flat roof, short projecting bonnet, vertically oriented headlights, squared rear, narrow compact footprint. Taller and boxier than the compact Alto, with conventional hinged side doors."
+  },
+  {
+    "id": "spacia",
+    "label": "Mini MPV",
+    "status": "Proposed illustration; not an exact inventory vehicle",
+    "introduced_in": "v1",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 2951,
+    "exports": [
+      "1024/sns-vehicle-spacia.png",
+      "256/sns-vehicle-spacia.png",
+      "128/sns-vehicle-spacia.png",
+      "64/sns-vehicle-spacia.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create a matching new vehicle-category illustration using the supplied image as the STYLE reference. Preserve its soft simplified 3D illustration treatment, pearl-grey satin body, opaque charcoal windows, minimal silver disc wheel hubs and black smooth tires, simple headlights, no visible interior and no photorealistic fine details. Same front-three-quarter camera, nose toward lower right, same soft upper-left studio light, transparent alpha background and subtle contact shadow. Single entire vehicle centered on a square canvas with generous clear padding, no cropped parts. No text, manufacturer logos, numbers, badges, people, props, watermarks or backdrop. Change the vehicle silhouette to the following subject; distinguish the category by real body proportions, not body colour. This is an illustrative family icon rather than an exact inventory vehicle.\nSubject: Suzuki Spacia-inspired boxy mini MPV: very tall almost rectangular passenger cabin, long flat roof, tiny short bonnet, large rectangular side windows, visible sliding rear door seam, compact narrow body, upright front. Passenger mini MPV, not a commercial van."
+  },
+  {
+    "id": "every",
+    "label": "Microvan",
+    "status": "Proposed illustration; not an exact inventory vehicle",
+    "introduced_in": "v1",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 2998,
+    "exports": [
+      "1024/sns-vehicle-every.png",
+      "256/sns-vehicle-every.png",
+      "128/sns-vehicle-every.png",
+      "64/sns-vehicle-every.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create a matching new vehicle-category illustration using the supplied image as the STYLE reference. Preserve its soft simplified 3D illustration treatment, pearl-grey satin body, opaque charcoal windows, minimal silver disc wheel hubs and black smooth tires, simple headlights, no visible interior and no photorealistic fine details. Same front-three-quarter camera, nose toward lower right, same soft upper-left studio light, transparent alpha background and subtle contact shadow. Single entire vehicle centered on a square canvas with generous clear padding, no cropped parts. No text, manufacturer logos, numbers, badges, people, props, watermarks or backdrop. Change the vehicle silhouette to the following subject; distinguish the category by real body proportions, not body colour. This is an illustrative family icon rather than an exact inventory vehicle.\nSubject: Suzuki Every-inspired cab-over microvan: rectangular high-roof van body, very short nearly flat nose, windshield directly above front axle, sliding side passenger door, large rear side glazing, small wheels, upright simple face. Clearly longer boxy van body than a hatchback."
+  },
+  {
+    "id": "prius",
+    "label": "Liftback",
+    "status": "Proposed illustration; not an exact inventory vehicle",
+    "introduced_in": "v1",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3796,
+    "exports": [
+      "1024/sns-vehicle-prius.png",
+      "256/sns-vehicle-prius.png",
+      "128/sns-vehicle-prius.png",
+      "64/sns-vehicle-prius.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create a matching new vehicle-category illustration using the supplied image as the STYLE reference. Preserve its soft simplified 3D illustration treatment, pearl-grey satin body, opaque charcoal windows, minimal silver disc wheel hubs and black smooth tires, simple headlights, no visible interior and no photorealistic fine details. Same front-three-quarter camera, nose toward lower right, same soft upper-left studio light, transparent alpha background and subtle contact shadow. Single entire vehicle centered on a square canvas with generous clear padding, no cropped parts. No text, manufacturer logos, numbers, badges, people, props, watermarks or backdrop. Change the vehicle silhouette to the following subject; distinguish the category by real body proportions, not body colour. This is an illustrative family icon rather than an exact inventory vehicle.\nSubject: Toyota Prius-inspired streamlined five-door liftback, long low aerodynamic wedge silhouette, sloping bonnet, arched roof tapering into raised rear hatch, small triangular rear quarter window, elongated swept-back simple headlights. Clearly a liftback with no separate protruding trunk. Keep simplified soft 3D styling, not photography. Ensure the alpha silhouette is clean, no white halo, disconnected specks or remnants around the roof."
+  },
+  {
+    "id": "axio",
+    "label": "Sedan",
+    "status": "Proposed illustration; not an exact inventory vehicle",
+    "introduced_in": "v1",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3770,
+    "exports": [
+      "1024/sns-vehicle-axio.png",
+      "256/sns-vehicle-axio.png",
+      "128/sns-vehicle-axio.png",
+      "64/sns-vehicle-axio.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create a matching new vehicle-category illustration using the supplied image as the STYLE reference. Preserve its soft simplified 3D illustration treatment, pearl-grey satin body, opaque charcoal windows, minimal silver disc wheel hubs and black smooth tires, simple headlights, no visible interior and no photorealistic fine details. Same front-three-quarter camera, nose toward lower right, same soft upper-left studio light, transparent alpha background and subtle contact shadow. Single entire vehicle centered on a square canvas with generous clear padding, no cropped parts. No text, manufacturer logos, numbers, badges, people, props, watermarks or backdrop. Change the vehicle silhouette to the following subject; distinguish the category by real body proportions, not body colour. This is an illustrative family icon rather than an exact inventory vehicle.\nSubject: Toyota Corolla Axio-inspired compact four-door sedan, conventional three-box proportions with a distinct separate rear trunk, modest rounded roof, longer bonnet, slim horizontal headlamps. Clearly lower and longer than a hatchback and not a sloped liftback. Keep simplified soft 3D styling, not photography. Ensure the alpha silhouette is clean, no white halo, disconnected specks or remnants around the roof."
+  },
+  {
+    "id": "generic",
+    "label": "Generic fallback",
+    "status": "Proposed illustration; not an exact inventory vehicle",
+    "introduced_in": "v1",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3627,
+    "exports": [
+      "1024/sns-vehicle-generic.png",
+      "256/sns-vehicle-generic.png",
+      "128/sns-vehicle-generic.png",
+      "64/sns-vehicle-generic.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create a matching new vehicle-category illustration using the supplied image as the STYLE reference. Preserve its soft simplified 3D illustration treatment, pearl-grey satin body, opaque charcoal windows, minimal silver disc wheel hubs and black smooth tires, simple headlights, no visible interior and no photorealistic fine details. Same front-three-quarter camera, nose toward lower right, same soft upper-left studio light, transparent alpha background and subtle contact shadow. Single entire vehicle centered on a square canvas with generous clear padding, no cropped parts. No text, manufacturer logos, numbers, badges, people, props, watermarks or backdrop. Change the vehicle silhouette to the following subject; distinguish the category by real body proportions, not body colour. This is an illustrative family icon rather than an exact inventory vehicle.\nSubject: Unbranded generic passenger car fallback: neutral mid-sized five-door car, smooth clean silhouette, uncomplicated grille, rectangular softly rounded headlights, no model-specific identifiers. Slightly darker mid silver-grey body than the six family assets while keeping the same palette, materials, viewpoint and light. No question mark or symbols. Ensure the alpha silhouette is clean, no white halo, disconnected specks or remnants around the roof."
+  },
+  {
+    "id": "hustler",
+    "label": "Kei crossover / Hustler",
+    "status": "Proposed future-use illustration; not confirmed fleet or business category",
+    "introduced_in": "v2",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3421,
+    "exports": [
+      "1024/sns-vehicle-hustler.png",
+      "256/sns-vehicle-hustler.png",
+      "128/sns-vehicle-hustler.png",
+      "64/sns-vehicle-hustler.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create ONE new vehicle category PNG matching the supplied SNS vehicle STYLE reference. Soft simplified studio 3D miniature illustration, pearl silver-grey satin body, opaque charcoal windows with NO visible interior, restrained broad highlights, simple light shapes without internal optics, smooth dark tires and minimal circular silver wheel hubs. No photorealistic textures or tiny details. Same front three-quarter view, nose pointing toward lower right, slightly elevated near-orthographic camera and upper-left soft lighting. Show entire vehicle centered on square canvas with generous clear margins and subtle contact shadow. True transparent alpha background, no ground plane, scenery or baked-in checkerboard. No text, logos, emblems, registration numbers, badges, people or props. Clean silhouette with no detached flecks or white fringe. This is a proposed illustrative body family, not exact fleet data. Preserve style, change proportions to the following subject:\nSuzuki Hustler-inspired tiny kei crossover. Distinctive rounded-square upright cabin, short boxy bonnet, clearly ROUND front headlights, black lower bumper and wheel-arch cladding, slightly raised stance, very short compact body, dark charcoal contrasting roof, small wheels. Must look tiny and upright, different from a full-size SUV and different from the Wagon R. Silver body, charcoal roof."
+  },
+  {
+    "id": "van",
+    "label": "Full-size passenger van",
+    "status": "Proposed future-use illustration; not confirmed fleet or business category",
+    "introduced_in": "v2",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3296,
+    "exports": [
+      "1024/sns-vehicle-van.png",
+      "256/sns-vehicle-van.png",
+      "128/sns-vehicle-van.png",
+      "64/sns-vehicle-van.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create ONE new vehicle category PNG matching the supplied SNS vehicle STYLE reference. Soft simplified studio 3D miniature illustration, pearl silver-grey satin body, opaque charcoal windows with NO visible interior, restrained broad highlights, simple light shapes without internal optics, smooth dark tires and minimal circular silver wheel hubs. No photorealistic textures or tiny details. Same front three-quarter view, nose pointing toward lower right, slightly elevated near-orthographic camera and upper-left soft lighting. Show entire vehicle centered on square canvas with generous clear margins and subtle contact shadow. True transparent alpha background, no ground plane, scenery or baked-in checkerboard. No text, logos, emblems, registration numbers, badges, people or props. Clean silhouette with no detached flecks or white fringe. This is a proposed illustrative body family, not exact fleet data. Preserve style, change proportions to the following subject:\nFull-size passenger van, Hiace/KDH-like body proportions without branding. Long rectangular passenger body, tall flat roof, upright flat front with a very short nose, broad windshield, sliding side passenger door, long row of opaque dark passenger windows, simple rectangular headlights. Clearly a large long passenger van, not a small kei microvan, minibus or cargo delivery van. No text, passenger numbers or seating-capacity claims."
+  },
+  {
+    "id": "mid-suv",
+    "label": "Mid-size SUV",
+    "status": "Proposed future-use illustration; not confirmed fleet or business category",
+    "introduced_in": "v2",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3842,
+    "exports": [
+      "1024/sns-vehicle-mid-suv.png",
+      "256/sns-vehicle-mid-suv.png",
+      "128/sns-vehicle-mid-suv.png",
+      "64/sns-vehicle-mid-suv.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create ONE new vehicle category PNG matching the supplied SNS vehicle STYLE reference. Soft simplified studio 3D miniature illustration, pearl silver-grey satin body, opaque charcoal windows with NO visible interior, restrained broad highlights, simple light shapes without internal optics, smooth dark tires and minimal circular silver wheel hubs. No photorealistic textures or tiny details. Same front three-quarter view, nose pointing toward lower right, slightly elevated near-orthographic camera and upper-left soft lighting. Show entire vehicle centered on square canvas with generous clear margins and subtle contact shadow. True transparent alpha background, no ground plane, scenery or baked-in checkerboard. No text, logos, emblems, registration numbers, badges, people or props. Clean silhouette with no detached flecks or white fringe. This is a proposed illustrative body family, not exact fleet data. Preserve style, change proportions to the following subject:\nMid-size five-door road-oriented crossover SUV, RAV4-like proportions without branding, moderate ground clearance, swept roof, medium length bonnet, gently sloped rear window, subtle black wheel-arch cladding, slim horizontal front lights, ordinary medium wheels. Neither tiny kei crossover nor enormous off-road SUV. Make this more rounded and compact than the large SUV."
+  },
+  {
+    "id": "suv",
+    "label": "Large SUV",
+    "status": "Proposed future-use illustration; not confirmed fleet or business category",
+    "introduced_in": "v2",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3339,
+    "exports": [
+      "1024/sns-vehicle-suv.png",
+      "256/sns-vehicle-suv.png",
+      "128/sns-vehicle-suv.png",
+      "64/sns-vehicle-suv.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create ONE new vehicle category PNG matching the supplied SNS vehicle STYLE reference. Soft simplified studio 3D miniature illustration, pearl silver-grey satin body, opaque charcoal windows with NO visible interior, restrained broad highlights, simple light shapes without internal optics, smooth dark tires and minimal circular silver wheel hubs. No photorealistic textures or tiny details. Same front three-quarter view, nose pointing toward lower right, slightly elevated near-orthographic camera and upper-left soft lighting. Show entire vehicle centered on square canvas with generous clear margins and subtle contact shadow. True transparent alpha background, no ground plane, scenery or baked-in checkerboard. No text, logos, emblems, registration numbers, badges, people or props. Clean silhouette with no detached flecks or white fringe. This is a proposed illustrative body family, not exact fleet data. Preserve style, change proportions to the following subject:\nLarge upright five-door SUV, Land Cruiser/Prado-like body proportions without branding: long substantial boxy body, tall commanding stance, large squared cabin, extended flat roof, tall side windows, broad high grille, substantial bonnet, thick tires and restrained side steps. Clearly taller, longer and more upright than a mid-size crossover. No external spare wheel, roof cargo or off-road accessories."
+  },
+  {
+    "id": "pickup",
+    "label": "Double-cab pickup",
+    "status": "Proposed future-use illustration; not confirmed fleet or business category",
+    "introduced_in": "v2",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3679,
+    "exports": [
+      "1024/sns-vehicle-pickup.png",
+      "256/sns-vehicle-pickup.png",
+      "128/sns-vehicle-pickup.png",
+      "64/sns-vehicle-pickup.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create ONE new vehicle category PNG matching the supplied SNS vehicle STYLE reference. Soft simplified studio 3D miniature illustration, pearl silver-grey satin body, opaque charcoal windows with NO visible interior, restrained broad highlights, simple light shapes without internal optics, smooth dark tires and minimal circular silver wheel hubs. No photorealistic textures or tiny details. Same front three-quarter view, nose pointing toward lower right, slightly elevated near-orthographic camera and upper-left soft lighting. Show entire vehicle centered on square canvas with generous clear margins and subtle contact shadow. True transparent alpha background, no ground plane, scenery or baked-in checkerboard. No text, logos, emblems, registration numbers, badges, people or props. Clean silhouette with no detached flecks or white fringe. This is a proposed illustrative body family, not exact fleet data. Preserve style, change proportions to the following subject:\nMid-size double-cab pickup truck, four passenger doors and a clearly visible OPEN rear cargo bed extending behind the cabin. Long bonnet, strong squared front, raised stance, simple dark tires, pearl-grey body. Hilux-like body type without branding, no cargo, no roll bars, no rear canopy. Make open cargo bed visible so it cannot be mistaken for an SUV."
+  },
+  {
+    "id": "station-wagon",
+    "label": "Station wagon",
+    "status": "Proposed future-use illustration; not confirmed fleet or business category",
+    "introduced_in": "v2",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3823,
+    "exports": [
+      "1024/sns-vehicle-station-wagon.png",
+      "256/sns-vehicle-station-wagon.png",
+      "128/sns-vehicle-station-wagon.png",
+      "64/sns-vehicle-station-wagon.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create ONE new vehicle category PNG matching the supplied SNS vehicle STYLE reference. Soft simplified studio 3D miniature illustration, pearl silver-grey satin body, opaque charcoal windows with NO visible interior, restrained broad highlights, simple light shapes without internal optics, smooth dark tires and minimal circular silver wheel hubs. No photorealistic textures or tiny details. Same front three-quarter view, nose pointing toward lower right, slightly elevated near-orthographic camera and upper-left soft lighting. Show entire vehicle centered on square canvas with generous clear margins and subtle contact shadow. True transparent alpha background, no ground plane, scenery or baked-in checkerboard. No text, logos, emblems, registration numbers, badges, people or props. Clean silhouette with no detached flecks or white fringe. This is a proposed illustrative body family, not exact fleet data. Preserve style, change proportions to the following subject:\nLow five-door station wagon / estate car, long roof extending nearly horizontally to the rear hatch, elongated rear cargo section, long rear side window, conventional low car ground clearance and small wheels. Corolla Fielder-like proportions without branding. Clearly long and low, NOT a tall SUV, NOT a sedan with separate trunk and NOT a short hatchback."
+  },
+  {
+    "id": "premium-sedan",
+    "label": "Premium sedan",
+    "status": "Proposed future-use illustration; not confirmed fleet or business category",
+    "introduced_in": "v2",
+    "source_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verified": true,
+    "transparent_samples": 3915,
+    "exports": [
+      "1024/sns-vehicle-premium-sedan.png",
+      "256/sns-vehicle-premium-sedan.png",
+      "128/sns-vehicle-premium-sedan.png",
+      "64/sns-vehicle-premium-sedan.png"
+    ],
+    "generator": "Built-in image_gen",
+    "prompt": "Create ONE new vehicle category PNG matching the supplied SNS vehicle STYLE reference. Soft simplified studio 3D miniature illustration, pearl silver-grey satin body, opaque charcoal windows with NO visible interior, restrained broad highlights, simple light shapes without internal optics, smooth dark tires and minimal circular silver wheel hubs. No photorealistic textures or tiny details. Same front three-quarter view, nose pointing toward lower right, slightly elevated near-orthographic camera and upper-left soft lighting. Show entire vehicle centered on square canvas with generous clear margins and subtle contact shadow. True transparent alpha background, no ground plane, scenery or baked-in checkerboard. No text, logos, emblems, registration numbers, badges, people or props. Clean silhouette with no detached flecks or white fringe. This is a proposed illustrative body family, not exact fleet data. Preserve style, change proportions to the following subject:\nLarge premium four-door sedan, graceful low long three-box silhouette with a distinct rear trunk, notably longer bonnet and wheelbase than the compact sedan, restrained broad horizontal grille, slim headlights, long rear passenger door, simple elegant wheels. Pearl silver-grey paint matching the reference, no luxury badge, no hood ornament, no flashy black limousine paint. Broad low body, no exaggerated styling."
+  }
+]

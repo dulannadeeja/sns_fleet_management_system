@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>05.4 4 · Deposit and payment · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 960px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="05-NewRental-Dates-Phone.dc.html" title="අලුත් කුලියක්" subtitle="Ruwan · Thu 22 Oct · 11:20"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><div style="display: flex; flex-direction: column; gap: 8px">
+  <ol aria-label="Steps" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px"><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li aria-current="step" style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li></ol>
+  <div style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--sapphire-strong)">පියවර <span class="rt-num">4</span> / <span class="rt-num">5</span> · Deposit <span class="rt-en">· Deposit and payment</span></div>
+</div><section style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 15px; font-weight: 600">TR</span>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Tharindu R.</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">first rental · approved by Ruwan</span></span>
+</section><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Deposit</span><label style="display: flex; align-items: center; gap: 8px; min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%"><span style="color: var(--ink-muted); font-size: 16px">LKR</span><input value="10,000" class="rt-num" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 20px; font-weight: 600; color: var(--ink)"></label><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Held, not income. Used for the bill or damage; the rest is refunded. Waiving it needs a reason.</div></div><a href="#" style="font-size: 15px; font-weight: 600">Deposit එක ඕන නැහැ · Waive deposit (reason needed)</a><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">බිල ගෙවන්නේ කවද්ද? <span class="rt-en">· When will they pay the rent</span></span><div style="display: flex; flex-direction: column; gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input type="radio" checked style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">ආපසු දෙනකොට <span class="rt-en">· At return</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">from the deposit and any balance</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input type="radio"  style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">දැන් <span class="rt-en">· Now, in advance</span></span></span></label></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ඇපකරු <span class="rt-en">· Reference person</span></span><div style="display: flex; flex-direction: column; gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input type="radio" checked style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">ඕන නැහැ <span class="rt-en">· Not required</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Ruwan decides</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input type="radio"  style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">ඕන <span class="rt-en">· Required</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">their NIC and licence copies then block handover</span></span></label></div></div></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><a href="05-NewRental-Review-Phone.dc.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{twenty}}"></x-import><span>ඉදිරියට · Continue</span></a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

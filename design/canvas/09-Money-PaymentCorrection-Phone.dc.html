@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>09.5 Payment correction request · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1004px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="06-Rentals-RentalDetails-Phone.dc.html" title="ගෙවීම නිවැරදි කරන්න" subtitle="Request · Nimal · example"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><section style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="display: flex; align-items: center; justify-content: space-between; gap: 10px"><span style="font-size: 14px; font-weight: 600; color: var(--ink-muted)">දැනට තියෙන්නේ · Recorded now</span><x-import component-from-global-scope="Plate.StatePill" kind="recorded" label="kept"></x-import></div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="color: var(--ink-muted)">Rental</span><span class="rt-num" style="text-align: right; font-weight: 500">R‑0226</span><span style="color: var(--ink-muted)">How</span><span class="rt-num" style="text-align: right; font-weight: 500">Bank · HNB‑509377</span><span style="color: var(--ink-muted)">Amount</span><span class="rt-num" style="text-align: right; font-weight: 500">LKR 7,000</span><span style="color: var(--ink-muted)">Recorded by</span><span class="rt-num" style="text-align: right; font-weight: 500">Nimal</span></div></section><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මොකක්ද වැරදි? <span class="rt-en">· What is wrong</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><div style="display: flex; gap: 8px; flex-wrap: wrap"><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Amount</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Cash / bank / card</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--ink); color: var(--card); font-weight: 600; font-size: 15px">Reference</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Wrong rental</span></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">හරි විදිහ <span class="rt-en">· What it should be</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="Correct bank reference" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; border: 2px solid var(--sapphire);"></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ඇයි? <span class="rt-en">· Reason</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><textarea rows="3" placeholder="What you found, e.g. on the bank statement" style="padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; line-height: 26px; resize: vertical"></textarea></div><div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sunken); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><x-import component-from-global-scope="Plate.Icon" name="info" size="{{twenty}}" style="flex: none"></x-import><span>The original payment is never changed or deleted. Admin approves or rejects this request; if approved, the correction is added as a new dated line and both stay in the rental’s history.</span></div></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><a href="06-Rentals-RentalDetails-Phone.dc.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="stamp" size="{{twenty}}"></x-import><span>Admin ට යවන්න · Send to admin</span></a><a href="06-Rentals-RentalDetails-Phone.dc.html" class="rt-btn rt-btn-quiet rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>ආපසු · Back</span></a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1016}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>13.4 Record a salary payment · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+.m-row{grid-template-columns:minmax(0,1fr) fit-content(55%)!important;gap:2px 12px!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important}
+.m-row>*{grid-column:1;text-align:left!important;min-width:0}
+.m-row>:last-child{overflow-wrap:anywhere;grid-column:2;grid-row:1/span 8;align-self:center;text-align:right!important}
+.m-row>:nth-child(n+3):not(:last-child){font-size:14px!important;line-height:22px;color:var(--ink-muted)}
+.m-head{display:none!important}
+.m-g4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.m-g3{grid-template-columns:minmax(0,1fr)!important}
+.m-g1{grid-template-columns:minmax(0,1fr)!important}
+.m-lbl{color:var(--ink-muted);font-weight:400}
+.m-row.m-lastwide>:last-child{grid-column:1/-1;grid-row:auto;text-align:left!important;justify-self:start}
+.m-body h2{font-size:20px!important}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1100px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="13-Payroll-Payroll-Phone.dc.html" title="Record a salary payment" subtitle="පඩි · Payroll"></x-import>
+  <div class="m-body" style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px; min-width: 0"><div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 18px"><section style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span style="display: flex; flex-direction: column"><span style="font-size: 18px; line-height: 28px; font-weight: 600">Ruwan · September 2026</span><span style="font-size: 14px; color: var(--ink-muted)">Finalised · to pay 40,000</span></span><span class="rt-num" style="font-size: 26px; line-height: 34px; font-weight: 600; color: var(--ink)"><span style="font-size: 15px; font-weight: 500; color: var(--ink-muted)">LKR </span>40,000</span></div></section><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ගෙව්වේ <span class="rt-en">· Amount paid</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="LKR" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; border: 2px solid var(--sapphire);" value="35,000"/><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Less than the full amount is allowed.</div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">දිනය <span class="rt-en">· Date</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; " value="Wed 30 Sep"/></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">කොහොමද? <span class="rt-en">· Paid by</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); background: var(--sunken); border-style: dashed; border-radius: 12px"><input disabled="" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Cash <span class="rt-en">· from the drawer</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">still to decide</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input checked="" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Bank <span class="rt-en">· transfer</span></span></span></label></div><input placeholder="Bank reference · required" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; "/><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Bank is chosen only for the example; the sample data doesn’t say how Ruwan was paid.</div></div></div>
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 12px"><section style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><span style="font-size: 16px; font-weight: 600">ඉතුරු · What’s left</span><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="color: var(--ink-muted)">To pay</span><span class="rt-num" style="text-align: right; font-weight: 500">40,000</span><span style="color: var(--ink-muted)">This payment</span><span class="rt-num" style="text-align: right; font-weight: 500">− 35,000</span><span style="color: var(--ink-muted)">Still owed</span><span class="rt-num" style="text-align: right; font-weight: 500">5,000</span></div></section><div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sapphire-tint); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--sapphire-strong)"><x-import component-from-global-scope="Plate.Icon" name="info" size="{{twenty}}" style="flex: none"></x-import><span>The 5,000 left is added to Ruwan’s October pay as “September · still owed”. It is not paid twice.</span></div><x-import component-from-global-scope="Plate.Button" disabled="{{yes}}" full="{{yes}}" icon="check">Save කරන්න · Record payment</x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Turns on when the bank reference is entered.</span></div></div></div>
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html", "active": true}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Phone.dc.html', active: true }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

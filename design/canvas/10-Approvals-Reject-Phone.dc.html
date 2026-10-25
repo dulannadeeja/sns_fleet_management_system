@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>10.3 Reject · confirm · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="10-Approvals-Approvals-Phone.dc.html" title="ප්‍රතික්ෂේප කිරීම · Confirm" subtitle="Kamal · Admin · R‑0233"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><section style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">You are rejecting</span>
+  <span style="font-size: 18px; line-height: 28px; font-weight: 600">R‑0233 · 4,500 → 4,000 a day</span>
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Bill stays at</span><span class="rt-num" style=" text-align: right; font-weight: 500">4,500 a day</span><span style="">Effect on SNS</span><span class="rt-num" style=" text-align: right; font-weight: 500">none</span></div>
+</section><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ප්‍රතික්ෂේප කරන්නේ ඇයි? <span class="rt-en">· Note to Nimal</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><textarea rows="3" placeholder="Why it is rejected" style="padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; line-height: 26px; resize: vertical; border: 2px solid var(--sapphire)"></textarea><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Goes into the rental’s history with your name and the time.</div></div></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><x-import component-from-global-scope="Plate.Button" icon="x" full="{{yes}}" disabled="{{yes}}">ප්‍රතික්ෂේප කරන්න · Reject request</x-import><a href="10-Approvals-Approvals-Phone.dc.html" class="rt-btn rt-btn-quiet rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>ආපසු · Back</span></a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3, active: true }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Phone.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }],
+      tabsA: [{ icon: 'home', label: 'අද' }, { icon: 'car', label: 'වාහන' }, { icon: 'wallet', label: 'මුදල්' }, { icon: 'stamp', label: 'අනුමැති', active: true }]
+    };
+  }
+}
+</script>
+</body>
+</html>

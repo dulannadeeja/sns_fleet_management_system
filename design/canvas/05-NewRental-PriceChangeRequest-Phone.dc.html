@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>05.7 Price change needs admin · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1300px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="02-Home-StaffHome-Phone.dc.html" title="R-0233 · මිල · Price" subtitle="Nimal · Staff"></x-import>
+
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px">
+    <section style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+      <div style="display: flex; align-items: center; justify-content: center; height: 64px; padding: 6px; background: var(--sunken); border-radius: 12px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBJ 1186" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="rented" size="sm"></x-import></div>
+      </div>
+      <div style="grid-column: 1 / -1; font-size: 15px; line-height: 24px">Wagon R · SNS-owned · 10 days · return Mon 26 Oct 8:00</div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 6px">
+      <label for="rate" style="font-size: 16px; line-height: 26px; font-weight: 600">දවසකට මිල <span class="rt-en">· Daily rate (agreed)</span></label>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--sunken)">
+        <x-import component-from-global-scope="Plate.Icon" name="lock" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+        <input id="rate" value="LKR 4,500" readonly="" style="flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font-family: var(--font-plate); font-size: 24px; font-weight: 600">
+      </div>
+    </section>
+
+    <x-import component-from-global-scope="Plate.BlockedPanel" what="මිල වෙනස් කරන්න admin අනුමැතිය ඕන · Changing an agreed price needs admin approval" why="Staff can't change a price once it is agreed. This protects both SNS and the customer." who="Admin (Kamal) or the owner" next="Send a request below. Nothing changes until it is approved."></x-import>
+
+    <section style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+      <div style="font-size: 17px; line-height: 26px; font-weight: 600">අනුමැතිය ඉල්ලන්න · Request approval</div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 4px 12px; font-size: 15px; line-height: 24px">
+        <span>New rate</span><b class="rt-num">4,500 → 4,000 / day</b>
+        <span>Days</span><b class="rt-num">10</b>
+        <span style="font-weight: 600">Effect on the bill</span><b class="rt-num" style="font-family: var(--font-plate); font-size: 18px; color: var(--overdue)">− 5,000</b>
+      </div>
+      <x-import component-from-global-scope="Plate.Notice" tone="info" title="සම්පූර්ණ අඩුව SNS ට · The whole reduction falls on SNS">CBJ 1186 is SNS-owned, so no partner share changes. The long-rental surcharge (5 × 500 = 2,500) is assumed unchanged.</x-import>
+      <label for="req" style="font-size: 16px; line-height: 26px; font-weight: 600">හේතුව <span class="rt-en">· Reason </span><span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></label>
+      <textarea id="req" rows="2" placeholder="Why should the price change?" style="padding: 10px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; line-height: 28px"></textarea>
+    </section>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+      <a href="02-Home-StaffHome-Phone.dc.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="stamp" size="{{twenty}}"></x-import><span>අනුමැතිය ඉල්ලන්න · Send request</span></a>
+      <div style="font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">After sending: "Done today · request sent · waiting for admin"</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, twenty: 20, twentyfour: 24 }; }
+}
+</script>
+</body>
+</html>

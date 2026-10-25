@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>09.3 Record a payment · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rt>div>main [style*="height: 844px"]{height:auto!important}
+
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railG}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="ගෙවීමක් · Record payment" subtitle="Nimal · Thu 22 Oct" user="Nimal" role="Staff · සේවක" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 32px 28px 56px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box">
+      <div style="width: 100%; max-width: 720px; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px"><section style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<span style="display: flex; flex-direction: column"><span class="rt-num" style="font-size: 17px; line-height: 26px; font-weight: 600">R‑0226</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">කුලිය · rental</span></span>
+<a href="06-Rentals-AllRentals-Desktop.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 600">වෙනස් · Change</a>
+</section><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මොකටද? <span class="rt-en">· For</span></span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><label style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 64px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); color: var(--sapphire-strong); border-radius: 12px; font-size: 15px; line-height: 22px; font-weight: 600"><input checked="" name="m" style="position: absolute; opacity: 0; pointer-events: none" type="radio"/><x-import component-from-global-scope="Plate.Icon" name="file" size="{{twenty}}"></x-import>බිල<span style="font-size: 14px; font-weight: 400; opacity: .78">Bill</span></label><label style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 64px; border: 1.5px solid var(--line-strong); background: var(--card); color: var(--ink); border-radius: 12px; font-size: 15px; line-height: 22px; font-weight: 600"><input name="m" style="position: absolute; opacity: 0; pointer-events: none" type="radio"/><x-import component-from-global-scope="Plate.Icon" name="banknote" size="{{twenty}}"></x-import>Deposit<span style="font-size: 14px; font-weight: 400; opacity: .78">not income</span></label></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මුදල <span class="rt-en">· Amount</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><label style="display: flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 18px; box-sizing: border-box; width: 100%"><span style="color: var(--ink-muted); font-size: 16px">LKR</span><input aria-label="Amount" class="rt-num" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 20px; font-weight: 600; color: var(--ink)" value="7,000"/></label></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ක්‍රමය <span class="rt-en">· Method</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(max(220px, calc((100% - 16px) / 3)), 1fr)); gap: 8px"><label style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 64px; border: 1.5px solid var(--line-strong); background: var(--card); color: var(--ink); border-radius: 12px; font-size: 15px; line-height: 22px; font-weight: 600"><input name="m" style="position: absolute; opacity: 0; pointer-events: none" type="radio"/><x-import component-from-global-scope="Plate.Icon" name="drawer" size="{{twenty}}"></x-import>Cash<span style="font-size: 14px; font-weight: 400; opacity: .78">drawer</span></label><label style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 64px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); color: var(--sapphire-strong); border-radius: 12px; font-size: 15px; line-height: 22px; font-weight: 600"><input checked="" name="m" style="position: absolute; opacity: 0; pointer-events: none" type="radio"/><x-import component-from-global-scope="Plate.Icon" name="link" size="{{twenty}}"></x-import>Bank<span style="font-size: 14px; font-weight: 400; opacity: .78">transfer</span></label><label style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 64px; border: 1.5px solid var(--line-strong); background: var(--card); color: var(--ink); border-radius: 12px; font-size: 15px; line-height: 22px; font-weight: 600"><input name="m" style="position: absolute; opacity: 0; pointer-events: none" type="radio"/><x-import component-from-global-scope="Plate.Icon" name="receipt" size="{{twenty}}"></x-import>Card<span style="font-size: 14px; font-weight: 400; opacity: .78">machine</span></label></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Bank reference <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input aria-invalid="true" aria-label="Bank reference" placeholder="e.g. the number on the transfer SMS" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 18px; box-sizing: border-box; width: 100%; border: 2px solid var(--overdue)"/><div style="display: flex; gap: 8px; align-items: flex-start; font-size: 14px; line-height: 22px; color: var(--overdue); font-weight: 500"><x-import component-from-global-scope="Plate.Icon" name="alert" size="{{eighteen}}" style="flex: none; margin-top: 2px"></x-import>Reference නැතුව bank ගෙවීමක් save කරන්න බැහැ · A bank payment cannot be saved without its reference.</div></div><section style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--sunken); border-radius: 14px">
+<span style="font-size: 15px; line-height: 24px; font-weight: 600">Save කළාම <span class="rt-en">· After saving</span></span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><x-import component-from-global-scope="Plate.StatePill" kind="recorded"></x-import><x-import component-from-global-scope="Plate.StatePill" kind="notChecked" label="Bank check · not yet"></x-import></div>
+<span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">The bill counts as paid straight away. Someone allowed to check the bank statement matches it later. Recorded is not the same as checked.</span>
+</section></div><div style="padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><x-import component-from-global-scope="Plate.Button" disabled="{{yes}}" full="{{yes}}" icon="lock">Save කරන්න · Save payment</x-import></div></div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":992}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26, railG: [
+        { icon: 'car', label: 'වාහන', href: '02-Home-StaffHome-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'drawer', label: 'ලාච්චුව', href: '09-Money-Drawer-Desktop.dc.html' , active: true },
+        { icon: 'check', label: 'උදේ check', href: '03-MorningCheck-InProgress-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මගේ පඩිපත', href: '13-Payroll-MyPayslip-Desktop.dc.html' }
+      ],
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      tabsD: [{ icon: 'car', label: 'වාහන' }, { icon: 'clipboard', label: 'කුලී' }, { icon: 'drawer', label: 'ලාච්චුව', active: true }, { icon: 'more', label: 'තවත්' }],
+      fab: { icon: 'plus', label: 'අලුත්' }
+    };
+  }
+}
+</script>
+</body>
+</html>
