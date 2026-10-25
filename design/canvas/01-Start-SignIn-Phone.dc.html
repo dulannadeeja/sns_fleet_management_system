@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>01.1 Sign in · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px">
+    <x-import component-from-global-scope="Plate.BrandMark" size="lg"></x-import>
+    <x-import component-from-global-scope="Plate.LanguageSwitch" lang="si" on-light="{{yes}}"></x-import>
+  </div>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 32px 20px 20px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font-size: 28px; line-height: 38px; font-weight: 600">ආයුබෝවන්</h1>
+      <p style="margin: 0; font-size: 16px; line-height: 26px; color: var(--ink-muted)">SNS Rent a Car · Elpitiya. ඔයාගේ account එකට ඇතුල් වෙන්න.<br><span class="rt-en">Sign in to your account.</span></p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">දුරකථන අංකය <span class="rt-en">· Phone number</span></span><input inputmode="tel" placeholder="07X XXX XXXX" aria-label="Phone number" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%"></div>
+    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මුරපදය <span class="rt-en">· Password</span></span><input type="password" value="••••••••" aria-label="Password" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; border: 2px solid var(--sapphire)"></div>
+    <a href="01-Start-FirstPassword-Phone.dc.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{twenty}}"></x-import><span>ඇතුල් වෙන්න · Sign in</span></a>
+    <div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sunken); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><x-import component-from-global-scope="Plate.Icon" name="info" size="{{twenty}}" style="flex: none"></x-import><span>Forgot your password? Ask the owner. How password recovery works is still to be decided.</span></div>
+  </div>
+  <div style="padding: 16px 20px 24px; font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">Owner, admin, staff and partners each have their own account.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

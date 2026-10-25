@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>02.2 Staff home · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1900px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <header style="display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 0 16px; background: var(--card); border-bottom: 1px solid var(--line)">
+    <x-import component-from-global-scope="Plate.BrandMark"></x-import>
+    <div style="flex: 1; min-width: 0; font-size: 15px; line-height: 20px"><div style="font-weight: 600">Nimal</div><div style="color: var(--ink-muted); font-size: 14px">Staff · 11:30</div></div>
+    <x-import component-from-global-scope="Plate.LanguageSwitch" lang="si" on-light="{{yes}}"></x-import>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 16px">
+    <label style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 14px; background: var(--card); border: 1.5px solid var(--line-strong); border-radius: 12px; color: var(--ink-muted)">
+      <x-import component-from-global-scope="Plate.Icon" name="search" size="{{twenty}}"></x-import>
+      <input type="search" placeholder="අංකය / නම හොයන්න" aria-label="Search by plate or name" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 17px; color: var(--ink)">
+    </label>
+    <x-import component-from-global-scope="Plate.LauncherGrid" title="ඉක්මන් වැඩ · Quick actions" columns="2" items="{{quick}}"></x-import>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">අද වැඩ <span class="rt-en">· Today's work</span></h2>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: var(--card); border: 2px solid var(--overdue); border-radius: 16px">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+          <x-import component-from-global-scope="Plate.StatusChip" status="overdue" detail="+3h 05m" size="sm"></x-import>
+          <x-import component-from-global-scope="Plate.PlateBadge" plate="CBC 5409" size="sm"></x-import>
+        </div>
+        <div style="font-size: 16px; line-height: 26px">Pradeep W. · R-0216 · deadline 22 Oct 8:00</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <a href="07-Return-Return-Phone.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="returnCar" size="{{twenty}}"></x-import><span>ආපසු ගන්න</span></a>
+          <x-import component-from-global-scope="Plate.Button" icon="phone" variant="secondary">කතා කරන්න</x-import>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+        <a href="06-Rentals-Handover-Phone.dc.html" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 20px; gap: 12px; align-items: center; min-height: 72px; padding: 12px 14px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sapphire-tint); color: var(--sapphire)"><x-import component-from-global-scope="Plate.Icon" name="key" size="{{twentytwo}}"></x-import></span>
+          <span style="display: flex; flex-direction: column"><b style="font-size: 16px; line-height: 24px">භාර දීමට <span class="rt-en">· Handover 4 / 5</span></b><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">CBF 7720 · R-0238 · agreement photo missing</span></span>
+          <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+        </a>
+        <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: center; min-height: 72px; padding: 12px 14px; border-bottom: 1px solid var(--line)">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="clock" size="{{twentytwo}}"></x-import></span>
+          <span style="display: flex; flex-direction: column"><b style="font-size: 16px; line-height: 24px">හෙට 8:00 ට කලින් <span class="rt-en">· Due by 8:00 tomorrow</span></b><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">CBE 6612 · PH 4521 · CBM 1340</span></span>
+        </div>
+        <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: center; min-height: 72px; padding: 12px 14px; background: var(--warning-tint)">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--card); color: var(--warning)"><x-import component-from-global-scope="Plate.Icon" name="question" size="{{twentytwo}}"></x-import></span>
+          <span style="display: flex; flex-direction: column"><b style="font-size: 16px; line-height: 24px">උදේ check · 17 / 18 found</b><span style="font-size: 14px; line-height: 22px">CBG 2967 not found · open until explained</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">නිදහස් වාහන <span class="rt-en">· Available </span><span class="rt-num" style="font-family: var(--font-plate)">17</span></h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <sc-for list="{{cars}}" as="c" hint-placeholder-count="6">
+          <x-import component-from-global-scope="Plate.VehicleCard" plate="{{c.plate}}" model="{{c.model}}" body="{{c.body}}" status="{{c.status}}" next="{{c.next}}" partner="{{c.partner}}" warning="{{c.warning}}" lang="si"></x-import>
+        </sc-for>
+      </div>
+      <a href="04-Cars-CarDetailsStaff-Phone.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 48px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--sapphire); font-size: 15px; font-weight: 600; text-decoration: none">නිදහස් 17ම බලන්න · See all 17</a>
+    </section>
+  </div>
+
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}" fab="{{fabNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    function car(plate, model, body, extra) { return Object.assign({ plate: plate, model: model, body: body, status: 'available', next: 'Ready', partner: false, warning: null }, extra || {}); }
+    return { quick: [{"icon": "receive-return", "label": "ආපසු ගන්න · Receive return", "href": "07-Return-Return-Phone.dc.html"}, {"icon": "record-payment", "label": "ගෙවීම · Record payment", "href": "09-Money-RecordPayment-Phone.dc.html"}, {"icon": "expense", "label": "වියදමක් · Record expense", "href": "09-Money-RecordExpense-Phone.dc.html"}, {"icon": "count-drawer", "label": "ලාච්චුව · Count drawer", "href": "09-Money-CountDrawer-Phone.dc.html"}], tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-StaffHome-Phone.dc.html", "active": true}, {"icon": "clipboard", "label": "කුලී", "href": "06-Rentals-AllRentals-Phone.dc.html"}, {"icon": "drawer", "label": "ලාච්චුව", "href": "09-Money-Drawer-Phone.dc.html"}, {"icon": "more", "label": "තවත්", "href": "02-Home-StaffMore-Phone.dc.html"}], fabNav: {"icon": "plus", "label": "අලුත්", "href": "05-NewRental-Customer-Phone.dc.html"},
+      yes: true, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      cars: [
+        car('CBF 7720', 'Wagon R', 'hatch', { next: 'Ruwan R-0238 සකසමින් · not reserved' }),
+        car('CBK 4127', 'Wagon R', 'hatch', { partner: true, next: 'Returned 9:40' }),
+        car('CBG 2967', 'Wagon R', 'hatch', { partner: true, next: null, warning: { label: '7:30 check එකේ හම්බුණේ නැහැ', icon: 'question' } }),
+        car('CBL 0458', 'Wagon R', 'hatch'),
+        car('PG 7754', 'Every', 'van'),
+        car('CAQ 6680', 'Prius', 'sedan')
+      ],
+      tabs: [
+        { icon: 'car', label: 'වාහන', active: true },
+        { icon: 'clipboard', label: 'කුලී' },
+        { icon: 'drawer', label: 'ලාච්චුව' },
+        { icon: 'more', label: 'තවත්' }
+      ],
+      fab: { icon: 'plus', label: 'අලුත්' }
+    };
+  }
+}
+</script>
+</body>
+</html>

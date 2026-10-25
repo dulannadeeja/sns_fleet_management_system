@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>09.1 Money today · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railMo}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="මුදල් · Money" subtitle="Thu 22 Oct 2026 · evening · drawer counted" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 28px 56px; display: flex; flex-direction: column; gap: 20px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">විසඳන්න ඕන <span class="rt-en">· Needs you</span> <span class="rt-num" style="color: var(--ink-muted); font-weight: 500">2</span></h2>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap"><a href="09-Money-EveningCheck-Desktop.dc.html" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 20px; gap: 12px; align-items: center; min-height: 68px; padding: 10px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; color: var(--ink); text-decoration: none; flex: 1 1 300px">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--overdue-tint); color: var(--overdue)"><x-import component-from-global-scope="Plate.Icon" name="drawer" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">ලාච්චුව LKR 1,000 අඩුයි · Drawer short 1,000</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Expected 48,950 · counted 47,950 · open</span></span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="09-Money-EveningCheck-Desktop.dc.html" style="display: grid; grid-template-columns: 40px minmax(0, 1fr) 20px; gap: 12px; align-items: center; min-height: 68px; padding: 10px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; color: var(--ink); text-decoration: none; flex: 1 1 300px">
+  <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--warning-tint); color: var(--warning)"><x-import component-from-global-scope="Plate.Icon" name="unlink" size="{{twenty}}"></x-import></span>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">HNB‑509377 · LKR 7,000 · unmatched</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0226 stays paid · under investigation</span></span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a></div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <a href="09-Money-EveningCheck-Desktop.dc.html" style="display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 24px; color: var(--ink); text-decoration: none; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="wallet" size="{{twenty}}"></x-import><span>අද ලැබුණු මුදල් <span class="rt-en">· Money received today</span></span><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="margin-left: auto; color: var(--ink-muted)"></x-import></a>
+  <span class="rt-num" style="font-size: 32px; line-height: 40px; font-weight: 600; color: var(--ink)"><span style="font-size: 15px; font-weight: 500; color: var(--ink-muted)">LKR </span>79,750</span><div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line)">
+  <x-import component-from-global-scope="Plate.Icon" name="drawer" size="{{twenty}}" style="color: var(--ink-muted); margin-top: 2px"></x-import>
+  <span style="display: flex; flex-direction: column; gap: 6px; min-width: 0"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Cash</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">7 payments · into the drawer</span></span><span style="display: flex; gap: 6px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.StatePill" kind="open" label="Drawer short 1,000"></x-import></span></span>
+  <span class="rt-num" style="text-align: right; font-size: 16px; line-height: 24px; font-weight: 600">48,250</span>
+</div><div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line)">
+  <x-import component-from-global-scope="Plate.Icon" name="link" size="{{twenty}}" style="color: var(--ink-muted); margin-top: 2px"></x-import>
+  <span style="display: flex; flex-direction: column; gap: 6px; min-width: 0"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Bank</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">4 transfers</span></span><span style="display: flex; gap: 6px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.StatePill" kind="matched" label="3 matched"></x-import><x-import component-from-global-scope="Plate.StatePill" kind="unmatched" label="1 unmatched"></x-import></span></span>
+  <span class="rt-num" style="text-align: right; font-size: 16px; line-height: 24px; font-weight: 600">22,500</span>
+</div><div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line)">
+  <x-import component-from-global-scope="Plate.Icon" name="receipt" size="{{twenty}}" style="color: var(--ink-muted); margin-top: 2px"></x-import>
+  <span style="display: flex; flex-direction: column; gap: 6px; min-width: 0"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Card</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">2 slips · machine total 9,000</span></span><span style="display: flex; gap: 6px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.StatePill" kind="matched" label="2 matched"></x-import></span></span>
+  <span class="rt-num" style="text-align: right; font-size: 16px; line-height: 24px; font-weight: 600">9,000</span>
+</div></div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Deposits received <span class="rt-en">· held, not income</span></span><span class="rt-num" style=" text-align: right; font-weight: 500">15,000</span><span style="">Bill and old‑debt payments</span><span class="rt-num" style=" text-align: right; font-weight: 500">64,750</span></div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Money received is not SNS earnings. Recorded payments count as paid; the tags show what was compared by hand with the bank statement and card machine.</div>
+</section>
+      <p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">මේ මුදල් එකට එකතු කරන්නේ නැහැ · These are different kinds of money and are never added together.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: start">
+        <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <a href="07-Return-DepositRefund-Desktop.dc.html" style="display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 24px; color: var(--ink); text-decoration: none; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="banknote" size="{{twenty}}"></x-import><span>Deposit තියාගෙන <span class="rt-en">· Deposits held</span></span><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="margin-left: auto; color: var(--ink-muted)"></x-import></a>
+  <span class="rt-num" style="font-size: 28px; line-height: 36px; font-weight: 600; color: var(--ink)"><span style="font-size: 15px; font-weight: 500; color: var(--ink-muted)">LKR </span>60,000</span><x-import component-from-global-scope="Plate.StatePill" kind="deposit"></x-import><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Start of day</span><span class="rt-num" style=" text-align: right; font-weight: 500">65,000</span><span style="">Received</span><span class="rt-num" style=" text-align: right; font-weight: 500">+ 15,000</span><span style="">Applied to bills · R‑0218, R‑0209</span><span class="rt-num" style=" text-align: right; font-weight: 500">− 17,000</span><span style="">Refunded · R‑0209</span><span class="rt-num" style=" text-align: right; font-weight: 500">− 3,000</span><span style="border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 4px; font-weight: 600;">Held now · 10 rentals</span><span class="rt-num" style="border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 4px; font-weight: 600; text-align: right; font-weight: 600">60,000</span></div>
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <a href="08-Customers-AllCustomers-Desktop.dc.html" style="display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 24px; color: var(--ink); text-decoration: none; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="users" size="{{twenty}}"></x-import><span>Customer ණය <span class="rt-en">· Customer debt</span></span><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="margin-left: auto; color: var(--ink-muted)"></x-import></a>
+  <span class="rt-num" style="font-size: 28px; line-height: 36px; font-weight: 600; color: var(--ink)"><span style="font-size: 15px; font-weight: 500; color: var(--ink-muted)">LKR </span>29,480</span><div style="display: flex; flex-direction: column; gap: 10px"><div style="display: flex; flex-direction: column; gap: 4px">
+  <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; line-height: 24px"><span>0–7 days · 1 customer</span><b class="rt-num" style="color: var(--ink)">3,250</b></div>
+  <span style="display: block; height: 6px; border-radius: 3px; background: var(--sunken)"><span style="display: block; width: 11%; height: 6px; border-radius: 3px; background: var(--ink)"></span></span>
+</div><div style="display: flex; flex-direction: column; gap: 4px">
+  <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; line-height: 24px"><span>8–30 days · 2 customers</span><b class="rt-num" style="color: var(--ink)">17,730</b></div>
+  <span style="display: block; height: 6px; border-radius: 3px; background: var(--sunken)"><span style="display: block; width: 60%; height: 6px; border-radius: 3px; background: var(--ink)"></span></span>
+</div><div style="display: flex; flex-direction: column; gap: 4px">
+  <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; line-height: 24px"><span>30+ days · Kasun P.</span><b class="rt-num" style="color: var(--overdue)">8,500</b></div>
+  <span style="display: block; height: 6px; border-radius: 3px; background: var(--sunken)"><span style="display: block; width: 29%; height: 6px; border-radius: 3px; background: var(--overdue)"></span></span>
+</div></div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">4 customers. Unmatched bank payments are never added here.</div>
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <a href="11-Partners-CashOuts-Desktop.dc.html" style="display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 24px; color: var(--ink); text-decoration: none; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="handshake" size="{{twenty}}"></x-import><span>Partner ට ගන්න පුළුවන් <span class="rt-en">· Partners can cash out</span></span><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="margin-left: auto; color: var(--ink-muted)"></x-import></a>
+  <span class="rt-num" style="font-size: 28px; line-height: 36px; font-weight: 600; color: var(--ink)"><span style="font-size: 15px; font-weight: 500; color: var(--ink-muted)">LKR </span>63,808.75</span><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Sunil J. · 2 cars</span><span class="rt-num" style=" text-align: right; font-weight: 500">33,208.75</span><span style="">3 other partner cars</span><span class="rt-num" style=" text-align: right; font-weight: 500">30,600</span></div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)"><a href="09-Money-CloseDay-Desktop.dc.html">Final at the end of each day.</a> Partners ask in their app; SNS pays and records it. No requests waiting.</div><div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border: 1.5px dashed var(--line-strong); border-radius: 12px">
+  <span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span style="font-size: 15px; line-height: 24px; font-weight: 600">Today · 5,525</span><x-import component-from-global-scope="Plate.StatePill" kind="provisional" label="Not final yet"></x-import></span>
+  <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">KX 5531, handed over today. Partners can’t see it until the day closes.</span>
+</div>
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; min-width: 0">
+  <a href="15-Settings-BusinessRules-Desktop.dc.html" style="display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 24px; color: var(--ink); text-decoration: none; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="chart" size="{{twenty}}"></x-import><span>SNS ආදායම <span class="rt-en">· SNS earnings</span></span><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="margin-left: auto; color: var(--ink-muted)"></x-import></a>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; background: var(--sunken); border-radius: 12px">
+  <span style="font-size: 16px; line-height: 26px; font-weight: 600">No figure yet</span>
+  <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">What counts as SNS earnings is an open owner decision, so no number is shown. It is never called profit.</span>
+</div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Example of why it differs from money received: R‑0209’s 7,000 deposit applied to its bill is earnings with no new money coming in.</div>
+</section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1691}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      railMo: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html', active: true }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      tabsO: [{ icon: 'home', label: 'අද' }, { icon: 'car', label: 'වාහන' }, { icon: 'wallet', label: 'මුදල්', active: true }, { icon: 'stamp', label: 'අනුමැති' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

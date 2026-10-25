@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>13.1 Payroll · October draft · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+.m-row{grid-template-columns:minmax(0,1fr) fit-content(55%)!important;gap:2px 12px!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important}
+.m-row>*{grid-column:1;text-align:left!important;min-width:0}
+.m-row>:last-child{overflow-wrap:anywhere;grid-column:2;grid-row:1/span 8;align-self:center;text-align:right!important}
+.m-row>:nth-child(n+3):not(:last-child){font-size:14px!important;line-height:22px;color:var(--ink-muted)}
+.m-head{display:none!important}
+.m-g4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.m-g3{grid-template-columns:minmax(0,1fr)!important}
+.m-g1{grid-template-columns:minmax(0,1fr)!important}
+.m-lbl{color:var(--ink-muted);font-weight:400}
+.m-row.m-lastwide>:last-child{grid-column:1/-1;grid-row:auto;text-align:left!important;justify-self:start}
+.m-body h2{font-size:20px!important}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1918px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="02-Home-OwnerMore-Phone.dc.html" title="October 2026 · draft" subtitle="පඩි · Payroll"></x-import>
+  <div class="m-body" style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px; min-width: 0"><p style="margin: 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">Salaries are entered by hand each month. No attendance, overtime or EPF/ETF is calculated.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 2 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px"><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px 20px">
+<h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ඔක්තෝබර් පඩි <span class="rt-en">· October 2026</span></h2>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 10px; background: var(--warning-tint); color: var(--warning); font-size: 14px; line-height: 22px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="pen" size="{{eighteen}}"></x-import>කෙටුම්පත · Draft</span>
+<span style="margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap"><a class="rt-btn rt-btn-secondary" href="13-Payroll-Adjustment-Phone.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{twenty}}"></x-import><span>වෙනසක් දාන්න · Add adjustment</span></a><x-import component-from-global-scope="Plate.Button" icon="lock">අවසන් කරන්න · Finalise</x-import></span>
+</div>
+<div class="m-row m-head m-lastwide" style="display: grid; grid-template-columns: minmax(180px, 1.4fr) 1fr 1.3fr 1.3fr 1fr; gap: 16px; padding: 10px 20px; border-top: 1px solid var(--line); background: var(--sunken)"><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; ">Employee</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; text-align: right">Salary</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; text-align: right">Added</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; text-align: right">Deducted</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); font-weight: 500; text-align: right">To pay</span></div><div class="m-row" style="display: grid; grid-template-columns: minmax(180px, 1.4fr) 1fr 1.3fr 1.3fr 1fr; gap: 16px; align-items: center; min-height: 64px; padding: 8px 20px; border-top: 1px solid var(--line)">
+<span style="display: flex; align-items: center; gap: 12px"><span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">KA</span><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Kamal</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Admin</span></span></span>
+<span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 500"><span class="m-lbl">Salary · </span>60,000</span><span style="text-align: right; color: var(--ink-muted)"><span class="m-lbl">Added · </span>—</span><span style="text-align: right; color: var(--ink-muted)"><span class="m-lbl">Deducted · </span>—</span><span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 600">60,000</span>
+</div><div class="m-row" style="display: grid; grid-template-columns: minmax(180px, 1.4fr) 1fr 1.3fr 1.3fr 1fr; gap: 16px; align-items: center; min-height: 64px; padding: 8px 20px; border-top: 1px solid var(--line)">
+<span style="display: flex; align-items: center; gap: 12px"><span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">NI</span><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Nimal</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Staff</span></span></span>
+<span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 500"><span class="m-lbl">Salary · </span>45,000</span><span style="text-align: right; color: var(--ink-muted)"><span class="m-lbl">Added · </span>—</span><span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 500"><span class="m-lbl">Deducted · </span>Advance − 5,000</span><span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 600">40,000</span>
+</div><div class="m-row" style="display: grid; grid-template-columns: minmax(180px, 1.4fr) 1fr 1.3fr 1.3fr 1fr; gap: 16px; align-items: center; min-height: 64px; padding: 8px 20px; border-top: 1px solid var(--line)">
+<span style="display: flex; align-items: center; gap: 12px"><span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">SA</span><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Sanduni</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Staff</span></span></span>
+<span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 500"><span class="m-lbl">Salary · </span>45,000</span><span style="text-align: right; color: var(--ink-muted)"><span class="m-lbl">Added · </span>—</span><span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 500"><span class="m-lbl">Deducted · </span>Loan − 3,000</span><span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 600">42,000</span>
+</div><div class="m-row" style="display: grid; grid-template-columns: minmax(180px, 1.4fr) 1fr 1.3fr 1.3fr 1fr; gap: 16px; align-items: center; min-height: 64px; padding: 8px 20px; border-top: 1px solid var(--line)">
+<span style="display: flex; align-items: center; gap: 12px"><span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">RU</span><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Ruwan</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Staff</span></span></span>
+<span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 500"><span class="m-lbl">Salary · </span>40,000</span><span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 500"><span class="m-lbl">Added · </span>Sep + 5,000</span><span style="text-align: right; color: var(--ink-muted)"><span class="m-lbl">Deducted · </span>—</span><span class="rt-num" style="text-align: right; font-size: 15px; line-height: 24px; font-weight: 600">45,000</span>
+</div><div class="m-row" style="display: grid; grid-template-columns: minmax(180px, 1.4fr) 1fr 1.3fr 1.3fr 1fr; gap: 16px; align-items: center; min-height: 56px; padding: 8px 20px; border-top: 1.5px solid var(--ink)">
+<span style="font-size: 16px; font-weight: 600">මුළු එකතුව · Total</span><span class="rt-num" style="text-align: right; font-weight: 600"><span class="m-lbl">Salary · </span>190,000</span><span class="rt-num" style="text-align: right; font-weight: 600"><span class="m-lbl">Added · </span>5,000</span><span class="rt-num" style="text-align: right; font-weight: 600"><span class="m-lbl">Deducted · </span>− 8,000</span><span class="rt-num" style="text-align: right; font-size: 17px; font-weight: 600">187,000</span>
+</div>
+<div style="padding: 12px 20px; border-top: 1px solid var(--line); font-size: 14px; line-height: 22px; color: var(--ink-muted)">Staff cannot see a draft. After finalising, each person sees only their own payslip. Payments are recorded one by one; anything not paid is carried to next month.</div>
+</section></div>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px"><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 10px; padding: 14px 20px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">Advance සහ ණය <span class="rt-en">· Advances and loans</span></h2><a href="13-Payroll-Advance-Phone.dc.html" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 15px; font-weight: 600; white-space: nowrap"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{eighteen}}"></x-import>New</a></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 12px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+<span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 600">Nimal · advance</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">given 10 Oct · taken back in full from October</span></span>
+<span class="rt-num" style="font-size: 16px; font-weight: 600">5,000</span>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 12px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+<span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 600">Sanduni · loan</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">3,000 a month · 9,000 left after October</span></span>
+<span class="rt-num" style="font-size: 16px; font-weight: 600">12,000</span>
+</div>
+</section><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ගෙවන්න තියෙන <span class="rt-en">· Still owed from September</span></h2>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Ruwan · September</span><span class="rt-num" style=" text-align: right; font-weight: 500">5,000</span></div>
+<span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)"><a href="13-Payroll-SalaryPayment-Phone.dc.html">Paid 35,000 of 40,000 on 30 Sep.</a> The rest is added to October, not paid twice.</span>
+</section><section style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 1.5px dashed var(--line-strong); border-radius: 14px">
+<span style="font-size: 15px; line-height: 24px; font-weight: 600">තවම තීරණය කර නැහැ · Still to decide</span>
+<span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">How much can be deducted in one month, rounding, and whether a deduction may be larger than the salary. Changes after finalising are also undecided.</span>
+</section></div>
+</div></div>
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1918}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html", "active": true}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Phone.dc.html', active: true }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

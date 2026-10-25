@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>09.8 Evening money check · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; align-items: stretch; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{rail}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="අද මුදල් · Today's money" subtitle="Thu 22 Oct 2026 · evening · drawer counted · bank &amp; card checked" search="අංකය / නම / ගෙවීම් ref හොයන්න" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 28px 32px 56px; display: flex; flex-direction: column; gap: 28px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
+
+      <x-import component-from-global-scope="Plate.AttentionBar" items="{{attention}}"></x-import>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px">
+        <x-import component-from-global-scope="Plate.MoneyBlock" label="අද ලැබුණු මුදල් · Money received" icon="wallet" figure="{{received}}" lines="{{receivedLines}}" note="Of this, 15,000 is deposits (held, not income) and 64,750 is bill or old-debt payments. Not SNS earnings."></x-import>
+        <x-import component-from-global-scope="Plate.MoneyBlock" label="ලාච්චුව · Drawer" icon="drawer" alert="{{yes}}" figure="{{diff}}" lines="{{drawerLines}}" note="විවෘතයි · Open until explained and resolved by an authorised person."></x-import>
+        <x-import component-from-global-scope="Plate.MoneyBlock" label="ගැලපීම · Bank &amp; card check" icon="link" alert="{{yes}}" state="Bank: 3 matched · 1 unmatched. Card: 2 slips matched to the machine total of 9,000." note="Checked by hand against the bank statements and the card-machine total. Nothing is checked automatically."></x-import>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 16px; align-items: start">
+        <section style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 2px solid var(--overdue); border-radius: 16px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+            <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">ලාච්චුවේ අඩුව <span class="rt-en">· Drawer short </span><span class="rt-num" style="font-family: var(--font-plate); color: var(--overdue)">LKR 1,000</span></h2>
+            <x-import component-from-global-scope="Plate.StatePill" kind="open"></x-import>
+          </div>
+          <div style="font-size: 15px; line-height: 24px">Expected 48,950 · counted 47,950</div>
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: var(--sunken); border-radius: 12px">
+            <div style="font-size: 15px; line-height: 24px; font-weight: 600">Cash taken in, by staff</div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 2px 16px; font-size: 15px; line-height: 24px">
+              <span>Sanduni · 3 payments (incl. 10,000 deposit)</span><b class="rt-num">24,650</b>
+              <span>Nimal · 3 payments</span><b class="rt-num">18,400</b>
+              <span>Ruwan · 1 payment</span><b class="rt-num">5,200</b>
+              <span style="font-weight: 600">Cash in</span><b class="rt-num">48,250</b>
+            </div>
+          </div>
+          <label for="expl" style="font-size: 16px; line-height: 26px; font-weight: 600">පැහැදිලි කිරීම <span class="rt-en">· Explanation </span><span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></label>
+          <textarea id="expl" rows="2" placeholder="What happened to the 1,000?" style="padding: 10px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; line-height: 26px"></textarea>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <x-import component-from-global-scope="Plate.Button" icon="pen">හේතුව සටහන් කරන්න · Record explanation</x-import>
+            <x-import component-from-global-scope="Plate.Button" icon="check" variant="secondary" disabled="{{yes}}">විසඳන්න · Resolve</x-import>
+          </div>
+          <div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Resolve unlocks after an explanation is recorded. The expected and counted figures are never changed.</div>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 2px solid var(--overdue); border-radius: 16px">
+          <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">HNB-509377 · bank <span class="rt-num" style="font-family: var(--font-plate)">LKR 7,000</span></h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <x-import component-from-global-scope="Plate.StatePill" kind="recorded" by="Nimal"></x-import>
+            <x-import component-from-global-scope="Plate.StatePill" kind="unmatched"></x-import>
+          </div>
+          <x-import component-from-global-scope="Plate.Notice" tone="info" title="R-0226 stays paid">An unmatched payment is investigated here. It is never added back to the customer's debt.</x-import>
+          <div>
+            <x-import component-from-global-scope="Plate.HistoryLine" actor="Nimal" action="recorded bank payment HNB-509377" target="R-0226" amount="{{seven}}" type="recorded" time="earlier today"></x-import>
+            <x-import component-from-global-scope="Plate.HistoryLine" actor="Kamal" action="marked unmatched against today's HNB statement" target="HNB-509377" type="unmatched" time="evening"></x-import>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <x-import component-from-global-scope="Plate.Button" icon="pen" variant="secondary">Note for the checker</x-import>
+            <a href="09-Money-BankCardCheck-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="link" size="{{twenty}}"></x-import><span>Match later</span></a>
+            <a href="09-Money-PaymentCorrection-Desktop.dc.html" class="rt-btn rt-btn-quiet" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><x-import component-from-global-scope="Plate.Icon" name="stamp" size="{{twenty}}"></x-import><span>Request correction · admin approves</span></a>
+          </div>
+        </section>
+      </div>
+
+      <section style="display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">අනිත් මුදල් <span class="rt-en">· Other money (never added to the above)</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px">
+          <x-import component-from-global-scope="Plate.MoneyBlock" label="Deposit තියාගෙන · Deposits held" icon="banknote" figure="{{held}}" note="10 rentals. ආදායම නොවේ · not income."></x-import>
+          <x-import component-from-global-scope="Plate.MoneyBlock" label="Customer ණය · Customer debt" icon="users" figure="{{debt}}" note="4 customers · 1 over 30 days (Kasun P., 8,500)."></x-import>
+          <x-import component-from-global-scope="Plate.MoneyBlock" label="Partner ට ගන්න පුළුවන් · Partners can cash out" icon="handshake" figure="{{payable}}" note="Final, any day. No cash-out requests today."></x-import>
+          <x-import component-from-global-scope="Plate.MoneyBlock" label="අද · තවම අවසන් නැහැ · Today, not final yet" icon="eyeOff" figure="{{provisional}}" note="KX 5531, handed over today. Extra km and late charges on cars still out are added when they come back. Partners can’t see this."></x-import>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1701}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, seven: 7000,
+      received: 79750, diff: -1000, held: 60000, debt: 29480, payable: 63808.75, provisional: 5525,
+      receivedLines: [
+        { label: 'Cash', amount: 48250, sign: 'in' },
+        { label: 'Bank', amount: 22500, sign: 'in' },
+        { label: 'Card', amount: 9000, sign: 'in' }
+      ],
+      drawerLines: [
+        { label: 'Opening count', amount: 10000 },
+        { label: 'Cash in', amount: 48250, sign: 'in' },
+        { label: 'Expenses', amount: 6300, sign: 'out' },
+        { label: 'Refunds', amount: 3000, sign: 'out' },
+        { label: 'Expected', amount: 48950, total: true },
+        { label: 'Counted', amount: 47950 }
+      ],
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html', active: true },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      attention: [
+        { label: 'විසඳන්න ඕන · Open items', count: 3, tone: 'warning', icon: 'alert', href: '02-Home-NeedsAttention-Desktop.dc.html' },
+        { label: 'Admin බලාපොරොත්තුවෙන් · Waiting for admin', count: 3, tone: 'info', icon: 'hourglass', href: '10-Approvals-Approvals-Desktop.dc.html' },
+        { label: 'අද විශේෂ තීරණ · Today’s decisions', count: 2, tone: 'neutral', icon: 'flag', href: '02-Home-NeedsAttention-Desktop.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
