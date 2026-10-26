@@ -23,7 +23,7 @@ Later stakeholder decisions supersede this document. Update this document before
 **Companion references (latest only):**
 
 - **The repository is the master copy** of the design system, the brand guidebook and the screens, so any agent or developer can work from git alone. claude.ai artifacts are viewers: they are refreshed from the repository after a change and never edited directly. Decided 26 Oct 2026 by Dulan (project setup, not a business rule).
-- **Screen design:** `screens/` (see `screens/README.md`): 170 screens, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
+- **Screen design:** `screens/` (see `screens/README.md`): 185 screen boards, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
 - **Design system:** `design-system/` (see `design-system/README.md`): tokens, components (`window.Plate`) and their previews. Viewer: "SNS Design System · Plate" (https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4).
 - **Brand guidebook:** `brand/guidebook/`: identity, colour, type, language, icons, vehicle imagery, layout, money on screen and printed documents.
 - **Client proposal:** `proposal/SNS_Rent_a_Car_Proposal_SI.pdf` and `proposal/SNS Rent a Car Proposal.html` in this folder (artifact: https://claude.ai/artifact/DCDGDwQJRuL7K8AUNN4nQ5). Commercial terms and phases live there; requirements live here. **Approved by the client and frozen** (confirmed by Dulan, 24 Oct 2026; approval date to be recorded): changes to scope, phases, price, payments, timeline or the agreement go through a change request (`change-requests/`) and an addendum (`addenda/`), never by editing the proposal.
@@ -76,7 +76,7 @@ Any cash introduced after launch must be recorded as a cash movement, not treate
 - **Primary owner:** One of the two admins. Full owner dashboard and authority to configure critical permissions for other staff.
 - **Additional admin:** Access controlled by the primary owner.
 - **Employee:** Operational access according to assigned permissions; access to their own payslips and advance/loan balances.
-- **Partner vehicle owner:** One account for all their vehicles. Access only to their own final rental earnings (day by day, per vehicle, with downloadable PDFs), their cash-out history, and the ability to request a cash-out. Never today's not-final amounts, other owners' data, or customer details.
+- **Partner vehicle owner:** One account for all their vehicles. Access only to their own final rental earnings (day by day, per vehicle, with downloadable PDFs), their cash-out history, and the ability to request a cash-out. Never today's not-final amounts, other owners' data, customer details, or the price a customer paid (a partner sees their earning, not the rental price; see Revenue allocation, §8.4).
 
 Customer-facing accounts are not confirmed. Customer document delivery is through the agreed printable documents.
 
@@ -94,6 +94,7 @@ All critical permissions are configurable. The following are agreed defaults, no
 | Decide a late-return charge | Employees or admins; no separate approval |
 | Decide a damage charge | Employees or admins |
 | Allocate damage proceeds | Admin decides |
+| Share an above-package price on a partner car | Admin decides the split for each rental, with a reason |
 | Change agreed rental price or grant discount | Admin approval required |
 | Correct a recorded payment | Admin approval required |
 | Reduce charges for an early return | Admin decides |
@@ -296,6 +297,7 @@ Payment corrections require admin approval and retain the original record plus c
 | Late-return charge | Vehicle commission split |
 | Discount | Reduces SNS and owner earnings proportionally |
 | Damage recovery | Admin decides allocation |
+| Price above the car's package, on a partner car | The package amount follows the vehicle commission split. The extra above it is split between SNS and the partner as an admin sets for that rental, with a reason; it may be 100% SNS. Confirmed: agreed by the owner, recorded by Dulan |
 | Cancellation fee | 100% SNS |
 | Fuel | 100% SNS |
 | Customer debt write-off | SNS bears loss |
@@ -325,7 +327,7 @@ Each partner has one account covering all their vehicles. Earnings are kept per 
 1. Calculate each vehicle's earnings using its historical commission terms.
 2. Each rental day's charge (and any applicable long-rental surcharge) for that vehicle becomes final when that business day closes, including for rentals still in progress.
 3. Extra-kilometre and late-return charges become final when the vehicle is returned and the charge is recorded.
-4. Items waiting for an admin decision (swap-day split, damage or accessory allocation, early-return reduction) stay out of the owner's earnings until decided.
+4. Items waiting for an admin decision (swap-day split, damage or accessory allocation, early-return reduction, the share of a price above the package) stay out of the owner's earnings until decided.
 5. Apply approved owner-responsible expenses and corrections as dated lines; never count an earning twice.
 6. Final earnings minus payouts already made is the owner's **balance ready to cash out**. Only final amounts are visible to the owner; today's not-final amounts are not.
 7. The owner requests a cash-out of all or part of the balance from their account (to their bank account, or collected at the branch). An authorised person pays and records the payout (a bank payout needs a reference). A partial payout leaves the rest in the balance.
@@ -559,6 +561,9 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-36 | A partner's opening balance is loaded; past rentals of their cars are imported | The opening balance can be cashed out from go-live; the imported rentals add no earnings; nothing is paid twice |
 | AT-37 | An imported past rental is opened, or a report covers its month | Shown marked "Imported", read-only, never recalculated; counted in reports, never in earnings, cash-outs or the drawer |
 | AT-38 | An imported opening customer debt is written off | SNS bears the loss; partner earnings unchanged (as AT-17) |
+| AT-39 | A partner car is rented above its package price; the admin keeps the whole extra for SNS | The partner's earning is worked out on the package price only; the partner sees no customer price and no extra |
+| AT-40 | Same, but the admin sets a 50/50 split of the extra, with a reason | The partner's day earning is their package share plus half the extra, shown as one amount; SNS keeps its commission plus the other half |
+| AT-41 | The business day closes before the admin decides the split | The package share becomes final; the extra waits, out of the partner's earnings, until decided |
 
 ## 20. Readiness and next steps
 
