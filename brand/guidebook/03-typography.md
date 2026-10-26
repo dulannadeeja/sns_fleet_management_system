@@ -1,7 +1,7 @@
 # 03 · Typography
 
-- **Yaldevi for every word, Sinhala and English.** One family for both scripts keeps a mixed line like "Deposit තියාගෙන · Held, not income" in one voice.
-- **Gemunu Libre for plates, money, counts and times** (`plate`, `figure`, and anything marked `rt-num`), with tabular figures so columns line up. Headings (`h1`, `h2`, the top-bar title) use it too.
+- **Yaldevi for every interface word, Sinhala and English.** One family for both scripts keeps a mixed line like "Deposit තියාගෙන · Held, not income" in one voice.
+- **Gemunu Libre for plates, money, counts and times** (`plate`, `figure`, and anything marked `rt-num`), with tabular figures so columns line up. Headings use it too: the `display`, `title` and `heading` styles, `h1`, `h2` and the top-bar title. Decided by Dulan on 26 Oct 2026 (audit finding F05).
 - **Three weights:** 400 reading, 500 labels, 600 headings, buttons, plates and figures. Never heavier: bold Sinhala loses its vowel signs.
 - **Bilingual labels have two voices.** In "සිංහල · English" the Sinhala is the label and the English a quieter echo (`rt-en`).
 - **Sizes:** `body` 17px on phones, `body-desktop` 16px on computers, nothing on screen under `caption` 14px. Line height 1.7; let labels wrap.
@@ -23,9 +23,9 @@ Values below are copied from `design-system/tokens.json`. If they ever differ, `
 
 | Style | Family | Size | Line height | Weight |
 | --- | --- | --- | --- | --- |
-| `display` | sans | 28px | 40px | 600 |
-| `title` | sans | 22px | 32px | 600 |
-| `heading` | sans | 18px | 28px | 600 |
+| `display` | plate | 28px | 40px | 600 |
+| `title` | plate | 22px | 32px | 600 |
+| `heading` | plate | 18px | 28px | 600 |
 | `body` | sans | 17px | 29px | 400 |
 | `body-desktop` | sans | 16px | 27px | 400 |
 | `label` | sans | 15px | 24px | 500 |

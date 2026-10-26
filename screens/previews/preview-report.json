@@ -74,7 +74,7 @@
  {
   "name": "02-Home-OwnerHome-Desktop",
   "w": 1440,
-  "canvasH": 2700,
+  "canvasH": 5093,
   "contentH": 5093,
   "missing": [],
   "broken": [],
@@ -83,7 +83,7 @@
  {
   "name": "02-Home-OwnerHome-Phone",
   "w": 390,
-  "canvasH": 2300,
+  "canvasH": 2946,
   "contentH": 2946,
   "missing": [],
   "broken": [],
@@ -118,9 +118,9 @@
  },
  {
   "name": "02-Home-StaffHome-Desktop",
-  "w": 1280,
-  "canvasH": 4550,
-  "contentH": 4550,
+  "w": 1440,
+  "canvasH": 4683,
+  "contentH": 4683,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

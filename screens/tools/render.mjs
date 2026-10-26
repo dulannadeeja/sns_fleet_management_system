@@ -73,7 +73,10 @@ for (const n of names) {
   await p.evaluate(() => Promise.race([Promise.all([...document.images].map((i) => (i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })))), new Promise((r) => setTimeout(r, 4000))]));
   const broken = await p.$$eval('img', (is) => is.filter((i) => !i.naturalWidth).map((i) => i.getAttribute('src')));
   const overflowX = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  // Measure in a short window: parts sized by the window height (the 100vh sidebar) would otherwise grow the board on every render.
+  await p.setViewportSize({ width: b.w, height: 400 });
   const contentH = await p.evaluate(() => Math.ceil(document.documentElement.scrollHeight));
+  await p.setViewportSize({ width: b.w, height: Math.max(b.h, contentH) });
   await p.screenshot({ path: join(PREV, 'png', `${n}.png`), fullPage: true });
   let html = await p.evaluate(() => { document.querySelectorAll('script, base').forEach((s) => s.remove()); return `<!doctype html>${document.documentElement.outerHTML}`; });
   html = html.split(`${fileUrl(join(REPO, 'fonts'))}/`).join('../../../fonts/')

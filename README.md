@@ -26,6 +26,7 @@ Everything works from this repository alone. The claude.ai artifacts are viewers
 | `reference/` | Material sent by the client |
 | `fonts/` | Yaldevi, Gemunu Libre, IBM Plex Mono |
 | `scripts/` | Repository checks and sync tools (Node, no install) |
+| `audits/` | Dated review records (design audit of 26 Oct 2026) |
 | `app/` | The application, built from `TRD.md` (not started yet) |
 | `.claude/`, `.github/` | The AI harness, issue and PR templates, CI checks |
 

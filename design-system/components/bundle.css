@@ -1,3 +1,5 @@
+/* Fonts: the repository's own files first (design-system/fonts.css); Google Fonts only as a fallback for the claude.ai viewers, which cannot reach the repository files. */
+@import url("../fonts.css");
 @import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
 
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */

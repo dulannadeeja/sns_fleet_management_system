@@ -1,4 +1,12 @@
-<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>10.3 Reject · confirm · Phone (static preview)</title><style>/* SNS Rent Car · Plate — generated from tokens.json */
+<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>10.3 Reject · confirm · Phone</title>
+<style>/* SNS Rent Car · Plate — font faces, loaded from the repository's fonts/ folder (SIL Open Font License). */
+@font-face { font-family: "Yaldevi"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-SemiBold.ttf") format("truetype"); }
+</style><style>/* SNS Rent Car · Plate — generated from tokens.json */
 :root, [data-theme="light"] {
   --paper: #eef1f0;
   --card: #ffffff;
@@ -50,16 +58,19 @@
   --font-sans: "Yaldevi", "Noto Sans Sinhala", system-ui, sans-serif;
   --font-plate: "Gemunu Libre", "Yaldevi", "Noto Sans Sinhala", sans-serif;
 }
-.display { font-family: var(--font-sans); font-size: 28px; line-height: 40px; font-weight: 600; }
-.title { font-family: var(--font-sans); font-size: 22px; line-height: 32px; font-weight: 600; }
-.heading { font-family: var(--font-sans); font-size: 18px; line-height: 28px; font-weight: 600; }
+.display { font-family: var(--font-plate); font-size: 28px; line-height: 40px; font-weight: 600; }
+.title { font-family: var(--font-plate); font-size: 22px; line-height: 32px; font-weight: 600; }
+.heading { font-family: var(--font-plate); font-size: 18px; line-height: 28px; font-weight: 600; }
 .body { font-family: var(--font-sans); font-size: 17px; line-height: 29px; font-weight: 400; }
 .body-desktop { font-family: var(--font-sans); font-size: 16px; line-height: 27px; font-weight: 400; }
 .label { font-family: var(--font-sans); font-size: 15px; line-height: 24px; font-weight: 500; }
 .caption { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
 .plate { font-family: var(--font-plate); font-size: 20px; line-height: 26px; font-weight: 600; }
 .figure { font-family: var(--font-plate); font-size: 26px; line-height: 34px; font-weight: 600; }
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
+
+/* Fonts: the repository's own files first (design-system/fonts.css); Google Fonts only as a fallback for the claude.ai viewers, which cannot reach the repository files. */
+
+
 
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */
 .rt, .rt * { box-sizing: border-box; }
@@ -453,19 +464,21 @@ a.rt-tab { text-decoration: none; }
 /* responsive 6: when a sheet or dialog is open, the sticky header and tab bar sit under its dimmed backdrop */
 .rt:has([role="dialog"], [aria-modal="true"]) :is(.rt-pagehead, .rt-tabs, .rt-header) { z-index: auto; }
 </style>
+
+
+
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
-</style>
-</head><body>
+</style></head><body>
 
 <div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
-  <header class="rt-pagehead"><a class="rt-pagehead-back" href="10-Approvals-Approvals-Phone.html" aria-label="ආපසු · Back"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><div class="rt-pagehead-text"><div class="rt-pagehead-title">ප්‍රතික්ෂේප කිරීම<span class="rt-en"> · Confirm</span></div><div class="rt-pagehead-sub">Kamal · Admin · R‑0233</div></div></header>
+  <span data-x-import="Plate.PageHeader" style="display: contents;"><header class="rt-pagehead"><a class="rt-pagehead-back" href="10-Approvals-Approvals-Phone.html" aria-label="ආපසු · Back"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a><div class="rt-pagehead-text"><div class="rt-pagehead-title">ප්‍රතික්ෂේප කිරීම<span class="rt-en"> · Confirm</span></div><div class="rt-pagehead-sub">Kamal · Admin · R‑0233</div></div></header></span>
   <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><section style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
   <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">You are rejecting</span>
   <span style="font-size: 18px; line-height: 28px; font-weight: 600">R‑0233 · 4,500 → 4,000 a day</span>
   <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Bill stays at</span><span class="rt-num" style=" text-align: right; font-weight: 500">4,500 a day</span><span style="">Effect on SNS</span><span class="rt-num" style=" text-align: right; font-weight: 500">none</span></div>
-</section><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ප්‍රතික්ෂේප කරන්නේ ඇයි? <span class="rt-en">· Note to Nimal</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><textarea rows="3" placeholder="Why it is rejected" style="padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; line-height: 26px; resize: vertical; border: 2px solid var(--sapphire)"></textarea><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Goes into the rental’s history with your name and the time.</div></div></div>
-  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><x-import component-from-global-scope="Plate.Button" icon="x" full="true" disabled="true">ප්‍රතික්ෂේප කරන්න · Reject request</x-import><a href="10-Approvals-Approvals-Phone.html" class="rt-btn rt-btn-quiet rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>ආපසු · Back</span></a></div>
+</section><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ප්‍රතික්ෂේප කරන්නේ ඇයි? <span class="rt-en">· Note to Nimal</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><textarea rows="3" placeholder="Why it is rejected" style="padding: 12px 14px; border-radius: 12px; background: var(--card); color: var(--ink); font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 16px; line-height: 26px; resize: vertical; border: 2px solid var(--sapphire);"></textarea><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Goes into the rental’s history with your name and the time.</div></div></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><span data-x-import="Plate.Button" style="display: contents;"><button disabled="" type="button" class="rt-btn rt-btn-primary rt-btn-full"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg><span><span style="display: contents;">ප්‍රතික්ෂේප කරන්න · Reject request</span></span></button></span><a href="10-Approvals-Approvals-Phone.html" class="rt-btn rt-btn-quiet rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>ආපසු · Back</span></a></div>
 </div>
 </body></html>

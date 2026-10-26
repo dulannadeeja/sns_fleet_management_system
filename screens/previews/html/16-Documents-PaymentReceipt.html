@@ -1,4 +1,12 @@
-<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>16.4 Payment receipt · 80 mm slip · print (static preview)</title><style>/* SNS Rent Car · Plate — generated from tokens.json */
+<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>16.4 Payment receipt · 80 mm slip · print</title>
+<style>/* SNS Rent Car · Plate — font faces, loaded from the repository's fonts/ folder (SIL Open Font License). */
+@font-face { font-family: "Yaldevi"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-SemiBold.ttf") format("truetype"); }
+</style><style>/* SNS Rent Car · Plate — generated from tokens.json */
 :root, [data-theme="light"] {
   --paper: #eef1f0;
   --card: #ffffff;
@@ -50,16 +58,19 @@
   --font-sans: "Yaldevi", "Noto Sans Sinhala", system-ui, sans-serif;
   --font-plate: "Gemunu Libre", "Yaldevi", "Noto Sans Sinhala", sans-serif;
 }
-.display { font-family: var(--font-sans); font-size: 28px; line-height: 40px; font-weight: 600; }
-.title { font-family: var(--font-sans); font-size: 22px; line-height: 32px; font-weight: 600; }
-.heading { font-family: var(--font-sans); font-size: 18px; line-height: 28px; font-weight: 600; }
+.display { font-family: var(--font-plate); font-size: 28px; line-height: 40px; font-weight: 600; }
+.title { font-family: var(--font-plate); font-size: 22px; line-height: 32px; font-weight: 600; }
+.heading { font-family: var(--font-plate); font-size: 18px; line-height: 28px; font-weight: 600; }
 .body { font-family: var(--font-sans); font-size: 17px; line-height: 29px; font-weight: 400; }
 .body-desktop { font-family: var(--font-sans); font-size: 16px; line-height: 27px; font-weight: 400; }
 .label { font-family: var(--font-sans); font-size: 15px; line-height: 24px; font-weight: 500; }
 .caption { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
 .plate { font-family: var(--font-plate); font-size: 20px; line-height: 26px; font-weight: 600; }
 .figure { font-family: var(--font-plate); font-size: 26px; line-height: 34px; font-weight: 600; }
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
+
+/* Fonts: the repository's own files first (design-system/fonts.css); Google Fonts only as a fallback for the claude.ai viewers, which cannot reach the repository files. */
+
+
 
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */
 .rt, .rt * { box-sizing: border-box; }
@@ -453,14 +464,16 @@ a.rt-tab { text-decoration: none; }
 /* responsive 6: when a sheet or dialog is open, the sticky header and tab bar sit under its dimmed backdrop */
 .rt:has([role="dialog"], [aria-modal="true"]) :is(.rt-pagehead, .rt-tabs, .rt-header) { z-index: auto; }
 </style>
+
+
+
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
-</style>
-</head><body>
+</style></head><body>
 
 <div class="rt" style="width: 302px; height: 540px; display: flex; flex-direction: column; gap: 12px; padding: 20px 18px; box-sizing: border-box; background: #ffffff; color: var(--ink); font-family: var(--font-sans); font-size: 13px; line-height: 20px; overflow: hidden">
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; padding-bottom: 10px; border-bottom: 1px dashed var(--ink)"><link rel="preload" as="image" href="../../../design-system/assets/brand/sns-logo.png"/><span class="rt-mark rt-mark-full"><img src="../../../design-system/assets/brand/sns-logo.png" alt="SNS Rent Car" draggable="false"/></span><span style="font-size: 12px; color: var(--ink-muted)">S.N.S. Rent a Car · Reg. 1/4/140<br>Elpitiya · 077 418 8240</span></div>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; padding-bottom: 10px; border-bottom: 1px dashed var(--ink)"><span data-x-import="Plate.BrandMark" style="display: contents;"><span class="rt-mark rt-mark-full"><img src="../../../design-system/assets/brand/sns-logo.png" alt="SNS Rent Car" draggable="false"></span></span><span style="font-size: 12px; color: var(--ink-muted)">S.N.S. Rent a Car · Reg. 1/4/140<br>Elpitiya · 077 418 8240</span></div>
   <div style="display: flex; flex-direction: column; align-items: center; gap: 2px"><span style="font-size: 16px; font-weight: 600; letter-spacing: 0.04em">PAYMENT RECEIPT</span><span style="font-size: 12px; color: var(--ink-muted)">Printed in English · language chosen at print</span></div>
   <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px"><span style=" font-weight: 400">Rental</span><span class="rt-num" style=" text-align: right; font-weight: 400">R‑0218</span><span style=" font-weight: 400">Customer</span><span class="rt-num" style=" text-align: right; font-weight: 400">Kasun P.</span><span style=" font-weight: 400">Car</span><span class="rt-num" style=" text-align: right; font-weight: 400">CBK 4127</span><span style=" font-weight: 400">Date</span><span class="rt-num" style=" text-align: right; font-weight: 400">Thu 22 Oct 2026</span></div>
   <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; padding-top: 8px; border-top: 1px dashed var(--ink)"><span style=" font-weight: 400">Cash received</span><span class="rt-num" style=" text-align: right; font-weight: 400">3,000</span><span style=" font-weight: 400">Bill total</span><span class="rt-num" style=" text-align: right; font-weight: 400">15,675</span><span style=" font-weight: 400">Paid before this</span><span class="rt-num" style=" text-align: right; font-weight: 400">12,675</span><span style="border-top: 1px dashed var(--ink); padding-top: 6px; font-weight: 600">Balance due</span><span class="rt-num" style="border-top: 1px dashed var(--ink); padding-top: 6px; text-align: right; font-weight: 600">0</span></div>

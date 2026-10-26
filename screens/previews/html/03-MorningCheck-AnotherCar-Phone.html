@@ -1,4 +1,12 @@
-<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>03.2 Another car is here · Phone (static preview)</title><style>/* SNS Rent Car · Plate — generated from tokens.json */
+<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>03.2 Another car is here · Phone</title>
+<style>/* SNS Rent Car · Plate — font faces, loaded from the repository's fonts/ folder (SIL Open Font License). */
+@font-face { font-family: "Yaldevi"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-SemiBold.ttf") format("truetype"); }
+</style><style>/* SNS Rent Car · Plate — generated from tokens.json */
 :root, [data-theme="light"] {
   --paper: #eef1f0;
   --card: #ffffff;
@@ -50,16 +58,19 @@
   --font-sans: "Yaldevi", "Noto Sans Sinhala", system-ui, sans-serif;
   --font-plate: "Gemunu Libre", "Yaldevi", "Noto Sans Sinhala", sans-serif;
 }
-.display { font-family: var(--font-sans); font-size: 28px; line-height: 40px; font-weight: 600; }
-.title { font-family: var(--font-sans); font-size: 22px; line-height: 32px; font-weight: 600; }
-.heading { font-family: var(--font-sans); font-size: 18px; line-height: 28px; font-weight: 600; }
+.display { font-family: var(--font-plate); font-size: 28px; line-height: 40px; font-weight: 600; }
+.title { font-family: var(--font-plate); font-size: 22px; line-height: 32px; font-weight: 600; }
+.heading { font-family: var(--font-plate); font-size: 18px; line-height: 28px; font-weight: 600; }
 .body { font-family: var(--font-sans); font-size: 17px; line-height: 29px; font-weight: 400; }
 .body-desktop { font-family: var(--font-sans); font-size: 16px; line-height: 27px; font-weight: 400; }
 .label { font-family: var(--font-sans); font-size: 15px; line-height: 24px; font-weight: 500; }
 .caption { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
 .plate { font-family: var(--font-plate); font-size: 20px; line-height: 26px; font-weight: 600; }
 .figure { font-family: var(--font-plate); font-size: 26px; line-height: 34px; font-weight: 600; }
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
+
+/* Fonts: the repository's own files first (design-system/fonts.css); Google Fonts only as a fallback for the claude.ai viewers, which cannot reach the repository files. */
+
+
 
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */
 .rt, .rt * { box-sizing: border-box; }
@@ -453,14 +464,16 @@ a.rt-tab { text-decoration: none; }
 /* responsive 6: when a sheet or dialog is open, the sticky header and tab bar sit under its dimmed backdrop */
 .rt:has([role="dialog"], [aria-modal="true"]) :is(.rt-pagehead, .rt-tabs, .rt-header) { z-index: auto; }
 </style>
+
+
+
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
-</style>
-</head><body>
+</style></head><body>
 
 <div class="rt" style="position: relative; width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
-  <header class="rt-pagehead"><a class="rt-pagehead-back" href="02-Home-StaffHome-Phone.html" aria-label="ආපසු · Back"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><div class="rt-pagehead-text"><div class="rt-pagehead-title">උදේ check<span class="rt-en"> · Morning check</span></div><div class="rt-pagehead-sub">Nimal · Thu 22 Oct · started 7:30</div></div></header>
+  <span data-x-import="Plate.PageHeader" style="display: contents;"><header class="rt-pagehead"><a class="rt-pagehead-back" href="02-Home-StaffHome-Phone.html" aria-label="ආපසු · Back"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a><div class="rt-pagehead-text"><div class="rt-pagehead-title">උදේ check<span class="rt-en"> · Morning check</span></div><div class="rt-pagehead-sub">Nimal · Thu 22 Oct · started 7:30</div></div></header></span>
   <div style="padding: 16px"><div style="display: flex; flex-direction: column; gap: 8px">
   <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 16px; line-height: 26px; font-weight: 600"><span class="rt-num">11</span> / <span class="rt-num">18</span> බැලුවා <span class="rt-en">· checked</span></span><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)"><span class="rt-num">7</span> ඉතුරුයි · left</span></div>
   <ol aria-label="Progress" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(18, minmax(0, 1fr)); gap: 3px"><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li></ol>
@@ -471,18 +484,18 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
     <div style="display: flex; align-items: flex-start; gap: 8px">
       <div style="flex: 1"><h2 style="margin: 0; font-size: 19px; line-height: 28px; font-weight: 600">මෙතන තියෙන තව car එකක් <span class="rt-en">· Another car is here</span></h2>
       <p style="margin: 4px 0 0; font-size: 15px; line-height: 24px; color: var(--ink-muted)">A car you can see in the yard, but the records say is rented, in repair or unavailable.</p></div>
-      <a href="03-MorningCheck-InProgress-Phone.html" aria-label="වසන්න · Close" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--ink)"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></a>
+      <a href="03-MorningCheck-InProgress-Phone.html" aria-label="වසන්න · Close" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--ink)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span></a>
     </div>
     <label style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 14px; border: 2px solid var(--sapphire); border-radius: 12px">
-      <div style="color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
-      <input type="search" value="CAA 9" aria-label="Plate number" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 18px; font-weight: 600; letter-spacing: .02em; color: var(--ink)">
+      <span data-x-import="Plate.Icon" style="display: contents; color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span>
+      <input type="search" value="CAA 9" aria-label="Plate number" style="flex: 1 1 0%; min-width: 0px; border: 0px; outline: none; background: transparent; font-style: inherit; font-variant: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 18px; font-weight: 600; letter-spacing: 0.02em; color: var(--ink);">
     </label>
     <div style="display: flex; flex-direction: column; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 14px">
-      <div style="display: flex; gap: 12px; align-items: center"><span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken); overflow: hidden"><div style="width: 100%; height: 100%"><img class="rt-vimg" src="../../../brand/vehicles/256/sns-vehicle-alto.png" alt="" loading="lazy" decoding="async" draggable="false"/></div></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0"><span class="rt-plate rt-plate-sm" aria-label="අංකය CAA 9083">CAA 9083</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Alto</span></span></div>
+      <div style="display: flex; gap: 12px; align-items: center"><span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken); overflow: hidden"><span data-x-import="Plate.VehicleImage" style="display: contents; width: 100%; height: 100%"><img class="rt-vimg" src="../../../brand/vehicles/256/sns-vehicle-alto.png" alt="" loading="eager" decoding="async" draggable="false"></span></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0"><span data-x-import="Plate.PlateBadge" style="display: contents;"><span class="rt-plate rt-plate-sm" aria-label="අංකය CAA 9083">CAA 9083</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Alto</span></span></div>
       <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 4px 16px; font-size: 15px; line-height: 24px"><span style="color: var(--ink-muted)">Record says</span><span class="rt-num" style="font-weight: 600; text-align: right">අලුත්වැඩියාවට · Under repair</span><span style="color: var(--ink-muted)">Since</span><span class="rt-num" style="color: var(--ink-muted); text-align: right">21 Oct · AC fault</span></div>
-      <a href="03-MorningCheck-InProgress-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span>මෙතන තියෙනවා · It's here</span></a>
+      <a href="03-MorningCheck-InProgress-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"></path></svg></span><span>මෙතන තියෙනවා · It's here</span></a>
     </div>
-    <div style="display: flex; gap: 10px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><div style="flex: none"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg></div><span>This does not change the car's status. It opens a discrepancy, because the yard and the records don't match.</span></div>
+    <div style="display: flex; gap: 10px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><span data-x-import="Plate.Icon" style="display: contents; flex: none"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.01"></path></svg></span><span>This does not change the car's status. It opens a discrepancy, because the yard and the records don't match.</span></div>
   </section>
 </div>
 </body></html>
