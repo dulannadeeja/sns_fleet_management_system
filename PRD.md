@@ -4,7 +4,7 @@ What the SNS Rent Car system must do, written as stories a developer can build a
 
 This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-83) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
-Status of this draft: front section and Phase 1 and 2 stories, written with Dulan from 26 Oct 2026, for review. Phases 3 and 4 are not yet written.
+Status of this draft: front section and the stories for all four phases, written with Dulan from 26 Oct 2026, for review.
 
 ## 1. Sources
 
@@ -77,16 +77,16 @@ Agreed with Dulan, 26 Oct 2026.
 | 16 Documents: rental | 16.1–16.4 | 2 | [16 Documents: rental](#16-documents-rental) |
 | 02 Home: staff and search | 02.2, 02.4 | 2 | [02 Home: staff and search](#02-home-staff-and-search) |
 | 18 Reservations | 18.1–18.5 | 2 | [18 Reservations](#18-reservations) |
-| 09 Money: drawer, day and expenses | 09.1–09.2, 09.6–09.13 | 3 | Not yet written |
-| 11 Partners: cash-outs and portal | 11.4–11.8 | 3 | Not yet written |
-| 13 Payroll | 13.1–13.5 | 3 | Not yet written |
-| 12 Maintenance | 12.1–12.2 | 3 | Not yet written |
-| 03 Morning check | 03.1–03.4 | 3 | Not yet written |
-| 16 Documents: partner and payslip | 16.5–16.7 | 3 | Not yet written |
-| 02 Home: owner | 02.1, 02.3, 02.5–02.6 | 4 | Not yet written |
-| 14 Reports | 14.1–14.2 | 4 | Not yet written |
-| Starting data | No screen: loaded by the developer; the Imported marker is in 17.1, 08.2, 11.2 | 4 | Not yet written |
-| 17 System states, 19 Navigation | 17.1–17.2, 19.1 | All | Not yet written |
+| 09 Money: drawer, day and expenses | 09.1–09.2, 09.6–09.13 | 3 | [09 Money: drawer, day and expenses](#09-money-drawer-day-and-expenses) |
+| 11 Partners: cash-outs and portal | 11.4–11.8 | 3 | [11 Partners: cash-outs and portal](#11-partners-cash-outs-and-portal) |
+| 13 Payroll | 13.1–13.5 | 3 | [13 Payroll](#13-payroll) |
+| 12 Maintenance | 12.1–12.2 | 3 | [12 Maintenance](#12-maintenance) |
+| 03 Morning check | 03.1–03.4 | 3 | [03 Morning check](#03-morning-check) |
+| 16 Documents: partner and payslip | 16.5–16.7 | 3 | [16 Documents: partner and payslip](#16-documents-partner-and-payslip) |
+| 02 Home: owner | 02.1, 02.3, 02.5–02.6 | 4 | [02 Home: owner](#02-home-owner) |
+| 14 Reports | 14.1–14.2 | 4 | [14 Reports](#14-reports) |
+| Starting data | No screen: loaded by the developer; the Imported marker is in 17.1, 08.2, 11.2 | 4 | [Starting data](#starting-data) |
+| 17 System states, 19 Navigation | 17.1–17.2, 19.1 | All | [17 System, 19 Navigation, and running the system](#17-system-19-navigation-and-running-the-system) |
 
 ## 6. Rules for every module
 
@@ -880,3 +880,438 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 Four were found and decided with Dulan for the owner on 26 Oct 2026, each now in the system design with a check: fuel and accessories are recorded at handover and never block it (ST-06.4, AT-53); an accessory charge on a partner car is the admin's decision (ST-07.1, AT-54); an unpaid debt warns as a flag does (ST-05.1, AT-55); a deposit may pay the same customer's older bills (ST-07.3, AT-56). Five wording errors in the screens were corrected: when a partner's share becomes final (06.2), the fuel price shown as an example (06.2, 16.3), deposits not called earnings (07.3), and an old board name (16.2).
 
 The owner decisions Phase 2 depended on (DN-01, DN-04, DN-06 to DN-11, DN-20) were settled afterwards; see section 7.
+
+## 12. Phase 3 · Money
+
+Months 4 and 5: the cash drawer and the day's close, the bank and card check, expenses, partner cash-outs and the partner portal, payroll, maintenance reminders and the morning vehicle check. Written with Dulan, 26 Oct 2026, for review.
+
+### 09 Money: drawer, day and expenses
+
+#### ST-09.3 · Money today
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Owner, Admin; staff by permission.
+- **Story:** As the owner, I see today's money in separate boxes (received, deposits held, customer debt, what partners can cash out, SNS earnings), so that nothing is mistaken for income.
+- **Rules:**
+  - Collections, earnings, deposits held and partner payables are kept apart and never added together; SNS earnings are kept apart from partner earnings. System design → [Dashboard and reporting](SNS_SYSTEM_DESIGN.md#15-dashboard-and-reporting).
+  - Money received is not SNS earnings; deposits are held, not income (PR-09). Bank and card count as paid when entered; whether they are checked is shown separately. System design → [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation).
+  - SNS earnings are SNS cars' rent plus SNS's commission and shares on partner cars, counted when final; profit is always labelled "before depreciation" (DN-16).
+- **Checks:** AT-12, AT-79.
+- **Screens:** 09.1 Money today.
+- **Decided:** DN-16.
+
+#### ST-09.4 · Drawer and money received by staff
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I see the drawer's expected cash and every cash line in and out, by who recorded it, so that the shared drawer stays accountable.
+- **Rules:**
+  - One shared drawer takes collections and pays expenses and refunds; every movement records who did it. Bank and card never go into the drawer. System design → [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation).
+  - Expected cash = opening count + cash in − expenses − refunds − cash paid out (partner payouts, salary, owner withdrawals). Each paid-out kind is its own line and never an expense line (DN-12).
+  - A refund is not an expense; a deposit received is held, not income.
+- **Checks:** AT-72 "Sunil's 10,000 cash-out and 5,000 of Nimal's salary paid from the drawer: expected cash falls by 15,000, each as its own line".
+- **Screens:** 09.2 Drawer and payments, 09.10 Money received by staff.
+- **Decided:** DN-12.
+
+#### ST-09.5 · Count the drawer and explain a difference
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff count; the authorised person resolves a difference.
+- **Story:** As staff, I count the drawer at the end of the day after seeing the expected amount, so that any difference is caught that day.
+- **Rules:**
+  - Staff see the expected cash first, then type what they count; both figures are kept and never changed. System design → [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation).
+  - A shortage or surplus is recorded as it is; the person counting writes what happened; the authorised person resolves it with a note and any receipt or photo. It stays shown against its day until resolved (DN-13).
+  - A count entered the next morning is marked late (DN-11).
+- **Checks:** AT-74 "The evening count is LKR 500 short: the note is kept; the shortage shows on that day until resolved".
+- **Screens:** 09.6 Count the drawer · expected shown, 09.8 Evening money check.
+- **Decided:** DN-11, DN-13.
+
+#### ST-09.6 · Bank and card check
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** The authorised person for checking payments; the owner until one is named.
+- **Story:** As the authorised person, I check bank transfers against the statement and card slips against the machine total, so that every recorded payment is confirmed.
+- **Rules:**
+  - Checking is by hand; the system is not linked to any bank (PR-14). A payment stays paid while its check is waiting, matched or flagged; it is never added back to the customer's debt. System design → [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation), [Collection](SNS_SYSTEM_DESIGN.md#81-collection).
+  - A payment not on the statement waits up to 3 days, then is flagged for investigation and listed on Exceptions. A fix goes through a payment correction (ST-09.2). Card-machine fees are entered monthly as an SNS expense (DN-13).
+- **Checks:** AT-10, AT-11 "A bank payment cannot be matched: flagged for investigation; the customer's debt is not restored", AT-73 "Recorded Monday, not on the statement by Thursday: waiting until Wednesday, flagged on Thursday".
+- **Screens:** 09.9 Bank and card check.
+- **Decided:** DN-13.
+
+#### ST-09.7 · Close the business day
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff, Admin.
+- **Story:** As staff, I close the day after the evening count, so that the day's partner shares become final and can be cashed out.
+- **Rules:**
+  - Closing shows what is still open (drawer difference, payments waiting, car discrepancies, approvals, handovers in progress) and what becomes final. If nobody closes the day, it closes on its own at 11:59 PM Asia/Colombo. System design → [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+  - At the close, each rental day's rent share for partner cars becomes final, including rentals still out; extra km and late charges are final at return; items waiting for an admin stay out. Final amounts never change; a correction is a new dated line (PR-07).
+  - Closing is recorded with the person and time and cannot be undone.
+- **Checks:** AT-14, AT-27 "The day closes with a rental still out: that day's share is final and cash-out-able; extra km waits for return", AT-71 "Nobody presses Close the day: it closes at 11:59 PM".
+- **Screens:** 09.11 Close the business day.
+- **Decided:** DN-11.
+
+#### ST-09.8 · Expenses
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff, Admin record; an admin decides who bears a cost when staff are unsure.
+- **Story:** As staff, I record each expense with what it was for, the car, who bears it and how it was paid, so that costs are counted once and charged to the right person.
+- **Rules:**
+  - Office rent, salaries, utilities and other business expenses are recorded for reports; salaries come from payroll and are not entered again. System design → [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll).
+  - On a partner car, staff choose the owner, SNS or "Admin decides". An owner-responsible cost paid by SNS is taken from the owner's final earnings before a cash-out, or repaid separately; only the unrecovered rest is deducted. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+  - Refunds are not expenses. Past expenses come from SNS's books, marked "Imported" (PR-04). Card-machine fees are entered once a month.
+- **Checks:** AT-15 "An owner expense partly repaid separately: only the unrecovered remainder is deducted".
+- **Screens:** 09.12 Expenses, 09.13 Record an expense.
+- **Decided:** DN-13.
+
+### 11 Partners: cash-outs and portal
+
+#### ST-11.4 · Partner cash-outs
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Admin by default; may be given to chosen staff.
+- **Story:** As an admin, I see each partner's final balance, today's not-final amounts, requests waiting and payouts made, so that partners are paid what is final and no more.
+- **Rules:**
+  - Each partner has one balance across all their cars; earnings are kept per car and per day. Balance = final earnings minus payouts and approved deductions. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+  - Items waiting for an admin (swap-day split, damage, accessory or garage-day allocation, early-return reduction, the extra above a package) stay out until decided. Fuel and cancellation fees are entirely SNS's.
+  - SNS pays partners even when the customer has not paid; customer debts and partner payables are separate records.
+- **Checks:** AT-13, AT-26 "A partner with two cars asks for part of the balance: one balance; payout recorded; the rest stays; a repeated request does not pay twice".
+- **Screens:** 11.4 Partner cash-outs.
+- **Decided:** DN-14.
+
+#### ST-11.5 · Car earnings by day
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Admin, Owner.
+- **Story:** As an admin, I see a partner car's earnings line by line (each day's rent, extra km, costs, cash-outs), so that every amount can be traced.
+- **Rules:**
+  - Each line is worked out from the rental's saved commission terms; a partner's share is rounded down to the rupee and SNS takes the difference (DN-10). System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
+  - Final lines are never edited; a correction or approved reduction is a new dated adjustment line; an overpayment is recovered from later earnings (PR-07).
+  - Opening balances and imported rentals are marked "Imported" and add no earnings (PR-04).
+- **Checks:** AT-14, AT-16, AT-36, AT-70.
+- **Screens:** 11.5 Car earnings by day.
+- **Decided:** DN-10.
+
+#### ST-11.6 · Pay and record a cash-out
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Admin by default ("Pay partner cash-outs" permission).
+- **Story:** As an admin, I pay a partner's request in full or in part and record it once, so that the balance is right and nothing is paid twice.
+- **Rules:**
+  - A bank payout needs its reference; a cash payout at the branch is recorded the same way and shows as its own line in the drawer. Paying less leaves the rest in the balance. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation).
+  - A payout is recorded atomically; sending it twice records it once (Derived control).
+  - There is no minimum, maximum or frequency limit. A negative balance a departing partner does not repay is written off by the authorised person, as SNS's loss (DN-14).
+- **Checks:** AT-26, AT-44 "A partner without a bank account asks to cash out: paid in cash at the branch and recorded once", AT-72, AT-76.
+- **Screens:** 11.6 Pay and record a cash-out.
+- **Decided:** DN-12, DN-14.
+
+#### ST-11.7 · Partner app: my earnings
+
+- **Status:** Confirmed; owner-data isolation on every request is a Derived control.
+- **Phase:** 3.
+- **Roles:** Partner.
+- **Story:** As a partner, I see my final earnings by day and by car, my cash-outs and a PDF statement, so that I know what SNS owes me.
+- **Rules:**
+  - A partner sees only their own final earnings and cash-outs, never today's not-final amounts, other partners, customer details or the price a customer paid; a price above the package shows only as their one earning for the day. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
+  - Access is checked on every request, not only by hiding pages (PR-06).
+- **Checks:** AT-22 "A partner opens today's not-final earnings or another partner's: access denied", AT-39, AT-40.
+- **Screens:** 11.7 Partner app · my earnings; prints 16.5 (ST-16.3).
+
+#### ST-11.8 · Partner app: ask to cash out
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Partner.
+- **Story:** As a partner, I ask to cash out all or part of my final balance, to my bank account or at the branch, so that I am paid when I need it.
+- **Rules:**
+  - Any final amount, any day, with no limits; SNS is told at once; the partner sees the request until it is paid. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+  - A car swapped out of an open rental is paid as returned: its final rent and extra km are payable at once (DN-14).
+- **Checks:** AT-26, AT-75 "A partner's car is swapped out on day 2 of an open rental: its final rent and extra km are payable at once".
+- **Screens:** 11.8 Partner app · ask to cash out.
+- **Decided:** DN-14.
+
+### 13 Payroll
+
+#### ST-13.1 · Prepare and finalise payroll
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Whoever has the one payroll-management permission.
+- **Story:** As the payroll person, I prepare each month's salaries with adjustments, advances, loans and what is still owed, then finalise them, so that everyone is paid correctly.
+- **Rules:**
+  - Salaries are admin-defined amounts entered by hand; no attendance, overtime or statutory (EPF/ETF) calculation. One permission covers preparing, finalising and paying. System design → [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll).
+  - Staff cannot see a draft; after finalising, each person sees only their own payslip.
+  - Deductions never take a salary below zero; the rest carries to next month. Whole rupees. A finalised payslip is never edited: a mistake is an adjustment line on a later payroll (DN-15).
+  - Salary expense, salary payable, loans and cash paid are never counted twice in reports.
+- **Checks:** AT-77 "40,000 salary, 50,000 loan, 50,000 deduction set: only 40,000 deducted; 10,000 carries", AT-78 "A finalised payslip had the wrong allowance: next month's payroll has an adjustment line".
+- **Screens:** 13.1 Payroll · October draft, 13.2 Add an adjustment.
+- **Decided:** DN-15.
+
+#### ST-13.2 · Advances and loans
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Payroll person.
+- **Story:** As the payroll person, I record an advance or a loan and how it is taken back, so that the balance is recovered from salary without mistakes.
+- **Rules:**
+  - Advances and loans, repayments and outstanding balances are kept; deductions come from future salaries within the never-below-zero rule. Paid in cash, it is its own line in the drawer. System design → [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll), [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation).
+  - The staff member sees their own advance and what is left to repay.
+- **Checks:** AT-77.
+- **Screens:** 13.3 Give an advance or loan.
+- **Decided:** DN-12, DN-15.
+
+#### ST-13.3 · Record a salary payment
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Payroll person.
+- **Story:** As the payroll person, I record each salary payment, in full or in part, so that what is still owed carries forward and nothing is paid twice.
+- **Rules:**
+  - A partial payment leaves the rest as unpaid salary carried to next month; a repeated payment never overwrites an earlier one. A bank payment needs its reference; a cash payment is its own drawer line. System design → [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll).
+- **Checks:** AT-23 "Partial salary or owner payout: the unpaid rest is kept; a repeated payment does not overwrite the earlier one", AT-72.
+- **Screens:** 13.4 Record a salary payment.
+- **Decided:** DN-12.
+
+#### ST-13.4 · My payslip
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff (their own only).
+- **Story:** As a staff member, I see my payslips, advances and loan balance and download a payslip, so that I can check my pay.
+- **Rules:**
+  - Employees see only their own payslips and advance or loan balances. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll).
+- **Checks:** AT-24.
+- **Screens:** 13.5 My payslip · staff; prints 16.7 (ST-16.5).
+
+### 12 Maintenance
+
+#### ST-12.1 · Maintenance and renewals
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I see cars off the road, costs on cars this month and what is coming up (services, insurance and licence renewals, cars due back), so that nothing expires unnoticed.
+- **Rules:**
+  - Reminders come only from dates or km entered; lead times are owner settings, starting at 30 days for insurance and licence, 7 days or 500 km for service and 3 days for payroll. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability).
+  - Any garage visit is Under repair; an admin marks the car available again. The owner's own use is Temporarily unavailable with a reason and expected return; no trip or km tracking.
+  - Expired insurance or licence warns; going ahead needs the authorised person and a reason.
+- **Checks:** AT-20, AT-45.
+- **Screens:** 12.1 Maintenance and renewals.
+
+#### ST-12.2 · Add a service or repair record
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff, Admin; "Admin decides" goes to Approvals.
+- **Story:** As staff, I record a service or repair with its date, odometer, cost and who pays, and the next service date or km, so that costs and reminders are right.
+- **Rules:**
+  - Who pays follows the partner's agreed terms; staff choose "Admin decides" when unsure. An owner-responsible cost is deducted from the owner's final earnings before a cash-out. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability).
+  - Saving does not change the car's status; an admin marks it available.
+- **Checks:** AT-15, AT-20.
+- **Screens:** 12.2 Add a service or repair record.
+
+### 03 Morning check
+
+#### ST-03.1 · Do the morning check
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff.
+- **Story:** As staff, I tick each car the records say is at the branch, and add any car I see that the records say is elsewhere, so that the yard and the records agree.
+- **Rules:**
+  - Staff check the cars present at the branch; the system compares with its records and highlights differences. "At the branch" comes only from this check; there is no tracking of where cars are (PR-14). System design → [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring).
+  - A car not found shows "not found at the morning check" on every screen until its discrepancy is closed; a car found that the records put elsewhere opens a discrepancy without changing its status.
+- **Checks:** AT-21.
+- **Screens:** 03.1 Morning check · in progress, 03.2 Another car is here, 03.3 Morning check · finished.
+
+#### ST-03.2 · Close a car discrepancy
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Whoever has the permission to resolve discrepancies.
+- **Story:** As the person allowed, I close a discrepancy with an explanation and the confirmed or corrected status, so that every gap is explained.
+- **Rules:**
+  - Closing needs both an explanation and the car's confirmed or corrected status; it is recorded with name and time and goes into the owner's daily summary. If the car went out without a record, the rental is recorded first. System design → [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring).
+  - These checks support accountability; they cannot guarantee that every physical movement is recorded.
+- **Checks:** AT-21 "A daily vehicle discrepancy is closed: explanation present and correct status verified".
+- **Screens:** 03.4 Close a missing-car discrepancy.
+
+### 16 Documents: partner and payslip
+
+#### ST-16.3 · Partner earnings statement
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Partner (their own), Admin, Owner.
+- **Story:** As a partner, I download a statement of my final earnings by car and day, so that I have a record for each cash-out.
+- **Rules:**
+  - Final amounts only, per car and per day, with what was left from before, payouts and the balance; items waiting for SNS are named but not counted. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+- **Checks:** AT-22.
+- **Screens:** 16.5 Partner earnings statement.
+
+#### ST-16.4 · Partner agreement
+
+- **Status:** Confirmed.
+- **Phase:** 1 for adding a partner; printed from Phase 3 with the cash-out terms.
+- **Roles:** Admin, Owner.
+- **Story:** As an admin, I print the partner agreement filled with the partner's cars and terms, so that it can be signed on paper.
+- **Rules:**
+  - It covers commission, the daily cash-out and who pays which costs, in Sinhala or English; it is signed and kept on paper, and staff record "signed on <date>"; nothing waits on it; a change of terms prints a new version. SNS supplies the wording and the owner approves each version. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
+- **Checks:** AT-83.
+- **Screens:** 16.6 Partner agreement.
+- **Decided:** DN-20.
+
+#### ST-16.5 · Payslip
+
+- **Status:** Confirmed.
+- **Phase:** 3.
+- **Roles:** Staff (their own), payroll person.
+- **Story:** As a staff member, I print or download my payslip, so that I have a record of my pay.
+- **Rules:**
+  - Shows salary, additions, deductions, to pay, payments and still owed; no attendance or statutory calculation. System design → [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll).
+- **Checks:** AT-23.
+- **Screens:** 16.7 Payslip.
+
+## 13. Phase 4 · Live
+
+Month 6: the owner's dashboard and reports, loading SNS's starting data, going live, recovery and the outage fallback. Written with Dulan, 26 Oct 2026, for review.
+
+### 02 Home: owner
+
+#### ST-02.3 · Owner home
+
+- **Status:** Confirmed.
+- **Phase:** 4.
+- **Roles:** Owner.
+- **Story:** As the owner, I open the system to today's money, the fleet, what is coming up and what needs me, so that I can run SNS without being at the branch.
+- **Rules:**
+  - Shows fleet today, collections, SNS earnings, customer debt, partner payments (including today's not-final amounts, owner view only), exceptions and upcoming work; each figure opens what is behind it. System design → [Dashboard and reporting](SNS_SYSTEM_DESIGN.md#15-dashboard-and-reporting).
+  - Collections, earnings, deposits held and partner payables are never added together; profit is labelled "before depreciation" (DN-16).
+- **Checks:** AT-28, AT-79.
+- **Screens:** 02.1 Owner home, 02.5 Owner · More menu.
+- **Decided:** DN-16.
+
+#### ST-02.4 · Needs attention and the daily summary
+
+- **Status:** Confirmed.
+- **Phase:** 4.
+- **Roles:** Owner; Admin by permission.
+- **Story:** As the owner, I see every decision made by hand today and everything not yet cleared, so that I can review exceptions each evening.
+- **Rules:**
+  - The owner gets a daily in-system summary of exceptional decisions (waivers, overrides, corrections, write-offs, self-approved requests, records entered after an outage); no automatic customer messages. System design → [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+- **Checks:** AT-57, AT-81.
+- **Screens:** 02.3 Needs attention, 02.6 Staff · More menu.
+
+### 14 Reports
+
+#### ST-14.1 · Reports and exports
+
+- **Status:** Confirmed.
+- **Phase:** 4.
+- **Roles:** Owner, Admin; exports need their own permission.
+- **Story:** As the owner, I see collections, SNS earnings, customer debt, partner payments, exceptions and upcoming work for a day, week, month or chosen dates, and export them, so that I and my accountant can review the business.
+- **Rules:**
+  - Definitions: SNS earnings, profit before depreciation, counted when final, expenses when recorded; an unfinished month is compared with the same days of last month (DN-16). System design → [Dashboard and reporting](SNS_SYSTEM_DESIGN.md#15-dashboard-and-reporting).
+  - Imported records are counted in reports, marked "Imported", never as earnings (PR-04). Excel and PDF exports need the export permission, checked by the server (PR-11, PR-06).
+- **Checks:** AT-24, AT-37, AT-79.
+- **Screens:** 14.1 Reports.
+- **Decided:** DN-16.
+
+#### ST-14.2 · Car performance
+
+- **Status:** Confirmed.
+- **Phase:** 4.
+- **Roles:** Owner, Admin.
+- **Story:** As the owner, I see each car's rental days, km, earnings, costs and time off the road, this month against last, so that I know which cars pay.
+- **Rules:**
+  - Car use = rented days divided by days in the fleet (retired days excluded); SNS's share and the partner's share are shown apart. System design → [Dashboard and reporting](SNS_SYSTEM_DESIGN.md#15-dashboard-and-reporting).
+- **Checks:** AT-80 "A car in the fleet all 31 days and rented 22: car use 71%".
+- **Screens:** 14.2 Car performance.
+- **Decided:** DN-16.
+
+### Starting data
+
+#### ST-SD.1 · Load and approve SNS's starting data
+
+- **Status:** Confirmed (CR-003, ADD-002).
+- **Phase:** 4.
+- **Roles:** Developer loads; the owner approves.
+- **Story:** As the owner, I approve the records loaded from SNS's books before go-live, so that the system starts with the real customers, cars, partners, balances and history.
+- **Rules:**
+  - Loaded once: customers with their flags, cars and packages, partners; opening balances (drawer cash, customer debts, partner balances, staff advances and loans); past rentals, payments, expenses and payroll. Each is marked "Imported" with who approved it and when. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
+  - Opening balances are final from go-live and never earnings; past records are read-only, never recalculated, counted in reports and never in earnings, cash-outs or the drawer. Imported customers still need their copies before the next handover.
+  - Rentals out on go-live day are entered as live rentals marked "Started before go-live"; partner earnings count only days from go-live.
+- **Checks:** AT-36, AT-37, AT-38, AT-42.
+- **Screens:** No screen of its own; the Imported marker shows on 17.1, 08.2 and 11.2.
+
+#### ST-SD.2 · Go live
+
+- **Status:** Confirmed.
+- **Phase:** 4.
+- **Roles:** Owner.
+- **Story:** As the owner, I go live only when every checklist item is done, so that the first day runs on complete data.
+- **Rules:**
+  - All of these must be done: business details on printouts, every car, starting packages, insurance and licence dates for every car, every partner car linked, staff accounts, the authorised person named, opening cash counted and entered before the first transaction, SNS's agreement wording approved. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
+  - Staff training and full testing are part of Phase 4 (approved proposal).
+- **Checks:** AT-43 "One car has no insurance date on go-live day: go-live is blocked".
+- **Screens:** 01.3 Ready to start · setup checklist (ST-01.3).
+- **Decided:** DN-20.
+
+### 17 System, 19 Navigation, and running the system
+
+#### ST-17.1 · System states
+
+- **Status:** Confirmed.
+- **Phase:** All.
+- **Roles:** Everyone.
+- **Story:** As anyone using the system, I see clear empty, offline, error, no-permission, changed-by-someone-else, imported and entered-after-outage states, so that I always know what happened.
+- **Rules:**
+  - Online only (PR-03): what was typed stays on the screen when the connection drops, and nothing is saved until it is back. A change made by someone else while a page is open must be loaded before saving, so nothing is overwritten. System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
+  - A record entered after an outage keeps its real time and shows who entered it and when.
+- **Checks:** AT-24, AT-37, AT-81.
+- **Screens:** 17.1 System states, 17.2 Design notes.
+
+#### ST-19.1 · Navigation
+
+- **Status:** Confirmed.
+- **Phase:** All.
+- **Roles:** Everyone, by role.
+- **Story:** As anyone, I reach my work from a side bar on a computer and a bottom bar on a phone, with counts that open filtered lists, so that the next task is one tap away.
+- **Rules:**
+  - A count such as "Overdue 1" opens the matching list already filtered, with the filter shown and removable. Each role sees only what its permissions allow. System design → [Dashboard and reporting](SNS_SYSTEM_DESIGN.md#15-dashboard-and-reporting).
+- **Checks:** AT-28.
+- **Screens:** 19.1 Navigation · sidebar.
+
+#### ST-17.2 · When the system is down
+
+- **Status:** Confirmed.
+- **Phase:** 4.
+- **Roles:** Staff, Owner.
+- **Story:** As staff, I keep renting on paper when the system cannot be reached, then enter what happened, so that the branch never stops.
+- **Rules:**
+  - Office internet down: use mobile data on a phone. System down: use the printed backup pack (blank rental agreement, handover and payment forms) and the fleet list the system prints each evening; enter each paper record afterwards with its real time, marked "entered after outage". This is a paper fallback, not offline operation. System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context).
+- **Checks:** AT-81.
+- **Screens:** 17.1 System states (the marker). The backup pack and the evening fleet list have no screen yet: to be designed in Phase 4.
+- **Decided:** DN-17.
+
+#### ST-17.3 · Backups and recovery
+
+- **Status:** Confirmed.
+- **Phase:** 4.
+- **Roles:** Developer; the owner holds the accounts.
+- **Story:** As the owner, I know the system is backed up every day and can be brought back quickly, so that SNS never loses more than a day.
+- **Rules:**
+  - Daily automatic backups, kept 30 days, with an off-site copy; at most one day of records may be lost and re-entered from paper; back within 4 working hours; a restore is tested monthly. System design → [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required).
+  - Hosting: Next.js and PostgreSQL on one DigitalOcean server with private Cloudflare R2 storage, in the owner's name, about LKR 5,000 a month (DN-19).
+- **Checks:** AT-82.
+- **Screens:** None.
+- **Decided:** DN-18, DN-19.
