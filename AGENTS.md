@@ -13,6 +13,12 @@ The rental and fleet management system for SNS Rent Car (one branch, Elpitiya, S
 
 Every change follows the **sns-change-control** skill: change the highest document first, then each one below it in order, then run the audit and commit.
 
+## Talking to Dulan
+
+- Dulan is Sinhalese and reads English as a second language. Write to him in simple English: short sentences, common words, one idea per sentence.
+- No jargon. If a technical word is needed, explain it in a few plain words the first time.
+- Lists and short tables are better than long paragraphs.
+
 ## Rules that always apply
 
 - Use the status labels exactly: Confirmed, Derived control, Proposed, Open, Deferred. Only the owner, S D De Silva, confirms a rule or settles an Open item; Dulan records it. Never decide an Open item yourself; ask Dulan, one question at a time, with a recommended answer.
