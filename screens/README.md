@@ -13,7 +13,7 @@ The claude.ai canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjb
 | `previews/preview-report.json` | The render check for each screen: width, height, missing or broken images. |
 | `canvas/` | The screen source (`*.dc.html`), the canvas layout (`canvas.json`) and `support.js`, as used by the claude.ai canvas. |
 | `canvas/ds/plate/` | A copy of the design-system tokens and bundle that the canvas pages load. It is generated from `design-system/`: never edit it by hand. |
-| `blob-map.json` | Maps claude.ai upload ids to the image files in this repository. |
+| `blob-map.json` | The canvas uploads: each upload id and the repository image it holds. |
 
 ## Names
 
@@ -27,9 +27,8 @@ Modules: 01 Start, 02 Home, 03 Morning check, 04 Cars, 05 New rental, 06 Rentals
 
 ## Refreshing the claude.ai canvas
 
-The canvas is built from this folder. It cannot reach paths outside its own files, so its copy of the design system carries the images:
+The canvas is built from this folder. It shows pictures only as uploads (`/_blob/<id>`), not as files beside the screens, so its copy of the bundle points at uploads:
 
 1. Copy `canvas/canvas.json`, every `canvas/*.dc.html`, and `canvas/ds/plate/` (`tokens.json`, `tokens.css`, `components/bundle.css`, `components/bundle.js`) into a folder as `project/…`.
-2. In that copy of `bundle.js`, change the image paths `../../brand/vehicles/256/` to `ds/plate/assets/vehicles-256/` and `../../design-system/assets/` to `ds/plate/assets/`.
-3. Copy the images to match: `brand/vehicles/256/*.png` to `project/ds/plate/assets/vehicles-256/`, and `design-system/assets/brand`, `icons-256` and `vehicles-512` to `project/ds/plate/assets/`.
-4. Publish the folder to the canvas link above, then copy the published `project/canvas.json` back to `canvas/canvas.json`.
+2. In that copy of `bundle.js`, replace each image path with its upload: `blob-map.json` lists every upload id with the repository file it holds. An image that changed or is new must be uploaded to the canvas first, and `blob-map.json` updated.
+3. Publish the folder to the canvas link above, then copy the published `project/canvas.json` back to `canvas/canvas.json`.
