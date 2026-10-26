@@ -38,14 +38,14 @@ If the type is unclear, ask.
 ## 3. Steps
 
 1. **Read.** Read the source of truth in full for the affected area, and every file the change touches. Re-read a file before editing it, because another agent may have changed it.
-2. **Check status.** Every rule carries one label: Confirmed, Derived control, Proposed, Open or Deferred. Only Confirmed rules may be treated as fact. Open items stay open. Never change a status yourself. Only Dulan can move a rule to Confirmed, and only in words, in this conversation.
+2. **Check status.** Every rule carries one label: Confirmed, Derived control, Proposed, Open or Deferred. Only Confirmed rules may be treated as fact. Open items stay open. Never change a status yourself. Only the owner's agreement, S D De Silva, can move a rule to Confirmed or resolve an Open item. The agreement must be given in words. Dulan records it in the source of truth with the date and who agreed.
 3. **List the files.** Before editing, write one line naming every file the change touches, across all ranks.
 4. **Stop and ask Dulan, one question at a time,** if any of these is true:
    1. The request conflicts with a Confirmed rule.
    2. It would resolve an Open item.
    3. It deletes, renames or moves files.
    4. The request is ambiguous.
-5. **Update the source of truth first.** Edit only the affected sections. Record the status and who decided, for example "Confirmed 24 Oct 2026 by Dulan". Add or update AT-ids for changed rules. For type B, show Dulan the exact change before propagating it.
+5. **Update the source of truth first.** Edit only the affected sections. Record the status and who agreed, for example "Confirmed 24 Oct 2026, owner S D De Silva (recorded by Dulan)". Add or update AT-ids for changed rules. For type B, show Dulan the exact change before propagating it.
 6. **Propagate down in rank order:** PRD, TRD, design system, screens, agent files, code. Never update a lower file before the higher one says the same thing.
 7. **Sync audit (section 4), commit (section 5), report.** The report has four parts:
    - **Changed:** each file and what changed.
