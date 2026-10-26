@@ -190,7 +190,7 @@ These formulas do not resolve discretionary late returns, early-return allowance
 
 ## 6. Customer onboarding and mandatory documents
 
-Staff record customer identity and driving-licence details and retain document copies. A reference person is required only sometimes; staff decide. Staff with customer access see full NIC and phone numbers; there is no masking. A customer is saved with name, NIC, phone, and driving-licence number and expiry; the ID and licence copies may be added later. Until they are in, the customer shows "copies missing" and handover stays blocked (below). Confirmed: agreed by the owner, recorded by Dulan.
+Staff record customer identity and driving-licence details and retain document copies. A reference person is required only sometimes; staff decide. Staff with customer access see full NIC and phone numbers; there is no masking. A customer is saved with name, NIC, phone, and driving-licence number and expiry; the ID and licence copies may be added later. Until they are in, the customer shows "copies missing" and handover stays blocked (below). Confirmed: agreed by the owner, recorded by Dulan. One NIC belongs to one customer record: when staff enter a NIC already recorded, the system opens that customer instead of adding a second one, so debts, flags and rentals stay together. Confirmed: agreed by the owner, recorded by Dulan.
 
 ### Handover requirements
 
@@ -581,6 +581,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-48 | Staff close a customer's flag with a reason | No warning at the next rental; the flag, its reason, who closed it and when stay in the customer's history |
 | AT-49 | Staff save a new customer without the licence copy | The customer is saved and shows "copies missing"; their handover is blocked until the copy is added (as AT-06) |
 | AT-50 | An admin changes the Alto starting package from 4,000 to 4,200 a day | Alto cars already in the system stay at 4,000; an Alto added afterwards starts at 4,200 |
+| AT-51 | Staff add a new customer with a NIC already recorded | No second record; the existing customer opens, with their debts and flags |
 
 ## 20. Readiness and next steps
 
