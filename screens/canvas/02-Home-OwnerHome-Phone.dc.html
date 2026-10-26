@@ -85,7 +85,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
       </a>
       <a class="dash-row" href="12-Maintenance-Maintenance-Phone.dc.html">
         <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="wrench" size="{{twenty}}"></x-import></span>
-        <span><span class="dash-t">PJ 0937 service</span><span class="dash-d">Partner car · booked</span></span>
+        <span><span class="dash-t">PJ 0937 service</span><span class="dash-d">Partner car · under repair now</span></span>
         <span class="dash-meta">Fri 23 Oct</span>
         <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
       </a>
@@ -105,13 +105,13 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
       </div>
       <a class="dash-row" href="09-Money-MoneyToday-Phone.dc.html">
         <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="wallet" size="{{twenty}}"></x-import></span>
-        <span><span class="dash-t">අද ලැබුණු <span class="rt-en">· Collected</span></span><span class="dash-d">Not SNS earnings</span></span>
+        <span><span class="dash-t">අද ලැබුණු <span class="rt-en">· Collected</span></span><span class="dash-d">Cash, bank, card apart · not earnings</span></span>
         <span class="dash-fig">—</span>
         <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
       </a>
       <a class="dash-row" href="14-Reports-Reports-Phone.dc.html">
         <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="chart" size="{{twenty}}"></x-import></span>
-        <span><span class="dash-t">SNS ආදායම <span class="rt-en">· Earnings</span></span><span class="dash-d">Month to date · before depreciation</span></span>
+        <span><span class="dash-t">SNS ආදායම <span class="rt-en">· Earnings</span></span><span class="dash-d">Month to date vs last month · before depreciation</span></span>
         <span class="dash-fig">—</span>
         <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
       </a>
@@ -127,13 +127,14 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
         <span class="dash-fig"><small>LKR </small>63,808</span>
         <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
       </a>
+      <div class="dash-group" style="border-top: 1px solid var(--line)">තියාගෙන ඉන්න <span class="rt-en">· Held, not income</span></div>
       <a class="dash-row" href="09-Money-MoneyToday-Phone.dc.html">
         <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="banknote" size="{{twenty}}"></x-import></span>
         <span><span class="dash-t">Deposit තියාගෙන</span><span class="dash-d">ආදායම නොවේ · not income</span></span>
         <span class="dash-fig">—</span>
         <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
       </a>
-      <div class="dash-foot">Drawer, bank and card check, and partners' not-final amounts: in අද මුදල් · Money today. — : no figure in the sample yet.</div>
+      <div class="dash-foot">Cash-out requests, partners' not-final amounts, drawer, and bank and card check: in අද මුදල් · Money today. — : no figure in the sample yet.</div>
     </section>
 
     <section style="display: flex; flex-direction: column; gap: 12px" aria-labelledby="h-cars">
@@ -171,12 +172,13 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
         </a>
       </div>
     </section>
+    <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--ink-muted)">උදාහරණ දත්ත · Sample data: names, plates, counts and amounts are examples.</p>
   </div>
 
   <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2247}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2361}}'>
 class Component extends DCLogic {
   renderVals() {
     var fleet = [{ plate: 'CBC 5409', status: 'overdue' }, { plate: 'CBG 2967', status: 'available', warn: true }];

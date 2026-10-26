@@ -74,8 +74,8 @@
  {
   "name": "02-Home-OwnerHome-Desktop",
   "w": 1440,
-  "canvasH": 1702,
-  "contentH": 1702,
+  "canvasH": 1770,
+  "contentH": 1770,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -83,8 +83,8 @@
  {
   "name": "02-Home-OwnerHome-Phone",
   "w": 390,
-  "canvasH": 2247,
-  "contentH": 2247,
+  "canvasH": 2361,
+  "contentH": 2361,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -119,8 +119,8 @@
  {
   "name": "02-Home-StaffHome-Desktop",
   "w": 1440,
-  "canvasH": 934,
-  "contentH": 934,
+  "canvasH": 980,
+  "contentH": 980,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -128,8 +128,8 @@
  {
   "name": "02-Home-StaffHome-Phone",
   "w": 390,
-  "canvasH": 1271,
-  "contentH": 1271,
+  "canvasH": 1331,
+  "contentH": 1331,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

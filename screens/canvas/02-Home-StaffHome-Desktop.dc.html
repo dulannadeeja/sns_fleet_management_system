@@ -125,11 +125,12 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
         </div>
         <x-import component-from-global-scope="Plate.FleetStrip" cars="{{fleet}}" hrefs="{{fleetHrefs}}"></x-import>
       </section>
+      <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--ink-muted)">උදාහරණ දත්ත · Sample data: names, plates, counts and amounts are examples.</p>
     </main>
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":934}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":980}}'>
 class Component extends DCLogic {
   renderVals() {
     var fleet = [{ plate: 'CBC 5409', status: 'overdue' }];
