@@ -355,7 +355,7 @@ Track servicing by date and mileage, repairs, insurance expiry, vehicle-licence 
 - Reminders appear ahead of time by owner settings, starting at: insurance and revenue licence 30 days before expiry; service 7 days before its date or 500 km before its km, whichever comes first; payroll 3 days before payday (Confirmed: agreed by the owner, recorded by Dulan).
 - Expired insurance/licence documents warn staff; proceeding requires the authorised admin decision and reason.
 - Temporary owner use can mark the vehicle unavailable with a reason and expected return date, without trip or kilometre tracking.
-- Permanently returned/sold vehicles are retired while all historical rental, maintenance, and financial records remain accessible to authorised users.
+- Permanently returned/sold vehicles are retired while all historical rental, maintenance, and financial records remain accessible to authorised users. An admin or the primary owner retires a vehicle, with a reason and date, only when it is not rented or reserved. A partner's balance from it stays payable (Confirmed: agreed by the owner, recorded by Dulan).
 
 Detailed non-rental movement/odometer tracking is a future extension, not a launch requirement.
 
@@ -582,6 +582,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-49 | Staff save a new customer without the licence copy | The customer is saved and shows "copies missing"; their handover is blocked until the copy is added (as AT-06) |
 | AT-50 | An admin changes the Alto starting package from 4,000 to 4,200 a day | Alto cars already in the system stay at 4,000; an Alto added afterwards starts at 4,200 |
 | AT-51 | Staff add a new customer with a NIC already recorded | No second record; the existing customer opens, with their debts and flags |
+| AT-52 | Staff try to retire a car; then an admin retires a car that is reserved next week | Staff cannot; the admin is refused until the reservation is moved or cancelled |
 
 ## 20. Readiness and next steps
 

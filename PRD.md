@@ -2,7 +2,7 @@
 
 What the SNS Rent Car system must do, written as stories a developer can build and a tester can check.
 
-This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-51) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
+This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-52) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
 Status of this draft: front section and Phase 1 stories, written with Dulan from 26 Oct 2026, for review. Phases 2 to 4 are not yet written.
 
@@ -402,14 +402,14 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 - **Status:** Confirmed.
 - **Phase:** 1; the handover block it causes is checked in Phase 2.
-- **Roles:** Staff, Admin set Under repair or Temporarily unavailable; only an authorised person marks a car available again.
+- **Roles:** Staff, Admin set Under repair or Temporarily unavailable; only an authorised person marks a car available again; only an admin or the owner retires a car.
 - **Story:** As staff, I mark a car Under repair or Temporarily unavailable with a reason, so that nobody hands it over.
 - **Rules:**
   - A car under repair or unavailable cannot be handed over until an authorised person marks it available. Any garage visit, planned service included, is Under repair. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability).
   - The owner's own use marks the car unavailable with a reason and an expected return date, with no trip or km tracking.
-  - A car that is sold or returned for good is retired: no new rentals, every past record kept.
+  - A car that is sold or returned for good is retired by an admin or the owner, with a reason and date, only when it is not rented or reserved: no new rentals, every past record kept, and a partner's balance from it stays payable.
   - Rented and Overdue come from the rental itself, not from this screen.
-- **Checks:** AT-20 "Vehicle marked under repair: rental handover blocked until an authorised availability change". AT-25 "Retire a vehicle: no new rentals; history and money owed kept".
+- **Checks:** AT-20 "Vehicle marked under repair: rental handover blocked until an authorised availability change". AT-25 "Retire a vehicle: no new rentals; history and money owed kept". AT-52 "Staff try to retire a car; an admin retires a car reserved next week: staff cannot; the admin is refused until the reservation is moved or cancelled".
 - **Screens:** 04.5 Change a car's status, 04.7 Car status blocks · reference.
 - **Decisions needed:** DN-01 (who may set each status).
 
@@ -482,8 +482,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 ### Gaps found while writing Phase 1
 
-Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag; 08.3 New customer: save before the copies; 04.6 Starting packages: new cars only) are updated together once all are decided.
+Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag; 08.3 New customer: save before the copies; 04.6 Starting packages: new cars only; 04.5 Change a car's status: retire) are updated together once all are decided.
 
 | Gap | Where | What it needs |
 | --- | --- | --- |
-| No screen for retiring a car | 04.5 has Under repair and Temporarily unavailable only | A design for ST-04.5's retire rule |
