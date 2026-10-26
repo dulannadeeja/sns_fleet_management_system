@@ -34,7 +34,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
 <div class="m-g1" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px">
 <x-import component-from-global-scope="Plate.MoneyBlock" figure="{{received}}" icon="wallet" label="අද ලැබුණු මුදල් · Money received" lines="{{receivedLines}}" note="Of this, 15,000 is deposits (held, not income) and 64,750 is bill or old-debt payments. Not SNS earnings."></x-import>
 <x-import alert="{{yes}}" component-from-global-scope="Plate.MoneyBlock" figure="{{diff}}" icon="drawer" label="ලාච්චුව · Drawer" lines="{{drawerLines}}" note="විවෘතයි · Open until explained and resolved by an authorised person."></x-import>
-<x-import alert="{{yes}}" component-from-global-scope="Plate.MoneyBlock" icon="link" label="ගැලපීම · Bank &amp; card check" note="Checked by hand against the bank statements and the card-machine total. Nothing is checked automatically." state="Bank: 3 matched · 1 unmatched. Card: 2 slips matched to the machine total of 9,000."></x-import>
+<x-import alert="{{yes}}" component-from-global-scope="Plate.MoneyBlock" icon="link" label="ගැලපීම · Bank &amp; card check" note="Checked by hand against the bank statements and the card-machine total. Nothing is checked automatically." state="Bank: 3 matched · 1 waiting for the statement. Card: 2 slips matched to the machine total of 9,000."></x-import>
 </div>
 <div class="m-g1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 16px; align-items: start">
 <section style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 2px solid var(--overdue); border-radius: 16px">
@@ -64,12 +64,12 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
 <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">HNB-509377 · bank <span class="rt-num" style="font-family: var(--font-plate)">LKR 7,000</span></h2>
 <div style="display: flex; gap: 8px; flex-wrap: wrap">
 <x-import by="Nimal" component-from-global-scope="Plate.StatePill" kind="recorded"></x-import>
-<x-import component-from-global-scope="Plate.StatePill" kind="unmatched"></x-import>
+<x-import component-from-global-scope="Plate.StatePill" kind="notChecked"></x-import>
 </div>
-<x-import component-from-global-scope="Plate.Notice" title="R-0226 stays paid" tone="info">An unmatched payment is investigated here. It is never added back to the customer's debt.</x-import>
+<x-import component-from-global-scope="Plate.Notice" title="R-0226 stays paid" tone="info">Not on today’s statement yet. It waits up to 3 days, then is flagged and investigated here. It is never added back to the customer's debt.</x-import>
 <div>
 <x-import action="recorded bank payment HNB-509377" actor="Nimal" amount="{{seven}}" component-from-global-scope="Plate.HistoryLine" target="R-0226" time="earlier today" type="recorded"></x-import>
-<x-import action="marked unmatched against today's HNB statement" actor="Kamal" component-from-global-scope="Plate.HistoryLine" target="HNB-509377" time="evening" type="unmatched"></x-import>
+<x-import action="found it is not on today's HNB statement yet" actor="Kamal" component-from-global-scope="Plate.HistoryLine" target="HNB-509377" time="evening" type="recorded"></x-import>
 </div>
 <div style="display: flex; gap: 8px; flex-wrap: wrap">
 <x-import component-from-global-scope="Plate.Button" icon="pen" variant="secondary">Note for the checker</x-import>
@@ -91,7 +91,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
   <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3372}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3411}}'>
 class Component extends DCLogic {
   renderVals() {
     return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html", "active": true}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html"}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,

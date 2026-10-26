@@ -70,7 +70,7 @@
    "y": 3059
   },
   "02-Home-NeedsAttention-Phone.dc.html": {
-   "h": 1022,
+   "h": 1082,
    "is_interactive": true,
    "page": "plate",
    "title": "02.3 Needs attention · Phone",
@@ -819,7 +819,7 @@
    "y": 44088
   },
   "09-Money-BankCardCheck-Phone.dc.html": {
-   "h": 1470,
+   "h": 1478,
    "is_interactive": true,
    "page": "plate",
    "title": "09.9 Bank and card check · Phone",
@@ -895,7 +895,7 @@
    "y": 40496
   },
   "09-Money-EveningCheck-Phone.dc.html": {
-   "h": 3372,
+   "h": 3411,
    "is_interactive": true,
    "page": "plate",
    "title": "09.8 Evening money check · Phone",
@@ -924,7 +924,7 @@
   },
   "09-Money-MoneyToday-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1691,
+   "h": 1711,
    "is_interactive": true,
    "page": "plate",
    "title": "09.1 Money today · Desktop",

@@ -65,8 +65,8 @@
  {
   "name": "02-Home-NeedsAttention-Phone",
   "w": 390,
-  "canvasH": 1022,
-  "contentH": 1022,
+  "canvasH": 1082,
+  "contentH": 1082,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -794,8 +794,8 @@
  {
   "name": "09-Money-BankCardCheck-Phone",
   "w": 390,
-  "canvasH": 1470,
-  "contentH": 1470,
+  "canvasH": 1478,
+  "contentH": 1478,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -866,8 +866,8 @@
  {
   "name": "09-Money-EveningCheck-Phone",
   "w": 390,
-  "canvasH": 3372,
-  "contentH": 3372,
+  "canvasH": 3411,
+  "contentH": 3411,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -893,8 +893,8 @@
  {
   "name": "09-Money-MoneyToday-Desktop",
   "w": 1280,
-  "canvasH": 1691,
-  "contentH": 1691,
+  "canvasH": 1711,
+  "contentH": 1711,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

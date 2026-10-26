@@ -27,7 +27,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px">
         <x-import component-from-global-scope="Plate.MoneyBlock" label="අද ලැබුණු මුදල් · Money received" icon="wallet" figure="{{received}}" lines="{{receivedLines}}" note="Of this, 15,000 is deposits (held, not income) and 64,750 is bill or old-debt payments. Not SNS earnings."></x-import>
         <x-import component-from-global-scope="Plate.MoneyBlock" label="ලාච්චුව · Drawer" icon="drawer" alert="{{yes}}" figure="{{diff}}" lines="{{drawerLines}}" note="විවෘතයි · Open until explained and resolved by an authorised person."></x-import>
-        <x-import component-from-global-scope="Plate.MoneyBlock" label="ගැලපීම · Bank &amp; card check" icon="link" alert="{{yes}}" state="Bank: 3 matched · 1 unmatched. Card: 2 slips matched to the machine total of 9,000." note="Checked by hand against the bank statements and the card-machine total. Nothing is checked automatically."></x-import>
+        <x-import component-from-global-scope="Plate.MoneyBlock" label="ගැලපීම · Bank &amp; card check" icon="link" alert="{{yes}}" state="Bank: 3 matched · 1 waiting for the statement. Card: 2 slips matched to the machine total of 9,000." note="Checked by hand against the bank statements and the card-machine total. Nothing is checked automatically."></x-import>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 16px; align-items: start">
@@ -59,12 +59,12 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
           <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">HNB-509377 · bank <span class="rt-num" style="font-family: var(--font-plate)">LKR 7,000</span></h2>
           <div style="display: flex; gap: 8px; flex-wrap: wrap">
             <x-import component-from-global-scope="Plate.StatePill" kind="recorded" by="Nimal"></x-import>
-            <x-import component-from-global-scope="Plate.StatePill" kind="unmatched"></x-import>
+            <x-import component-from-global-scope="Plate.StatePill" kind="notChecked"></x-import>
           </div>
-          <x-import component-from-global-scope="Plate.Notice" tone="info" title="R-0226 stays paid">An unmatched payment is investigated here. It is never added back to the customer's debt.</x-import>
+          <x-import component-from-global-scope="Plate.Notice" tone="info" title="R-0226 stays paid">Not on today’s statement yet. It waits up to 3 days, then is flagged and investigated here. It is never added back to the customer's debt.</x-import>
           <div>
             <x-import component-from-global-scope="Plate.HistoryLine" actor="Nimal" action="recorded bank payment HNB-509377" target="R-0226" amount="{{seven}}" type="recorded" time="earlier today"></x-import>
-            <x-import component-from-global-scope="Plate.HistoryLine" actor="Kamal" action="marked unmatched against today's HNB statement" target="HNB-509377" type="unmatched" time="evening"></x-import>
+            <x-import component-from-global-scope="Plate.HistoryLine" actor="Kamal" action="found it is not on today's HNB statement" target="HNB-509377" type="recorded" time="evening"></x-import>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap">
             <x-import component-from-global-scope="Plate.Button" icon="pen" variant="secondary">Note for the checker</x-import>
