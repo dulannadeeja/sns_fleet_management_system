@@ -204,11 +204,11 @@ Handover is blocked until the following are present:
 
 Vehicle-condition photos are optional. Incoming odometer readings are mandatory at return.
 
-An accessories checklist is recorded at handover and return. **Open:** whether a missing accessory or the fuel level blocks handover, and how an accessory-shortage charge is allocated on a partner vehicle.
+An accessories checklist and the fuel level are recorded at handover and return. Handover cannot finish until both are recorded, but a missing accessory or low fuel never blocks it: what is missing is written on the record, so the customer is not charged for it at return. Confirmed: agreed by the owner, recorded by Dulan. An accessory-shortage charge on a partner vehicle is allocated as damage recovery is: an admin decides the split for each case, with a reason, and it stays out of the owner's earnings until decided (§8.4, §10). Confirmed: agreed by the owner, recorded by Dulan.
 
 An expired customer driving licence triggers a warning. An authorised person may override it with a reason. An override does not make the licence legally valid.
 
-Staff may flag a customer for unpaid balances, damage, or other issues. Warnings appear before future rentals; employees may proceed with a recorded reason. Employees or admins close a flag with a reason (for example, the money was paid); it stops warning but stays in the customer's history with who closed it and when. Nothing is deleted. Confirmed: agreed by the owner, recorded by Dulan.
+Staff may flag a customer for unpaid balances, damage, or other issues. Warnings appear before future rentals; employees may proceed with a recorded reason. Employees or admins close a flag with a reason (for example, the money was paid); it stops warning but stays in the customer's history with who closed it and when. Nothing is deleted. Confirmed: agreed by the owner, recorded by Dulan. An unpaid customer debt warns on its own, as a flag does, before every new rental until it is paid or written off; employees may proceed with a recorded reason. Confirmed: agreed by the owner, recorded by Dulan.
 
 A customer may rent multiple vehicles simultaneously. Each has its own agreement and bill. Separate actual-driver records per vehicle are outside the agreed scope.
 
@@ -286,7 +286,7 @@ Staff can cancel a rental before handover with a reason. An authorised person ca
 
 ### 8.2 Deposits
 
-Employees can set or waive a security deposit based on vehicle and customer. Deposits can pay the final bill or damage charges; refund the remaining amount. Record every application and refund.
+Employees can set or waive a security deposit based on vehicle and customer. Deposits can pay the final bill or damage charges; after that, with the customer's agreement noted, staff may apply what is left to the same customer's older unpaid bills; refund the remaining amount. Record every application and refund. Confirmed (older bills): agreed by the owner, recorded by Dulan.
 
 **Derived control:** Refundable deposits are money held, not rental earnings. Advances/payments must not be counted again when allocated to a bill. Allocations cannot exceed the available payment/deposit balance.
 
@@ -303,6 +303,7 @@ Payment corrections require admin approval and retain the original record plus c
 | Late-return charge | Vehicle commission split |
 | Discount | Reduces SNS and owner earnings proportionally |
 | Damage recovery | Admin decides allocation |
+| Accessory-shortage charge | Admin decides allocation, as damage recovery. Confirmed: agreed by the owner, recorded by Dulan |
 | Price above the car's package, on a partner car | The package amount follows the vehicle commission split. The extra above it is split between SNS and the partner as an admin sets for that rental, with a reason; it may be 100% SNS. Confirmed: agreed by the owner, recorded by Dulan |
 | Cancellation fee | 100% SNS |
 | Fuel | 100% SNS |
@@ -583,6 +584,10 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-50 | An admin changes the Alto starting package from 4,000 to 4,200 a day | Alto cars already in the system stay at 4,000; an Alto added afterwards starts at 4,200 |
 | AT-51 | Staff add a new customer with a NIC already recorded | No second record; the existing customer opens, with their debts and flags |
 | AT-52 | Staff try to retire a car; then an admin retires a car that is reserved next week | Staff cannot; the admin is refused until the reservation is moved or cancelled |
+| AT-53 | A car goes out with its spare-wheel tool missing and a quarter tank | Handover finishes once the fuel level and checklist are recorded; at return the missing tool is not charged to this customer |
+| AT-54 | A partner car comes back without its air pump; LKR 2,000 is charged | The 2,000 waits for an admin decision, out of the partner's earnings; once the admin sets the split with a reason, the partner's share becomes final |
+| AT-55 | A customer with an unpaid bill and no flag starts a new rental | A debt warning shows; staff continue only with a reason, which is recorded and appears in the owner's daily summary |
+| AT-56 | LKR 10,000 deposit, LKR 7,000 final bill, LKR 2,000 older bill; the customer agrees | 7,000 pays this bill, 2,000 pays the older bill, 1,000 is refunded; nothing is applied beyond what is held |
 
 ## 20. Readiness and next steps
 

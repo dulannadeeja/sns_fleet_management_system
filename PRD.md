@@ -2,7 +2,7 @@
 
 What the SNS Rent Car system must do, written as stories a developer can build and a tester can check.
 
-This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-52) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
+This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-56) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
 Status of this draft: front section and Phase 1 stories, written with Dulan from 26 Oct 2026, for review. Phases 2 to 4 are not yet written.
 
@@ -120,7 +120,6 @@ Every Open item in the source of truth, with the stories it blocks. A story neve
 | DN-02 | Document retention, deletion and access scope | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 08 Customers, 06 Rentals | 1 | SNS owner with advice |
 | DN-03 | Login recovery and stronger protection for owner and admin accounts | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 01 Start, 15 Settings | 1 | SNS owner with developer |
 | DN-04 | Garage-day charge: what triggers it, who decides it, how it is split on a partner car | [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings) | 07 Return | 2 | SNS owner |
-| DN-05 | Whether a missing accessory or the fuel level blocks handover; how an accessory-shortage charge is split on a partner car | [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents) | 06 Rentals, 07 Return | 2 | SNS owner |
 | DN-06 | Fuel charging workflow: same-level return versus paid fuel | [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 06 Rentals, 07 Return | 2 | SNS owner |
 | DN-07 | Swaps: allowance pool on a swap day when allowances differ, rounding, partial-day earnings outside the admin-allocated day | [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 06 Rentals | 2 | SNS owner |
 | DN-08 | Amended agreement or signature after an extension or swap | [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 06 Rentals, 16 Documents | 2 | SNS owner |
@@ -136,6 +135,8 @@ Every Open item in the source of truth, with the stories it blocks. A story neve
 | DN-18 | Acceptable data loss and recovery time (daily backup itself is Confirmed) | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | TRD | 4 | SNS owner with developer |
 | DN-19 | Hosting vendor and technology stack | [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | TRD | — | Dulan and SNS owner |
 | DN-20 | Wording of the customer and partner agreements (SNS approves, Sinhala and English), and how the partner agreement is signed and uploaded | [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports) | 11 Partners, 16 Documents, 01 Start (go-live checklist) | 1, 2 | SNS owner |
+
+Decided since this list was made, and so removed: DN-05 (accessories and fuel at handover; accessory charges on partner cars), 26 Oct 2026.
 
 ## 8. Proposed, not yet agreed
 
@@ -309,7 +310,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Story:** As staff, I see a customer's details, documents, warnings, debts and rentals in one place, and I can correct their details, so that I know who I am dealing with.
 - **Rules:**
   - Past rentals from SNS's books show marked "Imported", read-only and never recalculated. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
-  - An old debt shows before every new rental until it is paid. Recording a payment is Phase 2; writing off a debt is for the authorised person only. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions), [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs).
+  - An unpaid debt warns before every new rental until it is paid or written off, as a flag does (AT-55). Recording a payment is Phase 2; writing off a debt is for the authorised person only. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions), [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs).
   - Decisions taken for this customer show with their reason, person and time (PR-05).
 - **Checks:** AT-37 "An imported past rental is opened: shown marked Imported, read-only, never recalculated".
 - **Screens:** 08.2 Customer details.
