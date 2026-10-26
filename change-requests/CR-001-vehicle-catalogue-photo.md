@@ -3,11 +3,11 @@
 | | |
 | --- | --- |
 | Raised | 25 October 2026, by Dulan Nadeeja (developer) |
-| Status | **Waiting for the owner's agreement** (S D De Silva) |
+| Status | **Agreed by the owner** (S D De Silva), recorded by Dulan, 26 October 2026. Addendum: `addenda/ADD-003-vehicle-catalogue-photo.md` |
 | Proposal affected | Proposal v1, 22 October 2026 (approved, frozen), not edited |
 | Price effect | **None.** No charge |
 | Phase and timeline effect | **None.** Fits inside the current phases; no extra time |
-| System design | §4.2 per-vehicle settings, §16 scope table, AT-29 (all marked Proposed) |
+| System design | §4.2 per-vehicle settings, §16 scope table, AT-29 (Confirmed) |
 
 ## What
 
@@ -31,7 +31,4 @@ Staff and the owner find a car faster when its card shows the real car, for exam
 
 ## Owner's decision
 
-- [ ] Agreed, no charge. Record in the system design as Confirmed and issue the next addendum in `addenda/`.
-- [ ] Not wanted. Remove it from the system design and the screens.
-
-Owner: ____________________   Date: ____________
+- [x] Agreed, no charge. Recorded in the system design as Confirmed; addendum ADD-003 issued.

@@ -6,5 +6,4 @@ Addenda to the approved proposal, one per agreed change request: `ADD-NNN-short-
 | --- | --- | --- |
 | `ADD-001-advance-reservations.md` | CR-002 | Advance reservations, up to 30 days ahead (Phase 2, no charge) |
 | `ADD-002-starting-data.md` | CR-003 | Existing records, opening balances and past records loaded before go-live (Phase 4, no charge) |
-
-CR-001 (optional catalogue photo per car) is waiting for the owner's agreement.
+| `ADD-003-vehicle-catalogue-photo.md` | CR-001 | One optional catalogue photo per car (Phase 1, no charge) |

@@ -9,7 +9,7 @@ The gallery card: model image (or a photo), status chip over the photo corner, a
 - optional `warning` `{label, icon}`
 - `canAddPhoto` (true for admins only; shows "Photo නැහැ · එකතු කරන්න" when there is no photo) and `onClick`
 
-The car's own photo is optional and admin-managed: system design §4.2, Proposed under CR-001.
+The car's own photo is optional and admin-managed: system design, Per-vehicle settings; Confirmed (CR-001, ADD-003).
 
 **Rules:**
 - **Overdue cards get a 2px `overdue` border** and sort first.

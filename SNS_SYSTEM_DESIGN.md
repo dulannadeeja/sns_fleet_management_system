@@ -55,9 +55,11 @@ SNS primarily serves customers from its local area because trust is important wh
 | Rentals | Walk-in rentals, and advance reservations up to 30 days ahead (§7.6) |
 | Initial data | Existing records, opening balances and past rentals and money records, loaded once before go-live (Starting data, below) |
 | Price, phases, payments and support | Set by the approved proposal (`proposal/`) |
-| Hosting vendor and technology stack | Open |
+| Hosting vendor and technology stack | Next.js (TypeScript) web app that installs like an app on a phone, with a PostgreSQL database, on one 2 GB DigitalOcean server (Bangalore or Singapore, chosen by a speed test from Elpitiya) with daily backups; customer document copies and an off-site copy of each night's backup in private Cloudflare R2 storage. About LKR 5,000 a month, within the proposal's running-cost estimate; accounts in the owner's name. Confirmed: agreed by the owner, recorded by Dulan |
 
 Any cash introduced after launch must be recorded as a cash movement, not treated as rental earnings.
+
+**When the system is down.** If only the office internet is down, staff use mobile data on a phone. If the system cannot be reached, staff use a printed backup pack kept at the branch (blank rental agreement, handover and payment forms) and the fleet list the system prints each evening. When the system is back, each paper record is entered with its real time and marked "entered after outage"; the owner sees them in the daily summary. This is a paper fallback, not offline operation. Confirmed: agreed by the owner, recorded by Dulan.
 
 ### Starting data
 
@@ -153,7 +155,7 @@ Admins can define each vehicle's package according to its condition and update p
 - Surcharge starting day, default day six.
 - Garage-day charge, default LKR 5,000 per day. It applies only when the vehicle goes to the garage because of damage during that rental. Staff propose the days at return; an admin approves the days and the amount, and corrects the days when the vehicle is back from the garage. On a partner vehicle the admin decides the split, as for damage recovery. Confirmed: agreed by the owner, recorded by Dulan.
 - Agreed payment terms and expense responsibilities.
-- Catalogue photo: optional, one per vehicle, added or replaced by an admin. It is shown on the vehicle's card and profile; until one is added, the system shows the model's standard image. It is not a condition photo, not a handover requirement and not a customer document. **Proposed** under change request CR-001 (no charge, no extra time), decided by Dulan on 25 Oct 2026; becomes Confirmed when the owner agrees CR-001.
+- Catalogue photo: optional, one per vehicle, added or replaced by an admin. It is shown on the vehicle's card and profile; until one is added, the system shows the model's standard image. It is not a condition photo, not a handover requirement and not a customer document. Confirmed: agreed by the owner, recorded by Dulan (change request CR-001, addendum ADD-003; no charge, no extra time).
 
 ### 4.3 Historical terms
 
@@ -341,7 +343,7 @@ Authorised staff reconcile cash, bank transfers, and cards daily:
 
 **Closing the business day.** Employees or admins close the day with "Close the day" after the evening drawer count; that day's rent shares become final then. If nobody closes it, the day closes on its own at 11:59 PM, Asia/Colombo time, so partners are never held back; a count entered the next morning is marked late. Confirmed: agreed by the owner, recorded by Dulan.
 
-**Proposed reconciliation model:** Separate recorded payment status from reconciliation status. A payment can remain recorded as confirmed while reconciliation is unmatched or under investigation.
+**Reconciliation model:** Recorded payment status is kept separate from reconciliation status (waiting, matched, flagged). A payment stays recorded as paid while its reconciliation is waiting, unmatched or under investigation. Confirmed: agreed by the owner, recorded by Dulan.
 
 **Cash paid out of the drawer.** A partner cash-out, a salary or an owner withdrawal paid in cash is recorded as its own kind of cash-out line, with who paid it and why, and lowers the expected cash. None is an expense line: the salary expense comes from payroll, the partner payout from the partner's balance, and an owner withdrawal is never an expense, so nothing is counted twice. Confirmed: agreed by the owner, recorded by Dulan.
 
@@ -421,7 +423,9 @@ Agreements, receipts, and bills support Sinhala or English. Sinhala is also the 
 
 The customer agreement will be redesigned for SNS review. Applicable customer, vehicle, dates, and agreed prices are filled automatically. Print for signature and upload the signed copy before handover.
 
-Vehicle-partner agreements cover commission, the daily cash-out arrangement, and expense responsibilities. Their exact wording and signing/upload workflow still need confirmation.
+Vehicle-partner agreements cover commission, the daily cash-out arrangement, and expense responsibilities. The system prints the agreement, filled with the partner's vehicles and terms, in Sinhala or English; it is signed and kept on paper, and staff record "signed on <date>". There is no upload and nothing is blocked by it; when terms change, a new version is printed. Confirmed: agreed by the owner, recorded by Dulan.
+
+**Agreement wording.** SNS supplies the wording of the customer and partner agreements; Dulan enters it in Sinhala and English; the owner approves each version before it is used. It is on the go-live checklist (Starting data). Confirmed: agreed by the owner, recorded by Dulan.
 
 Reference files provided:
 
@@ -468,7 +472,7 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | Fuel at return | By default fuel is not counted: SNS takes fuel out of returned vehicles before the next customer, and the bill has no fuel line. For one rental, staff may choose "same level": if the vehicle comes back lower than at handover, staff estimate the missing litres and charge them at the owner's price per litre (100% SNS), or waive it with a reason; a higher level is not refunded. Confirmed: agreed by the owner, recorded by Dulan |
 | Fuel taken out | Staff may record the litres taken out of a returned vehicle, marked "estimate" (read from the fuel gauge), with who and when. Litres only: no money value, never income or earnings, never in the drawer. Confirmed: agreed by the owner, recorded by Dulan |
 | Garage-day charge | Confirmed in scope; default LKR 5,000/day per vehicle; trigger and partner split open |
-| Vehicle catalogue photo (one optional photo per vehicle) | Proposed; change request CR-001, no charge, awaiting owner agreement |
+| Vehicle catalogue photo (one optional photo per vehicle) | Confirmed; change request CR-001, addendum ADD-003, no charge |
 | Non-rental vehicle movement tracking | Future extension |
 | Advance reservations | Confirmed; CR-002, agreed by the owner, no charge, Phase 2 (§7.6) |
 | Offline operation | Excluded |
@@ -480,13 +484,13 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | GPS tracking | Excluded (approved proposal; recorded by Dulan 26 Oct 2026) |
 | App-store app | Excluded; the website works like an app on a phone (approved proposal; recorded by Dulan 26 Oct 2026) |
 | Price, phases, payments and support | Set by the approved proposal |
-| Hosting vendor and technology stack | Open |
+| Hosting vendor and technology stack | Next.js (TypeScript) web app that installs like an app on a phone, with a PostgreSQL database, on one 2 GB DigitalOcean server (Bangalore or Singapore, chosen by a speed test from Elpitiya) with daily backups; customer document copies and an off-site copy of each night's backup in private Cloudflare R2 storage. About LKR 5,000 a month, within the proposal's running-cost estimate; accounts in the owner's name. Confirmed: agreed by the owner, recorded by Dulan |
 
 No additional scope is authorised merely by appearing as a proposed technical option in this document.
 
 ## 17. Proposed logical structure — not yet approved
 
-This section organises the confirmed behaviour for future engineering discussion. It does not select a technology stack or hosting vendor.
+This section organises the confirmed behaviour for engineering. The stack and hosting are set in §2 (Confirmed); the technical design is in the TRD.
 
 ### 17.1 Modules
 
@@ -522,7 +526,7 @@ This section organises the confirmed behaviour for future engineering discussion
 | PayrollPeriod, PayrollEntry, EmployeeLoan, SalaryPayment | Manual payroll and balances |
 | Approval, AuditEvent, Notification | Decisions, history, daily summaries |
 
-**Proposed architecture:** A responsive web application and modular backend with a relational database, private object storage, and background tasks for PDFs/reminders. A modular monolith is a candidate, not a selected architecture. Hosting and cost decisions remain deferred.
+**Proposed architecture:** One Next.js application organised as modules (a modular monolith), with PostgreSQL, private object storage (Cloudflare R2) and background tasks for PDFs, reminders, the 11:59 PM day close and nightly backups. The stack and hosting are Confirmed (§2); the module layout is for the TRD.
 
 ### 17.3 Derived integrity controls
 
@@ -538,11 +542,11 @@ This section organises the confirmed behaviour for future engineering discussion
 
 ## 18. Operational and security decisions still required
 
+**Backups and recovery.** Backups run automatically every day (Confirmed by the client-approved proposal, Phase 4). At most one day of records may be lost; staff re-enter that day from the paper backup pack and receipts. The system is back within 4 working hours. Backups are kept for 30 days and a restore is tested once a month. Confirmed: agreed by the owner, recorded by Dulan.
+
 | Open decision | Consequence if unresolved | Decision owner |
 | --- | --- | --- |
-| Acceptable data loss and recovery time. Backups run automatically every day: Confirmed by the client-approved proposal (Phase 4), recorded by Dulan 26 Oct 2026 | Cannot define recovery design or reliable operating cost | SNS owner with developer |
-| Outage procedure for an online-only branch | Staff may have no agreed process during downtime | SNS owner |
-| Hosting vendor and technology stack (price, phases, payments and support are set by the approved proposal) | Hosting cost and setup cannot be finalised | Dulan and SNS owner |
+| None at present | — | — |
 
 ## 19. Acceptance scenarios for implementation planning
 
@@ -578,7 +582,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-26 | Owner with two vehicles requests a partial cash-out | One balance across both vehicles; payout recorded; the rest stays available; a repeated submission does not pay twice |
 | AT-27 | Business day closes with a rental still out | That day's share becomes final and cash-out-able; extra km for the rental waits for return |
 | AT-28 | Staff open "Overdue 1" from the navigation or attention summary | The rentals list opens showing only the overdue rental, with a visible filter that can be removed |
-| AT-29 | Vehicle with no catalogue photo; an admin then adds one (Proposed, CR-001) | Card and profile show the model's standard image, then the photo; handover requirements are unchanged; staff without admin rights cannot add or replace it |
+| AT-29 | Vehicle with no catalogue photo; an admin then adds one (CR-001) | Card and profile show the model's standard image, then the photo; handover requirements are unchanged; staff without admin rights cannot add or replace it |
 | AT-30 | A car is reserved for Fri to Sun; staff try to rent or reserve the same car for Sat | Refused: the car is held on overlapping days |
 | AT-31 | The car's package changes after the reservation is made | Pickup uses the package saved on the reservation |
 | AT-32 | A phone extension would run into another customer's reservation on the same car | Extension blocked with the reason, until the reservation is moved to another free car or its dates change |
@@ -630,6 +634,9 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-78 | A finalised payslip had the wrong allowance | The payslip is unchanged; next month's payroll has an adjustment line with the reason |
 | AT-79 | On 26 October the owner opens this month's report | October 1–26 is compared with September 1–26; profit is labelled "before depreciation"; deposits held are not in earnings |
 | AT-80 | A car was in the fleet all 31 days of a month and rented 22 | Car use shows 71% (22 ÷ 31) |
+| AT-81 | A rental was handed over on paper at 10:00 during an outage and entered at 14:00 | It shows pickup 10:00, marked "entered after outage" with who entered it at 14:00, and appears in the owner's daily summary |
+| AT-82 | The monthly restore test is run | Last night's backup restores to a test copy and the day's records are present |
+| AT-83 | A partner is added and the agreement printed but not yet marked signed | Cash-outs are not held back; the partner page shows "agreement not yet signed" until staff record the date |
 
 ## 20. Readiness and next steps
 
