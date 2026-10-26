@@ -722,8 +722,8 @@
  {
   "name": "08-Customers-CustomerDetails-Phone",
   "w": 390,
-  "canvasH": 2080,
-  "contentH": 2080,
+  "canvasH": 2085,
+  "contentH": 2085,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1442,8 +1442,8 @@
  {
   "name": "15-Settings-People-Phone",
   "w": 390,
-  "canvasH": 1830,
-  "contentH": 1830,
+  "canvasH": 1834,
+  "contentH": 1834,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

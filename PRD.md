@@ -482,7 +482,4 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 ### Gaps found while writing Phase 1
 
-Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag; 08.3 New customer: save before the copies; 04.6 Starting packages: new cars only; 04.5 Change a car's status: retire) are updated together once all are decided.
-
-| Gap | Where | What it needs |
-| --- | --- | --- |
+Six gaps were found and decided with Dulan for the owner on 26 Oct 2026. Each is now in the system design and its story, with a check: turning off an account (ST-15.2, AT-47), closing a flag (ST-08.5, AT-48), saving a customer before the copies (ST-08.2, AT-49), starting packages for new cars only (ST-04.4, AT-50), one customer per NIC (ST-08.2, AT-51) and retiring a car (ST-04.5, AT-52). The screens 15.3, 08.2, 08.3, 04.6 and 04.5 show them.

@@ -69,12 +69,12 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
 <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
 </a>
 </section>
-<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Nobody shares an account. Every action is saved under the name of the person signed in, even though staff share one cash drawer.</div></div>
+<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Nobody shares an account. Every action is saved under the name of the person signed in, even though staff share one cash drawer. When someone leaves, the owner opens their row and turns the account off, with a reason: sign-in stops, and their name stays on everything they recorded.</div></div>
 </div></div>
   <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1830}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1834}}'>
 class Component extends DCLogic {
   renderVals() {
     return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html", "active": true}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,
