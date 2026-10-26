@@ -208,7 +208,7 @@ An accessories checklist is recorded at handover and return. **Open:** whether a
 
 An expired customer driving licence triggers a warning. An authorised person may override it with a reason. An override does not make the licence legally valid.
 
-Staff may flag a customer for unpaid balances, damage, or other issues. Warnings appear before future rentals; employees may proceed with a recorded reason.
+Staff may flag a customer for unpaid balances, damage, or other issues. Warnings appear before future rentals; employees may proceed with a recorded reason. Employees or admins close a flag with a reason (for example, the money was paid); it stops warning but stays in the customer's history with who closed it and when. Nothing is deleted. Confirmed: agreed by the owner, recorded by Dulan.
 
 A customer may rent multiple vehicles simultaneously. Each has its own agreement and bill. Separate actual-driver records per vehicle are outside the agreed scope.
 
@@ -578,6 +578,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-45 | A car's insurance expires in 30 days, with the starting reminder settings | It appears in Upcoming work; the owner can change how early |
 | AT-46 | A staff member forgets their password | The primary owner resets it; the staff member changes it at the next sign-in |
 | AT-47 | The owner turns off the account of a staff member who left | They can no longer sign in; everything they recorded keeps their name and is unchanged |
+| AT-48 | Staff close a customer's flag with a reason | No warning at the next rental; the flag, its reason, who closed it and when stay in the customer's history |
 
 ## 20. Readiness and next steps
 

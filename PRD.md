@@ -2,7 +2,7 @@
 
 What the SNS Rent Car system must do, written as stories a developer can build and a tester can check.
 
-This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-47) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
+This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-48) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
 Status of this draft: front section and Phase 1 stories, written with Dulan from 26 Oct 2026, for review. Phases 2 to 4 are not yet written.
 
@@ -331,11 +331,12 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Status:** Confirmed.
 - **Phase:** 1.
 - **Roles:** Staff, Admin, Owner.
-- **Story:** As staff, I flag a customer for unpaid money, damage or another reason, so that everyone is warned before their next rental.
+- **Story:** As staff, I flag a customer for unpaid money, damage or another reason, so that everyone is warned before their next rental, and I close it with a reason when it no longer applies.
 - **Rules:**
   - The reasons are unpaid money, damage or something else; what happened must be written. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
+  - Staff or admins close a flag with a reason, for example when the money is paid. A closed flag stops warning but stays in the customer's history with who closed it and when; nothing is deleted. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
   - No ratings or scores (PR-14). Flags from SNS's books come with imported customers. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
-- **Checks:** *Proposed check:* a flagged customer shows the flag before the next rental, to every person.
+- **Checks:** AT-48 "Staff close a customer's flag with a reason: no warning at the next rental; the flag, its reason, who closed it and when stay in the history". *Proposed check:* a flagged customer shows the flag before the next rental, to every person.
 - **Screens:** 08.5 Add a customer flag.
 
 ### 04 Cars
@@ -478,11 +479,10 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 ### Gaps found while writing Phase 1
 
-Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off) are updated together once all are decided.
+Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag) are updated together once all are decided.
 
 | Gap | Where | What it needs |
 | --- | --- | --- |
-| Removing or ending a customer flag | 08.5 | The system design does not say |
 | Whether a customer can be saved before all copies are in (handover stays blocked either way) | 08.3 asks for every copy to save | Imported customers may arrive without copies, so saving cannot always require them |
 | Whether a change to a starting package changes the existing cars of that type | 04.6 | The system design says only that new cars start with it |
 | No screen for retiring a car | 04.5 has Under repair and Temporarily unavailable only | A design for ST-04.5's retire rule |
