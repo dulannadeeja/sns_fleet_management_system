@@ -2,7 +2,7 @@
 
 The tokens and components for the SNS Rent Car management website, master copy. Requirements and business rules live in `SNS_SYSTEM_DESIGN.md` and win over anything here. Brand and visual rules (colour use, type, language, icons, vehicle images, layout, money on screen, printed documents) live in `brand/guidebook/`; this folder is how those rules are built.
 
-The claude.ai design system "SNS Rent Car · Plate v2" (https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4) is a viewer. Change the files here first, then refresh the viewer.
+The claude.ai design system "SNS Design System · Plate" (https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4) is a viewer. Change the files here first, then refresh the viewer.
 
 ## See every component
 

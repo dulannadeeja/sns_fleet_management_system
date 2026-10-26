@@ -2,7 +2,7 @@
   "v": 3,
   "layout": "files",
   "createdOnFiles": {"v": 1, "at": "2026-10-26T04:34:25Z"},
-  "title": "SNS Rent Car · Plate v2",
+  "title": "SNS Design System · Plate",
   "namespace": "Plate",
   "libraries": [{"name": "react", "version": "18.3.1"}, {"name": "react-dom", "version": "18.3.1"}],
   "sections": {},
@@ -10,5 +10,5 @@
   "assetGroups": {},
   "blobs": {},
   "docs": {"readme": "project/README.md", "sections": []},
-  "lastChange": {"by": "Dulan Nadeeja", "via": "Claude Code", "at": "2026-10-26T04:34:25Z", "note": "Created from design/design-system (offline copy of SNS Rent Car · Plate). Components, tokens and README; no previews, assets or fonts yet."}
+  "lastChange": {"by": "Dulan Nadeeja", "via": "Claude Code", "at": "2026-10-26T05:30:00Z", "note": "Renamed from SNS Rent Car · Plate v2 to SNS Design System · Plate."}
 }

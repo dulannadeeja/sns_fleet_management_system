@@ -23,7 +23,7 @@ Higher rank wins. A lower file may restate or implement a higher one, never cont
 | 6 | **Agent instructions** | Pointers only | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` |
 | 7 | **Code, tests, data** | Implementation | the repository (when it exists) |
 
-The repository is the master copy of every rank-4 item. The claude.ai viewers (design system "SNS Rent Car · Plate v2", screens canvas "SNS Rent Car · Plate") are never edited directly: change the repository, then refresh the viewer.
+The repository is the master copy of every rank-4 item. The claude.ai viewers (design system "SNS Design System · Plate", screens canvas "SNS Rent Car · Plate") are never edited directly: change the repository, then refresh the viewer.
 
 History lives in git. Don't add version history inside any doc.
 

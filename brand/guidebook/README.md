@@ -2,7 +2,7 @@
 
 How SNS Rent Car looks, reads and sounds, for every screen, component and printed document. Requirements and business rules live in `SNS_SYSTEM_DESIGN.md` and win over anything here.
 
-This repository is the master copy. The claude.ai design system "SNS Rent Car · Plate v2" is a viewer, refreshed from here.
+This repository is the master copy. The claude.ai design system "SNS Design System · Plate" is a viewer, refreshed from here.
 
 | Chapter | What it covers |
 | --- | --- |

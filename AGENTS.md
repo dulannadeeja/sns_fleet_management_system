@@ -22,7 +22,7 @@ The repository is the master copy. Everything below works from git alone; no cla
 | What | Master (in this repository) | Viewer on claude.ai | Notes |
 | --- | --- | --- | --- |
 | Brand guidebook | `brand/guidebook/` | — | Identity, colour, type, language, icons, vehicle imagery, layout, money on screen, printed documents. Start from `brand/guidebook/README.md`. |
-| Design system | `design-system/` | "SNS Rent Car · Plate v2": https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4 | Tokens, components (global `window.Plate`) and previews. Open `design-system/index.html` in a browser to see every component. |
+| Design system | `design-system/` | "SNS Design System · Plate": https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4 | Tokens, components (global `window.Plate`) and previews. Open `design-system/index.html` in a browser to see every component. |
 | Screen designs | `screens/` | Canvas "SNS Rent Car · Plate": https://claude.ai/artifact/XPpVE6ZafYtyG4gRZukHYz | 170 screens. Every screen has a desktop and a phone version, grouped in numbered modules. Names follow `NN.n Name · Device`; files follow `NN-Module-Screen-Desktop` / `-Phone`. Links stay on the same device. |
 
 **Plate in one line:** cool grey ground `#eef1f0`; the Sri Lankan number plate is the signature (yellow plate face `#f6c343` with ink `#1b1f1d`, only on plates, the SNS mark and the active nav pill); action blue `#1756a9`; Yaldevi for text, Gemunu Libre for plates, money and headings; status colours keep their meaning and are never shown by colour alone.
