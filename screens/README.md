@@ -14,6 +14,7 @@ The claude.ai canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjb
 | `canvas/` | The screen source (`*.dc.html`), the canvas layout (`canvas.json`) and `support.js`, as used by the claude.ai canvas. |
 | `canvas/ds/plate/` | A copy of the design-system tokens and bundle that the canvas pages load. It is generated from `design-system/`: never edit it by hand. |
 | `blob-map.json` | The canvas uploads: each upload id and the repository image it holds. |
+| `tools/` | The renderer: `node screens/tools/render.mjs --changed` rewrites the previews and the report for changed boards (first run: `npm install && npx playwright install chromium` in `tools/`). |
 
 ## Names
 
@@ -23,7 +24,7 @@ Modules: 01 Start, 02 Home, 03 Morning check, 04 Cars, 05 New rental, 06 Rentals
 
 ## Keeping the canvas copy in step
 
-`canvas/ds/plate/` must match `design-system/` except for the image path prefix: the canvas pages sit two folders down, so their bundle prefixes every image path with `../../` (`../../design-system/assets/…`, `../../brand/vehicles/…`) where the master bundle uses `design-system/assets/…` and `brand/vehicles/…`. After changing `design-system/tokens.json`, `tokens.css`, `components/bundle.js` or `components/bundle.css`, copy them here and apply that prefix.
+`canvas/ds/plate/` must match `design-system/` except for the image path prefix: the canvas pages sit two folders down, so their bundle prefixes every image path with `../../` (`../../design-system/assets/…`, `../../brand/vehicles/…`) where the master bundle uses `design-system/assets/…` and `brand/vehicles/…`. After changing `design-system/tokens.json`, `tokens.css`, `components/bundle.js` or `components/bundle.css`, run `node scripts/sync-design-copy.mjs` (the Claude Code post-edit hook runs it for you); never edit the copy by hand.
 
 ## Refreshing the claude.ai canvas
 

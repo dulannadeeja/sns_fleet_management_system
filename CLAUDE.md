@@ -1,9 +1,7 @@
-# SNS Rent Car System — Claude
+@AGENTS.md
 
-Follow `AGENTS.md` in this folder; it holds the full instructions for every agent.
+## Claude Code only
 
-**Before any change, read and follow `.agents/skills/sns-change-control/SKILL.md`.** Update the source of truth first, then everything below it in order, run the sync audit and commit.
-
-- **Single source of truth:** `SNS_SYSTEM_DESIGN.md` (repository root). Read it first. It wins over every other source. Record decisions there before changing anything else. Open items stay open.
-- **Latest design (master in this repository):** brand guidebook `brand/guidebook/`, design system `design-system/`, screens `screens/`. claude.ai viewers (design system "SNS Design System · Plate", canvas "SNS Rent Car · Screens") are refreshed from the repository and never edited directly.
-- **Proposal:** `proposal/SNS_Rent_a_Car_Proposal_SI.pdf` / `proposal/SNS Rent a Car Proposal.html` (https://claude.ai/artifact/DCDGDwQJRuL7K8AUNN4nQ5). Approved by the client and frozen: changes only through `change-requests/` and `addenda/`.
+- Project hooks in `.claude/settings.json`: a guard blocks edits to frozen or generated files and risky git commands; after an edit, generated copies are synced and links checked; the sync audit runs before a turn ends; a model advisor flags work that needs a higher model.
+- Subagents are in `.claude/agents/`; delegate exploration and checks to them, and run reviewers in parallel.
+- MCP servers in `.mcp.json`: `context7` (library docs), `playwright` (browser checks of screens and the app), `next-devtools` (once `app/` runs). TypeScript LSP comes from the `typescript-lsp` plugin (`npm install -g typescript-language-server typescript`).

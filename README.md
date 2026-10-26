@@ -10,9 +10,11 @@ The rental and fleet management system for SNS Rent Car (one branch, Elpitiya, S
 4. `brand/guidebook/README.md`: the brand guidebook.
 5. `design-system/README.md`: the Plate design system. Open `design-system/index.html` in a browser to see every component.
 6. `screens/README.md`: the screens.
-7. `.agents/skills/sns-change-control/SKILL.md`: the order every change follows.
+7. `.claude/skills/sns-change-control/SKILL.md`: the order every change follows.
 
 Everything works from this repository alone. The claude.ai artifacts are viewers, refreshed from here.
+
+**AI harness.** `AGENTS.md` (and a nested `AGENTS.md` in each folder) for every agent; for Claude Code also `.claude/` (skills, subagents, hooks) and `.mcp.json`. Run `node scripts/audit.mjs` to check that everything agrees.
 
 | Folder | Contents |
 | --- | --- |
@@ -23,5 +25,8 @@ Everything works from this repository alone. The claude.ai artifacts are viewers
 | `change-requests/`, `addenda/` | Changes to the proposal |
 | `reference/` | Material sent by the client |
 | `fonts/` | Yaldevi, Gemunu Libre, IBM Plex Mono |
+| `scripts/` | Repository checks and sync tools (Node, no install) |
+| `app/` | The application, built from `TRD.md` (not started yet) |
+| `.claude/`, `.github/` | The AI harness, issue and PR templates, CI checks |
 
 Set up on 25 Oct 2026 from the earlier `sns_rent_car_system` folder, carrying over only current files.

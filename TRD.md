@@ -2,7 +2,7 @@
 
 How the SNS Rent Car system is built: architecture, data model, integrity rules, jobs, deployment and testing.
 
-This document is **derived** (rank 3). It sits below `SNS_SYSTEM_DESIGN.md` (rank 1, the source of truth) and `PRD.md` (rank 2), and may never contradict or extend them: a business rule lives in the system design, a story in the PRD, and here only how it is built. Where they differ, the higher document wins and this file is corrected. Changes follow `.agents/skills/sns-change-control/SKILL.md`.
+This document is **derived** (rank 3). It sits below `SNS_SYSTEM_DESIGN.md` (rank 1, the source of truth) and `PRD.md` (rank 2), and may never contradict or extend them: a business rule lives in the system design, a story in the PRD, and here only how it is built. Where they differ, the higher document wins and this file is corrected. Changes follow `.claude/skills/sns-change-control/SKILL.md`.
 
 Status: written with Dulan, 26 Oct 2026, for review. Technical choices are Dulan's as developer; the stack and hosting are recorded in the system design as agreed with the owner (DN-19).
 

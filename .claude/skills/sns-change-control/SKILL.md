@@ -41,8 +41,8 @@ If the type is unclear, ask.
 
 1. **Read.** Read the source of truth in full for the affected area, and every file the change touches. Re-read a file before editing it, because another agent may have changed it.
 2. **Check status.** Every rule carries one label: Confirmed, Derived control, Proposed, Open or Deferred. Only Confirmed rules may be treated as fact. Open items stay open. Never change a status yourself. Only the owner's agreement, S D De Silva, can move a rule to Confirmed or resolve an Open item. The agreement must be given in words. Dulan records it in the source of truth with the date and who agreed.
-3. **List the files.** Before editing, write one line naming every file the change touches, across all ranks.
-4. **Stop and ask Dulan, one question at a time,** if any of these is true:
+3. **List the files.** Before editing, write one line naming every file the change touches, across all ranks. To find them without filling your context, ask the **consistency-checker** subagent (where a rule is stated or shown) or the **explorer** subagent.
+4. **Stop and ask Dulan, one question at a time** (the **grilling** skill's style: AskUserQuestion, recommended option first), if any of these is true:
    1. The request conflicts with a Confirmed rule.
    2. It would resolve an Open item.
    3. It deletes, renames or moves files.
@@ -57,7 +57,7 @@ If the type is unclear, ask.
 
 ## 4. Sync audit
 
-Run after every change. Report mismatches. Don't silently change the source of truth.
+Run `node scripts/audit.mjs` after every change; the Stop hook runs it too and will not let a turn end on hard failures. It checks links and headings, screen files against `canvas.json`, previews and the render report, canvas overlaps, screen counts, every AT used by a PRD story, the design-system copy, agent files and skills. The points below need judgement: hand them to the **consistency-checker** subagent and report what it finds. Don't silently change the source of truth.
 
 1. **Numbers:** every price, rate, charge, deposit, commission and worked example is the same wherever it appears. Compare against the source of truth. Don't copy figures into this skill, because they go stale.
 2. **Rules:** day close, partner earnings, cash-out, deposits (held money, not income), write-offs, permissions and handover requirements match everywhere.
@@ -68,7 +68,7 @@ Run after every change. Report mismatches. Don't silently change the source of t
 
 ## 5. Git
 
-- Work on the `development` branch. Don't commit to `main` without Dulan's say-so.
+- Work on the `development` branch, or a feature branch for a ticket. Never commit or push to `main` (the guard hook blocks pushes to it). Commit with the **ship** skill.
 - Start every task with a clean tree (`git status`). Don't mix unrelated changes in one commit.
 - One commit per change, after the sync audit passes. If the source of truth changed, the same commit holds the downstream updates, or the message lists what is still pending.
 - Message format: `type(scope): summary`, where type is one of `decision`, `scope`, `design`, `docs`, `impl`, `fix`, `chore`. The body lists the source-of-truth sections and AT-ids, who decided, the files changed and anything still pending.

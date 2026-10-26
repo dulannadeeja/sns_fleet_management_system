@@ -28,7 +28,7 @@ Later stakeholder decisions supersede this document. Update this document before
 - **Brand guidebook:** `brand/guidebook/`: identity, colour, type, language, icons, vehicle imagery, layout, money on screen and printed documents.
 - **Client proposal:** `proposal/SNS_Rent_a_Car_Proposal_SI.pdf` and `proposal/SNS Rent a Car Proposal.html` in this folder (artifact: https://claude.ai/artifact/DCDGDwQJRuL7K8AUNN4nQ5). Commercial terms and phases live there; requirements live here. **Approved by the client and frozen** (confirmed by Dulan, 24 Oct 2026; approval date to be recorded): changes to scope, phases, price, payments, timeline or the agreement go through a change request (`change-requests/`) and an addendum (`addenda/`), never by editing the proposal.
 
-**Change control.** Every change follows the `sns-change-control` skill (`.agents/skills/sns-change-control/SKILL.md`): update this document first, then propagate in order (PRD → TRD → design system → screens → proposal addendum → agent files → code), run the sync audit and commit. History is kept in git, not inside this document.
+**Change control.** Every change follows the `sns-change-control` skill (`.claude/skills/sns-change-control/SKILL.md`): update this document first, then propagate in order (PRD → TRD → design system → screens → proposal addendum → agent files → code), run the sync audit and commit. History is kept in git, not inside this document.
 
 
 ## 2. Goals and operating context
