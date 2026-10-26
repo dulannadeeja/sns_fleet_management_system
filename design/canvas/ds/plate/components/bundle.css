@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
-
+@import url("../../../../../fonts/plate/fonts.css");
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */
 .rt, .rt * { box-sizing: border-box; }
 .rt { font-family: var(--font-sans); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; font-optical-sizing: auto; text-rendering: optimizeLegibility; scrollbar-color: var(--line-strong) transparent; accent-color: var(--sapphire); }

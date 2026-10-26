@@ -180,3 +180,7 @@ The new moves were chosen from real product screens on Mobbin; Ratna's evidence 
 | One soft 3D car image per type | [Uber "Choose a ride"](https://mobbin.com/screens/1634d7c8-5d3f-4223-8f11-df000b37f3ea) | `VehicleImage` from the SNS vehicle pack |
 
 None of these proves anything about SNS users. Test Plate in Sinhala with the owner and staff, on their own phones and office PCs, outdoors as well as in the office.
+
+## Local font loading (26 October 2026)
+
+Use the supplied local `fonts/plate/fonts.css`: Yaldevi for interface text; Gemunu Libre for headings, plates and figures. Heading tokens now match the existing screen styles. Component stylesheets import the local font stylesheet first; static HTML previews link it from the head. Font files and their SIL OFL notices were extracted from the original project font ZIP. External Google Fonts access is no longer required. This local fix does not claim that online artifacts have been republished.
