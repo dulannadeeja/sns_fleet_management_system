@@ -1,79 +1,64 @@
-# SNS Rent Car System — instructions for AI agents
+# SNS Rent Car system: instructions for every agent
 
-Read this before doing any work in this folder. It applies to every agent and tool (Claude, Codex, Gemini, Antigravity, Copilot and others).
+The rental and fleet management system for SNS Rent Car (one branch, Elpitiya, Sri Lanka). Sinhala first, office computers and phones. These instructions apply to every agent and person (Claude, Codex, Gemini, Copilot and others). Each folder has its own `AGENTS.md` with its rules and checks; read it when you work there.
 
-## 0. Change control (mandatory)
+## Rank order (higher wins)
 
-Every task follows **`.agents/skills/sns-change-control/SKILL.md`**. Read it before your first change. In short:
+1. `SNS_SYSTEM_DESIGN.md`: the source of truth for every rule and decision. Read the part you work on first.
+2. `PRD.md`: stories ST-nn.n, each tied to acceptance scenarios AT-nn.
+3. `TRD.md`: architecture, data model, integrity rules, jobs, deployment, tests.
+4. `brand/guidebook/`, `design-system/`, `screens/`: the repository is the master; the claude.ai viewers are refreshed from it, never edited.
+5. `proposal/`: approved and frozen. Changes only through `change-requests/` and `addenda/`.
+6. Agent files, then code in `app/`.
 
-1. Classify the task (question, decision, scope, visual, implementation, inconsistency, housekeeping).
-2. Read the source of truth and the files you will touch. Never work from memory.
-3. Write the impact analysis across all files before editing.
-4. Stop and ask the stakeholder, one question at a time, on any conflict, open item, commercial change, final money, permissions, deletes or ambiguity.
-5. Update `SNS_SYSTEM_DESIGN.md` **first**, then PRD → TRD → design system → screens → proposal addendum → agent files → code.
-6. Run the sync audit, commit to git, and report what changed, what didn't and what is still open.
+Every change follows the **sns-change-control** skill: change the highest document first, then each one below it in order, then run the audit and commit.
 
-## 1. One source of truth
+## Talking to Dulan
 
-**`E:\sns_fleet_managment_system\SNS_SYSTEM_DESIGN.md`** is the single source of truth for requirements, business rules and decisions.
+- Dulan is Sinhalese and reads English as a second language. Write to him in simple English: short sentences, common words, one idea per sentence.
+- No jargon. If a technical word is needed, explain it in a few plain words the first time.
+- Lists and short tables are better than long paragraphs.
 
-- Read it first, every session. Use its status labels exactly: Confirmed, Derived control, Proposed, Open, Deferred.
-- If anything else (a screen, the proposal, a note, your memory, an earlier chat) disagrees with it, the design doc wins. Report the conflict; don't silently follow the other source.
-- New decisions go into the design doc first. Only then update screens, the proposal or code.
-- **Open** items stay open. Don't pick an answer in code or design; ask the stakeholder, one question at a time.
+## Rules that always apply
 
-## 2. Latest design (use only these)
+- Use the status labels exactly: Confirmed, Derived control, Proposed, Open, Deferred. Only the owner, S D De Silva, confirms a rule or settles an Open item; Dulan records it. Never decide an Open item yourself; ask Dulan, one question at a time, with a recommended answer.
+- Never invent data. Label sample, example and placeholder values.
+- Money is whole rupees. Deposits are held money, not income. "Profit" only for the agreed figure, labelled "before depreciation". Imported records and opening balances are never earnings.
+- No GPS, payment integration, automatic bank verification, fraud guarantees, customer trust scores or ratings. Staff see full NIC and phone numbers.
+- Plain everyday Sinhala; English only for words SNS already uses.
+- Don't create `PRODUCT.md`. Don't bring back files from the old folder.
 
-| What | Where | Notes |
-| --- | --- | --- |
-| Screen designs | Design canvas "SNS Rent Car · Plate": https://claude.ai/artifact/XPpVE6ZafYtyG4gRZukHYz | 170 screens. Every screen has a desktop and a phone version, grouped in 17 modules. Names follow `NN.n Name · Device`; files follow `NN-Module-Screen-Desktop` / `-Phone`. Links stay on the same device. |
-| Design system | "SNS Rent Car · Plate": https://claude.ai/artifact/E1pWnYhfHjpZ9C18ipGBWv | Tokens, components (global `window.Plate`), brand book. Start from its `project/README.md` (offline copy: `design/design-system/README.md`). |
-| Offline copy | `design/` in this folder | Read-only snapshot of both, for agents that cannot open claude.ai (Codex and others): screen source, static HTML and PNG previews, the design system files and every image. Start from `design/README.md`. |
+## Where things are
 
-**Plate in one line:** cool grey ground `#eef1f0`; the Sri Lankan number plate is the signature (yellow plate face `#f6c343` with ink `#1b1f1d`, only on plates, the SNS mark and the active nav pill); action blue `#1756a9`; Yaldevi for text, Gemunu Libre for plates, money and headings; status colours keep their meaning and are never shown by colour alone.
-
-**Retired, don't use:** the Ratna design system, Concept A/B/C screens, the Dashboard Design Briefs, navigation options 19.2 (day panel) and 19.3 (top bar), and any older canvas or older project folder.
-
-**If you cannot open claude.ai:** use `design/`. It is a snapshot; check `design/README.md` for the versions it was taken from. Never edit it to change the design: design changes go to the online canvas and design system first, and the snapshot is refreshed after. If the snapshot and the online version disagree, the online version wins.
-
-Screens show sample data and labelled examples. They illustrate the requirements; they don't add requirements.
-
-## 3. Client proposal (approved, frozen)
-
-- `proposal/SNS_Rent_a_Car_Proposal_SI.pdf` (print version) and `proposal/SNS Rent a Car Proposal.html`; online: https://claude.ai/artifact/DCDGDwQJRuL7K8AUNN4nQ5
-- The client has approved it. **Never edit it.** Scope, phase, price, payment, timeline or agreement changes go through a change request in `change-requests/` and, after the owner agrees, an addendum in `addenda/`.
-- The proposal holds the phases, price and agreement terms. Requirements live in the design doc.
-
-## 3a. History
-
-- This folder should be a git repository (run `git init` once if it is not yet). One commit per change, after the sync audit; message `type(scope): summary` with the source-of-truth sections, AT-ids and who decided. No version history inside the design doc.
-- Future PRD (`PRD.md`) and TRD (`TRD.md`) are derived from the design doc; every item cites its section or AT-id.
-
-## 4. Rules that always apply
-
-- Never invent data. Label sample, example and placeholder values as such.
-- Never call anything "profit". What counts as SNS earnings is an open owner decision.
-- Deposits are held money, not income.
-- No GPS, automatic bank verification, payment integration or fraud guarantees.
-- No customer trust scores or ratings.
-- Staff see full NIC and phone numbers; no masking.
-- Partners cash out on any day; one account covers all of a partner's cars; earnings become final when the business day closes.
-- Sinhala first; English is the second language. Plain everyday Sinhala; English only for words SNS already uses.
-- Don't create `PRODUCT.md`.
-- Before generating any AI image, icon or illustration, ask the stakeholder whether to switch to a higher model.
-
-## 5. What is in this folder
-
-| Path | What it is |
+| Path | What |
 | --- | --- |
-| `SNS_SYSTEM_DESIGN.md` | The source of truth (rank 1). |
-| `change-requests/`, `addenda/` | Change requests to the frozen proposal, and addenda once the owner agrees. |
-| `proposal/` | The approved, frozen client proposal (PDF and HTML). Never edit. |
-| `design/` | Offline snapshot of the canvas and the design system (read-only). |
-| `brand/` | Source brand files: the SNS logo, the vehicle PNG pack (`brand/vehicles/`) and the 44 SNS 3D icons (`brand/icons/`). |
-| `fonts/` | Gemunu Libre, Yaldevi and IBM Plex Mono (the proposal's fonts). |
-| `reference/client-agreement/` | The two photos of SNS's current agreement, sent by the client. Reference only; see system design §14 before using any wording. |
-| `.agents/skills/` | `sns-change-control` (mandatory) and `impeccable` (third-party design skill; don't edit). |
-| `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` | Agent instructions (this file is the full version). |
+| `brand/`, `design-system/`, `screens/` | Brand guidebook, Plate design system, 183 screen boards (each has an `AGENTS.md`) |
+| `app/` | The application (Next.js, PostgreSQL); `app/AGENTS.md` has its commands |
+| `change-requests/`, `addenda/`, `proposal/`, `reference/` | Changes to the frozen proposal, the proposal itself, client material |
+| `audits/` | Dated review records; `audits/README.md` says which findings are still open |
+| `scripts/` | Repository checks and sync tools (Node, no install) |
+| `.claude/skills/`, `.claude/agents/`, `.claude/hooks/` | The harness: skills (index in `.claude/skills/README.md`), subagents, hooks. Other agents can read and follow them too |
 
-Earlier exploration files, stock images and tooling from the old folder were left out on purpose. Don't bring them back.
+## Work loop
+
+- **Docs and designs:** grill (`/grill-with-docs`) → sns-change-control → sns-screen-update or sns-plate-component → validate → ship.
+- **Code, one GitHub issue per ticket:** slice-tickets → prime → plan-ticket → implement-ticket (tdd-workflow) → validate → review-changes → ship (PR into `development`; a human merges).
+- Before saying anything is done, fixed or passing: verification-before-completion. For any bug or failing test: systematic-debugging.
+
+## Models and subagents
+
+- Explore with the **explorer** subagent (Haiku); run checks with **validator** (Haiku). Keep the main context for decisions and edits.
+- Research with **researcher**; review code with **code-reviewer** and **consistency-checker** (all Sonnet).
+- Spec and money review: **spec-reviewer** (Opus). The agent that wrote a change never reviews it.
+- Planning, architecture, money rules, security and owner decisions need a top-tier model. If the session is not on one, say so in one line and suggest `/model opus` before starting. Ask the same before generating any image or icon.
+
+## Checks
+
+- Every change: `node scripts/audit.mjs` (links, screens, counts, AT coverage, design copy, agent files, skills). The Stop hook runs it and blocks on hard failures.
+- Each folder's `AGENTS.md` lists its own checks; `app/AGENTS.md` has the test and lint commands.
+
+## Git
+
+- Work on `development`, or a feature branch for a ticket. Never commit or push to `main`; never force-push.
+- One commit per change: `type(scope): summary`, with the system design sections, AT-ids and who decided in the body. History lives in git, not in documents.
+- Never commit secrets, `.env` files, customer documents or real NIC images.

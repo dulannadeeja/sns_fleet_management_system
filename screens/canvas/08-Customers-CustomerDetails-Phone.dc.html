@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>08.2 Customer details · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 2080px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="08-Customers-AllCustomers-Phone.dc.html" title="Kasun P." subtitle="Nimal · Staff · 11:30"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px">
+    <section style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 56px; height: 56px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 22px; font-weight: 600">KP</span><span style="display: flex; flex-direction: column"><span style="font-size: 22px; line-height: 32px; font-weight: 600">Kasun P.</span><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">නැවත එන පාරිභෝගිකයෙක් · returning customer</span></span></div>
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; line-height: 24px">
+    <span style="color: var(--ink-muted)">NIC</span><span class="rt-num" style="font-weight: 600; text-align: right">199012345678</span><span style="color: var(--ink-muted)">දුරකථන · Phone</span><span class="rt-num" style="font-weight: 600; text-align: right">077 123 4567</span>
+  </div>
+  <div style="display: flex; gap: 8px; flex-wrap: wrap">
+    <x-import component-from-global-scope="Plate.Button" icon="phone" variant="secondary">කතා කරන්න · Call</x-import>
+    <a href="08-Customers-NewCustomer-Phone.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="pen" size="{{twenty}}"></x-import><span>වෙනස් කරන්න · Edit</span></a>
+  </div>
+</section>
+    <section aria-label="Owes" style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: var(--card); border: 2px solid var(--overdue); border-radius: 16px">
+  <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">ණය · Owes SNS</span>
+  <span class="rt-num" style="font-size: 30px; line-height: 38px; font-weight: 600; color: var(--overdue)"><span style="font-size: 16px; font-weight: 500">LKR </span>8,500</span>
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; align-items: center; padding: 12px 0 0; border-top: 1px solid var(--line)">
+    <span style="display: flex; flex-direction: column"><a href="06-Rentals-RentalDetails-Phone.dc.html" class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600">R‑0197</a><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">unpaid since 18 Sep · 34 days</span></span>
+    <span class="rt-num" style="font-size: 15px; font-weight: 600">8,500</span>
+  </div>
+  <div style="display: flex; gap: 8px; flex-wrap: wrap">
+    <a href="09-Money-RecordPayment-Phone.dc.html" class="rt-btn rt-btn-primary" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="banknote" size="{{twenty}}"></x-import><span>ගෙවීම සටහන් කරන්න · Record payment</span></a>
+    
+  </div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">අවවාද <span class="rt-en">· Warnings</span></h2></div>
+  <div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--warning-tint); border-radius: 12px; color: var(--warning); font-size: 15px; line-height: 24px">
+    <x-import component-from-global-scope="Plate.Icon" name="alert" size="{{twenty}}" style="flex: none; margin-top: 2px"></x-import>
+    <span><b>පරණ ණය · Owes LKR 8,500 for 34 days.</b> Shown automatically before every new rental until it is paid.</span>
+  </div>
+  <div style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Flags · none. Staff can flag a customer for unpaid money, damage or another reason, and close a flag with a reason when it no longer applies; a closed flag stays in the history.</div>
+  <div><a href="08-Customers-AddFlag-Phone.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="flag" size="{{twenty}}"></x-import><span>Flag එකක් දාන්න · Add a flag</span></a></div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ලියකියවිලි <span class="rt-en">· Documents</span></h2></div>
+  <div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); ">
+  <x-import component-from-global-scope="Plate.Icon" name="idcard" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">හැඳුනුම්පත <span class="rt-en">· NIC copy</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">photo on file</span></span>
+  <span style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end"><a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1.5px solid var(--line-strong); border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--ink); white-space: nowrap">බලන්න</a></span>
+</div><div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); ">
+  <x-import component-from-global-scope="Plate.Icon" name="idcard" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">රියදුරු බලපත්‍රය <span class="rt-en">· Driving licence</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">valid when checked on 20 Oct · photo on file</span></span>
+  <span style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end"><span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600">වලංගුයි</span> <a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1.5px solid var(--line-strong); border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--ink); white-space: nowrap">බලන්න</a></span>
+</div><div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 0; ">
+  <x-import component-from-global-scope="Plate.Icon" name="users" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">ඇපකරු <span class="rt-en">· Reference person</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">not required for R‑0218 · Nimal decided, 20 Oct</span></span>
+  <span style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end"><span></span></span>
+</div></div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">කුලී <span class="rt-en">· Rentals</span></h2></div>
+  <div style="display: flex; flex-direction: column"><a href="06-Rentals-RentalDetails-Phone.dc.html" style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; align-items: center; min-height: 60px; padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; flex-direction: column"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600">R‑0218</span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="sm"></x-import></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">20 Oct → 22 Oct · 2 days</span></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-end"><span class="rt-num" style="font-size: 15px; font-weight: 600">15,675</span><span style="font-size: 14px; line-height: 22px; color: var(--available); font-weight: 500">paid in full</span></span>
+</a><a href="06-Rentals-RentalDetails-Phone.dc.html" style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; align-items: center; min-height: 60px; padding: 8px 0; color: var(--ink); text-decoration: none">
+  <span style="display: flex; flex-direction: column"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600">R‑0197</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">returned 18 Sep</span></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-end"><span class="rt-num" style="font-size: 15px; font-weight: 600">8,500</span><span style="font-size: 14px; line-height: 22px; color: var(--overdue); font-weight: 500">unpaid</span></span>
+</a><a href="06-Rentals-RentalDetails-Phone.dc.html" style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; align-items: center; min-height: 60px; padding: 8px 0; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none"><span style="display: flex; flex-direction: column"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600">R‑0091</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 10px; background: var(--sunken); color: var(--ink-muted); font-size: 14px; line-height: 22px; font-weight: 500; white-space: nowrap"><x-import component-from-global-scope="Plate.Icon" name="file" size="{{eighteen}}"></x-import>Imported</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">14 Mar → 16 Mar · from SNS’s books</span></span><span style="display: flex; flex-direction: column; align-items: flex-end"><span class="rt-num" style="font-size: 15px; font-weight: 600">9,000</span><span style="font-size: 14px; line-height: 22px; color: var(--available); font-weight: 500">paid in full</span></span></a></div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">සිදු වූ දේ <span class="rt-en">· What happened</span></h2></div>
+  <div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">22 Oct 9:52</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px"><b>Nimal</b> · R‑0218 ගෙවා අවසන් · paid in full</span></span>
+    </div><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">20 Oct 10:38</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px"><b>Nimal</b> · ණය තිබියදී කුලියක් දුන්නා · rented despite the old bill</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">reason: “Regular customer; සඳුදා ගෙවනවා කිව්වා”</span></span>
+    </div></div>
+</section>
+  </div>
+  <div style="padding: 12px 16px; background: var(--card); border-top: 1px solid var(--line)"><a href="05-NewRental-Customer-Phone.dc.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{twenty}}"></x-import><span>අලුත් කුලියක් · New rental</span></a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2085}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railR: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html', active: true }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      tabs: [{ icon: 'car', label: 'වාහන' }, { icon: 'clipboard', label: 'කුලී' }, { icon: 'drawer', label: 'ලාච්චුව' }, { icon: 'more', label: 'තවත්' }],
+      fab: { icon: 'plus', label: 'අලුත්' }
+    };
+  }
+}
+</script>
+</body>
+</html>

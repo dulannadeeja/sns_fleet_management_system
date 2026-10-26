@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>08.3 New customer with documents · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rt>div>main [style*="height: 844px"]{height:auto!important}
+
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railG}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="අලුත් පාරිභෝගිකයෙක්" subtitle="Ruwan · Thu 22 Oct" user="Ruwan" role="Staff · සේවක" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 32px 28px 56px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box">
+      <div style="width: 100%; max-width: 720px; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><section style="display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><span style="font-size: 17px; line-height: 26px; font-weight: 600">කවුද <span class="rt-en">· Who</span></span><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">නම <span class="rt-en">· Name</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%" value="Tharindu R."/></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">NIC <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input class="rt-num" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%" value="200012345678"/><div style="display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 22px; color: var(--available); font-weight: 500"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{eighteen}}"></x-import>No customer with this NIC yet</div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">දුරකථන <span class="rt-en">· Phone</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input inputmode="tel" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%" value="071 234 5678"/></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ලිපිනය <span class="rt-en">· Address</span></span><input placeholder="House, road, town" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; border: 2px solid var(--sapphire)"/></div></section><section style="display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><span style="font-size: 17px; line-height: 26px; font-weight: 600">රියදුරු බලපත්‍රය <span class="rt-en">· Driving licence</span></span><div style="display: flex; flex-direction: column; gap: 14px"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">අංකය <span class="rt-en">· Number</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="B1234567" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%"/></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ඉවර වෙන දිනය <span class="rt-en">· Expires</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="DD / MM / YYYY" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%"/></div></div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">If the licence has expired, everyone sees a warning before renting to this customer.</div></section><section style="display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><span style="font-size: 17px; line-height: 26px; font-weight: 600">Photos <span class="rt-en">· Document copies</span></span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px"><div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 96px; padding: 8px; box-sizing: border-box; border-radius: 12px; background: var(--sunken); border: 1px solid var(--line)">
+<x-import component-from-global-scope="Plate.Icon" name="idcard" size="{{twentytwo}}" style="color: var(--ink-muted)"></x-import>
+<span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: var(--available-tint); color: var(--available); font-size: 14px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{eighteen}}"></x-import>ගත්තා · taken</span>
+</div>
+<span style="font-size: 14px; line-height: 22px">NIC · ඉස්සරහ · <a href="#">නැවත</a></span>
+</div><div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 96px; padding: 8px; box-sizing: border-box; border-radius: 12px; background: var(--sunken); border: 1px solid var(--line)">
+<x-import component-from-global-scope="Plate.Icon" name="idcard" size="{{twentytwo}}" style="color: var(--ink-muted)"></x-import>
+<span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: var(--available-tint); color: var(--available); font-size: 14px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{eighteen}}"></x-import>ගත්තා · taken</span>
+</div>
+<span style="font-size: 14px; line-height: 22px">NIC · පිටුපස · <a href="#">නැවත</a></span>
+</div><div style="display: flex; flex-direction: column; gap: 6px">
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 96px; border-radius: 12px; border: 1.5px dashed var(--sapphire); background: var(--sapphire-tint); color: var(--sapphire-strong); font-size: 14px; font-weight: 600; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="camera" size="{{twentytwo}}"></x-import>Photo එක ගන්න</a>
+<span style="font-size: 14px; line-height: 22px">Licence · ඉස්සරහ</span>
+</div><div style="display: flex; flex-direction: column; gap: 6px">
+<a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 96px; border-radius: 12px; border: 1.5px dashed var(--sapphire); background: var(--sapphire-tint); color: var(--sapphire-strong); font-size: 14px; font-weight: 600; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="camera" size="{{twentytwo}}"></x-import>Photo එක ගන්න</a>
+<span style="font-size: 14px; line-height: 22px">Licence · පිටුපස</span>
+</div></div><div style="display: flex; gap: 8px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><x-import component-from-global-scope="Plate.Icon" name="lock" size="{{eighteen}}" style="flex: none; margin-top: 2px"></x-import><span>Stored safely. Only people with customer access can open these photos, and each opening is logged. Make sure every number is clear before saving.</span></div></section><section style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 1.5px dashed var(--line-strong); border-radius: 16px">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 16px; line-height: 24px; font-weight: 600"><input style="width: 20px; height: 20px" type="checkbox"/>ඇපකරුවෙක් ඕන <span class="rt-en">· Reference person</span></label>
+<span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Only when staff decide one is needed. Their NIC and licence copies are then required too.</span>
+</section></div><div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><a class="rt-btn rt-btn-primary rt-btn-full" href="05-NewRental-ChooseCar-Desktop.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{twenty}}"></x-import><span>Save කරන්න · Save customer</span></a><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">Licence number and expiry still needed. Photos can be added later; handover waits for them.</span></div></div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1643}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26, railG: [
+        { icon: 'car', label: 'වාහන', href: '02-Home-StaffHome-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' , active: true },
+        { icon: 'drawer', label: 'ලාච්චුව', href: '09-Money-Drawer-Desktop.dc.html' },
+        { icon: 'check', label: 'උදේ check', href: '03-MorningCheck-InProgress-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මගේ පඩිපත', href: '13-Payroll-MyPayslip-Desktop.dc.html' }
+      ],
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

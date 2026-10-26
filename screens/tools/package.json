@@ -1,0 +1,12 @@
+{
+  "name": "sns-screens-tools",
+  "private": true,
+  "description": "Renders the screen designs to static HTML and PNG previews.",
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

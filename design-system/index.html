@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNS Rent Car · Plate components</title>
+<!-- Paths below are from the repository root, so the bundle's image paths (design-system/assets/…, brand/vehicles/…) resolve as written. -->
+<base href="../">
+<link rel="stylesheet" href="design-system/fonts.css">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/components/bundle.css">
+<style>
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Yaldevi", "Noto Sans Sinhala", system-ui, sans-serif; font-size: 16px; line-height: 1.7; }
+  .vw { max-width: 1200px; margin: 0 auto; padding: 32px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); }
+  .vw-head h1 { font-family: "Gemunu Libre", "Yaldevi", sans-serif; font-weight: 600; font-size: 32px; line-height: 1.2; margin: 0 0 8px; }
+  .vw-head p { margin: 0; color: var(--ink-muted); max-width: 70ch; }
+  .vw-toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 8px; padding: 0; list-style: none; }
+  .vw-toc a { display: inline-block; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); text-decoration: none; font-size: 14px; }
+  .vw-toc a:focus-visible { outline: 3px solid var(--focus, var(--sapphire)); outline-offset: 2px; }
+  .vw-group { margin-top: 40px; }
+  .vw-group > h2 { font-family: "Gemunu Libre", "Yaldevi", sans-serif; font-weight: 600; font-size: 22px; margin: 0 0 16px; }
+  .vw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+  .vw-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+  .vw-card.wide { grid-column: 1 / -1; }
+  .vw-card header { padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .vw-card h3 { margin: 0; font-size: 16px; font-weight: 600; }
+  .vw-card header p { margin: 2px 0 0; font-size: 14px; color: var(--ink-muted); }
+  .vw-stage { padding: 16px; background: var(--paper); display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; min-width: 0; overflow-x: auto; }
+  .vw-stage > * { min-width: 0; }
+  .vw-error { color: var(--overdue); font-size: 14px; }
+  .vw-note { margin-top: 48px; font-size: 14px; color: var(--ink-muted); }
+</style>
+</head>
+<body>
+<main class="vw">
+  <div class="vw-head">
+    <h1>SNS Rent Car · Plate components</h1>
+    <p>Every component in <code>design-system/components/bundle.js</code>, drawn with sample data. Names, plates and amounts are examples, not records. Brand rules: <code>brand/guidebook/</code>. Usage notes: <code>design-system/components/&lt;Name&gt;/README.md</code>.</p>
+  </div>
+  <ul class="vw-toc" id="toc"></ul>
+  <div id="groups"></div>
+  <p class="vw-note">Sample data only. Open this file from the repository (double-click <code>design-system/index.html</code>); everything it needs is in the repository, so it works offline.</p>
+</main>
+
+<script src="design-system/vendor/react-18.3.1.production.min.js"></script>
+<script src="design-system/vendor/react-dom-18.3.1.production.min.js"></script>
+<script src="design-system/components/bundle.js"></script>
+<script>
+(function () {
+  var h = React.createElement, P = window.Plate || {};
+
+  // Sample data, labelled as such on the page. Not real SNS records.
+  var cars = [
+    { plate: 'CBH-4521', model: 'Wagon R', status: 'overdue', statusDetail: '+3h 05m', next: 'ආපසු ගෙනාවේ නැහැ · not returned' },
+    { plate: 'CAD-1187', model: 'Alto', status: 'available', next: 'අද නිදහස් · free today' },
+    { plate: 'KX-2190', model: 'Prius', status: 'rented', next: 'Sat 24 Oct 8:00', partner: true, partnerName: 'Sunil' },
+    { plate: 'PH-7734', model: 'Every', status: 'repair', statusDetail: 'AC fault', next: 'back 27 Oct' },
+    { plate: 'CAF-3302', model: 'Axio', status: 'unavailable', statusDetail: 'back 25 Oct' }
+  ];
+
+  var groups = [
+    { title: 'Brand', items: [
+      ['BrandMark', 'The SNS Rent Car logo (supplied file).', function () { return [h(P.BrandMark, { size: 'lg' }), h(P.BrandMark, { variant: 'mark' })]; }],
+      ['LanguageSwitch', 'සිං | EN switch; each option in its own script.', function () { return h(P.LanguageSwitch, { lang: 'si', onLight: true }); }]
+    ]},
+    { title: 'Status and identity', items: [
+      ['PlateBadge', 'Registration number: the primary vehicle identifier.', function () { return [h(P.PlateBadge, { plate: 'CBH-4521', size: 'lg' }), h(P.PlateBadge, { plate: 'KX-2190' })]; }],
+      ['StatusChip', 'Vehicle status: colour, icon and word. Overdue is the only solid chip.', function () { return ['overdue', 'available', 'rented', 'repair', 'unavailable', 'retired'].map(function (s) { return h(P.StatusChip, { key: s, status: s }); }); }],
+      ['StatePill', 'Money record state. Matched always names who matched it.', function () { return [h(P.StatePill, { kind: 'recorded', by: 'Nimal' }), h(P.StatePill, { kind: 'notChecked' }), h(P.StatePill, { kind: 'matched', by: 'Dulan' }), h(P.StatePill, { kind: 'unmatched' }), h(P.StatePill, { kind: 'provisional' }), h(P.StatePill, { kind: 'finalised' })]; }],
+      ['Icon', 'Line icon on a 24px grid, always paired with a visible word.', function () { return ['car', 'key', 'check', 'clockAlert', 'wrench', 'pause', 'link', 'unlink', 'lock', 'banknote', 'drawer', 'search'].map(function (n) { return h('span', { key: n, style: { display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14 } }, h(P.Icon, { name: n }), n); }); }]
+    ]},
+    { title: 'Vehicles', items: [
+      ['VehicleImage', 'The model image from the SNS vehicle pack. Unknown models show the generic car.', function () { return ['Wagon R', 'Alto', 'Prius', 'Every', 'Lancer'].map(function (m) { return h('div', { key: m, style: { width: 120, textAlign: 'center', fontSize: 14 } }, h('div', { style: { width: 120, height: 80 } }, h(P.VehicleImage, { model: m })), m); }); }],
+      ['VehicleSilhouette', 'Superseded by VehicleImage; the line drawing only when no model is known.', function () { return [h('div', { key: 'a', style: { width: 120, height: 80 } }, h(P.VehicleSilhouette, { body: 'hatch' })), h('div', { key: 'b', style: { width: 120, height: 80 } }, h(P.VehicleSilhouette, { body: 'van' }))]; }],
+      ['VehicleCard', 'Gallery card: image and status, large plate, model and ownership, one warning, one next event.', function () { return cars.slice(0, 3).map(function (c) { return h('div', { key: c.plate, style: { width: 260 } }, h(P.VehicleCard, c)); }); }, true],
+      ['VehicleRow', 'Compact row: thumbnail, plate, model, next event, status chip.', function () { return h('div', { style: { width: '100%' } }, cars.map(function (c) { return h(P.VehicleRow, Object.assign({ key: c.plate }, c)); })); }, true],
+      ['FleetStrip', 'The whole fleet as one tick per car, with a worded legend.', function () { var s = ['overdue', 'available', 'available', 'available', 'rented', 'rented', 'rented', 'rented', 'repair', 'unavailable']; return h('div', { style: { width: '100%' } }, h(P.FleetStrip, { cars: s.map(function (st, i) { return { plate: 'SAMPLE-' + (i + 1), status: st, warn: i === 3 }; }) })); }, true]
+    ]},
+    { title: 'Navigation', items: [
+      ['AppHeader', 'Desktop top bar: title, search, New rental, language switch, initials.', function () { return h('div', { style: { width: '100%' } }, h(P.AppHeader, { title: 'අද · Today', subtitle: 'Fri 23 Oct', user: 'Dulan', role: 'Owner' })); }, true],
+      ['NavRail', 'Desktop navigation, grouped by job; logo on top, Settings at the bottom.', function () { return h('div', { style: { height: 520, display: 'flex' } }, h(P.NavRail, { items: [
+        { icon: 'home', label: 'අද', en: 'Today', active: true, group: 0 },
+        { icon: 'key', label: 'කුලී', en: 'Rentals', badge: 1, badgeTone: 'overdue', group: 1 },
+        { icon: 'car', label: 'වාහන', en: 'Cars', group: 1 },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', en: 'Customers', group: 1 },
+        { icon: 'banknote', label: 'මුදල්', en: 'Money', badge: 2, badgeTone: 'waiting', group: 2 },
+        { icon: 'handshake', label: 'Partners', en: 'Partners', group: 2 },
+        { icon: 'chart', label: 'වාර්තා', en: 'Reports', group: 3 },
+        { icon: 'settings', label: 'සැකසුම්', en: 'Settings', group: 9 }
+      ] })); }],
+      ['BottomTabBar', 'Phone navigation: four labelled tabs and an optional centre action.', function () { return h('div', { style: { width: 390, maxWidth: '100%', position: 'relative' } }, h(P.BottomTabBar, { tabs: [
+        { icon: 'home', label: 'අද', active: true }, { icon: 'key', label: 'කුලී' }, { icon: 'car', label: 'වාහන' }, { icon: 'more', label: 'තව' }
+      ], fab: { icon: 'plus', label: 'අලුත්' } })); }],
+      ['PageHeader', 'Phone page header: back link, title, subtitle.', function () { return h('div', { style: { width: 390, maxWidth: '100%' } }, h(P.PageHeader, { backHref: '#', backLabel: 'ආපසු', title: 'කුලී · Rentals', subtitle: '12 open' })); }]
+    ]},
+    { title: 'Actions and feedback', items: [
+      ['Button', 'A verb with an icon, 48px tall. One primary per screen.', function () { return [h(P.Button, { key: 1, variant: 'primary', icon: 'plus' }, 'අලුත් කුලියක්'), h(P.Button, { key: 2, variant: 'secondary', icon: 'returnCar' }, 'ආපසු ගන්න'), h(P.Button, { key: 3, variant: 'quiet' }, 'Cancel'), h(P.Button, { key: 4, variant: 'danger', icon: 'x' }, 'Write off')]; }],
+      ['Notice', 'Inline message: info, warning or danger.', function () { return h('div', { style: { display: 'grid', gap: 8, width: '100%' } }, h(P.Notice, { tone: 'info', title: 'Sample' }, 'Day closes at the time the owner sets.'), h(P.Notice, { tone: 'warning', title: 'Licence expired' }, 'An authorised person may continue with a reason.'), h(P.Notice, { tone: 'danger', title: 'Not found' }, 'CBH-4521 was not at the morning check.')); }],
+      ['BlockedPanel', 'Beside a disabled action: what, why, who can, next step.', function () { return h(P.BlockedPanel, { what: 'Handover is blocked', why: 'The signed agreement photo is missing.', who: 'Any staff member', next: 'Upload the signed agreement', actionLabel: 'Add photo', actionIcon: 'camera' }); }, true],
+      ['Checklist', 'Handover or return gate. Open items are undecided owner questions.', function () { return h('div', { style: { width: '100%' } }, h(P.Checklist, { title: 'Handover', progressLabel: '3 of 5', items: [
+        { state: 'done', label: 'Customer ID copy' }, { state: 'done', label: 'Driving licence copy' }, { state: 'missing', label: 'Signed agreement photo' }, { state: 'done', label: 'Outgoing odometer', meta: '48,210 km' }, { state: 'open', label: 'Accessories', tag: 'තීරණය කරන්න · Decide' }
+      ] })); }],
+      ['ConfirmationBlock', 'Persistent feedback after a money or vehicle action.', function () { return h('div', { style: { width: '100%' } }, h(P.ConfirmationBlock, { icon: 'done-handover', title: 'Handed over', sentence: 'CBH-4521 is with the customer. Sample.', rows: [{ label: 'Due back', value: 'Tue 27 Oct 8:00' }, { label: 'By', value: 'Nimal · 9:52' }] })); }],
+      ['EmptyState', 'Nothing to show yet, said plainly.', function () { return h('div', { style: { width: '100%' } }, h(P.EmptyState, { icon: 'empty-search', title: 'කිසිවක් හමු වුණේ නැහැ', body: 'No match for that plate or NIC.' })); }]
+    ]},
+    { title: 'Money and history', items: [
+      ['AttentionBar', 'Labelled counts that open their filtered list.', function () { return h('div', { style: { width: '100%' } }, h(P.AttentionBar, { items: [{ label: 'Overdue', count: 1, tone: 'overdue', icon: 'clockAlert' }, { label: 'Open items', count: 3, tone: 'warning' }, { label: 'Waiting for admin', count: 2, tone: 'info' }] })); }, true],
+      ['MoneyBlock', 'One kind of money per block, never summed with another.', function () { return [
+        h('div', { key: 1, style: { width: 300 } }, h(P.MoneyBlock, { label: 'Received today · so far', icon: 'banknote', figure: 48950, lines: [{ label: 'Cash', amount: 32500, sign: 'in' }, { label: 'Bank', amount: 16450, sign: 'in' }] })),
+        h('div', { key: 2, style: { width: 300 } }, h(P.MoneyBlock, { label: 'Deposits held', icon: 'wallet', figure: 30000, note: 'Held, not income. Sample.' }))
+      ]; }, true],
+      ['HistoryLine', 'One event as a sentence: who, what, record, amount, time.', function () { return h('div', { style: { width: '100%' } }, h(P.HistoryLine, { actor: 'Nimal', action: 'recorded a payment on', target: 'R-0218', amount: 5750, type: 'recorded', time: '9:52' }), h(P.HistoryLine, { actor: 'Dulan', action: 'matched a bank transfer on', target: 'R-0215', amount: 12000, type: 'matched', time: '10:14' })); }, true]
+    ]},
+    { title: 'SNS 3D icons', items: [
+      ['GameIcon', 'One of the 44 SNS 3D icons. Only on launchers, quick actions, empty and done screens.', function () { return ['rentals', 'customers', 'close-day', 'new-rental', 'receive-return', 'morning-check'].map(function (n) { return h('div', { key: n, style: { textAlign: 'center', fontSize: 14, width: 96 } }, h(P.GameIcon, { name: n, size: 'tile' }), h('div', null, n)); }); }],
+      ['LauncherTile', 'A launcher tile with a 3D icon and a label.', function () { return h('div', { style: { width: 180 } }, h(P.LauncherTile, { icon: 'rentals', label: 'කුලී', sub: 'Rentals', badge: 1, badgeTone: 'overdue' })); }],
+      ['LauncherGrid', 'A grid of launcher tiles, as on the More screens.', function () { return h('div', { style: { width: '100%' } }, h(P.LauncherGrid, { title: 'මුදල් · Money', columns: 3, items: [{ icon: 'close-day', label: 'දවස වසන්න' }, { icon: 'expense', label: 'වියදම්' }, { icon: 'partner-cashouts', label: 'Partner cash-outs' }] })); }, true]
+    ]}
+  ];
+
+  var toc = document.getElementById('toc'), root = document.getElementById('groups');
+  var missing = [];
+  groups.forEach(function (g, gi) {
+    var id = 'g' + gi;
+    var li = document.createElement('li'); li.innerHTML = '<a href="#' + id + '"></a>'; li.firstChild.textContent = g.title; toc.appendChild(li);
+    var sec = document.createElement('section'); sec.className = 'vw-group'; sec.id = id;
+    sec.innerHTML = '<h2></h2><div class="vw-grid"></div>'; sec.firstChild.textContent = g.title; root.appendChild(sec);
+    var grid = sec.lastChild;
+    g.items.forEach(function (it) {
+      var name = it[0], card = document.createElement('article');
+      card.className = 'vw-card' + (it[3] ? ' wide' : ''); card.id = name;
+      card.innerHTML = '<header><h3></h3><p></p></header><div class="vw-stage"></div>';
+      card.querySelector('h3').textContent = name; card.querySelector('p').textContent = it[1];
+      grid.appendChild(card);
+      var stage = card.querySelector('.vw-stage');
+      if (!P[name]) { missing.push(name); stage.innerHTML = '<span class="vw-error"></span>'; stage.firstChild.textContent = name + ' is not in the bundle.'; return; }
+      try { ReactDOM.createRoot(stage).render(h(React.Fragment, null, it[2]())); }
+      catch (e) { stage.innerHTML = '<span class="vw-error"></span>'; stage.firstChild.textContent = 'Could not draw ' + name + ': ' + e.message; }
+    });
+  });
+  if (missing.length) console.warn('Missing from bundle:', missing.join(', '));
+})();
+</script>
+</body>
+</html>

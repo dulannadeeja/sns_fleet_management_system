@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>06.8 Extend · blocked by a reservation · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="06-Rentals-RentalDetails-Phone.dc.html" title="දිගු කිරීම · Extend" subtitle="Nimal · Thu 22 Oct"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="rt-num" style="font-size: 18px; font-weight: 600">R‑0225</span><x-import component-from-global-scope="Plate.PlateBadge" plate="CBE 6612" size="sm"></x-import><span style="font-size: 14px; color: var(--ink-muted)">Wagon R</span></div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Back by now</span><span class="rt-num" style=" text-align: right; font-weight: 500">Fri 23 Oct · 8:00</span></div></section><span style="font-size: 16px; line-height: 26px; font-weight: 600">කීයක් දවස් වැඩිපුරද? <span class="rt-en">· How many more days</span></span><div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Extra days</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">customer asked by phone</span></span><span style="display: flex; align-items: center; gap: 12px"><span aria-label="One day less" role="button" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line-strong); font-size: 22px">−</span><b class="rt-num" style="font-size: 24px; min-width: 24px; text-align: center">2</b><span aria-label="One day more" role="button" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line-strong); font-size: 22px">+</span></span></div><x-import component-from-global-scope="Plate.BlockedPanel" what="Can't extend to Sun 25 Oct 8:00" why="CBE 6612 is reserved from Sat 24 Oct 10:00 for Ruwan D. (RV‑0011)." who="Any staff member" next="Move the reservation to another car, or change its dates. One extra day, to Sat 24 Oct 8:00, still fits. Open the reservation below."></x-import></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><x-import component-from-global-scope="Plate.Button" disabled="{{yes}}" full="{{yes}}" icon="calendarPlus">දිගු කරන්න · Extend to Sun 25 Oct 8:00</x-import><a class="rt-btn rt-btn-secondary rt-btn-full" href="18-Reservations-ReservationDetails-Phone.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="calendar" size="{{twenty}}"></x-import><span>RV‑0011 බලන්න · Open the reservation</span></a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24 };
+  }
+}
+</script>
+</body>
+</html>

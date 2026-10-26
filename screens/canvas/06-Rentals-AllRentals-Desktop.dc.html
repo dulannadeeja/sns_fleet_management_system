@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>06.1 Rentals · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railR}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="කුලී · Rentals" subtitle="Thu 22 Oct 2026 · 11:05" search="කුලී අංකය / අංකය / නම හොයන්න" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 28px 56px; display: flex; flex-direction: column; gap: 16px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+        <div role="tablist" aria-label="කුලී · Rentals" style="display: flex; gap: 4px; padding: 4px; background: var(--sunken); border-radius: 12px; width: fit-content; max-width: 100%; flex-wrap: wrap">
+  <button type="button" role="tab" aria-selected="true" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 9px; background: var(--card); color: var(--ink); font: inherit; font-size: 15px; font-weight: 600">විවෘත සහ අද <span class="rt-num">13</span></button>
+  <button type="button" role="tab" aria-selected="false" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 9px; background: transparent; color: var(--ink-muted); font: inherit; font-size: 15px; font-weight: 500">පරණ කුලී · Older</button>
+  <button type="button" role="tab" aria-selected="false" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 9px; background: transparent; color: var(--ink-muted); font: inherit; font-size: 15px; font-weight: 500">අවලංගු · Cancelled</button>
+</div>
+        <a href="05-NewRental-Customer-Desktop.dc.html" class="rt-btn rt-btn-primary" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="plus" size="{{twenty}}"></x-import><span>අලුත් කුලියක් · New rental</span></a>
+      </div>
+      <a href="18-Reservations-AllReservations-Desktop.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="calendar" size="{{twenty}}"></x-import><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">වෙන්කිරීම් <span class="rt-en">· Reservations</span></span><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">2 collecting today · 2 need attention · 6 upcoming</span></span><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="margin-left: auto; color: var(--ink-muted); flex: none"></x-import></a><section style="background: var(--card); border: 2px solid var(--overdue); border-radius: 16px; overflow: hidden">
+  <h2 style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 14px 20px; font-size: 17px; line-height: 26px; font-weight: 600; color: var(--overdue)"><x-import component-from-global-scope="Plate.Icon" name="clockAlert" size="{{twenty}}"></x-import>පරක්කුයි <span class="rt-en">· Overdue</span><span class="rt-num" style="margin-left: auto; font-size: 17px">1</span></h2>
+  <div class="rt-lrows"><a href="06-Rentals-Overdue-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBC 5409" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0216</span></span>
+  <span style="font-size: 15px; line-height: 24px">Pradeep W. · Wagon R</span>
+  <span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--overdue)">+3h 05m · deadline 22 Oct 8:00</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a></div>
+</section><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+  <h2 style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 14px 20px; font-size: 17px; line-height: 26px; font-weight: 600; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="clock" size="{{twenty}}"></x-import>හෙට 8:00 ට කලින් ආපසු එනවා <span class="rt-en">· Due back by Fri 8:00</span><span class="rt-num" style="margin-left: auto; font-size: 17px">3</span></h2>
+  <div class="rt-lrows"><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBE 6612" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0225</span></span>
+  <span style="font-size: 15px; line-height: 24px">Wagon R</span>
+  <span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink)">Fri 23 Oct 8:00</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="PH 4521" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0235</span></span>
+  <span style="font-size: 15px; line-height: 24px">Every · deposit waived</span>
+  <span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink)">Fri 23 Oct 8:00</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Spacia" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBM 1340" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0230</span></span>
+  <span style="font-size: 15px; line-height: 24px">Spacia</span>
+  <span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink)">Fri 23 Oct 8:00</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a></div>
+</section><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+  <h2 style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 14px 20px; font-size: 17px; line-height: 26px; font-weight: 600; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="key" size="{{twenty}}"></x-import>භාර දෙමින් <span class="rt-en">· Handover in progress</span><span class="rt-num" style="margin-left: auto; font-size: 17px">1</span></h2>
+  <div class="rt-lrows"><a href="06-Rentals-Handover-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBF 7720" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0238</span></span>
+  <span style="font-size: 15px; line-height: 24px">Tharindu R. · Ruwan</span>
+  <span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--warning)">4 / 5 · agreement photo missing</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a></div>
+</section><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+  <h2 style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 14px 20px; font-size: 17px; line-height: 26px; font-weight: 600; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="returnCar" size="{{twenty}}"></x-import>අද ආපසු ආවා <span class="rt-en">· Returned today</span><span class="rt-num" style="margin-left: auto; font-size: 17px">2</span></h2>
+  <div class="rt-lrows"><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0218</span></span>
+  <span style="font-size: 15px; line-height: 24px">Kasun P. · Wagon R</span>
+  <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 10px; background: var(--warning-tint); color: var(--warning); font-size: 14px; line-height: 22px; font-weight: 500; white-space: nowrap"><x-import component-from-global-scope="Plate.Icon" name="hourglass" size="{{eighteen}}"></x-import>Admin තීරණය</span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--available)">9:40 · paid in full</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="07-Return-DepositRefund-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAX 8834" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0209</span></span>
+  <span style="font-size: 15px; line-height: 24px">Wagon R</span>
+  <span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--available)">8:00 · deposit 3,000 refunded</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a></div>
+</section><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+  <h2 style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 14px 20px; font-size: 17px; line-height: 26px; font-weight: 600; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="car" size="{{twenty}}"></x-import>අනිත් දුවන කුලී <span class="rt-en">· Other open rentals</span><span class="rt-num" style="margin-left: auto; font-size: 17px">6</span></h2>
+  <div class="rt-lrows"><a href="10-Approvals-Approvals-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBJ 1186" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0233</span></span>
+  <span style="font-size: 15px; line-height: 24px">Wagon R · 10 days</span>
+  <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 10px; background: var(--warning-tint); color: var(--warning); font-size: 14px; line-height: 22px; font-weight: 500; white-space: nowrap"><x-import component-from-global-scope="Plate.Icon" name="hourglass" size="{{eighteen}}"></x-import>Admin තීරණය</span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink)">Mon 26 Oct 8:00</span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="06-Rentals-SwapCar-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBH 2210" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0231</span></span>
+  <span style="font-size: 15px; line-height: 24px">Alto · swapped in 20 Oct</span>
+  <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 10px; background: var(--warning-tint); color: var(--warning); font-size: 14px; line-height: 22px; font-weight: 500; white-space: nowrap"><x-import component-from-global-scope="Plate.Icon" name="hourglass" size="{{eighteen}}"></x-import>Admin තීරණය</span>
+  <span></span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="KX 5531" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0237</span></span>
+  <span style="font-size: 15px; line-height: 24px">Prius · handed over today</span>
+  <span></span>
+  <span></span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAY 3051" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0222</span></span>
+  <span style="font-size: 15px; line-height: 24px">Wagon R</span>
+  <span></span>
+  <span></span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAV 6127" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0223</span></span>
+  <span style="font-size: 15px; line-height: 24px">Alto</span>
+  <span></span>
+  <span></span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a><a href="06-Rentals-RentalDetails-Desktop.dc.html" class="rt-lrow" style="display: grid; grid-template-columns: 72px 112px minmax(0, 1fr) auto auto 20px; gap: 16px; align-items: center; min-height: 68px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+  <span style="display: flex; align-items: center; justify-content: center; width: 72px; height: 54px; padding: 2px; background: var(--sunken); border-radius: 8px"><x-import component-from-global-scope="Plate.VehicleImage" model="Axio" style="width: 100%; height: 100%"></x-import></span>
+  <span style="display: flex; flex-direction: column; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAS 3318" size="sm"></x-import><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">R‑0220</span></span>
+  <span style="font-size: 15px; line-height: 24px">Axio</span>
+  <span></span>
+  <span></span>
+  <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="color: var(--ink-muted)"></x-import>
+</a></div>
+</section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1640}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      railR: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', active: true, badge: 1, badgeTone: 'overdue' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      tabs: [{ icon: 'car', label: 'වාහන' }, { icon: 'clipboard', label: 'කුලී', active: true }, { icon: 'drawer', label: 'ලාච්චුව' }, { icon: 'more', label: 'තවත්' }],
+      fab: { icon: 'plus', label: 'අලුත්' }
+    };
+  }
+}
+</script>
+</body>
+</html>
