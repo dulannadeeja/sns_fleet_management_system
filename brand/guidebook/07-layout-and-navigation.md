@@ -35,7 +35,7 @@
 - **Phone:** the same order in one column, by the task done first. Each list shows its first rows and a link to where all its items are. Staff start new rentals from the centre button.
 - **Rows, not cards:** each list is one card with divided rows; every row opens what is behind it. A figure the sample data does not have is shown as "—" with a note, never invented.
 - Every home board ends with a line saying its names, plates, counts and amounts are sample data.
-- Proposed: dashboard first pass for review, recorded by Dulan, 26 Oct 2026.
+- Accepted by Dulan, 26 Oct 2026 (visual layout only; no business rule changed).
 - **Two-pane layouts need at least 1280px.** Below that they stack.
 - **Spacing:** `space-6` between blocks and `space-8` between sections on desktop; `space-4` margins on phones.
 - **Radius:**
