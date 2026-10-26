@@ -318,7 +318,7 @@
       props.user ? h('div', { className: 'rt-header-user', title: props.user + (props.role ? ' · ' + props.role : '') }, h('span', { className: 'rt-avatar', 'aria-hidden': 'true' }, initials), h('span', { className: 'rt-header-who' }, props.user, props.role ? h('small', null, props.role) : null)) : null);
   }
 
-  /* Desktop navigation: a labelled sidebar grouped by job (concept A, chosen 25 Oct 2026).
+  /* Desktop navigation: a labelled sidebar grouped by job (chosen 25 Oct 2026).
      Same items, order and permissions as before; the component groups them by their label. */
   var NAV_EN = { 'අද': 'Today', 'උදේ check': 'Morning check', 'වාහන': 'Cars', 'කුලී': 'Rentals', 'පාරිභෝගිකයෝ': 'Customers',
     'මුදල්': 'Money', 'ලාච්චුව': 'Drawer', 'Partner ගණන්': 'Partners', 'පඩි': 'Payroll', 'මගේ පඩිපත': 'My payslip',

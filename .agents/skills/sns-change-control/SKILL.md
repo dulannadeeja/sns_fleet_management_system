@@ -63,7 +63,7 @@ Run after every change. Report mismatches. Don't silently change the source of t
 2. **Rules:** day close, partner earnings, cash-out, deposits (held money, not income), write-offs, permissions and handover requirements match everywhere.
 3. **Open items:** none is shown as decided in screens, PRD, TRD or code.
 4. **Screens:** every Confirmed user-facing rule has a screen. No screen adds a rule. Sample data is labelled. Names follow `NN.n Name · Device`.
-5. **Links and files:** every path and URL in agent files and notes exists. No references to retired items (Ratna, Concept A/B/C, dashboard briefs). Every file in the repository is referenced by a document, or is named in the report as a deliberate exception.
+5. **Links and files:** every path and URL in agent files and notes exists. Only the latest design versions are referenced: nothing points to a deleted artifact or an earlier design. Every file in the repository is referenced by a document, or is named in the report as a deliberate exception.
 6. **Repeated rules:** `AGENTS.md` §4 says the same as the source of truth. If they differ, the source of truth wins and the copy is corrected in the same commit.
 
 ## 5. Git

@@ -8,7 +8,7 @@
 - **Printed documents** (agreement, receipt, bill, payslip, partner statement) keep body text at 14px or more, but fine print and notes may be 12px (about 9pt on A4). Never below 12px. Decided by Dulan on 25 Oct 2026.
 - **No letter-spacing beyond the plate's, no capitals styling, no eyebrow labels.**
 
-**Test before rollout:** an early Ratna draft dropped Yaldevi because it looked small next to Inter. Plate uses Yaldevi for both scripts, so the mismatch is gone, but its text sits a little taller: Theme A screens needed up to about 10% more height. Check it on the staff phones outdoors.
+**Test before rollout:** Yaldevi text sits a little taller than most screen faces, so screens needed up to about 10% more height. Check it on the staff phones outdoors.
 
 ## Font files
 

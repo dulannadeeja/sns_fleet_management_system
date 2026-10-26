@@ -24,7 +24,7 @@ Values below are copied from `design-system/tokens.json`. If they ever differ, `
 | `line-strong` | `#78827d` | Input and secondary-button borders (3.97:1 on card). |
 | `ink` | `#1b1f1d` | Text and figures on paper and card; also the text on a yellow plate (10.2:1 on plate-ground). |
 | `ink-muted` | `#4b5450` | Secondary text and metadata: 6.9:1 on paper, 7.8:1 on card. |
-| `sapphire` | `#1756a9` | Action blue: primary buttons, links, focus ring. White on it 7.1:1. Never a status colour. (Name kept from Ratna so components stay compatible.) |
+| `sapphire` | `#1756a9` | Action blue: primary buttons, links, focus ring. White on it 7.1:1. Never a status colour. (The token name is kept so components stay compatible.) |
 | `sapphire-strong` | `#0f3e7e` | Primary button hover/pressed; emphasis text on sapphire-tint. |
 | `sapphire-tint` | `#e2ebf7` | Selected rows, info notices, matched/deposit pills. Sapphire text on it 5.9:1. |
 | `on-sapphire` | `#ffffff` | Text and icons on sapphire and sapphire-strong. |

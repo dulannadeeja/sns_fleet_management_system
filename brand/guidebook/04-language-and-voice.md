@@ -1,7 +1,5 @@
 # 04 · Language and voice
 
-These are unchanged from Concept A.
-
 - **Write plain, everyday Sinhala.** Keep English only for words SNS already uses: car, bill, cash, km, partner, deposit, staff, agreement, photo, admin.
 - **Labels are short nouns; actions are verbs.**
     - Navigation: "වාහන", "කුලී", "මුදල්" (vehicles, rentals, money).

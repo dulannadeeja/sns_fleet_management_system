@@ -1,5 +1,5 @@
 # NavRail
-The desktop navigation: a 264px labelled sidebar (concept A, chosen 25 Oct 2026). The SNS logo sits at the top, then the items grouped by job. Settings sits at the bottom. "New rental", search, the language switch and the account live in the top bar (`AppHeader`), decided by Dulan on 25 Oct 2026.
+The desktop navigation: a 264px labelled sidebar (chosen 25 Oct 2026). The SNS logo sits at the top, then the items grouped by job. Settings sits at the bottom. "New rental", search, the language switch and the account live in the top bar (`AppHeader`), decided by Dulan on 25 Oct 2026.
 
 **Provide:**
 - `items` `[{icon, label, href, active, badge, badgeTone, badgeHref, group, en}]`. `badgeHref` makes the count its own link to the filtered list (Rentals 1 opens the overdue rentals; system design §15, AT-28).

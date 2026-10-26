@@ -2,8 +2,6 @@
 
 ## Rules that protect the money
 
-These are unchanged from Concept A.
-
 - **Separate blocks.** Money received, the drawer, reconciliation, deposits held, customer debt, partner payable (finalised), partner share (provisional) and SNS earnings are separate `MoneyBlock`s. They are never added together.
 - **During the day, blocks say "මේ වෙනකම් · so far".**
 - **Two pills for a staff payment.** It shows "Recorded · [name]" and a separate reconciliation pill. An unmatched payment stays paid on the bill.
@@ -19,7 +17,7 @@ These are unchanged from Concept A.
 
 ## Design evidence
 
-The new moves were chosen from real product screens on Mobbin; Ratna's evidence still applies to the layout and components.
+These moves were chosen from real product screens on Mobbin.
 
 | Move | Mobbin screen | Used in Plate as |
 | --- | --- | --- |

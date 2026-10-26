@@ -3,7 +3,7 @@
 ## Navigation
 
 - **Desktop: `NavRail`, always on the left of the page, never above it.** At 1,100px and wider it is a 264px labelled sidebar; narrower, a 104px rail with icon over Sinhala label. It stays in view while the page scrolls. Counts link straight to their filtered list.
-- **The 264px sidebar** (concept A, chosen by Dulan on 25 Oct 2026, after Jobber and Shopify).
+- **The 264px sidebar** (chosen by Dulan on 25 Oct 2026, after Jobber and Shopify).
     - The SNS logo sits at the top.
     - Then the items, grouped by job: today, cars and rentals, money, running SNS. Settings sits at the bottom.
     - Every item shows its Sinhala label and an English echo.
@@ -22,11 +22,11 @@
 - **Phone: `BottomTabBar`.** Four labelled tabs plus an optional raised centre action. The centre action is only for the person's most frequent task:
     - staff: "අලුත්" (new rental)
     - owner: no centre action, because the owner mostly reads
-- **The order of screens and the steps inside each flow are Concept A's.** Plate changes no routes.
+- **The order of screens and the steps inside each flow are set by `screens/`.** The visual system changes no routes.
 
 ## Dashboard layout
 
-- **Owner home (desktop), top to bottom, in Concept A's order:**
+- **Owner home (desktop), top to bottom:**
     1. Top bar (greeting, date, search)
     2. `AttentionBar`
     3. The money ledger as separate `MoneyBlock`s

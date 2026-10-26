@@ -27,8 +27,6 @@ The repository is the master copy. Everything below works from git alone; no cla
 
 **Plate in one line:** cool grey ground `#eef1f0`; the Sri Lankan number plate is the signature (yellow plate face `#f6c343` with ink `#1b1f1d`, only on plates, the SNS mark and the active nav pill); action blue `#1756a9`; Yaldevi for text, Gemunu Libre for plates, money and headings; status colours keep their meaning and are never shown by colour alone.
 
-**Retired, don't use:** the claude.ai artifact "SNS Rent Car · Plate" design system (https://claude.ai/artifact/E1pWnYhfHjpZ9C18ipGBWv), the Ratna design system, Concept A/B/C screens, the Dashboard Design Briefs, navigation options 19.2 (day panel) and 19.3 (top bar), and any older canvas or older project folder.
-
 **Viewers are never edited directly.** Change the repository first, then refresh the viewer. If a viewer and the repository disagree, the repository wins.
 
 Screens show sample data and labelled examples. They illustrate the requirements; they don't add requirements.
