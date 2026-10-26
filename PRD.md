@@ -2,7 +2,7 @@
 
 What the SNS Rent Car system must do, written as stories a developer can build and a tester can check.
 
-This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-56) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
+This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-83) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
 Status of this draft: front section and Phase 1 and 2 stories, written with Dulan from 26 Oct 2026, for review. Phases 3 and 4 are not yet written.
 
@@ -27,10 +27,10 @@ Each story has the same parts. An example of the shape (not a real story):
 > - **Rules:** what it must obey, each linked to its section of the system design by name.
 > - **Checks:** the acceptance scenarios from [Acceptance scenarios for implementation planning](SNS_SYSTEM_DESIGN.md#19-acceptance-scenarios-for-implementation-planning), by ID and in words, for example AT-08 "Two employees submit handovers for the same car: only one succeeds". A check written here that has no AT-ID is marked *Proposed check* and is not a requirement until it is added to the system design.
 > - **Screens:** 05.2 Choose a car.
-> - **Decisions needed:** DN-nn, where an open decision blocks part of the story.
+> - **Decided:** DN-nn, the decisions (section 7) the story depends on.
 
 - **Status** is copied from the source of truth and never raised here. Only the owner, S D De Silva, confirms a rule; Dulan records it in the source of truth.
-- **Open** items are never answered in a story. They appear as `Decision needed` (section 7) and the story says what waits on them.
+- **Open** items are never answered in a story. Each was settled and recorded in the system design first (section 7); a story names the decision it uses as `Decided`.
 - IDs follow the screen modules: `ST-05.3` is the third story in module 05. Screen numbers are `NN.n` as in `screens/README.md`.
 
 ## 3. Roles
@@ -108,46 +108,38 @@ These apply to every story and are not repeated in each.
 | PR-12 | Data is backed up automatically every day. | Confirmed | System design → [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) |
 | PR-13 | Staff with customer access see full NIC and phone numbers; no masking. | Confirmed | System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents) |
 | PR-14 | No GPS, automatic bank verification, payment integration, fraud guarantees or customer trust scores. | Confirmed | System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context) (no trust guarantee), [Collection](SNS_SYSTEM_DESIGN.md#81-collection) (manual recording), [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring) (no fraud guarantee), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) (GPS, payment integration); `AGENTS.md` [Vehicles, packages, and historical terms](SNS_SYSTEM_DESIGN.md#4-vehicles-packages-and-historical-terms) (no trust scores) |
-| PR-15 | Business times are read in Asia/Colombo. | Proposed | System design → [Business-wide timing](SNS_SYSTEM_DESIGN.md#51-business-wide-timing) |
+| PR-15 | Business times are read in Asia/Colombo. Every amount is a whole rupee. | Confirmed | System design → [Business-wide timing](SNS_SYSTEM_DESIGN.md#51-business-wide-timing), [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls) |
 
-## 7. Decisions needed
+## 7. Decisions
 
-Every Open item in the source of truth, with the stories it blocks. A story never assumes an answer to one of these. When the owner decides, the source of truth changes first, then the stories.
+Every decision that was Open in the system design, settled with Dulan for the owner on 26 Oct 2026 and recorded there first, as agreed by the owner. No Open decision is left. IDs are kept so the stories can name them.
 
-| ID | Open decision | In the system design | Blocks | Phase | Decides |
-| --- | --- | --- | --- | --- | --- |
-| DN-01 | Exact permission catalogue, delegation limits, whether a requester may approve their own price or payment correction, approval workflow | [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 15 Settings, 10 Approvals | 1, 2 | SNS owner |
-| DN-02 | Document retention, deletion and access scope | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 08 Customers, 06 Rentals | 1 | SNS owner with advice |
-| DN-03 | Login recovery and stronger protection for owner and admin accounts | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 01 Start, 15 Settings | 1 | SNS owner with developer |
-| DN-04 | Garage-day charge: what triggers it, who decides it, how it is split on a partner car | [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings) | 07 Return | 2 | SNS owner |
-| DN-06 | Fuel charging workflow: same-level return versus paid fuel | [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 06 Rentals, 07 Return | 2 | SNS owner |
-| DN-07 | Swaps: allowance pool on a swap day when allowances differ, rounding, partial-day earnings outside the admin-allocated day | [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 06 Rentals | 2 | SNS owner |
-| DN-08 | Amended agreement or signature after an extension or swap | [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 06 Rentals, 16 Documents | 2 | SNS owner |
-| DN-09 | Effect of an early return on included kilometres | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 07 Return | 2 | SNS owner |
-| DN-10 | Charge and discount allocation, and currency rounding | [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 07 Return, 11 Partners, 13 Payroll | 2, 3 | SNS owner with developer |
-| DN-11 | Business-day close time, which also decides when partner earnings become final | [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 09 Money, 11 Partners | 3 | SNS owner |
-| DN-12 | How partner cash-outs paid in cash (allowed), salaries and owner withdrawals show in the drawer count and the expected cash | [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 09 Money, 11 Partners, 13 Payroll | 3 | SNS owner |
-| DN-13 | Payment-processor fees, bank and card posting delays, evidence needed to resolve a cash difference | [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation) | 09 Money | 3 | SNS owner |
-| DN-14 | Cash-out limits and frequency, if any; a returned car segment while its swapped rental is still open; final recovery when a retired car or partner has no future earnings | [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 11 Partners | 3 | SNS owner |
-| DN-15 | Payroll deduction limits, rounding, adjustments after finalisation, deductions above net salary | [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 13 Payroll | 3 | SNS owner |
-| DN-16 | Reporting definitions: what counts as SNS earnings ("profit"), depreciation, when expenses and earnings are recognised, the utilisation measure, comparing an unfinished month | [Dashboard and reporting](SNS_SYSTEM_DESIGN.md#15-dashboard-and-reporting), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 02 Home (owner), 14 Reports | 4 | SNS owner |
-| DN-17 | Outage procedure for an online-only branch | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | 17 System | 4 | SNS owner |
-| DN-18 | Acceptable data loss and recovery time (daily backup itself is Confirmed) | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | TRD | 4 | SNS owner with developer |
-| DN-19 | Hosting vendor and technology stack | [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope), [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | TRD | — | Dulan and SNS owner |
-| DN-20 | Wording of the customer and partner agreements (SNS approves, Sinhala and English), and how the partner agreement is signed and uploaded | [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports) | 11 Partners, 16 Documents, 01 Start (go-live checklist) | 1, 2 | SNS owner |
-
-Decided since this list was made, and so removed: DN-05 (accessories and fuel at handover; accessory charges on partner cars), 26 Oct 2026.
+| ID | Decision | In the system design | Checks |
+| --- | --- | --- | --- |
+| DN-01 | The defaults table is the full permission list (seven rows added); the owner may give any permission except adding people, changing permissions and turning accounts off or on; nobody approves their own request, and the owner's own approval is marked "self-approved" | [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions) | AT-57, AT-58 |
+| DN-02 | Document copies kept 7 years after the last rental or settled debt, then deleted by the owner from a list; staff and admins with customer access open them, each opening logged; SNS to check the period against the Personal Data Protection Act | [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents) | AT-59 |
+| DN-03 | Passwords of 8 or more characters; 5 wrong tries lock for 15 minutes; owner and admin get an emailed one-time code on a new device and reset their own password by email; the owner resets staff and partners; no SMS | [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts) | AT-60, AT-61 |
+| DN-04 | Garage days only for damage during the rental; staff propose the days, an admin approves and corrects them, and splits them on a partner car | [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings) | AT-62, AT-63 |
+| DN-05 | Fuel and accessories recorded at handover, never blocking it; an accessory charge on a partner car is the admin's decision | [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents) | AT-53, AT-54 |
+| DN-06 | Fuel not counted by default; "same level" is a per-rental option charging missing litres at the owner's price; fuel taken out recorded in litres as an estimate, no money value | [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) | AT-64 to AT-66 |
+| DN-07 | Days before the swap go to the old car, after it to the new; the admin picks the swap day's car and divides its allowance | [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps) | AT-67 |
+| DN-08 | No new signature after an extension or swap; the change shows on the final bill | [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps) | AT-68 |
+| DN-09 | Included km follow the days actually charged after an early return | [Early and late return](SNS_SYSTEM_DESIGN.md#74-early-and-late-return) | AT-69 |
+| DN-10 | Whole rupees everywhere; a partner's share rounds down and SNS takes the difference | [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls) | AT-03, AT-70 |
+| DN-11 | Staff close the business day; if nobody does, it closes at 11:59 PM Asia/Colombo | [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation) | AT-71 |
+| DN-12 | Partner payouts, salaries and owner withdrawals paid in cash are their own drawer lines, lower the expected cash, and are never expense lines | [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation) | AT-72 |
+| DN-13 | Card fees monthly as an SNS expense; bank and card payments "waiting" up to 3 days, then flagged; a cash difference resolved by the authorised person with a note | [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation) | AT-73, AT-74 |
+| DN-14 | No cash-out limits; a swapped-out car is paid as returned; an unpaid negative balance is written off by the authorised person | [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out) | AT-75, AT-76 |
+| DN-15 | Deductions never take a salary below zero, the rest carries over; a finalised payslip is fixed by a later adjustment line | [Business expenses and payroll](SNS_SYSTEM_DESIGN.md#13-business-expenses-and-payroll) | AT-77, AT-78 |
+| DN-16 | SNS earnings, profit before depreciation, counted when final, car use = rented days ÷ days in the fleet, unfinished month compared with the same days | [Dashboard and reporting](SNS_SYSTEM_DESIGN.md#15-dashboard-and-reporting) | AT-79, AT-80 |
+| DN-17 | Outage: phone data first, then the printed backup pack and evening fleet list, entered afterwards marked "entered after outage" | [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context) | AT-81 |
+| DN-18 | At most one day lost, back within 4 working hours, backups kept 30 days, restore tested monthly | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | AT-82 |
+| DN-19 | Next.js and PostgreSQL on one 2 GB DigitalOcean server with daily backups; private Cloudflare R2 for documents and an off-site backup copy; about LKR 5,000 a month | [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context) | — |
+| DN-20 | The partner agreement is printed, signed on paper, and staff record the date; SNS supplies both agreements' wording, Dulan enters it in Sinhala and English, the owner approves each version | [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports) | AT-83 |
 
 ## 8. Proposed, not yet agreed
 
-Built only after the owner agrees and the source of truth marks them Confirmed.
-
-| Item | In the system design | Note |
-| --- | --- | --- |
-| Optional catalogue photo per car | [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope); AT-29 | Change request `change-requests/CR-001-vehicle-catalogue-photo.md`, awaiting the owner |
-| Business times in Asia/Colombo; exact day-boundary and business-day-close calculations | [Business-wide timing](SNS_SYSTEM_DESIGN.md#51-business-wide-timing) | Needs worked examples and confirmation |
-| Recorded payment status kept separate from reconciliation status | [Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation) | Reconciliation model |
-| Responsive web application, modular backend, relational database, private file storage | [Core records and relationships](SNS_SYSTEM_DESIGN.md#172-core-records-and-relationships) | Architecture candidate; the TRD takes it up |
+Nothing at present. The catalogue photo (CR-001, addendum ADD-003), business times in Asia/Colombo and the reconciliation model are now Confirmed. The module layout inside the one application is for the TRD.
 
 ## 9. Out of scope
 
@@ -182,7 +174,8 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - After signing in, each person reaches only what their permissions allow; a partner reaches only the partner pages (PR-06).
 - **Checks:** AT-46 "A staff member forgets their password: the primary owner resets it; the staff member changes it at the next sign-in". AT-24 "Staff without a permission request those records directly: the server denies access".
 - **Screens:** 01.1 Sign in.
-- **Decisions needed:** DN-03 (password rules, login recovery, stronger protection for owner and admin accounts).
+  - Passwords have at least 8 characters; 5 wrong tries lock the account for 15 minutes. The owner and the admin get an emailed one-time code when signing in on a new device and reset their own password by email (AT-60, AT-61).
+- **Decided:** DN-03.
 
 #### ST-01.2 · First sign-in
 
@@ -195,7 +188,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Sinhala is the default; each person can switch to English at any time (PR-01).
 - **Checks:** AT-46 (the new password is set at the next sign-in). *Proposed check:* a person signed in with a first password reaches nothing else until they have set their own.
 - **Screens:** 01.2 First sign-in · set password.
-- **Decisions needed:** DN-03 (password rules).
+- **Decided:** DN-03 (at least 8 characters).
 
 #### ST-01.3 · Go-live checklist
 
@@ -208,13 +201,13 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - SNS's old records are loaded by the developer once before go-live, approved by the owner and marked "Imported"; rentals still out on go-live day are entered as live rentals marked "Started before go-live" (PR-04; System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data)). The loading is Phase 4.
 - **Checks:** AT-43 "One car still has no insurance date on go-live day: go-live is blocked until it is entered".
 - **Screens:** 01.3 Ready to start · setup checklist.
-- **Decisions needed:** every decision in section 7 must be settled before go-live; the checklist shows how many are left.
+- **Decided:** every decision in section 7 is settled. SNS's agreement wording, approved by the owner, is still an item to complete (DN-20).
 
 ### 15 Settings
 
 #### ST-15.1 · Set permissions
 
-- **Status:** Confirmed for the defaults; the full list of permissions is Open (DN-01). "Only the owner until the authorised person is set" is a Derived control.
+- **Status:** Confirmed. "Only the owner until the authorised person is set" is a Derived control.
 - **Phase:** 1.
 - **Roles:** Owner only changes permissions.
 - **Story:** As the owner, I decide what the admin and each staff member may do, starting from the agreed defaults, so that each person has the access their job needs.
@@ -225,7 +218,8 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Every change is recorded with who made it and when (PR-05), and permissions are checked by the server on every request (PR-06).
 - **Checks:** AT-24 "Staff without export or payroll permission request those records directly: the server denies access, even outside normal navigation". *Proposed check:* the owner changes a permission; the activity log shows the change, who made it and when.
 - **Screens:** 15.1 Permissions.
-- **Decisions needed:** DN-01 (exact permission list, delegation limits, whether a person may approve their own request). Until it is decided, the list is the rows of the defaults table, and the approvals screen (Phase 2) says so when the requester and the approver are the same person.
+  - The defaults table is the full list. The owner may give any permission to the admin or any staff member, except adding people, changing permissions and turning accounts off or on (AT-58). Nobody approves their own request; the owner's own is marked "self-approved" (AT-57). System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+- **Decided:** DN-01.
 
 #### ST-15.2 · People
 
@@ -241,27 +235,27 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Adding a person and turning an account off or on are recorded in the activity log (PR-05).
 - **Checks:** AT-46. AT-47 "The owner turns off the account of a staff member who left: they can no longer sign in; everything they recorded keeps their name". *Proposed check:* a new staff member starts with the agreed staff defaults and must change the first password before anything else.
 - **Screens:** 15.3 People, 15.4 Add a person.
-- **Decisions needed:** DN-01 (whether anyone besides the owner may add people), DN-03.
+- **Decided:** DN-01 (only the owner adds people), DN-03 (the admin gives an email address for one-time codes).
 
 #### ST-15.3 · Business rules and open decisions
 
-- **Status:** Confirmed for each rule set now; the rest are Open and listed, never answered.
+- **Status:** Confirmed.
 - **Phase:** 1.
 - **Roles:** Owner changes owner settings; everyone with settings access sees them.
 - **Story:** As the owner, I see the business rules in force and the decisions still open, and I change the settings that are mine, so that everyone works to the same rules.
 - **Rules:**
   - Set now: extra-km rates per car, starting at LKR 17 to 27 a km by type (System design → [Initial defaults](SNS_SYSTEM_DESIGN.md#41-initial-defaults)); fuel price per litre, an owner setting with no agreed figure ([Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope)); staff see the expected drawer cash first, then type what they count ([Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation)); expired insurance or licence warns, and going ahead needs an authorised person and a reason; any garage visit is Under repair; reminder lead times, starting at 30 days for insurance and licence, 7 days or 500 km for service and 3 days for payroll, changeable by the owner ([Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability)); no late fee runs on its own, staff decide ([Early and late return](SNS_SYSTEM_DESIGN.md#74-early-and-late-return)); partners cash out any day, to the bank or in cash at the branch ([Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out)); SNS commission per partner car, default 15%; garage-day charge LKR 5,000 a day per car ([Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings)).
-  - Still to decide: each Open decision is shown as open. The screen offers no setting for it until the owner decides and the system design records it.
+  - No decision is left open. A rule the owner adds later is recorded in the system design before it appears here.
   - Every change to a setting is recorded with who, when, and the old and new values (PR-05).
-- **Checks:** AT-45 "A car's insurance expires in 30 days, with the starting reminder settings: it appears in Upcoming work; the owner can change how early" (the reminders themselves are Phase 3). *Proposed check:* an open decision appears as still to decide and has no value anyone can set.
+- **Checks:** AT-45 "A car's insurance expires in 30 days, with the starting reminder settings: it appears in Upcoming work; the owner can change how early" (the reminders themselves are Phase 3).
 - **Screens:** 15.2 Business rules and open decisions.
-- **Decisions needed:** shown here: DN-04 (garage-day charge), DN-06 (fuel charging), DN-11 (business-day close), DN-12 (cash leaving the drawer), DN-15 (payroll deductions), DN-16 (SNS earnings).
+- **Decided:** shown here as set now: DN-04 (garage days for damage only, admin approves), DN-06 (fuel not counted by default, same level per rental), DN-11 (staff close the day, or 11:59 PM), DN-12 (cash leaving the drawer), DN-15 (payroll deductions), DN-16 (SNS earnings and profit before depreciation).
 
 #### ST-15.4 · Activity log
 
 - **Status:** Confirmed; "can't be edited or deleted" is a Derived control.
 - **Phase:** 1; entries fill in as each phase adds its actions.
-- **Roles:** Owner.
+- **Roles:** Owner, Admin.
 - **Story:** As the owner, I see every recorded action and every exceptional decision with its reason, by person and by kind, so that I can check what happened and who did it.
 - **Rules:**
   - Every transaction records who entered it; every exceptional decision records the reason, the person, the date and the time (PR-05).
@@ -269,7 +263,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - The owner's daily summary of exceptional decisions is built from this log and is shown on the owner's home in Phase 4. System design → [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring).
 - **Checks:** *Proposed check:* nobody, the owner included, can change or delete an entry.
 - **Screens:** 15.5 Activity log.
-- **Decisions needed:** DN-01 (whether the admin may see the log).
+- **Decided:** DN-01 (the admin sees the log by default; staff do not).
 
 ### 08 Customers
 
@@ -300,7 +294,8 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - An imported customer whose copies were not in SNS's books needs them before their next handover. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
 - **Checks:** AT-06 "Missing signed agreement or customer ID or licence copy: handover blocked" and AT-07 "Reference person required but their licence copy missing: handover blocked" (both checked at handover, Phase 2). AT-49 "Staff save a new customer without the licence copy: saved, shows copies missing, handover blocked until it is added". AT-51 "Staff add a new customer with a NIC already recorded: no second record; the existing customer opens, with their debts and flags".
 - **Screens:** 08.3 New customer with documents.
-- **Decisions needed:** DN-02 (how long copies are kept, deletion, who may open them).
+  - Copies are kept 7 years after the last rental or settled debt, then listed for the owner to delete; staff and admins with customer access open them and every opening is logged (AT-59).
+- **Decided:** DN-02.
 
 #### ST-08.3 · Customer details
 
@@ -314,7 +309,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Decisions taken for this customer show with their reason, person and time (PR-05).
 - **Checks:** AT-37 "An imported past rental is opened: shown marked Imported, read-only, never recalculated".
 - **Screens:** 08.2 Customer details.
-- **Decisions needed:** DN-02.
+- **Decided:** DN-02.
 
 #### ST-08.4 · Warnings before a rental
 
@@ -358,7 +353,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 #### ST-04.2 · Car details
 
-- **Status:** Confirmed; who sees a partner's earnings and terms is part of DN-01.
+- **Status:** Confirmed.
 - **Phase:** 1; rentals, reservations, payments and earnings fill in from Phases 2 and 3.
 - **Roles:** Owner sees everything; staff see the car without the partner's earnings and terms (screens 04.2 and 04.3).
 - **Story:** As the owner, I see a car's status, papers and service, terms, the partner's earnings from it and its history, so that I know how each car is doing.
@@ -368,7 +363,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Earnings show only once final. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
 - **Checks:** AT-37.
 - **Screens:** 04.2 Car details · owner, 04.3 Car details · staff.
-- **Decisions needed:** DN-01 (who sees partner earnings and terms).
+- **Decided:** DN-01 (partner earnings and terms: admin by default, not staff).
 
 #### ST-04.3 · Add or edit a car and its package
 
@@ -383,7 +378,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Fuel income is always SNS's. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
 - **Checks:** AT-05 "Admin changes the package while a rental is active: the old rental and its extension keep the old terms; a new rental uses the new ones".
 - **Screens:** 04.4 Edit car, package and terms.
-- **Decisions needed:** DN-04 (when the garage-day charge applies; the amount is stored, never charged until decided).
+- **Decided:** DN-04 (garage days only for damage during the rental; ST-07.2).
 
 #### ST-04.4 · Starting packages
 
@@ -412,7 +407,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Rented and Overdue come from the rental itself, not from this screen.
 - **Checks:** AT-20 "Vehicle marked under repair: rental handover blocked until an authorised availability change". AT-25 "Retire a vehicle: no new rentals; history and money owed kept". AT-52 "Staff try to retire a car; an admin retires a car reserved next week: staff cannot; the admin is refused until the reservation is moved or cancelled".
 - **Screens:** 04.5 Change a car's status, 04.7 Car status blocks · reference.
-- **Decisions needed:** DN-01 (who may set each status).
+- **Decided:** DN-01 (staff and admins set Under repair or Unavailable; the admin marks a car available).
 
 #### ST-04.6 · Papers and service dates
 
@@ -429,12 +424,12 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 #### ST-04.7 · Catalogue photo
 
-- **Status:** Proposed (change request CR-001, awaiting the owner). Not built until agreed.
-- **Phase:** 1 if agreed.
+- **Status:** Confirmed (change request CR-001, addendum ADD-003).
+- **Phase:** 1.
 - **Roles:** Admin adds or replaces it.
 - **Story:** As an admin, I add one photo of a car for its card and page, so that staff recognise it.
 - **Rules:** one optional photo per car; until one is added, the model's standard image shows. It is not a condition photo, not a handover requirement and not a customer document. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
-- **Checks:** AT-29 (Proposed).
+- **Checks:** AT-29.
 - **Screens:** 04.4 Edit car (Add photo).
 
 ### 11 Partners: owners
@@ -461,12 +456,12 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - One account for all the partner's cars; the first password is changed at the first sign-in. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - For each car: SNS commission (default 15%), the agreed payment terms and who pays which costs. A cost not agreed is decided case by case by the admin. The daily rate is set on the car (ST-04.3). System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
   - A bank account is optional; without one, cash-outs are paid in cash at the branch. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
-  - The partner agreement covers commission, the daily cash-out arrangement and who pays which costs, and is printed for signing. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
+  - The partner agreement covers commission, the daily cash-out arrangement and who pays which costs. The system prints it; it is signed and kept on paper, and staff record "signed on <date>". Nothing waits on it (AT-83). System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
   - A partner never sees the price a customer paid, customer details or other partners' data. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - Adding a partner is recorded in the activity log (PR-05).
 - **Checks:** AT-44 "A partner without a bank account asks to cash out: an authorised person pays cash at the branch and records it once" (Phase 3).
 - **Screens:** 11.3 Add a partner.
-- **Decisions needed:** DN-20 (partner agreement wording, signing and upload). DN-01 (who may add a partner).
+- **Decided:** DN-20 (printed, signed on paper, date recorded), DN-01 (admin adds partners by default).
 
 #### ST-11.3 · Partner details
 
@@ -479,7 +474,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Terms changed here apply to new rentals only (PR-08).
 - **Checks:** AT-36 "A partner's opening balance is loaded; past rentals of their cars are imported: the balance can be cashed out from go-live; the imported rentals add no earnings; nothing is paid twice".
 - **Screens:** 11.2 Partner details.
-- **Decisions needed:** DN-20.
+- **Decided:** DN-20.
 
 ### Gaps found while writing Phase 1
 
@@ -520,7 +515,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 
 #### ST-05.3 · Dates and estimate
 
-- **Status:** Confirmed; reading times in Asia/Colombo is Proposed (PR-15).
+- **Status:** Confirmed.
 - **Phase:** 2.
 - **Roles:** Staff, Admin, Owner.
 - **Story:** As staff, I set how many days and see the return deadline and the estimate, so that the customer knows the price before signing.
@@ -556,7 +551,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 
 #### ST-05.6 · Review and print the agreement
 
-- **Status:** Confirmed; the agreement conditions wait on DN-20.
+- **Status:** Confirmed; the conditions are SNS's wording, approved by the owner (DN-20).
 - **Phase:** 2.
 - **Roles:** Staff, Admin, Owner.
 - **Story:** As staff, I review the rental and print the agreement in Sinhala or English, so that the customer signs what was agreed.
@@ -565,7 +560,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - The conditions are SNS's own wording, approved by SNS; nothing is taken from the unverified reference images.
 - **Checks:** AT-06 "Missing signed agreement: handover blocked".
 - **Screens:** 05.5 Review and print; prints 16.1 or 16.2 (ST-16.1).
-- **Decisions needed:** DN-20.
+- **Decided:** DN-20.
 
 #### ST-05.7 · Ask for a different price
 
@@ -578,7 +573,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - A discount reduces SNS's and the partner's earnings in proportion. On a partner car, a price above the package goes to the admin, who sets how the extra is split (ST-10.3). System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
 - **Checks:** AT-39, AT-40 (ST-10.3).
 - **Screens:** 05.7 Price change needs admin.
-- **Decisions needed:** DN-01 (whether a person may approve their own request); DN-10 (rounding).
+- **Decided:** DN-01 (nobody approves their own request), DN-10 (whole rupees).
 
 #### ST-05.8 · Cancel before handover
 
@@ -604,7 +599,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 
 #### ST-06.2 · Rental details
 
-- **Status:** Confirmed; who sees "who earns what" is part of DN-01.
+- **Status:** Confirmed.
 - **Phase:** 2.
 - **Roles:** Staff, Admin, Owner; the earnings split is shown to the owner.
 - **Story:** As staff, I see a rental's customer, car, readings, bill, payments and history in one place, so that I can answer any question about it.
@@ -615,7 +610,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - A payment is corrected only by request (ST-09.3).
 - **Checks:** AT-14 "A rental runs several days: each day final once, at its close; excess km final at return; nothing counted twice". AT-37. AT-42.
 - **Screens:** 06.2 Rental details.
-- **Decisions needed:** DN-11 (business-day close).
+- **Decided:** DN-01 (the admin sees the split by default), DN-11 (staff close the day, or 11:59 PM).
 
 #### ST-06.3 · Overdue rental
 
@@ -652,7 +647,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - An extension that would run into a reservation on the same car is blocked, with the reason, until the reservation is moved or its dates change. System design → [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
 - **Checks:** AT-05 (the extension keeps the old terms). AT-32 "An extension would run into another customer's reservation: blocked with the reason".
 - **Screens:** 06.6 Extend by phone, 06.8 Extend · blocked by a reservation.
-- **Decisions needed:** DN-08 (whether an extension needs an amended agreement or signature).
+- **Decided:** DN-08 (no new signature; the new deadline shows on the final bill, AT-68).
 
 #### ST-06.6 · Swap a car
 
@@ -666,36 +661,36 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - Earnings follow the actual use of each car; anything waiting for the admin stays out of a partner's earnings.
 - **Checks:** AT-19 "Rental swap: required readings, separate km, recorded admin decisions and the saved rates".
 - **Screens:** 06.7 Swap a car.
-- **Decisions needed:** DN-07 (allowance pool when cars differ, rounding, partial-day earnings), DN-08 (amended agreement).
+- **Decided:** DN-07 (the admin picks the swap day's car and divides its allowance, AT-67), DN-08 (no new signature), DN-14 (a swapped-out car is paid as returned, AT-75).
 
 ### 07 Return
 
 #### ST-07.1 · Receive the car and settle the bill
 
-- **Status:** Confirmed; the fuel charge waits on DN-06.
+- **Status:** Confirmed.
 - **Phase:** 2.
 - **Roles:** Staff, Admin decide late and damage charges; an admin decides early-return reductions and damage or accessory allocation.
 - **Story:** As staff, I record the car's return and settle the bill, so that the customer, SNS and the partner each know where they stand.
 - **Rules:**
   - The incoming odometer is required. Extra km = km driven minus the pooled included km, at the car's saved rate. System design → [Handover requirements](SNS_SYSTEM_DESIGN.md#handover-requirements), [Example calculations without swaps](SNS_SYSTEM_DESIGN.md#53-example-calculations-without-swaps).
   - Staff set or waive a late charge, with a reason; it follows the car's commission split. An early-return reduction is the admin's decision. System design → [Early and late return](SNS_SYSTEM_DESIGN.md#74-early-and-late-return).
-  - The accessories checklist and fuel level are recorded again. A missing accessory may be charged; on a partner car the admin decides who gets it. Fuel is litres times the owner's price per litre, entirely SNS's. Damage charges are staff decisions; the admin allocates them. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope).
+  - The accessories checklist and fuel level are recorded again. A missing accessory may be charged; on a partner car the admin decides who gets it. Fuel is not counted by default; on a "same level" rental, missing litres are charged at the owner's price per litre, entirely SNS's, or waived with a reason. Litres taken out of the car may be recorded as an estimate, with no money value. Damage charges are staff decisions; the admin allocates them. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope).
   - Staff choose the car's next state; nothing is chosen for them. System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
   - Payments and the deposit are applied (ST-07.3, ST-09.1). An unpaid balance becomes customer debt; the partner is paid even when the customer has not paid. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
 - **Checks:** AT-03, AT-04, AT-13 "Customer has not paid when the partner asks to cash out: the partner's final earnings stay payable", AT-14, AT-54 "A partner car comes back without its air pump: the charge waits for the admin, out of the partner's earnings".
 - **Screens:** 07.1 Return and payment.
-- **Decisions needed:** DN-06 (same-level return or paid fuel), DN-09 (early return and included km), DN-10 (allocation and rounding).
+- **Decided:** DN-06 (fuel not counted by default; same level per rental, AT-64, AT-65), DN-09 (included km follow the days charged, AT-69), DN-10 (whole rupees, AT-70).
 
 #### ST-07.2 · Garage days on the bill
 
-- **Status:** Open; the line cannot be added to a bill until DN-04 is decided.
+- **Status:** Confirmed.
 - **Phase:** 2.
-- **Roles:** to be decided (DN-04).
-- **Story:** As staff, when a car comes back needing the garage, I can add the days it cannot be rented to the bill, once the owner has decided when that applies.
-- **Rules:** the garage-day charge is set per car, default LKR 5,000 a day; what triggers it, who decides it and how it is split on a partner car are Open. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
-- **Checks:** none until DN-04 is decided.
+- **Roles:** Staff propose; an admin approves the days and amount, corrects them when the car is back, and splits them on a partner car.
+- **Story:** As staff, when a car comes back damaged and must go to the garage, I propose the days it cannot be rented, so that an admin can add them to the customer's bill.
+- **Rules:** only for damage during this rental, never for a planned service; the rate is the car's garage-day charge (default LKR 5,000 a day); an admin approves the days and amount and corrects the days when the car is back; on a partner car the admin decides the split, as damage recovery, and it stays out of the partner's earnings until decided. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings), [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
+- **Checks:** AT-62 "A partner car spends 3 days at the garage after damage: staff propose 3 days; once approved they are on the bill and the split waits for the admin". AT-63 "A planned service after a rental: no garage-day charge".
 - **Screens:** 07.2 Garage days on the bill.
-- **Decisions needed:** DN-04.
+- **Decided:** DN-04.
 
 #### ST-07.3 · Use the deposit and refund the rest
 
@@ -713,7 +708,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 
 #### ST-09.1 · Record a payment
 
-- **Status:** Confirmed; keeping "recorded" apart from "checked" is Proposed.
+- **Status:** Confirmed.
 - **Phase:** 2; the bank and card check is Phase 3.
 - **Roles:** Staff, Admin, Owner.
 - **Story:** As staff, I record each payment with how it was paid, so that every rupee is under the name of who took it.
@@ -733,7 +728,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Rules:** a correction needs an admin's approval; the original is never changed or deleted; an approved correction is a new dated line, and earnings already final change only by an adjustment line. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs); PR-07.
 - **Checks:** AT-16 "An approved correction affects earnings already final or cashed out: the original lines stay; a dated adjustment line changes the balance".
 - **Screens:** 09.5 Payment correction request.
-- **Decisions needed:** DN-01 (self-approval).
+- **Decided:** DN-01 (nobody approves their own request).
 
 ### 08 Customers: write-off
 
@@ -751,14 +746,14 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 
 #### ST-10.1 · Approvals waiting
 
-- **Status:** Confirmed; the approval workflow is part of DN-01.
+- **Status:** Confirmed.
 - **Phase:** 2.
 - **Roles:** Admin, Owner.
 - **Story:** As an admin, I see every request waiting for me with its effect and who bears it, so that I decide with the facts in front of me.
 - **Rules:** waiting requests include price changes and discounts, payment corrections, swap pricing and swap-day splits, damage and accessory allocations, early-return reductions and the split of a price above the package. Each shows the requester's reason word for word. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
 - **Checks:** none beyond ST-10.2.
 - **Screens:** 10.1 Approvals.
-- **Decisions needed:** DN-01. Until it is decided, the screen says so when the requester and the approver are the same person.
+- **Decided:** DN-01: a person never sees their own request as something to approve; the owner's own is marked "self-approved" (AT-57).
 
 #### ST-10.2 · Approve or reject
 
@@ -781,20 +776,20 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - Until decided, the extra stays out of the partner's earnings; the package share becomes final at each day's close. The partner sees one earning a day, never the price, the extra or SNS's share. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
 - **Checks:** AT-39 "The admin keeps the whole extra for SNS: the partner's earning is on the package only". AT-40 "A 50/50 split with a reason: the partner's day earning is the package share plus half the extra, shown as one amount". AT-41 "The day closes before the split is decided: the package share is final; the extra waits".
 - **Screens:** 10.4 Approve a higher price on a partner car.
-- **Decisions needed:** DN-10 (rounding).
+- **Decided:** DN-10 (whole rupees; the partner's share rounds down).
 
 ### 16 Documents: rental
 
 #### ST-16.1 · Rental agreement
 
-- **Status:** Confirmed; the conditions wait on DN-20.
+- **Status:** Confirmed.
 - **Phase:** 2.
 - **Roles:** Staff, Admin, Owner.
 - **Story:** As staff, I print the rental agreement in Sinhala or English, filled in with this rental, so that the customer signs the right terms.
 - **Rules:** filled with SNS's business details, the customer, car, dates, daily rate, included and extra km, and deposit; odometer and fuel are written at handover; the conditions are SNS's approved wording; the signed copy is photographed and uploaded before handover. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
 - **Checks:** AT-06.
 - **Screens:** 16.1 Rental agreement · Sinhala, 16.2 Rental agreement · English.
-- **Decisions needed:** DN-20, DN-08.
+- **Decided:** DN-20 (SNS's wording, owner-approved per version), DN-08 (no amended agreement).
 
 #### ST-16.2 · Final bill and payment receipt
 
@@ -884,4 +879,4 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 
 Four were found and decided with Dulan for the owner on 26 Oct 2026, each now in the system design with a check: fuel and accessories are recorded at handover and never block it (ST-06.4, AT-53); an accessory charge on a partner car is the admin's decision (ST-07.1, AT-54); an unpaid debt warns as a flag does (ST-05.1, AT-55); a deposit may pay the same customer's older bills (ST-07.3, AT-56). Five wording errors in the screens were corrected: when a partner's share becomes final (06.2), the fuel price shown as an example (06.2, 16.3), deposits not called earnings (07.3), and an old board name (16.2).
 
-Phase 2 still waits on these owner decisions: DN-01, DN-04, DN-06, DN-07, DN-08, DN-09, DN-10, DN-11, DN-20.
+The owner decisions Phase 2 depended on (DN-01, DN-04, DN-06 to DN-11, DN-20) were settled afterwards; see section 7.
