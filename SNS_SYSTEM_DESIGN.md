@@ -176,7 +176,7 @@ Pickup cutoff and return deadline are business-wide settings. The provisional ex
 
 Pickup exactly at the cutoff belongs to the next rental day. The minimum charge is one full rental day; there are no shorter-hire packages.
 
-**Proposed:** Interpret all business timestamps in Asia/Colombo and retain timestamps consistently in storage. Exact day-boundary and business-day-close calculations still require worked examples and confirmation.
+Business times are read in Asia/Colombo (Confirmed: agreed by the owner, recorded by Dulan). **Derived control:** store timestamps consistently and test the cutoff, deadline and day close with worked examples (AT-01, AT-02, AT-71).
 
 ### 5.2 Kilometres and surcharge
 
@@ -252,7 +252,7 @@ Staff can cancel a rental before handover with a reason. An authorised person ca
 
 ### 7.4 Early and late return
 
-- Early-return reductions require an admin decision.
+- Early-return reductions require an admin decision. Included kilometres follow the days actually charged: with no reduction the customer keeps the agreed days' allowance; if the admin reduces the charged days, the allowance falls with them. The admin sees the effect on extra kilometres before approving. Confirmed: agreed by the owner, recorded by Dulan.
 - Late-return charges may be set or waived by employees with a reason.
 - Late-return charges follow the vehicle's commission split.
 - If an approved adjustment creates an owner overpayment (for example, after the owner has already cashed out), recover it from the owner's later earnings before their next cash-out.
@@ -273,7 +273,9 @@ Staff can cancel a rental before handover with a reason. An authorised person ca
 
 **Derived control:** Capture the old vehicle's return reading and replacement vehicle's outgoing reading. Preserve one rental's sequence of vehicle-use segments. Prevent simultaneous active allocation of a vehicle across rentals, including concurrent employee submissions.
 
-**Open:** Define the allowance pool on a swap day when vehicle allowances differ, rounding, partial-day earnings outside the admin-allocated day, and any amended agreement/signature required for a swap or extension.
+**Swap days.** Days before the swap day belong to the old vehicle and days after it to the replacement, each with its own saved rate, allowance and earnings. For the swap day the admin picks which vehicle's rate and allowance apply, then divides that allowance between the two vehicles. Amounts are in whole rupees (§17.3). Confirmed: agreed by the owner, recorded by Dulan.
+
+**No new signature.** A phone extension or a swap needs no amended agreement or new signature. The change (new deadline, or replacement vehicle with its readings and terms) is recorded with who and when, and shown on the final bill. Confirmed: agreed by the owner, recorded by Dulan.
 
 ### 7.6 Advance reservations
 
@@ -337,9 +339,11 @@ Authorised staff reconcile cash, bank transfers, and cards daily:
 - Unmatched payments remain flagged for investigation rather than automatically becoming customer debt again.
 - Any required payment correction follows the approval process.
 
+**Closing the business day.** Employees or admins close the day with "Close the day" after the evening drawer count; that day's rent shares become final then. If nobody closes it, the day closes on its own at 11:59 PM, Asia/Colombo time, so partners are never held back; a count entered the next morning is marked late. Confirmed: agreed by the owner, recorded by Dulan.
+
 **Proposed reconciliation model:** Separate recorded payment status from reconciliation status. A payment can remain recorded as confirmed while reconciliation is unmatched or under investigation.
 
-**Open:** Treatment of payment-processor fees, bank/card posting delays, business-day closure time (which also decides when partner earnings become final), how partner cash-outs paid in cash affect expected cash (paying them in cash is allowed, §10), whether and how salaries and owner withdrawals paid in cash leave the drawer and affect expected cash, and the evidence needed to resolve a cash difference. A reconciliation adjustment must not silently rewrite the original transaction.
+**Open:** Treatment of payment-processor fees, bank/card posting delays, how partner cash-outs paid in cash affect expected cash (paying them in cash is allowed, §10), whether and how salaries and owner withdrawals paid in cash leave the drawer and affect expected cash, and the evidence needed to resolve a cash difference. A reconciliation adjustment must not silently rewrite the original transaction.
 
 ## 10. Vehicle-owner earnings and daily cash-out
 
@@ -361,7 +365,7 @@ Expense responsibility depends on the expense and agreement. Owner-responsible e
 
 Final earnings lines cannot be edited. Corrections appear as traceable adjustment lines dated when they are made. Overpayments caused by approved rental reductions are recovered from later earnings.
 
-**Open:** The business-day close time (it decides when each day's earnings become final); how cash payouts appear in the drawer count (paying a partner in cash at the branch is allowed: Confirmed: agreed by the owner, recorded by Dulan); minimum or maximum cash-out amounts and how often a partner may request one, if any limits are wanted; rounding; treatment of a returned segment while its overall swapped rental remains open; and final recovery if a retired vehicle or owner has no future earnings.
+The business day closes when staff close it, or at 11:59 PM if nobody does (§9). **Open:** how cash payouts appear in the drawer count (paying a partner in cash at the branch is allowed: Confirmed: agreed by the owner, recorded by Dulan); minimum or maximum cash-out amounts and how often a partner may request one, if any limits are wanted; treatment of a returned segment while its overall swapped rental remains open; and final recovery if a retired vehicle or owner has no future earnings.
 
 ## 11. Asset records, maintenance, and availability
 
@@ -451,7 +455,8 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | --- | --- |
 | Fuel accounting | Confirmed in scope |
 | Fuel calculation | Estimated litres × price per litre; income allocated entirely to SNS. The price per litre is an owner setting; no figure is agreed |
-| Same-fuel-level return versus paid fuel | Original business requirement; detailed workflow still to be designed |
+| Fuel at return | By default fuel is not counted: SNS takes fuel out of returned vehicles before the next customer, and the bill has no fuel line. For one rental, staff may choose "same level": if the vehicle comes back lower than at handover, staff estimate the missing litres and charge them at the owner's price per litre (100% SNS), or waive it with a reason; a higher level is not refunded. Confirmed: agreed by the owner, recorded by Dulan |
+| Fuel taken out | Staff may record the litres taken out of a returned vehicle, marked "estimate" (read from the fuel gauge), with who and when. Litres only: no money value, never income or earnings, never in the drawer. Confirmed: agreed by the owner, recorded by Dulan |
 | Garage-day charge | Confirmed in scope; default LKR 5,000/day per vehicle; trigger and partner split open |
 | Vehicle catalogue photo (one optional photo per vehicle) | Proposed; change request CR-001, no charge, awaiting owner agreement |
 | Non-rental vehicle movement tracking | Future extension |
@@ -512,7 +517,7 @@ This section organises the confirmed behaviour for future engineering discussion
 ### 17.3 Derived integrity controls
 
 - Enforce vehicle exclusivity at the server/database level, not only in the screen.
-- Use exact decimal/minor-unit monetary arithmetic; agree rounding rules before coding.
+- Use exact decimal/minor-unit monetary arithmetic. Every amount is kept and shown in whole rupees: bills, payments, refunds and deposits are whole; a partner's share of each earnings line is rounded down to the rupee and SNS takes the difference, so the shares always add up to the charge. Confirmed: agreed by the owner, recorded by Dulan.
 - Record payout and payment operations atomically; make retries safe against duplication.
 - Reject invalid/missing odometer inputs; define a controlled correction path for errors or meter replacement.
 - Retain original approved financial records and add adjustments rather than destructive edits.
@@ -527,16 +532,10 @@ This section organises the confirmed behaviour for future engineering discussion
 | --- | --- | --- |
 | Acceptable data loss and recovery time. Backups run automatically every day: Confirmed by the client-approved proposal (Phase 4), recorded by Dulan 26 Oct 2026 | Cannot define recovery design or reliable operating cost | SNS owner with developer |
 | Outage procedure for an online-only branch | Staff may have no agreed process during downtime | SNS owner |
-| Business-day close time (decides when partner earnings become final) | Owner earnings and drawer counts can differ depending on implementation assumptions | SNS owner |
 | How cash partner payouts appear in the drawer count (cash payouts themselves are allowed, §10) | Expected drawer cash may be wrong | SNS owner |
-| Early-return effects on included kilometres | Customer final bills may be inconsistent | SNS owner |
-| Swap allowance and rate edge cases | Double charging or under-allocation is possible | SNS owner |
-| Charge/discount allocation and currency rounding | Small discrepancies can accumulate between bills and partner earnings | SNS owner with developer |
-| Document amendments after extensions/swaps | Signed agreement may not reflect changed terms | SNS owner |
 | Final payout after vehicle retirement | Outstanding deductions may have no future earnings to recover from | SNS owner |
 | Payroll corrections and excessive deductions | Salary/loan balances can become misleading | SNS owner |
 | Reporting definitions | Profit and utilisation may be misunderstood | SNS owner |
-| Fuel charging workflow: same-level return versus paid fuel (fuel itself is in scope, §16) | Fuel charges on the bill may be inconsistent | SNS owner |
 | Hosting vendor and technology stack (price, phases, payments and support are set by the approved proposal) | Hosting cost and setup cannot be finalised | Dulan and SNS owner |
 
 ## 19. Acceptance scenarios for implementation planning
@@ -547,7 +546,7 @@ These are requirement checks, not claims that software has been built or tested.
 | --- | --- | --- |
 | AT-01 | Pickup Monday 2 PM under 3 PM/8 AM settings | One-day deadline Tuesday 8 AM |
 | AT-02 | Pickup Monday exactly 3 PM | One-day deadline Wednesday 8 AM |
-| AT-03 | One-day Wagon R, 150 km, no adjustments | LKR 4,500 base + LKR 1,250 excess = LKR 5,750; SNS 862.50 and owner 4,887.50 at 15% |
+| AT-03 | One-day Wagon R, 150 km, no adjustments | LKR 4,500 base + LKR 1,250 excess = LKR 5,750; owner 4,887 (85% = 4,887.50, rounded down) and SNS 863 at 15% |
 | AT-04 | Six-day Wagon R, at most 600 km, default package | LKR 27,000 base + LKR 500 surcharge = LKR 27,500; SNS 4,125 and owner 23,375 |
 | AT-05 | Admin changes package while rental active | Old rental/extension retains old snapshot; new rental uses new version |
 | AT-06 | Missing signed agreement or customer ID/licence copy | Handover blocked |
@@ -608,6 +607,14 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-61 | The admin signs in on a new phone | A one-time code is emailed to the admin; sign-in finishes only with it |
 | AT-62 | A partner car comes back damaged and spends 3 days at the garage | Staff propose 3 garage days; once an admin approves, 3 × the car's garage-day rate is on the bill and the split waits for the admin, out of the partner's earnings |
 | AT-63 | A car goes to the garage for a planned service after a rental | No garage-day charge can be added to that customer's bill |
+| AT-64 | A rental with fuel not counted comes back with less fuel | No fuel line on the bill |
+| AT-65 | A "same level" rental comes back 8 litres lower | 8 × the owner's price per litre is on the bill, 100% SNS, unless staff waive it with a reason |
+| AT-66 | Staff record 10 litres taken out of a returned car | Shown as "10 L · estimate" with who and when; no money value, not in the drawer or earnings |
+| AT-67 | A Wagon R (100 km/day) is swapped for a Prius (120 km/day) on day 3 of 5; the admin gives day 3 to the Prius and divides 60/60 km | Days 1–2: Wagon R rate and 200 km; days 4–5: Prius rate and 240 km; day 3: Prius rate, 60 km to each car; each car's extra km at its own rate |
+| AT-68 | A rental is extended by phone, then its car is swapped | No new signature is asked for; the final bill shows the new deadline and both cars with their readings |
+| AT-69 | A 5-day Wagon R rental returns after 3 days with 380 km | No reduction: 5 days, 500 km included, no extra km. Admin reduces to 3 days: 300 km included, 80 extra km charged at the car's rate |
+| AT-70 | A discount makes a partner's day share 3,824.25 | The partner's line is 3,824; SNS's share takes the 0.25 difference; the bill and shares add up exactly |
+| AT-71 | Nobody presses "Close the day" on Tuesday | Tuesday closes on its own at 11:59 PM Asia/Colombo; Tuesday's rent shares become final; a drawer count entered on Wednesday morning is marked late |
 
 ## 20. Readiness and next steps
 
