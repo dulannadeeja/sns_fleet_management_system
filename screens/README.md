@@ -2,7 +2,7 @@
 
 The screen designs for the SNS Rent Car management website, master copy. Requirements and business rules live in `SNS_SYSTEM_DESIGN.md`; the screens show sample data and labelled examples, and never add a rule. Brand and visual rules are in `brand/guidebook/`; the components they use are in `design-system/`.
 
-The claude.ai canvas "SNS Rent Car · Plate" (https://claude.ai/artifact/XPpVE6ZafYtyG4gRZukHYz) is a viewer. Change the files here first, then refresh the canvas.
+The claude.ai canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td) is a viewer. Change the files here first, then refresh the canvas.
 
 ## What is here
 
@@ -24,3 +24,12 @@ Modules: 01 Start, 02 Home, 03 Morning check, 04 Cars, 05 New rental, 06 Rentals
 ## Keeping the canvas copy in step
 
 `canvas/ds/plate/` must match `design-system/` except for the image path prefix: the canvas pages sit two folders down, so their bundle prefixes every image path with `../../` (`../../design-system/assets/…`, `../../brand/vehicles/…`) where the master bundle uses `design-system/assets/…` and `brand/vehicles/…`. After changing `design-system/tokens.json`, `tokens.css`, `components/bundle.js` or `components/bundle.css`, copy them here and apply that prefix.
+
+## Refreshing the claude.ai canvas
+
+The canvas is built from this folder. It cannot reach paths outside its own files, so its copy of the design system carries the images:
+
+1. Copy `canvas/canvas.json`, every `canvas/*.dc.html`, and `canvas/ds/plate/` (`tokens.json`, `tokens.css`, `components/bundle.css`, `components/bundle.js`) into a folder as `project/…`.
+2. In that copy of `bundle.js`, change the image paths `../../brand/vehicles/256/` to `ds/plate/assets/vehicles-256/` and `../../design-system/assets/` to `ds/plate/assets/`.
+3. Copy the images to match: `brand/vehicles/256/*.png` to `project/ds/plate/assets/vehicles-256/`, and `design-system/assets/brand`, `icons-256` and `vehicles-512` to `project/ds/plate/assets/`.
+4. Publish the folder to the canvas link above, then copy the published `project/canvas.json` back to `canvas/canvas.json`.
