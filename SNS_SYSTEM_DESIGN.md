@@ -82,7 +82,9 @@ Any cash introduced after launch must be recorded as a cash movement, not treate
 
 Customer-facing accounts are not confirmed. Customer document delivery is through the agreed printable documents.
 
-**Sign-in.** Everyone (owner, admins, staff, partners) signs in with their own phone number and password; a first password is changed at the first sign-in. Until login recovery is decided (§18), the primary owner resets a forgotten password. Confirmed: agreed by the owner, recorded by Dulan.
+**Sign-in.** Everyone (owner, admins, staff, partners) signs in with their own phone number and password; a first password is changed at the first sign-in. The primary owner resets a forgotten password for staff and partners. Confirmed: agreed by the owner, recorded by Dulan.
+
+**Sign-in safety.** Passwords have at least 8 characters; 5 wrong tries lock the account for 15 minutes. The primary owner and the admin each give an email address: signing in on a new device asks for a one-time code sent to it, and they can reset their own forgotten password by email. No SMS is used. Confirmed: agreed by the owner, recorded by Dulan; email is the cost the approved proposal already lists (password reset, LKR 0).
 
 **Turning off an account.** When a staff member or admin leaves, or a partner stops, the primary owner turns off their account, with a reason. Their sign-in stops at once. Nothing they recorded changes, and their name stays on it. A partner's cars, final earnings and balance stay; an authorised person can still pay out what is owed. The owner can turn the account back on. Confirmed: agreed by the owner, recorded by Dulan.
 
@@ -113,10 +115,21 @@ All critical permissions are configurable. The following are agreed defaults, no
 | Retain a cancellation fee | Authorised person |
 | Manage payroll | One payroll-management permission; no separate preparation/finalisation/payment permissions |
 | Export reports | Separate configurable export permission |
+| See partner earnings and terms | Admin; not staff |
+| See the activity log | Admin; not staff |
+| Add or edit cars and packages | Admin; not staff |
+| Add or edit partners | Admin; not staff |
+| Mark a car under repair or unavailable | Employees or admins |
+| Mark a car available again | Admin (the authorised person for availability) |
+| Add people, change permissions, turn accounts off or on | Primary owner only; cannot be given to anyone |
 
 Every exceptional decision requires a reason, actor, date, and time. Each transaction must identify the staff member who recorded it, even though staff share one cash drawer.
 
-**Open:** Exact permission catalogue, delegation limits, and whether a requester may approve their own price/payment correction. These should be settled before implementing approvals.
+The table above is the permission catalogue. Confirmed: agreed by the owner, recorded by Dulan.
+
+**Delegation.** The primary owner can give any permission to the admin or any employee, except adding people, changing permissions and turning accounts off or on, which stay with the primary owner. Every grant and removal is recorded. Confirmed: agreed by the owner, recorded by Dulan.
+
+**No self-approval.** Nobody approves their own request (a price change, discount, payment correction or any other approval); another approver must. The primary owner may approve their own, since nobody is above them; it is marked "self-approved" and shown in the daily summary of exceptional decisions. Confirmed: agreed by the owner, recorded by Dulan.
 
 ## 4. Vehicles, packages, and historical terms
 
@@ -138,7 +151,7 @@ Admins can define each vehicle's package according to its condition and update p
 - SNS commission percentage, default 15%.
 - Long-rental surcharge amount, default LKR 500 per applicable day.
 - Surcharge starting day, default day six.
-- Garage-day charge, default LKR 5,000 per day. **Open:** what triggers it, who decides it, and how it is split on a partner vehicle.
+- Garage-day charge, default LKR 5,000 per day. It applies only when the vehicle goes to the garage because of damage during that rental. Staff propose the days at return; an admin approves the days and the amount, and corrects the days when the vehicle is back from the garage. On a partner vehicle the admin decides the split, as for damage recovery. Confirmed: agreed by the owner, recorded by Dulan.
 - Agreed payment terms and expense responsibilities.
 - Catalogue photo: optional, one per vehicle, added or replaced by an admin. It is shown on the vehicle's card and profile; until one is added, the system shows the model's standard image. It is not a condition photo, not a handover requirement and not a customer document. **Proposed** under change request CR-001 (no charge, no extra time), decided by Dulan on 25 Oct 2026; becomes Confirmed when the owner agrees CR-001.
 
@@ -209,6 +222,8 @@ An accessories checklist and the fuel level are recorded at handover and return.
 An expired customer driving licence triggers a warning. An authorised person may override it with a reason. An override does not make the licence legally valid.
 
 Staff may flag a customer for unpaid balances, damage, or other issues. Warnings appear before future rentals; employees may proceed with a recorded reason. Employees or admins close a flag with a reason (for example, the money was paid); it stops warning but stays in the customer's history with who closed it and when. Nothing is deleted. Confirmed: agreed by the owner, recorded by Dulan. An unpaid customer debt warns on its own, as a flag does, before every new rental until it is paid or written off; employees may proceed with a recorded reason. Confirmed: agreed by the owner, recorded by Dulan.
+
+**Document copies.** Customer and reference-person ID and licence copies are kept while the customer is active and for 7 years after their last rental or settled debt. The system then lists them for the primary owner, who deletes them; a signed agreement stays with its rental. Staff and admins with customer access can open copies; every opening is logged with who and when. Copies are never shared outside the system. Confirmed: agreed by the owner, recorded by Dulan; SNS should check the period against Sri Lankan law (Personal Data Protection Act) before go-live.
 
 A customer may rent multiple vehicles simultaneously. Each has its own agreement and bill. Separate actual-driver records per vehicle are outside the agreed scope.
 
@@ -304,6 +319,7 @@ Payment corrections require admin approval and retain the original record plus c
 | Discount | Reduces SNS and owner earnings proportionally |
 | Damage recovery | Admin decides allocation |
 | Accessory-shortage charge | Admin decides allocation, as damage recovery. Confirmed: agreed by the owner, recorded by Dulan |
+| Garage-day charge | Admin decides allocation, as damage recovery. Confirmed: agreed by the owner, recorded by Dulan |
 | Price above the car's package, on a partner car | The package amount follows the vehicle commission split. The extra above it is split between SNS and the partner as an admin sets for that rental, with a reason; it may be 100% SNS. Confirmed: agreed by the owner, recorded by Dulan |
 | Cancellation fee | 100% SNS |
 | Fuel | 100% SNS |
@@ -511,9 +527,6 @@ This section organises the confirmed behaviour for future engineering discussion
 | --- | --- | --- |
 | Acceptable data loss and recovery time. Backups run automatically every day: Confirmed by the client-approved proposal (Phase 4), recorded by Dulan 26 Oct 2026 | Cannot define recovery design or reliable operating cost | SNS owner with developer |
 | Outage procedure for an online-only branch | Staff may have no agreed process during downtime | SNS owner |
-| Document retention, deletion, access scope | Sensitive identity documents may be retained or exposed unnecessarily | SNS owner with appropriate advice |
-| Login recovery and stronger protection for owner/admin accounts | Account loss/compromise handling is undefined | SNS owner with developer |
-| Approval workflow and self-approval restrictions | Critical overrides may not provide intended independent review | SNS owner |
 | Business-day close time (decides when partner earnings become final) | Owner earnings and drawer counts can differ depending on implementation assumptions | SNS owner |
 | How cash partner payouts appear in the drawer count (cash payouts themselves are allowed, §10) | Expected drawer cash may be wrong | SNS owner |
 | Early-return effects on included kilometres | Customer final bills may be inconsistent | SNS owner |
@@ -588,6 +601,13 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-54 | A partner car comes back without its air pump; LKR 2,000 is charged | The 2,000 waits for an admin decision, out of the partner's earnings; once the admin sets the split with a reason, the partner's share becomes final |
 | AT-55 | A customer with an unpaid bill and no flag starts a new rental | A debt warning shows; staff continue only with a reason, which is recorded and appears in the owner's daily summary |
 | AT-56 | LKR 10,000 deposit, LKR 7,000 final bill, LKR 2,000 older bill; the customer agrees | 7,000 pays this bill, 2,000 pays the older bill, 1,000 is refunded; nothing is applied beyond what is held |
+| AT-57 | Kamal (admin) requests a discount, then opens it to approve | He cannot approve it; another approver must. The owner approving their own request succeeds, marked "self-approved" in the daily summary |
+| AT-58 | The owner tries to give an admin the permission to change permissions | Refused: it stays with the primary owner |
+| AT-59 | Staff open a customer's NIC copy | It opens for staff with customer access; the opening is logged with who and when; there is no public link |
+| AT-60 | Someone types a wrong password 5 times | The account locks for 15 minutes |
+| AT-61 | The admin signs in on a new phone | A one-time code is emailed to the admin; sign-in finishes only with it |
+| AT-62 | A partner car comes back damaged and spends 3 days at the garage | Staff propose 3 garage days; once an admin approves, 3 × the car's garage-day rate is on the bill and the split waits for the admin, out of the partner's earnings |
+| AT-63 | A car goes to the garage for a planned service after a rental | No garage-day charge can be added to that customer's bill |
 
 ## 20. Readiness and next steps
 
