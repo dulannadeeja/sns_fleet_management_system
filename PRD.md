@@ -2,7 +2,7 @@
 
 What the SNS Rent Car system must do, written as stories a developer can build and a tester can check.
 
-This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-48) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
+This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-49) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
 Status of this draft: front section and Phase 1 stories, written with Dulan from 26 Oct 2026, for review. Phases 2 to 4 are not yet written.
 
@@ -292,10 +292,11 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Story:** As staff, I record a new customer's identity, licence and document copies, so that they can be rented to.
 - **Rules:**
   - Staff record identity and licence details and keep copies of the documents. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
+  - Name, NIC, phone, and licence number and expiry are needed to save. The ID and licence copies may come later: until they are in, the customer shows "copies missing". System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
   - Handover is blocked until the customer's ID copy and licence copy are in. A reference person is needed only when staff decide; their ID and licence copies are then required too. System design → [Handover requirements](SNS_SYSTEM_DESIGN.md#handover-requirements).
   - The copies are private: only people with permission open them, never through a public link. System design → [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
   - An imported customer whose copies were not in SNS's books needs them before their next handover. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
-- **Checks:** AT-06 "Missing signed agreement or customer ID or licence copy: handover blocked" and AT-07 "Reference person required but their licence copy missing: handover blocked" (both checked at handover, Phase 2). *Proposed check:* a customer whose NIC is already recorded is not added twice; the existing customer opens instead.
+- **Checks:** AT-06 "Missing signed agreement or customer ID or licence copy: handover blocked" and AT-07 "Reference person required but their licence copy missing: handover blocked" (both checked at handover, Phase 2). AT-49 "Staff save a new customer without the licence copy: saved, shows copies missing, handover blocked until it is added". *Proposed check:* a customer whose NIC is already recorded is not added twice; the existing customer opens instead.
 - **Screens:** 08.3 New customer with documents.
 - **Decisions needed:** DN-02 (how long copies are kept, deletion, who may open them).
 
@@ -479,11 +480,10 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 ### Gaps found while writing Phase 1
 
-Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag) are updated together once all are decided.
+Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag; 08.3 New customer: save before the copies) are updated together once all are decided.
 
 | Gap | Where | What it needs |
 | --- | --- | --- |
-| Whether a customer can be saved before all copies are in (handover stays blocked either way) | 08.3 asks for every copy to save | Imported customers may arrive without copies, so saving cannot always require them |
 | Whether a change to a starting package changes the existing cars of that type | 04.6 | The system design says only that new cars start with it |
 | No screen for retiring a car | 04.5 has Under repair and Temporarily unavailable only | A design for ST-04.5's retire rule |
 | One customer per NIC | 08.3 says "No customer with this NIC yet" | Confirm, then add a check to the system design |

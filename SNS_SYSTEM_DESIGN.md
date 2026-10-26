@@ -190,7 +190,7 @@ These formulas do not resolve discretionary late returns, early-return allowance
 
 ## 6. Customer onboarding and mandatory documents
 
-Staff record customer identity and driving-licence details and retain document copies. A reference person is required only sometimes; staff decide. Staff with customer access see full NIC and phone numbers; there is no masking.
+Staff record customer identity and driving-licence details and retain document copies. A reference person is required only sometimes; staff decide. Staff with customer access see full NIC and phone numbers; there is no masking. A customer is saved with name, NIC, phone, and driving-licence number and expiry; the ID and licence copies may be added later. Until they are in, the customer shows "copies missing" and handover stays blocked (below). Confirmed: agreed by the owner, recorded by Dulan.
 
 ### Handover requirements
 
@@ -579,6 +579,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-46 | A staff member forgets their password | The primary owner resets it; the staff member changes it at the next sign-in |
 | AT-47 | The owner turns off the account of a staff member who left | They can no longer sign in; everything they recorded keeps their name and is unchanged |
 | AT-48 | Staff close a customer's flag with a reason | No warning at the next rental; the flag, its reason, who closed it and when stay in the customer's history |
+| AT-49 | Staff save a new customer without the licence copy | The customer is saved and shows "copies missing"; their handover is blocked until the copy is added (as AT-06) |
 
 ## 20. Readiness and next steps
 
