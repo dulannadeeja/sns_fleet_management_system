@@ -27,12 +27,14 @@
 ## Dashboard layout
 
 - **Owner home (desktop), top to bottom:**
-    1. Top bar (greeting, date, search)
+    1. Top bar: "අද · Today", the date, search
     2. `AttentionBar`
-    3. The money ledger as separate `MoneyBlock`s
-    4. Vehicles: `FleetStrip` (its legend links replace the old status filter buttons), then the gallery grouped by status
-    5. Coming up
-- **Phone:** the same order in one column. The gallery becomes `VehicleRow`s.
+    3. Two columns. Left: "For you to decide" (approvals waiting, then open items) and "Coming up" (returns, service, owner use, cash-outs, renewals). Right: money, one row per kind of money, never added together: collected today, SNS earnings, customer debt, partner payable, then deposits held, partners' not-final amounts, drawer and bank and card check
+    4. Vehicles: `FleetStrip` (its legend links open the filtered lists), then only the cars that need a look, and a link to 04.1 All cars, which keeps the full gallery
+- **Staff home (desktop), top to bottom:** top bar with search; quick actions (new rental, receive return, record payment; expense and drawer count as smaller links); overdue and due back, with reservations collecting today; handovers waiting for documents; the morning check; Vehicles as the `FleetStrip` and a link to 04.1 All cars.
+- **Phone:** the same order in one column, by the task done first. Each list shows its first rows and a link to the whole list. Staff start new rentals from the centre button.
+- **Rows, not cards:** each list is one card with divided rows; every row opens what is behind it. A figure the sample data does not have is shown as "—" with a note, never invented.
+- Decided by Dulan, 26 Oct 2026 (dashboard first pass).
 - **Two-pane layouts need at least 1280px.** Below that they stack.
 - **Spacing:** `space-6` between blocks and `space-8` between sections on desktop; `space-4` margins on phones.
 - **Radius:**

@@ -14,119 +14,134 @@
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
+.dash-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
+.dash-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:60px;padding:6px 20px;border-bottom:1px solid var(--line)}
+.dash-head h2{margin:0;font-size:18px;line-height:28px;font-weight:600}
+.dash-sub{font-size:14px;line-height:22px;color:var(--ink-muted)}
+.dash-more{margin-left:auto;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:15px;line-height:22px;font-weight:600;text-decoration:none;color:var(--sapphire)}
+.dash-group{padding:10px 20px 4px;font-size:14px;line-height:22px;font-weight:600;color:var(--ink-muted)}
+.dash-row{display:grid;grid-template-columns:40px minmax(0,1fr) auto 20px;gap:14px;align-items:center;min-height:64px;padding:10px 20px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.dash-row:last-child{border-bottom:0}
+.dash-row:hover{background:var(--paper);color:var(--ink)}
+.dash-row:focus-visible,.dash-more:focus-visible{outline:3px solid var(--sapphire);outline-offset:-3px}
+.dash-row-sm{min-height:52px;padding-top:6px;padding-bottom:6px}
+.dash-ico{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--radius-md);background:var(--sunken);color:var(--ink)}
+.dash-ico-overdue{background:var(--overdue-tint);color:var(--overdue)}
+.dash-ico-warn{background:var(--warning-tint);color:var(--warning)}
+.dash-t{display:block;font-size:16px;line-height:24px;font-weight:600}
+.dash-d{display:block;font-size:14px;line-height:22px;color:var(--ink-muted)}
+.dash-meta{font-size:15px;line-height:22px;color:var(--ink-muted);text-align:right;white-space:nowrap}
+.dash-fig{font-family:var(--font-plate);font-size:22px;line-height:28px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dash-fig small{font-family:var(--font-sans);font-size:14px;font-weight:500;color:var(--ink-muted)}
+.dash-arrow{color:var(--ink-muted)}
+.dash-foot{padding:10px 20px 14px;font-size:14px;line-height:22px;color:var(--ink-muted);border-top:1px solid var(--line)}
+.dash-car{display:grid;grid-template-columns:72px minmax(0,1fr) 20px;gap:12px;align-items:center;min-height:64px;padding:8px 20px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.dash-car:hover{background:var(--paper);color:var(--ink)}
+.dash-car:focus-visible{outline:3px solid var(--sapphire);outline-offset:-3px}
+.dash-thumb{display:block;width:72px;height:44px;border-radius:var(--radius-sm);background:var(--sunken);overflow:hidden}
+.dash-ico-key{background:var(--sapphire-tint);color:var(--sapphire)}
+.dash-now{display:flex;flex-direction:column;gap:10px;padding:14px 20px 16px;background:var(--overdue-tint);border-bottom:1px solid var(--line)}
+.dash-link{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 14px;border:1.5px solid var(--line-strong);border-radius:var(--radius-md);background:var(--card);color:var(--ink);font-size:15px;line-height:22px;font-weight:600;text-decoration:none}
+.dash-link:focus-visible{outline:3px solid var(--sapphire);outline-offset:2px}
+.dash-tag{align-self:flex-start;padding:2px 10px;border-radius:var(--radius-sm);background:var(--warning-tint);color:var(--warning);font-size:14px;line-height:22px;font-weight:600}
 </style>
 </helmet>
 <div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; align-items: stretch; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
   <x-import component-from-global-scope="Plate.NavRail" items="{{rail}}" style="flex: none"></x-import>
   <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
-    <x-import component-from-global-scope="Plate.AppHeader" title="වාහන · Vehicles" subtitle="Thu 22 Oct 2026 · 11:30" search="අංකය / මාදිලිය / නම හොයන්න" user="Nimal" role="Staff · සේවක" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
-    <main style="padding: 28px 32px 56px; display: flex; flex-direction: column; gap: 28px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
+    <x-import component-from-global-scope="Plate.AppHeader" title="අද වැඩ · Today's work" subtitle="Thu 22 Oct 2026 · 11:30" search="අංකය / මාදිලිය / නම හොයන්න" user="Nimal" role="Staff · සේවක" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 24px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
 
-      <x-import component-from-global-scope="Plate.LauncherGrid" title="ඉක්මන් වැඩ · Quick actions" columns="5" items="{{quick}}"></x-import>
-
-      <section style="display: flex; flex-direction: column; gap: 12px">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap">
-          <h2 style="margin: 0; font-size: 22px; line-height: 32px; font-weight: 600">අද වැඩ <span class="rt-en">· Today's work</span></h2>
-          <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">from confirmed rules only</span>
+      <section style="display: flex; flex-direction: column; gap: 10px" aria-label="Quick actions">
+        <x-import component-from-global-scope="Plate.LauncherGrid" title="ඉක්මන් වැඩ · Quick actions" columns="3" items="{{quick}}"></x-import>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <a class="dash-link" href="09-Money-RecordExpense-Desktop.dc.html"><x-import component-from-global-scope="Plate.Icon" name="receipt" size="{{twenty}}"></x-import>වියදමක් <span class="rt-en">· Record expense</span></a>
+          <a class="dash-link" href="09-Money-CountDrawer-Desktop.dc.html"><x-import component-from-global-scope="Plate.Icon" name="drawer" size="{{twenty}}"></x-import>ලාච්චුව ගණන් කරන්න <span class="rt-en">· Count drawer</span></a>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px">
-          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 2px solid var(--overdue); border-radius: 16px">
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 26px; font-weight: 600; color: var(--overdue)"><x-import component-from-global-scope="Plate.Icon" name="clockAlert" size="{{twenty}}"></x-import>දැන්ම · Now</div>
-            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBC 5409" size="sm"></x-import><span style="font-size: 15px; line-height: 24px">Pradeep W. · +3h 05m</span></div>
+      </section>
+
+      <div style="display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(380px, 1fr); gap: 24px; align-items: start">
+        <section class="dash-card" aria-labelledby="h-today">
+          <div class="dash-head">
+            <h2 id="h-today">පරක්කු සහ එන්න තියෙන <span class="rt-en">· Overdue and due back</span></h2>
+            <a class="dash-more" href="06-Rentals-AllRentals-Desktop.dc.html">කුලී <span class="rt-en">· Rentals</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
+          </div>
+          <div class="dash-now">
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+              <x-import component-from-global-scope="Plate.StatusChip" status="overdue" detail="+3h 05m" size="sm" lang="si"></x-import>
+              <x-import component-from-global-scope="Plate.PlateBadge" plate="CBC 5409" size="sm"></x-import>
+              <span style="font-size: 16px; line-height: 24px; font-weight: 600">Pradeep W.</span>
+              <span class="dash-d">R‑0216 · deadline 22 Oct 8:00 · no fee runs by itself</span>
+            </div>
             <div style="display: flex; gap: 8px; flex-wrap: wrap">
               <a href="07-Return-Return-Desktop.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="returnCar" size="{{twenty}}"></x-import><span>ආපසු ගන්න</span></a>
               <a href="06-Rentals-Extend-Desktop.dc.html" class="rt-btn rt-btn-quiet" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><x-import component-from-global-scope="Plate.Icon" name="calendarPlus" size="{{twenty}}"></x-import><span>දින වැඩි කරන්න</span></a>
               <x-import component-from-global-scope="Plate.Button" icon="phone" variant="quiet">කතා කරන්න</x-import>
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 26px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="clock" size="{{twenty}}"></x-import>හෙට 8:00 ට කලින් · Due by tomorrow 8:00</div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBE 6612" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="PH 4521" size="sm"></x-import><x-import component-from-global-scope="Plate.PlateBadge" plate="CBM 1340" size="sm"></x-import></div>
-            <div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Return deadline Fri 23 Oct 8:00</div>
-          </div>
-          <a href="06-Rentals-Handover-Desktop.dc.html" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-decoration: none">
-            <span style="display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 26px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="key" size="{{twenty}}"></x-import>භාර දීමට · Handovers in progress</span>
-            <span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBF 7720" size="sm"></x-import><span style="font-size: 15px; line-height: 24px">R-0238 · Tharindu R. · 4 / 5</span></span>
-            <span style="align-self: flex-start; padding: 2px 10px; border-radius: 8px; background: var(--warning-tint); color: var(--warning); font-size: 14px; line-height: 22px; font-weight: 600">Signed agreement photo missing</span>
+          <a class="dash-row" href="06-Rentals-AllRentals-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="clock" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">හෙට 8:00 ට කලින් එන්න ඕන <span class="rt-en">· Due back by tomorrow 8:00</span></span><span class="dash-d rt-num">CBE 6612 · PH 4521 · CBM 1340</span></span>
+            <span class="dash-meta">3 cars</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
           </a>
-          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 26px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="clipboard" size="{{twenty}}"></x-import>උදේ check · Morning check</div>
-            <div style="font-size: 15px; line-height: 24px">7:30 · 17 of 18 found</div>
-            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBG 2967" size="sm"></x-import><span style="padding: 2px 10px; border-radius: 8px; background: var(--warning-tint); color: var(--warning); font-size: 14px; line-height: 22px; font-weight: 600">not found · open</span></div>
-          </div>
-        </div>
-      </section>
+          <a class="dash-row" href="18-Reservations-AllReservations-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="calendar" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">අද ගන්න එන වෙන්කිරීම් <span class="rt-en">· Reservations collecting today</span></span><span class="dash-d rt-num">CBC 5409 · Saman J. 15:00 · <b style="color: var(--overdue); font-weight: 600">car not back</b> · CAD 1187 · Nadeesha P. 16:30</span></span>
+            <span class="dash-meta">2</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+        </section>
 
-      <a href="18-Reservations-AllReservations-Desktop.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; color: var(--ink); text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="calendar" size="{{twenty}}"></x-import><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">අද ගන්න එන වෙන්කිරීම් <span class="rt-en">· Collecting today</span></span><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">CBC 5409 Saman J. 15:00 · car not back · CAD 1187 Nadeesha P. 16:30</span></span><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" style="margin-left: auto; color: var(--ink-muted); flex: none"></x-import></a><section style="display: flex; flex-direction: column; gap: 16px">
-        <h2 style="margin: 0; font-size: 22px; line-height: 32px; font-weight: 600">වාහන 30 <span class="rt-en">· Vehicles</span></h2>
+        <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
+          <section class="dash-card" aria-labelledby="h-hand">
+            <div class="dash-head"><h2 id="h-hand">ලියවිලි ඕන <span class="rt-en">· Handovers waiting for documents</span></h2></div>
+            <a class="dash-row" href="06-Rentals-Handover-Desktop.dc.html">
+              <span class="dash-ico dash-ico-key"><x-import component-from-global-scope="Plate.Icon" name="key" size="{{twenty}}"></x-import></span>
+              <span style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBF 7720" size="sm"></x-import><span class="dash-d">R‑0238 · Tharindu R.</span></span><span class="dash-tag">Signed agreement photo missing</span></span>
+              <span class="dash-fig">4 / 5</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+          </section>
+          <section class="dash-card" aria-labelledby="h-check">
+            <div class="dash-head">
+              <h2 id="h-check">උදේ check <span class="rt-en">· Morning check</span></h2>
+              <span class="dash-sub">7:30 · 17 of 18 found</span>
+            </div>
+            <a class="dash-row" href="03-MorningCheck-Finished-Desktop.dc.html">
+              <span class="dash-ico dash-ico-warn"><x-import component-from-global-scope="Plate.Icon" name="question" size="{{twenty}}"></x-import></span>
+              <span style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBG 2967" size="sm"></x-import><span class="dash-d">හම්බුණේ නැහැ · not found · open until explained</span></span>
+              <span></span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+          </section>
+        </div>
+      </div>
+
+      <section style="display: flex; flex-direction: column; gap: 16px" aria-labelledby="h-cars">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+          <h2 id="h-cars" style="margin: 0; font-size: 22px; line-height: 32px; font-weight: 600">වාහන 30 <span class="rt-en">· Vehicles</span></h2>
+          <a class="dash-more" href="04-Cars-AllCars-Desktop.dc.html">වාහන 30ම බලන්න <span class="rt-en">· See all 30 cars</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
+        </div>
         <x-import component-from-global-scope="Plate.FleetStrip" cars="{{fleet}}" hrefs="{{fleetHrefs}}"></x-import>
-        <sc-for list="{{groups}}" as="g" hint-placeholder-count="5">
-          <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 8px">
-            <div style="display: flex; align-items: center; gap: 10px">
-              <x-import component-from-global-scope="Plate.StatusChip" status="{{g.status}}" lang="si"></x-import>
-              <span class="rt-num" style="font-family: var(--font-plate); font-size: 22px; line-height: 28px; font-weight: 600">{{g.count}}</span>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px">
-              <sc-for list="{{g.cars}}" as="c" hint-placeholder-count="5">
-                <x-import component-from-global-scope="Plate.VehicleCard" plate="{{c.plate}}" model="{{c.model}}" body="{{c.body}}" status="{{c.status}}" status-detail="{{c.detail}}" next="{{c.next}}" partner="{{c.partner}}" warning="{{c.warning}}" lang="si"></x-import>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
       </section>
     </main>
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4683}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":934}}'>
 class Component extends DCLogic {
   renderVals() {
-    var P = true;
-    function car(plate, model, body, status, extra) { return Object.assign({ plate: plate, model: model, body: body, status: status, detail: null, next: null, partner: false, warning: null }, extra || {}); }
-    var groups = [
-      { status: 'overdue', count: '1', cars: [car('CBC 5409', 'Wagon R', 'hatch', 'overdue', { partner: P, detail: '+3h 05m', next: 'Pradeep W. · R-0216' })] },
-      { status: 'available', count: '17', cars: [
-        car('CBF 7720', 'Wagon R', 'hatch', 'available', { next: 'Ruwan R-0238 සකසමින් · not reserved' }),
-        car('CBK 4127', 'Wagon R', 'hatch', 'available', { partner: P, next: 'Returned 9:40' }),
-        car('CAX 8834', 'Wagon R', 'hatch', 'available', { next: 'Returned 8:00' }),
-        car('CBG 2967', 'Wagon R', 'hatch', 'available', { partner: P, warning: { label: '7:30 check එකේ හම්බුණේ නැහැ · not found', icon: 'question' } }),
-        car('CBL 0458', 'Wagon R', 'hatch', 'available', { next: 'Ready' }),
-        car('CBD 3375', 'Wagon R', 'hatch', 'available', { next: 'Ready' }),
-        car('CAZ 4490', 'Alto', 'hatch', 'available', { partner: P, next: 'Ready' }),
-        car('CBA 1802', 'Alto', 'hatch', 'available', { next: 'Ready' }),
-        car('CAU 7765', 'Alto', 'hatch', 'available', { next: 'Ready' }),
-        car('PG 7754', 'Every', 'van', 'available', { next: 'Ready' }),
-        car('PK 2216', 'Every', 'van', 'available', { next: 'Ready' }),
-        car('CAQ 6680', 'Prius', 'sedan', 'available', { next: 'Ready' }),
-        car('CAR 2049', 'Prius', 'sedan', 'available', { next: 'Ready' }),
-        car('CAT 7046', 'Axio', 'sedan', 'available', { partner: P, next: 'Ready' }),
-        car('CAN 5521', 'Axio', 'sedan', 'available', { next: 'Ready' }),
-        car('CBB 8826', 'Spacia', 'hatch', 'available', { next: 'Ready' }),
-        car('CBN 4473', 'Spacia', 'hatch', 'available', { next: 'Ready' })
-      ] },
-      { status: 'rented', count: '9', cars: [
-        car('CBE 6612', 'Wagon R', 'hatch', 'rented', { next: 'R-0225 · Fri 23 Oct 8:00' }),
-        car('PH 4521', 'Every', 'van', 'rented', { next: 'R-0235 · Fri 23 Oct 8:00' }),
-        car('CBM 1340', 'Spacia', 'hatch', 'rented', { partner: P, next: 'R-0230 · Fri 23 Oct 8:00' }),
-        car('CBJ 1186', 'Wagon R', 'hatch', 'rented', { next: 'R-0233 · Mon 26 Oct 8:00' }),
-        car('CAY 3051', 'Wagon R', 'hatch', 'rented', { partner: P, next: 'R-0222' }),
-        car('CBH 2210', 'Alto', 'hatch', 'rented', { partner: P, next: 'R-0231 · swapped in' }),
-        car('CAV 6127', 'Alto', 'hatch', 'rented', { next: 'R-0223' }),
-        car('KX 5531', 'Prius', 'sedan', 'rented', { partner: P, next: 'R-0237' }),
-        car('CAS 3318', 'Axio', 'sedan', 'rented', { next: 'R-0220' })
-      ] },
-      { status: 'repair', count: '2', cars: [
-        car('CAA 9083', 'Alto', 'hatch', 'repair', { detail: 'AC fault', next: 'Cannot hand over · admin marks available' }),
-        car('PJ 0937', 'Every', 'van', 'repair', { partner: P, detail: 'Service', next: 'Service 23 Oct' })
-      ] },
-      { status: 'unavailable', count: '1', cars: [car('CAP 9912', 'Prius', 'sedan', 'unavailable', { partner: P, detail: 'back 25 Oct' })] }
-    ];
-    var fleet = [];
-    groups.forEach(function (g) { g.cars.forEach(function (c) { fleet.push({ plate: c.plate, status: c.status, warn: !!c.warning }); }); });
-    return { quick: [{"icon": "new-rental", "label": "අලුත් කුලියක් · New rental", "href": "05-NewRental-Customer-Desktop.dc.html"}, {"icon": "receive-return", "label": "ආපසු ගන්න · Receive return", "href": "07-Return-Return-Desktop.dc.html"}, {"icon": "record-payment", "label": "ගෙවීම · Record payment", "href": "09-Money-RecordPayment-Desktop.dc.html"}, {"icon": "expense", "label": "වියදමක් · Record expense", "href": "09-Money-RecordExpense-Desktop.dc.html"}, {"icon": "count-drawer", "label": "ලාච්චුව · Count drawer", "href": "09-Money-CountDrawer-Desktop.dc.html"}], fleetHrefs: { overdue: '06-Rentals-Overdue-Desktop.dc.html', available: '04-Cars-AllCars-Desktop.dc.html', rented: '06-Rentals-AllRentals-Desktop.dc.html', repair: '12-Maintenance-Maintenance-Desktop.dc.html', unavailable: '04-Cars-AllCars-Desktop.dc.html' },
-      twenty: 20, twentyfour: 24, twentysix: 26,
+    var fleet = [{ plate: 'CBC 5409', status: 'overdue' }];
+    ['CBF 7720', 'CBK 4127', 'CAX 8834'].forEach(function (p) { fleet.push({ plate: p, status: 'available' }); });
+    fleet.push({ plate: 'CBG 2967', status: 'available', warn: true });
+    ['CBL 0458', 'CBD 3375', 'CAZ 4490', 'CBA 1802', 'CAU 7765', 'PG 7754', 'PK 2216', 'CAQ 6680', 'CAR 2049', 'CAT 7046', 'CAN 5521', 'CBB 8826', 'CBN 4473'].forEach(function (p) { fleet.push({ plate: p, status: 'available' }); });
+    ['CBE 6612', 'PH 4521', 'CBM 1340', 'CBJ 1186', 'CAY 3051', 'CBH 2210', 'CAV 6127', 'KX 5531', 'CAS 3318'].forEach(function (p) { fleet.push({ plate: p, status: 'rented' }); });
+    fleet.push({ plate: 'CAA 9083', status: 'repair' }, { plate: 'PJ 0937', status: 'repair' }, { plate: 'CAP 9912', status: 'unavailable' });
+    return { quick: [{"icon": "new-rental", "label": "අලුත් කුලියක් · New rental", "href": "05-NewRental-Customer-Desktop.dc.html"}, {"icon": "receive-return", "label": "ආපසු ගන්න · Receive return", "href": "07-Return-Return-Desktop.dc.html"}, {"icon": "record-payment", "label": "ගෙවීම · Record payment", "href": "09-Money-RecordPayment-Desktop.dc.html"}],
+      fleetHrefs: { overdue: '06-Rentals-Overdue-Desktop.dc.html', available: '04-Cars-AllCars-Desktop.dc.html', rented: '06-Rentals-AllRentals-Desktop.dc.html', repair: '12-Maintenance-Maintenance-Desktop.dc.html', unavailable: '04-Cars-AllCars-Desktop.dc.html' },
+      eighteen: 18, twenty: 20,
       fleet: fleet,
-      groups: groups,
       rail: [
         { icon: 'car', label: 'වාහන', href: '02-Home-StaffHome-Desktop.dc.html', active: true },
         { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },

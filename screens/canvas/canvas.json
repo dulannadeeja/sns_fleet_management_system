@@ -80,7 +80,7 @@
   },
   "02-Home-OwnerHome-Desktop.dc.html": {
    "expand": "fill",
-   "h": 5093,
+   "h": 1702,
    "is_interactive": true,
    "page": "plate",
    "title": "02.1 Owner home · Desktop",
@@ -89,7 +89,7 @@
    "y": 3059
   },
   "02-Home-OwnerHome-Phone.dc.html": {
-   "h": 2946,
+   "h": 2247,
    "is_interactive": true,
    "page": "plate",
    "title": "02.1 Owner home · Phone",
@@ -127,7 +127,7 @@
   },
   "02-Home-StaffHome-Desktop.dc.html": {
    "expand": "fill",
-   "h": 4683,
+   "h": 934,
    "is_interactive": true,
    "page": "plate",
    "title": "02.2 Staff home · Desktop",
@@ -136,7 +136,7 @@
    "y": 3059
   },
   "02-Home-StaffHome-Phone.dc.html": {
-   "h": 2085,
+   "h": 1271,
    "is_interactive": true,
    "page": "plate",
    "title": "02.2 Staff home · Phone",

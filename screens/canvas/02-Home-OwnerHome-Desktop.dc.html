@@ -14,114 +14,243 @@
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
+.dash-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
+.dash-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:60px;padding:6px 20px;border-bottom:1px solid var(--line)}
+.dash-head h2{margin:0;font-size:18px;line-height:28px;font-weight:600}
+.dash-sub{font-size:14px;line-height:22px;color:var(--ink-muted)}
+.dash-more{margin-left:auto;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:15px;line-height:22px;font-weight:600;text-decoration:none;color:var(--sapphire)}
+.dash-group{padding:10px 20px 4px;font-size:14px;line-height:22px;font-weight:600;color:var(--ink-muted)}
+.dash-row{display:grid;grid-template-columns:40px minmax(0,1fr) auto 20px;gap:14px;align-items:center;min-height:64px;padding:10px 20px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.dash-row:last-child{border-bottom:0}
+.dash-row:hover{background:var(--paper);color:var(--ink)}
+.dash-row:focus-visible,.dash-more:focus-visible{outline:3px solid var(--sapphire);outline-offset:-3px}
+.dash-row-sm{min-height:52px;padding-top:6px;padding-bottom:6px}
+.dash-ico{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--radius-md);background:var(--sunken);color:var(--ink)}
+.dash-ico-overdue{background:var(--overdue-tint);color:var(--overdue)}
+.dash-ico-warn{background:var(--warning-tint);color:var(--warning)}
+.dash-t{display:block;font-size:16px;line-height:24px;font-weight:600}
+.dash-d{display:block;font-size:14px;line-height:22px;color:var(--ink-muted)}
+.dash-meta{font-size:15px;line-height:22px;color:var(--ink-muted);text-align:right;white-space:nowrap}
+.dash-fig{font-family:var(--font-plate);font-size:22px;line-height:28px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dash-fig small{font-family:var(--font-sans);font-size:14px;font-weight:500;color:var(--ink-muted)}
+.dash-arrow{color:var(--ink-muted)}
+.dash-foot{padding:10px 20px 14px;font-size:14px;line-height:22px;color:var(--ink-muted);border-top:1px solid var(--line)}
+.dash-car{display:grid;grid-template-columns:72px minmax(0,1fr) 20px;gap:12px;align-items:center;min-height:64px;padding:8px 20px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.dash-car:hover{background:var(--paper);color:var(--ink)}
+.dash-car:focus-visible{outline:3px solid var(--sapphire);outline-offset:-3px}
+.dash-thumb{display:block;width:72px;height:44px;border-radius:var(--radius-sm);background:var(--sunken);overflow:hidden}
 </style>
 </helmet>
 <div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; align-items: stretch; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
   <x-import component-from-global-scope="Plate.NavRail" items="{{rail}}" style="flex: none"></x-import>
   <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
-    <x-import component-from-global-scope="Plate.AppHeader" title="සුබ උදෑසනක් · Good morning" subtitle="Thu 22 Oct 2026 · 11:05" search="අංකය / මාදිලිය / නම හොයන්න" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
-    <main style="padding: 28px 32px 56px; display: flex; flex-direction: column; gap: 32px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
+    <x-import component-from-global-scope="Plate.AppHeader" title="අද · Today" subtitle="Thu 22 Oct 2026 · 11:05" search="අංකය / මාදිලිය / නම හොයන්න" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 24px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
 
       <x-import component-from-global-scope="Plate.AttentionBar" items="{{attention}}"></x-import>
 
-      <section style="display: flex; flex-direction: column; gap: 14px">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap">
-          <h2 style="margin: 0; font-size: 22px; line-height: 32px; font-weight: 600">මුදල් <span class="rt-en">· Money</span></h2>
-          <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">මේ වෙනකම් · so far today — ගණන් කළේ නැහැ, බැලුවේ නැහැ · not yet counted, not yet checked</span>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px">
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="අද ලැබුණු මුදල් · Money received" icon="wallet" state="මේ වෙනකම් · so far today — cash, bank and card are shown separately" note="Includes deposits received, as their own line. Not SNS earnings."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="ලාච්චුව · Drawer" icon="drawer" state="තවම ගණන් කළේ නැහැ · not counted yet — the expected figure appears when the drawer is counted" note="No difference is shown until the count."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="ගැලපීම · Bank &amp; card check" icon="link" state="තවම බැලුවේ නැහැ · not yet checked" note="Recorded payments count as paid now; the check happens at day end."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="Deposit තියාගෙන · Deposits held" icon="banknote" state="දැන් තියාගෙන ඉන්න මුදල · the balance held right now" note="ආදායම නොවේ · not income. Refunded or applied to a bill."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="Customer ණය · Customer debt" icon="users" state="4 customers · 1 over 30 days" note="Unpaid bills. Write-offs are SNS's loss only."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="Partner ට ගන්න පුළුවන් · Partners can cash out" icon="handshake" figure="{{payable}}" note="Final at the end of each day. Partners ask in their app; SNS pays and records it."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="අද · තවම අවසන් නැහැ · Today, not final yet" icon="eyeOff" state="අද දවස වහනකම් · until the day closes" note="Partner ට පේන්නේ නැහැ · partners can’t see it until it is final."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="SNS ආදායම · SNS earnings" icon="chart" state="Month to date" note="SNS cars’ rent plus SNS’s commission and shares on partner cars; profit is shown before depreciation. The sample data has no month total."></x-import>
-        </div>
-      </section>
+      <div style="display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(400px, 1fr); gap: 24px; align-items: start">
+        <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
 
-      <section style="display: flex; flex-direction: column; gap: 16px">
-        <h2 style="margin: 0; font-size: 22px; line-height: 32px; font-weight: 600">වාහන 30 <span class="rt-en">· Vehicles</span></h2>
-        <x-import component-from-global-scope="Plate.FleetStrip" cars="{{fleet}}" hrefs="{{fleetHrefs}}"></x-import>
-        <sc-for list="{{groups}}" as="g" hint-placeholder-count="5">
-          <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 8px">
-            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
-              <x-import component-from-global-scope="Plate.StatusChip" status="{{g.status}}" lang="si"></x-import>
-              <span class="rt-num" style="font-family: var(--font-plate); font-size: 22px; line-height: 28px; font-weight: 600">{{g.count}}</span>
-              <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">{{g.hint}}</span>
+          <section class="dash-card" aria-labelledby="h-decide">
+            <div class="dash-head">
+              <h2 id="h-decide">ඔබ බලන්න ඕන <span class="rt-en">· For you to decide</span></h2>
+              <a class="dash-more" href="02-Home-NeedsAttention-Desktop.dc.html">සියල්ල <span class="rt-en">· All</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px">
-              <sc-for list="{{g.cars}}" as="c" hint-placeholder-count="5">
-                <x-import component-from-global-scope="Plate.VehicleCard" plate="{{c.plate}}" model="{{c.model}}" body="{{c.body}}" status="{{c.status}}" status-detail="{{c.detail}}" next="{{c.next}}" partner="{{c.partner}}" partner-name="{{c.partnerName}}" warning="{{c.warning}}" lang="si"></x-import>
-              </sc-for>
+            <div class="dash-group">Admin අනුමැතියට 3 <span class="rt-en">· Waiting for approval</span></div>
+            <a class="dash-row" href="10-Approvals-Approvals-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="stamp" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">මිල වෙනස <span class="rt-en">· Price change</span></span><span class="dash-d">R‑0233 · CBJ 1186 · asked by Nimal · 4,500 → 4,000 a day</span></span>
+              <span class="dash-fig">− 5,000</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="10-Approvals-Approvals-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="swap" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">Swap දවස බෙදීම <span class="rt-en">· Swap-day split</span></span><span class="dash-d">R‑0231 · partner Sunil J. · swap on 20 Oct</span></span>
+              <span class="dash-meta">1 day</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="10-Approvals-Approvals-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="box" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">Accessory ගාස්තුව <span class="rt-en">· Accessory charge</span></span><span class="dash-d">R‑0218 · missing air pump · who gets it</span></span>
+              <span class="dash-fig">2,000</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <div class="dash-group" style="border-top: 1px solid var(--line)">විසඳන්න ඕන 3 <span class="rt-en">· Open items</span></div>
+            <a class="dash-row" href="02-Home-NeedsAttention-Desktop.dc.html">
+              <span class="dash-ico dash-ico-warn"><x-import component-from-global-scope="Plate.Icon" name="drawer" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">ලාච්චුව අඩුයි <span class="rt-en">· Drawer short</span></span><span class="dash-d">Evening count · not yet explained</span></span>
+              <span class="dash-fig">− 1,000</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="03-MorningCheck-Finished-Desktop.dc.html">
+              <span class="dash-ico dash-ico-warn"><x-import component-from-global-scope="Plate.Icon" name="question" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">CBG 2967 හම්බුණේ නැහැ <span class="rt-en">· Not found at the 7:30 check</span></span><span class="dash-d">Morning check · not yet explained</span></span>
+              <span class="dash-meta">7:30</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="18-Reservations-AllReservations-Desktop.dc.html">
+              <span class="dash-ico dash-ico-warn"><x-import component-from-global-scope="Plate.Icon" name="calendar" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">වෙන්කළ වාහනය සූදානම් නැහැ <span class="rt-en">· Reserved car not ready</span></span><span class="dash-d">RV‑0012 · PH 7734 · in repair until 27 Oct</span></span>
+              <span class="dash-meta">move before Mon 26 Oct</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+          </section>
+
+          <section class="dash-card" aria-labelledby="h-next">
+            <div class="dash-head">
+              <h2 id="h-next">ඉදිරි වැඩ <span class="rt-en">· Coming up</span></h2>
+              <a class="dash-more" href="06-Rentals-AllRentals-Desktop.dc.html">කුලී <span class="rt-en">· Rentals</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
             </div>
+            <a class="dash-row" href="06-Rentals-AllRentals-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="returnCar" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">හෙට 8:00 ට කලින් එන්න ඕන <span class="rt-en">· Due back by tomorrow 8:00</span></span><span class="dash-d rt-num">CBE 6612 · PH 4521 · CBM 1340</span></span>
+              <span class="dash-meta">3 cars</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="12-Maintenance-Maintenance-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="wrench" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">PJ 0937 service</span><span class="dash-d">Partner car · booked</span></span>
+              <span class="dash-meta">Fri 23 Oct</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="04-Cars-AllCars-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="pause" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">CAP 9912 owner use ඉවරයි <span class="rt-en">· Back from owner use</span></span><span class="dash-d">Temporarily unavailable until then</span></span>
+              <span class="dash-meta">Sun 25 Oct</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="11-Partners-CashOuts-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="handshake" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">Partner cash-outs</span><span class="dash-d">Partners ask in their app; SNS pays and records it</span></span>
+              <span class="dash-meta">when asked</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-row" href="04-Cars-CarDetailsOwner-Desktop.dc.html">
+              <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="calendar" size="{{twenty}}"></x-import></span>
+              <span><span class="dash-t">CBK 4127 insurance renewal</span><span class="dash-d">Renewal date on the car</span></span>
+              <span class="dash-meta">04 Dec 2026</span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+          </section>
+        </div>
+
+        <section class="dash-card" aria-labelledby="h-money">
+          <div class="dash-head">
+            <h2 id="h-money">මුදල් <span class="rt-en">· Money</span></h2>
+            <a class="dash-more" href="09-Money-MoneyToday-Desktop.dc.html">අද මුදල් <span class="rt-en">· Money today</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
+            <span class="dash-sub" style="flex-basis: 100%; margin-top: -8px; padding-bottom: 6px">හැම එකක්ම වෙනම · each figure is separate, never added together</span>
           </div>
-        </sc-for>
-      </section>
+          <a class="dash-row" href="09-Money-MoneyToday-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="wallet" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">අද ලැබුණු මුදල් <span class="rt-en">· Collected today</span></span><span class="dash-d">Cash, bank and card apart · not SNS earnings</span></span>
+            <span class="dash-fig">—</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <a class="dash-row" href="14-Reports-Reports-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="chart" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">SNS ආදායම <span class="rt-en">· SNS earnings</span></span><span class="dash-d">Month to date · profit shown before depreciation</span></span>
+            <span class="dash-fig">—</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <a class="dash-row" href="08-Customers-AllCustomers-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="users" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">Customer ණය <span class="rt-en">· Customer debt</span></span><span class="dash-d">Unpaid bills · 1 over 30 days</span></span>
+            <span class="dash-meta">4 customers</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <a class="dash-row" href="11-Partners-CashOuts-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="handshake" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">Partner ට ගෙවන්න <span class="rt-en">· Partner payable</span></span><span class="dash-d">Final · owed to partners, not SNS money</span></span>
+            <span class="dash-fig"><small>LKR </small>63,808</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <div class="dash-group" style="border-top: 1px solid var(--line)">තියාගෙන ඉන්න, තවම බලන්න ඕන <span class="rt-en">· Held, and not yet checked</span></div>
+          <a class="dash-row dash-row-sm" href="09-Money-MoneyToday-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="banknote" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">Deposit තියාගෙන <span class="rt-en">· Deposits held</span></span><span class="dash-d">ආදායම නොවේ · not income</span></span>
+            <span class="dash-fig">—</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <a class="dash-row dash-row-sm" href="11-Partners-CashOuts-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="eyeOff" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">අද, තවම අවසන් නැහැ <span class="rt-en">· Partners today, not final</span></span><span class="dash-d">Owner only · final when the day closes</span></span>
+            <span class="dash-fig">—</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <a class="dash-row dash-row-sm" href="09-Money-Drawer-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="drawer" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">ලාච්චුව <span class="rt-en">· Drawer</span></span><span class="dash-d">Expected figure after the count</span></span>
+            <span class="dash-meta">ගණන් කළේ නැහැ</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <a class="dash-row dash-row-sm" href="09-Money-BankCardCheck-Desktop.dc.html">
+            <span class="dash-ico"><x-import component-from-global-scope="Plate.Icon" name="link" size="{{twenty}}"></x-import></span>
+            <span><span class="dash-t">ගැලපීම <span class="rt-en">· Bank &amp; card</span></span><span class="dash-d">Paid now · checked at day end</span></span>
+            <span class="dash-meta">බැලුවේ නැහැ</span>
+            <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+          </a>
+          <div class="dash-foot">— : the sample data has no figure for this yet. Figures are whole rupees.</div>
+        </section>
+      </div>
 
-      <section style="display: flex; flex-direction: column; gap: 12px">
-        <h2 style="margin: 0; font-size: 20px; line-height: 30px; font-weight: 600">ඉදිරි වැඩ <span class="rt-en">· Coming up</span></h2>
-        <div style="display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
-          <sc-for list="{{upcoming}}" as="u" hint-placeholder-count="5">
-            <div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line)">
-              <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: var(--sunken); color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="{{u.icon}}" size="{{twenty}}"></x-import></span>
-              <span style="font-size: 16px; line-height: 26px; font-weight: 600">{{u.title}}</span>
-              <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">{{u.detail}}</span>
-            </div>
-          </sc-for>
+      <section style="display: flex; flex-direction: column; gap: 16px" aria-labelledby="h-cars">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+          <h2 id="h-cars" style="margin: 0; font-size: 22px; line-height: 32px; font-weight: 600">වාහන 30 <span class="rt-en">· Vehicles</span></h2>
+          <a class="dash-more" href="04-Cars-AllCars-Desktop.dc.html">වාහන 30ම බලන්න <span class="rt-en">· See all 30 cars</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
+        </div>
+        <x-import component-from-global-scope="Plate.FleetStrip" cars="{{fleet}}" hrefs="{{fleetHrefs}}"></x-import>
+        <div class="dash-card">
+          <div class="dash-head"><h2>අවධානයට ඕන වාහන 5 <span class="rt-en">· Cars that need a look</span></h2><span class="dash-sub">The other 25 are ready or rented on time</span></div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr))">
+            <a class="dash-car" href="06-Rentals-Overdue-Desktop.dc.html" style="border-right: 1px solid var(--line)">
+              <span class="dash-thumb"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" size="sm"></x-import></span>
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBC 5409" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="overdue" detail="+3h 05m" size="sm" lang="si"></x-import></span><span class="dash-d"><b style="font-weight: 600; color: var(--ink)">Wagon R · Partner</b> · Pradeep W. · R‑0216 · due 22 Oct 8:00</span></span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-car" href="03-MorningCheck-Finished-Desktop.dc.html">
+              <span class="dash-thumb"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" size="sm"></x-import></span>
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBG 2967" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="available" size="sm" lang="si"></x-import></span><span class="dash-d"><b style="font-weight: 600; color: var(--ink)">Wagon R · Partner</b> · Not found at the 7:30 check</span></span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-car" href="12-Maintenance-Maintenance-Desktop.dc.html" style="border-right: 1px solid var(--line)">
+              <span class="dash-thumb"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" size="sm"></x-import></span>
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAA 9083" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="repair" size="sm" lang="si"></x-import></span><span class="dash-d"><b style="font-weight: 600; color: var(--ink)">Alto · SNS</b> · AC fault · since 21 Oct</span></span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-car" href="12-Maintenance-Maintenance-Desktop.dc.html">
+              <span class="dash-thumb"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" size="sm"></x-import></span>
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="PJ 0937" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="repair" size="sm" lang="si"></x-import></span><span class="dash-d"><b style="font-weight: 600; color: var(--ink)">Every · Partner</b> · Service on 23 Oct</span></span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-car" href="04-Cars-AllCars-Desktop.dc.html" style="border-right: 1px solid var(--line); border-bottom: 0">
+              <span class="dash-thumb"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" size="sm"></x-import></span>
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAP 9912" size="sm"></x-import><x-import component-from-global-scope="Plate.StatusChip" status="unavailable" size="sm" lang="si"></x-import></span><span class="dash-d"><b style="font-weight: 600; color: var(--ink)">Prius · Partner</b> · Owner use · back 25 Oct</span></span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}" class="dash-arrow"></x-import>
+            </a>
+            <a class="dash-car" href="04-Cars-AllCars-Desktop.dc.html" style="border-bottom: 0; color: var(--sapphire); grid-template-columns: minmax(0, 1fr) 20px; font-size: 15px; font-weight: 600">
+              <span>වාහන 30ම බලන්න <span class="rt-en">· See all 30 cars, with photos</span></span>
+              <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import>
+            </a>
+          </div>
         </div>
       </section>
     </main>
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5093}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1702}}'>
 class Component extends DCLogic {
   renderVals() {
-    var P = true;
-    function car(plate, model, body, status, extra) { return Object.assign({ plate: plate, model: model, body: body, status: status, detail: null, next: null, partner: false, partnerName: null, warning: null }, extra || {}); }
-    var overdue = [car('CBC 5409', 'Wagon R', 'hatch', 'overdue', { partner: P, partnerName: 'Sunil J.', detail: '+3h 05m', next: 'Pradeep W. · R-0216 · deadline 22 Oct 8:00' })];
-    var available = [
-      car('CBK 4127', 'Wagon R', 'hatch', 'available', { partner: P, partnerName: 'Sunil J.', next: 'ආපසු ආවා · Returned 9:40 · R-0218' }),
-      car('CBF 7720', 'Wagon R', 'hatch', 'available', { next: 'Ready' }),
-      car('CAX 8834', 'Wagon R', 'hatch', 'available', { next: 'ආපසු ආවා · Returned 8:00 · R-0209' }),
-      car('CBG 2967', 'Wagon R', 'hatch', 'available', { partner: P, warning: { label: 'උදේ check එකේ හම්බුණේ නැහැ · not found at 7:30 check', icon: 'question' } }),
-      car('CBL 0458', 'Wagon R', 'hatch', 'available', { next: 'Ready' }),
-      car('CBD 3375', 'Wagon R', 'hatch', 'available', { next: 'Ready' }),
-      car('CAZ 4490', 'Alto', 'hatch', 'available', { partner: P, next: 'Ready' }),
-      car('CBA 1802', 'Alto', 'hatch', 'available', { next: 'Ready' }),
-      car('CAU 7765', 'Alto', 'hatch', 'available', { next: 'Ready' }),
-      car('PG 7754', 'Every', 'van', 'available', { next: 'Ready' }),
-      car('PK 2216', 'Every', 'van', 'available', { next: 'Tyre repaired today' }),
-      car('CAQ 6680', 'Prius', 'sedan', 'available', { next: 'Ready' }),
-      car('CAR 2049', 'Prius', 'sedan', 'available', { next: 'Ready' }),
-      car('CAT 7046', 'Axio', 'sedan', 'available', { partner: P, next: 'Ready' }),
-      car('CAN 5521', 'Axio', 'sedan', 'available', { next: 'Ready' }),
-      car('CBB 8826', 'Spacia', 'hatch', 'available', { next: 'Ready' }),
-      car('CBN 4473', 'Spacia', 'hatch', 'available', { next: 'Ready' })
-    ];
-    var rented = [
-      car('CBE 6612', 'Wagon R', 'hatch', 'rented', { next: 'R-0225 · return Fri 23 Oct 8:00' }),
-      car('PH 4521', 'Every', 'van', 'rented', { next: 'R-0235 · return Fri 23 Oct 8:00' }),
-      car('CBM 1340', 'Spacia', 'hatch', 'rented', { partner: P, next: 'R-0230 · return Fri 23 Oct 8:00' }),
-      car('CBJ 1186', 'Wagon R', 'hatch', 'rented', { next: 'R-0233 · return Mon 26 Oct 8:00' }),
-      car('CAY 3051', 'Wagon R', 'hatch', 'rented', { partner: P, next: 'R-0222' }),
-      car('CBH 2210', 'Alto', 'hatch', 'rented', { partner: P, next: 'R-0231 · swapped in 20 Oct' }),
-      car('CAV 6127', 'Alto', 'hatch', 'rented', { next: 'R-0223' }),
-      car('KX 5531', 'Prius', 'sedan', 'rented', { partner: P, next: 'R-0237' }),
-      car('CAS 3318', 'Axio', 'sedan', 'rented', { next: 'R-0220' })
-    ];
-    var repair = [
-      car('CAA 9083', 'Alto', 'hatch', 'repair', { detail: 'AC fault', next: 'Since 21 Oct · reason recorded' }),
-      car('PJ 0937', 'Every', 'van', 'repair', { partner: P, detail: 'Service', next: 'Service 23 Oct' })
-    ];
-    var unavailable = [car('CAP 9912', 'Prius', 'sedan', 'unavailable', { partner: P, detail: 'back 25 Oct', next: 'Owner use · reason recorded' })];
-    var all = overdue.concat(available, rented, repair, unavailable);
+    var fleet = [{ plate: 'CBC 5409', status: 'overdue' }];
+    ['CBK 4127', 'CBF 7720', 'CAX 8834'].forEach(function (p) { fleet.push({ plate: p, status: 'available' }); });
+    fleet.push({ plate: 'CBG 2967', status: 'available', warn: true });
+    ['CBL 0458', 'CBD 3375', 'CAZ 4490', 'CBA 1802', 'CAU 7765', 'PG 7754', 'PK 2216', 'CAQ 6680', 'CAR 2049', 'CAT 7046', 'CAN 5521', 'CBB 8826', 'CBN 4473'].forEach(function (p) { fleet.push({ plate: p, status: 'available' }); });
+    ['CBE 6612', 'PH 4521', 'CBM 1340', 'CBJ 1186', 'CAY 3051', 'CBH 2210', 'CAV 6127', 'KX 5531', 'CAS 3318'].forEach(function (p) { fleet.push({ plate: p, status: 'rented' }); });
+    fleet.push({ plate: 'CAA 9083', status: 'repair' }, { plate: 'PJ 0937', status: 'repair' }, { plate: 'CAP 9912', status: 'unavailable' });
     return { fleetHrefs: { overdue: '06-Rentals-Overdue-Desktop.dc.html', available: '04-Cars-AllCars-Desktop.dc.html', rented: '06-Rentals-AllRentals-Desktop.dc.html', repair: '12-Maintenance-Maintenance-Desktop.dc.html', unavailable: '04-Cars-AllCars-Desktop.dc.html' },
-      twenty: 20, twentyfour: 24, twentysix: 26,
-      payable: 63808,
-      fleet: all.map(function (c) { return { plate: c.plate, status: c.status, warn: !!c.warning }; }),
+      eighteen: 18, twenty: 20,
+      fleet: fleet,
       rail: [
         { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html', active: true },
         { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' },
@@ -137,23 +266,9 @@ class Component extends DCLogic {
       ],
       attention: [
         { label: 'පරක්කු · Overdue', count: 1, tone: 'overdue', icon: 'clockAlert', href: '06-Rentals-Overdue-Desktop.dc.html' },
-        { label: 'විසඳන්න ඕන · Open items', count: 1, tone: 'warning', icon: 'alert', href: '02-Home-NeedsAttention-Desktop.dc.html' },
+        { label: 'විසඳන්න ඕන · Open items', count: 3, tone: 'warning', icon: 'alert', href: '02-Home-NeedsAttention-Desktop.dc.html' },
         { label: 'Admin බලාපොරොත්තුවෙන් · Waiting for admin', count: 3, tone: 'info', icon: 'hourglass', href: '10-Approvals-Approvals-Desktop.dc.html' },
         { label: 'අද විශේෂ තීරණ · Today’s decisions', count: 2, tone: 'neutral', icon: 'flag', href: '02-Home-NeedsAttention-Desktop.dc.html' }
-      ],
-      groups: [
-        { status: 'overdue', count: '1', hint: 'Call the customer or extend — no fee runs automatically', cars: overdue },
-        { status: 'available', count: '17', hint: '1 not found at the 7:30 check', cars: available },
-        { status: 'rented', count: '9', hint: 'Sorted by return deadline', cars: rented },
-        { status: 'repair', count: '2', hint: '', cars: repair },
-        { status: 'unavailable', count: '1', hint: '', cars: unavailable }
-      ],
-      upcoming: [
-        { icon: 'clock', title: 'හෙට 8:00 ට කලින් · Due by tomorrow 8:00', detail: 'CBE 6612 · PH 4521 · CBM 1340' },
-        { icon: 'wrench', title: 'PJ 0937 service', detail: 'Fri 23 Oct' },
-        { icon: 'pause', title: 'CAP 9912 back from owner use', detail: 'Sun 25 Oct' },
-        { icon: 'handshake', title: 'Partner cash-outs', detail: 'When a partner asks' },
-        { icon: 'calendar', title: 'CBK 4127 insurance renewal', detail: '04 Dec 2026' }
       ]
     };
   }
