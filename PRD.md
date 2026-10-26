@@ -69,14 +69,14 @@ Agreed with Dulan, 26 Oct 2026.
 | 04 Cars | 04.1–04.6 | 1 | Not yet written |
 | 11 Partners: owners | 11.1–11.3 | 1 | Not yet written |
 | 05 New rental | 05.1–05.8 | 2 | Not yet written |
-| 06 Rentals | 06.1–06.7 | 2 | Not yet written |
+| 06 Rentals | 06.1–06.8 | 2 | Not yet written |
 | 07 Return | 07.1–07.3 | 2 | Not yet written |
 | 09 Money: payments | 09.3–09.5 | 2 | Not yet written |
 | 08 Customers: write-off | 08.6 | 2 | Not yet written |
-| 10 Approvals | 10.1–10.3 | 2 | Not yet written |
+| 10 Approvals | 10.1–10.4 | 2 | Not yet written |
 | 16 Documents: rental | 16.1–16.4 | 2 | Not yet written |
 | 02 Home: staff and search | 02.2, 02.4 | 2 | Not yet written |
-| Reservations | No screens yet | 2 | Not yet written |
+| 18 Reservations | 18.1–18.5 | 2 | Not yet written |
 | 09 Money: drawer, day and expenses | 09.1–09.2, 09.6–09.13 | 3 | Not yet written |
 | 11 Partners: cash-outs and portal | 11.4–11.8 | 3 | Not yet written |
 | 13 Payroll | 13.1–13.5 | 3 | Not yet written |
@@ -85,7 +85,7 @@ Agreed with Dulan, 26 Oct 2026.
 | 16 Documents: partner and payslip | 16.5–16.7 | 3 | Not yet written |
 | 02 Home: owner | 02.1, 02.3, 02.5–02.6 | 4 | Not yet written |
 | 14 Reports | 14.1–14.2 | 4 | Not yet written |
-| Starting data | No screens yet | 4 | Not yet written |
+| Starting data | No screen: loaded by the developer; the Imported marker is in 17.1, 08.2, 11.2 | 4 | Not yet written |
 | 17 System states, 19 Navigation | 17.1–17.2, 19.1 | All | Not yet written |
 
 ## 6. Rules for every module

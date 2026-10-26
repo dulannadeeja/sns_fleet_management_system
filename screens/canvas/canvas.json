@@ -23,7 +23,7 @@
   },
   "01-Start-ReadyToStart-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1199,
+   "h": 1040,
    "is_interactive": true,
    "page": "plate",
    "title": "01.3 Ready to start · setup checklist · Desktop",
@@ -61,7 +61,7 @@
   },
   "02-Home-NeedsAttention-Desktop.dc.html": {
    "expand": "fill",
-   "h": 871,
+   "h": 958,
    "is_interactive": true,
    "page": "plate",
    "title": "02.3 Needs attention · Desktop",
@@ -70,7 +70,7 @@
    "y": 3059
   },
   "02-Home-NeedsAttention-Phone.dc.html": {
-   "h": 907,
+   "h": 1022,
    "is_interactive": true,
    "page": "plate",
    "title": "02.3 Needs attention · Phone",
@@ -127,7 +127,7 @@
   },
   "02-Home-StaffHome-Desktop.dc.html": {
    "expand": "fill",
-   "h": 2500,
+   "h": 4550,
    "is_interactive": true,
    "page": "plate",
    "title": "02.2 Staff home · Desktop",
@@ -136,7 +136,7 @@
    "y": 3059
   },
   "02-Home-StaffHome-Phone.dc.html": {
-   "h": 1900,
+   "h": 2085,
    "is_interactive": true,
    "page": "plate",
    "title": "02.2 Staff home · Phone",
@@ -250,7 +250,7 @@
   },
   "04-Cars-CarDetailsOwner-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1750,
+   "h": 1873,
    "is_interactive": true,
    "page": "plate",
    "title": "04.2 Car details · owner · Desktop",
@@ -269,7 +269,7 @@
   },
   "04-Cars-CarDetailsStaff-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1439,
+   "h": 1610,
    "is_interactive": true,
    "page": "plate",
    "title": "04.3 Car details · staff · Desktop",
@@ -278,7 +278,7 @@
    "y": 11767
   },
   "04-Cars-CarDetailsStaff-Phone.dc.html": {
-   "h": 1560,
+   "h": 1728,
    "is_interactive": true,
    "page": "plate",
    "title": "04.3 Car details · staff · Phone",
@@ -392,7 +392,7 @@
   },
   "05-NewRental-Customer-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1024,
+   "h": 1117,
    "is_interactive": true,
    "page": "plate",
    "title": "05.1 1 · Customer and warnings · Desktop",
@@ -449,7 +449,7 @@
   },
   "05-NewRental-PriceChangeRequest-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1079,
+   "h": 1088,
    "is_interactive": true,
    "page": "plate",
    "title": "05.7 Price change needs admin · Desktop",
@@ -458,7 +458,7 @@
    "y": 22958
   },
   "05-NewRental-PriceChangeRequest-Phone.dc.html": {
-   "h": 1300,
+   "h": 1332,
    "is_interactive": true,
    "page": "plate",
    "title": "05.7 Price change needs admin · Phone",
@@ -506,7 +506,7 @@
   },
   "06-Rentals-AllRentals-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1640,
+   "h": 1577,
    "is_interactive": true,
    "page": "plate",
    "title": "06.1 Rentals · Desktop",
@@ -734,7 +734,7 @@
   },
   "08-Customers-CustomerDetails-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1070,
+   "h": 1039,
    "is_interactive": true,
    "page": "plate",
    "title": "08.2 Customer details · Desktop",
@@ -1057,7 +1057,7 @@
   },
   "10-Approvals-Approvals-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1000,
+   "h": 949,
    "is_interactive": true,
    "page": "plate",
    "title": "10.1 Approvals · Desktop",
@@ -1190,7 +1190,7 @@
   },
   "11-Partners-PartnerDetails-Desktop.dc.html": {
    "expand": "fill",
-   "h": 958,
+   "h": 980,
    "is_interactive": true,
    "page": "plate",
    "title": "11.2 Partner details · Desktop",
@@ -1199,7 +1199,7 @@
    "y": 50253
   },
   "11-Partners-PartnerDetails-Phone.dc.html": {
-   "h": 1220,
+   "h": 1520,
    "is_interactive": true,
    "page": "plate",
    "title": "11.2 Partner details · Phone",
@@ -1399,7 +1399,7 @@
   },
   "14-Reports-CarPerformance-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1147,
+   "h": 1042,
    "is_interactive": true,
    "page": "plate",
    "title": "14.2 Car performance · Desktop",
@@ -1418,7 +1418,7 @@
   },
   "14-Reports-Reports-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1060,
+   "h": 991,
    "is_interactive": true,
    "page": "plate",
    "title": "14.1 Reports · Desktop",
@@ -1596,7 +1596,7 @@
   },
   "17-System-States.dc.html": {
    "expand": "fill",
-   "h": 1344,
+   "h": 1629,
    "is_interactive": true,
    "page": "plate",
    "title": "17.1 System states · empty, offline, error, permission",
@@ -1613,6 +1613,139 @@
    "y": 360,
    "title": "19.1 Navigation A · labelled sidebar + top bar · Desktop",
    "page": "nav"
+  },
+  "06-Rentals-ExtendBlocked-Desktop.dc.html": {
+   "h": 728,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.8 Extend · blocked by a reservation · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 27658,
+   "expand": "fill"
+  },
+  "06-Rentals-ExtendBlocked-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.8 Extend · blocked by a reservation · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 27658
+  },
+  "10-Approvals-HigherPrice-Desktop.dc.html": {
+   "h": 1217,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.4 Approve a higher price on a partner car · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 48413,
+   "expand": "fill"
+  },
+  "10-Approvals-HigherPrice-Phone.dc.html": {
+   "h": 1053,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.4 Approve a higher price on a partner car · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 48413
+  },
+  "18-Reservations-AllReservations-Desktop.dc.html": {
+   "h": 1180,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.1 Reservations · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 78682,
+   "expand": "fill"
+  },
+  "18-Reservations-AllReservations-Phone.dc.html": {
+   "h": 1600,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.1 Reservations · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 78682
+  },
+  "18-Reservations-NewReservation-Desktop.dc.html": {
+   "h": 1002,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.2 New reservation · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 78682,
+   "expand": "fill"
+  },
+  "18-Reservations-NewReservation-Phone.dc.html": {
+   "h": 1940,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.2 New reservation · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 78682
+  },
+  "18-Reservations-ReservationDetails-Desktop.dc.html": {
+   "h": 706,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.3 Reservation details · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 80862,
+   "expand": "fill"
+  },
+  "18-Reservations-ReservationDetails-Phone.dc.html": {
+   "h": 1290,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.3 Reservation details · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 80862
+  },
+  "18-Reservations-MoveCar-Desktop.dc.html": {
+   "h": 973,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.4 Move to another car · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 80862,
+   "expand": "fill"
+  },
+  "18-Reservations-MoveCar-Phone.dc.html": {
+   "h": 940,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.4 Move to another car · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 80862
+  },
+  "18-Reservations-CancelNoShow-Desktop.dc.html": {
+   "h": 1207,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.5 Cancel or no-show · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 82392,
+   "expand": "fill"
+  },
+  "18-Reservations-CancelNoShow-Phone.dc.html": {
+   "h": 1200,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "18.5 Cancel or no-show · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 82392
   }
  },
  "createdOnFiles": {
@@ -1809,6 +1942,15 @@
    "size": 24,
    "page": "nav",
    "text": "Chosen 25 Oct 2026: A, the labelled sidebar. It now runs on every desktop screen (Plate NavRail). B and C are kept for reference. Ideas from real products on Mobbin. A: labelled sidebar grouped by job (Jobber, Shopify). B: five-area rail with a “today, in order” panel (Supabase, Neon). C: top tabs with a search that jumps anywhere (Bonsai, command menus). Sample data."
+  },
+  "plate_18": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "18 · Reservations · වෙන්කිරීම්",
+   "w": 240,
+   "x": 0,
+   "y": 78007
   }
  },
  "order": [
@@ -1982,7 +2124,21 @@
   "16-Documents-Payslip.dc.html",
   "17-System-States.dc.html",
   "17-System-DesignNotes.dc.html",
-  "19-Nav-A-Sidebar-Desktop.dc.html"
+  "19-Nav-A-Sidebar-Desktop.dc.html",
+  "06-Rentals-ExtendBlocked-Desktop.dc.html",
+  "06-Rentals-ExtendBlocked-Phone.dc.html",
+  "10-Approvals-HigherPrice-Desktop.dc.html",
+  "10-Approvals-HigherPrice-Phone.dc.html",
+  "18-Reservations-AllReservations-Desktop.dc.html",
+  "18-Reservations-AllReservations-Phone.dc.html",
+  "18-Reservations-NewReservation-Desktop.dc.html",
+  "18-Reservations-NewReservation-Phone.dc.html",
+  "18-Reservations-ReservationDetails-Desktop.dc.html",
+  "18-Reservations-ReservationDetails-Phone.dc.html",
+  "18-Reservations-MoveCar-Desktop.dc.html",
+  "18-Reservations-MoveCar-Phone.dc.html",
+  "18-Reservations-CancelNoShow-Desktop.dc.html",
+  "18-Reservations-CancelNoShow-Phone.dc.html"
  ],
  "pages": [
   {

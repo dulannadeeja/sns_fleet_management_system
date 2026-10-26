@@ -19,7 +19,7 @@ The claude.ai canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjb
 
 Every screen has a desktop and a phone version. Screen names follow `NN.n Name · Device`; files follow `NN-Module-Screen-Desktop` and `NN-Module-Screen-Phone`. Links stay on the same device.
 
-Modules: 01 Start, 02 Home, 03 Morning check, 04 Cars, 05 New rental, 06 Rentals, 07 Return, 08 Customers, 09 Money, 10 Approvals, 11 Partners, 12 Maintenance, 13 Payroll, 14 Reports, 15 Settings, 16 Documents, 17 System, 19 Navigation.
+Modules: 01 Start, 02 Home, 03 Morning check, 04 Cars, 05 New rental, 06 Rentals, 07 Return, 08 Customers, 09 Money, 10 Approvals, 11 Partners, 12 Maintenance, 13 Payroll, 14 Reports, 15 Settings, 16 Documents, 17 System, 18 Reservations, 19 Navigation.
 
 ## Keeping the canvas copy in step
 

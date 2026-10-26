@@ -1,4 +1,12 @@
-<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>04.2 Car details · owner · Phone (static preview)</title><style>/* SNS Rent Car · Plate — generated from tokens.json */
+<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>04.2 Car details · owner · Phone</title>
+<style>/* SNS Rent Car · Plate — font faces, loaded from the repository's fonts/ folder (SIL Open Font License). */
+@font-face { font-family: "Yaldevi"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-SemiBold.ttf") format("truetype"); }
+</style><style>/* SNS Rent Car · Plate — generated from tokens.json */
 :root, [data-theme="light"] {
   --paper: #eef1f0;
   --card: #ffffff;
@@ -59,7 +67,8 @@
 .caption { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
 .plate { font-family: var(--font-plate); font-size: 20px; line-height: 26px; font-weight: 600; }
 .figure { font-family: var(--font-plate); font-size: 26px; line-height: 34px; font-weight: 600; }
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
+
+
 
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */
 .rt, .rt * { box-sizing: border-box; }
@@ -453,25 +462,27 @@ a.rt-tab { text-decoration: none; }
 /* responsive 6: when a sheet or dialog is open, the sticky header and tab bar sit under its dimmed backdrop */
 .rt:has([role="dialog"], [aria-modal="true"]) :is(.rt-pagehead, .rt-tabs, .rt-header) { z-index: auto; }
 </style>
+
+
+
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
-</style>
-</head><body>
+</style></head><body>
 
 <div class="rt" style="width: 100%; min-width: 320px; min-height: 2740px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
-  <header class="rt-pagehead"><a class="rt-pagehead-back" href="02-Home-OwnerHome-Phone.html" aria-label="ආපසු · Back"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><div class="rt-pagehead-text"><div class="rt-pagehead-title">CBK 4127</div><div class="rt-pagehead-sub">S D De Silva · Owner · 11:05</div></div></header>
+  <span data-x-import="Plate.PageHeader" style="display: contents;"><header class="rt-pagehead"><a class="rt-pagehead-back" href="02-Home-OwnerHome-Phone.html" aria-label="ආපසු · Back"><svg class="rt-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a><div class="rt-pagehead-text"><div class="rt-pagehead-title">CBK 4127</div><div class="rt-pagehead-sub">S D De Silva · Owner · 11:05</div></div></header></span>
   <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px 16px 24px">
-    <div style="display: flex; align-items: center; justify-content: center; height: 170px; padding: 6px 32px; background: var(--sunken); border-radius: 16px"><div style="width: 100%; height: 100%"><img class="rt-vimg" src="../../../design-system/assets/vehicles-512/sns-vehicle-wagon-r.png" alt="" loading="lazy" decoding="async" draggable="false"/></div></div>
+    <div style="display: flex; align-items: center; justify-content: center; height: 170px; padding: 6px 32px; background: var(--sunken); border-radius: 16px"><span data-x-import="Plate.VehicleImage" style="display: contents; width: 100%; height: 100%"><img class="rt-vimg" src="../../../design-system/assets/vehicles-512/sns-vehicle-wagon-r.png" alt="" loading="eager" decoding="async" draggable="false"></span></div>
 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
-  <span class="rt-plate rt-plate-lg" aria-label="අංකය CBK 4127">CBK 4127</span>
-  <span class="rt-chip rt-chip-available"><svg class="rt-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span>නිදහස්</span></span>
+  <span data-x-import="Plate.PlateBadge" style="display: contents;"><span class="rt-plate rt-plate-lg" aria-label="අංකය CBK 4127">CBK 4127</span></span>
+  <span data-x-import="Plate.StatusChip" style="display: contents;"><span class="rt-chip rt-chip-available"><svg class="rt-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"></path></svg><span>නිදහස්</span></span></span>
 </div>
 <div style="font-size: 16px; line-height: 26px">Wagon R · Partner · Sunil Jayasinghe</div>
     <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
   <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">දැන් <span class="rt-en">· Now</span></h2></div>
   <div style="display: flex; gap: 12px; align-items: flex-start">
-    <span style="display: inline-flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--available-tint); color: var(--available)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span>
+    <span style="display: inline-flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--available-tint); color: var(--available)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"></path></svg></span></span>
     <div style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px; font-weight: 600">අද 9:40 ට ආපසු ආවා <span class="rt-en">· Returned today 9:40</span></span><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">R‑0218 · Kasun P. · bill paid · Nimal</span></div>
   </div>
   <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; line-height: 24px">
@@ -481,17 +492,17 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
   <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ලියකියවිලි සහ සර්විස් <span class="rt-en">· Papers and service</span></h2></div>
   <div style="display: flex; flex-direction: column">
     <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line)">
-      <div style="color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h4"/></svg></div>
+      <span data-x-import="Plate.Icon" style="display: contents; color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h4"></path></svg></span>
       <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">රක්ෂණය <span class="rt-en">· Insurance</span></span><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">until 04 Dec 2026 · 43 days left</span></span>
       <span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600">වලංගුයි</span>
     </div>
     <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line)">
-      <div style="color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16a3 3 0 0 1 6 0M14 10h4M14 14h3"/></svg></div>
+      <span data-x-import="Plate.Icon" style="display: contents; color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M6 16a3 3 0 0 1 6 0M14 10h4M14 14h3"></path></svg></span>
       <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">ආදායම් බලපත්‍රය <span class="rt-en">· Revenue licence</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">දිනය සටහන් කර නැහැ · not recorded</span></span>
       <a href="04-Cars-EditCar-Phone.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1.5px dashed var(--line-strong); border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none">දිනය දාන්න</a>
     </div>
     <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 0">
-      <div style="color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg></div>
+      <span data-x-import="Plate.Icon" style="display: contents; color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"></path></svg></span>
       <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 26px">සර්විස් <span class="rt-en">· Service</span></span><span class="rt-num" style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">last 09 Oct 2026 · LKR 6,500 · Sunil's cost · next: not set</span></span>
       <a href="12-Maintenance-ServiceRecord-Phone.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1.5px dashed var(--line-strong); border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none">ඊළඟ එක දාන්න</a>
     </div>
@@ -502,13 +513,13 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
     <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: 12px">
       <span style="font-size: 15px; line-height: 24px; font-weight: 600">අවසන් · ගන්න පුළුවන් <span class="rt-en">· Final, ready to cash out</span></span>
       <span class="rt-num" style="font-family: var(--font-plate); font-size: 24px; line-height: 32px; font-weight: 600"><span style="font-size: 14px; font-weight: 500; color: var(--ink-muted)">LKR </span>18,508.75</span>
-      <div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="rt-pill rt-pill-finalised"><svg class="rt-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>අවසන් කළා</span></span></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap"><span data-x-import="Plate.StatePill" style="display: contents;"><span class="rt-pill rt-pill-finalised"><svg class="rt-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span>අවසන් කළා</span></span></span></div>
       <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Sunil sees this and can ask to cash it out</span>
     </div>
     <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: 12px">
       <span style="font-size: 15px; line-height: 24px; font-weight: 600">අන්තිමට ගත්තේ <span class="rt-en">· Last cash-out</span></span>
       <span class="rt-num" style="font-family: var(--font-plate); font-size: 24px; line-height: 32px; font-weight: 600"><span style="font-size: 14px; font-weight: 500; color: var(--ink-muted)">LKR </span>39,400</span>
-      <div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="rt-pill rt-pill-paid"><svg class="rt-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg><span>ගෙව්වා</span></span></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap"><span data-x-import="Plate.StatePill" style="display: contents;"><span class="rt-pill rt-pill-paid"><svg class="rt-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"></path></svg><span>ගෙව්වා</span></span></span></div>
       <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">16 Oct · earnings up to 15 Oct</span>
     </div>
   </div>
@@ -519,7 +530,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
     <span style="color: var(--ink-muted)">දවසකට · Daily rate</span><span class="rt-num" style="font-weight: 600; text-align: right">LKR 4,500</span><span style="color: var(--ink-muted)">දිනකට km · Included per day</span><span class="rt-num" style="font-weight: 600; text-align: right">100 km</span><span style="color: var(--ink-muted)">වැඩි km · Extra per km</span><span class="rt-num" style="font-weight: 600; text-align: right">LKR 25</span><span style="color: var(--ink-muted)">SNS commission</span><span class="rt-num" style="font-weight: 600; text-align: right">15%</span><span style="color: var(--ink-muted)">දිගු කුලී · Long-rental surcharge</span><span class="rt-num" style="font-weight: 600; text-align: right">LKR 500 / day from day 6</span><span style="color: var(--ink-muted)">මුදල් ගැනීම · Cash-out</span><span class="rt-num" style="font-weight: 600; text-align: right">any day · partner asks</span>
   </div>
   <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">වෙනස් කළොත් අලුත් කුලී වලට පමණයි · changes apply to new rentals only</span>
-</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+</section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">වෙන්කිරීම් <span class="rt-en">· Reservations</span></h2><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">No reservation on CBK 4127 in the next 30 days. A reservation holds this car for its days; no other rental can take it then.</span><div><a href="18-Reservations-NewReservation-Phone.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M4 10h16M9 3v4M15 3v4M12 13v5M9.5 15.5h5"></path></svg></span><span>වෙන් කරන්න · Reserve CBK 4127</span></a></div></section><section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
   <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ඉතිහාසය <span class="rt-en">· History</span></h2></div>
   <div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
       <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">අද 9:52</span>
@@ -540,8 +551,8 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
 </section>
   </div>
   <div style="display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px; padding: 12px 16px; background: var(--card); border-top: 1px solid var(--line)">
-    <a href="04-Cars-ChangeStatus-Phone.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg><span>තත්ත්වය</span></a>
-    <a href="05-NewRental-Customer-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>අලුත් කුලියක්</span></a>
+    <a href="04-Cars-ChangeStatus-Phone.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"></path></svg></span><span>තත්ත්වය</span></a>
+    <a href="05-NewRental-Customer-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span><span>අලුත් කුලියක්</span></a>
   </div>
 </div>
 </body></html>

@@ -20,8 +20,8 @@
  {
   "name": "01-Start-ReadyToStart-Desktop",
   "w": 1280,
-  "canvasH": 1199,
-  "contentH": 1199,
+  "canvasH": 1040,
+  "contentH": 1040,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -56,8 +56,8 @@
  {
   "name": "02-Home-NeedsAttention-Desktop",
   "w": 1280,
-  "canvasH": 871,
-  "contentH": 871,
+  "canvasH": 958,
+  "contentH": 958,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -65,8 +65,8 @@
  {
   "name": "02-Home-NeedsAttention-Phone",
   "w": 390,
-  "canvasH": 907,
-  "contentH": 907,
+  "canvasH": 1022,
+  "contentH": 1022,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -118,9 +118,9 @@
  },
  {
   "name": "02-Home-StaffHome-Desktop",
-  "w": 1440,
-  "canvasH": 2500,
-  "contentH": 4558,
+  "w": 1280,
+  "canvasH": 4550,
+  "contentH": 4550,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -128,8 +128,8 @@
  {
   "name": "02-Home-StaffHome-Phone",
   "w": 390,
-  "canvasH": 1900,
-  "contentH": 1943,
+  "canvasH": 2085,
+  "contentH": 2085,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -236,8 +236,8 @@
  {
   "name": "04-Cars-CarDetailsOwner-Desktop",
   "w": 1280,
-  "canvasH": 1750,
-  "contentH": 1750,
+  "canvasH": 1873,
+  "contentH": 1873,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -254,8 +254,8 @@
  {
   "name": "04-Cars-CarDetailsStaff-Desktop",
   "w": 1280,
-  "canvasH": 1439,
-  "contentH": 1439,
+  "canvasH": 1610,
+  "contentH": 1610,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -263,8 +263,8 @@
  {
   "name": "04-Cars-CarDetailsStaff-Phone",
   "w": 390,
-  "canvasH": 1560,
-  "contentH": 1560,
+  "canvasH": 1728,
+  "contentH": 1728,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -371,8 +371,8 @@
  {
   "name": "05-NewRental-Customer-Desktop",
   "w": 1280,
-  "canvasH": 1024,
-  "contentH": 1024,
+  "canvasH": 1117,
+  "contentH": 1117,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -425,8 +425,8 @@
  {
   "name": "05-NewRental-PriceChangeRequest-Desktop",
   "w": 1280,
-  "canvasH": 1079,
-  "contentH": 1079,
+  "canvasH": 1088,
+  "contentH": 1088,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -434,8 +434,8 @@
  {
   "name": "05-NewRental-PriceChangeRequest-Phone",
   "w": 390,
-  "canvasH": 1300,
-  "contentH": 1300,
+  "canvasH": 1332,
+  "contentH": 1332,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -479,8 +479,8 @@
  {
   "name": "06-Rentals-AllRentals-Desktop",
   "w": 1280,
-  "canvasH": 1640,
-  "contentH": 1640,
+  "canvasH": 1577,
+  "contentH": 1577,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -505,6 +505,24 @@
  },
  {
   "name": "06-Rentals-Extend-Phone",
+  "w": 390,
+  "canvasH": 844,
+  "contentH": 844,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "06-Rentals-ExtendBlocked-Desktop",
+  "w": 1280,
+  "canvasH": 728,
+  "contentH": 728,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "06-Rentals-ExtendBlocked-Phone",
   "w": 390,
   "canvasH": 844,
   "contentH": 844,
@@ -695,8 +713,8 @@
  {
   "name": "08-Customers-CustomerDetails-Desktop",
   "w": 1280,
-  "canvasH": 1070,
-  "contentH": 1070,
+  "canvasH": 1039,
+  "contentH": 1039,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1001,8 +1019,8 @@
  {
   "name": "10-Approvals-Approvals-Desktop",
   "w": 1280,
-  "canvasH": 1000,
-  "contentH": 1000,
+  "canvasH": 949,
+  "contentH": 949,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1030,6 +1048,24 @@
   "w": 390,
   "canvasH": 930,
   "contentH": 930,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "10-Approvals-HigherPrice-Desktop",
+  "w": 1280,
+  "canvasH": 1217,
+  "contentH": 1217,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "10-Approvals-HigherPrice-Phone",
+  "w": 390,
+  "canvasH": 1053,
+  "contentH": 1053,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1127,8 +1163,8 @@
  {
   "name": "11-Partners-PartnerDetails-Desktop",
   "w": 1280,
-  "canvasH": 958,
-  "contentH": 958,
+  "canvasH": 980,
+  "contentH": 980,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1136,8 +1172,8 @@
  {
   "name": "11-Partners-PartnerDetails-Phone",
   "w": 390,
-  "canvasH": 1220,
-  "contentH": 1220,
+  "canvasH": 1520,
+  "contentH": 1520,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1325,8 +1361,8 @@
  {
   "name": "14-Reports-CarPerformance-Desktop",
   "w": 1280,
-  "canvasH": 1147,
-  "contentH": 1147,
+  "canvasH": 1042,
+  "contentH": 1042,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1343,8 +1379,8 @@
  {
   "name": "14-Reports-Reports-Desktop",
   "w": 1280,
-  "canvasH": 1060,
-  "contentH": 1060,
+  "canvasH": 991,
+  "contentH": 991,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1523,8 +1559,98 @@
  {
   "name": "17-System-States",
   "w": 1280,
-  "canvasH": 1344,
-  "contentH": 1344,
+  "canvasH": 1629,
+  "contentH": 1629,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-AllReservations-Desktop",
+  "w": 1280,
+  "canvasH": 1180,
+  "contentH": 1180,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-AllReservations-Phone",
+  "w": 390,
+  "canvasH": 1600,
+  "contentH": 1600,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-CancelNoShow-Desktop",
+  "w": 1280,
+  "canvasH": 1207,
+  "contentH": 1207,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-CancelNoShow-Phone",
+  "w": 390,
+  "canvasH": 1200,
+  "contentH": 1200,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-MoveCar-Desktop",
+  "w": 1280,
+  "canvasH": 973,
+  "contentH": 973,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-MoveCar-Phone",
+  "w": 390,
+  "canvasH": 940,
+  "contentH": 940,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-NewReservation-Desktop",
+  "w": 1280,
+  "canvasH": 1002,
+  "contentH": 1002,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-NewReservation-Phone",
+  "w": 390,
+  "canvasH": 1940,
+  "contentH": 1940,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-ReservationDetails-Desktop",
+  "w": 1280,
+  "canvasH": 706,
+  "contentH": 706,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "18-Reservations-ReservationDetails-Phone",
+  "w": 390,
+  "canvasH": 1290,
+  "contentH": 1290,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

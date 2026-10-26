@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>18.5 Cancel or no-show · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railG}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="වෙන්කිරීම අවලංගු · Cancel" subtitle="RV‑0009 · Chamari F." user="Nimal" role="Staff · සේවක" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 32px 28px 56px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box">
+      <div style="width: 100%; max-width: 720px; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><section style="display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="rt-num" style="font-size: 18px; font-weight: 600">RV‑0009</span><x-import component-from-global-scope="Plate.PlateBadge" plate="KX 2190" size="sm"></x-import><span style="font-size: 14px; color: var(--ink-muted)">Prius · Chamari F. · Sat 24 Oct 12:00</span></div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Advance received</span><span class="rt-num" style=" text-align: right; font-weight: 500">LKR 6,500 · cash</span></div></section><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මොකක්ද වුණේ? <span class="rt-en">· What happened</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input checked="" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">අවලංගු කළා <span class="rt-en">· Cancelled</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">the customer called to cancel</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">ආවේ නැහැ <span class="rt-en">· No-show</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">the customer did not come; staff mark it by hand</span></span></label></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ඇයි? <span class="rt-en">· Reason</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><textarea placeholder="Why the reservation ends" rows="3" style="padding: 12px 14px; border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; line-height: 26px; resize: vertical; border: 2px solid var(--sapphire)"></textarea></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Cancellation ගාස්තුව <span class="rt-en">· Cancellation fee</span></span><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input checked="" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">ගාස්තුවක් නැහැ <span class="rt-en">· No fee</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">the advance is refunded in full</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; line-height: 24px; font-weight: 600">ගාස්තුවක් තියාගන්න <span class="rt-en">· Keep a fee</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">authorised person only · fee is 100% SNS</span></span></label></div><section style="display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--card); border: 2px solid var(--sapphire); border-radius: 16px"><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">Advance received</span><span class="rt-num" style=" text-align: right; font-weight: 500">LKR 6,500</span><span style="">Fee kept</span><span class="rt-num" style=" text-align: right; font-weight: 500">LKR 0</span><span style="border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 4px; font-weight: 600;">Refund to Chamari F.</span><span class="rt-num" style="border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 4px; font-weight: 600; text-align: right; font-weight: 600">LKR 6,500 · cash</span></div></section><div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sunken); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><x-import component-from-global-scope="Plate.Icon" name="info" size="{{twenty}}" style="flex: none"></x-import><span>The refund is recorded on the reservation as its own line, not as an expense. KX 2190 is free again for those days.</span></div></div><div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><x-import component-from-global-scope="Plate.Button" disabled="{{yes}}" full="{{yes}}" icon="x">අවලංගු කරන්න · End reservation</x-import><a class="rt-btn rt-btn-quiet rt-btn-full" href="18-Reservations-ReservationDetails-Desktop.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>ආපසු · Keep reservation</span></a></div></div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1210}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, railG: [
+        { icon: 'car', label: 'වාහන', href: '02-Home-StaffHome-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' , active: true },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'drawer', label: 'ලාච්චුව', href: '09-Money-Drawer-Desktop.dc.html' },
+        { icon: 'check', label: 'උදේ check', href: '03-MorningCheck-InProgress-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මගේ පඩිපත', href: '13-Payroll-MyPayslip-Desktop.dc.html' }
+      ] };
+  }
+}
+</script>
+</body>
+</html>
