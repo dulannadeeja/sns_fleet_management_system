@@ -2,7 +2,7 @@
 
 What the SNS Rent Car system must do, written as stories a developer can build and a tester can check.
 
-This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-46) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
+This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-47) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
 Status of this draft: front section and Phase 1 stories, written with Dulan from 26 Oct 2026, for review. Phases 2 to 4 are not yet written.
 
@@ -231,13 +231,14 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Status:** Confirmed.
 - **Phase:** 1.
 - **Roles:** Owner.
-- **Story:** As the owner, I add the admin and staff and see everyone who has an account, so that each person has their own sign-in.
+- **Story:** As the owner, I add the admin and staff, see everyone who has an account and turn off the account of someone who leaves, so that each person has their own sign-in.
 - **Rules:**
   - SNS has one primary owner, one additional admin and three staff; each partner has one account for all their cars. System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - A new person signs in with their phone number, gets a first password to change at first sign-in, and starts with their role's default permissions, which the owner can then change (ST-15.1). Sinhala is the default language (PR-01).
   - A partner's account is made when the partner is added (ST-11.2).
-  - Adding a person is recorded in the activity log (PR-05).
-- **Checks:** AT-46. *Proposed check:* a new staff member starts with the agreed staff defaults and must change the first password before anything else.
+  - When someone leaves, the owner turns off their account, with a reason: sign-in stops, and everything they recorded keeps their name. A partner's balance stays and can still be paid out. The owner can turn it back on. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
+  - Adding a person and turning an account off or on are recorded in the activity log (PR-05).
+- **Checks:** AT-46. AT-47 "The owner turns off the account of a staff member who left: they can no longer sign in; everything they recorded keeps their name". *Proposed check:* a new staff member starts with the agreed staff defaults and must change the first password before anything else.
 - **Screens:** 15.3 People, 15.4 Add a person.
 - **Decisions needed:** DN-01 (whether anyone besides the owner may add people), DN-03.
 
@@ -477,11 +478,10 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 ### Gaps found while writing Phase 1
 
-Questions for review; none is answered in a story.
+Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off) are updated together once all are decided.
 
 | Gap | Where | What it needs |
 | --- | --- | --- |
-| Turning off an account when someone leaves, or a partner stops | 15.3 People shows "Active" | The system design does not say; a rule from the owner |
 | Removing or ending a customer flag | 08.5 | The system design does not say |
 | Whether a customer can be saved before all copies are in (handover stays blocked either way) | 08.3 asks for every copy to save | Imported customers may arrive without copies, so saving cannot always require them |
 | Whether a change to a starting package changes the existing cars of that type | 04.6 | The system design says only that new cars start with it |

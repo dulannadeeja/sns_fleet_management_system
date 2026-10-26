@@ -84,6 +84,8 @@ Customer-facing accounts are not confirmed. Customer document delivery is throug
 
 **Sign-in.** Everyone (owner, admins, staff, partners) signs in with their own phone number and password; a first password is changed at the first sign-in. Until login recovery is decided (§18), the primary owner resets a forgotten password. Confirmed: agreed by the owner, recorded by Dulan.
 
+**Turning off an account.** When a staff member or admin leaves, or a partner stops, the primary owner turns off their account, with a reason. Their sign-in stops at once. Nothing they recorded changes, and their name stays on it. A partner's cars, final earnings and balance stay; an authorised person can still pay out what is owed. The owner can turn the account back on. Confirmed: agreed by the owner, recorded by Dulan.
+
 ### 3.2 Default permissions
 
 All critical permissions are configurable. The following are agreed defaults, not hard-coded role restrictions.
@@ -575,6 +577,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-44 | A partner without a bank account asks to cash out | An authorised person pays cash at the branch and records it; the payout is recorded once, as for a bank payout |
 | AT-45 | A car's insurance expires in 30 days, with the starting reminder settings | It appears in Upcoming work; the owner can change how early |
 | AT-46 | A staff member forgets their password | The primary owner resets it; the staff member changes it at the next sign-in |
+| AT-47 | The owner turns off the account of a staff member who left | They can no longer sign in; everything they recorded keeps their name and is unchanged |
 
 ## 20. Readiness and next steps
 
