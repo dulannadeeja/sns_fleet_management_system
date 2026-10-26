@@ -412,6 +412,8 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | Bank/card/payment-provider integration | Excluded; manual recording |
 | Separate driver records | Excluded |
 | Attendance and automatic overtime | Excluded |
+| GPS tracking | Excluded (approved proposal; recorded by Dulan 26 Oct 2026) |
+| App-store app | Excluded; the website works like an app on a phone (approved proposal; recorded by Dulan 26 Oct 2026) |
 | Price, phases, payments and support | Set by the approved proposal |
 | Hosting vendor and technology stack | Open |
 

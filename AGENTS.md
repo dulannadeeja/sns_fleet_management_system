@@ -60,6 +60,7 @@ Screens show sample data and labelled examples. They illustrate the requirements
 | Path | What it is |
 | --- | --- |
 | `SNS_SYSTEM_DESIGN.md` | The source of truth (rank 1). |
+| `PRD.md` | Product requirements (rank 2), derived from the source of truth. In progress. |
 | `change-requests/`, `addenda/` | Change requests to the frozen proposal, and addenda once the owner agrees. |
 | `proposal/` | The approved, frozen client proposal (PDF and HTML). Never edit. |
 | `design-system/` | The Plate design system (master): tokens, components, previews and the image copies they use (`design-system/assets/`). |
