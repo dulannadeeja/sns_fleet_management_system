@@ -18,7 +18,7 @@ This document consolidates the decisions made with Dulan for the proposed SNS Re
 
 Later stakeholder decisions supersede this document. Update this document before propagating changes into implementation tasks or a client proposal. Continue unresolved decisions with the stakeholder one question at a time.
 
-**Single source of truth.** This file, `E:\sns_fleet_managment_system\SNS_SYSTEM_DESIGN.md`, is the one source of truth for requirements and decisions. Every other reference follows it; where one disagrees, this document wins and the other is corrected.
+**Single source of truth.** This file, `SNS_SYSTEM_DESIGN.md` at the repository root, is the one source of truth for requirements and decisions. Every other reference follows it; where one disagrees, this document wins and the other is corrected.
 
 **Companion references (latest only):**
 

@@ -4,18 +4,11 @@ Read this before doing any work in this folder. It applies to every agent and to
 
 ## 0. Change control (mandatory)
 
-Every task follows **`.agents/skills/sns-change-control/SKILL.md`**. Read it before your first change. In short:
-
-1. Classify the task (question, decision, scope, visual, implementation, inconsistency, housekeeping).
-2. Read the source of truth and the files you will touch. Never work from memory.
-3. Write the impact analysis across all files before editing.
-4. Stop and ask the stakeholder, one question at a time, on any conflict, open item, commercial change, final money, permissions, deletes or ambiguity.
-5. Update `SNS_SYSTEM_DESIGN.md` **first**, then PRD → TRD → design system → screens → proposal addendum → agent files → code.
-6. Run the sync audit, commit to git, and report what changed, what didn't and what is still open.
+Every task follows **`.agents/skills/sns-change-control/SKILL.md`**. Read it before your first change, and follow its steps in order.
 
 ## 1. One source of truth
 
-**`E:\sns_fleet_managment_system\SNS_SYSTEM_DESIGN.md`** is the single source of truth for requirements, business rules and decisions.
+**`SNS_SYSTEM_DESIGN.md`** (repository root) is the single source of truth for requirements, business rules and decisions.
 
 - Read it first, every session. Use its status labels exactly: Confirmed, Derived control, Proposed, Open, Deferred.
 - If anything else (a screen, the proposal, a note, your memory, an earlier chat) disagrees with it, the design doc wins. Report the conflict; don't silently follow the other source.
@@ -46,7 +39,7 @@ Screens show sample data and labelled examples. They illustrate the requirements
 
 ## 3a. History
 
-- This folder should be a git repository (run `git init` once if it is not yet). One commit per change, after the sync audit; message `type(scope): summary` with the source-of-truth sections, AT-ids and who decided. No version history inside the design doc.
+- This folder is a git repository. Work on the `development` branch. One commit per change, after the sync audit; message `type(scope): summary` with the source-of-truth sections, AT-ids and who decided. No version history inside the design doc.
 - Future PRD (`PRD.md`) and TRD (`TRD.md`) are derived from the design doc; every item cites its section or AT-id.
 
 ## 4. Rules that always apply
