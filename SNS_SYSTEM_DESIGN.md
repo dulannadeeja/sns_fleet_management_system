@@ -54,7 +54,8 @@ SNS primarily serves customers from its local area because trust is important wh
 | Interface | Sinhala default; English switch per user |
 | Rentals | Walk-in rentals, no advance reservations |
 | Initial data | Fresh start, zero opening balances, no historical imports |
-| Budget and hosting | Deferred for later decision |
+| Price, phases, payments and support | Set by the approved proposal (`proposal/`) |
+| Hosting vendor and technology stack | Open |
 
 Any cash introduced after launch must be recorded as a cash movement, not treated as rental earnings.
 
@@ -411,7 +412,8 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | Bank/card/payment-provider integration | Excluded; manual recording |
 | Separate driver records | Excluded |
 | Attendance and automatic overtime | Excluded |
-| Hosting, vendor, stack, budget, delivery price | Undecided |
+| Price, phases, payments and support | Set by the approved proposal |
+| Hosting vendor and technology stack | Open |
 
 No additional scope is authorised merely by appearing as a proposed technical option in this document.
 
@@ -470,7 +472,7 @@ This section organises the confirmed behaviour for future engineering discussion
 
 | Open decision | Consequence if unresolved | Decision owner |
 | --- | --- | --- |
-| Backup frequency, acceptable data loss, recovery time | Cannot define recovery design or reliable operating cost | SNS owner with developer |
+| Acceptable data loss and recovery time. Backups run automatically every day: Confirmed by the client-approved proposal (Phase 4), recorded by Dulan 26 Oct 2026 | Cannot define recovery design or reliable operating cost | SNS owner with developer |
 | Outage procedure for an online-only branch | Staff may have no agreed process during downtime | SNS owner |
 | Document retention, deletion, access scope | Sensitive identity documents may be retained or exposed unnecessarily | SNS owner with appropriate advice |
 | Login recovery and stronger protection for owner/admin accounts | Account loss/compromise handling is undefined | SNS owner with developer |
@@ -484,8 +486,8 @@ This section organises the confirmed behaviour for future engineering discussion
 | Final payout after vehicle retirement | Outstanding deductions may have no future earnings to recover from | SNS owner |
 | Payroll corrections and excessive deductions | Salary/loan balances can become misleading | SNS owner |
 | Reporting definitions | Profit and utilisation may be misunderstood | SNS owner |
-| Fuel module inclusion | Final scope and charging rules remain uncertain | SNS owner |
-| Budget, stack, vendors, support commitments | No binding cost or delivery promise can be made | Dulan and SNS owner |
+| Fuel charging workflow: same-level return versus paid fuel (fuel itself is in scope, §16) | Fuel charges on the bill may be inconsistent | SNS owner |
+| Hosting vendor and technology stack (price, phases, payments and support are set by the approved proposal) | Hosting cost and setup cannot be finalised | Dulan and SNS owner |
 
 ## 19. Acceptance scenarios for implementation planning
 
@@ -534,5 +536,5 @@ Recommended next sequence, subject to stakeholder agreement:
 1. Review this document and record corrections.
 2. Resolve monetary edge cases using examples.
 3. Agree screen journeys and detailed permissions.
-4. Select architecture, hosting, delivery phases, budget, and support terms.
+4. Select architecture and hosting. Delivery phases, price, payments and support are set by the approved proposal.
 5. Implement and validate against acceptance scenarios and SNS-approved documents.
