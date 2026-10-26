@@ -16,12 +16,14 @@ Higher rank wins. A lower file may restate or implement a higher one, never cont
 | 1 | **System design (source of truth)** | Requirements, business rules, decisions and their status | `SNS_SYSTEM_DESIGN.md` |
 | 2 | **PRD** (when it exists) | Product requirements, user stories, acceptance criteria | `PRD.md` |
 | 3 | **TRD** (when it exists) | Architecture, data model, integrity rules | `TRD.md` |
-| 4 | **Design system** "SNS Rent Car · Plate" | Tokens, components, visual rules | https://claude.ai/artifact/E1pWnYhfHjpZ9C18ipGBWv |
-| 4 | **Screens** canvas "SNS Rent Car · Plate" | Desktop and phone screens, `NN-Module-Screen-Device` | https://claude.ai/artifact/XPpVE6ZafYtyG4gRZukHYz |
-| 4 | **Offline design snapshot** | Read-only copy of the two rank-4 artifacts | `design/` (see `design/README.md`) |
+| 4 | **Brand guidebook** | Brand and visual rules | `brand/guidebook/` |
+| 4 | **Design system** | Tokens, components, previews | `design-system/` |
+| 4 | **Screens** | Desktop and phone screens, `NN-Module-Screen-Device` | `screens/` |
 | 5 | **Client proposal** | Scope, phases, price, agreement (approved and frozen) | `proposal/` |
 | 6 | **Agent instructions** | Pointers only | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` |
 | 7 | **Code, tests, data** | Implementation | the repository (when it exists) |
+
+The repository is the master copy of every rank-4 item. The claude.ai viewers (design system "SNS Rent Car · Plate v2", screens canvas "SNS Rent Car · Plate") are never edited directly: change the repository, then refresh the viewer.
 
 History lives in git. Don't add version history inside any doc.
 
@@ -46,7 +48,7 @@ If the type is unclear, ask.
    3. It deletes, renames or moves files.
    4. The request is ambiguous.
 5. **Update the source of truth first.** Edit only the affected sections. Record the status and who agreed, for example "Confirmed 24 Oct 2026, owner S D De Silva (recorded by Dulan)". Add or update AT-ids for changed rules. For type B, show Dulan the exact change before propagating it.
-6. **Propagate down in rank order:** PRD, TRD, design system, screens, agent files, code. Never update a lower file before the higher one says the same thing.
+6. **Propagate down in rank order:** PRD, TRD, brand guidebook, design system, screens, agent files, code. Never update a lower file before the higher one says the same thing. After a rank-4 change, refresh the claude.ai viewer and name it in the commit body.
 7. **Sync audit (section 4), commit (section 5), report.** The report has four parts:
    - **Changed:** each file and what changed.
    - **Not changed, and why.**

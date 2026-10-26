@@ -17,17 +17,19 @@ Every task follows **`.agents/skills/sns-change-control/SKILL.md`**. Read it bef
 
 ## 2. Latest design (use only these)
 
-| What | Where | Notes |
-| --- | --- | --- |
-| Screen designs | Design canvas "SNS Rent Car · Plate": https://claude.ai/artifact/XPpVE6ZafYtyG4gRZukHYz | 170 screens. Every screen has a desktop and a phone version, grouped in 17 modules. Names follow `NN.n Name · Device`; files follow `NN-Module-Screen-Desktop` / `-Phone`. Links stay on the same device. |
-| Design system | "SNS Rent Car · Plate": https://claude.ai/artifact/E1pWnYhfHjpZ9C18ipGBWv | Tokens, components (global `window.Plate`), brand book. Start from its `project/README.md` (offline copy: `design/design-system/README.md`). |
-| Offline copy | `design/` in this folder | Read-only snapshot of both, for agents that cannot open claude.ai (Codex and others): screen source, static HTML and PNG previews, the design system files and every image. Start from `design/README.md`. |
+The repository is the master copy. Everything below works from git alone; no claude.ai account is needed.
+
+| What | Master (in this repository) | Viewer on claude.ai | Notes |
+| --- | --- | --- | --- |
+| Brand guidebook | `brand/guidebook/` | — | Identity, colour, type, language, icons, vehicle imagery, layout, money on screen, printed documents. Start from `brand/guidebook/README.md`. |
+| Design system | `design-system/` | "SNS Rent Car · Plate v2": https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4 | Tokens, components (global `window.Plate`) and previews. Open `design-system/index.html` in a browser to see every component. |
+| Screen designs | `screens/` | Canvas "SNS Rent Car · Plate": https://claude.ai/artifact/XPpVE6ZafYtyG4gRZukHYz | 170 screens. Every screen has a desktop and a phone version, grouped in numbered modules. Names follow `NN.n Name · Device`; files follow `NN-Module-Screen-Desktop` / `-Phone`. Links stay on the same device. |
 
 **Plate in one line:** cool grey ground `#eef1f0`; the Sri Lankan number plate is the signature (yellow plate face `#f6c343` with ink `#1b1f1d`, only on plates, the SNS mark and the active nav pill); action blue `#1756a9`; Yaldevi for text, Gemunu Libre for plates, money and headings; status colours keep their meaning and are never shown by colour alone.
 
-**Retired, don't use:** the Ratna design system, Concept A/B/C screens, the Dashboard Design Briefs, navigation options 19.2 (day panel) and 19.3 (top bar), and any older canvas or older project folder.
+**Retired, don't use:** the claude.ai artifact "SNS Rent Car · Plate" design system (https://claude.ai/artifact/E1pWnYhfHjpZ9C18ipGBWv), the Ratna design system, Concept A/B/C screens, the Dashboard Design Briefs, navigation options 19.2 (day panel) and 19.3 (top bar), and any older canvas or older project folder.
 
-**If you cannot open claude.ai:** use `design/`. It is a snapshot; check `design/README.md` for the versions it was taken from. Never edit it to change the design: design changes go to the online canvas and design system first, and the snapshot is refreshed after. If the snapshot and the online version disagree, the online version wins.
+**Viewers are never edited directly.** Change the repository first, then refresh the viewer. If a viewer and the repository disagree, the repository wins.
 
 Screens show sample data and labelled examples. They illustrate the requirements; they don't add requirements.
 
@@ -62,8 +64,9 @@ Screens show sample data and labelled examples. They illustrate the requirements
 | `SNS_SYSTEM_DESIGN.md` | The source of truth (rank 1). |
 | `change-requests/`, `addenda/` | Change requests to the frozen proposal, and addenda once the owner agrees. |
 | `proposal/` | The approved, frozen client proposal (PDF and HTML). Never edit. |
-| `design/` | Offline snapshot of the canvas and the design system (read-only). |
-| `brand/` | Source brand files: the SNS logo, the vehicle PNG pack (`brand/vehicles/`) and the 44 SNS 3D icons (`brand/icons/`). |
+| `design-system/` | The Plate design system (master): tokens, components, previews and the image copies they use (`design-system/assets/`). |
+| `screens/` | The screens (master): source (`screens/canvas/`), static HTML and PNG (`screens/previews/`). |
+| `brand/` | The brand guidebook (`brand/guidebook/`) and the source brand files: the SNS logo, the vehicle PNG pack (`brand/vehicles/`) and the 44 SNS 3D icons (`brand/icons/`). |
 | `fonts/` | Gemunu Libre, Yaldevi and IBM Plex Mono (the proposal's fonts). |
 | `reference/client-agreement/` | The two photos of SNS's current agreement, sent by the client. Reference only; see system design §14 before using any wording. |
 | `.agents/skills/` | `sns-change-control` (mandatory) and `impeccable` (third-party design skill; don't edit). |
