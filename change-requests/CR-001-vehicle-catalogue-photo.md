@@ -31,7 +31,7 @@ Staff and the owner find a car faster when its card shows the real car, for exam
 
 ## Owner's decision
 
-- [ ] Agreed, no charge. Record in the system design as Confirmed and issue addendum A-001.
+- [ ] Agreed, no charge. Record in the system design as Confirmed and issue the next addendum in `addenda/`.
 - [ ] Not wanted. Remove it from the system design and the screens.
 
 Owner: ____________________   Date: ____________

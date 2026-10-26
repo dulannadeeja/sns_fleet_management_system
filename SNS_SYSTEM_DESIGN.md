@@ -52,12 +52,22 @@ SNS primarily serves customers from its local area because trust is important wh
 | Devices | Office computers and mobile phones |
 | Connectivity | Online-only |
 | Interface | Sinhala default; English switch per user |
-| Rentals | Walk-in rentals, no advance reservations |
-| Initial data | Fresh start, zero opening balances, no historical imports |
+| Rentals | Walk-in rentals, and advance reservations up to 30 days ahead (§7.6) |
+| Initial data | Existing records, opening balances and past rentals and money records, loaded once before go-live (Starting data, below) |
 | Price, phases, payments and support | Set by the approved proposal (`proposal/`) |
 | Hosting vendor and technology stack | Open |
 
 Any cash introduced after launch must be recorded as a cash movement, not treated as rental earnings.
+
+### Starting data
+
+**Confirmed:** agreed by the owner, recorded by Dulan (change request CR-003, addendum ADD-002). No charge; Phase 4, as part of going live.
+
+- **What is loaded:** existing customers (with their flags), cars and their packages, partner owners; opening balances on go-live day (cash in the drawer, customer debts, partner balances owed, staff advances and loans); past rentals; and past payments, expenses and payroll from SNS's books.
+- **How:** SNS hands over its books or a file. The developer loads it once, before go-live, and the owner approves it. Every loaded record is marked "Imported", with who approved it and when.
+- **Opening balances** are one dated "Opening balance" line each and are final from go-live. Drawer cash is a cash movement. Customer debts can be collected or written off as any debt. Partner balances can be cashed out. Staff advances and loans are recovered as any advance or loan. None of them counts as earnings or income in any report. A mistake is fixed by a dated correction line, never an edit.
+- **Past rentals and past money records** are shown on each car, customer and partner, and counted in reports and month comparisons, always marked "Imported". They are read-only and never recalculated. They never create partner earnings, cash-outs or drawer movements: the opening balances already carry what is owed.
+- **Imported customers** keep the same handover requirements (§6): ID and licence copies are needed before their next handover if the books did not hold them.
 
 ## 3. Actors, access, and accountability
 
@@ -199,7 +209,7 @@ A customer may rent multiple vehicles simultaneously. Each has its own agreement
 
 ### 7.1 Normal journey
 
-1. Customer arrives; staff locate or create the customer record and review warnings.
+1. Customer arrives, or comes to collect a reservation (§7.6); staff locate or create the customer record and review warnings.
 2. Staff select an available vehicle and agree the rental dates, terms, payment timing, and deposit.
 3. System generates the agreement in the selected language.
 4. Customer signs the printed agreement; staff upload it and required identity documents.
@@ -242,6 +252,19 @@ Staff can cancel a rental before handover with a reason. An authorised person ca
 **Derived control:** Capture the old vehicle's return reading and replacement vehicle's outgoing reading. Preserve one rental's sequence of vehicle-use segments. Prevent simultaneous active allocation of a vehicle across rentals, including concurrent employee submissions.
 
 **Open:** Define the allowance pool on a swap day when vehicle allowances differ, rounding, partial-day earnings outside the admin-allocated day, and any amended agreement/signature required for a swap or extension.
+
+### 7.6 Advance reservations
+
+**Confirmed:** agreed by the owner, recorded by Dulan (change request CR-002, addendum ADD-001). No charge; Phase 2, with rentals.
+
+- **What a reservation holds:** one specific car for the booked days. No other rental or reservation can hold that car on overlapping days.
+- **How far ahead:** up to 30 days ahead.
+- **Who:** staff or admins make, change and cancel reservations, by phone or at the counter (configurable, as other permissions). Customers do not book themselves.
+- **Price:** the reservation keeps the car's package from the day it was made, as a rental keeps its terms (§4.3).
+- **Advance payment:** optional; staff decide. It is recorded as any payment (who, method, reference) and applied to the bill.
+- **Cancellation and no-show:** the cancellation rule (§7.3) applies. A reason is recorded; an authorised person may keep a cancellation fee, which belongs entirely to SNS; the rest of any advance is refunded and recorded. Staff mark a no-show by hand, and the car is then free.
+- **Clashes:** a phone extension (§7.2) that would overlap a reservation on the same car is blocked, with the reason shown, until staff move the reservation to another free car or change its dates. A booked car that is late or under repair flags the reservation for attention. Moving a reservation to a car with a different price needs admin approval, as a price change does (§3.2).
+- **Pickup:** the reservation becomes a normal rental. Customer warnings, the printed and signed agreement and the handover requirements (§6) all apply; nothing is skipped because the car was reserved.
 
 ## 8. Payments, deposits, and customer balances
 
@@ -405,9 +428,9 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | Garage-day charge | Confirmed in scope; default LKR 5,000/day per vehicle; trigger and partner split open |
 | Vehicle catalogue photo (one optional photo per vehicle) | Proposed; change request CR-001, no charge, awaiting owner agreement |
 | Non-rental vehicle movement tracking | Future extension |
-| Advance reservations | Excluded |
+| Advance reservations | Confirmed; CR-002, agreed by the owner, no charge, Phase 2 (§7.6) |
 | Offline operation | Excluded |
-| Historical imports/opening balances | Excluded; fresh start |
+| Historical imports and opening balances | Confirmed; CR-003, agreed by the owner, no charge, Phase 4 (§2, Starting data) |
 | Automatic customer reminders | Excluded; staff handle manually |
 | Bank/card/payment-provider integration | Excluded; manual recording |
 | Separate driver records | Excluded |
@@ -444,6 +467,7 @@ This section organises the confirmed behaviour for future engineering discussion
 | Customer, CustomerFlag, ReferencePerson | Rental eligibility evidence and history |
 | Document, AgreementVersion | Private file metadata, signed copy, template/version association |
 | Vehicle, PartnerOwner, VehicleTermsVersion | Asset identity, ownership, historical financial terms |
+| Reservation | A specific car held for future days, its saved package and any advance; becomes a Rental at pickup |
 | Rental | Customer agreement and billing lifecycle |
 | RentalVehicleSegment | Actual vehicle usage within a rental, readings, saved terms, swap allocations |
 | Charge, Adjustment | Itemised bill and traceable changes |
@@ -526,6 +550,15 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-27 | Business day closes with a rental still out | That day's share becomes final and cash-out-able; extra km for the rental waits for return |
 | AT-28 | Staff open "Overdue 1" from the navigation or attention summary | The rentals list opens showing only the overdue rental, with a visible filter that can be removed |
 | AT-29 | Vehicle with no catalogue photo; an admin then adds one (Proposed, CR-001) | Card and profile show the model's standard image, then the photo; handover requirements are unchanged; staff without admin rights cannot add or replace it |
+| AT-30 | A car is reserved for Fri to Sun; staff try to rent or reserve the same car for Sat | Refused: the car is held on overlapping days |
+| AT-31 | The car's package changes after the reservation is made | Pickup uses the package saved on the reservation |
+| AT-32 | A phone extension would run into another customer's reservation on the same car | Extension blocked with the reason, until the reservation is moved to another free car or its dates change |
+| AT-33 | Reserved customer does not come; an advance was paid | Staff mark a no-show; any fee kept is entirely SNS's; the rest of the advance is refunded and recorded; the car is free |
+| AT-34 | Staff try to reserve a car more than 30 days ahead | Refused |
+| AT-35 | Pickup of a reserved car without a signed agreement or ID copy | Handover blocked, as for any rental (AT-06) |
+| AT-36 | A partner's opening balance is loaded; past rentals of their cars are imported | The opening balance can be cashed out from go-live; the imported rentals add no earnings; nothing is paid twice |
+| AT-37 | An imported past rental is opened, or a report covers its month | Shown marked "Imported", read-only, never recalculated; counted in reports, never in earnings, cash-outs or the drawer |
+| AT-38 | An imported opening customer debt is written off | SNS bears the loss; partner earnings unchanged (as AT-17) |
 
 ## 20. Readiness and next steps
 

@@ -53,9 +53,9 @@ From the approved proposal. Price and payments are in the proposal and are not r
 | Phase | When | Promised |
 | --- | --- | --- |
 | 1 · Foundation | Month 1 | Staff accounts and permissions, customers and documents, cars and packages, partner owners |
-| 2 · Rentals | Months 2–3 | Rentals, agreement print, handover and return, bill, extensions, swaps, payments, deposits, customer debt, fuel and accessories |
+| 2 · Rentals | Months 2–3 | Rentals, agreement print, handover and return, bill, extensions, swaps, payments, deposits, customer debt, fuel and accessories; advance reservations (added by ADD-001) |
 | 3 · Money | Months 4–5 | Cash drawer and daily count, partner payments (daily cash-out) and partner portal, expenses, payroll, maintenance reminders, vehicle check |
-| 4 · Live | Month 6 | Owner dashboard, reports, full testing, going live, staff training |
+| 4 · Live | Month 6 | Owner dashboard, reports, full testing, going live, staff training; loading starting data (added by ADD-002) |
 
 ## 5. Modules
 
@@ -76,6 +76,7 @@ Agreed with Dulan, 26 Oct 2026.
 | 10 Approvals | 10.1–10.3 | 2 | Not yet written |
 | 16 Documents: rental | 16.1–16.4 | 2 | Not yet written |
 | 02 Home: staff and search | 02.2, 02.4 | 2 | Not yet written |
+| Reservations | No screens yet | 2 | Not yet written |
 | 09 Money: drawer, day and expenses | 09.1–09.2, 09.6–09.13 | 3 | Not yet written |
 | 11 Partners: cash-outs and portal | 11.4–11.8 | 3 | Not yet written |
 | 13 Payroll | 13.1–13.5 | 3 | Not yet written |
@@ -84,6 +85,7 @@ Agreed with Dulan, 26 Oct 2026.
 | 16 Documents: partner and payslip | 16.5–16.7 | 3 | Not yet written |
 | 02 Home: owner | 02.1, 02.3, 02.5–02.6 | 4 | Not yet written |
 | 14 Reports | 14.1–14.2 | 4 | Not yet written |
+| Starting data | No screens yet | 4 | Not yet written |
 | 17 System states, 19 Navigation | 17.1–17.2, 19.1 | All | Not yet written |
 
 ## 6. Rules for every module
@@ -95,7 +97,7 @@ These apply to every story and are not repeated in each.
 | PR-01 | Sinhala is the default interface language; each user can switch to English. Plain everyday Sinhala; English only for words SNS already uses. | Confirmed | System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports); [Guidebook: language and voice](brand/guidebook/04-language-and-voice.md) |
 | PR-02 | Works on office computers and phones. | Confirmed | System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context) |
 | PR-03 | Online only; no offline operation. | Confirmed | System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) |
-| PR-04 | Fresh start: zero opening balances, no historical imports. Cash introduced after launch is recorded as a cash movement, not rental earnings. | Confirmed | System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) |
+| PR-04 | The system starts with SNS's existing records, opening balances and past rentals and money records, loaded once before go-live and marked "Imported". Opening balances are never earnings; cash introduced after launch is a cash movement, not rental earnings. | Confirmed (CR-003) | System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data), [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) |
 | PR-05 | Every transaction records the staff member who entered it. Every exceptional decision records a reason, actor, date and time. | Confirmed | System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions) |
 | PR-06 | Permissions are configurable, starting from the defaults in System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions). They are enforced by the server on every request, not only by hiding menu items. | Confirmed; enforcement is a Derived control | System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions), [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls); AT-24 |
 | PR-07 | Money that is final is never edited; a correction is a new dated line that keeps the original. | Confirmed | System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out) |
@@ -147,13 +149,11 @@ Built only after the owner agrees and the source of truth marks them Confirmed.
 
 ## 9. Out of scope
 
-From System design → [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) and the approved proposal's list of what is not included. None of these is built.
+From System design → [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) and the approved proposal's list of what is not included, less what the addenda have added. None of these is built.
 
 | Item | Source |
 | --- | --- |
-| Advance reservations; rentals are walk-in only | System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope); proposal |
 | Offline operation | System design → [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope); proposal |
-| Historical imports and opening balances | System design → [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope); proposal |
 | Automatic customer reminders (SMS, WhatsApp) | System design → [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope); proposal |
 | Bank, card or payment-provider integration | System design → [Collection](SNS_SYSTEM_DESIGN.md#81-collection), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope); proposal |
 | Separate driver records | System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope) |
