@@ -23,7 +23,7 @@ Later stakeholder decisions supersede this document. Update this document before
 **Companion references (latest only):**
 
 - **The repository is the master copy** of the design system, the brand guidebook and the screens, so any agent or developer can work from git alone. claude.ai artifacts are viewers: they are refreshed from the repository after a change and never edited directly. Decided 26 Oct 2026 by Dulan (project setup, not a business rule).
-- **Screen design:** `screens/` (see `screens/README.md`): 185 screen boards, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
+- **Screen design:** `screens/` (see `screens/README.md`): 183 screen boards, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
 - **Design system:** `design-system/` (see `design-system/README.md`): tokens, components (`window.Plate`) and their previews. Viewer: "SNS Design System · Plate" (https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4).
 - **Brand guidebook:** `brand/guidebook/`: identity, colour, type, language, icons, vehicle imagery, layout, money on screen and printed documents.
 - **Client proposal:** `proposal/SNS_Rent_a_Car_Proposal_SI.pdf` and `proposal/SNS Rent a Car Proposal.html` in this folder (artifact: https://claude.ai/artifact/DCDGDwQJRuL7K8AUNN4nQ5). Commercial terms and phases live there; requirements live here. **Approved by the client and frozen** (confirmed by Dulan, 24 Oct 2026; approval date to be recorded): changes to scope, phases, price, payments, timeline or the agreement go through a change request (`change-requests/`) and an addendum (`addenda/`), never by editing the proposal.
@@ -68,6 +68,8 @@ Any cash introduced after launch must be recorded as a cash movement, not treate
 - **Opening balances** are one dated "Opening balance" line each and are final from go-live. Drawer cash is a cash movement. Customer debts can be collected or written off as any debt. Partner balances can be cashed out. Staff advances and loans are recovered as any advance or loan. None of them counts as earnings or income in any report. A mistake is fixed by a dated correction line, never an edit.
 - **Past rentals and past money records** are shown on each car, customer and partner, and counted in reports and month comparisons, always marked "Imported". They are read-only and never recalculated. They never create partner earnings, cash-outs or drawer movements: the opening balances already carry what is owed.
 - **Imported customers** keep the same handover requirements (§6): ID and licence copies are needed before their next handover if the books did not hold them.
+- **Rentals still out on go-live day** are entered before go-live as normal rentals, with their real start date, agreed price and outgoing odometer from the paper agreement, marked "Started before go-live"; the paper agreement and ID copies are uploaded, as handover requires. From go-live they are normal rentals: return, bill, and partner earnings for days from go-live. Earnings for days before go-live are in the partner's opening balance. Confirmed: agreed by the owner, recorded by Dulan.
+- **Go-live checklist.** The system goes live only when all of these are done: business details on printouts; every car entered; starting packages; insurance and licence dates for every car; every partner car linked to its owner; staff accounts; the authorised person for checking payments, write-offs, cancellation fees and expired papers; opening cash in the drawer, counted and entered before the first transaction; SNS's agreement wording; and every Open decision in this document. Confirmed: agreed by the owner, recorded by Dulan.
 
 ## 3. Actors, access, and accountability
 
@@ -79,6 +81,8 @@ Any cash introduced after launch must be recorded as a cash movement, not treate
 - **Partner vehicle owner:** One account for all their vehicles. Access only to their own final rental earnings (day by day, per vehicle, with downloadable PDFs), their cash-out history, and the ability to request a cash-out. Never today's not-final amounts, other owners' data, customer details, or the price a customer paid (a partner sees their earning, not the rental price; see Revenue allocation, §8.4).
 
 Customer-facing accounts are not confirmed. Customer document delivery is through the agreed printable documents.
+
+**Sign-in.** Everyone (owner, admins, staff, partners) signs in with their own phone number and password; a first password is changed at the first sign-in. Until login recovery is decided (§18), the primary owner resets a forgotten password. Confirmed: agreed by the owner, recorded by Dulan.
 
 ### 3.2 Default permissions
 
@@ -308,7 +312,7 @@ One shared drawer receives collections and funds expenses and refunds. Every mov
 
 Authorised staff reconcile cash, bank transfers, and cards daily:
 
-- Preserve expected and counted cash amounts.
+- Preserve expected and counted cash amounts. Staff see the expected amount first, then enter what they count (Confirmed: agreed by the owner, recorded by Dulan).
 - Record, explain, and resolve shortages or surpluses.
 - Match bank/card records to statements or card-machine totals.
 - Unmatched payments remain flagged for investigation rather than automatically becoming customer debt again.
@@ -316,7 +320,7 @@ Authorised staff reconcile cash, bank transfers, and cards daily:
 
 **Proposed reconciliation model:** Separate recorded payment status from reconciliation status. A payment can remain recorded as confirmed while reconciliation is unmatched or under investigation.
 
-**Open:** Treatment of payment-processor fees, bank/card posting delays, business-day closure time (which also decides when partner earnings become final), whether and how partner cash-outs, salaries, and owner withdrawals paid in cash leave the drawer and affect expected cash, and the evidence needed to resolve a cash difference. A reconciliation adjustment must not silently rewrite the original transaction.
+**Open:** Treatment of payment-processor fees, bank/card posting delays, business-day closure time (which also decides when partner earnings become final), how partner cash-outs paid in cash affect expected cash (paying them in cash is allowed, §10), whether and how salaries and owner withdrawals paid in cash leave the drawer and affect expected cash, and the evidence needed to resolve a cash difference. A reconciliation adjustment must not silently rewrite the original transaction.
 
 ## 10. Vehicle-owner earnings and daily cash-out
 
@@ -338,13 +342,15 @@ Expense responsibility depends on the expense and agreement. Owner-responsible e
 
 Final earnings lines cannot be edited. Corrections appear as traceable adjustment lines dated when they are made. Overpayments caused by approved rental reductions are recovered from later earnings.
 
-**Open:** The business-day close time (it decides when each day's earnings become final); whether cash payouts from the drawer are allowed and how they appear in the drawer count; minimum or maximum cash-out amounts and how often a partner may request one, if any limits are wanted; rounding; treatment of a returned segment while its overall swapped rental remains open; and final recovery if a retired vehicle or owner has no future earnings.
+**Open:** The business-day close time (it decides when each day's earnings become final); how cash payouts appear in the drawer count (paying a partner in cash at the branch is allowed: Confirmed: agreed by the owner, recorded by Dulan); minimum or maximum cash-out amounts and how often a partner may request one, if any limits are wanted; rounding; treatment of a returned segment while its overall swapped rental remains open; and final recovery if a retired vehicle or owner has no future earnings.
 
 ## 11. Asset records, maintenance, and availability
 
 Track servicing by date and mileage, repairs, insurance expiry, vehicle-licence expiry, expenses, and upcoming reminders.
 
 - Vehicles under repair or marked unavailable cannot be handed over until an authorised person marks them available.
+- Any garage visit, planned service included, uses the "Under repair" status (Confirmed: agreed by the owner, recorded by Dulan).
+- Reminders appear ahead of time by owner settings, starting at: insurance and revenue licence 30 days before expiry; service 7 days before its date or 500 km before its km, whichever comes first; payroll 3 days before payday (Confirmed: agreed by the owner, recorded by Dulan).
 - Expired insurance/licence documents warn staff; proceeding requires the authorised admin decision and reason.
 - Temporary owner use can mark the vehicle unavailable with a reason and expected return date, without trip or kilometre tracking.
 - Permanently returned/sold vehicles are retired while all historical rental, maintenance, and financial records remain accessible to authorised users.
@@ -425,7 +431,7 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | Item | Status |
 | --- | --- |
 | Fuel accounting | Confirmed in scope |
-| Fuel calculation | Estimated litres × price per litre; income allocated entirely to SNS |
+| Fuel calculation | Estimated litres × price per litre; income allocated entirely to SNS. The price per litre is an owner setting; no figure is agreed |
 | Same-fuel-level return versus paid fuel | Original business requirement; detailed workflow still to be designed |
 | Garage-day charge | Confirmed in scope; default LKR 5,000/day per vehicle; trigger and partner split open |
 | Vehicle catalogue photo (one optional photo per vehicle) | Proposed; change request CR-001, no charge, awaiting owner agreement |
@@ -506,7 +512,7 @@ This section organises the confirmed behaviour for future engineering discussion
 | Login recovery and stronger protection for owner/admin accounts | Account loss/compromise handling is undefined | SNS owner with developer |
 | Approval workflow and self-approval restrictions | Critical overrides may not provide intended independent review | SNS owner |
 | Business-day close time (decides when partner earnings become final) | Owner earnings and drawer counts can differ depending on implementation assumptions | SNS owner |
-| Cash partner payouts from the drawer | Expected drawer cash may be wrong | SNS owner |
+| How cash partner payouts appear in the drawer count (cash payouts themselves are allowed, §10) | Expected drawer cash may be wrong | SNS owner |
 | Early-return effects on included kilometres | Customer final bills may be inconsistent | SNS owner |
 | Swap allowance and rate edge cases | Double charging or under-allocation is possible | SNS owner |
 | Charge/discount allocation and currency rounding | Small discrepancies can accumulate between bills and partner earnings | SNS owner with developer |
@@ -564,6 +570,11 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-39 | A partner car is rented above its package price; the admin keeps the whole extra for SNS | The partner's earning is worked out on the package price only; the partner sees no customer price and no extra |
 | AT-40 | Same, but the admin sets a 50/50 split of the extra, with a reason | The partner's day earning is their package share plus half the extra, shown as one amount; SNS keeps its commission plus the other half |
 | AT-41 | The business day closes before the admin decides the split | The package share becomes final; the extra waits, out of the partner's earnings, until decided |
+| AT-42 | A car is out on a paper rental on go-live day | Entered before go-live as a live rental marked "Started before go-live"; its return and bill work as any rental; partner earnings count only days from go-live |
+| AT-43 | One car still has no insurance date on go-live day | Go-live is blocked until it is entered |
+| AT-44 | A partner without a bank account asks to cash out | An authorised person pays cash at the branch and records it; the payout is recorded once, as for a bank payout |
+| AT-45 | A car's insurance expires in 30 days, with the starting reminder settings | It appears in Upcoming work; the owner can change how early |
+| AT-46 | A staff member forgets their password | The primary owner resets it; the staff member changes it at the next sign-in |
 
 ## 20. Readiness and next steps
 

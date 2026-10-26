@@ -837,24 +837,6 @@
   "unresolvedBlob": false
  },
  {
-  "name": "09-Money-CountDrawerBlind-Desktop",
-  "w": 1280,
-  "canvasH": 800,
-  "contentH": 800,
-  "missing": [],
-  "broken": [],
-  "unresolvedBlob": false
- },
- {
-  "name": "09-Money-CountDrawerBlind-Phone",
-  "w": 390,
-  "canvasH": 844,
-  "contentH": 844,
-  "missing": [],
-  "broken": [],
-  "unresolvedBlob": false
- },
- {
   "name": "09-Money-Drawer-Desktop",
   "w": 1280,
   "canvasH": 1218,
@@ -1091,8 +1073,8 @@
  {
   "name": "11-Partners-AddPartner-Desktop",
   "w": 1280,
-  "canvasH": 1224,
-  "contentH": 1224,
+  "canvasH": 1222,
+  "contentH": 1222,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1433,8 +1415,8 @@
  {
   "name": "15-Settings-BusinessRules-Desktop",
   "w": 1280,
-  "canvasH": 1299,
-  "contentH": 1299,
+  "canvasH": 1258,
+  "contentH": 1258,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

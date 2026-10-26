@@ -865,25 +865,6 @@
    "x": 3270,
    "y": 40496
   },
-  "09-Money-CountDrawerBlind-Desktop.dc.html": {
-   "expand": "fill",
-   "h": 800,
-   "is_interactive": true,
-   "page": "plate",
-   "title": "09.7 Count the drawer · blind · Desktop",
-   "w": 1280,
-   "x": 3860,
-   "y": 40496
-  },
-  "09-Money-CountDrawerBlind-Phone.dc.html": {
-   "h": 844,
-   "is_interactive": true,
-   "page": "plate",
-   "title": "09.7 Count the drawer · blind · Phone",
-   "w": 390,
-   "x": 5200,
-   "y": 40496
-  },
   "09-Money-Drawer-Desktop.dc.html": {
    "expand": "fill",
    "h": 1218,
@@ -1114,7 +1095,7 @@
   },
   "11-Partners-AddPartner-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1224,
+   "h": 1222,
    "is_interactive": true,
    "page": "plate",
    "title": "11.3 Add a partner · Desktop",
@@ -1475,7 +1456,7 @@
   },
   "15-Settings-BusinessRules-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1299,
+   "h": 1258,
    "is_interactive": true,
    "page": "plate",
    "title": "15.2 Business rules and open decisions · Desktop",
@@ -2051,8 +2032,6 @@
   "09-Money-PaymentCorrection-Phone.dc.html",
   "09-Money-CountDrawer-Desktop.dc.html",
   "09-Money-CountDrawer-Phone.dc.html",
-  "09-Money-CountDrawerBlind-Desktop.dc.html",
-  "09-Money-CountDrawerBlind-Phone.dc.html",
   "09-Money-EveningCheck-Desktop.dc.html",
   "09-Money-EveningCheck-Phone.dc.html",
   "09-Money-BankCardCheck-Desktop.dc.html",
