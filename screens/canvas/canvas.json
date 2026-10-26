@@ -430,7 +430,7 @@
   },
   "05-NewRental-Deposit-Desktop.dc.html": {
    "expand": "fill",
-   "h": 968,
+   "h": 1168,
    "is_interactive": true,
    "page": "plate",
    "title": "05.4 4 · Deposit and payment · Desktop",
@@ -439,7 +439,7 @@
    "y": 21178
   },
   "05-NewRental-Deposit-Phone.dc.html": {
-   "h": 960,
+   "h": 1131,
    "is_interactive": true,
    "page": "plate",
    "title": "05.4 4 · Deposit and payment · Phone",
@@ -487,7 +487,7 @@
   },
   "05-NewRental-Review-Desktop.dc.html": {
    "expand": "fill",
-   "h": 896,
+   "h": 902,
    "is_interactive": true,
    "page": "plate",
    "title": "05.5 5 · Review and print · Desktop",
@@ -629,7 +629,7 @@
    "y": 27658
   },
   "06-Rentals-SwapCar-Phone.dc.html": {
-   "h": 950,
+   "h": 955,
    "is_interactive": true,
    "page": "plate",
    "title": "06.7 Swap a car · Phone",
@@ -677,7 +677,7 @@
   },
   "07-Return-Return-Desktop.dc.html": {
    "expand": "fill",
-   "h": 2072,
+   "h": 2312,
    "is_interactive": true,
    "page": "plate",
    "title": "07.1 Return and payment · Desktop",
@@ -848,7 +848,7 @@
   },
   "09-Money-CountDrawer-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1152,
+   "h": 1160,
    "is_interactive": true,
    "page": "plate",
    "title": "09.6 Count the drawer · expected shown · Desktop",
@@ -914,7 +914,7 @@
    "y": 44088
   },
   "09-Money-Expenses-Phone.dc.html": {
-   "h": 1965,
+   "h": 2059,
    "is_interactive": true,
    "page": "plate",
    "title": "09.12 Expenses · Phone",
@@ -1171,7 +1171,7 @@
   },
   "11-Partners-PartnerDetails-Desktop.dc.html": {
    "expand": "fill",
-   "h": 980,
+   "h": 1002,
    "is_interactive": true,
    "page": "plate",
    "title": "11.2 Partner details · Desktop",
@@ -1266,7 +1266,7 @@
   },
   "12-Maintenance-ServiceRecord-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1198,
+   "h": 1199,
    "is_interactive": true,
    "page": "plate",
    "title": "12.2 Add a service or repair record · Desktop",
@@ -1294,7 +1294,7 @@
    "y": 58364
   },
   "13-Payroll-Adjustment-Phone.dc.html": {
-   "h": 1252,
+   "h": 1258,
    "is_interactive": true,
    "page": "plate",
    "title": "13.2 Add an adjustment · Phone",
@@ -1313,7 +1313,7 @@
    "y": 58364
   },
   "13-Payroll-Advance-Phone.dc.html": {
-   "h": 1442,
+   "h": 1464,
    "is_interactive": true,
    "page": "plate",
    "title": "13.3 Give an advance or loan · Phone",
@@ -1424,7 +1424,7 @@
    "title": "15.5 Activity log · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 70571
+   "y": 71443
   },
   "15-Settings-ActivityLog-Phone.dc.html": {
    "h": 1543,
@@ -1433,11 +1433,11 @@
    "title": "15.5 Activity log · Phone",
    "w": 390,
    "x": 1340,
-   "y": 70571
+   "y": 71443
   },
   "15-Settings-AddPerson-Desktop.dc.html": {
    "expand": "fill",
-   "h": 960,
+   "h": 982,
    "is_interactive": true,
    "page": "plate",
    "title": "15.4 Add a person · Desktop",
@@ -1456,19 +1456,19 @@
   },
   "15-Settings-BusinessRules-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1258,
+   "h": 1357,
    "is_interactive": true,
    "page": "plate",
-   "title": "15.2 Business rules and open decisions · Desktop",
+   "title": "15.2 Business rules · Desktop",
    "w": 1280,
    "x": 1930,
    "y": 66032
   },
   "15-Settings-BusinessRules-Phone.dc.html": {
-   "h": 2222,
+   "h": 2235,
    "is_interactive": true,
    "page": "plate",
-   "title": "15.2 Business rules and open decisions · Phone",
+   "title": "15.2 Business rules · Phone",
    "w": 390,
    "x": 3270,
    "y": 66032
@@ -1494,7 +1494,7 @@
   },
   "15-Settings-Permissions-Desktop.dc.html": {
    "expand": "fill",
-   "h": 2115,
+   "h": 2341,
    "is_interactive": true,
    "page": "plate",
    "title": "15.1 Permissions · Desktop",
@@ -1503,7 +1503,7 @@
    "y": 66032
   },
   "15-Settings-Permissions-Phone.dc.html": {
-   "h": 4365,
+   "h": 5237,
    "is_interactive": true,
    "page": "plate",
    "title": "15.1 Permissions · Phone",
@@ -1517,7 +1517,7 @@
    "title": "16.3 Final bill · print",
    "w": 794,
    "x": 1988,
-   "y": 72994
+   "y": 73866
   },
   "16-Documents-PartnerAgreement.dc.html": {
    "h": 1123,
@@ -1525,7 +1525,7 @@
    "title": "16.6 Partner agreement · print",
    "w": 794,
    "x": 4478,
-   "y": 72994
+   "y": 73866
   },
   "16-Documents-PartnerStatement.dc.html": {
    "h": 1123,
@@ -1533,7 +1533,7 @@
    "title": "16.5 Partner earnings statement · print",
    "w": 794,
    "x": 3484,
-   "y": 72994
+   "y": 73866
   },
   "16-Documents-PaymentReceipt.dc.html": {
    "h": 540,
@@ -1541,7 +1541,7 @@
    "title": "16.4 Payment receipt · 80 mm slip · print",
    "w": 302,
    "x": 2982,
-   "y": 72994
+   "y": 73866
   },
   "16-Documents-Payslip.dc.html": {
    "h": 1123,
@@ -1549,7 +1549,7 @@
    "title": "16.7 Payslip · print",
    "w": 794,
    "x": 5472,
-   "y": 72994
+   "y": 73866
   },
   "16-Documents-RentalAgreementEN.dc.html": {
    "h": 1123,
@@ -1557,7 +1557,7 @@
    "title": "16.2 Rental agreement · English · print",
    "w": 794,
    "x": 994,
-   "y": 72994
+   "y": 73866
   },
   "16-Documents-RentalAgreementSI.dc.html": {
    "h": 1123,
@@ -1565,7 +1565,7 @@
    "title": "16.1 Rental agreement · Sinhala · print",
    "w": 794,
    "x": 0,
-   "y": 72994
+   "y": 73866
   },
   "17-System-DesignNotes.dc.html": {
    "h": 2410,
@@ -1573,17 +1573,17 @@
    "title": "17.2 Design notes · navigation and components",
    "w": 1440,
    "x": 1480,
-   "y": 74997
+   "y": 75869
   },
   "17-System-States.dc.html": {
    "expand": "fill",
-   "h": 1629,
+   "h": 1731,
    "is_interactive": true,
    "page": "plate",
    "title": "17.1 System states · empty, offline, error, permission",
    "w": 1280,
    "x": 0,
-   "y": 74997
+   "y": 75869
   },
   "19-Nav-A-Sidebar-Desktop.dc.html": {
    "w": 1440,
@@ -1640,7 +1640,7 @@
    "title": "18.1 Reservations · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 78682,
+   "y": 79554,
    "expand": "fill"
   },
   "18-Reservations-AllReservations-Phone.dc.html": {
@@ -1650,7 +1650,7 @@
    "title": "18.1 Reservations · Phone",
    "w": 390,
    "x": 1340,
-   "y": 78682
+   "y": 79554
   },
   "18-Reservations-NewReservation-Desktop.dc.html": {
    "h": 1002,
@@ -1659,7 +1659,7 @@
    "title": "18.2 New reservation · Desktop",
    "w": 1280,
    "x": 1930,
-   "y": 78682,
+   "y": 79554,
    "expand": "fill"
   },
   "18-Reservations-NewReservation-Phone.dc.html": {
@@ -1669,7 +1669,7 @@
    "title": "18.2 New reservation · Phone",
    "w": 390,
    "x": 3270,
-   "y": 78682
+   "y": 79554
   },
   "18-Reservations-ReservationDetails-Desktop.dc.html": {
    "h": 706,
@@ -1678,7 +1678,7 @@
    "title": "18.3 Reservation details · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 80862,
+   "y": 81734,
    "expand": "fill"
   },
   "18-Reservations-ReservationDetails-Phone.dc.html": {
@@ -1688,7 +1688,7 @@
    "title": "18.3 Reservation details · Phone",
    "w": 390,
    "x": 1340,
-   "y": 80862
+   "y": 81734
   },
   "18-Reservations-MoveCar-Desktop.dc.html": {
    "h": 973,
@@ -1697,7 +1697,7 @@
    "title": "18.4 Move to another car · Desktop",
    "w": 1280,
    "x": 1930,
-   "y": 80862,
+   "y": 81734,
    "expand": "fill"
   },
   "18-Reservations-MoveCar-Phone.dc.html": {
@@ -1707,7 +1707,7 @@
    "title": "18.4 Move to another car · Phone",
    "w": 390,
    "x": 3270,
-   "y": 80862
+   "y": 81734
   },
   "18-Reservations-CancelNoShow-Desktop.dc.html": {
    "h": 1207,
@@ -1716,7 +1716,7 @@
    "title": "18.5 Cancel or no-show · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 82392,
+   "y": 83264,
    "expand": "fill"
   },
   "18-Reservations-CancelNoShow-Phone.dc.html": {
@@ -1726,7 +1726,7 @@
    "title": "18.5 Cancel or no-show · Phone",
    "w": 390,
    "x": 1340,
-   "y": 82392
+   "y": 83264
   }
  },
  "createdOnFiles": {
@@ -1888,7 +1888,7 @@
    "text": "16 · Printed documents · ලියකියවිලි",
    "w": 240,
    "x": 0,
-   "y": 72319
+   "y": 73191
   },
   "plate_17": {
    "kind": "title1",
@@ -1897,7 +1897,7 @@
    "text": "17 · System reference",
    "w": 240,
    "x": 0,
-   "y": 74322
+   "y": 75194
   },
   "plate_intro": {
    "page": "plate",
@@ -1931,7 +1931,7 @@
    "text": "18 · Reservations · වෙන්කිරීම්",
    "w": 240,
    "x": 0,
-   "y": 78007
+   "y": 78879
   }
  },
  "order": [

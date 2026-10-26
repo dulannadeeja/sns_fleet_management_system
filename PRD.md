@@ -237,18 +237,18 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Screens:** 15.3 People, 15.4 Add a person.
 - **Decided:** DN-01 (only the owner adds people), DN-03 (the admin gives an email address for one-time codes).
 
-#### ST-15.3 · Business rules and open decisions
+#### ST-15.3 · Business rules
 
 - **Status:** Confirmed.
 - **Phase:** 1.
 - **Roles:** Owner changes owner settings; everyone with settings access sees them.
-- **Story:** As the owner, I see the business rules in force and the decisions still open, and I change the settings that are mine, so that everyone works to the same rules.
+- **Story:** As the owner, I see the business rules in force and I change the settings that are mine, so that everyone works to the same rules.
 - **Rules:**
   - Set now: extra-km rates per car, starting at LKR 17 to 27 a km by type (System design → [Initial defaults](SNS_SYSTEM_DESIGN.md#41-initial-defaults)); fuel price per litre, an owner setting with no agreed figure ([Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope)); staff see the expected drawer cash first, then type what they count ([Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation)); expired insurance or licence warns, and going ahead needs an authorised person and a reason; any garage visit is Under repair; reminder lead times, starting at 30 days for insurance and licence, 7 days or 500 km for service and 3 days for payroll, changeable by the owner ([Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability)); no late fee runs on its own, staff decide ([Early and late return](SNS_SYSTEM_DESIGN.md#74-early-and-late-return)); partners cash out any day, to the bank or in cash at the branch ([Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out)); SNS commission per partner car, default 15%; garage-day charge LKR 5,000 a day per car ([Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings)).
   - No decision is left open. A rule the owner adds later is recorded in the system design before it appears here.
   - Every change to a setting is recorded with who, when, and the old and new values (PR-05).
 - **Checks:** AT-45 "A car's insurance expires in 30 days, with the starting reminder settings: it appears in Upcoming work; the owner can change how early" (the reminders themselves are Phase 3).
-- **Screens:** 15.2 Business rules and open decisions.
+- **Screens:** 15.2 Business rules.
 - **Decided:** shown here as set now: DN-04 (garage days for damage only, admin approves), DN-06 (fuel not counted by default, same level per rental), DN-11 (staff close the day, or 11:59 PM), DN-12 (cash leaving the drawer), DN-15 (payroll deductions), DN-16 (SNS earnings and profit before depreciation).
 
 #### ST-15.4 · Activity log

@@ -407,8 +407,8 @@
  {
   "name": "05-NewRental-Deposit-Desktop",
   "w": 1280,
-  "canvasH": 968,
-  "contentH": 968,
+  "canvasH": 1168,
+  "contentH": 1168,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -416,8 +416,8 @@
  {
   "name": "05-NewRental-Deposit-Phone",
   "w": 390,
-  "canvasH": 960,
-  "contentH": 960,
+  "canvasH": 1131,
+  "contentH": 1131,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -461,8 +461,8 @@
  {
   "name": "05-NewRental-Review-Desktop",
   "w": 1280,
-  "canvasH": 896,
-  "contentH": 896,
+  "canvasH": 902,
+  "contentH": 902,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -614,8 +614,8 @@
  {
   "name": "06-Rentals-SwapCar-Phone",
   "w": 390,
-  "canvasH": 950,
-  "contentH": 950,
+  "canvasH": 955,
+  "contentH": 955,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -659,8 +659,8 @@
  {
   "name": "07-Return-Return-Desktop",
   "w": 1280,
-  "canvasH": 2072,
-  "contentH": 2072,
+  "canvasH": 2312,
+  "contentH": 2312,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -821,8 +821,8 @@
  {
   "name": "09-Money-CountDrawer-Desktop",
   "w": 1280,
-  "canvasH": 1152,
-  "contentH": 1152,
+  "canvasH": 1160,
+  "contentH": 1160,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -884,8 +884,8 @@
  {
   "name": "09-Money-Expenses-Phone",
   "w": 390,
-  "canvasH": 1965,
-  "contentH": 1965,
+  "canvasH": 2059,
+  "contentH": 2059,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1145,8 +1145,8 @@
  {
   "name": "11-Partners-PartnerDetails-Desktop",
   "w": 1280,
-  "canvasH": 980,
-  "contentH": 980,
+  "canvasH": 1002,
+  "contentH": 1002,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1235,7 +1235,7 @@
  {
   "name": "12-Maintenance-ServiceRecord-Desktop",
   "w": 1280,
-  "canvasH": 1198,
+  "canvasH": 1199,
   "contentH": 1199,
   "missing": [],
   "broken": [],
@@ -1262,8 +1262,8 @@
  {
   "name": "13-Payroll-Adjustment-Phone",
   "w": 390,
-  "canvasH": 1252,
-  "contentH": 1252,
+  "canvasH": 1258,
+  "contentH": 1258,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1280,8 +1280,8 @@
  {
   "name": "13-Payroll-Advance-Phone",
   "w": 390,
-  "canvasH": 1442,
-  "contentH": 1442,
+  "canvasH": 1464,
+  "contentH": 1464,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1397,8 +1397,8 @@
  {
   "name": "15-Settings-AddPerson-Desktop",
   "w": 1280,
-  "canvasH": 960,
-  "contentH": 960,
+  "canvasH": 982,
+  "contentH": 982,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1415,8 +1415,8 @@
  {
   "name": "15-Settings-BusinessRules-Desktop",
   "w": 1280,
-  "canvasH": 1258,
-  "contentH": 1258,
+  "canvasH": 1357,
+  "contentH": 1357,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1424,8 +1424,8 @@
  {
   "name": "15-Settings-BusinessRules-Phone",
   "w": 390,
-  "canvasH": 2222,
-  "contentH": 2222,
+  "canvasH": 2235,
+  "contentH": 2235,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1451,8 +1451,8 @@
  {
   "name": "15-Settings-Permissions-Desktop",
   "w": 1280,
-  "canvasH": 2115,
-  "contentH": 2115,
+  "canvasH": 2341,
+  "contentH": 2341,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1460,8 +1460,8 @@
  {
   "name": "15-Settings-Permissions-Phone",
   "w": 390,
-  "canvasH": 4365,
-  "contentH": 4365,
+  "canvasH": 5237,
+  "contentH": 5237,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1541,8 +1541,8 @@
  {
   "name": "17-System-States",
   "w": 1280,
-  "canvasH": 1629,
-  "contentH": 1629,
+  "canvasH": 1731,
+  "contentH": 1731,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

@@ -1,4 +1,12 @@
-<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>11.8 Partner app · ask to cash out · Phone (static preview)</title><style>/* SNS Rent Car · Plate — generated from tokens.json */
+<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>11.8 Partner app · ask to cash out · Phone</title>
+<style>/* SNS Rent Car · Plate — font faces, loaded from the repository's fonts/ folder (SIL Open Font License). */
+@font-face { font-family: "Yaldevi"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-SemiBold.ttf") format("truetype"); }
+</style><style>/* SNS Rent Car · Plate — generated from tokens.json */
 :root, [data-theme="light"] {
   --paper: #eef1f0;
   --card: #ffffff;
@@ -59,7 +67,8 @@
 .caption { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
 .plate { font-family: var(--font-plate); font-size: 20px; line-height: 26px; font-weight: 600; }
 .figure { font-family: var(--font-plate); font-size: 26px; line-height: 34px; font-weight: 600; }
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
+
+
 
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */
 .rt, .rt * { box-sizing: border-box; }
@@ -453,25 +462,27 @@ a.rt-tab { text-decoration: none; }
 /* responsive 6: when a sheet or dialog is open, the sticky header and tab bar sit under its dimmed backdrop */
 .rt:has([role="dialog"], [aria-modal="true"]) :is(.rt-pagehead, .rt-tabs, .rt-header) { z-index: auto; }
 </style>
+
+
+
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
-</style>
-</head><body>
+</style></head><body>
 
 <div class="rt" style="position: relative; width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
   <header style="display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 0 16px; background: var(--card); border-bottom: 1px solid var(--line)">
-    <link rel="preload" as="image" href="../../../design-system/assets/brand/sns-logo.png"/><span class="rt-mark rt-mark-full"><img src="../../../design-system/assets/brand/sns-logo.png" alt="SNS Rent Car" draggable="false"/></span>
+    <span data-x-import="Plate.BrandMark" style="display: contents;"><span class="rt-mark rt-mark-full"><img src="../../../design-system/assets/brand/sns-logo.png" alt="SNS Rent Car" draggable="false"></span></span>
     <div style="flex: 1; min-width: 0"><div style="font-size: 16px; line-height: 22px; font-weight: 600">Sunil Jayasinghe</div><div style="font-size: 14px; line-height: 20px; color: var(--ink-muted)">Partner · 2 cars</div></div>
-    <div class="rt-lang rt-lang-light" role="group" aria-label="භාෂාව · Language"><button type="button" aria-pressed="true" lang="si">සිං</button><button type="button" aria-pressed="false" lang="en">EN</button></div>
+    <span data-x-import="Plate.LanguageSwitch" style="display: contents;"><div class="rt-lang rt-lang-light" role="group" aria-label="භාෂාව · Language"><button type="button" aria-pressed="true" lang="si">සිං</button><button type="button" aria-pressed="false" lang="en">EN</button></div></span>
   </header>
   <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(20, 24, 40, .42)"></div>
   <section role="dialog" aria-label="Cash out" style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 14px; padding: 12px 16px 20px; background: var(--card); border-radius: 20px 20px 0 0">
     <span aria-hidden="true" style="align-self: center; width: 40px; height: 4px; border-radius: 2px; background: var(--line-strong)"></span>
     <h2 style="margin: 0; font-size: 19px; line-height: 28px; font-weight: 600">මුදල් ගන්න <span class="rt-en">· Cash out</span></h2>
-    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">කීයද? <span class="rt-en">· How much</span></span><div style="display: flex; flex-direction: column; gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input type="radio" checked style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">සියල්ල <span class="rt-en">· All of it</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">LKR 33,208.75</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input type="radio"  style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">වෙන ගණනක් <span class="rt-en">· Another amount</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">up to 33,208.75</span></span></label></div></div>
-    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">කොහොමද? <span class="rt-en">· How</span></span><div style="display: flex; flex-direction: column; gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input type="radio" checked style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Bank එකට <span class="rt-en">· To my bank account</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">the account SNS has on file</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input type="radio"  style="width: 20px; height: 20px; margin: 2px 0 0; flex: none"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Cash <span class="rt-en">· Collect at the branch</span></span></span></label></div></div>
-    <a href="11-Partners-PartnerEarnings-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>ඉල්ලන්න · Send request</span></a>
+    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">කීයද? <span class="rt-en">· How much</span></span><div style="display: flex; flex-direction: column; gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input type="radio" checked="" style="width: 20px; height: 20px; margin: 2px 0px 0px; flex: 0 0 auto;"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">සියල්ල <span class="rt-en">· All of it</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">LKR 33,208</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input type="radio" style="width: 20px; height: 20px; margin: 2px 0px 0px; flex: 0 0 auto;"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">වෙන ගණනක් <span class="rt-en">· Another amount</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">up to 33,208</span></span></label></div></div>
+    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">කොහොමද? <span class="rt-en">· How</span></span><div style="display: flex; flex-direction: column; gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input type="radio" checked="" style="width: 20px; height: 20px; margin: 2px 0px 0px; flex: 0 0 auto;"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Bank එකට <span class="rt-en">· To my bank account</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">the account SNS has on file</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input type="radio" style="width: 20px; height: 20px; margin: 2px 0px 0px; flex: 0 0 auto;"><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Cash <span class="rt-en">· Collect at the branch</span></span></span></label></div></div>
+    <a href="11-Partners-PartnerEarnings-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><span>ඉල්ලන්න · Send request</span></a>
     <span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">SNS is told straight away. You’ll see it here once it is paid.</span>
   </section>
 </div>

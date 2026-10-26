@@ -37,7 +37,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
           <x-import component-from-global-scope="Plate.MoneyBlock" label="Customer ණය · Customer debt" icon="users" state="4 customers · 1 over 30 days" note="Unpaid bills. Write-offs are SNS's loss only."></x-import>
           <x-import component-from-global-scope="Plate.MoneyBlock" label="Partner ට ගන්න පුළුවන් · Partners can cash out" icon="handshake" figure="{{payable}}" note="Final at the end of each day. Partners ask in their app; SNS pays and records it."></x-import>
           <x-import component-from-global-scope="Plate.MoneyBlock" label="අද · තවම අවසන් නැහැ · Today, not final yet" icon="eyeOff" state="අද දවස වහනකම් · until the day closes" note="Partner ට පේන්නේ නැහැ · partners can’t see it until it is final."></x-import>
-          <x-import component-from-global-scope="Plate.MoneyBlock" label="SNS ආදායම · SNS earnings" icon="chart" state="Month to date" note="අර්ථය තවම තීරණය කර නැහැ · definition pending owner decision. Never labelled profit."></x-import>
+          <x-import component-from-global-scope="Plate.MoneyBlock" label="SNS ආදායම · SNS earnings" icon="chart" state="Month to date" note="SNS cars’ rent plus SNS’s commission and shares on partner cars; profit is shown before depreciation. The sample data has no month total."></x-import>
         </div>
       </section>
 
@@ -120,7 +120,7 @@ class Component extends DCLogic {
     var all = overdue.concat(available, rented, repair, unavailable);
     return { fleetHrefs: { overdue: '06-Rentals-Overdue-Desktop.dc.html', available: '04-Cars-AllCars-Desktop.dc.html', rented: '06-Rentals-AllRentals-Desktop.dc.html', repair: '12-Maintenance-Maintenance-Desktop.dc.html', unavailable: '04-Cars-AllCars-Desktop.dc.html' },
       twenty: 20, twentyfour: 24, twentysix: 26,
-      payable: 63808.75,
+      payable: 63808,
       fleet: all.map(function (c) { return { plate: c.plate, status: c.status, warn: !!c.warning }; }),
       rail: [
         { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html', active: true },

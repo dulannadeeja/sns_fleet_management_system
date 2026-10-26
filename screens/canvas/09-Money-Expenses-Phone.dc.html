@@ -76,13 +76,13 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
 </section>
 <section style="display: flex; gap: 12px; align-items: flex-start; padding: 16px 20px; border: 1.5px dashed var(--line-strong); border-radius: 16px">
 <x-import component-from-global-scope="Plate.Icon" name="file" size="{{twenty}}" style="flex: none; margin-top: 2px; color: var(--ink-muted)"></x-import>
-<span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Business expenses <span class="rt-en">· rent, utilities and other running costs</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">None recorded yet; the system starts fresh. Salaries come from Payroll and are not entered here again.</span></span>
+<span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Business expenses <span class="rt-en">· rent, utilities and other running costs</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">None in the sample data. Past expenses come from SNS’s books, marked “Imported”. Card-machine fees are entered once a month from the bank statement. Salaries come from Payroll and are not entered here again.</span></span>
 <span style="margin-left: auto"><x-import component-from-global-scope="Plate.Button" icon="plus" variant="secondary">දාන්න · Add</x-import></span>
 </section></div>
   <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1965}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2059}}'>
 class Component extends DCLogic {
   renderVals() {
     return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html", "active": true}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html"}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,

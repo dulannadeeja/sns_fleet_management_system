@@ -1,4 +1,12 @@
-<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>01.1 Sign in · Phone (static preview)</title><style>/* SNS Rent Car · Plate — generated from tokens.json */
+<!doctype html><html lang="si"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>01.1 Sign in · Phone</title>
+<style>/* SNS Rent Car · Plate — font faces, loaded from the repository's fonts/ folder (SIL Open Font License). */
+@font-face { font-family: "Yaldevi"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Yaldevi"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Yaldevi/static/Yaldevi-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 500; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-Medium.ttf") format("truetype"); }
+@font-face { font-family: "Gemunu Libre"; font-weight: 600; font-style: normal; font-display: swap; src: url("../../../fonts/Gemunu_Libre/static/GemunuLibre-SemiBold.ttf") format("truetype"); }
+</style><style>/* SNS Rent Car · Plate — generated from tokens.json */
 :root, [data-theme="light"] {
   --paper: #eef1f0;
   --card: #ffffff;
@@ -59,7 +67,8 @@
 .caption { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
 .plate { font-family: var(--font-plate); font-size: 20px; line-height: 26px; font-weight: 600; }
 .figure { font-family: var(--font-plate); font-size: 26px; line-height: 34px; font-weight: 600; }
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@400;500;600;700&family=Gemunu+Libre:wght@500;600;700&family=Noto+Sans+Sinhala:wght@400..600&display=swap');
+
+
 
 /* Plate — SNS Rent Car. Every value comes from tokens.css (generated from tokens.json). */
 .rt, .rt * { box-sizing: border-box; }
@@ -453,26 +462,28 @@ a.rt-tab { text-decoration: none; }
 /* responsive 6: when a sheet or dialog is open, the sticky header and tab bar sit under its dimmed backdrop */
 .rt:has([role="dialog"], [aria-modal="true"]) :is(.rt-pagehead, .rt-tabs, .rt-header) { z-index: auto; }
 </style>
+
+
+
 <style>
 body{margin:0;background:#eef1f0}
 a{color:#1756a9}a:hover{color:#0f3e7e}
-</style>
-</head><body>
+</style></head><body>
 
 <div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
   <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px">
-    <link rel="preload" as="image" href="../../../design-system/assets/brand/sns-logo.png"/><span class="rt-mark rt-mark-full rt-mark-lg"><img src="../../../design-system/assets/brand/sns-logo.png" alt="SNS Rent Car" draggable="false"/></span>
-    <div class="rt-lang rt-lang-light" role="group" aria-label="භාෂාව · Language"><button type="button" aria-pressed="true" lang="si">සිං</button><button type="button" aria-pressed="false" lang="en">EN</button></div>
+    <span data-x-import="Plate.BrandMark" style="display: contents;"><span class="rt-mark rt-mark-full rt-mark-lg"><img src="../../../design-system/assets/brand/sns-logo.png" alt="SNS Rent Car" draggable="false"></span></span>
+    <span data-x-import="Plate.LanguageSwitch" style="display: contents;"><div class="rt-lang rt-lang-light" role="group" aria-label="භාෂාව · Language"><button type="button" aria-pressed="true" lang="si">සිං</button><button type="button" aria-pressed="false" lang="en">EN</button></div></span>
   </div>
   <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 32px 20px 20px">
     <div style="display: flex; flex-direction: column; gap: 6px">
       <h1 style="margin: 0; font-size: 28px; line-height: 38px; font-weight: 600">ආයුබෝවන්</h1>
       <p style="margin: 0; font-size: 16px; line-height: 26px; color: var(--ink-muted)">SNS Rent a Car · Elpitiya. ඔයාගේ account එකට ඇතුල් වෙන්න.<br><span class="rt-en">Sign in to your account.</span></p>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">දුරකථන අංකය <span class="rt-en">· Phone number</span></span><input inputmode="tel" placeholder="07X XXX XXXX" aria-label="Phone number" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%"></div>
-    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මුරපදය <span class="rt-en">· Password</span></span><input type="password" value="••••••••" aria-label="Password" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; border: 2px solid var(--sapphire)"></div>
-    <a href="01-Start-FirstPassword-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>ඇතුල් වෙන්න · Sign in</span></a>
-    <div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sunken); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><div style="flex: none"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg></div><span>Forgot your password? Ask the owner. How password recovery works is still to be decided.</span></div>
+    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">දුරකථන අංකය <span class="rt-en">· Phone number</span></span><input inputmode="tel" placeholder="07X XXX XXXX" aria-label="Phone number" style="min-height: 52px; padding: 0px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 17px; box-sizing: border-box; width: 100%;"></div>
+    <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මුරපදය <span class="rt-en">· Password</span></span><input type="password" value="••••••••" aria-label="Password" style="min-height: 52px; padding: 0px 14px; border-radius: 12px; background: var(--card); color: var(--ink); font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 17px; box-sizing: border-box; width: 100%; border: 2px solid var(--sapphire);"></div>
+    <a href="01-Start-FirstPassword-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><span>ඇතුල් වෙන්න · Sign in</span></a>
+    <div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--sunken); border-radius: 12px; font-size: 14px; line-height: 22px; color: var(--ink-muted)"><span data-x-import="Plate.Icon" style="display: contents; flex: none"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.01"></path></svg></span><span>Forgot your password? Ask the owner to reset it. The owner and the admin can reset theirs by email. 5 wrong tries lock the account for 15 minutes.</span></div>
   </div>
   <div style="padding: 16px 20px 24px; font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">Owner, admin, staff and partners each have their own account.</div>
 </div>
