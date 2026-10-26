@@ -40,7 +40,7 @@ Screens show sample data and labelled examples. They illustrate the requirements
 ## 3a. History
 
 - This folder is a git repository. Work on the `development` branch. One commit per change, after the sync audit; message `type(scope): summary` with the source-of-truth sections, AT-ids and who decided. No version history inside the design doc.
-- Future PRD (`PRD.md`) and TRD (`TRD.md`) are derived from the design doc; every item cites its section or AT-id.
+- The PRD (`PRD.md`) and TRD (`TRD.md`) are derived from the design doc; every item cites its section or AT-id.
 
 ## 4. Rules that always apply
 
@@ -60,7 +60,8 @@ Screens show sample data and labelled examples. They illustrate the requirements
 | Path | What it is |
 | --- | --- |
 | `SNS_SYSTEM_DESIGN.md` | The source of truth (rank 1). |
-| `PRD.md` | Product requirements (rank 2), derived from the source of truth. In progress. |
+| `PRD.md` | Product requirements (rank 2): stories for all four phases, derived from the source of truth. |
+| `TRD.md` | Technical requirements (rank 3): architecture, data model, integrity rules, jobs, deployment, tests. |
 | `change-requests/`, `addenda/` | Change requests to the frozen proposal, and addenda once the owner agrees. |
 | `proposal/` | The approved, frozen client proposal (PDF and HTML). Never edit. |
 | `design-system/` | The Plate design system (master): tokens, components, previews and the image copies they use (`design-system/assets/`). |

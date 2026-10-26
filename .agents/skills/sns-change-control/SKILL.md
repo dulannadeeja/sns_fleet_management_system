@@ -14,8 +14,8 @@ Higher rank wins. A lower file may restate or implement a higher one, never cont
 | Rank | File | Owns | Location |
 |---|---|---|---|
 | 1 | **System design (source of truth)** | Requirements, business rules, decisions and their status | `SNS_SYSTEM_DESIGN.md` |
-| 2 | **PRD** (when it exists) | Product requirements, user stories, acceptance criteria | `PRD.md` |
-| 3 | **TRD** (when it exists) | Architecture, data model, integrity rules | `TRD.md` |
+| 2 | **PRD** | Product requirements, user stories, acceptance criteria | `PRD.md` |
+| 3 | **TRD** | Architecture, data model, integrity rules | `TRD.md` |
 | 4 | **Brand guidebook** | Brand and visual rules | `brand/guidebook/` |
 | 4 | **Design system** | Tokens, components, previews | `design-system/` |
 | 4 | **Screens** | Desktop and phone screens, `NN-Module-Screen-Device` | `screens/` |

@@ -6,10 +6,11 @@ The rental and fleet management system for SNS Rent Car (one branch, Elpitiya, S
 
 1. `AGENTS.md`: how to work in this folder (every agent and person).
 2. `SNS_SYSTEM_DESIGN.md`: the source of truth for requirements and decisions.
-3. `brand/guidebook/README.md`: the brand guidebook.
-4. `design-system/README.md`: the Plate design system. Open `design-system/index.html` in a browser to see every component.
-5. `screens/README.md`: the screens.
-6. `.agents/skills/sns-change-control/SKILL.md`: the order every change follows.
+3. `PRD.md` and `TRD.md`: the product stories and the technical design, derived from it.
+4. `brand/guidebook/README.md`: the brand guidebook.
+5. `design-system/README.md`: the Plate design system. Open `design-system/index.html` in a browser to see every component.
+6. `screens/README.md`: the screens.
+7. `.agents/skills/sns-change-control/SKILL.md`: the order every change follows.
 
 Everything works from this repository alone. The claude.ai artifacts are viewers, refreshed from here.
 

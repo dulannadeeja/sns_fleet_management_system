@@ -526,7 +526,7 @@ This section organises the confirmed behaviour for engineering. The stack and ho
 | PayrollPeriod, PayrollEntry, EmployeeLoan, SalaryPayment | Manual payroll and balances |
 | Approval, AuditEvent, Notification | Decisions, history, daily summaries |
 
-**Proposed architecture:** One Next.js application organised as modules (a modular monolith), with PostgreSQL, private object storage (Cloudflare R2) and background tasks for PDFs, reminders, the 11:59 PM day close and nightly backups. The stack and hosting are Confirmed (§2); the module layout is for the TRD.
+**Proposed architecture:** One Next.js application organised as modules (a modular monolith), with PostgreSQL, private object storage (Cloudflare R2) and background tasks for PDFs, reminders, the 11:59 PM day close and nightly backups. The stack and hosting are Confirmed (§2); the module layout, data model and enforcement of these controls are in `TRD.md`.
 
 ### 17.3 Derived integrity controls
 
