@@ -4,7 +4,7 @@ What the SNS Rent Car system must do, written as stories a developer can build a
 
 This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-56) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
-Status of this draft: front section and Phase 1 stories, written with Dulan from 26 Oct 2026, for review. Phases 2 to 4 are not yet written.
+Status of this draft: front section and Phase 1 and 2 stories, written with Dulan from 26 Oct 2026, for review. Phases 3 and 4 are not yet written.
 
 ## 1. Sources
 
@@ -68,15 +68,15 @@ Agreed with Dulan, 26 Oct 2026.
 | 08 Customers | 08.1–08.5 | 1 | [08 Customers](#08-customers) |
 | 04 Cars | 04.1–04.7 | 1 | [04 Cars](#04-cars) |
 | 11 Partners: owners | 11.1–11.3 | 1 | [11 Partners: owners](#11-partners-owners) |
-| 05 New rental | 05.1–05.8 | 2 | Not yet written |
-| 06 Rentals | 06.1–06.8 | 2 | Not yet written |
-| 07 Return | 07.1–07.3 | 2 | Not yet written |
-| 09 Money: payments | 09.3–09.5 | 2 | Not yet written |
-| 08 Customers: write-off | 08.6 | 2 | Not yet written |
-| 10 Approvals | 10.1–10.4 | 2 | Not yet written |
-| 16 Documents: rental | 16.1–16.4 | 2 | Not yet written |
-| 02 Home: staff and search | 02.2, 02.4 | 2 | Not yet written |
-| 18 Reservations | 18.1–18.5 | 2 | Not yet written |
+| 05 New rental | 05.1–05.8 | 2 | [05 New rental](#05-new-rental) |
+| 06 Rentals | 06.1–06.8 | 2 | [06 Rentals](#06-rentals) |
+| 07 Return | 07.1–07.3 | 2 | [07 Return](#07-return) |
+| 09 Money: payments | 09.3–09.5 | 2 | [09 Money: payments](#09-money-payments) |
+| 08 Customers: write-off | 08.6 | 2 | [08 Customers: write-off](#08-customers-write-off) |
+| 10 Approvals | 10.1–10.4 | 2 | [10 Approvals](#10-approvals) |
+| 16 Documents: rental | 16.1–16.4 | 2 | [16 Documents: rental](#16-documents-rental) |
+| 02 Home: staff and search | 02.2, 02.4 | 2 | [02 Home: staff and search](#02-home-staff-and-search) |
+| 18 Reservations | 18.1–18.5 | 2 | [18 Reservations](#18-reservations) |
 | 09 Money: drawer, day and expenses | 09.1–09.2, 09.6–09.13 | 3 | Not yet written |
 | 11 Partners: cash-outs and portal | 11.4–11.8 | 3 | Not yet written |
 | 13 Payroll | 13.1–13.5 | 3 | Not yet written |
@@ -214,14 +214,14 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 #### ST-15.1 · Set permissions
 
-- **Status:** Confirmed for the defaults; the full list of permissions is Open (DN-01). "Nobody can do it until the authorised person is set" is a Derived control.
+- **Status:** Confirmed for the defaults; the full list of permissions is Open (DN-01). "Only the owner until the authorised person is set" is a Derived control.
 - **Phase:** 1.
 - **Roles:** Owner only changes permissions.
 - **Story:** As the owner, I decide what the admin and each staff member may do, starting from the agreed defaults, so that each person has the access their job needs.
 - **Rules:**
   - Every person starts from the agreed defaults; the owner can change them for each person. The owner can do everything and is not listed. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
   - Payroll is one permission covering preparation, finalising and payment. Exporting reports is a separate permission (PR-11). Paying partner cash-outs is the admin's by default and may be given to chosen staff. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
-  - Checking payments, writing off a debt, keeping a cancellation fee and going ahead with expired papers belong to an authorised person. Until the owner names one, nobody can do them (Derived control); naming one is on the go-live checklist.
+  - Checking payments, writing off a debt, keeping a cancellation fee and going ahead with expired papers belong to an authorised person. Until the owner names one, only the owner can do them, as the owner can do everything (Derived control); naming one is on the go-live checklist.
   - Every change is recorded with who made it and when (PR-05), and permissions are checked by the server on every request (PR-06).
 - **Checks:** AT-24 "Staff without export or payroll permission request those records directly: the server denies access, even outside normal navigation". *Proposed check:* the owner changes a permission; the activity log shows the change, who made it and when.
 - **Screens:** 15.1 Permissions.
@@ -484,3 +484,404 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 ### Gaps found while writing Phase 1
 
 Six gaps were found and decided with Dulan for the owner on 26 Oct 2026. Each is now in the system design and its story, with a check: turning off an account (ST-15.2, AT-47), closing a flag (ST-08.5, AT-48), saving a customer before the copies (ST-08.2, AT-49), starting packages for new cars only (ST-04.4, AT-50), one customer per NIC (ST-08.2, AT-51) and retiring a car (ST-04.5, AT-52). The screens 15.3, 08.2, 08.3, 04.6 and 04.5 show them.
+
+## 11. Phase 2 · Rentals
+
+Months 2 and 3: a rental from the first step to the paid bill, with extensions, swaps, payments, deposits, debts, approvals, printed documents and advance reservations. Written with Dulan, 26 Oct 2026, for review. Defaults for who may do what are in System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions); every one is configurable (PR-06).
+
+### 05 New rental
+
+#### ST-05.1 · Start a rental with the customer
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner. Approving a first-time customer: staff or admins.
+- **Story:** As staff, I start a rental by finding or adding the customer and reading their warnings, so that I rent to them knowingly.
+- **Rules:**
+  - A rental starts from the customer: found, or added (ST-08.2). A customer collecting a reservation starts from the reservation instead (ST-18.3). System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
+  - Flags and unpaid debts warn; staff go ahead only with a reason. An expired licence needs the authorised person (ST-08.4). System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
+  - Staff decide whether a reference person is needed (ST-05.5).
+  - A customer may rent several cars at once; each is its own rental, agreement and bill.
+- **Checks:** AT-55 "A customer with an unpaid bill and no flag starts a new rental: a debt warning shows; staff continue only with a reason". AT-09 "Customer rents two vehicles: separate rentals, agreements and bills; one payment may be allocated across both".
+- **Screens:** 05.1 Customer and warnings.
+
+#### ST-05.2 · Choose a car
+
+- **Status:** Confirmed; holding the car at the database is a Derived control.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I choose a free car, so that the rental gets a car nobody else holds.
+- **Rules:**
+  - Only free cars can be chosen. A car under repair, unavailable, retired, rented or reserved on any of the rental's days is not offered. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability), [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
+  - The car is held only at handover; until then it stays free. If two people hand over the same car, only one succeeds. System design → [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
+  - A car not found at this morning's check is shown as such.
+- **Checks:** AT-08 "Two employees submit handovers for the same car: only one succeeds". AT-20 "Car under repair: handover blocked". AT-30 "A car is reserved Fri to Sun; staff try to rent it for Sat: refused".
+- **Screens:** 05.2 Choose a car.
+
+#### ST-05.3 · Dates and estimate
+
+- **Status:** Confirmed; reading times in Asia/Colombo is Proposed (PR-15).
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I set how many days and see the return deadline and the estimate, so that the customer knows the price before signing.
+- **Rules:**
+  - The pickup cutoff and the return deadline are business settings, for now 3:00 PM and 8:00 AM. A pickup before the cutoff ends day one at the next morning's deadline; a pickup at or after it, the morning after. The minimum is one full day. System design → [Business-wide timing](SNS_SYSTEM_DESIGN.md#51-business-wide-timing).
+  - Included km are pooled over the rental. From the surcharge's start day (default day 6) each day adds the long-rental extra (default LKR 500). System design → [Kilometres and surcharge](SNS_SYSTEM_DESIGN.md#52-kilometres-and-surcharge), [Example calculations without swaps](SNS_SYSTEM_DESIGN.md#53-example-calculations-without-swaps).
+  - The car's package is copied onto the rental now; later package changes never touch it (PR-08).
+- **Checks:** AT-01 "Pickup Monday 2 PM: deadline Tuesday 8 AM". AT-02 "Pickup Monday exactly 3 PM: deadline Wednesday 8 AM". AT-03 "One-day Wagon R, 150 km: 4,500 + 1,250 = 5,750". AT-04 "Six-day Wagon R, at most 600 km: 27,000 + 500 = 27,500". AT-05.
+- **Screens:** 05.3 Dates and estimate.
+
+#### ST-05.4 · Deposit and when the rent is paid
+
+- **Status:** Confirmed; deposits kept apart from income is a Derived control.
+- **Phase:** 2.
+- **Roles:** Staff, Admin set or waive a deposit and allow payment after return; each is a recorded decision.
+- **Story:** As staff, I set the deposit and agree when the rent is paid, so that SNS holds what it needs for this customer and car.
+- **Rules:**
+  - Staff set or waive a deposit by car and customer; waiving needs a reason. System design → [Deposits](SNS_SYSTEM_DESIGN.md#82-deposits), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+  - A deposit is money held, never income (PR-09).
+  - The rent may be paid now or at return; staff may allow an unpaid balance after return, with the decision recorded. System design → [Collection](SNS_SYSTEM_DESIGN.md#81-collection).
+- **Checks:** *Proposed check:* waiving a deposit without a reason is refused; with one, the reason, name and time are recorded and appear in the owner's daily summary.
+- **Screens:** 05.4 Deposit and payment.
+
+#### ST-05.5 · Reference person
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin decide whether one is needed.
+- **Story:** As staff, when I decide a rental needs a reference person, I record them with their documents, so that SNS has someone to contact.
+- **Rules:** needed only when staff decide; their name, NIC, phone, and ID and licence copies are then required, and handover waits for the copies. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents), [Handover requirements](SNS_SYSTEM_DESIGN.md#handover-requirements).
+- **Checks:** AT-07 "Reference person required but their licence copy missing: handover blocked".
+- **Screens:** 05.6 Reference person.
+
+#### ST-05.6 · Review and print the agreement
+
+- **Status:** Confirmed; the agreement conditions wait on DN-20.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I review the rental and print the agreement in Sinhala or English, so that the customer signs what was agreed.
+- **Rules:**
+  - The agreement is filled with the customer, car, dates and agreed prices, in the chosen language (PR-10). It is printed, signed, and the signed copy uploaded before handover. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
+  - The conditions are SNS's own wording, approved by SNS; nothing is taken from the unverified reference images.
+- **Checks:** AT-06 "Missing signed agreement: handover blocked".
+- **Screens:** 05.5 Review and print; prints 16.1 or 16.2 (ST-16.1).
+- **Decisions needed:** DN-20.
+
+#### ST-05.7 · Ask for a different price
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff request; an admin approves (ST-10.2).
+- **Story:** As staff, I ask an admin to change the agreed price or give a discount, with a reason, so that a special price is an approved decision.
+- **Rules:**
+  - Changing the agreed price or giving a discount needs an admin's approval. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+  - A discount reduces SNS's and the partner's earnings in proportion. On a partner car, a price above the package goes to the admin, who sets how the extra is split (ST-10.3). System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
+- **Checks:** AT-39, AT-40 (ST-10.3).
+- **Screens:** 05.7 Price change needs admin.
+- **Decisions needed:** DN-01 (whether a person may approve their own request); DN-10 (rounding).
+
+#### ST-05.8 · Cancel before handover
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin cancel with a reason; only the authorised person keeps a fee.
+- **Story:** As staff, I cancel a rental that was not handed over, with a reason, so that the car is free and any money is settled.
+- **Rules:** only before handover; a reason is required; an authorised person may keep a cancellation fee, which is entirely SNS's; the rest is refunded and recorded on the rental as its own line, not as an expense. System design → [Cancellation before handover](SNS_SYSTEM_DESIGN.md#73-cancellation-before-handover), [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
+- **Checks:** AT-18 "Pre-handover cancellation with authorised fee: refund recorded; fee entirely SNS".
+- **Screens:** 05.8 Cancel before handover.
+
+### 06 Rentals
+
+#### ST-06.1 · Rentals list
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I see open rentals grouped by what needs doing (overdue, due back, handover in progress, returned today, the rest), so that nothing is missed.
+- **Rules:** a filter opened from the navigation or the attention summary is shown and can be removed; reservations are reached from here (ST-18.1); older and cancelled rentals are kept. System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
+- **Checks:** AT-28 "Staff open Overdue 1 from the navigation: only the overdue rental shows, with a visible filter that can be removed".
+- **Screens:** 06.1 Rentals.
+
+#### ST-06.2 · Rental details
+
+- **Status:** Confirmed; who sees "who earns what" is part of DN-01.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner; the earnings split is shown to the owner.
+- **Story:** As staff, I see a rental's customer, car, readings, bill, payments and history in one place, so that I can answer any question about it.
+- **Rules:**
+  - Each rental day's rent becomes final for the partner at that day's close; extra km and the late charge at return; items waiting for an admin stay out until decided. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+  - Return status is kept apart from what the customer and SNS still owe. System design → [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
+  - A rental marked "Started before go-live" earns for the partner only from go-live; an imported rental is read-only. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
+  - A payment is corrected only by request (ST-09.3).
+- **Checks:** AT-14 "A rental runs several days: each day final once, at its close; excess km final at return; nothing counted twice". AT-37. AT-42.
+- **Screens:** 06.2 Rental details.
+- **Decisions needed:** DN-11 (business-day close).
+
+#### ST-06.3 · Overdue rental
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I see how late a rental is and call the customer, receive the car or extend, so that late cars are followed up.
+- **Rules:** no late fee runs on its own; staff decide any late charge at return, with a reason. No automatic customer messages: staff call. System design → [Early and late return](SNS_SYSTEM_DESIGN.md#74-early-and-late-return), [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring).
+- **Checks:** none in the system design.
+- **Screens:** 06.3 Overdue rental.
+
+#### ST-06.4 · Hand over the car
+
+- **Status:** Confirmed; holding the car at the database is a Derived control.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I hand over the car only when every required item is in, so that no car leaves without its papers.
+- **Rules:**
+  - Handover is blocked until the customer's ID copy, licence copy, the signed agreement photo, the outgoing odometer and, when needed, the reference person's copies are in. Nobody can skip one. System design → [Handover requirements](SNS_SYSTEM_DESIGN.md#handover-requirements).
+  - The fuel level and the accessories checklist must be recorded, but a missing item or low fuel never blocks handover. Condition photos are optional.
+  - A car under repair or unavailable cannot be handed over. Only one handover of a car can succeed.
+  - A reserved car's pickup follows the same steps.
+- **Checks:** AT-06, AT-07, AT-08, AT-20, AT-35 "Pickup of a reserved car without a signed agreement or ID copy: blocked". AT-53 "A car goes out with an accessory missing and a quarter tank: handover finishes once both are recorded; the customer is not charged for the missing item".
+- **Screens:** 06.4 Handover checklist, 06.5 Handover done.
+
+#### ST-06.5 · Extend by phone
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin; no admin approval.
+- **Story:** As staff, I extend a rental when the customer calls, so that the new deadline is recorded at the original rate.
+- **Rules:**
+  - Staff accept a phone extension without admin approval; the person and the new deadline are recorded; the rental keeps its original rates and terms. System design → [Extensions](SNS_SYSTEM_DESIGN.md#72-extensions).
+  - An extension that would run into a reservation on the same car is blocked, with the reason, until the reservation is moved or its dates change. System design → [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
+- **Checks:** AT-05 (the extension keeps the old terms). AT-32 "An extension would run into another customer's reservation: blocked with the reason".
+- **Screens:** 06.6 Extend by phone, 06.8 Extend · blocked by a reservation.
+- **Decisions needed:** DN-08 (whether an extension needs an amended agreement or signature).
+
+#### ST-06.6 · Swap a car
+
+- **Status:** Confirmed; the record of each car's use is a Derived control.
+- **Phase:** 2.
+- **Roles:** Staff record the swap; an admin decides the price and the swap-day split (ST-10.2).
+- **Story:** As staff, I swap the car on a running rental, recording both readings, so that each car's use is counted on its own.
+- **Rules:**
+  - The returning car's reading and the replacement's outgoing reading are both required. Only free cars can be the replacement. One rental keeps the sequence of cars it used. System design → [Vehicle swaps](SNS_SYSTEM_DESIGN.md#75-vehicle-swaps).
+  - The admin decides the replacement's price, how the swap day is split, the swap day's km allowance and any long-rental extra on that day. Km are counted per car at each car's own rate; the long-rental day count continues from the rental's start; the replacement's surcharge rule applies from the swap. The replacement's terms are saved when it joins (PR-08).
+  - Earnings follow the actual use of each car; anything waiting for the admin stays out of a partner's earnings.
+- **Checks:** AT-19 "Rental swap: required readings, separate km, recorded admin decisions and the saved rates".
+- **Screens:** 06.7 Swap a car.
+- **Decisions needed:** DN-07 (allowance pool when cars differ, rounding, partial-day earnings), DN-08 (amended agreement).
+
+### 07 Return
+
+#### ST-07.1 · Receive the car and settle the bill
+
+- **Status:** Confirmed; the fuel charge waits on DN-06.
+- **Phase:** 2.
+- **Roles:** Staff, Admin decide late and damage charges; an admin decides early-return reductions and damage or accessory allocation.
+- **Story:** As staff, I record the car's return and settle the bill, so that the customer, SNS and the partner each know where they stand.
+- **Rules:**
+  - The incoming odometer is required. Extra km = km driven minus the pooled included km, at the car's saved rate. System design → [Handover requirements](SNS_SYSTEM_DESIGN.md#handover-requirements), [Example calculations without swaps](SNS_SYSTEM_DESIGN.md#53-example-calculations-without-swaps).
+  - Staff set or waive a late charge, with a reason; it follows the car's commission split. An early-return reduction is the admin's decision. System design → [Early and late return](SNS_SYSTEM_DESIGN.md#74-early-and-late-return).
+  - The accessories checklist and fuel level are recorded again. A missing accessory may be charged; on a partner car the admin decides who gets it. Fuel is litres times the owner's price per litre, entirely SNS's. Damage charges are staff decisions; the admin allocates them. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation), [Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope).
+  - Staff choose the car's next state; nothing is chosen for them. System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
+  - Payments and the deposit are applied (ST-07.3, ST-09.1). An unpaid balance becomes customer debt; the partner is paid even when the customer has not paid. System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+- **Checks:** AT-03, AT-04, AT-13 "Customer has not paid when the partner asks to cash out: the partner's final earnings stay payable", AT-14, AT-54 "A partner car comes back without its air pump: the charge waits for the admin, out of the partner's earnings".
+- **Screens:** 07.1 Return and payment.
+- **Decisions needed:** DN-06 (same-level return or paid fuel), DN-09 (early return and included km), DN-10 (allocation and rounding).
+
+#### ST-07.2 · Garage days on the bill
+
+- **Status:** Open; the line cannot be added to a bill until DN-04 is decided.
+- **Phase:** 2.
+- **Roles:** to be decided (DN-04).
+- **Story:** As staff, when a car comes back needing the garage, I can add the days it cannot be rented to the bill, once the owner has decided when that applies.
+- **Rules:** the garage-day charge is set per car, default LKR 5,000 a day; what triggers it, who decides it and how it is split on a partner car are Open. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
+- **Checks:** none until DN-04 is decided.
+- **Screens:** 07.2 Garage days on the bill.
+- **Decisions needed:** DN-04.
+
+#### ST-07.3 · Use the deposit and refund the rest
+
+- **Status:** Confirmed; deposits kept apart from income is a Derived control.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I apply the deposit to the bill and refund what is left, so that the deposit is settled and recorded.
+- **Rules:**
+  - The deposit pays this rental's bill and damage first; then, with the customer's agreement noted, the same customer's older unpaid bills; the rest is refunded. Nothing is applied beyond what is held. System design → [Deposits](SNS_SYSTEM_DESIGN.md#82-deposits).
+  - Every application and refund is recorded. A refund is not an expense; a cash refund shows in the drawer as its own line. A deposit applied to a bill is not counted again as new money (PR-09).
+- **Checks:** AT-12 "LKR 10,000 deposit, LKR 7,000 bill: apply 7,000, refund 3,000; no double-counted earnings". AT-56 "10,000 deposit, 7,000 bill, 2,000 older bill, the customer agrees: 7,000, then 2,000, then 1,000 refunded".
+- **Screens:** 07.3 Use deposit and refund.
+
+### 09 Money: payments
+
+#### ST-09.1 · Record a payment
+
+- **Status:** Confirmed; keeping "recorded" apart from "checked" is Proposed.
+- **Phase:** 2; the bank and card check is Phase 3.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I record each payment with how it was paid, so that every rupee is under the name of who took it.
+- **Rules:**
+  - Cash, bank transfer, card and mixed payments are recorded by hand; there is no payment integration (PR-14). A bank transfer needs its reference; a card payment needs its receipt number. Bank and card count as paid as soon as they are entered. System design → [Collection](SNS_SYSTEM_DESIGN.md#81-collection).
+  - One payment may be allocated across several of the customer's bills, never beyond its amount. System design → [Collection](SNS_SYSTEM_DESIGN.md#81-collection), [Deposits](SNS_SYSTEM_DESIGN.md#82-deposits).
+  - A payment is recorded once, even if sent twice. System design → [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
+- **Checks:** AT-09, AT-10 "Staff record a bank payment with its reference: counted at once; the check is tracked apart".
+- **Screens:** 09.3 Record a payment, 09.4 Split payment · cash and bank.
+
+#### ST-09.2 · Ask for a payment correction
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff request; an admin approves or rejects (ST-10.2).
+- **Story:** As staff, I ask for a wrong payment to be corrected, saying what is wrong, what it should be and why, so that the fix is approved and both records stay.
+- **Rules:** a correction needs an admin's approval; the original is never changed or deleted; an approved correction is a new dated line, and earnings already final change only by an adjustment line. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs); PR-07.
+- **Checks:** AT-16 "An approved correction affects earnings already final or cashed out: the original lines stay; a dated adjustment line changes the balance".
+- **Screens:** 09.5 Payment correction request.
+- **Decisions needed:** DN-01 (self-approval).
+
+### 08 Customers: write-off
+
+#### ST-08.6 · Write off a debt
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** The authorised person; until one is named, only the owner.
+- **Story:** As the authorised person, I write off all or part of a debt that cannot be collected, with a reason, so that the books show the loss honestly.
+- **Rules:** a reason is required; the loss is entirely SNS's and no partner's earnings change; the bills stay as they were and the customer's record notes the write-off; it shows in the owner's exceptions. An imported opening debt is written off the same way. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs), [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
+- **Checks:** AT-17 "Customer debt written off: SNS absorbs the loss; partner earnings not reduced". AT-38 "An imported opening debt is written off: same".
+- **Screens:** 08.6 Write off a debt.
+
+### 10 Approvals
+
+#### ST-10.1 · Approvals waiting
+
+- **Status:** Confirmed; the approval workflow is part of DN-01.
+- **Phase:** 2.
+- **Roles:** Admin, Owner.
+- **Story:** As an admin, I see every request waiting for me with its effect and who bears it, so that I decide with the facts in front of me.
+- **Rules:** waiting requests include price changes and discounts, payment corrections, swap pricing and swap-day splits, damage and accessory allocations, early-return reductions and the split of a price above the package. Each shows the requester's reason word for word. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+- **Checks:** none beyond ST-10.2.
+- **Screens:** 10.1 Approvals.
+- **Decisions needed:** DN-01. Until it is decided, the screen says so when the requester and the approver are the same person.
+
+#### ST-10.2 · Approve or reject
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Admin, Owner.
+- **Story:** As an admin, I approve or reject a request after a confirm step that repeats its effect, so that nothing is decided by a slip.
+- **Rules:** rejecting needs a note; the approver, time and note go into the rental's history, and the requester's reason is kept (PR-05). A decision affecting earnings already final adds a dated adjustment line (PR-07). The requester sees the result.
+- **Checks:** AT-16.
+- **Screens:** 10.2 Approve · confirm, 10.3 Reject · confirm.
+
+#### ST-10.3 · Split a price above the package on a partner car
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Admin, Owner.
+- **Story:** As an admin, when a partner car is rented above its package, I set how the extra is split between SNS and the partner, with a reason, so that the partner's share is fair and decided.
+- **Rules:**
+  - The package amount follows the car's commission. The extra above it is split as the admin sets for that rental, with a reason; it may be all SNS's. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
+  - Until decided, the extra stays out of the partner's earnings; the package share becomes final at each day's close. The partner sees one earning a day, never the price, the extra or SNS's share. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
+- **Checks:** AT-39 "The admin keeps the whole extra for SNS: the partner's earning is on the package only". AT-40 "A 50/50 split with a reason: the partner's day earning is the package share plus half the extra, shown as one amount". AT-41 "The day closes before the split is decided: the package share is final; the extra waits".
+- **Screens:** 10.4 Approve a higher price on a partner car.
+- **Decisions needed:** DN-10 (rounding).
+
+### 16 Documents: rental
+
+#### ST-16.1 · Rental agreement
+
+- **Status:** Confirmed; the conditions wait on DN-20.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I print the rental agreement in Sinhala or English, filled in with this rental, so that the customer signs the right terms.
+- **Rules:** filled with SNS's business details, the customer, car, dates, daily rate, included and extra km, and deposit; odometer and fuel are written at handover; the conditions are SNS's approved wording; the signed copy is photographed and uploaded before handover. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
+- **Checks:** AT-06.
+- **Screens:** 16.1 Rental agreement · Sinhala, 16.2 Rental agreement · English.
+- **Decisions needed:** DN-20, DN-08.
+
+#### ST-16.2 · Final bill and payment receipt
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I print the itemised final bill and a receipt for each payment, in Sinhala or English, so that the customer has a clear record.
+- **Rules:** the bill lists each charge (days, extra km, fuel, accessories, late charge, damage) and each payment, deposit applied and balance due; the receipt shows the amount received, the bill total, what was paid before and the balance, and who received it. Both print in Sinhala or English (PR-10); the receipt prints on an 80 mm slip or A4. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
+- **Checks:** none in the system design.
+- **Screens:** 16.3 Final bill, 16.4 Payment receipt · 80 mm slip.
+
+### 02 Home: staff and search
+
+#### ST-02.1 · Staff home
+
+- **Status:** Confirmed.
+- **Phase:** 2; the morning-check line comes with Phase 3.
+- **Roles:** Staff, Admin.
+- **Story:** As staff, I open the system to today's work (overdue cars, cars due back, handovers in progress, reservations collected today, the cars), so that I know what to do first.
+- **Rules:** today's work comes from recorded facts and agreed rules only; nothing is invented. System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey), [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
+- **Checks:** AT-28.
+- **Screens:** 02.2 Staff home.
+
+#### ST-02.2 · Search
+
+- **Status:** Confirmed.
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I search by plate, rental number, customer name, NIC or phone, so that I reach any car, rental or customer at once.
+- **Rules:** results are grouped as cars, rentals and customers; full NIC and phone are shown (PR-13); a person sees only what their permissions allow (PR-06).
+- **Checks:** AT-24.
+- **Screens:** 02.4 Search results.
+
+### 18 Reservations
+
+#### ST-18.1 · Reservations list
+
+- **Status:** Confirmed (CR-002).
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I see reservations that need attention, those collected today and those coming, so that each reserved car is ready.
+- **Rules:** a reserved car that is late back or under repair flags its reservation for attention; collected, cancelled and no-show reservations are kept. System design → [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
+- **Checks:** none beyond ST-18.2 to ST-18.5.
+- **Screens:** 18.1 Reservations.
+
+#### ST-18.2 · Reserve a car
+
+- **Status:** Confirmed (CR-002).
+- **Phase:** 2.
+- **Roles:** Staff, Admin, by phone or at the counter. Customers do not book themselves.
+- **Story:** As staff, I reserve a specific car for a customer's days, up to 30 days ahead, with an optional advance, so that the car is held for them.
+- **Rules:** one car for the booked days; no other rental or reservation can hold it on overlapping days; no more than 30 days ahead; the car's package is saved on the reservation; an advance is optional and recorded as any payment. System design → [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
+- **Checks:** AT-30, AT-31 "The package changes after the reservation is made: pickup uses the saved package", AT-34 "Reserving more than 30 days ahead: refused".
+- **Screens:** 18.2 New reservation.
+
+#### ST-18.3 · Reservation details and pickup
+
+- **Status:** Confirmed (CR-002).
+- **Phase:** 2.
+- **Roles:** Staff, Admin, Owner.
+- **Story:** As staff, I open a reservation, change its dates, and start the rental when the customer comes, so that pickup is quick and complete.
+- **Rules:** at pickup the reservation becomes a normal rental with its car, dates and saved price; warnings, the signed agreement and every handover item still apply; an advance is applied to the bill. A date change is refused if it would overlap another hold on the car or go beyond 30 days. System design → [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
+- **Checks:** AT-35.
+- **Screens:** 18.3 Reservation details.
+
+#### ST-18.4 · Move a reservation to another car
+
+- **Status:** Confirmed (CR-002).
+- **Phase:** 2.
+- **Roles:** Staff, Admin; a car at a different price needs an admin's approval.
+- **Story:** As staff, I move a reservation to another free car, so that the customer is served when the booked car cannot be.
+- **Rules:** only cars free for all the reserved days; a car at the same price moves at once; a different price goes to an admin first, and the customer keeps the saved price until the admin decides. System design → [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+- **Checks:** AT-32 (moving the reservation unblocks the extension). *Proposed check:* moving to a car at a different price waits for an admin; until then the reservation keeps its car and price.
+- **Screens:** 18.4 Move to another car.
+
+#### ST-18.5 · Cancel or no-show
+
+- **Status:** Confirmed (CR-002).
+- **Phase:** 2.
+- **Roles:** Staff, Admin; only the authorised person keeps a fee.
+- **Story:** As staff, I cancel a reservation or mark a no-show, with a reason, so that the car is free and any advance is settled.
+- **Rules:** as for a cancellation before handover: a reason; the authorised person may keep a fee, entirely SNS's; the rest of the advance is refunded and recorded as its own line, not as an expense; staff mark a no-show by hand; the car is then free. System design → [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations), [Cancellation before handover](SNS_SYSTEM_DESIGN.md#73-cancellation-before-handover).
+- **Checks:** AT-33 "Reserved customer does not come; an advance was paid: no-show marked; any fee kept is SNS's; the rest refunded; the car is free".
+- **Screens:** 18.5 Cancel or no-show.
+
+### Gaps found while writing Phase 2
+
+Four were found and decided with Dulan for the owner on 26 Oct 2026, each now in the system design with a check: fuel and accessories are recorded at handover and never block it (ST-06.4, AT-53); an accessory charge on a partner car is the admin's decision (ST-07.1, AT-54); an unpaid debt warns as a flag does (ST-05.1, AT-55); a deposit may pay the same customer's older bills (ST-07.3, AT-56). Five wording errors in the screens were corrected: when a partner's share becomes final (06.2), the fuel price shown as an example (06.2, 16.3), deposits not called earnings (07.3), and an old board name (16.2).
+
+Phase 2 still waits on these owner decisions: DN-01, DN-04, DN-06, DN-07, DN-08, DN-09, DN-10, DN-11, DN-20.
