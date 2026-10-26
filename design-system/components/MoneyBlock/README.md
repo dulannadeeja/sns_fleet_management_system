@@ -20,7 +20,7 @@ One kind of money per block, with a fixed label, a figure or a time-of-day state
 
 **Rules:**
 - **During the day, show "so far · not yet counted / not yet checked"**, not close-of-day-looking totals.
-- **Never use the word "profit" (ලාභය).** Its definition is an open owner decision.
+- **Use "profit" (ලාභය) only for the agreed figure**, always labelled "before depreciation" (ක්ෂය කිරීමට පෙර), as defined in the system design (Dashboard and reporting).
 - **Refunds and expenses are separate lines.** A refund returns customer money; an expense is a cost.
 - **Signs carry words:** "+ Cash in", "− Refunds". Colour is never the only cue.
 

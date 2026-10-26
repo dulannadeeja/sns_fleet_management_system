@@ -343,7 +343,9 @@ Authorised staff reconcile cash, bank transfers, and cards daily:
 
 **Proposed reconciliation model:** Separate recorded payment status from reconciliation status. A payment can remain recorded as confirmed while reconciliation is unmatched or under investigation.
 
-**Open:** Treatment of payment-processor fees, bank/card posting delays, how partner cash-outs paid in cash affect expected cash (paying them in cash is allowed, §10), whether and how salaries and owner withdrawals paid in cash leave the drawer and affect expected cash, and the evidence needed to resolve a cash difference. A reconciliation adjustment must not silently rewrite the original transaction.
+**Cash paid out of the drawer.** A partner cash-out, a salary or an owner withdrawal paid in cash is recorded as its own kind of cash-out line, with who paid it and why, and lowers the expected cash. None is an expense line: the salary expense comes from payroll, the partner payout from the partner's balance, and an owner withdrawal is never an expense, so nothing is counted twice. Confirmed: agreed by the owner, recorded by Dulan.
+
+**Fees, delays and differences.** Card-machine fees are entered once a month from the bank statement as an SNS expense, never taken from a customer's bill or a partner's share. A bank or card payment not yet on the statement shows "waiting" for up to 3 days, then is flagged for investigation. For a cash difference the person counting writes what happened; the authorised person resolves it with a note and any receipt or photo; a difference stays shown against its day until resolved. Confirmed: agreed by the owner, recorded by Dulan. A reconciliation adjustment must not silently rewrite the original transaction.
 
 ## 10. Vehicle-owner earnings and daily cash-out
 
@@ -365,7 +367,9 @@ Expense responsibility depends on the expense and agreement. Owner-responsible e
 
 Final earnings lines cannot be edited. Corrections appear as traceable adjustment lines dated when they are made. Overpayments caused by approved rental reductions are recovered from later earnings.
 
-The business day closes when staff close it, or at 11:59 PM if nobody does (§9). **Open:** how cash payouts appear in the drawer count (paying a partner in cash at the branch is allowed: Confirmed: agreed by the owner, recorded by Dulan); minimum or maximum cash-out amounts and how often a partner may request one, if any limits are wanted; treatment of a returned segment while its overall swapped rental remains open; and final recovery if a retired vehicle or owner has no future earnings.
+The business day closes when staff close it, or at 11:59 PM if nobody does (§9). Paying a partner in cash at the branch is allowed and shows as its own line in the drawer (§9). Confirmed: agreed by the owner, recorded by Dulan.
+
+**Limits and edge cases.** There is no minimum, maximum or frequency limit: a partner may ask for any final amount at any time. A vehicle swapped out of a rental that is still open is treated as returned: its final rent and its extra kilometres (final when it came back) are payable at once. When a retired vehicle or a departing partner leaves a negative balance, SNS asks the partner to repay it in cash, recorded as a repayment; if it is not repaid, the authorised person writes it off with a reason, as SNS's loss. Confirmed: agreed by the owner, recorded by Dulan.
 
 ## 11. Asset records, maintenance, and availability
 
@@ -407,7 +411,7 @@ One configurable payroll-management permission covers preparation, finalisation,
 
 Attendance and automated overtime calculations are excluded. Automatic statutory deduction calculations, filings, or compliance certification have not been requested or designed.
 
-**Open:** Deduction limits, rounding, adjustments after payroll finalisation, and whether deductions may exceed net salary. Salary expense, salary payable, employee loan receivable, and cash paid must not be counted twice in reports.
+**Deductions and corrections.** Deductions (advance and loan repayments) never take a month's salary below zero; what does not fit carries to the next month. There is no other fixed limit: the payroll-management permission sets each month's deduction. Amounts are whole rupees. A finalised payslip is never edited: a mistake is fixed by an adjustment line on the next payroll, or a separate payment, with a reason, and both stay visible. Confirmed: agreed by the owner, recorded by Dulan. Salary expense, salary payable, employee loan receivable, and cash paid must not be counted twice in reports.
 
 ## 14. Documents, languages, and exports
 
@@ -447,7 +451,13 @@ A count shown in the navigation or the attention summary (for example "Overdue 1
 
 Keep collections, earnings, deposits held, and partner payables visually and mathematically separate. Likewise distinguish SNS earnings from partner earnings.
 
-**Open:** Exact profit definition, depreciation/asset costs, recognition date of expenses and earnings, utilisation denominator, and comparable-period treatment for an unfinished month. Dashboard labels must not imply a final accounting profit before these are defined.
+**Definitions.** Confirmed: agreed by the owner, recorded by Dulan.
+
+- **SNS earnings:** rent and charges from SNS-owned vehicles, plus SNS's commission and shares on partner vehicles (its share of extras above the package, fuel, cancellation fees, and its share of damage, accessory and garage-day charges). Deposits held, imported records and opening balances are never earnings.
+- **Profit (before depreciation):** SNS earnings minus business expenses (salaries, office rent, utilities, card-machine fees, SNS-paid vehicle costs and other expenses). No depreciation at launch; the label always says "before depreciation".
+- **When counted:** earnings on the day they become final (rent at the day's close, extra kilometres and late charges at return); expenses on the day they are recorded.
+- **Car use:** rented days divided by days the vehicle was in the fleet in the period (retired days excluded).
+- **Unfinished month:** compared with the same days of the previous month (for example, 1 to 26 October with 1 to 26 September).
 
 ## 16. Optional and excluded scope
 
@@ -532,10 +542,6 @@ This section organises the confirmed behaviour for future engineering discussion
 | --- | --- | --- |
 | Acceptable data loss and recovery time. Backups run automatically every day: Confirmed by the client-approved proposal (Phase 4), recorded by Dulan 26 Oct 2026 | Cannot define recovery design or reliable operating cost | SNS owner with developer |
 | Outage procedure for an online-only branch | Staff may have no agreed process during downtime | SNS owner |
-| How cash partner payouts appear in the drawer count (cash payouts themselves are allowed, §10) | Expected drawer cash may be wrong | SNS owner |
-| Final payout after vehicle retirement | Outstanding deductions may have no future earnings to recover from | SNS owner |
-| Payroll corrections and excessive deductions | Salary/loan balances can become misleading | SNS owner |
-| Reporting definitions | Profit and utilisation may be misunderstood | SNS owner |
 | Hosting vendor and technology stack (price, phases, payments and support are set by the approved proposal) | Hosting cost and setup cannot be finalised | Dulan and SNS owner |
 
 ## 19. Acceptance scenarios for implementation planning
@@ -615,6 +621,15 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-69 | A 5-day Wagon R rental returns after 3 days with 380 km | No reduction: 5 days, 500 km included, no extra km. Admin reduces to 3 days: 300 km included, 80 extra km charged at the car's rate |
 | AT-70 | A discount makes a partner's day share 3,824.25 | The partner's line is 3,824; SNS's share takes the 0.25 difference; the bill and shares add up exactly |
 | AT-71 | Nobody presses "Close the day" on Tuesday | Tuesday closes on its own at 11:59 PM Asia/Colombo; Tuesday's rent shares become final; a drawer count entered on Wednesday morning is marked late |
+| AT-72 | Kamal pays Sunil's LKR 10,000 cash-out and LKR 5,000 of Nimal's salary from the drawer | Expected cash falls by 15,000, shown as a partner payout and a salary line; neither is an expense line; reports count each once |
+| AT-73 | A bank payment recorded Monday is not on the statement by Thursday | It showed "waiting" Monday to Wednesday and is flagged on Thursday; the customer's debt is not restored |
+| AT-74 | The evening count is LKR 500 short | The counter's note is kept; the shortage shows on that day until the authorised person resolves it with a note |
+| AT-75 | A partner's car is swapped out on day 2 of an open 5-day rental | Its final rent and extra km are payable at once; the rental stays open on the replacement |
+| AT-76 | A partner leaves with a balance of −3,000 and does not repay | The authorised person writes off 3,000 with a reason; SNS bears it; the balance is 0 |
+| AT-77 | Nimal earns 40,000 and owes 50,000 on a loan; the payroll person sets a 50,000 deduction | Only 40,000 is deducted; net pay is 0; 10,000 of the loan carries to next month |
+| AT-78 | A finalised payslip had the wrong allowance | The payslip is unchanged; next month's payroll has an adjustment line with the reason |
+| AT-79 | On 26 October the owner opens this month's report | October 1–26 is compared with September 1–26; profit is labelled "before depreciation"; deposits held are not in earnings |
+| AT-80 | A car was in the fleet all 31 days of a month and rented 22 | Car use shows 71% (22 ÷ 31) |
 
 ## 20. Readiness and next steps
 

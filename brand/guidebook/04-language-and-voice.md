@@ -8,7 +8,7 @@
 - **Say who and when on every money or vehicle event:** "Nimal · 9:52".
 - **Write money as `LKR 48,950`**, with thousands separators and Western digits. Signs carry a word.
 - **Dates:** "Fri 23 Oct 8:00". Overdue reads as time past the deadline: "+3h 05m".
-- **Never use "profit" (ලාභය).** Its definition is an open owner decision.
+- **Use "profit" (ලාභය) only for the agreed figure**, always labelled "before depreciation" (ක්ෂය කිරීමට පෙර), as defined in the system design (Dashboard and reporting).
 - **Never claim more than the record knows.** "Matched" names who matched it. Nothing is "verified". A car not found at the morning check says so.
 - **No emoji anywhere.**
 - **Required fields** say so in words after the label: "(අනිවාර්යයි · required)", in `overdue` colour. Approved by Dulan on 25 Oct 2026; it replaces the informal "(ඕන)".

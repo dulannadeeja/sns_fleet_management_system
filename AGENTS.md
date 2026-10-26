@@ -45,7 +45,7 @@ Screens show sample data and labelled examples. They illustrate the requirements
 ## 4. Rules that always apply
 
 - Never invent data. Label sample, example and placeholder values as such.
-- Never call anything "profit". What counts as SNS earnings is an open owner decision.
+- Use "profit" only for the agreed figure, always labelled "before depreciation" (system design, Dashboard and reporting). Deposits held, imported records and opening balances are never earnings.
 - Deposits are held money, not income.
 - No GPS, automatic bank verification, payment integration or fraud guarantees.
 - No customer trust scores or ratings.
