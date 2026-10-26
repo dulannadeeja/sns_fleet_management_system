@@ -1,0 +1,1239 @@
+{
+  "date": "2026-10-26",
+  "files": 792,
+  "text_files": 459,
+  "findings": [
+    {
+      "id": "F01",
+      "priority": "P1",
+      "title": "Snapshot coverage is inconsistent",
+      "observation": "171 canvas sources and HTML previews exist, but only 170 PNGs. 02-Home-NeedsAttention-Phone.png is missing. There are 81 desktop, 81 phone and 9 document/system boards. Two More screens are phone-only; StatusBlocks and selected navigation 19.1 are desktop-only.",
+      "recommendation": "Publish a manifest separating product screens, documents and references. Regenerate the missing PNG and document intended pairing exceptions.",
+      "evidence": [
+        "AGENTS.md:29",
+        "README.md:14",
+        "design/previews/preview-report.json"
+      ]
+    },
+    {
+      "id": "F02",
+      "priority": "P1",
+      "title": "Canvas source runtime is absent",
+      "observation": "All 171 canvas sources reference ./support.js, which is absent. x-dc/x-import sources are not standalone applications.",
+      "recommendation": "Document runtime requirements and a supported export entry point; direct offline reviewers to static previews.",
+      "evidence": [
+        "design/canvas/01-Start-SignIn-Desktop.dc.html:6"
+      ]
+    },
+    {
+      "id": "F03",
+      "priority": "P1",
+      "title": "Navigation token is stale",
+      "observation": "--rail is 128px; current sidebar CSS uses 264px, becoming 104px below 1100px.",
+      "recommendation": "Propose explicit wide/compact sidebar tokens and a shared breakpoint, then update the online system.",
+      "evidence": [
+        "design/design-system/tokens.css:45",
+        "design/design-system/components/bundle.css:280",
+        "design/design-system/components/bundle.css:23"
+      ]
+    },
+    {
+      "id": "F04",
+      "priority": "P2",
+      "title": "Touch minimum has two definitions",
+      "observation": "Tokens and Button docs use 48px; responsive guidance and several controls use 44px. This is a policy mismatch, not a blanket accessibility failure.",
+      "recommendation": "Agree whether 44px is an allowed compact exception and 48px the default; name both roles and verify actual clickable bounds.",
+      "evidence": [
+        "design/design-system/tokens.json:313",
+        "design/design-system/README.md:149",
+        "design/design-system/components/bundle.css:209"
+      ]
+    },
+    {
+      "id": "F05",
+      "priority": "P1",
+      "title": "Heading typography differs by implementation",
+      "observation": "display/title/heading token classes use Yaldevi; README and h1/h2/header overrides use Gemunu Libre.",
+      "recommendation": "Approve one semantic heading family and generate token classes and component CSS from it.",
+      "evidence": [
+        "design/design-system/tokens.css:53",
+        "design/design-system/components/bundle.css:234",
+        "design/design-system/README.md:56"
+      ],
+      "follow_up": {
+        "status": "Fixed locally",
+        "date": "2026-10-26",
+        "details": "TYPOGRAPHY_FIX.md",
+        "online_artifacts": "Not republished"
+      }
+    },
+    {
+      "id": "F06",
+      "priority": "P2",
+      "title": "Letter spacing contradicts the guide",
+      "observation": "The guide permits tracking only on plates; CSS adds 0.01em to numbers, h1, h2 and header titles.",
+      "recommendation": "Remove non-plate tracking in the online system or approve an explicit exception; check Sinhala vowel signs.",
+      "evidence": [
+        "design/design-system/README.md:61",
+        "design/design-system/components/bundle.css:234"
+      ]
+    },
+    {
+      "id": "F07",
+      "priority": "P2",
+      "title": "Money-state blue needs an explicit exception",
+      "observation": "The guide says action blue never marks status, but matched/deposit pills use its tint and strong shade. Token descriptions acknowledge this usage.",
+      "recommendation": "Separate vehicle status, money state and action semantics in the colour policy before recolouring anything.",
+      "evidence": [
+        "design/design-system/README.md:44",
+        "design/design-system/components/bundle.css:240"
+      ]
+    },
+    {
+      "id": "F08",
+      "priority": "P1",
+      "title": "Proposed catalogue photo looks like approved scope",
+      "observation": "CR-001 is pending owner agreement; both EditCar boards expose Add photo without a local Proposed/CR-001 qualification.",
+      "recommendation": "Annotate the design as Proposed, CR-001 pending. Do not implement as confirmed scope; ask for the owner decision separately.",
+      "evidence": [
+        "SNS_SYSTEM_DESIGN.md:124",
+        "change-requests/CR-001-vehicle-catalogue-photo.md:6",
+        "design/canvas/04-Cars-EditCar-Desktop.dc.html:26",
+        "design/canvas/04-Cars-EditCar-Phone.dc.html:35"
+      ]
+    },
+    {
+      "id": "F09",
+      "priority": "P1",
+      "title": "Fuel inclusion contradicts itself in rank 1",
+      "observation": "Section 16 marks fuel accounting Confirmed in scope; section 18 still lists fuel module inclusion as an open decision.",
+      "recommendation": "Ask Dulan to distinguish confirmed inclusion from unresolved workflow and reconcile the source of truth first.",
+      "evidence": [
+        "SNS_SYSTEM_DESIGN.md:400",
+        "SNS_SYSTEM_DESIGN.md:486"
+      ]
+    },
+    {
+      "id": "F10",
+      "priority": "P1",
+      "title": "Commercial readiness language is inconsistent",
+      "observation": "Section 1 says the proposal is approved/frozen; sections 16/20 still describe delivery price or a fixed-price commitment as undecided/not ready. Internal costs may remain open, but wording conflates them.",
+      "recommendation": "Ask the stakeholder to separate approved client terms from unresolved internal costs and technical readiness. Preserve the frozen proposal.",
+      "evidence": [
+        "SNS_SYSTEM_DESIGN.md:28",
+        "SNS_SYSTEM_DESIGN.md:413",
+        "SNS_SYSTEM_DESIGN.md:529"
+      ]
+    },
+    {
+      "id": "F11",
+      "priority": "P2",
+      "title": "Component manifest lags the runtime",
+      "observation": "The bundle header lists 22 components. Runtime additionally exports PageHeader, GameIcon, LauncherTile, LauncherGrid and EmptyState.",
+      "recommendation": "Generate header metadata, catalogue and declarations from one manifest, with helpers listed separately.",
+      "evidence": [
+        "design/design-system/components/bundle.js:1",
+        "design/design-system/components/bundle.js:403"
+      ]
+    },
+    {
+      "id": "F12",
+      "priority": "P2",
+      "title": "Vehicle fallback documentation differs from code",
+      "observation": "Docs say models beyond the six launch models use generic art; runtime recognises more families, including Hustler, SUVs and pickup.",
+      "recommendation": "Document actual asset mapping separately from approved business packages. Extra artwork does not add scope.",
+      "evidence": [
+        "design/design-system/components/VehicleImage/README.md:5",
+        "design/design-system/components/bundle.js:137"
+      ]
+    },
+    {
+      "id": "F13",
+      "priority": "P2",
+      "title": "Walkthrough contains placeholder links",
+      "observation": "There are 36 href=\"#\" occurrences in canvas sources and 40 in static previews. They are not missing-file links but have no destination.",
+      "recommendation": "Classify intentional static controls versus missing routes; clearly label previews as non-production.",
+      "evidence": [
+        "design/canvas/*.dc.html",
+        "design/previews/html/*.html"
+      ]
+    },
+    {
+      "id": "F14",
+      "priority": "P1",
+      "title": "Preview font import follows CSS rules",
+      "observation": "Static previews concatenate token rules before the bundle @import. In Chrome, OwnerHome-Desktop has zero CSS import rules and zero declared FontFace entries. This verifies the font-loading defect for that preview; the same export pattern appears elsewhere. Local fonts are supplied inside a ZIP.",
+      "recommendation": "Put font loading in a valid head/stylesheet position and use licensed local font files for reproducible exports. Verify loaded faces, not just CSS declarations.",
+      "evidence": [
+        "design/previews/html/02-Home-OwnerHome-Desktop.html:62",
+        "design/design-system/components/bundle.css:1"
+      ],
+      "follow_up": {
+        "status": "Fixed locally",
+        "date": "2026-10-26",
+        "details": "TYPOGRAPHY_FIX.md",
+        "online_artifacts": "Not republished"
+      }
+    },
+    {
+      "id": "F15",
+      "priority": "P2",
+      "title": "Matched attribution is optional in the API",
+      "observation": "Docs require Matched to name who/against what/when. The by prop is optional in TypeScript and runtime, allowing an unattributed pill.",
+      "recommendation": "Use a discriminated prop contract or validation requiring attribution for Matched. Keep manual reconciliation semantics.",
+      "evidence": [
+        "design/design-system/components/StatePill/README.md:11",
+        "design/design-system/components/index.d.ts:17",
+        "design/design-system/components/bundle.js:111"
+      ]
+    },
+    {
+      "id": "F16",
+      "priority": "P2",
+      "title": "Snapshot provenance is outside its entry point",
+      "observation": "design/README.md repeats the guide. CHANGELOG identifies canvas v64 / system v13 from 25 Oct 2026, but the README lacks a version/coverage/runtime manifest.",
+      "recommendation": "Add artifact IDs, versions, export date, checksums and viewing instructions. JSON schema/token versions are not artifact versions.",
+      "evidence": [
+        "CHANGELOG.md:7",
+        "design/README.md:1"
+      ]
+    },
+    {
+      "id": "F17",
+      "priority": "P2",
+      "title": "Historical references weaken the current guide",
+      "observation": "References to unchanged Concept A flows and Ratna evidence are historical, not proof of active retired design use; however, they make the current guide less self-contained.",
+      "recommendation": "Restate current Plate rules explicitly. Retain legitimate history and selected navigation 19.1; never rewrite frozen proposal artwork.",
+      "evidence": [
+        "design/design-system/README.md:21",
+        "design/design-system/README.md:172"
+      ]
+    },
+    {
+      "id": "F18",
+      "priority": "P2",
+      "title": "Finalised colour wording is stale",
+      "observation": "StatePill README calls Finalised solid navy; CSS uses ink (#1b1f1d).",
+      "recommendation": "Align the documentation to the agreed semantic colour while preserving the lock icon and label.",
+      "evidence": [
+        "design/design-system/components/StatePill/README.md:12",
+        "design/design-system/components/bundle.css:47"
+      ]
+    },
+    {
+      "id": "F19",
+      "priority": "P2",
+      "title": "Sample labelling needs point-of-use review",
+      "observation": "Screens contain sample names, plates and money. Marker scans alone cannot establish that every example is qualified clearly where used. This is a review gap, not a claim all screens lack labels.",
+      "recommendation": "Add a consistent preview-level Sample data label and check printable examples separately. Do not treat example values as requirements.",
+      "evidence": [
+        "AGENTS.md",
+        "design/canvas/*.dc.html"
+      ]
+    }
+  ],
+  "links": {
+    "canvas": {
+      "missing": [
+        [
+          "design/canvas/01-Start-FirstPassword-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/01-Start-FirstPassword-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/01-Start-ReadyToStart-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/01-Start-ReadyToStart-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/01-Start-SignIn-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/01-Start-SignIn-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-NeedsAttention-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-NeedsAttention-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-OwnerHome-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-OwnerHome-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-OwnerMore-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-Search-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-Search-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-StaffHome-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-StaffHome-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/02-Home-StaffMore-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-AnotherCar-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-AnotherCar-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-CloseMissingCar-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-CloseMissingCar-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-Finished-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-Finished-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-InProgress-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/03-MorningCheck-InProgress-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-AllCars-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-AllCars-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-CarDetailsOwner-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-CarDetailsOwner-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-CarDetailsStaff-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-CarDetailsStaff-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-ChangeStatus-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-ChangeStatus-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-EditCar-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-EditCar-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-Packages-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-Packages-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/04-Cars-StatusBlocks-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Cancel-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Cancel-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-ChooseCar-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-ChooseCar-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Customer-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Customer-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Dates-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Dates-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Deposit-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Deposit-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-PriceChangeRequest-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-PriceChangeRequest-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Review-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/05-NewRental-Review-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-AllRentals-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-AllRentals-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-Extend-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-Extend-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-Handover-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-Handover-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-HandoverDone-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-HandoverDone-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-Overdue-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-Overdue-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-RentalDetails-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-RentalDetails-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-SwapCar-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/06-Rentals-SwapCar-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/07-Return-DepositRefund-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/07-Return-DepositRefund-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/07-Return-GarageDays-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/07-Return-GarageDays-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/07-Return-Return-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/07-Return-Return-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-AddFlag-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-AddFlag-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-AllCustomers-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-AllCustomers-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-CustomerDetails-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-CustomerDetails-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-Warnings-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-Warnings-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-WriteOff-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/08-Customers-WriteOff-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-BankCardCheck-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-BankCardCheck-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-CloseDay-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-CloseDay-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-CountDrawer-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-CountDrawer-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-CountDrawerBlind-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-CountDrawerBlind-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-Drawer-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-Drawer-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-EveningCheck-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-EveningCheck-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-Expenses-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-Expenses-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-MoneyToday-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-MoneyToday-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-PaymentCorrection-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-PaymentCorrection-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-ReceivedByStaff-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-ReceivedByStaff-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-RecordExpense-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-RecordExpense-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-RecordPayment-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-RecordPayment-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/10-Approvals-Approvals-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/10-Approvals-Approvals-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/10-Approvals-Approve-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/10-Approvals-Approve-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/10-Approvals-Reject-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/10-Approvals-Reject-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-AddPartner-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-AddPartner-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-CarEarnings-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-CarEarnings-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-CashOuts-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-CashOuts-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerAskCashOut-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerAskCashOut-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerDetails-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerDetails-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerEarnings-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerEarnings-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerOwners-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PartnerOwners-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PayCashOut-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/11-Partners-PayCashOut-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/12-Maintenance-Maintenance-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/12-Maintenance-Maintenance-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/12-Maintenance-ServiceRecord-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/12-Maintenance-ServiceRecord-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-Adjustment-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-Adjustment-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-Advance-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-Advance-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-MyPayslip-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-MyPayslip-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-Payroll-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-Payroll-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-SalaryPayment-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/13-Payroll-SalaryPayment-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/14-Reports-CarPerformance-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/14-Reports-CarPerformance-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/14-Reports-Reports-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/14-Reports-Reports-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-ActivityLog-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-ActivityLog-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-AddPerson-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-AddPerson-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-BusinessRules-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-BusinessRules-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-People-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-People-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-Permissions-Desktop.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/15-Settings-Permissions-Phone.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/16-Documents-FinalBill.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/16-Documents-PartnerAgreement.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/16-Documents-PartnerStatement.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/16-Documents-PaymentReceipt.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/16-Documents-Payslip.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/16-Documents-RentalAgreementEN.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/16-Documents-RentalAgreementSI.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/17-System-DesignNotes.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/17-System-States.dc.html:6",
+          "./support.js"
+        ],
+        [
+          "design/canvas/19-Nav-A-Sidebar-Desktop.dc.html:6",
+          "./support.js"
+        ]
+      ],
+      "cross_device": [],
+      "placeholder": [
+        [
+          "design/canvas/04-Cars-EditCar-Desktop.dc.html:30",
+          "#"
+        ],
+        [
+          "design/canvas/04-Cars-EditCar-Desktop.dc.html:30",
+          "#"
+        ],
+        [
+          "design/canvas/04-Cars-EditCar-Phone.dc.html:39",
+          "#"
+        ],
+        [
+          "design/canvas/04-Cars-EditCar-Phone.dc.html:39",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-Deposit-Desktop.dc.html:32",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-Deposit-Phone.dc.html:27",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Desktop.dc.html:26",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Desktop.dc.html:26",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Desktop.dc.html:26",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Phone.dc.html:21",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Phone.dc.html:21",
+          "#"
+        ],
+        [
+          "design/canvas/05-NewRental-ReferencePerson-Phone.dc.html:21",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-CustomerDetails-Desktop.dc.html:49",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-CustomerDetails-Desktop.dc.html:53",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-CustomerDetails-Phone.dc.html:58",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-CustomerDetails-Phone.dc.html:62",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Desktop.dc.html:31",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Desktop.dc.html:37",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Desktop.dc.html:39",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Desktop.dc.html:42",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Phone.dc.html:26",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Phone.dc.html:32",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Phone.dc.html:34",
+          "#"
+        ],
+        [
+          "design/canvas/08-Customers-NewCustomer-Phone.dc.html:37",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-RecordExpense-Desktop.dc.html:30",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-RecordExpense-Desktop.dc.html:30",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-RecordExpense-Phone.dc.html:25",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-RecordExpense-Phone.dc.html:25",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Desktop.dc.html:26",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Desktop.dc.html:28",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Desktop.dc.html:30",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Phone.dc.html:21",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Phone.dc.html:23",
+          "#"
+        ],
+        [
+          "design/canvas/09-Money-SplitPayment-Phone.dc.html:25",
+          "#"
+        ],
+        [
+          "design/canvas/12-Maintenance-ServiceRecord-Desktop.dc.html:26",
+          "#"
+        ],
+        [
+          "design/canvas/12-Maintenance-ServiceRecord-Phone.dc.html:21",
+          "#"
+        ]
+      ]
+    },
+    "previews/html": {
+      "missing": [],
+      "cross_device": [],
+      "placeholder": [
+        [
+          "design/previews/html/04-Cars-EditCar-Desktop.html:473",
+          "#"
+        ],
+        [
+          "design/previews/html/04-Cars-EditCar-Desktop.html:473",
+          "#"
+        ],
+        [
+          "design/previews/html/04-Cars-EditCar-Phone.html:482",
+          "#"
+        ],
+        [
+          "design/previews/html/04-Cars-EditCar-Phone.html:482",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-Deposit-Desktop.html:475",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-Deposit-Phone.html:470",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-ReferencePerson-Desktop.html:469",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-ReferencePerson-Desktop.html:469",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-ReferencePerson-Desktop.html:469",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-ReferencePerson-Phone.html:464",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-ReferencePerson-Phone.html:464",
+          "#"
+        ],
+        [
+          "design/previews/html/05-NewRental-ReferencePerson-Phone.html:464",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-CustomerDetails-Desktop.html:492",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-CustomerDetails-Desktop.html:496",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-CustomerDetails-Phone.html:501",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-CustomerDetails-Phone.html:505",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Desktop.html:474",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Desktop.html:480",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Desktop.html:482",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Desktop.html:485",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Phone.html:469",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Phone.html:475",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Phone.html:477",
+          "#"
+        ],
+        [
+          "design/previews/html/08-Customers-NewCustomer-Phone.html:480",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-RecordExpense-Desktop.html:473",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-RecordExpense-Desktop.html:473",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-RecordExpense-Phone.html:468",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-RecordExpense-Phone.html:468",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-SplitPayment-Desktop.html:469",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-SplitPayment-Desktop.html:471",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-SplitPayment-Desktop.html:473",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-SplitPayment-Phone.html:464",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-SplitPayment-Phone.html:466",
+          "#"
+        ],
+        [
+          "design/previews/html/09-Money-SplitPayment-Phone.html:468",
+          "#"
+        ],
+        [
+          "design/previews/html/12-Maintenance-ServiceRecord-Desktop.html:469",
+          "#"
+        ],
+        [
+          "design/previews/html/12-Maintenance-ServiceRecord-Phone.html:464",
+          "#"
+        ],
+        [
+          "design/previews/html/17-System-DesignNotes.html:550",
+          "#"
+        ],
+        [
+          "design/previews/html/17-System-DesignNotes.html:550",
+          "#"
+        ],
+        [
+          "design/previews/html/17-System-DesignNotes.html:550",
+          "#"
+        ],
+        [
+          "design/previews/html/17-System-DesignNotes.html:550",
+          "#"
+        ]
+      ]
+    }
+  },
+  "json_issues": []
+}

@@ -1,0 +1,793 @@
+﻿path,bytes,sha256,review,detail
+.agents/skills/impeccable/agents/impeccable_asset_producer.toml,8476,af4b1724f58c853a0f5fdf3916a0501c07899eba45c6ee3fedfddda81ebd7291,UTF-8 full-content scan,
+.agents/skills/impeccable/agents/impeccable_documenter.toml,3230,dda3050e01b58d1ed3f64ab760069b716e796c6b194d030ed3d66db8ef593493,UTF-8 full-content scan,
+.agents/skills/impeccable/agents/impeccable_finish_reviewer.toml,15744,b4e690d0056e26777697bb1d8f7a4779d857f155fed99f43165c5f20aac83804,UTF-8 full-content scan,
+.agents/skills/impeccable/agents/impeccable_manual_edit_applier.toml,7127,517031fa28b8c10fd4344818bacf4f52a798568d3e851d66c6ef41b7326244f6,UTF-8 full-content scan,
+.agents/skills/impeccable/agents/openai.yaml,239,92a7f329c767dd067a21b6e7bc1ccf07319a2b4e6f84687b3318a595af2e15d9,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/adapt.md,11631,7fa395172f7ee6dce4ee88f9b7dadc07362542ca682acd7404ec341fa1e56432,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/adapt.native.md,3968,07f759e869ab46308ab8e4776cbc9587f3b44f43dcad48c953d68861bc280de0,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/android.md,4139,a3757686a0c2778ccbc0ea321f4460368f26bc0229d2b24c3c694a42ce40b1a0,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/animate.md,5325,9d6d186e5da3d4ebffb333f9b58209d847705d11d9b4e761bfb2529bf47b0d3a,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/audit.md,9389,2e8eb96adbc2536af58f5593fcfd5f750a6f588d599c7a25c8337fb39a7f2927,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/audit.native.md,8465,b203cd0b268ca3e69937462967b3c88095166ea9f8b5d9c8907bad4c5468794f,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/bolder.md,3599,b0f36c1f1bd01eca327d755e935bae11f5c02fb8006635bb613d6c0f82388ec4,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/clarify.md,4684,cbbf5647e0e14f6b10c7fd43392ecc1d6924acfbf43994d1d147047d73497f42,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/colorize.md,4623,a3cd4b18154e8c06edfbf7e7316077e8dd500d9777ea723c09fc02fe32b3fba2,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/component-review.md,8080,479855a5e4e9e706470eb2950a72c4bd451e1f303d3a5765618d569f42ab5b08,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/craft-floor.md,5552,c51f0d79d3e4b403f6b709c1e32a528af608e3cf178799accb2b452d4f99c144,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/craft.md,560,39b5fefbf524ad156a4cab2fbc5b65f2358c213a30d59a4c7510704e8d9dd56b,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/critique.md,49799,b1b1ad178ebc135d922cae4d55e27460140dd340f763bef9af05541643e0fb98,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/degraded/asset-producer.md,8624,09456545fe32b648e2bd5bb6a1e807e4fb40b440c3abe6730cd179a3db808d9e,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/degraded/documenter.md,3348,4609eff24dc4e74450a80b696092085255bb3fd068e8046163934e44bda49503,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/degraded/finish-reviewer.md,15840,ffceed2530950ec2e6e82a4e07dca5854330ad9aa94bb4007d7cce5079845cd7,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/degraded/manual-edit-applier.md,7287,1b3672f3f3ae0065fbaac8a9025b759da40caeaa75cb716b629e4544c03ad8fb,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/delight.md,3786,14a5700220c44c9addf2bca02036969b4cede7ea51fd98fe290892942bb89d2c,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/distill.md,5759,ecd046fed780af3c054ae33d9989c1861f0968ca99bdc26d8a1c405a675d26be,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/doctor.md,5617,d32ef85f7f067b2c52231a0c96b3da4e1ca4c2da0655ca3138a4dfc72faaf3b5,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/document.md,27939,8ed88ce75b25a0114e7db709d5ad928ed1c2cd07f44519782c0d6f0c2dca385e,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/extract.md,3475,9f62e80b14a210b1c5dd036865c9d3a83614451e060cbd4b2220d1b597b2c973,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/generate.md,13322,4cfb126cab29ca02b667fa37a7f1ab670c74ad65d01e40eecd1e4e2c28496469,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/harden.md,11110,592a24802724356b029fdf8cf27c3927341a27dc254e8819a15670127d8f0394,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/hooks.md,14230,0beafe37a56bf87eb74763f4a029287d8ce6581199ede9e84a3bfb6850f131f3,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/init.md,11897,2e612d1131a6e1b576222f4356bdf2a2be939c4f5e4d3dd68e2a47ab0a5a7487,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/ios.md,3863,60ada207bfb419ad0a570b8319c29403713ca2ad3fb9a2f5bdffa62ab25611bb,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/layout.md,5245,875ceae18559e953dc9949e50374c2daadaebdb58520406b909f552a06c3e081,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/live-setup.md,8290,d297e5a3e3695e94bccc732d4cb38187602349893e7f215a8d400a95b8af55d7,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/live.md,37119,d03712f9b4d8232e43157da1f849d036ace2c39e8287e5f55ea54b9c9037e0e0,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/mode-operate.md,4737,7cc131b41dae694a4b554c940445117318f0c6fb19f905cf1f8cbafc08a3f430,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/mode-persuade.md,3657,81cf3d22f747b9768abe48bd6cb881b8807809b8995f20096cfb442dadf550bc,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/mode-read.md,4417,20da46dd620da4433736173b130de306ceeb124dac83fccf664a12e236ee0b8d,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/new-work.md,62074,f07faf4c8265129b81dc262257dfbf509ecafc04be8925e6f00c859e3a35779f,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/onboard.md,7922,3dbda622366c2161e8a7ab585298895a0a9332ee65724a5009b378b0f4b1ab60,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/operate.md,4206,c4b169ab7932329c833750971c53bc129d0385e16d0219b31f002792fce939e8,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/optimize.md,7852,bf39d3e644880f99310578558634377efe3af9872c166a94423b687205e48f38,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/overdrive.md,9206,0386e434919124508d57358ad78eea905ef3d4de464e64f8d1ffd4097dc404ba,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/polish.md,6751,e0f8997a76ff955449cc65bf2d9fcc542d893700a30b56fb2c5e5d8a438410f7,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/quieter.md,5119,f348d23d8a60bb1e3956489512129edd2993343eead114d06ff398e2a2caab8a,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/region-map.md,3387,af58ff0b02c6507be860624f122f6d2f4f36bddf18f143b2d5036962bea932c6,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/routing.md,3360,3347cc1bf41d7b34e32617a468a7064fc1740eb7c1abe4ff479be07cfebec5b5,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/shape.md,3606,51960b514f8437baf12484dd5be824e0c2d0ee8802e29e7f511e431493a6c417,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/typeset.md,6353,1189468e9b74842534f7932e9db90012307d374d67c7d54e48eb15dd407b05d2,UTF-8 full-content scan,
+.agents/skills/impeccable/reference/visualize.md,13965,f3fa0f21096d7db32cd494dd0b5d206c19fedb65d159874778ef6d5a23000338,UTF-8 full-content scan,
+.agents/skills/impeccable/scripts/command-metadata.json,8490,96a05614e8c3d0ed091415d496758d878fd86ac7b129a616e00493951c186f01,UTF-8 full-content scan,JSON parsed
+.agents/skills/impeccable/scripts/data/font-index-failures.json,2557,7461de9923357d70b1365647b0a85d181eac1702f622cbf24465767f4ba99d06,UTF-8 full-content scan,JSON parsed
+.agents/skills/impeccable/scripts/data/font-index.json,1100013,47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da,UTF-8 full-content scan,JSON parsed
+.agents/skills/impeccable/scripts/impeccable,9039,47c96e1b46562973a834db37691333c08033a764b6c65fc18c4909a4a1f44e90,binary inventory/hash,
+.agents/skills/impeccable/scripts/impeccable.cmd,9545,e6c5f6a1b4cfb5c2d3548ad7581f4bcfa71f44aa04c5a02d40c9e48102980925,UTF-8 full-content scan,
+.agents/skills/impeccable/scripts/live-browser-dom.js,12603,0e8e243d4242d1af8a710a548a85fe421a4fcf7787c6dbc11376ebe4c0f8f118,UTF-8 full-content scan,
+.agents/skills/impeccable/scripts/live-browser-ignores.js,10588,cab20ca388425390b961d698b37445ba9416b4614852feace997c2375bcf4519,UTF-8 full-content scan,
+.agents/skills/impeccable/scripts/live-browser-session.js,5931,b94fb3852486579e6796211e2176b6105ceb38c98f34ede2f935b0c72a2371c3,UTF-8 full-content scan,
+.agents/skills/impeccable/scripts/live-browser.js,563593,45810b89f85281828e5aea10dd9818d739a79252c5214457a7ef57d5b9850466,UTF-8 full-content scan,
+.agents/skills/impeccable/scripts/modern-screenshot.umd.js,29304,9b0dc34415466edac6e6802574006608b5e5c0da9fdcb7b2651dbd1ea06713a6,UTF-8 full-content scan,
+.agents/skills/impeccable/scripts/VERSION,8,a5689fdfe12484161ae85462360e3382a0eaa1bd1fb55a30fc244d9653d76ea6,binary inventory/hash,
+.agents/skills/impeccable/SKILL.md,11744,a5d5c15a1d9e16ca502443726fcf29d51cdbc41212c4b65e0271aad423dd7908,UTF-8 full-content scan,
+.agents/skills/sns-change-control/SKILL.md,13595,21ed8b3df05ff4d0222ad81cc2ef0528ef1c4fac6178dc936a0e348497302a93,UTF-8 full-content scan,
+.gitignore,99,d90eb17d647570a0faec2ee3f6fad50b1391322bf120482af0f4127f9794af0d,UTF-8 full-content scan,
+addenda/README.md,321,5b4811322c8bfb660f30d002d3e5b5bcd516387631376903376aa7932b92a023,UTF-8 full-content scan,
+AGENTS.md,6414,191d7bf2277269d12ce445348708a051987d9e7a53c7575554b931fbbacf34fc,UTF-8 full-content scan,
+brand/icons/BRIEF.md,6745,a42065ecfcbfdb0c2e618bdc012a60b1a3d0c59eb352076cfd0e6422bd94e38c,UTF-8 full-content scan,
+brand/icons/png-1024/01-rentals.png,689340,113c0d8a0cac808592eeaaa2e9928905388bfa6726dfe536fc01174201bf4dcc,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/02-customers.png,549505,f7de842685362f667bfc4bf70b8b6f0182e232cce3ae5abb55d772dc36115015,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/03-all-cars.png,645126,0ba4af9c3d50eed947d88df5416bc6e6b926e5847114f0fe479f2d4d6306e48f,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/04-partner-owners.png,537027,117fd36ab4342804d6c94bdb49a27495550a96f3fb766066bb301a556585ba2a,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/05-morning-check.png,601630,a5f571a448f9be179e2465ca6fbb7feb36ffffd80653632441b8573e6dc501bd,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/06-search.png,519348,40214df1e444cd4943f286b1af25185ba0d76bc676fa01b2f9128cf63929ad94,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/07-expense.png,659173,6e9d1b7ba272d466114a484f171f589a4146305917abf06f4371d6160d864623,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/08-my-payslip.png,685182,6e97f5fa85c8513f2679472f7fcdf0352fcd2a898a980b828d34aaeb188b2744,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/09-payroll.png,733820,cfee4f0eb4a18b122bc218fdb5ccf0ab326610cfab4a102fc66ac8a4cdfe5875,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/10-close-day.png,697843,e947ccd3e25a84700e85a9779323d489dee1ebad7609c4e3025d75bd6ef17788,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/11-bank-card-check.png,522957,b649100697170af49c6490cac94245676a1726e5d9f8014424cc886f7c2cfa9d,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/12-received-by-staff.png,583182,ecc6b36ea11a86f874c36ede1b8c0d1bfcf3c2240ad2e2a660e8f7d74b88b260,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/13-partner-cashouts.png,706222,540d78e87e9519b289b64c909f4de42dedd4bafdd0863b5e5150a07f47541bc6,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/14-maintenance.png,873228,214378427d6e67da6bdcb6035d94bce76a7b474edb4fd0b46744af1bc0d5ad3c,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/15-reports.png,538273,4b8216f47e88595222f7662d851b536681ff41ed8c21a1c5d74ab45d6174b1b9,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/16-settings.png,590381,ae322567162496bf6a9e58d5307717dc8c1572fa692d62e56a338596ea606c6c,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/17-ready-to-start.png,732720,7f5a1aabbe83092240d486398d162ba3b271cdc88ae2ffd6f79f92a1772a7674,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/18-activity-log.png,603332,eabff103e1ddb3d767997f9943a6fb279b05d080cd8ca927e5631b84aefe7364,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/19-new-rental.png,758841,53b25aa53d8a485e6d0f4bd3602a6a77e10f303610e55794e51f88dc947bc357,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/20-receive-return.png,643729,f5960beca38de4ad577f0dbfbe6aac1f5575e58359d82374c1661c25212a5cba,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/21-handover.png,406259,d58cc16f1c22c5d148d585c49b646ca26bd76c2cfac704a6b8ca069827eee1d8,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/22-extend-rental.png,766697,b16664f852c809ae67112918b0602b8f8202e29f405a592dc2e11ab85b90001a,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/23-swap-car.png,680354,584564316d61db726c3fce7108a0ada96f8d4ee617b4f7557ef6a4bee6d06274,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/24-add-customer.png,629164,8d98f32cb01e49ed17ccaa88440d6b8d9b8a964f1d06f1cdea92961fda2d7959,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/25-flag-customer.png,561309,9e21de3d9d2495c015770c8a44c381be3be6713eb9859c8c67d21125e3df8dc5,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/26-record-payment.png,579751,a3a240b2c9cce8ebe499028444734c8be5e00715df898a31a33e93bb38eb9c7d,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/27-count-drawer.png,663209,63530f7100983a43c0cc07aefeaef252c1fcf9679692df3ee3a77bf7defeec9b,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/28-partner-statement.png,648493,f71b5b4b3097994a46590bbc8bc6411b9e7488278c09a285571b5cd5b3f75761,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/29-approvals.png,558648,f4149c03e9285b6def0087a31415d268c809bfea162269e90776720f088f45a7,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/30-print-document.png,696092,e3cccea8626c4dc7dfd5abc020ec007120023663c4938d7e10f3b4c25cc258d8,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/31-empty-overdue.png,703489,4b0a1ab6693e86c264c85a384932cee56a76e4d93dba63abb8a5a85966624b72,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/32-empty-approvals.png,491455,9fd48fa3089f77a12ac624d3952f22bbe789158fa138e49c569115d597542c8b,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/33-empty-debts.png,613666,a3c4c12e632a6a27a9861417aa35b228e4f009e78d9136374f8f749fe93e7362,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/34-empty-search.png,660883,d9d962a5be6e17f8179d1313d1300a118086eea8e44a7025307f450159ed2e9c,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/35-empty-expenses.png,454775,902b17c72406f764f271439c36aa83738077f41c09da7d57c79b1ffc51461348,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/36-empty-checks.png,656961,fdb026eae9bb0aa768f0009fe5bb90746c7f54785012e08a52c0cd40262fd0ed,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/37-offline.png,562959,b5ed84910c299e2b69c57aeadb5fec06f8f33b633b572b7374e836987caa8cbf,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/38-done-handover.png,661654,af8d6b32ec1071928d909c1eba8901de65bb920b8a0b4771059dd080f6436d6a,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/39-done-return.png,594701,75e6d2366950830bc867e5b9adf14f9e95d901789e9ee851057e06fb9ebea255,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/40-done-payment.png,598759,51fd4a68def0bd309551d3f7ca301c2221dc9716acf3e92f9de95cc6c125340b,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/41-done-drawer.png,500687,b138e7af8b526d6e194465532651a1f2e3be689e4669221479da7c5ee97fee66,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/42-done-cashout.png,662927,f89611b69452c858fd9c7e8b3303d3ebf4c9505fbe256b915e4b5447deacec5c,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/43-done-day.png,715927,5310da5a70d071865a15eb5aef5186db05a489da7323ce39900d60a176151a22,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/png-1024/44-done-sign-in.png,585122,8a4ae0d407870dd851ac30a0d3c04f9381c2e3a1d2461bf8059542f72398168d,image integrity; no semantic assertion,1024x1024 RGBA
+brand/icons/README.md,1812,aff8fe65de28e8ff9de74d15162be6bdcb584c7dec24c7c9faa2e220c8d778ad,UTF-8 full-content scan,
+brand/logo/sns-logo-original.png,473915,f4f35bcee520c4abbcbfd96e512c223800251937a966104f04e95248b22a7654,image integrity; no semantic assertion,1774x887 RGBA
+brand/vehicles/1024/sns-vehicle-alto.png,869912,097ca88de616298f4d3a46b4da0c3de0732a5a02d9d8751138c2c3e8f7df922b,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-axio.png,756690,8e58b2f2a27ab9aefb79d5e15a10b46a30bb0eaff4909cf1c0284002b35f9ffa,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-every.png,959748,193eb7c805b6dc8732def8aea77fb2d5666daa93200bb7a51afd1dc328fdba36,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-generic.png,826016,c7173c115e04baae2a70a2f2ec726b33c4e1b149e19532e623f39cf69769ded3,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-hustler.png,835093,feb9fc40eed7e9a69842094688503d7e5dcdfb1dc98d878cde2725ed0031e434,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-mid-suv.png,764984,9a9c0bd0a04ca7a6f8f20ba388243af913bcfa81220ddf50c6f3037782eac9ca,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-pickup.png,803525,9df4858176e4228a27b2b309bbfb8eb11c4336eb7cc36548224726d0895c6a24,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-premium-sedan.png,730943,268a910feb1ac28de68a8ff8686ff20a354bd0bb489cfeffaddf6097871662d7,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-prius.png,762650,5e3a77ba36288a960d05542ea114aed04e643df147e1f37c23ab1faf9ff5e2d2,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-spacia.png,1001082,ffc8f49d6c27108b0a9ec44b09e60ff783d2b5209922d6ccbb772b3539c448c2,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-station-wagon.png,778648,21310aa83b72b99a98954368fb46dfc55050cb36c45395b10b0288db8701034b,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-suv.png,901950,20cae9c069b4478824e1a5fbbcdac493139ff706dd85bebbd8e0648ce8f44588,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-van.png,874191,568ff6f6da14c3255076f982ea5903847b18397aefcbc342198c18848d07fbe6,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/1024/sns-vehicle-wagon-r.png,967123,53ecbdef85a054e3ebf4df25d76a57fe4c2b28c7f84ab0f71dad4e5514cf0198,image integrity; no semantic assertion,1024x1024 RGBA
+brand/vehicles/128/sns-vehicle-alto.png,20602,9a2ff336824a5c196aab13751953950c0800f65374f213ed032881184580d7c2,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-axio.png,18759,fc47e1481d96d7b37f851c82baa85dfad50e6886e5645697b4ea707caefb1082,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-every.png,23229,493e81be83b4f696af240bf01f2b0c528c9045216ce46a9589a6745c1798464e,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-generic.png,19897,3d3f6ed38853d4a05734a706164a392b98d5bb60d5a5e7492f9c4ad6224c36e0,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-hustler.png,20368,17723c2db887d562f3c4e51c708e8052a542d1bca987f32354ec08c8befea55c,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-mid-suv.png,18743,f1ec62e99312c9deab467aefa73520d8b8a9ebf1d7649bf4ab0873a7a78071b6,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-pickup.png,19792,3d0eaf3c4c1830749d979d60d699323cc6da8f1bb1b9ec05e046e9ab85d16d51,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-premium-sedan.png,17847,ce97b3ad5c5e20c03ba8a9a91dbf2a70e5cd04514db17debced44a1b978484d6,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-prius.png,18897,1ce6c78edbd343cf3246a7ecbe2df724cf7539eb4f796a481e3d91ae9ef5ceea,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-spacia.png,24127,f3a6ce44368f5e6f7b8824f36d18da1d325986b1ce58198984e5bafc94634398,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-station-wagon.png,18790,d0248d862e6b25401adead2b081b83b796ff3a26cdd17b58af3e5b5930436a01,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-suv.png,22055,e1391a9b4e7068f96f6b3cd6e77e8bfb5d61b7e343a394aef5e62ff373d22bc3,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-van.png,21291,b6480ce1d4fa78936548d515951c0dfc449383b6a572edce93fe42e95ff76cd8,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/128/sns-vehicle-wagon-r.png,23095,ac6295f7278e6e758b39e69d54cb23daf6c5484391b35d86c8c5a1e9c7ca1555,image integrity; no semantic assertion,128x128 RGBA
+brand/vehicles/256/sns-vehicle-alto.png,66837,938eada52a6ab945caeef8db5bc04ef6092981aeb4aa92c4ff27f0b5d6398653,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-axio.png,60411,6a5af89b17059c4fdd146622cb29e061df02541c3313c62cd4b6a8edc5de7668,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-every.png,75444,6fdac901ac8c75cc1c958120a383ae0e5aa7cf873e47c4e718cb01c2330839ac,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-generic.png,64676,3ff22f768df16a7cec6a42fdd73ee1abdbb27d61490a3f195e3c8ca43f5fa8c1,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-hustler.png,65580,5fcd5daeb56981dc9d48517bb8cef574582f1e4ef577a0e941bdeae82b1c785c,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-mid-suv.png,59992,e7ac5257f26f5a2729b4fafee0453257080058593a47d204344480f4b5b0deb4,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-pickup.png,64240,922d274ab609f8efa3c0fedd6f9b054163c49f871c65758d8b9285af41920cd1,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-premium-sedan.png,58308,679db956d9b9b231a5c4f2dcd8b4d85040e89564a95b0abc0d2e06209d58b899,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-prius.png,60951,7a6213bd13a403d5cd182d76e0625224271db540608660eb4aa0a7ad2296f42b,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-spacia.png,78285,56111111fae0e1f36ffadd77947059a59131d48d3b2c67da1786b3bc6c1e1fc4,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-station-wagon.png,61116,489a0c11033a9acd803d4f9d9dc4ec473754d9aa7159ed24b10ee95124412740,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-suv.png,71657,594d9a6a4ecb6a1d8000ae9ce0229894b5e1227a01fa62653d7834579044462a,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-van.png,68424,d764fef682d3f20b166da4fdc28b72283191d317c5201e4745990f8ebc6f5749,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/256/sns-vehicle-wagon-r.png,74845,197bda0fb31f9425e71a7e5cc2345dfff484bc7a70f0f28bdcd267f017865aba,image integrity; no semantic assertion,256x256 RGBA
+brand/vehicles/64/sns-vehicle-alto.png,6322,07328fe640bdd881b37268ddf8dcaa8b5137d3adf7df4417b4141ca42a400884,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-axio.png,5664,f6fecf405a046b595b8135a3c8adebb9b3a9bc7598a164e3b2b8c2dbe31eeb2b,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-every.png,7120,0e9675724994549bc72a77516a51408c2d1e36e01ed9d92d500199d52629ffb8,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-generic.png,5892,cb465d21afa7c581eaac78d269ac9697e5dcde4241444b9447545d165c5524c2,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-hustler.png,6332,07673cb33d43637f336059220e78436dff90766186be8acd3539e23bd7eeb308,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-mid-suv.png,5763,7c0b939a32dd8340a82781680d331ca36a42d19239ae3a6977a440c1af20b296,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-pickup.png,5984,3995f772c9bc094a178edd292b5cbbcb70a9f9e1f5daf47450c5a4c241a56112,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-premium-sedan.png,5359,a2c59642475fd4d01a4c0306c3dee6a1a5725dc45fa577fc03ce856cea093a28,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-prius.png,5657,7f763fcac330e4f2249c12fc146f55603198207bad9d8e5bf126a5f9112382b4,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-spacia.png,7379,8269b857dd6e66fed265132666072c529b6ea769a83794037b11b2e70787faa8,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-station-wagon.png,5667,4b9f3d6e2ea913b27cde841b36977223191f29a1abc3e56421ffffb0bdde33dc,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-suv.png,6664,2f451145d57c105038daa3596eb00f1062ce11aa56de152ba2bde925f72e550c,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-van.png,6586,ae603aef484b60ac87179fdc7d4d58691e862c6d46d1b59c164fc707e380b0e9,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/64/sns-vehicle-wagon-r.png,7153,4a0add0e16a49fd0034889fb240339dee49fe0cee3336f3971f29798fcb912cf,image integrity; no semantic assertion,64x64 RGBA
+brand/vehicles/manifest.json,25479,85a9fbe29ffdd8ffdc5363f05fee5370a6e16c407f927ed7c77d0342370bc0c5,UTF-8 full-content scan,JSON parsed
+brand/vehicles/preview-additions.png,560234,e63a6241649ad390fddde9bff6b02faa0b49e1f9209d79b8d6c435fe4b960a49,image integrity; no semantic assertion,1320x1070 RGBA
+brand/vehicles/preview.png,1141837,b7abe02b71a0f55b8aec5a553a66d297927f2031f03f6cd98e985d6c071ff075,image integrity; no semantic assertion,1320x1860 RGBA
+brand/vehicles/README.md,4255,766629cae8808b4b6a459dc7086876e3ebd9ee82457a20e01b70f9f234aa8790,UTF-8 full-content scan,
+change-requests/CR-001-vehicle-catalogue-photo.md,1490,66a72991b4df196ca2527c9dbe9534ff5e68401de729b52b43396854eea00671,UTF-8 full-content scan,
+CHANGELOG.md,3553,ac15f8caf8d7a4aee58f8ea7c3280bc2b57bc3c1e0394ab6ca036786414cb503,UTF-8 full-content scan,
+CLAUDE.md,1095,f415b699b41a459798d0c1d438c19b4a54cf1198235e56922042811ad0fd6f76,UTF-8 full-content scan,
+design/assets/brand/sns-logo-mark.png,53620,4b8048e9186bf8fbc888006546b351586653cc1cbe883b2de5e2c76fc7e28aef,image integrity; no semantic assertion,236x256 RGBA
+design/assets/brand/sns-logo.png,121079,6c7f688a3306d6cba868250c61abe03ea459cc5041b4bdd0e4920136b712e56b,image integrity; no semantic assertion,720x261 RGBA
+design/assets/icons-256/sns-icon-activity-log.png,39339,94b88f4ce56f6376104ecd76a6bf6ad9f9b5c5ab61229aa67eeeb21b31817282,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-add-customer.png,40787,b04d30315ff200e39a431ea7c08d6b4ad8694100982c3733b75e270e063dba62,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-all-cars.png,46105,88a214b9bf9e9a0c54591ba0a40f0fe6b3910c57be6ad140270970b36e16a117,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-approvals.png,37652,e3e0c7af4891a71ee7b11afcde8d037a8614b6425dfed4a09c2722403dba824a,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-bank-card-check.png,35970,a276fc2334ee86591c2932323a72acbc2d594e66296b5c6e75ecfc73e04fe135,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-close-day.png,44771,cc8a8ac8e47432b43dc822a01bb7a8972498ad1e17a72e131bbaeabcf0fe237c,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-count-drawer.png,45749,5bba5e5dd3604288b6e63cf0305f0e045e389fcc7bdab6bcec631812838ecc11,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-customers.png,36489,d81c341ed300e8e1c1f4eecbf1e9e9a3d32495266c25af1059010944a2c35662,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-done-cashout.png,42527,a333ca59f7cec6b6b1a6b34a60c0a666563d34ce66d3dc77bdbf60cbf37c7009,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-done-day.png,43679,81bdd341e538d3fa978b2048546fa458d9835dde8ebf27bcdf83f5affd523bec,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-done-drawer.png,36284,74fdbf4cd7fb066799c9e507c87770e326c2dda7bfebda3d1e1592654b561ded,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-done-handover.png,43903,afe734f8f3cd83488f696ebb96a7c134deccd74afee0790ee33e1f38b21ed624,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-done-payment.png,38711,875f43435c737c3c8d6a6723bc6dbb4743a14c8c9f1483a41c29381afb8993da,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-done-return.png,44795,f6dff69ef8db18edf73d1230431595f358e622142bb4ccc4635cb0df073c55b9,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-done-sign-in.png,41037,f128fa152b70c9628f4eced3d09cbc7f27810c1009a43f3d03f4f737970adfaf,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-empty-approvals.png,34399,5b5701ac3db78fa7837fbb8d27c283618b540d38f4d91058d4713b61dc2577c2,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-empty-checks.png,43843,dc96e282d5c08111273a93e29e98aba08e47c52d40f4de625835763921d856d0,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-empty-debts.png,40495,7a3a19eeeeb17c7a5ed40fc836e3d16c10081b8c33c590ee58426b9cad48831b,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-empty-expenses.png,32794,b3a0205c2a0d91aadcb529ef5af0121361c44fb97ca6026d1781d71764bcf33a,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-empty-overdue.png,47130,ca5b2fafaca77acc891bd7e4bc512abb1f62afb04e78f857626fc58bd1070139,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-empty-search.png,44107,3c1f74914b278343f8fe9fe228b2260c583d6ec96591dda771b1870814fdf3f1,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-expense.png,42866,cc863cfd9dfd3c8fc74de4ddb520f101ea1e84cda28fc9cb295ae27f7171df3b,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-extend-rental.png,46394,bd3679a08942cfb4d8823a466b66c78329c2b920d874377774d91ad1d9f390d4,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-flag-customer.png,37864,894cc953a58818cb2901729e7960e61bb85b2a147fd4b13fde6d90da582506cc,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-handover.png,32066,20083b501d89e6e8b765407d228ce4b05b7a2f68cd694f31385430c7a5462846,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-maintenance.png,57920,e7422ecd485f9b7d5cafb5ad282bc30810478f9bd7c2826b084a128447f899a4,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-morning-check.png,42546,00afc136df6f23ae4eb81f295b1d7f9b67e6f30ec73d9d8b449d427cfaeda442,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-my-payslip.png,44252,1a09a624608ab83ff9135c35781fd2bd107b4c00d9c965ee479ab844689b0ebd,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-new-rental.png,47145,e551e08b6ccd4dced4f109a9faf9a3a6ccbbee5f95657469756a7cbf1fd16d5e,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-offline.png,39859,a64c038471182edcaee5c20722973da90a46a2ae8b36a91728529f6c6f87cd13,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-partner-cashouts.png,45219,e2ea742eaff0ce00cdad5627c36680e67cbb1d3bf2f72a7eb3f1c2910a9b4967,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-partner-owners.png,38076,7f634ea4b662b0873829e424fd477d5b9c824aa78c9b4e9dbba6e569aa7b1ee1,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-partner-statement.png,43011,66a5e7d7d0998a677063025cb9d18343bce6c0bc9e262023e874ae6a3aaa426a,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-payroll.png,49057,d85ec41c254d8e80be41745bfc52fd6379cb09daacf2fb85da96e9ed33c902be,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-print-document.png,44794,f7d285a2736bea1b7cfce1219cb808c3ee498b384e8edfdc94ef420c0e139023,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-ready-to-start.png,45079,3f80f080b3c6c0d0ba1f5068ffa02b7d0079a61de53884f14991dc171a77f07c,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-receive-return.png,45181,d5df67ef67e7e06934149d8ca3de495595080a16f040753854c00fc2f403027e,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-received-by-staff.png,41679,09fb90671609b1bd3a25bfc79545e539418fee304e6ff94d737b977c8bc029f9,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-record-payment.png,40719,ea39867bd86c980566fbc338fcefb3241a3fa1cb3c4bbec0019e8c2e7fcebebc,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-rentals.png,44594,10c8c404f19cc42c65f3afcbfa16ebdf657e1b7ed7a70160edd52017a462f1f9,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-reports.png,32357,b854fa595bbac70a732883d0eed68e360f199e30245bc572262d90498ff1150e,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-search.png,37812,64b1e916f6c6f728ce4bc40c513089537bbbdb5e4bbe81b8bcaf044cebdbfa5a,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-settings.png,40738,dc28f5223013e34191c9bcd6d6a714ed0150edae92a031187ce79951fd46cb41,image integrity; no semantic assertion,256x256 RGBA
+design/assets/icons-256/sns-icon-swap-car.png,52011,75ca3bd5bd74952f6d27252af207e19dc576b6bdd3223a8b4f1f3389358198fc,image integrity; no semantic assertion,256x256 RGBA
+design/assets/vehicles-512/sns-vehicle-alto.png,188482,8c7675e6042ebcf75fa8e09988590a49003660650ed210e98f877e6c9a47a00a,image integrity; no semantic assertion,512x512 RGBA
+design/assets/vehicles-512/sns-vehicle-axio.png,167095,4f9c005a4e646c91b8d5ac5414b9fbf3fd25f0e70e8267a159743c4eafc11d9f,image integrity; no semantic assertion,512x512 RGBA
+design/assets/vehicles-512/sns-vehicle-every.png,199884,8389c227669476e07dcbf0ce2f6dc19759bf684443b931e04c64a9f44d7438f3,image integrity; no semantic assertion,512x512 RGBA
+design/assets/vehicles-512/sns-vehicle-generic.png,177617,ff26b327466a1beb59e0ad1e62e2708a968013fb9f21e89d65676615e419ee32,image integrity; no semantic assertion,512x512 RGBA
+design/assets/vehicles-512/sns-vehicle-prius.png,170515,d14fc806c297ec224aae85b9938576d38f0aee06d73a86d9c7d95f0250921cac,image integrity; no semantic assertion,512x512 RGBA
+design/assets/vehicles-512/sns-vehicle-spacia.png,206145,7f7b9f6cd88d513f6a9ae511d79b52ccabb8b2defe7258b06c1db6dd897aa1ee,image integrity; no semantic assertion,512x512 RGBA
+design/assets/vehicles-512/sns-vehicle-wagon-r.png,203344,4eed466cf3f0d3df82f8c065f797c01cf0d08e0a4fe06fdbf050dfe4b4a10906,image integrity; no semantic assertion,512x512 RGBA
+design/blob-map.json,11904,e86873213a63c55f80d0d64d11539155dc862e4c685940cb53a161292910de5d,UTF-8 full-content scan,JSON parsed
+design/canvas/01-Start-FirstPassword-Desktop.dc.html,5648,7d622c3a9de212e53e4c1ded3cc2ea9acecc3898f003edde11c848ed05a4fc9b,UTF-8 full-content scan,
+design/canvas/01-Start-FirstPassword-Phone.dc.html,5382,d8c1e7c3fb675d4ad3f5593385076415895c3b295073fdd95a046f72d64f583e,UTF-8 full-content scan,
+design/canvas/01-Start-ReadyToStart-Desktop.dc.html,16329,810b4c2a23c76f4d2aaf800e9836a6a308abe9dd4e96c58e76115f0dbe97912b,UTF-8 full-content scan,
+design/canvas/01-Start-ReadyToStart-Phone.dc.html,17355,369c80385c55bb294000d6677640962554057368625d3e87b8a2a0d815a5b59d,UTF-8 full-content scan,
+design/canvas/01-Start-SignIn-Desktop.dc.html,5191,2d5eb4ad7f80be46878894053732fae3a147bf2d3f4b383a83aaec222402114b,UTF-8 full-content scan,
+design/canvas/01-Start-SignIn-Phone.dc.html,4789,b9de107de7ae148f2bd15f4b18c64122cccab9c690b49c27ff4126dde9b44653,UTF-8 full-content scan,
+design/canvas/02-Home-NeedsAttention-Desktop.dc.html,11901,633003f178dee75d0fae59368a2a61b2be3940964d17331448d18df471311619,UTF-8 full-content scan,
+design/canvas/02-Home-NeedsAttention-Phone.dc.html,10841,7d161c74a78024efc3d5ee98c5bb2766de56de56545946fb31013760250eb83a,UTF-8 full-content scan,
+design/canvas/02-Home-OwnerHome-Desktop.dc.html,14225,0269857d6611b58f315abdcfd167d9aa81dcca26cb412aef09571b03caa441da,UTF-8 full-content scan,
+design/canvas/02-Home-OwnerHome-Phone.dc.html,8852,fdd1bfcdbaa07f427d4c444a0fc5a91718f3afd42b2c079f43097ba789f20823,UTF-8 full-content scan,
+design/canvas/02-Home-OwnerMore-Phone.dc.html,4876,6fec783efe3f84ad967c9d3c30318cfabfb08da9348a190762644524dd00b9b8,UTF-8 full-content scan,
+design/canvas/02-Home-Search-Desktop.dc.html,8539,8039eec65d8fce910ac41881f7370590b9cf0a3c6f6af74352ee6cbffbf26fbf,UTF-8 full-content scan,
+design/canvas/02-Home-Search-Phone.dc.html,6955,3402780682cb624fa2c304c840c79da45f011b4f37d5cea0893d931cdff18d6a,UTF-8 full-content scan,
+design/canvas/02-Home-StaffHome-Desktop.dc.html,13316,7c49cbf261928e9a463d64bb3fd7c5aa47050f7994ea6f2f44c81ab5e42587a3,UTF-8 full-content scan,
+design/canvas/02-Home-StaffHome-Phone.dc.html,9688,bc2e6fc382d7a34ab1d27baa23acc292a011808913128e34ccd774ea03cbf205,UTF-8 full-content scan,
+design/canvas/02-Home-StaffMore-Phone.dc.html,3261,372d4d6dd95bc7e1ccc0a6937f5035297175ff5ab38faeaac74ff3678e99b83e,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-AnotherCar-Desktop.dc.html,9609,8887078ccbecb576b15718dc4625a11b51e37be9e6701956a839cefbfc032220,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-AnotherCar-Phone.dc.html,8138,aa2ad1c8c582946925ca9ffe2b50dfbb80c2ea0fe87ac988f0c8107345572995,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-CloseMissingCar-Desktop.dc.html,33656,e7c860fb1e6eecd3bd2f575e5bd968f17697ffd1290aa782e0bf954f97a2cd70,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-CloseMissingCar-Phone.dc.html,34638,fd905cf3f8234b1d1a4da6e2451b02591356591ef4d206bec788284a0d5b5181,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-Finished-Desktop.dc.html,9389,783494955bd0221f9c7d808eb8595619273cd824ba6bdfe909df8dd877230cba,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-Finished-Phone.dc.html,7860,d8467ae6cb473fea34707f152be8765825d932b86a4acb5346052a3fedeeb331,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-InProgress-Desktop.dc.html,29656,1544498b157fc308410d75f73fc5f63228b7379720d39514d0c0ce0625eef1b8,UTF-8 full-content scan,
+design/canvas/03-MorningCheck-InProgress-Phone.dc.html,28342,b16c4ca6ca851947ceded419ae701ae881cf743c44b0494b63d4506d8ee6b7ee,UTF-8 full-content scan,
+design/canvas/04-Cars-AllCars-Desktop.dc.html,49545,a22e361501934623191a7604eebec3fd45ee0df867eaff02eb12421937a42e8f,UTF-8 full-content scan,
+design/canvas/04-Cars-AllCars-Phone.dc.html,55558,e4d306dfe876086d2f965f0c32db7d942d1c9eb749b3dcf08b5d9155331ddd0d,UTF-8 full-content scan,
+design/canvas/04-Cars-CarDetailsOwner-Desktop.dc.html,17219,7c551b8c43995cf9be956541eb19b60f2a473b4fc440527af21b45c9419b8fb1,UTF-8 full-content scan,
+design/canvas/04-Cars-CarDetailsOwner-Phone.dc.html,16339,c683d29d518056c8f47ff55a3749fb4fe6aba4547e349edcce7eeb0b0fd6c766,UTF-8 full-content scan,
+design/canvas/04-Cars-CarDetailsStaff-Desktop.dc.html,12599,212bdd0b01b032d167969de848a068079a355a3d5cb25050597b35b5760d1092,UTF-8 full-content scan,
+design/canvas/04-Cars-CarDetailsStaff-Phone.dc.html,11249,c1a6c2cf75a4bf5a310107050ef37856d469349160405fda2d4e8354b4906711,UTF-8 full-content scan,
+design/canvas/04-Cars-ChangeStatus-Desktop.dc.html,7087,9acbe6d223113d656531388127eb1530c22bd8214350163b6f6a996fbff8dd4c,UTF-8 full-content scan,
+design/canvas/04-Cars-ChangeStatus-Phone.dc.html,5567,8bf3b00ff0f366473ba31c33c424b029d19a6fab5528b267321e50c6a03eed25,UTF-8 full-content scan,
+design/canvas/04-Cars-EditCar-Desktop.dc.html,15741,bae18f4ab83d69afc33b890eefa75261a744ce9bbc0fdb5f8f45a63482ae8242,UTF-8 full-content scan,
+design/canvas/04-Cars-EditCar-Phone.dc.html,16810,5d6e07a0a5793b2ba0b997f29f0764b786b4eb856e7052301def2b2bf8259ba3,UTF-8 full-content scan,
+design/canvas/04-Cars-Packages-Desktop.dc.html,12980,6a1e964f4cb0987ddde010a082b63fbf4222bd2bf746d6f4659c0d04c0941f55,UTF-8 full-content scan,
+design/canvas/04-Cars-Packages-Phone.dc.html,14553,0d2ae31b71071946657ce74cc1704b61ee508552c801866b598126a118471ddb,UTF-8 full-content scan,
+design/canvas/04-Cars-StatusBlocks-Desktop.dc.html,13952,9417422aebfbcf6a3e080e80a5715fdddf2fc1852be0d41966a9df9c00aa5e15,UTF-8 full-content scan,
+design/canvas/05-NewRental-Cancel-Desktop.dc.html,7467,7aedd0ca648b0e348eae3b7446477509e047ea1ffe6e1b0cac8fe632e6aea434,UTF-8 full-content scan,
+design/canvas/05-NewRental-Cancel-Phone.dc.html,5943,e41370278dff11536fa5e3a91c615e9662aaefc21e96210a6bf76b24be915779,UTF-8 full-content scan,
+design/canvas/05-NewRental-ChooseCar-Desktop.dc.html,12316,cdd9a20dde52997e9128913a34f2ac99b0bdee5b8930de0b35cede9072740fdf,UTF-8 full-content scan,
+design/canvas/05-NewRental-ChooseCar-Phone.dc.html,10850,b34ac7951587abf15b2af318465e59577ed03ea7df0aa347c106bff93b5a896e,UTF-8 full-content scan,
+design/canvas/05-NewRental-Customer-Desktop.dc.html,7604,b6c6ecedaca2d2f32e30ec9ae5328617a4223cdb5cda88e95766586320c6d1c6,UTF-8 full-content scan,
+design/canvas/05-NewRental-Customer-Phone.dc.html,6377,9fd0cd1781bab3b28376512fb2f37a0edf3e5438e29f4ac35d6707cee7a83b12,UTF-8 full-content scan,
+design/canvas/05-NewRental-Dates-Desktop.dc.html,9441,c693fe0d235a23a33e6f6de8f091a95c29d2854f68133c95d888226f8376eb1f,UTF-8 full-content scan,
+design/canvas/05-NewRental-Dates-Phone.dc.html,7894,c90c04fc0d2763abce54e23a95ee0702f8ad6f5d5b343d91fd4fcaf97d4b3649,UTF-8 full-content scan,
+design/canvas/05-NewRental-Deposit-Desktop.dc.html,9581,44fd31df4523ff46a110b45c6a5916375bdea8af36c04133f3d8c4dccb22974f,UTF-8 full-content scan,
+design/canvas/05-NewRental-Deposit-Phone.dc.html,8011,bfe36de524a82daa2fc3ab57dbc53ed78dc262f983d11d9347b51d34af6a3119,UTF-8 full-content scan,
+design/canvas/05-NewRental-PriceChangeRequest-Desktop.dc.html,6801,449f48f4270cc3dfaf2e674514c35581181c3be7d8fba75ba203911d14fd0df0,UTF-8 full-content scan,
+design/canvas/05-NewRental-PriceChangeRequest-Phone.dc.html,5552,7aca600d4b30ef18150a757527d09821a2111e75316d5badacce40c6cd5af42c,UTF-8 full-content scan,
+design/canvas/05-NewRental-ReferencePerson-Desktop.dc.html,9273,f9a698754d29a7a0ec6793b1cc09c18963ed88c4685eb24e4b6a256cc8d17ff4,UTF-8 full-content scan,
+design/canvas/05-NewRental-ReferencePerson-Phone.dc.html,7750,cd7427a7a96060fbcd4906727781baf787de72a112d4642542eb640c6491191b,UTF-8 full-content scan,
+design/canvas/05-NewRental-Review-Desktop.dc.html,8600,e1e3a63e3788646214f35a5d7c770c295d43337cc0ad8840f25c1464231f811f,UTF-8 full-content scan,
+design/canvas/05-NewRental-Review-Phone.dc.html,7045,3d5ce4647df7a7719f9625c6e5c85098f24b4aef147571348516ff9d7df2e3bf,UTF-8 full-content scan,
+design/canvas/06-Rentals-AllRentals-Desktop.dc.html,25090,631af1a1b445086e8ceedfe7011088a8e66fd5edf9e27d59a3b75458e9215c5f,UTF-8 full-content scan,
+design/canvas/06-Rentals-AllRentals-Phone.dc.html,24841,9dbda0195fb1de8b64bf80f0dd5efc3feb96fb1bc43d76ce88f692cb8ed0cf8f,UTF-8 full-content scan,
+design/canvas/06-Rentals-Extend-Desktop.dc.html,7974,c1ca539c4abc0e5f611ba874d13216d961cb3ff5403569e631f3a3a908355bdf,UTF-8 full-content scan,
+design/canvas/06-Rentals-Extend-Phone.dc.html,6416,53bd95a52b45646a6cf4cd18824151448f77ab8a54dbf430553d1a7a66f6b2a0,UTF-8 full-content scan,
+design/canvas/06-Rentals-Handover-Desktop.dc.html,6210,e85beed569838f0bb22370a73005367e7b57d11c72eb471db65348ddff82f9e9,UTF-8 full-content scan,
+design/canvas/06-Rentals-Handover-Phone.dc.html,4844,49b80bc2804f85fdc0231b3334d6d5ea0b780679a99ad9c865cc31c5b86a15d2,UTF-8 full-content scan,
+design/canvas/06-Rentals-HandoverDone-Desktop.dc.html,8561,d465b06dc9c9bdea7e4f0623ccaacf6a7665d81f10b6c13742060e6c10bf3a4a,UTF-8 full-content scan,
+design/canvas/06-Rentals-HandoverDone-Phone.dc.html,6991,b8420f6bb60d081f36ae1e77f84a7dc108bcfe123ed0e90af09752abade4565d,UTF-8 full-content scan,
+design/canvas/06-Rentals-Overdue-Desktop.dc.html,12824,27af8dd23599f188cac3ecc1ffacb3b8244cf099e618a6487d3f90292b78b55f,UTF-8 full-content scan,
+design/canvas/06-Rentals-Overdue-Phone.dc.html,13696,03729ddd2f6e874c02e544b31fd5c10e7a64f488c8a8ee097c5c5115d9cbe727,UTF-8 full-content scan,
+design/canvas/06-Rentals-RentalDetails-Desktop.dc.html,23040,5c8d3ff74350847b4da3d18923b830f96088aac479fe51befb9638132178c18a,UTF-8 full-content scan,
+design/canvas/06-Rentals-RentalDetails-Phone.dc.html,18854,bdc3242c93f4f59e432e53e39540b2ecae7a81c4dc5818330572f8b400566eb6,UTF-8 full-content scan,
+design/canvas/06-Rentals-SwapCar-Desktop.dc.html,8125,0968c8b8793b83618788306552e42ecc0070f589a0aa0a29a7976581005ac5b6,UTF-8 full-content scan,
+design/canvas/06-Rentals-SwapCar-Phone.dc.html,6568,79fa7ea0eccca3a04068cfac060b26cf9403c19617e0fdb95fefde1b860c56ec,UTF-8 full-content scan,
+design/canvas/07-Return-DepositRefund-Desktop.dc.html,7844,e27856aac3f50ca3732abbc9c059b351a660f7de05410c3c94da1d2f330f0f1a,UTF-8 full-content scan,
+design/canvas/07-Return-DepositRefund-Phone.dc.html,6271,9f92a52de064182f32e348e8d7102dce65b1d89c2d70594e493457e23a71d5d9,UTF-8 full-content scan,
+design/canvas/07-Return-GarageDays-Desktop.dc.html,7137,972187b0a76e0481c3fdebd6bb669ee8917c409cbeecdcc835740d5fee9a6a33,UTF-8 full-content scan,
+design/canvas/07-Return-GarageDays-Phone.dc.html,5561,e75099821e88b19d96f1f105ff762866d2ae3bebe78f5919ce9a5e598c3ee7b3,UTF-8 full-content scan,
+design/canvas/07-Return-Return-Desktop.dc.html,11787,30378f247c0941d9fb13d9aedd0de1ea6ebf079f6e61d06b867bf956c46526d0,UTF-8 full-content scan,
+design/canvas/07-Return-Return-Phone.dc.html,10602,b04e5e2839e4f8e56851772c05739bb942dfcb86be4b9902aa46423120e12266,UTF-8 full-content scan,
+design/canvas/08-Customers-AddFlag-Desktop.dc.html,6762,2e17bdbf1485e019f6759e24fb6ec44839ebd368c16e759cf0377e54aaaffaea,UTF-8 full-content scan,
+design/canvas/08-Customers-AddFlag-Phone.dc.html,5240,8420a0acd792c84e1298bd078345eaf8524bd30d05c217231eccb9c32cbe71e9,UTF-8 full-content scan,
+design/canvas/08-Customers-AllCustomers-Desktop.dc.html,13498,d3277270bce091ce3d186d8c4f0385a35dafdea4ed37d10c049e2c75231e903e,UTF-8 full-content scan,
+design/canvas/08-Customers-AllCustomers-Phone.dc.html,12915,36d69203eb36e27616fe927d6d637b762df13006ae444d4275d45f9369436bb7,UTF-8 full-content scan,
+design/canvas/08-Customers-CustomerDetails-Desktop.dc.html,16856,b841433a13892795e1551276ed6dd5bf4966821036e8f2daab287ef477708583,UTF-8 full-content scan,
+design/canvas/08-Customers-CustomerDetails-Phone.dc.html,15838,619d7b9c6c3fb670af72645af087cc5c803122fd57cb8fcebe8669094f417c60,UTF-8 full-content scan,
+design/canvas/08-Customers-NewCustomer-Desktop.dc.html,13093,93e41b54720ab124492945759836451e7dadecb7e5eb47800f8bd1b70304c987,UTF-8 full-content scan,
+design/canvas/08-Customers-NewCustomer-Phone.dc.html,11558,43bf30b8d721c45a4e7935aaad1d3f65850153d5bc97ee246fdde07ea6384413,UTF-8 full-content scan,
+design/canvas/08-Customers-Warnings-Desktop.dc.html,7297,64e77bb8eca47feda1350d39e89785ba8d249dbb1cca55014de7aadecb3a10eb,UTF-8 full-content scan,
+design/canvas/08-Customers-Warnings-Phone.dc.html,5740,17c420b03fac44e0c0488bac0afa0c23ba7b8f6800e140d4de95068b7d3e38de,UTF-8 full-content scan,
+design/canvas/08-Customers-WriteOff-Desktop.dc.html,9235,b8a361917c38243991bbe9e0ecc7fd0b1f8c616d2352e2617f5f9327d95da4e4,UTF-8 full-content scan,
+design/canvas/08-Customers-WriteOff-Phone.dc.html,10256,68b4e7b8b339762cd9b02d8ae08a6700837b8fae9754e02a0cea3934f6677655,UTF-8 full-content scan,
+design/canvas/09-Money-BankCardCheck-Desktop.dc.html,11288,7cfdb726a2ae5255b9ab8c974ed7aeee3dd0d9512d1431a62f29adebbb20cfd5,UTF-8 full-content scan,
+design/canvas/09-Money-BankCardCheck-Phone.dc.html,12575,26ca65c1d8930a36df069d42fef9441974749ceaa971e1094b10c280789da431,UTF-8 full-content scan,
+design/canvas/09-Money-CloseDay-Desktop.dc.html,13899,5bd50e75b9d10582abe0c9a6ccfc4caee0cf448e514c7aa5e9d5bd6a54a4e8dc,UTF-8 full-content scan,
+design/canvas/09-Money-CloseDay-Phone.dc.html,14921,273dee84459d82d442a6634ef150c6f12e1c29d7e178ae246adefc91e112cf31,UTF-8 full-content scan,
+design/canvas/09-Money-CountDrawer-Desktop.dc.html,9657,d8c601ee900c041580ef9c42dc452716d0e60dd3d5fab0029cedc30964a1d71d,UTF-8 full-content scan,
+design/canvas/09-Money-CountDrawer-Phone.dc.html,8104,2603e7bba7edf9f29fa6cc24f37f5b2551270bebed478d6396526a47150f1176,UTF-8 full-content scan,
+design/canvas/09-Money-CountDrawerBlind-Desktop.dc.html,6839,176ccd14682eebb28a97eeadc82463b3920b8ec7b0843f60669564d0f17f6d0a,UTF-8 full-content scan,
+design/canvas/09-Money-CountDrawerBlind-Phone.dc.html,5263,d0236a358859aa926057360bec4ee1a668e9513194f7b4864661662b4cd8eed4,UTF-8 full-content scan,
+design/canvas/09-Money-Drawer-Desktop.dc.html,21053,00b0d701c45ddc0fbbe2db3fcd8286f31e5ae1503b7e279b2bc9b86d1b2db1e4,UTF-8 full-content scan,
+design/canvas/09-Money-Drawer-Phone.dc.html,16516,eed253f59bde0d635ad28777d3e2acf512b3f6a5ede3c57d9cacfa7b97d198ce,UTF-8 full-content scan,
+design/canvas/09-Money-EveningCheck-Desktop.dc.html,11598,4a45c824d963a572893d86ae61550ac960042e0504d9b36a2f16a0cc1ee59a59,UTF-8 full-content scan,
+design/canvas/09-Money-EveningCheck-Phone.dc.html,12087,398c97292bc54812301e3f589e58d58e0507b1831f30888e6e9be2c1494a7e90,UTF-8 full-content scan,
+design/canvas/09-Money-Expenses-Desktop.dc.html,12833,4bf383a853fac40c2502809ef603ce96e938ac9590c3ae8f8d9012bc17736bda,UTF-8 full-content scan,
+design/canvas/09-Money-Expenses-Phone.dc.html,14272,b3120f620d33612c8f1a66c2ca6ddebbeab939c5a237eb0ec59122f61b527217,UTF-8 full-content scan,
+design/canvas/09-Money-MoneyToday-Desktop.dc.html,19515,3e915739abcccff060ea93767e9bec4cfe440f346332c5439a6847c397079ab1,UTF-8 full-content scan,
+design/canvas/09-Money-MoneyToday-Phone.dc.html,19276,95d697fa490124f7e255871c0ba98c811ef45d14b2994f18412a3ccef47fdcbc,UTF-8 full-content scan,
+design/canvas/09-Money-PaymentCorrection-Desktop.dc.html,8561,376519cda3e14c57d61dd146344532ce54c7fa05aa9266df9f16fcede8a89953,UTF-8 full-content scan,
+design/canvas/09-Money-PaymentCorrection-Phone.dc.html,6990,16057cf5199d5227f0a08460ba79f21e5309b6bdd35dd41cc56c052bf84dd722,UTF-8 full-content scan,
+design/canvas/09-Money-ReceivedByStaff-Desktop.dc.html,12059,75dc34b45698d2c0950473642f6bc4a12c6c5f7889d949d346f96dd0302f26f9,UTF-8 full-content scan,
+design/canvas/09-Money-ReceivedByStaff-Phone.dc.html,13783,c2612797488bee0235776a2078ac7e5c6cc822fa80e48429a96149410563046a,UTF-8 full-content scan,
+design/canvas/09-Money-RecordExpense-Desktop.dc.html,11533,0e404278d90acba276b4a8eedb1e65f7ae686c411cedcfa8dcc0c25b0cd6e56a,UTF-8 full-content scan,
+design/canvas/09-Money-RecordExpense-Phone.dc.html,9953,72b6642060e77e076537980e7ec05ee2fa9aad697ea0cd82a0a1f3e3532e450d,UTF-8 full-content scan,
+design/canvas/09-Money-RecordPayment-Desktop.dc.html,11198,9720c52b1ef2c291534d8ddc53a6aa15e18c79a02011abdaebe437d9bcacdf43,UTF-8 full-content scan,
+design/canvas/09-Money-RecordPayment-Phone.dc.html,9577,08ff50686bec0b708ceee2c22802f178f05a6398f5969f7b737ba310970dfd1c,UTF-8 full-content scan,
+design/canvas/09-Money-SplitPayment-Desktop.dc.html,10058,23ecb19f304ab98f58404016b9d771c44fa4761beac938ee31dfd8adf7e3e689,UTF-8 full-content scan,
+design/canvas/09-Money-SplitPayment-Phone.dc.html,8486,d7d6d155e97ee598e2c335c2cc351a8362245ded2b03932d520884343e6e64bf,UTF-8 full-content scan,
+design/canvas/10-Approvals-Approvals-Desktop.dc.html,12435,baea54b0649403927170526c50891d44f62283853880484479326a4c924583d0,UTF-8 full-content scan,
+design/canvas/10-Approvals-Approvals-Phone.dc.html,8361,a72773d215a72af9d4d4f8e2fd0d9209055ff45c76a373704a89c563760342d8,UTF-8 full-content scan,
+design/canvas/10-Approvals-Approve-Desktop.dc.html,6745,76a4d4de681c1894fc2dc066be82adfc7013c466b778e386bbf33d3328e944e0,UTF-8 full-content scan,
+design/canvas/10-Approvals-Approve-Phone.dc.html,7763,20d34b188a6495829a3b49fb5efa6ad616c7b15cd45b9f24e90bc5c915dd9d8f,UTF-8 full-content scan,
+design/canvas/10-Approvals-Reject-Desktop.dc.html,7845,18040805b0048560d01d6c37d5abb730c702f735a0e330206b851603adbe2856,UTF-8 full-content scan,
+design/canvas/10-Approvals-Reject-Phone.dc.html,5650,acc0ed4ba446242141ddb8588acbda2ac1368058b65371edeb9c11967d63ba94,UTF-8 full-content scan,
+design/canvas/11-Partners-AddPartner-Desktop.dc.html,16092,72fa1d1743aaf721ab9857a7176ce0193ff42cb126bfa57ef5d711ab575bd702,UTF-8 full-content scan,
+design/canvas/11-Partners-AddPartner-Phone.dc.html,17107,be2a8c89956c19282b7ecafb9b893ed21781e5e959c4a31ea48cb11fa5243592,UTF-8 full-content scan,
+design/canvas/11-Partners-CarEarnings-Desktop.dc.html,14925,db7f27103cd5968143641e3581695b3b07387d4a39e420589c67af7de552e9ab,UTF-8 full-content scan,
+design/canvas/11-Partners-CarEarnings-Phone.dc.html,16732,00853576ab76b541f0da1c8db24f6a533822aa72a15dadadb541c43e7e4f14ee,UTF-8 full-content scan,
+design/canvas/11-Partners-CashOuts-Desktop.dc.html,15289,99cdbf5b0520f3ed7fbad33d58bcc9bbe64204b34e30ea89e702585319799c10,UTF-8 full-content scan,
+design/canvas/11-Partners-CashOuts-Phone.dc.html,14385,fc62a45fb721f4b4c29ebdac5b6a8fea4f7aaf2f45da50260481e42d47cfcda3,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerAskCashOut-Desktop.dc.html,6943,4804d4606807b8b649efedf4fe9e9f3a8573270c2d8a0461ad12e6fa92cfd60d,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerAskCashOut-Phone.dc.html,6409,04425d9921cfb48c8a7674dcab60c6fba93f67bdc4afb2d9ae31d757a9b3c416,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerDetails-Desktop.dc.html,9689,51721f5fb2ccbb4f82ab6d0fabcc014c405d8dd8720f6933d87ec2dcfa95c291,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerDetails-Phone.dc.html,10708,5ad9f4b3316d1ef7edd4f83a40c285270a588007e9afa367890028d2f2c055eb,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerEarnings-Desktop.dc.html,8314,3da929c4e9c430acdae3a69588cb4d1683ca57b059a0885da20f576b2b642bb6,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerEarnings-Phone.dc.html,7811,60d33f98bcf6e2a877d29003f485e34c69e9e35e40ccd85cbe57a4ef36c55d51,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerOwners-Desktop.dc.html,8168,2103dc775817eecd13b720a67075e650d8437190d615a7f90e5e5c7fd6a155ea,UTF-8 full-content scan,
+design/canvas/11-Partners-PartnerOwners-Phone.dc.html,9244,0f476b2af56d55045d1993dc9ff2f2e7db77272823284ca84dbff0ef134274b5,UTF-8 full-content scan,
+design/canvas/11-Partners-PayCashOut-Desktop.dc.html,7948,04f38e2ed26dc1762926a2ac34939991ee7bb6b38a53c71929c4abe0ac779395,UTF-8 full-content scan,
+design/canvas/11-Partners-PayCashOut-Phone.dc.html,5854,9341911293f8ca6b8d0ad8011e7da499c8488439e9f9ca9c7f3d4bdf523707a0,UTF-8 full-content scan,
+design/canvas/12-Maintenance-Maintenance-Desktop.dc.html,19360,8c2f9fe9dc7e936468f7956ec816ca7ab013948197b749b9fce06152abdb9f97,UTF-8 full-content scan,
+design/canvas/12-Maintenance-Maintenance-Phone.dc.html,17631,22dd6a1294da161b1ebcef3594c7be7af33514255b96c0d124c889db496186e1,UTF-8 full-content scan,
+design/canvas/12-Maintenance-ServiceRecord-Desktop.dc.html,12105,ef74ca70afa7943f4cff6ee5dfed4dec0cb62b31fc4f8ff5478127fed71c0ae9,UTF-8 full-content scan,
+design/canvas/12-Maintenance-ServiceRecord-Phone.dc.html,10010,08d0fd8701d770ff827a4074308ed7e1bf67801727db0214351f12fa052411b9,UTF-8 full-content scan,
+design/canvas/13-Payroll-Adjustment-Desktop.dc.html,11026,55f278a2ccf7c66b03a2ae5a62bb251763f02856b776cc52c3e4c012d924564d,UTF-8 full-content scan,
+design/canvas/13-Payroll-Adjustment-Phone.dc.html,12053,b7a54e542db0b2e95d55b1e75e2ae3e8f264585c872c1649f7f3fb45b7e0991b,UTF-8 full-content scan,
+design/canvas/13-Payroll-Advance-Desktop.dc.html,13756,6503bfa8f3435783958d06fa332bbff447738806ca0ad58c43e98940d14bfc10,UTF-8 full-content scan,
+design/canvas/13-Payroll-Advance-Phone.dc.html,14798,d60d502d3b774e942d04e0213bf297f7b45375bc23be7643fbe12234470e3f4a,UTF-8 full-content scan,
+design/canvas/13-Payroll-MyPayslip-Desktop.dc.html,10698,991ccee5881ad3d0aacdb4d6102421f85df5e9168690afa3958d29e5c43f9d7a,UTF-8 full-content scan,
+design/canvas/13-Payroll-MyPayslip-Phone.dc.html,9522,a14a44d6c5cffa391bcb187e6d454df66803d8be4530ceebc001b39777bf99a6,UTF-8 full-content scan,
+design/canvas/13-Payroll-Payroll-Desktop.dc.html,15194,699751d1ef8fc6ba231f8f32a0f9c2c08d83fdea088306b8cdd0ae20eee22249,UTF-8 full-content scan,
+design/canvas/13-Payroll-Payroll-Phone.dc.html,16677,56365ed2c2f0b7bbb02f008d3f5ed93647484c6c95a8cf794cade2f0e48a0912,UTF-8 full-content scan,
+design/canvas/13-Payroll-SalaryPayment-Desktop.dc.html,9570,866c8574fa97c3f840c3ddb37d80a1c17a709d0de16741fb9a8c7975b0d2071c,UTF-8 full-content scan,
+design/canvas/13-Payroll-SalaryPayment-Phone.dc.html,10611,fabe235dd640a2ba265af14c062dd046f6ef457fd7f94dc5d860edb46f56f4a8,UTF-8 full-content scan,
+design/canvas/14-Reports-CarPerformance-Desktop.dc.html,13434,5b7a7b30bade2d06917fafb6e4c03e53c9de763f24654a339b8d7432495339ff,UTF-8 full-content scan,
+design/canvas/14-Reports-CarPerformance-Phone.dc.html,14928,7e9f86d2f9206a46584939fe0a77b412d832272ed69e90bd6bedbf310d23f8e1,UTF-8 full-content scan,
+design/canvas/14-Reports-Reports-Desktop.dc.html,22005,cefa34c8aeb31ed3a50715083f46c939e5d57dedffad9dbbb578cfc897b9c9c9,UTF-8 full-content scan,
+design/canvas/14-Reports-Reports-Phone.dc.html,23548,e7c6aef4533e52064d40394577d951744d25cafb920ccacfc05681df0de71444,UTF-8 full-content scan,
+design/canvas/15-Settings-ActivityLog-Desktop.dc.html,15236,89a89e901c9905807e8a345d2b36389f679b394134bd4c325cb66e4d4f79fd39,UTF-8 full-content scan,
+design/canvas/15-Settings-ActivityLog-Phone.dc.html,16203,bb19f65fa4da085760ae1c6e06230815922ec38a5fdc8b4a28d3cd2b788a3238,UTF-8 full-content scan,
+design/canvas/15-Settings-AddPerson-Desktop.dc.html,13631,1606cf67c6e3855029be1ed79871f1f2c308c559beaaef6e1f077485345f4fdd,UTF-8 full-content scan,
+design/canvas/15-Settings-AddPerson-Phone.dc.html,14590,d310cc96c8c02b9249c1ee9d1aac4fee15c74bdfab5be46d6bbf079aecdb3310,UTF-8 full-content scan,
+design/canvas/15-Settings-BusinessRules-Desktop.dc.html,16415,6038badde7af1b33ee37244ca43f83e1026c055ab5c682080dbb6a87d6add6f3,UTF-8 full-content scan,
+design/canvas/15-Settings-BusinessRules-Phone.dc.html,17471,6bec3743378ae6c27f1812c5eeb102c4a68375b8539a43a7aa1162af3ed97335,UTF-8 full-content scan,
+design/canvas/15-Settings-People-Desktop.dc.html,14799,a4d8770f19f1cb57308bf8bf47a13b6c4171407cddd1ee122a8ed01ec117f791,UTF-8 full-content scan,
+design/canvas/15-Settings-People-Phone.dc.html,15976,1522709e9331bbf4b6ddc9aee6c9ec8a58876f2c2e2fcd767a54878a44fd983f,UTF-8 full-content scan,
+design/canvas/15-Settings-Permissions-Desktop.dc.html,43938,7bc47a676c0dd729e07497b332cce7f17890d8e7c75b165cb8808c70f4a51961,UTF-8 full-content scan,
+design/canvas/15-Settings-Permissions-Phone.dc.html,44808,b324b7c720c4ef80238474e3d0f07e7ab3a295939cbd87d022b18231f63589fc,UTF-8 full-content scan,
+design/canvas/16-Documents-FinalBill.dc.html,7531,d8eec1e37fd0b3c20f4c606ef7b79aa09f53118669beb5ec070e4789de59341f,UTF-8 full-content scan,
+design/canvas/16-Documents-PartnerAgreement.dc.html,7385,290917b838ce909e3283b7d91d664d8d7b18dd48d1c74ecca8c2f91de6f52111,UTF-8 full-content scan,
+design/canvas/16-Documents-PartnerStatement.dc.html,9492,6da9a6759abfb81b8d0e91ed526df70e7005c206b3153dfce4c88ebf31451162,UTF-8 full-content scan,
+design/canvas/16-Documents-PaymentReceipt.dc.html,4518,2bf51c351da0e6e9e8aeb1424bdf10a2f3a034194a1b19926f2044d6b8191437,UTF-8 full-content scan,
+design/canvas/16-Documents-Payslip.dc.html,6809,41c4fdc653a0fbb9deeda4d8b1549b4f78280cbb979464236554cb0d624b3270,UTF-8 full-content scan,
+design/canvas/16-Documents-RentalAgreementEN.dc.html,6759,7fa3b4a576ed8f02fe7674061dbd9cfd9a62f0f2e32e44bb347e8717f2161749,UTF-8 full-content scan,
+design/canvas/16-Documents-RentalAgreementSI.dc.html,7115,b06c8b8d6d15843adc14891962b05829a3d6939977b7c29c631fcd9c22f17649,UTF-8 full-content scan,
+design/canvas/17-System-DesignNotes.dc.html,16468,883397b779c44d6e6cf36d51c17cafd9511755f0f7485cb7462f14f915599e0a,UTF-8 full-content scan,
+design/canvas/17-System-States.dc.html,15836,5df0dcc93be42435a91ebe61fd3a0d911510bfe3e99a9deffb212800662fa5c8,UTF-8 full-content scan,
+design/canvas/19-Nav-A-Sidebar-Desktop.dc.html,6169,952fb2bd0420ea7d421a58e9d7f8e82c698ccc7cd1f18a8fb37a27af74bbb1e6,UTF-8 full-content scan,
+design/canvas/canvas.json,47782,9d8bc5db40a475943b792ce908ed7d067cae2cb7b6a7601aa723fb0633fb368c,UTF-8 full-content scan,JSON parsed
+design/canvas/ds/plate/components/bundle.css,34066,ab7937448c283e375e80cfd942b232c470f9568629f973beeeeb3234fd0cd64d,UTF-8 full-content scan,
+design/canvas/ds/plate/components/bundle.js,39186,6263d79cbc6da9e7ef2226126bdde11a27e1d556358bfef3f8eb446574008b4f,UTF-8 full-content scan,
+design/canvas/ds/plate/tokens.css,2185,e2587a24f5a227ee31a62b97447cd8ed2b8061bb319b3b8372132c6028e8c76a,UTF-8 full-content scan,
+design/canvas/ds/plate/tokens.json,10188,13ffdd22e5c74127ac69509c965b116f6690ed3f8e0e19d887c3413e25cd5f7a,UTF-8 full-content scan,JSON parsed
+design/design-system/components/AppHeader/README.md,1547,11dd32e2339cac10b7fdc4f19537a6784b1093fa33a8a039d4ad9ebaa9483f16,UTF-8 full-content scan,
+design/design-system/components/AttentionBar/README.md,1335,ffdf516f67e8e7e2a3ff93460943c780618a14787a9bc1ede1bd98c9a7ce6762,UTF-8 full-content scan,
+design/design-system/components/BlockedPanel/README.md,1227,10fff0163c1ac163d7dfb8d9e7eec87749af75b46e9e9291f22b8cf1faf97b66,UTF-8 full-content scan,
+design/design-system/components/BottomTabBar/README.md,1547,50f6bf4a7370d3d47784bff29220245bd6ed46e9cfc62e8c222edaea46b0b491,UTF-8 full-content scan,
+design/design-system/components/BrandMark/README.md,1321,f6d71f1ad4c8c1c84b8a8a908650a4ea498952bd24e6596a0a967248db4701e7,UTF-8 full-content scan,
+design/design-system/components/bundle.css,34066,ab7937448c283e375e80cfd942b232c470f9568629f973beeeeb3234fd0cd64d,UTF-8 full-content scan,
+design/design-system/components/bundle.js,38784,0978af16134507aee7e0bfd56137b5557d71da47551ee43bc8d19eb7a7f9fa0f,UTF-8 full-content scan,
+design/design-system/components/Button/README.md,1472,52a9eb4b72daa36be64dc895d4e725157962a19054414e77fb5c028604610e17,UTF-8 full-content scan,
+design/design-system/components/Checklist/README.md,1284,06259536e539c4cf3db858d3f0689540782d7880d247783648d8507581e44086,UTF-8 full-content scan,
+design/design-system/components/ConfirmationBlock/README.md,1283,c3982c5fb69491c2bb7144cab687351e1c515846ea9dedfe4ac029c0ba4746af,UTF-8 full-content scan,
+design/design-system/components/EmptyState/README.md,596,0499c33b08cac0b24aec608353d0d39e80335259f4ac9da4f59bd13b8cdf66a7,UTF-8 full-content scan,
+design/design-system/components/FleetStrip/README.md,943,d9603e9464f10712ae7ace5da67ef3411ab150339a202ad1881cda7bb3f3789a,UTF-8 full-content scan,
+design/design-system/components/GameIcon/README.md,1081,a24ff8080e2bc8de90c26054f541f2cb04d9c59b7f5b7692dd03be406c1ab1cb,UTF-8 full-content scan,
+design/design-system/components/HistoryLine/README.md,1011,15af17101347a56ab3612547e888fa88bf13a02577e0e61a25aa82989ee82f39,UTF-8 full-content scan,
+design/design-system/components/Icon/README.md,1571,6a46d7163dc867c83ffd7fdbfd2cc8ef01ad19591c82369eb2f6ec193a9f0217,UTF-8 full-content scan,
+design/design-system/components/index.d.ts,12541,d162ea4c420add290b5fa5474f2c5352cccd1665a409dccc987d71ec59f798df,UTF-8 full-content scan,
+design/design-system/components/LanguageSwitch/README.md,391,250a1b5b9e150b9f291a8c878c36ab65d0e2b08c656d1debc831c25bbfcf3011,UTF-8 full-content scan,
+design/design-system/components/LauncherTile/README.md,1152,9e5d14ac03cf31fe736e08866f7e03cd5e497b51f6f7383afc43f9d9a45cda85,UTF-8 full-content scan,
+design/design-system/components/MoneyBlock/README.md,1812,dc3368564611acefbe3fbeed30eef5b177a7d55e1fd5824241985716603efe46,UTF-8 full-content scan,
+design/design-system/components/NavRail/README.md,2842,e755ac8cf4726247a670712eba34715733d5a27e52af2145912a4de54227fdf6,UTF-8 full-content scan,
+design/design-system/components/Notice/README.md,590,164d1f0d25b4e90de589eb5fb823813fd05da542ed5fba5a6693edd3ad891088,UTF-8 full-content scan,
+design/design-system/components/PageHeader/README.md,967,f76cc0bafdba7b162d366670564a10a319f0fb87f44224f4527a76bc0bbb08db,UTF-8 full-content scan,
+design/design-system/components/PlateBadge/README.md,946,93fdb12f185abed6fe4576cf74ef92f12a46fb66adef3848e3f96062d08ff5b6,UTF-8 full-content scan,
+design/design-system/components/StatePill/README.md,1607,d966931b2ddadef0cbd885675f98b6c26c503e105d812a0c59ee9af72087ad49,UTF-8 full-content scan,
+design/design-system/components/StatusChip/README.md,1634,5fc1581efd0929ff07c0b4b971c70cf22db890e328e592e68d59ee83aae88b7e,UTF-8 full-content scan,
+design/design-system/components/VehicleCard/README.md,1884,42ab0ba9a6d8bd461f72313602a885275662514705ffd05d77cebbec712f5889,UTF-8 full-content scan,
+design/design-system/components/VehicleImage/README.md,2218,8be2218d1af173db6e8c0ed8e09131f98c7c605eb27040c87b5ff2fea4d831e5,UTF-8 full-content scan,
+design/design-system/components/VehicleRow/README.md,593,a4764cc13a45b490aacd0637edb02749c54e81f6e60be4959cedbb22bb2ea648,UTF-8 full-content scan,
+design/design-system/components/VehicleSilhouette/README.md,382,59eab690c5d8eafa96881d5ff56dcfe599db80b2ce2b111e6f8debe7de1438d1,UTF-8 full-content scan,
+design/design-system/design-system.json,17891,57dbd54ca5a881cee9809df4e0b2e7fb4713a0eac5c633c01bda398fba899130,UTF-8 full-content scan,JSON parsed
+design/design-system/README.md,17134,b4dc0b7735206c5a810e512814b51b3a0af906320e8531dbdb3e9f316855fc29,UTF-8 full-content scan,
+design/design-system/tokens.css,2185,e2587a24f5a227ee31a62b97447cd8ed2b8061bb319b3b8372132c6028e8c76a,UTF-8 full-content scan,
+design/design-system/tokens.json,10188,13ffdd22e5c74127ac69509c965b116f6690ed3f8e0e19d887c3413e25cd5f7a,UTF-8 full-content scan,JSON parsed
+design/previews/html/01-Start-FirstPassword-Desktop.html,40533,207b1fa34a34d826b7c65c80513eedb919b6fc414205885812531b0e5529a7e0,UTF-8 full-content scan,
+design/previews/html/01-Start-FirstPassword-Phone.html,40816,408a5203d0d53dee217d6d1329671347e13538042b3ca6686399f0325ee2a8b1,UTF-8 full-content scan,
+design/previews/html/01-Start-ReadyToStart-Desktop.html,59952,eafc8bf6ac806dd9bde57bb1a737ba9ef4e8d9b9d7985b88f08cb5ca4df9950a,UTF-8 full-content scan,
+design/previews/html/01-Start-ReadyToStart-Phone.html,54455,cda0f71cfc737447add739fa1137c39b8a16df8f90759925291a9ab0f6d40f9d,UTF-8 full-content scan,
+design/previews/html/01-Start-SignIn-Desktop.html,40350,7f928cd080bc2e9426f18ffc2f8272e51c733ea576e40689f30aed242eb9bab7,UTF-8 full-content scan,
+design/previews/html/01-Start-SignIn-Phone.html,40133,7919bf825409477c6fec7f97204d77f9abe2bdfc48e4a97445aed246f25ae206,UTF-8 full-content scan,
+design/previews/html/02-Home-NeedsAttention-Desktop.html,50923,18229aec81250996a654991e639cc868791e6283588bb28a33cfb88f903efbe8,UTF-8 full-content scan,
+design/previews/html/02-Home-NeedsAttention-Phone.html,47031,cd276f3cda7aeded0adb41fcea4fb2122a4584d414fee5d477607043be1a6ee5,UTF-8 full-content scan,
+design/previews/html/02-Home-OwnerHome-Desktop.html,95768,9a89c6e18fde5ec6c0fa020192f01c2c758518b78990d90d22c78f35dc2a5eea,UTF-8 full-content scan,
+design/previews/html/02-Home-OwnerHome-Phone.html,62282,6d03eaf760e48ea48c40f11cf88a6607fe81a501c21d6abee538c208cac025b5,UTF-8 full-content scan,
+design/previews/html/02-Home-OwnerMore-Phone.html,47967,b58662674c7dd0afd74e8c2d8ce40977c115169cd9a6b6b6d42f36536a726095,UTF-8 full-content scan,
+design/previews/html/02-Home-Search-Desktop.html,48651,e4dc9ecd8b638dad340917e8d0fd0501c9686adb2a054035cf648bf836169c68,UTF-8 full-content scan,
+design/previews/html/02-Home-Search-Phone.html,42891,74708eb215ca173bb88bc9f0450914abd648c91ecb94c2dbcbfa03a8967aa019,UTF-8 full-content scan,
+design/previews/html/02-Home-StaffHome-Desktop.html,87269,0ace7f58450698d1e613c52e3524e06cfff80b660853cb79b35d90dd2e2a1b07,UTF-8 full-content scan,
+design/previews/html/02-Home-StaffHome-Phone.html,53835,eb0ca02d69fb0c7020959e54c24ff21e369fad0a54141fda53077528c4fcf241,UTF-8 full-content scan,
+design/previews/html/02-Home-StaffMore-Phone.html,42772,94b99bd91ae6ac66e43991fa155f5a060c6a23304876dfa391c2d409511db90a,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-AnotherCar-Desktop.html,49561,91c75c2c51f13aea3bad6f839fc087a1bd739a7801c0bfd3850cf8b33d91fb35,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-AnotherCar-Phone.html,43914,474bdd9ebd7d3b7b1e81b7a21d101c7eb49855b60870ee6816a82dcaf6b1659c,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-CloseMissingCar-Desktop.html,78639,0ebc868b868b45252292e5c356b4305da55745506579fd578e052aa6299e82d1,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-CloseMissingCar-Phone.html,73680,0804151af2db3b5cd406f9d8a25f4fa93601295188fd3f4dd42e9dfe7cb662e3,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-Finished-Desktop.html,49107,85fe1358ce1163f1748d30a495f5079f2020cf9732a706b7bed12bf9f391652b,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-Finished-Phone.html,43402,03b41ed93631014622f2a2551d768ba3e4761165465f6a4a1041599dda798661,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-InProgress-Desktop.html,71421,a5717089812e9d5652f2e1ef64cc8c104c445ac6bd421c40742968bd3fc11ad0,UTF-8 full-content scan,
+design/previews/html/03-MorningCheck-InProgress-Phone.html,65931,ad39913e889e9305bd62ffa2b24bafab230f0f92c013192167ff3b04becae07c,UTF-8 full-content scan,
+design/previews/html/04-Cars-AllCars-Desktop.html,100702,832917be9bcf5617790a715aaea6fc19467e3f12973620c7b4da11ee4a7c88c3,UTF-8 full-content scan,
+design/previews/html/04-Cars-AllCars-Phone.html,100192,93318299cd7049d492ae56398b9d588b0021a11cfd2bd86ece5df17359170948,UTF-8 full-content scan,
+design/previews/html/04-Cars-CarDetailsOwner-Desktop.html,61562,5e684b72b16240b4e4d97fa7f35a5870176ba7736689001ce74d5b81b49d10d8,UTF-8 full-content scan,
+design/previews/html/04-Cars-CarDetailsOwner-Phone.html,53237,414091838ac740f186047547808a60bacfe5b045bc44486b9cb0a75372a95a82,UTF-8 full-content scan,
+design/previews/html/04-Cars-CarDetailsStaff-Desktop.html,53188,0f23d5807318b841ea8f16e226df1b730794f50968889147b4c4e4755b40ce76,UTF-8 full-content scan,
+design/previews/html/04-Cars-CarDetailsStaff-Phone.html,47662,f347eb71eedbcbba24442062a7fbda11a27edb8ea7e30eccdd7edfcb1b710871,UTF-8 full-content scan,
+design/previews/html/04-Cars-ChangeStatus-Desktop.html,46361,ad557b7ae7ca41c2f1e4835a385f0f58ed651d59ba5561fb2c8e0d29582c966b,UTF-8 full-content scan,
+design/previews/html/04-Cars-ChangeStatus-Phone.html,40665,618a30658952ad1756578cb3843f2ff79edf75b54c05f245c22dcfd0aa7855cb,UTF-8 full-content scan,
+design/previews/html/04-Cars-EditCar-Desktop.html,58099,8846c821c9f66a298ce34d209494df3b20fda8319ce89727eb0b4c066ef8d5e9,UTF-8 full-content scan,
+design/previews/html/04-Cars-EditCar-Phone.html,52672,b92e2f9153bb013be8219377f3ac13c32325f15af411b9710efc3e668d3b9439,UTF-8 full-content scan,
+design/previews/html/04-Cars-Packages-Desktop.html,56643,7f6e7576b7aec373e1b9c04ba025da64ebaeb0b498ca9a74802c1e9ebd8cb6ad,UTF-8 full-content scan,
+design/previews/html/04-Cars-Packages-Phone.html,51692,f082359b32c87d739087035dd2c84597471452557410d98ede17979203826bf7,UTF-8 full-content scan,
+design/previews/html/04-Cars-StatusBlocks-Desktop.html,52433,f00f1e979f24b37d2d1bc5f2cf85e7b04bb89580e7b9687dac74ff1f60670bb2,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Cancel-Desktop.html,46556,0b201e1cd05020421f5b3e5bb822229d8dd98e9bf5585fcc0fd073560b480e91,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Cancel-Phone.html,41208,cc190b012ee64b455cd943612eb93e533ce771a2418f41de6c2dbec80e4311d9,UTF-8 full-content scan,
+design/previews/html/05-NewRental-ChooseCar-Desktop.html,51850,eea306fbb3fb926c46fd52c4a5227b517c68b53ba772a9ce09493d1df9f08790,UTF-8 full-content scan,
+design/previews/html/05-NewRental-ChooseCar-Phone.html,46560,4115586c2a3ebcfcb07c20daea4bf198c4724ee6726ab00030281095b71cf901,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Customer-Desktop.html,48313,427ecc1a0c642bc56e7c725bb71e6bbb4aa19b2cea60ea185d253e870a85b29e,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Customer-Phone.html,43161,04a2578a7233aed6046efef8fc80f55def16408e69650f8023910f239dff970b,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Dates-Desktop.html,48691,74e41391ff1ae5e8996462272b90354b2c1e3fde38dc8ce78a02746a74d61d42,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Dates-Phone.html,43320,53a36e20568bcce944434e60c991804e20c7e1fd0e7d736d490d3fca089fcf9f,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Deposit-Desktop.html,48640,73b0cafc5063190f2f0b750a833de329c242f7ffd09727d038f5df3802780e0e,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Deposit-Phone.html,43246,f80f9021698019bd8d043b0fe510d22520d0d61c47077b7eed6e32f0189314aa,UTF-8 full-content scan,
+design/previews/html/05-NewRental-PriceChangeRequest-Desktop.html,48056,450cee5b5684c4b09f6b24fc6fcdafb7fd1e29af94f86cab7c0a0221c5cac7f2,UTF-8 full-content scan,
+design/previews/html/05-NewRental-PriceChangeRequest-Phone.html,42882,d5fffb1e6a554a9e8a33be078934e344a537d69850573779a0816b261f0480f0,UTF-8 full-content scan,
+design/previews/html/05-NewRental-ReferencePerson-Desktop.html,48941,16f7813851d8df0a589f34023cd7f6b7803f65f716925bff52171c3546b37b06,UTF-8 full-content scan,
+design/previews/html/05-NewRental-ReferencePerson-Phone.html,43594,39b7f71e283caf0411c2f6bfee6a7474af113c4d2d1550e6803b13d454a93b36,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Review-Desktop.html,47673,4a1473a74c8c79aa53e3703c239bf76ec2392a62de24ad7300fa39938bbc729e,UTF-8 full-content scan,
+design/previews/html/05-NewRental-Review-Phone.html,42294,5c961b5a1cc4d02a08e91aec5fd4f54fa9f64c9e567b91e50f257814ffe0e589,UTF-8 full-content scan,
+design/previews/html/06-Rentals-AllRentals-Desktop.html,70236,4ddf26a8c8bbea60f478e222b1932f2eeca33b6a666b1bcc8c319f347a7012cd,UTF-8 full-content scan,
+design/previews/html/06-Rentals-AllRentals-Phone.html,63938,7418dc576eead9ffc191eade42fb40717d835304cd5c38d5358971655a329f19,UTF-8 full-content scan,
+design/previews/html/06-Rentals-Extend-Desktop.html,47468,1b513e2e7aedf486f7404409530ca730a87b8100d35718ea2fa3c5450e271f6e,UTF-8 full-content scan,
+design/previews/html/06-Rentals-Extend-Phone.html,41734,6d0b2de100400cef3456c12ba58324c2200820ed064c212d7ad7aaed2016c1d2,UTF-8 full-content scan,
+design/previews/html/06-Rentals-Handover-Desktop.html,50111,2bf8d90d1e0b2eebcee7e0ac50af5d816f91c8ed9e726d754c203f812693ad84,UTF-8 full-content scan,
+design/previews/html/06-Rentals-Handover-Phone.html,44468,232c832eb80ecf667b52fb3691ddb0a04e85691af00b4fe45f6dbeff380e4f68,UTF-8 full-content scan,
+design/previews/html/06-Rentals-HandoverDone-Desktop.html,48649,cbd686e860373a07a67a74b07777a7a885b07fd0b1ff88c73cd2b1f73d78aa00,UTF-8 full-content scan,
+design/previews/html/06-Rentals-HandoverDone-Phone.html,42904,1eef8b3aa9eb98358362f003909d12e2e962e37f40fba2cf10f48aff8338f869,UTF-8 full-content scan,
+design/previews/html/06-Rentals-Overdue-Desktop.html,54859,d06b5a7b5a4ef2d77182e63eb9e81a1b1c734ba4fe4d73ba32a0a6f87130bad1,UTF-8 full-content scan,
+design/previews/html/06-Rentals-Overdue-Phone.html,49822,7fa946c8fdaf32d3a2233412401418eb10f7c57ec18f456ea7d3f3b8608a5a29,UTF-8 full-content scan,
+design/previews/html/06-Rentals-RentalDetails-Desktop.html,65184,711bf7bf34785aeb5813390219df5fb1fb695abdb3ee9103b373d8bbd91d934c,UTF-8 full-content scan,
+design/previews/html/06-Rentals-RentalDetails-Phone.html,53490,471a5e724e7f1ac632bac5a6655cb50ebf86093e53191556d69ea8404b0b83a9,UTF-8 full-content scan,
+design/previews/html/06-Rentals-SwapCar-Desktop.html,47655,51db8799adab4807811e6037de0bc6c57aecabcb3b1fd7fcf2fa94a61e8f99f3,UTF-8 full-content scan,
+design/previews/html/06-Rentals-SwapCar-Phone.html,41922,9f6c282d6acb27622ccfcbffa14e47da74e6069c64d82158c4f40a8be6fb9e30,UTF-8 full-content scan,
+design/previews/html/07-Return-DepositRefund-Desktop.html,47247,2d605836cb83617e1bb493d8df9e4fc7f87f0150e5e4e901e8a4acefd8899d8c,UTF-8 full-content scan,
+design/previews/html/07-Return-DepositRefund-Phone.html,41498,71254cbf1c8009d3279a666fe2c77bdecda5a5f765d725bf9760721f19478394,UTF-8 full-content scan,
+design/previews/html/07-Return-GarageDays-Desktop.html,46608,1fa18c70e39669b173ec8af5c480fe020ff44c9b2bf4d2e9571a8dd68545da11,UTF-8 full-content scan,
+design/previews/html/07-Return-GarageDays-Phone.html,40856,90950469a4fcde75c9dd75bf911c957b2c608bab9eda7ed8f1aa92304679ab50,UTF-8 full-content scan,
+design/previews/html/07-Return-Return-Desktop.html,54488,6a28f0dbb8ec56ab2d9d3b3f261eae96c4c35f6c130be6eaf940ac66024af829,UTF-8 full-content scan,
+design/previews/html/07-Return-Return-Phone.html,49026,6e867702a9bb3ce880e0a83dcf0e389fddb72580b3b2c4995d25f1deaea070ad,UTF-8 full-content scan,
+design/previews/html/08-Customers-AddFlag-Desktop.html,46046,0d7fb9d4ad0cdead1a4e247defc773e36476cfdecdf18a9b0f636c556a2f1b07,UTF-8 full-content scan,
+design/previews/html/08-Customers-AddFlag-Phone.html,40348,4d35b5fe37ea61f2c61db63670b86f713190092a5a12136f1ac03eb1a453e7e3,UTF-8 full-content scan,
+design/previews/html/08-Customers-AllCustomers-Desktop.html,56248,51da2f1abad907e5106e92c794cdd2d1c5423954aa0efd0c979d4c6a3393bb31,UTF-8 full-content scan,
+design/previews/html/08-Customers-AllCustomers-Phone.html,48424,e4ce2b9f0a091ee394bb7a9fc296112fc42b113430f80724b8ee8423fc8e738f,UTF-8 full-content scan,
+design/previews/html/08-Customers-CustomerDetails-Desktop.html,59678,46a40add37e34798dae808e65d2cb69e2506e46cca6b1deb9ce34c1bbea2c455,UTF-8 full-content scan,
+design/previews/html/08-Customers-CustomerDetails-Phone.html,51150,96143c11430d261cc0dac63130cba88bbc187132c2bb98da314ede16f00617e0,UTF-8 full-content scan,
+design/previews/html/08-Customers-NewCustomer-Desktop.html,53848,dff8324d74bd552029f1a484b877c2f09d98a97810da0facd2f9fe5fac3f4763,UTF-8 full-content scan,
+design/previews/html/08-Customers-NewCustomer-Phone.html,48137,1c2a154fdc153589f85dd0f008a4621045e9f2985ff95a8c6062beef580f6818,UTF-8 full-content scan,
+design/previews/html/08-Customers-Warnings-Desktop.html,46976,8b1fb341984d0f42a892d1ff828b55d0e84b5e224ebe9168c57f782a01edb82e,UTF-8 full-content scan,
+design/previews/html/08-Customers-Warnings-Phone.html,41243,3cce3126cb41a7e676534e766b6a6d8eef918e516f841f69b84cfc7f3f8e0656,UTF-8 full-content scan,
+design/previews/html/08-Customers-WriteOff-Desktop.html,51983,6bda011d4dcb8bf46cf296ff399fdf28b855624252921d90eff0a575e8478f17,UTF-8 full-content scan,
+design/previews/html/08-Customers-WriteOff-Phone.html,46480,86587721d143b809b9fa45fd42b783857db5e7f64b541999b8965ea463b6bda4,UTF-8 full-content scan,
+design/previews/html/09-Money-BankCardCheck-Desktop.html,54533,00465ee990563f78d49059caf611e55218836c899580187a2f5e267cf6d3feea,UTF-8 full-content scan,
+design/previews/html/09-Money-BankCardCheck-Phone.html,49296,fe98b56e73e3f2c61e4d73864606a922af1007bbb7e4c51853878d25b575bc94,UTF-8 full-content scan,
+design/previews/html/09-Money-CloseDay-Desktop.html,57267,c58b46eb8c24127d7b63730dadee7eebb0a2244afedab4a5ad9b450390913d61,UTF-8 full-content scan,
+design/previews/html/09-Money-CloseDay-Phone.html,51766,7f69b8efd6b756d3da7581e26f710d3aa80ba703b77050f3f58d56e4ef3b5245,UTF-8 full-content scan,
+design/previews/html/09-Money-CountDrawer-Desktop.html,49167,f27ecb16c1ed364cdb9b2d4b5111bd84b286d8068e8a216e9862f5d378d0f2ea,UTF-8 full-content scan,
+design/previews/html/09-Money-CountDrawer-Phone.html,43438,6320eebdb96da9571aa75da95e0c8c9e68f05e32e990451803558b059750f2bf,UTF-8 full-content scan,
+design/previews/html/09-Money-CountDrawerBlind-Desktop.html,46418,beeedee6217c61dfc1e9c85fb24a937133b9b6f069997f1bdc5816c500dfccaf,UTF-8 full-content scan,
+design/previews/html/09-Money-CountDrawerBlind-Phone.html,40666,51b15b0111370970126d437c56e3b3ba76339054b8895566f7f982aaa8629485,UTF-8 full-content scan,
+design/previews/html/09-Money-Drawer-Desktop.html,63184,7b0111f1b32fde10581aa7480eb01186b577a542fb9f54799d6411f87dcbb462,UTF-8 full-content scan,
+design/previews/html/09-Money-Drawer-Phone.html,53574,f9266de656c19a773bba614a062123e65b87e170169e5df77bf10129915be80c,UTF-8 full-content scan,
+design/previews/html/09-Money-EveningCheck-Desktop.html,60020,aed858bdb1f463da1b92607df0e8edcdf61dca3725333bf7dad06ded01424a76,UTF-8 full-content scan,
+design/previews/html/09-Money-EveningCheck-Phone.html,54508,11869e866814a1e63a1a5fc00d96a0de2e03e03988c3a3b52db0d22a1c8328eb,UTF-8 full-content scan,
+design/previews/html/09-Money-Expenses-Desktop.html,55093,f591f2b612c46cef9345808fcab76c7b375a7e0e31876370b4e8e337f77a5ccc,UTF-8 full-content scan,
+design/previews/html/09-Money-Expenses-Phone.html,50009,aa600125d0d49325bccfe880915b4293009cb82d553f8f2a19579888631e82d7,UTF-8 full-content scan,
+design/previews/html/09-Money-MoneyToday-Desktop.html,65355,88441e3125cfc0df0397241cc412418da9b1bd4fdfd9b1d82f8521fdec60168d,UTF-8 full-content scan,
+design/previews/html/09-Money-MoneyToday-Phone.html,58592,12725c5a9b2e0b4f062d550752a3b5e81828c64582e9e0ac9c5f8d9b0047c2df,UTF-8 full-content scan,
+design/previews/html/09-Money-PaymentCorrection-Desktop.html,48378,1aed0af89e54af4509a93e35ac08211e53c74613a902cab4e1820b8c79dc3f83,UTF-8 full-content scan,
+design/previews/html/09-Money-PaymentCorrection-Phone.html,42630,030c3de0179f426eaec8b94f1a19017d03567cf5c11a73b90256fa7617a7ac9c,UTF-8 full-content scan,
+design/previews/html/09-Money-ReceivedByStaff-Desktop.html,54250,5725161a8588c55e5ec0249c6f4d7971fed90e8247d7d07b648a1e8855698324,UTF-8 full-content scan,
+design/previews/html/09-Money-ReceivedByStaff-Phone.html,49450,ee967bb679e54f7bb115ddaa11b7d358c8301f1ca5a3f9eb56e6862a62dc4754,UTF-8 full-content scan,
+design/previews/html/09-Money-RecordExpense-Desktop.html,51126,20a4333d17ba004f33b5f782f10409afc86e8a0ce916dad9e73e29366d60b213,UTF-8 full-content scan,
+design/previews/html/09-Money-RecordExpense-Phone.html,45370,e4456bf584392f827390d929fedb091667c4672719956580e740bb84542cfb9e,UTF-8 full-content scan,
+design/previews/html/09-Money-RecordPayment-Desktop.html,51777,9339e13f8f5f66d9479e3bed9e279deccbaf2735f8373ba9810d45ac5fdb0383,UTF-8 full-content scan,
+design/previews/html/09-Money-RecordPayment-Phone.html,45980,6c52b175b5aab98e512a667258d50fbfeb1ee29d3b6527980030224fee868acf,UTF-8 full-content scan,
+design/previews/html/09-Money-SplitPayment-Desktop.html,49636,e43d3dda0192895b5a6628fd9416dab319f1520d9f235caa6e4de24288756357,UTF-8 full-content scan,
+design/previews/html/09-Money-SplitPayment-Phone.html,43888,dc395b6543369ab230654952db84582bd6aeb7ede8fc4f649e9af5b22e18ba29,UTF-8 full-content scan,
+design/previews/html/10-Approvals-Approvals-Desktop.html,54886,08775a63f282ca4eb6539b848452d5cd2dce08c21974f37d4bf15103d13b8dc1,UTF-8 full-content scan,
+design/previews/html/10-Approvals-Approvals-Phone.html,43059,7cbefcdc73c22174613f313b9f1a75c27ad6cb14b482543a18eff31e641a9159,UTF-8 full-content scan,
+design/previews/html/10-Approvals-Approve-Desktop.html,48886,4e83abc48e774a205cadb28d73af5d02e5b68b2cb80636adce4d6147f0ee3090,UTF-8 full-content scan,
+design/previews/html/10-Approvals-Approve-Phone.html,43381,9c59e31ce3ef22305330c55a7ed7d8b6b891a5f1263dd83378894235fbe9d8ae,UTF-8 full-content scan,
+design/previews/html/10-Approvals-Reject-Desktop.html,48323,d59b025eb80e98348b4b4b47f3834950963d4031ffaa7888a93b22ea4d8aad84,UTF-8 full-content scan,
+design/previews/html/10-Approvals-Reject-Phone.html,39525,b3c4be23d1c5f9da12537910fbf97122d7272d2bbd1e6ceb4ad1a171c29eafec,UTF-8 full-content scan,
+design/previews/html/11-Partners-AddPartner-Desktop.html,58419,1044d76a7a63eead7421c6e5b94ec2c8e605f98154737910932422d139ba03ba,UTF-8 full-content scan,
+design/previews/html/11-Partners-AddPartner-Phone.html,52911,bf4c2a1b831a693bcc0a8a4b169d99ae74ef54351fdb42ad0cce2911cacdd09c,UTF-8 full-content scan,
+design/previews/html/11-Partners-CarEarnings-Desktop.html,57144,dccdec24b0dc9e06eaf718f0235fd542568881e774f96f5744508f0e0eb165d7,UTF-8 full-content scan,
+design/previews/html/11-Partners-CarEarnings-Phone.html,52455,08fd1144c6b20675cb561ab0282d08361e3d4eaa4328ef77fc83e0c29a75f0a4,UTF-8 full-content scan,
+design/previews/html/11-Partners-CashOuts-Desktop.html,58481,208937b8c16001774da903cfe06dc97247981dd5620ca825d56aca2ec5604ae8,UTF-8 full-content scan,
+design/previews/html/11-Partners-CashOuts-Phone.html,49440,01b2ce5bf1b9208a4631f7041bb49cdf283c544c47e65de852acf54400d2a745,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerAskCashOut-Desktop.html,43676,7744b1dc365c680adc5c10437ad6194a17790dec572e43f3570c8d1cf69e3290,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerAskCashOut-Phone.html,41582,f62e48eff6b1e225ece10dab76911bb1b508f03c8c666fbda367aec736a2e78b,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerDetails-Desktop.html,52048,cf1f5cee9f376bb1e6fa6a609af2e05ca0641110f8a24c445a5984a6d7668308,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerDetails-Phone.html,46570,6e369f18121a83ef75120668321a48c08f1fb5b72456820be1304c34d957090d,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerEarnings-Desktop.html,45285,bd20b774507fa7217e76b66a494e9ed9e0072d0dbf6e59bf21a957f22eb931b1,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerEarnings-Phone.html,43222,1592abfb8739e44c9456828924b711f685c4c31a00d7d34171ce2a5e5c7b09f5,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerOwners-Desktop.html,50196,fa1cff14a947937d57f9536181655b737589a6a58065438cf9da4c5411e0dfa7,UTF-8 full-content scan,
+design/previews/html/11-Partners-PartnerOwners-Phone.html,44749,c26d5f12c9b4f446424581eb61c1f71555467ebc3c3302ba51ca37caf9f57fd2,UTF-8 full-content scan,
+design/previews/html/11-Partners-PayCashOut-Desktop.html,49959,9bc46e444f916e91292ae5fb6e124bc685b078b134d29e604ba7ab598d1430ae,UTF-8 full-content scan,
+design/previews/html/11-Partners-PayCashOut-Phone.html,41159,abe578174e157f9e8dae3ba390694585bfd4e5996abc44200f9258a79bf57155,UTF-8 full-content scan,
+design/previews/html/12-Maintenance-Maintenance-Desktop.html,64034,cc6f638091c7ad900435bb9d73e1c866c462d22fef2abec1a4f8afe69b2102ff,UTF-8 full-content scan,
+design/previews/html/12-Maintenance-Maintenance-Phone.html,54183,9f7c4515c75eda5ac25435e6d6e391691a27e6915078114434de8b2554b7e0be,UTF-8 full-content scan,
+design/previews/html/12-Maintenance-ServiceRecord-Desktop.html,54036,3d8924e99460e2a85dc5b677da48b9de990b951c437537da9875fe66b132e3d4,UTF-8 full-content scan,
+design/previews/html/12-Maintenance-ServiceRecord-Phone.html,45235,75b97d7f9417d40508442cc66affee695332a0f8cd8e6a132914afcea2ef5947,UTF-8 full-content scan,
+design/previews/html/13-Payroll-Adjustment-Desktop.html,53381,632f615f81cf882f81be9f7e012589cb4c33fbf0bee3d4016d4804d92ab6678f,UTF-8 full-content scan,
+design/previews/html/13-Payroll-Adjustment-Phone.html,47884,e6557e5287acf8b745960e82713e1e736232d0d007c48fa6ef7f513ce47e1f1e,UTF-8 full-content scan,
+design/previews/html/13-Payroll-Advance-Desktop.html,56170,6e3ed76ff8c033099fe35245eaf92940a2b1ca51625381518bf91c786c95edd5,UTF-8 full-content scan,
+design/previews/html/13-Payroll-Advance-Phone.html,50688,cfbab3552bbe98938e321cd553f399dd7d01aa99e4db3d7f4bc71d1aaa552ac4,UTF-8 full-content scan,
+design/previews/html/13-Payroll-MyPayslip-Desktop.html,49058,f8fa5d563067bdc343f4ad585ac22b6d1e9872908959b22382072391175ee884,UTF-8 full-content scan,
+design/previews/html/13-Payroll-MyPayslip-Phone.html,45066,b6480e9452538055e1d3e8f36dd4d5834eddf48527fcd1bb2409ff0401e99669,UTF-8 full-content scan,
+design/previews/html/13-Payroll-Payroll-Desktop.html,57605,4df2d8fa5249a84616496754af80611430cb6488b7eccc5341cd2c095c788267,UTF-8 full-content scan,
+design/previews/html/13-Payroll-Payroll-Phone.html,52564,f581db8ecbfaa3d7b69a0d14cc91534647e81f7729b7d62cf02561c49e36bf90,UTF-8 full-content scan,
+design/previews/html/13-Payroll-SalaryPayment-Desktop.html,51755,507d84ff118e527f6e7f7a7b4a000ed366319d61c26ce981dd0e04613fa5ee45,UTF-8 full-content scan,
+design/previews/html/13-Payroll-SalaryPayment-Phone.html,46272,c97a61f3d415adf3fd5a74df4513fb2002bc52ce19256739cb361ded39f0d9ee,UTF-8 full-content scan,
+design/previews/html/14-Reports-CarPerformance-Desktop.html,55454,ac1d36c7712b9d002037a9943baf72cb5675c28a74a72277a9f5f3e427277dcc,UTF-8 full-content scan,
+design/previews/html/14-Reports-CarPerformance-Phone.html,50425,dc20fd980b8b831a8afef0b3f520f743502557ee4c03adb03b28a31c3af88e94,UTF-8 full-content scan,
+design/previews/html/14-Reports-Reports-Desktop.html,66903,73fb2457864206e01d68eff0bfd429f5ff99c1ec9e95a59bfab8dd725ffc87da,UTF-8 full-content scan,
+design/previews/html/14-Reports-Reports-Phone.html,61950,55a19ce575841b8650782101d1a7b92987186f31ee394434c898a988c4ac3b94,UTF-8 full-content scan,
+design/previews/html/15-Settings-ActivityLog-Desktop.html,59742,123e92eeb6963f8cbd5a88b8b5bd1b07637eb8a6eb74a11ebc4764b03b506e1d,UTF-8 full-content scan,
+design/previews/html/15-Settings-ActivityLog-Phone.html,54185,b82be6e27e6d884a12c615806fbf6ee2ba09febd372dcb656a48c50e28a85862,UTF-8 full-content scan,
+design/previews/html/15-Settings-AddPerson-Desktop.html,57393,78771a86a724b1836564246c5611d9dd0185e537a7329a516a0acc276a66b25d,UTF-8 full-content scan,
+design/previews/html/15-Settings-AddPerson-Phone.html,51828,8cc6ef817473abd19dba2adc1b17b5ae653535ed6b378c3033561bece1d6db3b,UTF-8 full-content scan,
+design/previews/html/15-Settings-BusinessRules-Desktop.html,59829,dd462377798cce3bc55aeb3a6c07c967ed14468bf615ae1498215b4c56de4eff,UTF-8 full-content scan,
+design/previews/html/15-Settings-BusinessRules-Phone.html,54362,262cc0300c3c77f521e8a43068bcf317562953fa7f583b731324cf1937077709,UTF-8 full-content scan,
+design/previews/html/15-Settings-People-Desktop.html,58678,54708bc1802d92d263e9a49ce96dd6c7d7a5fc40d785ffed01a06449c3d79998,UTF-8 full-content scan,
+design/previews/html/15-Settings-People-Phone.html,53331,7170b50b9d6a2cb2444ffb4907cf4c372dedd6ad4af468c866685148e5e27796,UTF-8 full-content scan,
+design/previews/html/15-Settings-Permissions-Desktop.html,92665,0069868959a2dc7bae0eb7bcd9e7c90dafa1ec5465177c34339918677974ca07,UTF-8 full-content scan,
+design/previews/html/15-Settings-Permissions-Phone.html,87012,e34f53e7d9957573f37266d0a500a3c46e7caf14547f23845b1e832fcfabcce1,UTF-8 full-content scan,
+design/previews/html/16-Documents-FinalBill.html,42560,447d3e2e1ef2a3e7a07dbf6232a2e6b4d1b532a80bf11c71e32cd205b107ab3a,UTF-8 full-content scan,
+design/previews/html/16-Documents-PartnerAgreement.html,42288,a62051dab5c1e5d4dbd8c7e4f928086d6fdd3cf1fd8154a3ed84d3c47a25f528,UTF-8 full-content scan,
+design/previews/html/16-Documents-PartnerStatement.html,44395,20be108c781216695960ea3266b8e16a7d9a6133add6c88c381f40004943b79f,UTF-8 full-content scan,
+design/previews/html/16-Documents-PaymentReceipt.html,39422,005f5e62f9c7449672cc5d77215da2f5ada4b8fcbbc7bb6a78b16e26a3c3a6cb,UTF-8 full-content scan,
+design/previews/html/16-Documents-Payslip.html,41712,0787dc16f1cc93a2914a42ab06f2a4c5d5e55ec7b8d5188f3dfec71606b2f519,UTF-8 full-content scan,
+design/previews/html/16-Documents-RentalAgreementEN.html,41662,a693a78c20a8544236bc9ab5170be502b8f9b47b9d73b0efa00f967baa41d524,UTF-8 full-content scan,
+design/previews/html/16-Documents-RentalAgreementSI.html,42018,e3de28ba3477f47d1c29bff2f074780f0cee6f9b680c5492910fc522c5db981a,UTF-8 full-content scan,
+design/previews/html/17-System-DesignNotes.html,66395,86507846d4e3184baa4547ede0cb3f8616aab0573980efd80091912997cd7fa2,UTF-8 full-content scan,
+design/previews/html/17-System-States.html,59396,db10245f82d2b61a3b09f673ab0d251c232eeb4e91d05ddc5f9843555f8b4e41,UTF-8 full-content scan,
+design/previews/html/19-Nav-A-Sidebar-Desktop.html,57065,2929c070e5a23be922ed5151280a9e53a45177905d74f78814f2a80316dc3bd6,UTF-8 full-content scan,
+design/previews/png/01-Start-FirstPassword-Desktop.png,75886,1cdeb2116e3096db0d5f39f7d02dc0df6f7746aa2073b0defed370a4565d9aa0,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/01-Start-FirstPassword-Phone.png,71532,4657a7483a47a4fbdb3eca3b689d2e1137183412cec746e2eb90b6e7d156cb34,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/01-Start-ReadyToStart-Desktop.png,227501,81a0ac99fea4ad4f0dc4eb914138b0c97bbccf2c1aa374cc3dd08eee7e9e30ee,image integrity; screen previews also contact-sheet surveyed,1280x1199 RGB
+design/previews/png/01-Start-ReadyToStart-Phone.png,171205,722577de4af2bb87e77d6ebf495e91efb031c3a68392f0d6fc86a534db000ba9,image integrity; screen previews also contact-sheet surveyed,390x1930 RGB
+design/previews/png/01-Start-SignIn-Desktop.png,66332,2a0b910637e7505c99e8ad8b48ea7b6a24b31f24fef235923d90f19d04664236,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/01-Start-SignIn-Phone.png,61084,2dc9aa00b9b3d1ea006e25a3ce1f5303751e0b3555124ccb0df88901b8933c4f,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/02-Home-NeedsAttention-Desktop.png,126344,e21edcf32454522c38dad2a3ad35cae70c457a7acfd03ecd903910b8622807a2,image integrity; screen previews also contact-sheet surveyed,1280x871 RGB
+design/previews/png/02-Home-OwnerHome-Desktop.png,1365385,9948c3e5dd21dd1a481ee2c80d16cac37699933c20151498487a9fdf265556b8,image integrity; screen previews also contact-sheet surveyed,1440x5093 RGB
+design/previews/png/02-Home-OwnerHome-Phone.png,347253,bb7b1b97603594c0d8d7cb417ff77ca8250319ad88c8c7f647c1e489af868e19,image integrity; screen previews also contact-sheet surveyed,390x2946 RGB
+design/previews/png/02-Home-OwnerMore-Phone.png,130893,7a2cced0ab45e90133cc22b6f650bbbc2d3e25b4b5531445b20cc846eab21c67,image integrity; screen previews also contact-sheet surveyed,390x1745 RGB
+design/previews/png/02-Home-Search-Desktop.png,93914,26abdf55091791fe80fe98b05291ca5cc8b9723ddd33dea1b3558606b58a21e2,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/02-Home-Search-Phone.png,50805,ef812d36bc72367424a8351571b0f73e1d044b62d0a4c4aa891e282664520a57,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/02-Home-StaffHome-Desktop.png,1221017,eb5c16b72c5d8f5c3e9e4ac5f07a92b62e891cae31857b055b6e2f3caec51968,image integrity; screen previews also contact-sheet surveyed,1440x4558 RGB
+design/previews/png/02-Home-StaffHome-Phone.png,223126,8363bf75cbf10d2b9a056f1614313e2c019c18707046ec7f5ed2be5568a01880,image integrity; screen previews also contact-sheet surveyed,390x1943 RGB
+design/previews/png/02-Home-StaffMore-Phone.png,70671,f3b0f365b7ca5dd62ff95b5d303555699dea85b1b52b3dd0bae8afbc860faab8,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/03-MorningCheck-AnotherCar-Desktop.png,94046,d42d8fc3df7615c58ecefb210d3c48a53820ee5b8b24cec2fff5b298d2b1f51a,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/03-MorningCheck-AnotherCar-Phone.png,59588,456d56a0898289aef455c8b2a915f475c91e1cc614c934e4ba20678b80058206,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/03-MorningCheck-CloseMissingCar-Desktop.png,367693,453b31940706ae14ae08787d368aae1e94e51fb93848dba50ffbbf1fde76dbee,image integrity; screen previews also contact-sheet surveyed,1280x1745 RGB
+design/previews/png/03-MorningCheck-CloseMissingCar-Phone.png,309595,a355e27f753bb411347ef6be4e4a6e251eaab0ca7b607470ffbbe26f33e85545,image integrity; screen previews also contact-sheet surveyed,390x3184 RGB
+design/previews/png/03-MorningCheck-Finished-Desktop.png,139280,74717b95fd591c1859552f3e543049f4c0474d6067dbf1eff23627a26aee0b79,image integrity; screen previews also contact-sheet surveyed,1280x953 RGB
+design/previews/png/03-MorningCheck-Finished-Phone.png,96114,0e31984bac1669324aef8a07c627be14f4c6cab1c0a4003161099dfb4fbcb4fa,image integrity; screen previews also contact-sheet surveyed,390x998 RGB
+design/previews/png/03-MorningCheck-InProgress-Desktop.png,258097,51e4099eee5fde4249cdc1a76b8213141b5231c8678222fefdcee9931d4bff90,image integrity; screen previews also contact-sheet surveyed,1280x2421 RGB
+design/previews/png/03-MorningCheck-InProgress-Phone.png,201363,5cd9f5c92c43d640ce8de4309f84262311f0d23b033db0aee320bd113ffe4539,image integrity; screen previews also contact-sheet surveyed,390x2351 RGB
+design/previews/png/04-Cars-AllCars-Desktop.png,434963,7223fb2f4e1f4479a9f451d46d01580f7150fd6c8f7f5c532053587535e20580,image integrity; screen previews also contact-sheet surveyed,1280x2526 RGB
+design/previews/png/04-Cars-AllCars-Phone.png,461363,09d1df0223aec36f1a7bb74928ef753d04c5a73ed0a2f9fd0ca8452fc80bbb81,image integrity; screen previews also contact-sheet surveyed,390x6857 RGB
+design/previews/png/04-Cars-CarDetailsOwner-Desktop.png,304036,71b95952832e2908ab2fc88b3bbc94eac3551834d8388a36e70cd9d67533212e,image integrity; screen previews also contact-sheet surveyed,1280x1750 RGB
+design/previews/png/04-Cars-CarDetailsOwner-Phone.png,234189,a1ac75e80d05e0ea6d8d7bd43ca3eb35c41ea49341ec814e966a75d402fc3547,image integrity; screen previews also contact-sheet surveyed,390x2740 RGB
+design/previews/png/04-Cars-CarDetailsStaff-Desktop.png,192985,0e8868abcdb20b997bf2af82adf15ad5ee5ec599e6b50d3d15a1086c70258d49,image integrity; screen previews also contact-sheet surveyed,1280x1439 RGB
+design/previews/png/04-Cars-CarDetailsStaff-Phone.png,141675,df07d71c17348cf0d2585de032e75bedb111ad41dc1b5318d4f5334efeb84d07,image integrity; screen previews also contact-sheet surveyed,390x1560 RGB
+design/previews/png/04-Cars-ChangeStatus-Desktop.png,88609,d31e1be64d8ab0765d1eecdbc07320ddb0750a620499b1bbba44bbc66ff8b7ce,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/04-Cars-ChangeStatus-Phone.png,59494,fc1fa96a4cf94ab4979ac36da6faa2f909019a6a14b6d5de136465564ca6e40c,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/04-Cars-EditCar-Desktop.png,215939,5d0f0bd88ae10d3cd90ce49feeafee8cca572ef6cc725ac4231347a3275b2228,image integrity; screen previews also contact-sheet surveyed,1280x1430 RGB
+design/previews/png/04-Cars-EditCar-Phone.png,168702,49791806ad8a9a70f1868788eb1a3c1338ac887111c2fed8a10e752090e4df7c,image integrity; screen previews also contact-sheet surveyed,390x2465 RGB
+design/previews/png/04-Cars-Packages-Desktop.png,158885,46351ff4c7389bc727976b82d1b804ed828f474726b652bf22134909c4cc453b,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/04-Cars-Packages-Phone.png,116860,35da464070e14b67fafa6778f55322dfd921c8271cd61d4c98a615cc314980f0,image integrity; screen previews also contact-sheet surveyed,390x1684 RGB
+design/previews/png/04-Cars-StatusBlocks-Desktop.png,226100,1bdabec2e056c4ea07274c1dc6f2505a7566dae089a2aa150c3e4e02d65d50fc,image integrity; screen previews also contact-sheet surveyed,1280x1450 RGB
+design/previews/png/05-NewRental-Cancel-Desktop.png,112463,6a805590ce32cdb0f0be4481f381c1e4c02300dab0e2b703e548fed7de576bc6,image integrity; screen previews also contact-sheet surveyed,1280x831 RGB
+design/previews/png/05-NewRental-Cancel-Phone.png,72156,a8696397e40e1a9f6469a7620126372f4e6aa29d6b10358286b22a9ce911346e,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/05-NewRental-ChooseCar-Desktop.png,146899,75272ca53e0371e9e94d8fa23ec9e2e98bcb3149967f2200db44301043b93664,image integrity; screen previews also contact-sheet surveyed,1280x1112 RGB
+design/previews/png/05-NewRental-ChooseCar-Phone.png,102232,9d129b1c1615a9be9f78cc699344d94249226bdfa78c2d48d70fbed55c0b854f,image integrity; screen previews also contact-sheet surveyed,390x1040 RGB
+design/previews/png/05-NewRental-Customer-Desktop.png,139323,47373cf9a2c58d2d6bf75a9e0aed47a430e431010ae5651aaeff6debaf4ee410,image integrity; screen previews also contact-sheet surveyed,1280x1024 RGB
+design/previews/png/05-NewRental-Customer-Phone.png,98462,8cab3afb03077ca60ac561c64d490d143b942d5204b3a1d148b9cb44ac6e1ffe,image integrity; screen previews also contact-sheet surveyed,390x1560 RGB
+design/previews/png/05-NewRental-Dates-Desktop.png,114899,488e17bfc892270f0c3bab6d472cd875246488a740c572253d13f2b6fb410cf6,image integrity; screen previews also contact-sheet surveyed,1280x920 RGB
+design/previews/png/05-NewRental-Dates-Phone.png,73420,5c1f5bf1c0b5bd781fca64cfeb0298074fb4bb39f12b1aa0bff57e8e2982c7e0,image integrity; screen previews also contact-sheet surveyed,390x900 RGB
+design/previews/png/05-NewRental-Deposit-Desktop.png,127281,6eb01f6a8e2ca3d247ec6e7c236bc625359a4fee6fd0c3774d3ed9bda090dfbd,image integrity; screen previews also contact-sheet surveyed,1280x968 RGB
+design/previews/png/05-NewRental-Deposit-Phone.png,83947,7b990fb41f4b11360becd7b42d33e0fe2da512c3ce0e846c2d26ffea33de00bb,image integrity; screen previews also contact-sheet surveyed,390x960 RGB
+design/previews/png/05-NewRental-PriceChangeRequest-Desktop.png,161154,2e42c321577ebda9a3eae93123aba6b8fde0b7b0b2987ba0e91a04cc61b0c3b1,image integrity; screen previews also contact-sheet surveyed,1280x1079 RGB
+design/previews/png/05-NewRental-PriceChangeRequest-Phone.png,117131,39c256c5f313855dfce5266f726e34a977bc059486f098cff30191f80d5b1993,image integrity; screen previews also contact-sheet surveyed,390x1300 RGB
+design/previews/png/05-NewRental-ReferencePerson-Desktop.png,141579,dcc0a8831cc3754d13d118deae60738ae3be7c5e8708179629b4af307ebe580a,image integrity; screen previews also contact-sheet surveyed,1280x1079 RGB
+design/previews/png/05-NewRental-ReferencePerson-Phone.png,93134,b2833ae82369730876b70be6d10b4d80174a2de5a9e76789a4f39672978a27e6,image integrity; screen previews also contact-sheet surveyed,390x1044 RGB
+design/previews/png/05-NewRental-Review-Desktop.png,114585,215389ade1b2a4e354e7065ce74db7b53fd5ce04d3776167e96941ad64531026,image integrity; screen previews also contact-sheet surveyed,1280x896 RGB
+design/previews/png/05-NewRental-Review-Phone.png,72650,c937ad967c1a3016fe83751ac4663d20e8b23d3fc62d60593da07cf81d585e7e,image integrity; screen previews also contact-sheet surveyed,390x860 RGB
+design/previews/png/06-Rentals-AllRentals-Desktop.png,237043,0f241aa65862624fbdd5d7d2b393d02b1258360a06442c56ec31f515fcfce45a,image integrity; screen previews also contact-sheet surveyed,1280x1640 RGB
+design/previews/png/06-Rentals-AllRentals-Phone.png,160842,64e86ff0d0748bad98ec9dfb3fde89c9c96845efd078c7ce2e98538300026832,image integrity; screen previews also contact-sheet surveyed,390x1900 RGB
+design/previews/png/06-Rentals-Extend-Desktop.png,107302,86158938a863d165a8db31f41ec871749b054eb6a3d3090f723ae5f4a28239da,image integrity; screen previews also contact-sheet surveyed,1280x828 RGB
+design/previews/png/06-Rentals-Extend-Phone.png,62996,15970592fa1e5e9800d9efd9de2a6d6a16fa1e4f8a1a59e5f9b005ca37134f20,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/06-Rentals-Handover-Desktop.png,171640,577e0b37f38caf15bc7b698cdc3942884eff295a13c0f3ee40104eefd6f197c8,image integrity; screen previews also contact-sheet surveyed,1280x1362 RGB
+design/previews/png/06-Rentals-Handover-Phone.png,120782,b3481d8e10951c48b9bc7e813bab0ffe1690120b6308f5c22abfdeed3fe3f6d7,image integrity; screen previews also contact-sheet surveyed,390x1410 RGB
+design/previews/png/06-Rentals-HandoverDone-Desktop.png,118494,f4c1f2dd28d7e7a02d7369b8bd15b5b60f0106dee174ae6f6c4f0e62a8bf8b2f,image integrity; screen previews also contact-sheet surveyed,1280x1027 RGB
+design/previews/png/06-Rentals-HandoverDone-Phone.png,72864,f487cd8789e1793b2016031649d863f006b178a4fdc8ce39f90a84cb19014962,image integrity; screen previews also contact-sheet surveyed,390x954 RGB
+design/previews/png/06-Rentals-Overdue-Desktop.png,169851,f717f6e3472e927fd5b313e32c5c23f2f41ea7d86783b827414a6b4d54f4199a,image integrity; screen previews also contact-sheet surveyed,1280x864 RGB
+design/previews/png/06-Rentals-Overdue-Phone.png,123255,e857af4f284d55999bf2ab9211daf765ad338000ba30b894b85f6150261166c5,image integrity; screen previews also contact-sheet surveyed,390x1541 RGB
+design/previews/png/06-Rentals-RentalDetails-Desktop.png,280247,e4b3707b7c6f35f49c2bcc0a6edcf0480bec43735ec32be2d5c5b3f3da3e285b,image integrity; screen previews also contact-sheet surveyed,1280x1600 RGB
+design/previews/png/06-Rentals-RentalDetails-Phone.png,168538,9a531eb94d5e65547560e4610eaed7aa67f0b4d3f5925a60382f49de3c7cd1ae,image integrity; screen previews also contact-sheet surveyed,390x2300 RGB
+design/previews/png/06-Rentals-SwapCar-Desktop.png,132406,daeeb0443e190732b6b9b5848f07add537e1da517084d5893f8e888982a20cd8,image integrity; screen previews also contact-sheet surveyed,1280x991 RGB
+design/previews/png/06-Rentals-SwapCar-Phone.png,86907,808307a2d57801b72b020c8d9c5919a70bb4aa1c13494e7f467b4a7e33d9e280,image integrity; screen previews also contact-sheet surveyed,390x950 RGB
+design/previews/png/07-Return-DepositRefund-Desktop.png,116385,57a2ddc80b7e918e4e14cd6ba7ca7de614dc043f73244df04d5ee6c3cf151a10,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/07-Return-DepositRefund-Phone.png,70766,e0e4dbf2d9396a9c073d18c3a03f3ba3fb9288f52b1c86d1a6e8db82a997c39d,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/07-Return-GarageDays-Desktop.png,112028,5b17fe60cfd0546bf74cfeac8350977d4d4de8b7f52b2711670634a88eb2b7e7,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/07-Return-GarageDays-Phone.png,68395,f87c2a879a508e293c4a9f455dbad711415f27e3bea9a19773a169259e5d1445,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/07-Return-Return-Desktop.png,251254,c9ded7078b51762187ccf2904a9dc4cab20a69248f21e949e9eca2d97adecff1,image integrity; screen previews also contact-sheet surveyed,1280x2072 RGB
+design/previews/png/07-Return-Return-Phone.png,193950,a7fb3036c3c419c2a77eee62ef6c507e09d21f834456a42f324d588184653834,image integrity; screen previews also contact-sheet surveyed,390x2560 RGB
+design/previews/png/08-Customers-AddFlag-Desktop.png,91161,2123b5ed1d206e3df3bf0e6f58bad62e28a802dd646d95a51de54413f565af31,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/08-Customers-AddFlag-Phone.png,58345,b92158f48dbc048f3ff8823864691ee6694edef0d89828463beda0bf9277f5ee,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/08-Customers-AllCustomers-Desktop.png,144029,449300b7fef5ee5aa0f9778de97e0c0b1f69dc8f0d56fbc57bc4e7f7e9187d3e,image integrity; screen previews also contact-sheet surveyed,1280x840 RGB
+design/previews/png/08-Customers-AllCustomers-Phone.png,78646,6911ef8b28ef8b8c40cbc6e4f254b32b4a0241499b50391642998a2d32e6752e,image integrity; screen previews also contact-sheet surveyed,390x932 RGB
+design/previews/png/08-Customers-CustomerDetails-Desktop.png,215268,b049099fee6d7b214b57479fbdf76a7ede3541e27b22eda6b38fe0a20f99a6ff,image integrity; screen previews also contact-sheet surveyed,1280x1070 RGB
+design/previews/png/08-Customers-CustomerDetails-Phone.png,149988,713a303481aafbae470fb41d9654312ac7f851f7e67e3732ab4a4f184db2454e,image integrity; screen previews also contact-sheet surveyed,390x2080 RGB
+design/previews/png/08-Customers-NewCustomer-Desktop.png,187264,b303bc6671d1e6447baa029db183c38bcf5ca2bacd65f1c34c27ba6873c6aa89,image integrity; screen previews also contact-sheet surveyed,1280x1643 RGB
+design/previews/png/08-Customers-NewCustomer-Phone.png,134710,a1c2984586efd5cf08baf5bf65fe6ba79ec74a7b16e3a9dbd6cc9f52bbb66644,image integrity; screen previews also contact-sheet surveyed,390x1661 RGB
+design/previews/png/08-Customers-Warnings-Desktop.png,127037,03fd915a73db387c0a261feb6fd7f725949d43444971f18313f9357ed83a95c6,image integrity; screen previews also contact-sheet surveyed,1280x832 RGB
+design/previews/png/08-Customers-Warnings-Phone.png,82644,4ca656bdb494e5f350865a26221c63b5acf8c50c1e67bb40bf2e21014868cd0e,image integrity; screen previews also contact-sheet surveyed,390x880 RGB
+design/previews/png/08-Customers-WriteOff-Desktop.png,158510,efb9415a201cb866f0007e72782089015b598114ae7cfec0457b2c97cbfd734a,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/08-Customers-WriteOff-Phone.png,105273,ef434c37eda7ff6abd069f8db40a2ca56eb7992e788f0ee6d4f4177e11fa8324,image integrity; screen previews also contact-sheet surveyed,390x1147 RGB
+design/previews/png/09-Money-BankCardCheck-Desktop.png,148899,7584ca33ca5f7aac446b870cb0624953eba5e9d75fbf9cc25139a649a61507a4,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/09-Money-BankCardCheck-Phone.png,101214,9cb628926dc75fddb331fb8f9f3f1e45a77f41118b7885bf7f0bcbbe2eee8f66,image integrity; screen previews also contact-sheet surveyed,390x1470 RGB
+design/previews/png/09-Money-CloseDay-Desktop.png,212112,2f28825032b4b1b70c0b27022a3046cbb9be62ab1539898d9d1d0f5a8fd4550f,image integrity; screen previews also contact-sheet surveyed,1280x1026 RGB
+design/previews/png/09-Money-CloseDay-Phone.png,155722,69e82f76f2a71fb7e5bde287ace04c32a1134d43a819453ada4fb4c7df6e2222,image integrity; screen previews also contact-sheet surveyed,390x1733 RGB
+design/previews/png/09-Money-CountDrawer-Desktop.png,148102,d2d57acdf62ab23f071cbbcfc494d0c50f18e11ccc8b39e764ce8c5fc18a86c1,image integrity; screen previews also contact-sheet surveyed,1280x1152 RGB
+design/previews/png/09-Money-CountDrawer-Phone.png,102408,bf8fe1c001bce65911ab4970cc662b13f4dd4c9842b0e203ea51980cfc33f793,image integrity; screen previews also contact-sheet surveyed,390x1200 RGB
+design/previews/png/09-Money-CountDrawerBlind-Desktop.png,99531,b559ac9dc553722a98a6b59c65f3fe0914244d29a7766ed854e17bc6ea8f7ad7,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/09-Money-CountDrawerBlind-Phone.png,57899,ab123fc50681bcc315acf3d1c135aacaa2893b7584632d268cda21f8d596fa5e,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/09-Money-Drawer-Desktop.png,226378,c8ec67dccfc2e243319ee1fa153c617549f2d335058ce40e53a89b98429a73d2,image integrity; screen previews also contact-sheet surveyed,1280x1218 RGB
+design/previews/png/09-Money-Drawer-Phone.png,131286,de4e1524b13aae2406d46b3e533356ff21087ff8edee5f9c458daeb356f3afe4,image integrity; screen previews also contact-sheet surveyed,390x1784 RGB
+design/previews/png/09-Money-EveningCheck-Desktop.png,350729,79b1a5cfdd886aa71779744fe60fcb32646f12749b8502d7dd77df1d21fb21f4,image integrity; screen previews also contact-sheet surveyed,1440x1701 RGB
+design/previews/png/09-Money-EveningCheck-Phone.png,277901,c73cc91934a2c845d1965509bd7a74d262c89875813034d42d7f6a0c03a4f587,image integrity; screen previews also contact-sheet surveyed,390x3372 RGB
+design/previews/png/09-Money-Expenses-Desktop.png,163546,6dcdb57952510366298ce2b7d31dc4cefee692c537b55f313bc815f6cc15d703,image integrity; screen previews also contact-sheet surveyed,1280x1028 RGB
+design/previews/png/09-Money-Expenses-Phone.png,127583,876b7bb027f561921acbdbf7dca0bb40c67d2c4bf28547f444bf51958befb410,image integrity; screen previews also contact-sheet surveyed,390x1965 RGB
+design/previews/png/09-Money-MoneyToday-Desktop.png,270382,6072aecf5addd728615fe5683d81962055df0823c7c3cd255ff5a635b06f7609,image integrity; screen previews also contact-sheet surveyed,1280x1691 RGB
+design/previews/png/09-Money-MoneyToday-Phone.png,214549,dc9af11edbedf0f5e465d63c1264a24f14bc302337f20c838f627ac6a08409c6,image integrity; screen previews also contact-sheet surveyed,390x2990 RGB
+design/previews/png/09-Money-PaymentCorrection-Desktop.png,133680,c0cc34c83004275b4d6ce3aacad19ae4a52f92fa441dde7b04d2d26f16d30b08,image integrity; screen previews also contact-sheet surveyed,1280x941 RGB
+design/previews/png/09-Money-PaymentCorrection-Phone.png,89485,bea19be6b1805b79debf55dbce75739a41337e52c44ff74bc2c21c3f05cf85f3,image integrity; screen previews also contact-sheet surveyed,390x1016 RGB
+design/previews/png/09-Money-ReceivedByStaff-Desktop.png,157918,2b752a50f7e9c7b83d9dfce99215fd7ec18fb331ad1282f6745fe22a3e290e61,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/09-Money-ReceivedByStaff-Phone.png,112015,be8ab5c99602cb9d95e902e75f782d42ac673328c8b4417ae097ffefb98b216f,image integrity; screen previews also contact-sheet surveyed,390x1691 RGB
+design/previews/png/09-Money-RecordExpense-Desktop.png,171304,0736451a3c82a36b6ba8b01acb481ce9cd1e7d23a57dbaa5012e253b75d00705,image integrity; screen previews also contact-sheet surveyed,1280x1165 RGB
+design/previews/png/09-Money-RecordExpense-Phone.png,124102,6d326ca50c7b6d08c216bd2f05fc21d07485d7542b2fdf86d8db075dcd60af6e,image integrity; screen previews also contact-sheet surveyed,390x1288 RGB
+design/previews/png/09-Money-RecordPayment-Desktop.png,141895,1e3da1f13be18f474457fe6acede4d152a8e9d55a564a1c2c225eeb3d0383f5a,image integrity; screen previews also contact-sheet surveyed,1280x992 RGB
+design/previews/png/09-Money-RecordPayment-Phone.png,94182,06c86f5586389b319e916c477b8141547b7f93e8059c4260e87642b31e2cb407,image integrity; screen previews also contact-sheet surveyed,390x970 RGB
+design/previews/png/09-Money-SplitPayment-Desktop.png,133533,55befe66156d1722f696c99ee9c52f9d19aebdd65f428ab5000bd6d456187037,image integrity; screen previews also contact-sheet surveyed,1280x1200 RGB
+design/previews/png/09-Money-SplitPayment-Phone.png,83833,bf61804559c71194bd267be2aafdb4372f563864ca4b9b6490caa622de82c990,image integrity; screen previews also contact-sheet surveyed,390x1152 RGB
+design/previews/png/10-Approvals-Approvals-Desktop.png,204196,5e65de3b74a74441ee78fc4822994928dc4317b139b2d1ee157f00ba4aae064a,image integrity; screen previews also contact-sheet surveyed,1280x1000 RGB
+design/previews/png/10-Approvals-Approvals-Phone.png,73602,cbb4f7573f2a81b411e3ac5a884b41c2f85e9a56f26422aa1ced9fa783f69103,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/10-Approvals-Approve-Desktop.png,123621,67901939ced62aa0f00b1562844ab40a3530822df27136b3305ceda237a190cd,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/10-Approvals-Approve-Phone.png,69712,9578c893523df6b72421eb02c18bb1bc32f61b68e3755949d143087ea80ad7b1,image integrity; screen previews also contact-sheet surveyed,390x930 RGB
+design/previews/png/10-Approvals-Reject-Desktop.png,111086,4ea55297bf8a93c43867e092f1b85f73ae9edfd5e0235c0d64bb5c122ce9d664,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/10-Approvals-Reject-Phone.png,51687,57b1fb9db457a239e5a19dc62bb60151464d771b60735e17c556f3f952e85d64,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/11-Partners-AddPartner-Desktop.png,201622,166507d895eadd36927a65b849f8193f910ab62a73d29fd59d8dd3cbb94481da,image integrity; screen previews also contact-sheet surveyed,1280x1224 RGB
+design/previews/png/11-Partners-AddPartner-Phone.png,152322,d9d9415320e3601e05c03f9e6cc7de07e0d275edbe59d6fad73ac5d2cab02666,image integrity; screen previews also contact-sheet surveyed,390x2037 RGB
+design/previews/png/11-Partners-CarEarnings-Desktop.png,180222,c5480054e385b2c8c6e59df4af150aa7163bcc683c95c92f6d56195aa6cbade3,image integrity; screen previews also contact-sheet surveyed,1280x1191 RGB
+design/previews/png/11-Partners-CarEarnings-Phone.png,142673,7b3c63d60666f3962524ac4811fce1ba5482de12430826da73f27d9bb8750c68,image integrity; screen previews also contact-sheet surveyed,390x2060 RGB
+design/previews/png/11-Partners-CashOuts-Desktop.png,212345,d9b24a0478418d363d5c038b34565b615d28bf03c364bc85f00c77120fa472ed,image integrity; screen previews also contact-sheet surveyed,1280x1070 RGB
+design/previews/png/11-Partners-CashOuts-Phone.png,146127,4891d5014dac7a749092e0328aba64e7ee0d8c219bb2fb392b8d31f8f8fdb7c7,image integrity; screen previews also contact-sheet surveyed,390x1953 RGB
+design/previews/png/11-Partners-PartnerAskCashOut-Desktop.png,76601,0fdc9bc5dd84e8336830a9c49dd3a9750dbbc955c981ce43ceca3a163e9f1738,image integrity; screen previews also contact-sheet surveyed,1280x800 RGB
+design/previews/png/11-Partners-PartnerAskCashOut-Phone.png,60633,e2f74ed8deecbadfaac700769056ca8c287f5a562b67ce74afffa2c38c1c5228,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/11-Partners-PartnerDetails-Desktop.png,146274,4f5fea1523fa191d3fbbeaffaf97fe36fb6b90f52cc2cc0d35e60f8010bbff78,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/11-Partners-PartnerDetails-Phone.png,95925,d5ec915d642d63a60cc6af80068a1e9f99c6a70c5a2aec4406b6d22b53f28432,image integrity; screen previews also contact-sheet surveyed,390x1220 RGB
+design/previews/png/11-Partners-PartnerEarnings-Desktop.png,100637,a8c0a36909b4b422cb154dfcaf4c9adc26ddf21d6d4730b7371d72b35941f956,image integrity; screen previews also contact-sheet surveyed,1280x1088 RGB
+design/previews/png/11-Partners-PartnerEarnings-Phone.png,81247,6074835c85c4dcb46cb113d1e4c4d630e89496e27146c1f1ccb3e9bda7156838,image integrity; screen previews also contact-sheet surveyed,390x1038 RGB
+design/previews/png/11-Partners-PartnerOwners-Desktop.png,123572,e1647977d5572a5b5bc4d7a445b4070b55d5029a3d129d6e44749e745def309d,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/11-Partners-PartnerOwners-Phone.png,70529,49949971ccf3922e16c96999d2787de2b425dc0aa0607dc44db2c32bbc7c78d3,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/11-Partners-PayCashOut-Desktop.png,138536,32ce56e8d90169e1bab9a9863e80916598a45c2c0120f53e57fef5c285c20300,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/11-Partners-PayCashOut-Phone.png,76044,d62149284764e875f221692886c3212ea8d158f859d109b6dede46d1e239d10e,image integrity; screen previews also contact-sheet surveyed,390x844 RGB
+design/previews/png/12-Maintenance-Maintenance-Desktop.png,247257,ffdf1b5d5307bac1af1655ede43c6381d18914f7e8790484d94aadbc25d7da72,image integrity; screen previews also contact-sheet surveyed,1280x1280 RGB
+design/previews/png/12-Maintenance-Maintenance-Phone.png,165755,430b1ca80877accb74087d2bef9ee5280b6935903b5e10c43d8db2ef1d38fbc7,image integrity; screen previews also contact-sheet surveyed,390x2040 RGB
+design/previews/png/12-Maintenance-ServiceRecord-Desktop.png,185367,3c93b9976be3ca93a9b2b3b88b3e600fca04f52d4e704742c1287a84aa745928,image integrity; screen previews also contact-sheet surveyed,1280x1199 RGB
+design/previews/png/12-Maintenance-ServiceRecord-Phone.png,121081,8d2e80fd94a5b988573d0f5a72ad9df63bb21fa2515eeadde879db22c505442e,image integrity; screen previews also contact-sheet surveyed,390x1304 RGB
+design/previews/png/13-Payroll-Adjustment-Desktop.png,164864,571c02a1f610cc8b918b2f724516b315b298c2e7d6ec739cc359a70efe01fc59,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/13-Payroll-Adjustment-Phone.png,111300,eb53262fd5e0e1e38053d7d11a3385de236cc4969f48f52187fb89a0a0af4062,image integrity; screen previews also contact-sheet surveyed,390x1252 RGB
+design/previews/png/13-Payroll-Advance-Desktop.png,207807,d787957e5d0bb1ab7a91b68ddddcbf2fbfed4a85e88119d0667c006ed6cfb133,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/13-Payroll-Advance-Phone.png,149311,90bd56a343584f2618eb9e35be69c30ea4fdec51f787f2bb0315dc276111256b,image integrity; screen previews also contact-sheet surveyed,390x1442 RGB
+design/previews/png/13-Payroll-MyPayslip-Desktop.png,125681,c38bc93fb4c95427391f7a031c176c7262d9dc18c9d3c4e90cc8b4cb1cd7467f,image integrity; screen previews also contact-sheet surveyed,1280x1092 RGB
+design/previews/png/13-Payroll-MyPayslip-Phone.png,85315,0f2530c7a2600058cc61a70de829768bdb2382cf9b7583d555b3371024a1da1a,image integrity; screen previews also contact-sheet surveyed,390x1127 RGB
+design/previews/png/13-Payroll-Payroll-Desktop.png,180085,9b5ec2d7399526fa9f66d8f376a8034e60a64a8c53c04df89d6208320d50ddd7,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/13-Payroll-Payroll-Phone.png,140793,01c57676c5d82620c33d5b53b7ec995f593cdb1134d46d10d4e69314a2dc847a,image integrity; screen previews also contact-sheet surveyed,390x1918 RGB
+design/previews/png/13-Payroll-SalaryPayment-Desktop.png,155889,2ad58b04fbdc92db37efa0adae4fddee1b90224ca6b3b06c9c77653f67329781,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/13-Payroll-SalaryPayment-Phone.png,101063,d723c3b00efc5a88322a20180d2382bf419ee5448389d61e10996f052382c0b6,image integrity; screen previews also contact-sheet surveyed,390x1100 RGB
+design/previews/png/14-Reports-CarPerformance-Desktop.png,189544,4fb2b411b09a9a699ddf8deb773488667e3266a55b39cd8970f6b6eb66900258,image integrity; screen previews also contact-sheet surveyed,1280x1147 RGB
+design/previews/png/14-Reports-CarPerformance-Phone.png,144281,b926047452ac4a534ce53303bb02fd65ab09a3899586de26a31fed610f6fee6c,image integrity; screen previews also contact-sheet surveyed,390x2158 RGB
+design/previews/png/14-Reports-Reports-Desktop.png,242282,15ae043c22f846604482520de3d0c09949b59dcc216e9cb47c7527f998b5966e,image integrity; screen previews also contact-sheet surveyed,1280x1060 RGB
+design/previews/png/14-Reports-Reports-Phone.png,199180,831969e4b7f55fbe4532e21a9cf799ff7ffd99e1e890e7302d8f6c70961d9bc5,image integrity; screen previews also contact-sheet surveyed,390x2720 RGB
+design/previews/png/15-Settings-ActivityLog-Desktop.png,171869,b2c8c105943d31e591140783e91bf9eb8effe5b8acdcec69b4c5c6ae6c97cf48,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/15-Settings-ActivityLog-Phone.png,122668,8360e551c7abb69d6fd109e2bb19a2fee9f2ab83768949bd12ca9e83bfc87dc9,image integrity; screen previews also contact-sheet surveyed,390x1543 RGB
+design/previews/png/15-Settings-AddPerson-Desktop.png,185045,afe4ce9d01468654571b3397621965c9b97fc0f880a346d6549de41c5c1f2490,image integrity; screen previews also contact-sheet surveyed,1280x960 RGB
+design/previews/png/15-Settings-AddPerson-Phone.png,131422,164d590107d3c2df2ee3d7b803f34007e845aec4f5d132e6219706db3e529982,image integrity; screen previews also contact-sheet surveyed,390x1702 RGB
+design/previews/png/15-Settings-BusinessRules-Desktop.png,233229,23a4bdd0b1f502a5d031acc6af5c29b1cd0a0c7456990613bc580cc2dafd6b56,image integrity; screen previews also contact-sheet surveyed,1280x1299 RGB
+design/previews/png/15-Settings-BusinessRules-Phone.png,174627,3cded95ce58f5dcf7d5a66a176d86ad42c4b06ff84064fb57ab7f7a097a89ccb,image integrity; screen previews also contact-sheet surveyed,390x2222 RGB
+design/previews/png/15-Settings-People-Desktop.png,167888,c38d8bdaf107b880a83b3cec3d396f1f1080de7b99d0c88c7469f1fa48d265fb,image integrity; screen previews also contact-sheet surveyed,1280x958 RGB
+design/previews/png/15-Settings-People-Phone.png,114488,d08d797bf33f837a9febd8b6e713754f8b7a0106f97ec1be77542a7d22eff54f,image integrity; screen previews also contact-sheet surveyed,390x1830 RGB
+design/previews/png/15-Settings-Permissions-Desktop.png,285143,0a4140388d875992a59efb8bbb075afec3b3923ef916bcb41a2ed8b9c6c7d8cf,image integrity; screen previews also contact-sheet surveyed,1280x2115 RGB
+design/previews/png/15-Settings-Permissions-Phone.png,225489,c1524344b6dfd07f33d64b977b1daeaf41b0747f4ea5f77ec6ae594e0e88affd,image integrity; screen previews also contact-sheet surveyed,390x4365 RGB
+design/previews/png/16-Documents-FinalBill.png,88626,a46e214138160d9c325628b54eac5ea0c9afbea33d0f7964ba0309df6fc0f21a,image integrity; screen previews also contact-sheet surveyed,794x1123 RGB
+design/previews/png/16-Documents-PartnerAgreement.png,110954,c5566c8e8be985aa36b30eab7d1e2e784befc0eba0d9f57187028cbeaef88f18,image integrity; screen previews also contact-sheet surveyed,794x1123 RGB
+design/previews/png/16-Documents-PartnerStatement.png,96359,e8b24decf34f9c42a3f1fb4976d9b1d5995200bba94aa41f1cf1863280fbe576,image integrity; screen previews also contact-sheet surveyed,794x1123 RGB
+design/previews/png/16-Documents-PaymentReceipt.png,44544,a47c7d3b8cd97749d9a0db7b31908d9b3dfde75ab676337cb19af8ff526c7819,image integrity; screen previews also contact-sheet surveyed,302x540 RGB
+design/previews/png/16-Documents-Payslip.png,76185,faafde2425af2ff1ee4f99ace278b2680c5c109a06a3e7c5b6e03faa6156b213,image integrity; screen previews also contact-sheet surveyed,794x1123 RGB
+design/previews/png/16-Documents-RentalAgreementEN.png,95863,07bf2f22f5a436dcb7b28cd85760cacd83bfcfee1f3c9a2dd175f674130e1177,image integrity; screen previews also contact-sheet surveyed,794x1123 RGB
+design/previews/png/16-Documents-RentalAgreementSI.png,114735,097285769ccc6de4ecf6b37decaf96eda4c65a3d83d1fb928902a02028ec5a7c,image integrity; screen previews also contact-sheet surveyed,794x1123 RGB
+design/previews/png/17-System-DesignNotes.png,505217,f72314fac392928e3835924a9971218f8aca347afa33cb465b0479ebf195262f,image integrity; screen previews also contact-sheet surveyed,1440x2410 RGB
+design/previews/png/17-System-States.png,255104,95ad97d11ff836cabce40375b55c599ab40670cf66ca402d04818acd383a0cc4,image integrity; screen previews also contact-sheet surveyed,1280x1344 RGB
+design/previews/png/19-Nav-A-Sidebar-Desktop.png,282539,114038ff898a04214bc01776bda41e307004b4aa49bdd0390e04d902eb996d26,image integrity; screen previews also contact-sheet surveyed,1440x1100 RGB
+design/previews/preview-report.json,27172,1799742b436a2c944d112e64ef23fd982a63fb76600b0d2c469eae623d17c56a,UTF-8 full-content scan,JSON parsed
+design/README.md,17134,b4dc0b7735206c5a810e512814b51b3a0af906320e8531dbdb3e9f316855fc29,UTF-8 full-content scan,
+"fonts/Gemunu_Libre,IBM_Plex_Mono,Yaldevi.zip",5373371,1f6b1b009ea0a94adab2ef3383f204f1dc7c6797bb7814149fe49578ff17e51b,archive structure/CRC and member inventory,34 members; CRC pass
+GEMINI.md,1095,253e1dd951441fce7fcd848cd65a118766cf0152e8305632e91e3c3610cb3c30,UTF-8 full-content scan,
+proposal/SNS Rent a Car Proposal.html,1764568,e9f39f030cb0f728ba41f848443dccf01f32d3855e97058d89f620e49913d7ae,UTF-8 full-content scan,
+proposal/SNS_Rent_a_Car_Proposal_SI.pdf,2184652,7eb0926038deee771b66c4e44596ff5cbcc4e64c24958111b55d8842b2a38206,25-page rendered visual survey; companion HTML read,Not clause-by-clause PDF/HTML equivalence
+README.md,1158,775cfc0a4668416f3c7a0aef9e23188dc1961928a388f17f7fbedfe427541fc4,UTF-8 full-content scan,
+reference/client-agreement/WhatsApp Image 2026-10-22 at 13.41.23.jpeg,176358,9e4f4dc177b28b769518a75568277e7c3fbdf398aeb62b5cdc1b15256e37c0fa,image integrity; no semantic assertion,960x1280 RGB
+reference/client-agreement/WhatsApp Image 2026-10-22 at 13.41.24.jpeg,192066,0cdc131acdb297fd9f5e3393a8727e0a1e000ee452ea6e4eeec520c190b04cca,image integrity; no semantic assertion,960x1280 RGB
+skills-lock.json,278,bebe8df43bfb25c43bd2a7c1431a8ea3295391f52ca2d4bb77b3db771ebf69a5,UTF-8 full-content scan,JSON parsed
+SNS Rent Car Walkthrough.zip,10599665,918caba8cf8543bf8bac2f8ed32ee009c8551d2000545b2f2b11737f1fa171d6,archive structure/CRC and member inventory,201 members; CRC pass
+SNS_SYSTEM_DESIGN.md,37463,a90858befacf66a1460f794638f0aa2349d85c2b964ef603b70fbf2596aa4757,UTF-8 full-content scan,
