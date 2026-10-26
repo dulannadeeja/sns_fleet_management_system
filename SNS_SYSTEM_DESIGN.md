@@ -129,7 +129,7 @@ Every exceptional decision requires a reason, actor, date, and time. Each transa
 | Alto | 4,000 | 100 | 17 |
 | Prius, Axio | 6,500 | 100 | 27 |
 
-Admins can define each vehicle's package according to its condition and update packages later. The extra-km rates above are design rates; final rates will be set per vehicle.
+Admins can define each vehicle's package according to its condition and update packages later. These are starting packages: a new vehicle starts with its type's package. Changing a starting package changes only vehicles added afterwards; existing vehicles keep their own package until an admin changes it on that vehicle. Confirmed: agreed by the owner, recorded by Dulan. The extra-km rates above are design rates; final rates will be set per vehicle.
 
 ### 4.2 Per-vehicle settings
 
@@ -580,6 +580,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-47 | The owner turns off the account of a staff member who left | They can no longer sign in; everything they recorded keeps their name and is unchanged |
 | AT-48 | Staff close a customer's flag with a reason | No warning at the next rental; the flag, its reason, who closed it and when stay in the customer's history |
 | AT-49 | Staff save a new customer without the licence copy | The customer is saved and shows "copies missing"; their handover is blocked until the copy is added (as AT-06) |
+| AT-50 | An admin changes the Alto starting package from 4,000 to 4,200 a day | Alto cars already in the system stay at 4,000; an Alto added afterwards starts at 4,200 |
 
 ## 20. Readiness and next steps
 

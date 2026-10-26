@@ -2,7 +2,7 @@
 
 What the SNS Rent Car system must do, written as stories a developer can build and a tester can check.
 
-This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-49) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
+This document is **derived** from `SNS_SYSTEM_DESIGN.md`, the source of truth (rank 1). The PRD is rank 2: it may restate, detail or split what the source of truth says, never contradict or extend it. Where they differ, the source of truth wins and this file is corrected. Every story links to the system design sections it comes from, by name, and lists the acceptance scenarios (AT-01 to AT-50) that check it. Changes follow `.agents/skills/sns-change-control/SKILL.md`: the source of truth first, then this file.
 
 Status of this draft: front section and Phase 1 stories, written with Dulan from 26 Oct 2026, for review. Phases 2 to 4 are not yet written.
 
@@ -392,8 +392,9 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Rules:**
   - Starting packages: Wagon R and Spacia 4,500 a day; Every (van) 5,000; Alto 4,000; Prius and Axio 6,500; 100 km a day each; extra km 25, 25, 17 and 27 a km. System design → [Initial defaults](SNS_SYSTEM_DESIGN.md#41-initial-defaults).
   - Shared defaults: SNS commission 15%, long-rental extra LKR 500 a day from day 6, garage-day charge LKR 5,000 a day. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
+  - Changing a starting package changes only cars added afterwards. Cars already in the system keep their own package until an admin changes it on the car (ST-04.3). System design → [Initial defaults](SNS_SYSTEM_DESIGN.md#41-initial-defaults).
   - Changing a package never changes rentals already running (PR-08).
-- **Checks:** AT-05.
+- **Checks:** AT-05. AT-50 "An admin changes the Alto starting package from 4,000 to 4,200: existing Altos stay at 4,000; an Alto added afterwards starts at 4,200".
 - **Screens:** 04.6 Starting packages.
 
 #### ST-04.5 · Change a car's status
@@ -480,10 +481,9 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 ### Gaps found while writing Phase 1
 
-Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag; 08.3 New customer: save before the copies) are updated together once all are decided.
+Questions for review; none is answered in a story. Decided gaps move into their story and the system design; the screens they touch (15.3 People: turning an account off; 08.2 Customer details: closing a flag; 08.3 New customer: save before the copies; 04.6 Starting packages: new cars only) are updated together once all are decided.
 
 | Gap | Where | What it needs |
 | --- | --- | --- |
-| Whether a change to a starting package changes the existing cars of that type | 04.6 | The system design says only that new cars start with it |
 | No screen for retiring a car | 04.5 has Under repair and Temporarily unavailable only | A design for ST-04.5's retire rule |
 | One customer per NIC | 08.3 says "No customer with this NIC yet" | Confirm, then add a check to the system design |
