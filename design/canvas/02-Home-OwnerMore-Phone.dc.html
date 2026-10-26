@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>02.5 Owner · More menu · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1745px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <header style="display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 0 16px; background: var(--card); border-bottom: 1px solid var(--line)">
+    <x-import component-from-global-scope="Plate.BrandMark"></x-import>
+    <div style="flex: 1; min-width: 0; font-size: 15px; line-height: 20px"><div style="font-weight: 600">තවත් · More</div><div style="color: var(--ink-muted); font-size: 14px">S D De Silva · Owner</div></div>
+    <x-import component-from-global-scope="Plate.LanguageSwitch" lang="si" on-light="{{yes}}"></x-import>
+  </header>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 16px"><x-import component-from-global-scope="Plate.LauncherGrid" title="කුලී සහ පාරිභෝගිකයෝ · Rentals and customers" columns="3" items="{{tiles0}}"></x-import><x-import component-from-global-scope="Plate.LauncherGrid" title="මුදල් · Money" columns="3" items="{{tiles1}}"></x-import><x-import component-from-global-scope="Plate.LauncherGrid" title="වාහන සහ partners · Cars and partners" columns="3" items="{{tiles2}}"></x-import><x-import component-from-global-scope="Plate.LauncherGrid" title="පඩි සහ වාර්තා · Payroll and reports" columns="3" items="{{tiles3}}"></x-import><x-import component-from-global-scope="Plate.LauncherGrid" title="සැකසුම් · Settings" columns="3" items="{{tiles4}}"></x-import></div>
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1745}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { tiles0: [{"icon": "rentals", "label": "කුලී  · Rentals", "href": "06-Rentals-AllRentals-Phone.dc.html"}, {"icon": "customers", "label": "පාරිභෝගිකයෝ  · Customers", "href": "08-Customers-AllCustomers-Phone.dc.html"}], tiles1: [{"icon": "close-day", "label": "දවස වහන්න  · Close the day", "href": "09-Money-CloseDay-Phone.dc.html"}, {"icon": "bank-card-check", "label": "Bank සහ card  · Bank and card check", "href": "09-Money-BankCardCheck-Phone.dc.html"}, {"icon": "received-by-staff", "label": "Staff අනුව  · Received by staff", "href": "09-Money-ReceivedByStaff-Phone.dc.html"}, {"icon": "expense", "label": "වියදම්  · Expenses", "href": "09-Money-Expenses-Phone.dc.html"}, {"icon": "partner-cashouts", "label": "Partner ගණන්  · Partner cash-outs", "href": "11-Partners-CashOuts-Phone.dc.html"}], tiles2: [{"icon": "all-cars", "label": "වාහන 30  · All cars", "href": "04-Cars-AllCars-Phone.dc.html"}, {"icon": "maintenance", "label": "නඩත්තුව  · Maintenance", "href": "12-Maintenance-Maintenance-Phone.dc.html"}, {"icon": "partner-owners", "label": "Partners  · Partner owners", "href": "11-Partners-PartnerOwners-Phone.dc.html"}], tiles3: [{"icon": "payroll", "label": "පඩි  · Payroll", "href": "13-Payroll-Payroll-Phone.dc.html"}, {"icon": "reports", "label": "වාර්තා  · Reports", "href": "14-Reports-Reports-Phone.dc.html"}], tiles4: [{"icon": "settings", "label": "සැකසුම්  · Settings", "href": "15-Settings-Permissions-Phone.dc.html"}, {"icon": "ready-to-start", "label": "පටන් ගන්න  · Ready to start", "href": "01-Start-ReadyToStart-Phone.dc.html"}, {"icon": "activity-log", "label": "සිදු වූ දේ  · Activity log", "href": "15-Settings-ActivityLog-Phone.dc.html"}], tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html", "active": true}],
+      yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26
+    };
+  }
+}
+</script>
+</body>
+</html>

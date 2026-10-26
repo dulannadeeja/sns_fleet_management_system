@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>07.1 Return and payment · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rt>div>main [style*="height: 844px"]{height:auto!important}
+
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railG}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="ආපසු ගැනීම · Return" subtitle="Nimal · Thu 22 Oct · 9:40" user="Nimal" role="Staff · සේවක" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 32px 28px 56px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box">
+      <div style="width: 100%; max-width: 720px; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px">
+<section style="display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<div style="display: flex; align-items: center; justify-content: center; height: 72px; padding: 6px; background: var(--sunken); border-radius: 12px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" style="align-self: flex-start"></x-import>
+<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · Partner</div>
+</div>
+<div style="grid-column: 1 / -1; font-size: 15px; line-height: 24px">R-0218 · Kasun P. · out 20 Oct 10:42 · deadline 22 Oct 8:00</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 8px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<label for="odo" style="display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 26px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="gauge" size="{{twenty}}" style="color: var(--ink-muted)"></x-import>Odometer එන විට <span class="rt-en">· Incoming reading</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></label>
+<input id="odo" inputmode="numeric" style="min-height: 56px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font-family: var(--font-plate); font-size: 28px; font-weight: 600" value="25,122"/>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 2px 12px; font-size: 15px; line-height: 24px">
+<span style="color: var(--ink-muted)">Out reading</span><b class="rt-num">24,831</b>
+<span style="color: var(--ink-muted)">Driven</span><b class="rt-num">291 km</b>
+<span style="color: var(--ink-muted)">Included · 2 days × 100</span><b class="rt-num">200 km</b>
+<span>Extra km · × 25</span><b class="rt-num">91 km</b>
+</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<div style="display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 26px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="clockAlert" size="{{twenty}}" style="color: var(--overdue)"></x-import>පරක්කු 1h 40m · Late 1h 40m</div>
+<div aria-label="Late charge decision · ගාස්තුව හෝ අත්හැරීම" role="radiogroup" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 12px; border: 1.5px solid var(--line-strong); border-radius: 12px; font-size: 15px"><input name="late" style="width: 20px; height: 20px" type="radio"/>ගාස්තුව</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 12px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px; font-size: 15px; font-weight: 600"><input checked="" name="late" style="width: 20px; height: 20px" type="radio"/>අත්හරින්න</label>
+</div>
+<div style="font-size: 15px; line-height: 24px">හේතුව · Reason: “under 2 h, regular customer”</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 8px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<div style="font-size: 16px; line-height: 26px; font-weight: 600">බඩු · Accessories 5 / 6</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 15px; line-height: 24px"><span>වායු පොම්පය නැහැ · Air pump missing</span><b class="rt-num">LKR 2,000</b></div>
+<x-import component-from-global-scope="Plate.StatePill" kind="pending" label="Who gets the 2,000 · admin decides" style="align-self: flex-start"></x-import>
+</section>
+<fieldset style="margin: 0; display: flex; flex-direction: column; gap: 8px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<legend style="padding: 0 4px; font-size: 16px; font-weight: 600">Car එකේ ඊළඟ තත්ත්වය <span class="rt-en">· Car's next state</span></legend>
+<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Nothing is chosen for you.</div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px"><input checked="" name="next" style="width: 20px; height: 20px" type="radio"/><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="available"></x-import></label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input name="next" style="width: 20px; height: 20px" type="radio"/><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="repair"></x-import></label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input name="next" style="width: 20px; height: 20px" type="radio"/><x-import component-from-global-scope="Plate.StatusChip" size="sm" status="unavailable"></x-import></label>
+</fieldset>
+<x-import component-from-global-scope="Plate.MoneyBlock" figure="{{total}}" icon="receipt" label="බිල · Bill R-0218" lines="{{bill}}" note="Fuel goes 100% to SNS. Rent and extra km are split 85 / 15 with the partner."></x-import>
+<section style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<div style="font-size: 16px; line-height: 26px; font-weight: 600">ගෙවීම · Payment</div>
+<div aria-label="Apply payment to" role="radiogroup" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(max(220px, calc((100% - 8px) / 3)), 1fr)); padding: 4px; gap: 4px; background: var(--sunken); border-radius: 12px">
+<label style="display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 9px; font-size: 15px; color: var(--ink-muted)"><input name="apply" style="position: absolute; opacity: 0" type="radio"/>Deposit</label>
+<label style="display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 9px; background: var(--card); border: 1.5px solid var(--sapphire); color: var(--sapphire-strong); font-size: 15px; font-weight: 600"><input checked="" name="apply" style="position: absolute; opacity: 0" type="radio"/>මේ බිලට</label>
+<label style="display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 9px; font-size: 15px; color: var(--ink-muted)"><input name="apply" style="position: absolute; opacity: 0" type="radio"/>පරණ බිලකට</label>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 4px 12px; font-size: 15px; line-height: 24px">
+<span>Deposit applied (held 10,000)</span><b class="rt-num">10,000</b>
+<span>Cash</span><b class="rt-num">3,000</b>
+<span>Bank · ref BOC-448812</span><b class="rt-num">2,675</b>
+<span style="font-weight: 600">R-0218 balance</span><b class="rt-num" style="font-family: var(--font-plate); font-size: 18px">15,675 → 0</b>
+</div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border: 1.5px dashed var(--line-strong); border-radius: 12px; font-size: 15px; line-height: 22px"><input style="width: 20px; height: 20px" type="checkbox"/>R-0197 old bill · LKR 8,500 · not included</label>
+</section>
+<x-import component-from-global-scope="Plate.ConfirmationBlock" icon="done-return" rows="{{rows}}" sentence="R-0218 is fully paid. CBK 4127 is now Available." title="ගෙවීම සටහන් කළා · Payment recorded"></x-import>
+</div></div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2072}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26, railG: [
+        { icon: 'car', label: 'වාහන', href: '02-Home-StaffHome-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' , active: true },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'drawer', label: 'ලාච්චුව', href: '09-Money-Drawer-Desktop.dc.html' },
+        { icon: 'check', label: 'උදේ check', href: '03-MorningCheck-InProgress-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මගේ පඩිපත', href: '13-Payroll-MyPayslip-Desktop.dc.html' }
+      ],
+      twenty: 20, twentyfour: 24,
+      total: 15675,
+      bill: [
+        { label: 'Rent · 2 days × 4,500', amount: 9000 },
+        { label: 'Extra km · 91 × 25', amount: 2275 },
+        { label: 'Fuel · 8 L × 300', amount: 2400 },
+        { label: 'Air pump missing', amount: 2000 },
+        { label: 'Late 1h 40m · waived', amount: 0 },
+        { label: 'Total', amount: 15675, total: true }
+      ],
+      rows: [
+        { label: 'Recorded by', value: 'Nimal · 9:52' },
+        { label: 'Deposit applied', value: 'LKR 10,000 · deposits held −10,000' },
+        { label: 'Cash', value: 'LKR 3,000' },
+        { label: 'Bank BOC-448812', value: 'LKR 2,675 · not yet checked' },
+        { label: 'Balance', value: 'LKR 0' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>05.1 1 · Customer and warnings · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rt>div>main [style*="height: 844px"]{height:auto!important}
+
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railG}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="අලුත් කුලියක් · New rental" subtitle="Nimal · Tue 20 Oct · 10:38" user="Nimal" role="Staff · සේවක" lang="si" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 32px 28px 56px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box">
+      <div style="width: 100%; max-width: 720px; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<ol aria-label="පියවර · Steps" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(max(150px, calc((100% - 24px) / 5)), 1fr)); gap: 6px">
+<li aria-current="step" style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li>
+<li style="height: 6px; border-radius: 3px; background: var(--line)"></li>
+<li style="height: 6px; border-radius: 3px; background: var(--line)"></li>
+<li style="height: 6px; border-radius: 3px; background: var(--line)"></li>
+<li style="height: 6px; border-radius: 3px; background: var(--line)"></li>
+</ol>
+<div style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--sapphire-strong)">පියවර <span class="rt-num">1</span> / <span class="rt-num">5</span> · පාරිභෝගිකයා <span class="rt-en">· Customer</span></div>
+</div>
+<section style="display: flex; gap: 12px; align-items: center; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 17px; font-weight: 600">KP</span>
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 18px; line-height: 26px; font-weight: 600">Kasun P.</div>
+<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">NIC 199012345678 · 077 123 4567 · returning customer</div>
+</div>
+<a href="08-Customers-AllCustomers-Desktop.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 600">වෙනස් · Change</a>
+</section>
+<x-import component-from-global-scope="Plate.Notice" title="පරණ ණය LKR 8,500 · R-0197 · දින 32" tone="warning">Old unpaid bill from a previous rental. You can still continue, with a reason. The owner sees this in today's decisions.</x-import>
+<section style="display: flex; flex-direction: column; gap: 8px">
+<label for="reason" style="font-size: 16px; line-height: 26px; font-weight: 600">හේතුව <span class="rt-en">· Reason </span><span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></label>
+<textarea id="reason" rows="3" style="padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; line-height: 28px; resize: vertical">Regular customer; සඳුදා ගෙවනවා කිව්වා</textarea>
+<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Recorded as Nimal · 10:38. It cannot be edited later.</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+<div style="font-size: 16px; line-height: 26px; font-weight: 600">අනිත් checks · Other checks</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<x-import component-from-global-scope="Plate.StatePill" kind="paid" label="Licence valid"></x-import>
+<x-import component-from-global-scope="Plate.StatePill" kind="notChecked" label="No flags on this customer"></x-import>
+</div>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 15px; font-weight: 600">Reference person · ඇපකරු</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border: 1.5px solid var(--line-strong); border-radius: 12px; font-size: 15px"><input name="ref" style="width: 20px; height: 20px" type="radio"/>ඕන <span class="rt-en">· Required</span></label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 12px; font-size: 15px; font-weight: 600"><input checked="" name="ref" style="width: 20px; height: 20px" type="radio"/>ඕන නැහැ <span class="rt-en">· Not required (Nimal decides)</span></label>
+</fieldset>
+</section>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+<a class="rt-btn rt-btn-primary rt-btn-full" href="05-NewRental-ChooseCar-Desktop.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{twenty}}"></x-import><span>හේතුව සටහන් කර ඉදිරියට · Record reason, choose car</span></a>
+<a class="rt-btn rt-btn-quiet rt-btn-full" href="02-Home-StaffHome-Desktop.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>අවලංගු කරන්න · Cancel</span></a>
+</div>
+</div></div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1024}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26, railG: [
+        { icon: 'car', label: 'වාහන', href: '02-Home-StaffHome-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' , active: true },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'drawer', label: 'ලාච්චුව', href: '09-Money-Drawer-Desktop.dc.html' },
+        { icon: 'check', label: 'උදේ check', href: '03-MorningCheck-InProgress-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මගේ පඩිපත', href: '13-Payroll-MyPayslip-Desktop.dc.html' }
+      ], yes: true, twentyfour: 24 }; }
+}
+</script>
+</body>
+</html>

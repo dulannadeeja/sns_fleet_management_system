@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>05.2 2 · Choose a car · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 1040px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="05-NewRental-Customer-Phone.dc.html" title="අලුත් කුලියක්" subtitle="Ruwan · Thu 22 Oct · 11:20"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><div style="display: flex; flex-direction: column; gap: 8px">
+  <ol aria-label="Steps" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px"><li style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li aria-current="step" style="height: 6px; border-radius: 3px; background: var(--sapphire)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li><li style="height: 6px; border-radius: 3px; background: var(--line)"></li></ol>
+  <div style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--sapphire-strong)">පියවර <span class="rt-num">2</span> / <span class="rt-num">5</span> · වාහනය <span class="rt-en">· Car</span></div>
+</div><section style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 15px; font-weight: 600">TR</span>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Tharindu R.</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">first rental · approved by Ruwan</span></span>
+</section><label style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%"><x-import component-from-global-scope="Plate.Icon" name="search" size="{{twenty}}" style="color: var(--ink-muted)"></x-import><input value="Wagon R" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 17px; color: var(--ink)"></label><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Free Wagon R cars right now · 6</span><label style="display: grid; grid-template-columns: 72px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBF 7720" size="sm"></x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · 4,500 a day</span></span>
+  <input type="radio" name="car" checked style="width: 22px; height: 22px; margin: 0">
+</label><label style="display: grid; grid-template-columns: 72px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 14px; border: 1px solid var(--line); background: var(--card); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBL 0458" size="sm"></x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · 4,500 a day</span></span>
+  <input type="radio" name="car"  style="width: 22px; height: 22px; margin: 0">
+</label><label style="display: grid; grid-template-columns: 72px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 14px; border: 1px solid var(--line); background: var(--card); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBD 3375" size="sm"></x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · 4,500 a day</span></span>
+  <input type="radio" name="car"  style="width: 22px; height: 22px; margin: 0">
+</label><label style="display: grid; grid-template-columns: 72px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 14px; border: 1px solid var(--line); background: var(--card); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.PlateBadge" plate="CAX 8834" size="sm"></x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · 4,500 a day</span><span style="font-size: 14px; line-height: 22px; color: var(--warning); font-weight: 600">Returned 8:00 today</span></span>
+  <input type="radio" name="car"  style="width: 22px; height: 22px; margin: 0">
+</label><label style="display: grid; grid-template-columns: 72px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 14px; border: 1px solid var(--line); background: var(--card); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="sm"></x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · Partner · 4,500 a day</span><span style="font-size: 14px; line-height: 22px; color: var(--warning); font-weight: 600">Returned 9:40 today</span></span>
+  <input type="radio" name="car"  style="width: 22px; height: 22px; margin: 0">
+</label><label style="display: grid; grid-template-columns: 72px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 14px; border: 1px solid var(--line); background: var(--card); border-radius: 14px">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBG 2967" size="sm"></x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · Partner · 4,500 a day</span><span style="font-size: 14px; line-height: 22px; color: var(--warning); font-weight: 600">Not found at 7:30 check</span></span>
+  <input type="radio" name="car"  style="width: 22px; height: 22px; margin: 0">
+</label></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><a href="05-NewRental-Dates-Phone.dc.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{twenty}}"></x-import><span>CBF 7720 තෝරන්න · Continue with CBF 7720</span></a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1040}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

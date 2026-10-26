@@ -1,0 +1,61 @@
+/* SNS Rent Car · Plate — generated from tokens.json */
+:root, [data-theme="light"] {
+  --paper: #eef1f0;
+  --card: #ffffff;
+  --sunken: #e4e9e7;
+  --line: #d6dcd9;
+  --line-strong: #78827d;
+  --ink: #1b1f1d;
+  --ink-muted: #4b5450;
+  --sapphire: #1756a9;
+  --sapphire-strong: #0f3e7e;
+  --sapphire-tint: #e2ebf7;
+  --on-sapphire: #ffffff;
+  --overdue: #b42318;
+  --overdue-tint: #fdeceb;
+  --available: #146c43;
+  --available-tint: #ddf3e6;
+  --available-tick: #3aa675;
+  --rented: #2c3330;
+  --rented-tint: #e3e7e5;
+  --repair: #9a4100;
+  --repair-tint: #fcead9;
+  --repair-tick: #d9822b;
+  --unavailable: #565d59;
+  --unavailable-tint: #eceeed;
+  --unavailable-tick: #b9bac0;
+  --warning: #7a5000;
+  --warning-tint: #fff1cc;
+  --focus: #1756a9;
+  --plate-ground: #f6c343;
+  --plate-ink: #1b1f1d;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --touch-min: 48px;
+  --rail: 128px;
+  --topbar: 68px;
+  --nav-bottom: 76px;
+  --thumb-row: 64px;
+  --shadow-lift: 0 6px 16px rgba(27,31,29,0.16);
+  --font-sans: "Yaldevi", "Noto Sans Sinhala", system-ui, sans-serif;
+  --font-plate: "Gemunu Libre", "Yaldevi", "Noto Sans Sinhala", sans-serif;
+}
+.display { font-family: var(--font-plate); font-size: 28px; line-height: 40px; font-weight: 600; }
+.title { font-family: var(--font-plate); font-size: 22px; line-height: 32px; font-weight: 600; }
+.heading { font-family: var(--font-plate); font-size: 18px; line-height: 28px; font-weight: 600; }
+.body { font-family: var(--font-sans); font-size: 17px; line-height: 29px; font-weight: 400; }
+.body-desktop { font-family: var(--font-sans); font-size: 16px; line-height: 27px; font-weight: 400; }
+.label { font-family: var(--font-sans); font-size: 15px; line-height: 24px; font-weight: 500; }
+.caption { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
+.plate { font-family: var(--font-plate); font-size: 20px; line-height: 26px; font-weight: 600; }
+.figure { font-family: var(--font-plate); font-size: 26px; line-height: 34px; font-weight: 600; }

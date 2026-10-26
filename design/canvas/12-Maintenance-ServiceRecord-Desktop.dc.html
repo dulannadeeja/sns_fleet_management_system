@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>12.2 Add a service or repair record · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.rt>div>main [style*="height: 844px"]{height:auto!important}
+
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railG}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="සර්විස් / අලුත්වැඩියා" subtitle="Add a record · PJ 0937 due 23 Oct" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 32px 28px 56px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box">
+      <div style="width: 100%; max-width: 720px; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; overflow: hidden"><div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">වාහනය <span class="rt-en">· Car</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--card); border: 2px solid var(--sapphire); border-radius: 12px"><x-import component-from-global-scope="Plate.PlateBadge" plate="PJ 0937" size="sm"></x-import><span style="flex: 1; font-size: 15px; line-height: 22px; color: var(--ink-muted)">Every · Partner car</span><a href="#" style="font-size: 15px; font-weight: 600">වෙනස්</a></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">මොකක්ද කළේ? <span class="rt-en">· What was done</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><div style="display: flex; gap: 8px; flex-wrap: wrap"><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--ink); color: var(--card); font-weight: 600; font-size: 15px">Service</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Repair</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Tyres</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Battery</span><span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); font-size: 15px">Other</span></div></div><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">දිනය <span class="rt-en">· Date</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; " value="Fri 23 Oct"/></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Odometer <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="km" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; "/></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">විස්තරය <span class="rt-en">· Details</span></span><textarea placeholder="e.g. oil and filter, garage name" rows="2" style="padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 16px; line-height: 26px; resize: vertical"></textarea></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">වියදම <span class="rt-en">· Cost</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><input placeholder="LKR" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; "/></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">කවුද ගෙවන්නේ? <span class="rt-en">· Who pays</span> <span style="color: var(--overdue)">(අනිවාර්යයි · required)</span></span><div style="display: flex; flex-direction: column; gap: 8px"><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Car එකේ අයිතිකරු <span class="rt-en">· The car’s owner</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">per the partner’s terms · taken from earnings before cash-out</span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">SNS <span class="rt-en">· SNS</span></span></span></label><label style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px"><input style="width: 20px; height: 20px; margin: 2px 0 0; flex: none" type="radio"/><span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Admin තීරණය කරයි <span class="rt-en">· Admin decides</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">goes to Approvals</span></span></label></div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">ඊළඟ සර්විස් <span class="rt-en">· Next service</span></span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px"><input placeholder="Date" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; "/><input placeholder="or km" style="min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; "/></div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Fill one or both. A reminder appears only if a date or km is entered.</div></div></div><div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><a class="rt-btn rt-btn-primary rt-btn-full" href="12-Maintenance-Maintenance-Desktop.dc.html" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{twenty}}"></x-import><span>Save කරන්න · Save record</span></a><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted); text-align: center">Saving sets the car back to available unless you change it.</span></div></div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1198}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26, railG: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' , active: true },
+        { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

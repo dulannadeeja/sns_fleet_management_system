@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>04.6 Starting packages · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{railX}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="සැකසුම් · Settings" subtitle="Cars and packages" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 28px 56px; display: flex; flex-direction: column; gap: 20px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box"><div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+  <div style="flex: 0 1 300px; min-width: 280px"><nav aria-label="Settings" style="display: flex; flex-direction: column; gap: 4px; padding: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><a href="15-Settings-Permissions-Desktop.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="users" size="{{twenty}}"></x-import>අවසර <span class="rt-en">· Permissions</span></a><a href="15-Settings-People-Desktop.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="idcard" size="{{twenty}}"></x-import>සේවකයෝ <span class="rt-en">· People</span></a><a href="15-Settings-BusinessRules-Desktop.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="file" size="{{twenty}}"></x-import>නීති <span class="rt-en">· Business rules</span></a><a href="04-Cars-Packages-Desktop.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; background: var(--sapphire-tint); color: var(--sapphire-strong); font-weight: 600; font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="car" size="{{twenty}}"></x-import>වාහන <span class="rt-en">· Cars and packages</span></a><a href="11-Partners-PartnerOwners-Desktop.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="handshake" size="{{twenty}}"></x-import>Partners <span class="rt-en">· Partners</span></a><a href="16-Documents-RentalAgreementSI.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="receipt" size="{{twenty}}"></x-import>ලියකියවිලි <span class="rt-en">· Printed documents</span></a><a href="15-Settings-ActivityLog-Desktop.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="clock" size="{{twenty}}"></x-import>සිදු වූ දේ <span class="rt-en">· Activity log</span></a></nav></div>
+  <div style="flex: 1 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px"><section style="background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+  <div style="display: flex; align-items: center; gap: 10px; padding: 14px 20px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">මුල් පැකේජ <span class="rt-en">· Starting packages</span></h2><span style="margin-left: auto; font-size: 14px; color: var(--ink-muted)">LKR</span></div>
+  <div class="rt-tscroll"><div style="min-width: 800px; display: grid; grid-template-columns: 64px minmax(0, 1.4fr) 110px 100px 110px 90px; gap: 14px; padding: 10px 20px; border-top: 1px solid var(--line); background: var(--sunken)"><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500; "></span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500; ">Type</span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500; text-align: right">Per day</span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500; text-align: right">km a day</span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500; text-align: right">Extra km</span><span style="font-size: 14px; color: var(--ink-muted); font-weight: 500; text-align: right">Cars</span></div><div style="min-width: 800px; display: grid; grid-template-columns: 64px minmax(0, 1.4fr) 110px 100px 110px 90px; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 16px; line-height: 24px; font-weight: 600">Wagon R, Spacia</span>
+  <span class="rt-num" style="text-align: right; font-size: 16px; font-weight: 600">4,500</span><span class="rt-num" style="text-align: right">100</span><span class="rt-num" style="text-align: right">25</span><span class="rt-num" style="text-align: right; color: var(--ink-muted)">13</span>
+</div><div style="min-width: 800px; display: grid; grid-template-columns: 64px minmax(0, 1.4fr) 110px 100px 110px 90px; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Every" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 16px; line-height: 24px; font-weight: 600">Every (van)</span>
+  <span class="rt-num" style="text-align: right; font-size: 16px; font-weight: 600">5,000</span><span class="rt-num" style="text-align: right">100</span><span class="rt-num" style="text-align: right">25</span><span class="rt-num" style="text-align: right; color: var(--ink-muted)">4</span>
+</div><div style="min-width: 800px; display: grid; grid-template-columns: 64px minmax(0, 1.4fr) 110px 100px 110px 90px; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Alto" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 16px; line-height: 24px; font-weight: 600">Alto</span>
+  <span class="rt-num" style="text-align: right; font-size: 16px; font-weight: 600">4,000</span><span class="rt-num" style="text-align: right">100</span><span class="rt-num" style="text-align: right">17</span><span class="rt-num" style="text-align: right; color: var(--ink-muted)">6</span>
+</div><div style="min-width: 800px; display: grid; grid-template-columns: 64px minmax(0, 1.4fr) 110px 100px 110px 90px; gap: 14px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line)">
+  <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken)"><x-import component-from-global-scope="Plate.VehicleImage" model="Prius" style="width: 100%; height: 100%"></x-import></span><span style="font-size: 16px; line-height: 24px; font-weight: 600">Prius, Axio</span>
+  <span class="rt-num" style="text-align: right; font-size: 16px; font-weight: 600">6,500</span><span class="rt-num" style="text-align: right">100</span><span class="rt-num" style="text-align: right">27</span><span class="rt-num" style="text-align: right; color: var(--ink-muted)">7</span>
+</div></div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 16px; padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">හැම car එකකටම <span class="rt-en">· For every car</span></h2></div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 8px 16px; font-size: 15px; line-height: 24px"><span>SNS commission on partner cars</span><b class="rt-num">15%</b><span>Long-rental extra</span><b class="rt-num">500 a day from day 6</b><span>Garage-day charge</span><b class="rt-num">5,000 a day</b></div></section>
+<div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">A new car starts with its type’s package. Each car can then be changed on its own page. Extra-km rates are the design rates; final rates are still to be agreed. Changing a package never changes rentals already running.</div></div>
+</div></main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":958}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Desktop.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Desktop.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Desktop.dc.html', badge: 1, badgeTone: 'overdue', badgeHref: '06-Rentals-Overdue-Desktop.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Desktop.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Desktop.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Desktop.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Desktop.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Desktop.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Desktop.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Desktop.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Desktop.dc.html', active: true }]
+    };
+  }
+}
+</script>
+</body>
+</html>

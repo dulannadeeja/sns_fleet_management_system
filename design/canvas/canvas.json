@@ -1,0 +1,1998 @@
+{
+ "v": 3,
+ "attachments": {},
+ "boards": {
+  "01-Start-FirstPassword-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.2 First sign-in · set password · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 360
+  },
+  "01-Start-FirstPassword-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.2 First sign-in · set password · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 360
+  },
+  "01-Start-ReadyToStart-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1199,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.3 Ready to start · setup checklist · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 360
+  },
+  "01-Start-ReadyToStart-Phone.dc.html": {
+   "h": 1930,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.3 Ready to start · setup checklist · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 360
+  },
+  "01-Start-SignIn-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.1 Sign in · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 360
+  },
+  "01-Start-SignIn-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.1 Sign in · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 360
+  },
+  "02-Home-NeedsAttention-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 871,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.3 Needs attention · Desktop",
+   "w": 1280,
+   "x": 4180,
+   "y": 3059
+  },
+  "02-Home-NeedsAttention-Phone.dc.html": {
+   "h": 907,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.3 Needs attention · Phone",
+   "w": 390,
+   "x": 5520,
+   "y": 3059
+  },
+  "02-Home-OwnerHome-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 2700,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.1 Owner home · Desktop",
+   "w": 1440,
+   "x": 0,
+   "y": 3059
+  },
+  "02-Home-OwnerHome-Phone.dc.html": {
+   "h": 2300,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.1 Owner home · Phone",
+   "w": 390,
+   "x": 1500,
+   "y": 3059
+  },
+  "02-Home-OwnerMore-Phone.dc.html": {
+   "h": 1745,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.5 Owner · More menu · Phone",
+   "w": 390,
+   "x": 8040,
+   "y": 3059
+  },
+  "02-Home-Search-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.4 Search results · Desktop",
+   "w": 1280,
+   "x": 6110,
+   "y": 3059
+  },
+  "02-Home-Search-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.4 Search results · Phone",
+   "w": 390,
+   "x": 7450,
+   "y": 3059
+  },
+  "02-Home-StaffHome-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 2500,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.2 Staff home · Desktop",
+   "w": 1440,
+   "x": 2090,
+   "y": 3059
+  },
+  "02-Home-StaffHome-Phone.dc.html": {
+   "h": 1900,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.2 Staff home · Phone",
+   "w": 390,
+   "x": 3590,
+   "y": 3059
+  },
+  "02-Home-StaffMore-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "02.6 Staff · More menu · Phone",
+   "w": 390,
+   "x": 0,
+   "y": 5979
+  },
+  "03-MorningCheck-AnotherCar-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.2 Another car is here · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 7703
+  },
+  "03-MorningCheck-AnotherCar-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.2 Another car is here · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 7703
+  },
+  "03-MorningCheck-CloseMissingCar-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1745,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.4 Close a missing-car discrepancy · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 7703
+  },
+  "03-MorningCheck-CloseMissingCar-Phone.dc.html": {
+   "h": 3184,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.4 Close a missing-car discrepancy · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 7703
+  },
+  "03-MorningCheck-Finished-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 953,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.3 Morning check · finished · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 7703
+  },
+  "03-MorningCheck-Finished-Phone.dc.html": {
+   "h": 998,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.3 Morning check · finished · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 7703
+  },
+  "03-MorningCheck-InProgress-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 2421,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.1 Morning check · in progress · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 7703
+  },
+  "03-MorningCheck-InProgress-Phone.dc.html": {
+   "h": 2351,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "03.1 Morning check · in progress · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 7703
+  },
+  "04-Cars-AllCars-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 2526,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.1 All cars · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 11767
+  },
+  "04-Cars-AllCars-Phone.dc.html": {
+   "h": 6857,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.1 All cars · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 11767
+  },
+  "04-Cars-CarDetailsOwner-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1750,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.2 Car details · owner · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 11767
+  },
+  "04-Cars-CarDetailsOwner-Phone.dc.html": {
+   "h": 2740,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.2 Car details · owner · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 11767
+  },
+  "04-Cars-CarDetailsStaff-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1439,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.3 Car details · staff · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 11767
+  },
+  "04-Cars-CarDetailsStaff-Phone.dc.html": {
+   "h": 1560,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.3 Car details · staff · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 11767
+  },
+  "04-Cars-ChangeStatus-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.5 Change a car’s status · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 18704
+  },
+  "04-Cars-ChangeStatus-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.5 Change a car’s status · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 18704
+  },
+  "04-Cars-EditCar-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1430,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.4 Edit car, package and terms · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 11767
+  },
+  "04-Cars-EditCar-Phone.dc.html": {
+   "h": 2465,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.4 Edit car, package and terms · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 11767
+  },
+  "04-Cars-Packages-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.6 Starting packages · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 18704
+  },
+  "04-Cars-Packages-Phone.dc.html": {
+   "h": 1684,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.6 Starting packages · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 18704
+  },
+  "04-Cars-StatusBlocks-Desktop.dc.html": {
+   "h": 1450,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.7 Car status blocks · reference · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 18704
+  },
+  "05-NewRental-Cancel-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 831,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.8 Cancel before handover · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 22958
+  },
+  "05-NewRental-Cancel-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.8 Cancel before handover · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 22958
+  },
+  "05-NewRental-ChooseCar-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1112,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.2 2 · Choose a car · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 21178
+  },
+  "05-NewRental-ChooseCar-Phone.dc.html": {
+   "h": 1040,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.2 2 · Choose a car · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 21178
+  },
+  "05-NewRental-Customer-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1024,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.1 1 · Customer and warnings · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 21178
+  },
+  "05-NewRental-Customer-Phone.dc.html": {
+   "h": 1560,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.1 1 · Customer and warnings · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 21178
+  },
+  "05-NewRental-Dates-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 920,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.3 3 · Dates and estimate · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 21178
+  },
+  "05-NewRental-Dates-Phone.dc.html": {
+   "h": 900,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.3 3 · Dates and estimate · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 21178
+  },
+  "05-NewRental-Deposit-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 968,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.4 4 · Deposit and payment · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 21178
+  },
+  "05-NewRental-Deposit-Phone.dc.html": {
+   "h": 960,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.4 4 · Deposit and payment · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 21178
+  },
+  "05-NewRental-PriceChangeRequest-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1079,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.7 Price change needs admin · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 22958
+  },
+  "05-NewRental-PriceChangeRequest-Phone.dc.html": {
+   "h": 1300,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.7 Price change needs admin · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 22958
+  },
+  "05-NewRental-ReferencePerson-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1079,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.6 Reference person · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 22958
+  },
+  "05-NewRental-ReferencePerson-Phone.dc.html": {
+   "h": 1044,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.6 Reference person · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 22958
+  },
+  "05-NewRental-Review-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 896,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.5 5 · Review and print · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 22958
+  },
+  "05-NewRental-Review-Phone.dc.html": {
+   "h": 860,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "05.5 5 · Review and print · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 22958
+  },
+  "06-Rentals-AllRentals-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1640,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.1 Rentals · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 25138
+  },
+  "06-Rentals-AllRentals-Phone.dc.html": {
+   "h": 1900,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.1 Rentals · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 25138
+  },
+  "06-Rentals-Extend-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 828,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.6 Extend by phone · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 27658
+  },
+  "06-Rentals-Extend-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.6 Extend by phone · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 27658
+  },
+  "06-Rentals-Handover-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1362,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.4 Handover checklist · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 25138
+  },
+  "06-Rentals-Handover-Phone.dc.html": {
+   "h": 1410,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.4 Handover checklist · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 25138
+  },
+  "06-Rentals-HandoverDone-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1027,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.5 Handover done · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 27658
+  },
+  "06-Rentals-HandoverDone-Phone.dc.html": {
+   "h": 954,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.5 Handover done · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 27658
+  },
+  "06-Rentals-Overdue-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 864,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.3 Overdue rental · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 25138
+  },
+  "06-Rentals-Overdue-Phone.dc.html": {
+   "h": 1541,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.3 Overdue rental · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 25138
+  },
+  "06-Rentals-RentalDetails-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1600,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.2 Rental details · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 25138
+  },
+  "06-Rentals-RentalDetails-Phone.dc.html": {
+   "h": 2300,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.2 Rental details · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 25138
+  },
+  "06-Rentals-SwapCar-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 991,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.7 Swap a car · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 27658
+  },
+  "06-Rentals-SwapCar-Phone.dc.html": {
+   "h": 950,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "06.7 Swap a car · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 27658
+  },
+  "07-Return-DepositRefund-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "07.3 Use deposit and refund · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 29519
+  },
+  "07-Return-DepositRefund-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "07.3 Use deposit and refund · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 29519
+  },
+  "07-Return-GarageDays-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "07.2 Garage days on the bill · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 29519
+  },
+  "07-Return-GarageDays-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "07.2 Garage days on the bill · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 29519
+  },
+  "07-Return-Return-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 2072,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "07.1 Return and payment · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 29519
+  },
+  "07-Return-Return-Phone.dc.html": {
+   "h": 2560,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "07.1 Return and payment · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 29519
+  },
+  "08-Customers-AddFlag-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.5 Add a customer flag · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 35259
+  },
+  "08-Customers-AddFlag-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.5 Add a customer flag · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 35259
+  },
+  "08-Customers-AllCustomers-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 840,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.1 Customers · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 32959
+  },
+  "08-Customers-AllCustomers-Phone.dc.html": {
+   "h": 932,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.1 Customers · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 32959
+  },
+  "08-Customers-CustomerDetails-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1070,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.2 Customer details · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 32959
+  },
+  "08-Customers-CustomerDetails-Phone.dc.html": {
+   "h": 2080,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.2 Customer details · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 32959
+  },
+  "08-Customers-NewCustomer-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1643,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.3 New customer with documents · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 32959
+  },
+  "08-Customers-NewCustomer-Phone.dc.html": {
+   "h": 1661,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.3 New customer with documents · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 32959
+  },
+  "08-Customers-Warnings-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 832,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.4 Flag and expired licence warning · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 32959
+  },
+  "08-Customers-Warnings-Phone.dc.html": {
+   "h": 880,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.4 Flag and expired licence warning · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 32959
+  },
+  "08-Customers-WriteOff-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.6 Write off a debt · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 35259
+  },
+  "08-Customers-WriteOff-Phone.dc.html": {
+   "h": 1147,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "08.6 Write off a debt · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 35259
+  },
+  "09-Money-BankCardCheck-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.9 Bank and card check · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 44088
+  },
+  "09-Money-BankCardCheck-Phone.dc.html": {
+   "h": 1470,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.9 Bank and card check · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 44088
+  },
+  "09-Money-CloseDay-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1026,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.11 Close the business day · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 44088
+  },
+  "09-Money-CloseDay-Phone.dc.html": {
+   "h": 1733,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.11 Close the business day · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 44088
+  },
+  "09-Money-CountDrawer-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1152,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.6 Count the drawer · expected shown · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 40496
+  },
+  "09-Money-CountDrawer-Phone.dc.html": {
+   "h": 1200,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.6 Count the drawer · expected shown · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 40496
+  },
+  "09-Money-CountDrawerBlind-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.7 Count the drawer · blind · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 40496
+  },
+  "09-Money-CountDrawerBlind-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.7 Count the drawer · blind · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 40496
+  },
+  "09-Money-Drawer-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1218,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.2 Drawer and payments · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 37286
+  },
+  "09-Money-Drawer-Phone.dc.html": {
+   "h": 1784,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.2 Drawer and payments · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 37286
+  },
+  "09-Money-EveningCheck-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1701,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.8 Evening money check · Desktop",
+   "w": 1440,
+   "x": 5790,
+   "y": 40496
+  },
+  "09-Money-EveningCheck-Phone.dc.html": {
+   "h": 3372,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.8 Evening money check · Phone",
+   "w": 390,
+   "x": 7290,
+   "y": 40496
+  },
+  "09-Money-Expenses-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1028,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.12 Expenses · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 44088
+  },
+  "09-Money-Expenses-Phone.dc.html": {
+   "h": 1965,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.12 Expenses · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 44088
+  },
+  "09-Money-MoneyToday-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1691,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.1 Money today · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 37286
+  },
+  "09-Money-MoneyToday-Phone.dc.html": {
+   "h": 2990,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.1 Money today · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 37286
+  },
+  "09-Money-PaymentCorrection-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 941,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.5 Payment correction request · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 40496
+  },
+  "09-Money-PaymentCorrection-Phone.dc.html": {
+   "h": 1016,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.5 Payment correction request · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 40496
+  },
+  "09-Money-ReceivedByStaff-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.10 Money received by staff · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 44088
+  },
+  "09-Money-ReceivedByStaff-Phone.dc.html": {
+   "h": 1691,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.10 Money received by staff · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 44088
+  },
+  "09-Money-RecordExpense-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1165,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.13 Record an expense · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 46273
+  },
+  "09-Money-RecordExpense-Phone.dc.html": {
+   "h": 1288,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.13 Record an expense · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 46273
+  },
+  "09-Money-RecordPayment-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 992,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.3 Record a payment · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 37286
+  },
+  "09-Money-RecordPayment-Phone.dc.html": {
+   "h": 970,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.3 Record a payment · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 37286
+  },
+  "09-Money-SplitPayment-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1200,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.4 Split payment · cash and bank · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 37286
+  },
+  "09-Money-SplitPayment-Phone.dc.html": {
+   "h": 1152,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "09.4 Split payment · cash and bank · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 37286
+  },
+  "10-Approvals-Approvals-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1000,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.1 Approvals · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 48413
+  },
+  "10-Approvals-Approvals-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.1 Approvals · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 48413
+  },
+  "10-Approvals-Approve-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.2 Approve · confirm · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 48413
+  },
+  "10-Approvals-Approve-Phone.dc.html": {
+   "h": 930,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.2 Approve · confirm · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 48413
+  },
+  "10-Approvals-Reject-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.3 Reject · confirm · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 48413
+  },
+  "10-Approvals-Reject-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "10.3 Reject · confirm · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 48413
+  },
+  "11-Partners-AddPartner-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1224,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.3 Add a partner · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 50253
+  },
+  "11-Partners-AddPartner-Phone.dc.html": {
+   "h": 2037,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.3 Add a partner · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 50253
+  },
+  "11-Partners-CarEarnings-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1191,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.5 Car earnings by day · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 52510
+  },
+  "11-Partners-CarEarnings-Phone.dc.html": {
+   "h": 2060,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.5 Car earnings by day · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 52510
+  },
+  "11-Partners-CashOuts-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1070,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.4 Partner cash-outs · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 50253
+  },
+  "11-Partners-CashOuts-Phone.dc.html": {
+   "h": 1953,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.4 Partner cash-outs · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 50253
+  },
+  "11-Partners-PartnerAskCashOut-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.8 Partner app · ask to cash out · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 52510
+  },
+  "11-Partners-PartnerAskCashOut-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.8 Partner app · ask to cash out · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 52510
+  },
+  "11-Partners-PartnerDetails-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.2 Partner details · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 50253
+  },
+  "11-Partners-PartnerDetails-Phone.dc.html": {
+   "h": 1220,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.2 Partner details · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 50253
+  },
+  "11-Partners-PartnerEarnings-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1088,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.7 Partner app · my earnings · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 52510
+  },
+  "11-Partners-PartnerEarnings-Phone.dc.html": {
+   "h": 1038,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.7 Partner app · my earnings · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 52510
+  },
+  "11-Partners-PartnerOwners-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.1 Partner owners · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 50253
+  },
+  "11-Partners-PartnerOwners-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.1 Partner owners · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 50253
+  },
+  "11-Partners-PayCashOut-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.6 Pay and record a cash-out · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 52510
+  },
+  "11-Partners-PayCashOut-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "11.6 Pay and record a cash-out · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 52510
+  },
+  "12-Maintenance-Maintenance-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1280,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "12.1 Maintenance and renewals · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 55444
+  },
+  "12-Maintenance-Maintenance-Phone.dc.html": {
+   "h": 2040,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "12.1 Maintenance and renewals · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 55444
+  },
+  "12-Maintenance-ServiceRecord-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1198,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "12.2 Add a service or repair record · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 55444
+  },
+  "12-Maintenance-ServiceRecord-Phone.dc.html": {
+   "h": 1304,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "12.2 Add a service or repair record · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 55444
+  },
+  "13-Payroll-Adjustment-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.2 Add an adjustment · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 58364
+  },
+  "13-Payroll-Adjustment-Phone.dc.html": {
+   "h": 1252,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.2 Add an adjustment · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 58364
+  },
+  "13-Payroll-Advance-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.3 Give an advance or loan · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 58364
+  },
+  "13-Payroll-Advance-Phone.dc.html": {
+   "h": 1442,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.3 Give an advance or loan · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 58364
+  },
+  "13-Payroll-MyPayslip-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1092,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.5 My payslip · staff · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 60481
+  },
+  "13-Payroll-MyPayslip-Phone.dc.html": {
+   "h": 1127,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.5 My payslip · staff · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 60481
+  },
+  "13-Payroll-Payroll-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.1 Payroll · October draft · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 58364
+  },
+  "13-Payroll-Payroll-Phone.dc.html": {
+   "h": 1918,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.1 Payroll · October draft · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 58364
+  },
+  "13-Payroll-SalaryPayment-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.4 Record a salary payment · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 58364
+  },
+  "13-Payroll-SalaryPayment-Phone.dc.html": {
+   "h": 1100,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "13.4 Record a salary payment · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 58364
+  },
+  "14-Reports-CarPerformance-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1147,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "14.2 Car performance · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 62488
+  },
+  "14-Reports-CarPerformance-Phone.dc.html": {
+   "h": 2158,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "14.2 Car performance · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 62488
+  },
+  "14-Reports-Reports-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1060,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "14.1 Reports · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 62488
+  },
+  "14-Reports-Reports-Phone.dc.html": {
+   "h": 2720,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "14.1 Reports · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 62488
+  },
+  "15-Settings-ActivityLog-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.5 Activity log · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 70571
+  },
+  "15-Settings-ActivityLog-Phone.dc.html": {
+   "h": 1543,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.5 Activity log · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 70571
+  },
+  "15-Settings-AddPerson-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 960,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.4 Add a person · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 66032
+  },
+  "15-Settings-AddPerson-Phone.dc.html": {
+   "h": 1702,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.4 Add a person · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 66032
+  },
+  "15-Settings-BusinessRules-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1299,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.2 Business rules and open decisions · Desktop",
+   "w": 1280,
+   "x": 1930,
+   "y": 66032
+  },
+  "15-Settings-BusinessRules-Phone.dc.html": {
+   "h": 2222,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.2 Business rules and open decisions · Phone",
+   "w": 390,
+   "x": 3270,
+   "y": 66032
+  },
+  "15-Settings-People-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 958,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.3 People · Desktop",
+   "w": 1280,
+   "x": 3860,
+   "y": 66032
+  },
+  "15-Settings-People-Phone.dc.html": {
+   "h": 1830,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.3 People · Phone",
+   "w": 390,
+   "x": 5200,
+   "y": 66032
+  },
+  "15-Settings-Permissions-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 2115,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.1 Permissions · Desktop",
+   "w": 1280,
+   "x": 0,
+   "y": 66032
+  },
+  "15-Settings-Permissions-Phone.dc.html": {
+   "h": 4365,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.1 Permissions · Phone",
+   "w": 390,
+   "x": 1340,
+   "y": 66032
+  },
+  "16-Documents-FinalBill.dc.html": {
+   "h": 1123,
+   "page": "plate",
+   "title": "16.3 Final bill · print",
+   "w": 794,
+   "x": 1988,
+   "y": 72994
+  },
+  "16-Documents-PartnerAgreement.dc.html": {
+   "h": 1123,
+   "page": "plate",
+   "title": "16.6 Partner agreement · print",
+   "w": 794,
+   "x": 4478,
+   "y": 72994
+  },
+  "16-Documents-PartnerStatement.dc.html": {
+   "h": 1123,
+   "page": "plate",
+   "title": "16.5 Partner earnings statement · print",
+   "w": 794,
+   "x": 3484,
+   "y": 72994
+  },
+  "16-Documents-PaymentReceipt.dc.html": {
+   "h": 540,
+   "page": "plate",
+   "title": "16.4 Payment receipt · 80 mm slip · print",
+   "w": 302,
+   "x": 2982,
+   "y": 72994
+  },
+  "16-Documents-Payslip.dc.html": {
+   "h": 1123,
+   "page": "plate",
+   "title": "16.7 Payslip · print",
+   "w": 794,
+   "x": 5472,
+   "y": 72994
+  },
+  "16-Documents-RentalAgreementEN.dc.html": {
+   "h": 1123,
+   "page": "plate",
+   "title": "16.2 Rental agreement · English · print",
+   "w": 794,
+   "x": 994,
+   "y": 72994
+  },
+  "16-Documents-RentalAgreementSI.dc.html": {
+   "h": 1123,
+   "page": "plate",
+   "title": "16.1 Rental agreement · Sinhala · print",
+   "w": 794,
+   "x": 0,
+   "y": 72994
+  },
+  "17-System-DesignNotes.dc.html": {
+   "h": 2410,
+   "page": "plate",
+   "title": "17.2 Design notes · navigation and components",
+   "w": 1440,
+   "x": 1480,
+   "y": 74997
+  },
+  "17-System-States.dc.html": {
+   "expand": "fill",
+   "h": 1344,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "17.1 System states · empty, offline, error, permission",
+   "w": 1280,
+   "x": 0,
+   "y": 74997
+  },
+  "19-Nav-A-Sidebar-Desktop.dc.html": {
+   "w": 1440,
+   "h": 1100,
+   "expand": "fill",
+   "is_interactive": true,
+   "x": 0,
+   "y": 360,
+   "title": "19.1 Navigation A · labelled sidebar + top bar · Desktop",
+   "page": "nav"
+  }
+ },
+ "createdOnFiles": {
+  "at": "2026-10-23T10:10:00Z",
+  "v": 1
+ },
+ "designSystems": [
+  {
+   "artifact": "https://claude.ai/artifact/E1pWnYhfHjpZ9C18ipGBWv",
+   "copiedAt": "2026-10-24T19:45:00Z",
+   "namespace": "plate",
+   "title": "SNS Rent Car · Plate",
+   "version": "1792870564-7201"
+  }
+ ],
+ "launch": {
+  "view": "canvas"
+ },
+ "notes": {
+  "plate_01": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "01 · Start · ආරම්භය",
+   "w": 240,
+   "x": 0,
+   "y": 0
+  },
+  "plate_02": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "02 · Home and navigation · මුල් පිටුව",
+   "w": 240,
+   "x": 0,
+   "y": 2699
+  },
+  "plate_03": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "03 · Morning check · උදේ check",
+   "w": 240,
+   "x": 0,
+   "y": 7343
+  },
+  "plate_04": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "04 · Cars · වාහන",
+   "w": 240,
+   "x": 0,
+   "y": 11407
+  },
+  "plate_05": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "05 · New rental · අලුත් කුලියක්",
+   "w": 240,
+   "x": 0,
+   "y": 20503
+  },
+  "plate_06": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "06 · Rentals and handover · කුලී",
+   "w": 240,
+   "x": 0,
+   "y": 24463
+  },
+  "plate_07": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "07 · Return · ආපසු ගැනීම",
+   "w": 240,
+   "x": 0,
+   "y": 28844
+  },
+  "plate_08": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "08 · Customers · පාරිභෝගිකයෝ",
+   "w": 240,
+   "x": 0,
+   "y": 32284
+  },
+  "plate_09": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "09 · Money and drawer · මුදල්",
+   "w": 240,
+   "x": 0,
+   "y": 36611
+  },
+  "plate_10": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "10 · Approvals · අනුමැති",
+   "w": 240,
+   "x": 0,
+   "y": 47738
+  },
+  "plate_11": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "11 · Partners and cash-outs · Partner ගණන්",
+   "w": 240,
+   "x": 0,
+   "y": 49578
+  },
+  "plate_12": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "12 · Maintenance · නඩත්තුව",
+   "w": 240,
+   "x": 0,
+   "y": 54769
+  },
+  "plate_13": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "13 · Payroll · පඩි",
+   "w": 240,
+   "x": 0,
+   "y": 57689
+  },
+  "plate_14": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "14 · Reports · වාර්තා",
+   "w": 240,
+   "x": 0,
+   "y": 61813
+  },
+  "plate_15": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "15 · Settings · සැකසුම්",
+   "w": 240,
+   "x": 0,
+   "y": 65357
+  },
+  "plate_16": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "16 · Printed documents · ලියකියවිලි",
+   "w": 240,
+   "x": 0,
+   "y": 72319
+  },
+  "plate_17": {
+   "kind": "title1",
+   "maxW": 8000,
+   "page": "plate",
+   "text": "17 · System reference",
+   "w": 240,
+   "x": 0,
+   "y": 74322
+  },
+  "plate_intro": {
+   "page": "plate",
+   "size": 24,
+   "text": "SNS Rent Car · Plate. Screens are grouped by module in the order of the work (01 Start → 15 Settings, then printed documents and system reference). Each screen shows its desktop version, then its phone version beside it. Names follow “module.screen  Name · Device”; file names follow the same pattern (e.g. 05-NewRental-ChooseCar-Phone). Links stay on the same device.",
+   "w": 1100,
+   "x": 0,
+   "y": -700
+  },
+  "nav_title": {
+   "x": 0,
+   "y": 0,
+   "text": "19 · Navigation concepts · සංචලනය (exploration)",
+   "kind": "title1",
+   "maxW": 4560,
+   "page": "nav"
+  },
+  "nav_intro": {
+   "x": 0,
+   "y": -520,
+   "w": 1300,
+   "fill": "yellow",
+   "size": 24,
+   "page": "nav",
+   "text": "Chosen 25 Oct 2026: A, the labelled sidebar. It now runs on every desktop screen (Plate NavRail). B and C are kept for reference. Ideas from real products on Mobbin. A: labelled sidebar grouped by job (Jobber, Shopify). B: five-area rail with a “today, in order” panel (Supabase, Neon). C: top tabs with a search that jumps anywhere (Bonsai, command menus). Sample data."
+  }
+ },
+ "order": [
+  "01-Start-SignIn-Desktop.dc.html",
+  "01-Start-SignIn-Phone.dc.html",
+  "01-Start-FirstPassword-Desktop.dc.html",
+  "01-Start-FirstPassword-Phone.dc.html",
+  "01-Start-ReadyToStart-Desktop.dc.html",
+  "01-Start-ReadyToStart-Phone.dc.html",
+  "02-Home-OwnerHome-Desktop.dc.html",
+  "02-Home-OwnerHome-Phone.dc.html",
+  "02-Home-StaffHome-Desktop.dc.html",
+  "02-Home-StaffHome-Phone.dc.html",
+  "02-Home-NeedsAttention-Desktop.dc.html",
+  "02-Home-NeedsAttention-Phone.dc.html",
+  "02-Home-Search-Desktop.dc.html",
+  "02-Home-Search-Phone.dc.html",
+  "02-Home-OwnerMore-Phone.dc.html",
+  "02-Home-StaffMore-Phone.dc.html",
+  "03-MorningCheck-InProgress-Desktop.dc.html",
+  "03-MorningCheck-InProgress-Phone.dc.html",
+  "03-MorningCheck-AnotherCar-Desktop.dc.html",
+  "03-MorningCheck-AnotherCar-Phone.dc.html",
+  "03-MorningCheck-Finished-Desktop.dc.html",
+  "03-MorningCheck-Finished-Phone.dc.html",
+  "03-MorningCheck-CloseMissingCar-Desktop.dc.html",
+  "03-MorningCheck-CloseMissingCar-Phone.dc.html",
+  "04-Cars-AllCars-Desktop.dc.html",
+  "04-Cars-AllCars-Phone.dc.html",
+  "04-Cars-CarDetailsOwner-Desktop.dc.html",
+  "04-Cars-CarDetailsOwner-Phone.dc.html",
+  "04-Cars-CarDetailsStaff-Desktop.dc.html",
+  "04-Cars-CarDetailsStaff-Phone.dc.html",
+  "04-Cars-EditCar-Desktop.dc.html",
+  "04-Cars-EditCar-Phone.dc.html",
+  "04-Cars-ChangeStatus-Desktop.dc.html",
+  "04-Cars-ChangeStatus-Phone.dc.html",
+  "04-Cars-Packages-Desktop.dc.html",
+  "04-Cars-Packages-Phone.dc.html",
+  "04-Cars-StatusBlocks-Desktop.dc.html",
+  "05-NewRental-Customer-Desktop.dc.html",
+  "05-NewRental-Customer-Phone.dc.html",
+  "05-NewRental-ChooseCar-Desktop.dc.html",
+  "05-NewRental-ChooseCar-Phone.dc.html",
+  "05-NewRental-Dates-Desktop.dc.html",
+  "05-NewRental-Dates-Phone.dc.html",
+  "05-NewRental-Deposit-Desktop.dc.html",
+  "05-NewRental-Deposit-Phone.dc.html",
+  "05-NewRental-Review-Desktop.dc.html",
+  "05-NewRental-Review-Phone.dc.html",
+  "05-NewRental-ReferencePerson-Desktop.dc.html",
+  "05-NewRental-ReferencePerson-Phone.dc.html",
+  "05-NewRental-PriceChangeRequest-Desktop.dc.html",
+  "05-NewRental-PriceChangeRequest-Phone.dc.html",
+  "05-NewRental-Cancel-Desktop.dc.html",
+  "05-NewRental-Cancel-Phone.dc.html",
+  "06-Rentals-AllRentals-Desktop.dc.html",
+  "06-Rentals-AllRentals-Phone.dc.html",
+  "06-Rentals-RentalDetails-Desktop.dc.html",
+  "06-Rentals-RentalDetails-Phone.dc.html",
+  "06-Rentals-Overdue-Desktop.dc.html",
+  "06-Rentals-Overdue-Phone.dc.html",
+  "06-Rentals-Handover-Desktop.dc.html",
+  "06-Rentals-Handover-Phone.dc.html",
+  "06-Rentals-HandoverDone-Desktop.dc.html",
+  "06-Rentals-HandoverDone-Phone.dc.html",
+  "06-Rentals-Extend-Desktop.dc.html",
+  "06-Rentals-Extend-Phone.dc.html",
+  "06-Rentals-SwapCar-Desktop.dc.html",
+  "06-Rentals-SwapCar-Phone.dc.html",
+  "07-Return-Return-Desktop.dc.html",
+  "07-Return-Return-Phone.dc.html",
+  "07-Return-GarageDays-Desktop.dc.html",
+  "07-Return-GarageDays-Phone.dc.html",
+  "07-Return-DepositRefund-Desktop.dc.html",
+  "07-Return-DepositRefund-Phone.dc.html",
+  "08-Customers-AllCustomers-Desktop.dc.html",
+  "08-Customers-AllCustomers-Phone.dc.html",
+  "08-Customers-CustomerDetails-Desktop.dc.html",
+  "08-Customers-CustomerDetails-Phone.dc.html",
+  "08-Customers-NewCustomer-Desktop.dc.html",
+  "08-Customers-NewCustomer-Phone.dc.html",
+  "08-Customers-Warnings-Desktop.dc.html",
+  "08-Customers-Warnings-Phone.dc.html",
+  "08-Customers-AddFlag-Desktop.dc.html",
+  "08-Customers-AddFlag-Phone.dc.html",
+  "08-Customers-WriteOff-Desktop.dc.html",
+  "08-Customers-WriteOff-Phone.dc.html",
+  "09-Money-MoneyToday-Desktop.dc.html",
+  "09-Money-MoneyToday-Phone.dc.html",
+  "09-Money-Drawer-Desktop.dc.html",
+  "09-Money-Drawer-Phone.dc.html",
+  "09-Money-RecordPayment-Desktop.dc.html",
+  "09-Money-RecordPayment-Phone.dc.html",
+  "09-Money-SplitPayment-Desktop.dc.html",
+  "09-Money-SplitPayment-Phone.dc.html",
+  "09-Money-PaymentCorrection-Desktop.dc.html",
+  "09-Money-PaymentCorrection-Phone.dc.html",
+  "09-Money-CountDrawer-Desktop.dc.html",
+  "09-Money-CountDrawer-Phone.dc.html",
+  "09-Money-CountDrawerBlind-Desktop.dc.html",
+  "09-Money-CountDrawerBlind-Phone.dc.html",
+  "09-Money-EveningCheck-Desktop.dc.html",
+  "09-Money-EveningCheck-Phone.dc.html",
+  "09-Money-BankCardCheck-Desktop.dc.html",
+  "09-Money-BankCardCheck-Phone.dc.html",
+  "09-Money-ReceivedByStaff-Desktop.dc.html",
+  "09-Money-ReceivedByStaff-Phone.dc.html",
+  "09-Money-CloseDay-Desktop.dc.html",
+  "09-Money-CloseDay-Phone.dc.html",
+  "09-Money-Expenses-Desktop.dc.html",
+  "09-Money-Expenses-Phone.dc.html",
+  "09-Money-RecordExpense-Desktop.dc.html",
+  "09-Money-RecordExpense-Phone.dc.html",
+  "10-Approvals-Approvals-Desktop.dc.html",
+  "10-Approvals-Approvals-Phone.dc.html",
+  "10-Approvals-Approve-Desktop.dc.html",
+  "10-Approvals-Approve-Phone.dc.html",
+  "10-Approvals-Reject-Desktop.dc.html",
+  "10-Approvals-Reject-Phone.dc.html",
+  "11-Partners-PartnerOwners-Desktop.dc.html",
+  "11-Partners-PartnerOwners-Phone.dc.html",
+  "11-Partners-PartnerDetails-Desktop.dc.html",
+  "11-Partners-PartnerDetails-Phone.dc.html",
+  "11-Partners-AddPartner-Desktop.dc.html",
+  "11-Partners-AddPartner-Phone.dc.html",
+  "11-Partners-CashOuts-Desktop.dc.html",
+  "11-Partners-CashOuts-Phone.dc.html",
+  "11-Partners-CarEarnings-Desktop.dc.html",
+  "11-Partners-CarEarnings-Phone.dc.html",
+  "11-Partners-PayCashOut-Desktop.dc.html",
+  "11-Partners-PayCashOut-Phone.dc.html",
+  "11-Partners-PartnerEarnings-Desktop.dc.html",
+  "11-Partners-PartnerEarnings-Phone.dc.html",
+  "11-Partners-PartnerAskCashOut-Desktop.dc.html",
+  "11-Partners-PartnerAskCashOut-Phone.dc.html",
+  "12-Maintenance-Maintenance-Desktop.dc.html",
+  "12-Maintenance-Maintenance-Phone.dc.html",
+  "12-Maintenance-ServiceRecord-Desktop.dc.html",
+  "12-Maintenance-ServiceRecord-Phone.dc.html",
+  "13-Payroll-Payroll-Desktop.dc.html",
+  "13-Payroll-Payroll-Phone.dc.html",
+  "13-Payroll-Adjustment-Desktop.dc.html",
+  "13-Payroll-Adjustment-Phone.dc.html",
+  "13-Payroll-Advance-Desktop.dc.html",
+  "13-Payroll-Advance-Phone.dc.html",
+  "13-Payroll-SalaryPayment-Desktop.dc.html",
+  "13-Payroll-SalaryPayment-Phone.dc.html",
+  "13-Payroll-MyPayslip-Desktop.dc.html",
+  "13-Payroll-MyPayslip-Phone.dc.html",
+  "14-Reports-Reports-Desktop.dc.html",
+  "14-Reports-Reports-Phone.dc.html",
+  "14-Reports-CarPerformance-Desktop.dc.html",
+  "14-Reports-CarPerformance-Phone.dc.html",
+  "15-Settings-Permissions-Desktop.dc.html",
+  "15-Settings-Permissions-Phone.dc.html",
+  "15-Settings-BusinessRules-Desktop.dc.html",
+  "15-Settings-BusinessRules-Phone.dc.html",
+  "15-Settings-People-Desktop.dc.html",
+  "15-Settings-People-Phone.dc.html",
+  "15-Settings-AddPerson-Desktop.dc.html",
+  "15-Settings-AddPerson-Phone.dc.html",
+  "15-Settings-ActivityLog-Desktop.dc.html",
+  "15-Settings-ActivityLog-Phone.dc.html",
+  "16-Documents-RentalAgreementSI.dc.html",
+  "16-Documents-RentalAgreementEN.dc.html",
+  "16-Documents-FinalBill.dc.html",
+  "16-Documents-PaymentReceipt.dc.html",
+  "16-Documents-PartnerStatement.dc.html",
+  "16-Documents-PartnerAgreement.dc.html",
+  "16-Documents-Payslip.dc.html",
+  "17-System-States.dc.html",
+  "17-System-DesignNotes.dc.html",
+  "19-Nav-A-Sidebar-Desktop.dc.html"
+ ],
+ "pages": [
+  {
+   "id": "plate",
+   "name": "SNS Rent Car · Plate"
+  },
+  {
+   "id": "nav",
+   "name": "Navigation concepts"
+  }
+ ],
+ "title": "SNS Rent Car · Plate"
+}
