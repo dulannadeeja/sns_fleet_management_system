@@ -107,7 +107,7 @@ run('skills', () => {
   for (const d of [...new Set(files.filter((f) => f.startsWith('.claude/skills/')).map((f) => f.split('/')[2]))]) {
     const p = `.claude/skills/${d}/SKILL.md`;
     if (!exists(p)) { if (exists(`.claude/skills/${d}`) && d !== 'README.md' && d !== 'AGENTS.md' && d !== 'CLAUDE.md') hard.push(`skills: ${d} has no SKILL.md`); continue; }
-    const fm = /^---\n([\s\S]*?)\n---/.exec(read(p))?.[1] ?? '';
+    const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(read(p))?.[1] ?? '';
     const name = /^name:\s*(.+)$/m.exec(fm)?.[1]?.trim();
     if (name !== d) hard.push(`skills: ${p} name is "${name}", folder is "${d}"`);
     if (!/^description:/m.test(fm)) hard.push(`skills: ${p} has no description`);
