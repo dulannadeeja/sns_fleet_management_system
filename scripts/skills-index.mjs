@@ -14,7 +14,7 @@ const GROUPS = [
 const dir = join(ROOT, '.claude/skills');
 const all = readdirSync(dir).filter((d) => existsSync(join(dir, d, 'SKILL.md'))).sort();
 const meta = (d) => {
-  const fm = /^---\n([\s\S]*?)\n---/.exec(read(`.claude/skills/${d}/SKILL.md`))?.[1] ?? '';
+  const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(read(`.claude/skills/${d}/SKILL.md`))?.[1] ?? '';
   const desc = (/^description:\s*("?)([\s\S]*?)\1\s*$/m.exec(fm)?.[2] ?? '').replace(/\s+/g, ' ').trim();
   const user = /^disable-model-invocation:\s*true/m.test(fm) ? 'you (/' + d + ')' : 'you or the agent';
   const paths = /^paths:/m.test(fm) ? 'scoped' : '';
@@ -32,6 +32,6 @@ for (const [title, list] of groups) {
 }
 const target = '.claude/skills/README.md';
 if (process.argv.includes('--check')) {
-  if (!exists(target) || read(target) !== md) { console.error('Skills index is out of date. Run: node scripts/skills-index.mjs'); process.exit(1); }
+  if (!exists(target) || read(target).replace(/\r\n/g, '\n') !== md) { console.error('Skills index is out of date. Run: node scripts/skills-index.mjs'); process.exit(1); }
   console.log('Skills index up to date.');
 } else { writeFileSync(join(ROOT, target), md); console.log(`Wrote ${target} (${all.length} skills).`); }
