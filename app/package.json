@@ -48,6 +48,6 @@
     "test:at-coverage:strict": "node scripts/at-coverage.mjs --strict",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
-    "pretypecheck": "node scripts/sync-plate.mjs"
+    "pretypecheck": "node scripts/sync-plate.mjs && next typegen"
   }
 }
