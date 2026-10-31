@@ -16,7 +16,7 @@ One kind of money per block, with a fixed label, a figure or a time-of-day state
 - Customer debt
 - Partner payable (finalised)
 - Partner share (provisional, the partner cannot see it)
-- SNS earnings ("definition pending owner decision")
+- SNS earnings (defined in the system design, Dashboard and reporting: counted on the day each line becomes final)
 
 **Rules:**
 - **During the day, show "so far · not yet counted / not yet checked"**, not close-of-day-looking totals.

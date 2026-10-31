@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"Plate","components":[{"name":"BrandMark"},{"name":"NavRail"},{"name":"FleetStrip"},{"name":"Icon"},{"name":"StatusChip"},{"name":"StatePill"},{"name":"PlateBadge"},{"name":"VehicleSilhouette"},{"name":"VehicleImage"},{"name":"VehicleCard"},{"name":"VehicleRow"},{"name":"Button"},{"name":"AttentionBar"},{"name":"MoneyBlock"},{"name":"Checklist"},{"name":"BlockedPanel"},{"name":"ConfirmationBlock"},{"name":"HistoryLine"},{"name":"Notice"},{"name":"AppHeader"},{"name":"LanguageSwitch"},{"name":"BottomTabBar"}]} */
+/* @ds-bundle: {"format":4,"namespace":"Plate","components":[{"name":"BrandMark"},{"name":"NavRail"},{"name":"FleetStrip"},{"name":"Icon"},{"name":"StatusChip"},{"name":"StatePill"},{"name":"PlateBadge"},{"name":"VehicleSilhouette"},{"name":"VehicleImage"},{"name":"VehicleCard"},{"name":"VehicleRow"},{"name":"ListCard"},{"name":"Button"},{"name":"AttentionBar"},{"name":"MoneyBlock"},{"name":"Checklist"},{"name":"BlockedPanel"},{"name":"ConfirmationBlock"},{"name":"HistoryLine"},{"name":"Notice"},{"name":"AppHeader"},{"name":"LanguageSwitch"},{"name":"BottomTabBar"}]} */
 (function () {
   var React = window.React;
   var h = React.createElement;
@@ -161,13 +161,47 @@
         props.next ? h('div', { className: cx('rt-vcard-next', s === 'overdue' && 'rt-vcard-next-overdue') }, nb(props.next)) : null));
   }
 
+  /* Compact car line: thumbnail, plate and status on top, model · owner · next event below. A link when `href` is given. */
   function VehicleRow(props) {
     var lang = props.lang || 'si', s = props.status || 'available';
-    return h('button', { type: 'button', className: cx('rt-vrow', props.className), onClick: props.onClick },
+    var line = [props.model, props.partner ? 'Partner' + (props.partnerName ? ' · ' + props.partnerName : '') : 'SNS'].join(' · ');
+    return h(props.href ? 'a' : 'button', { type: props.href ? undefined : 'button', href: props.href, className: cx('rt-vrow', s === 'overdue' && 'rt-vrow-overdue', props.className), onClick: props.onClick, 'aria-label': props.plate + ' ' + props.model + ' ' + word(STATUS, s, lang) },
       h('span', { className: 'rt-thumb' }, h(Photo, props)),
-      h('span', { className: 'rt-stack', style: { gap: 0 } }, h(PlateBadge, { plate: props.plate, size: 'sm', lang: lang }), h('span', { className: 'rt-caption' }, props.model + (props.partner ? ' · Partner' : ''))),
-      h('span', { className: 'rt-caption', style: { color: s === 'overdue' ? 'var(--overdue)' : 'var(--ink)' } }, nb(props.next) || ''),
-      h(StatusChip, { status: s, lang: lang, size: 'sm', detail: props.statusDetail }));
+      h('span', { className: 'rt-vrow-main' },
+        h('span', { className: 'rt-vrow-top' }, h(PlateBadge, { plate: props.plate, size: 'sm', lang: lang }), h(StatusChip, { status: s, lang: lang, size: 'sm', detail: props.statusDetail })),
+        h('span', { className: 'rt-vrow-line' }, h('b', null, line), props.next ? ' · ' + nb(props.next) : null)),
+      h(Icon, { name: 'arrowRight', size: 18, className: 'rt-li-arrow' }));
+  }
+
+  /* ---------- Lists: one card, divided rows, each row opens what is behind it ---------- */
+  function ListRow(r) {
+    var value = r.figure != null ? h('span', { className: 'rt-li-fig' }, r.currency ? h('small', null, 'LKR ') : null, fmt(r.figure))
+      : r.meta ? h('span', { className: 'rt-li-meta' }, r.meta) : h('span', null);
+    var detail = r.plate || r.tag
+      ? h('span', { className: 'rt-li-stack' }, r.plate ? h('span', { className: 'rt-li-plate' }, h(PlateBadge, { plate: r.plate, size: 'sm' }), r.detail ? h('span', { className: 'rt-li-d' }, nb(r.detail)) : null) : (r.detail ? h('span', { className: 'rt-li-d' }, nb(r.detail)) : null), r.tag ? h('span', { className: 'rt-li-tag' }, r.tag) : null)
+      : r.detail ? h('span', { className: 'rt-li-d' }, nb(r.detail)) : null;
+    return h(r.href ? 'a' : 'div', { href: r.href, className: cx('rt-li', r.small && 'rt-li-sm', !r.href && 'rt-li-static') },
+      h('span', { className: cx('rt-li-ico', r.tone && 'rt-li-ico-' + r.tone) }, h(Icon, { name: r.icon || 'info', size: 20 })),
+      h('span', { className: 'rt-li-text' }, r.title ? h('span', { className: 'rt-li-t' }, bi(r.title)) : null, detail),
+      value,
+      r.href ? h(Icon, { name: 'arrowRight', size: 18, className: 'rt-li-arrow' }) : h('span', null));
+  }
+  function ListCard(props) {
+    var groups = props.groups || [{ rows: props.rows || [] }];
+    var Tag = props.heading === 'h3' ? 'h3' : 'h2';
+    return h(props.bare ? 'div' : 'section', { className: cx('rt-lc', props.columns === 2 && 'rt-lc-2', props.bare && 'rt-lc-bare', props.className) },
+      props.bare || !props.title ? null : h('div', { className: 'rt-lc-head' },
+        h(Tag, { className: 'rt-lc-title' }, bi(props.title)),
+        props.more ? h('a', { className: 'rt-lc-more', href: props.more.href }, bi(props.more.label), h(Icon, { name: 'arrowRight', size: 18 })) : null,
+        props.sub ? h('span', { className: 'rt-lc-sub' }, props.sub) : null),
+      groups.map(function (g, gi) {
+        return h(React.Fragment, { key: gi },
+          g.label ? h('div', { className: 'rt-lc-group' }, bi(g.label)) : null,
+          h('div', { className: 'rt-lc-rows' }, (g.rows || []).map(function (r, i) {
+            return r.car ? h(VehicleRow, Object.assign({ key: i }, r.car)) : r.link ? h('a', { key: i, className: 'rt-li rt-li-link', href: r.link.href }, h('span', null, bi(r.link.label)), h(Icon, { name: 'arrowRight', size: 18 })) : h(ListRow, Object.assign({ key: i }, r));
+          })));
+      }),
+      props.foot ? h('div', { className: 'rt-lc-foot' }, props.foot) : null);
   }
 
   /* ---------- Actions ---------- */
@@ -400,6 +434,6 @@
     return h('nav', { className: cx('rt-tabs', props.className), 'aria-label': 'Tabs' }, tabs);
   }
 
-  var api = { BrandMark: BrandMark, NavRail: NavRail, FleetStrip: FleetStrip, Icon: Icon, StatusChip: StatusChip, StatePill: StatePill, PlateBadge: PlateBadge, VehicleSilhouette: VehicleSilhouette, VehicleImage: VehicleImage, vehicleKey: vehicleKey, VehicleCard: VehicleCard, VehicleRow: VehicleRow, Button: Button, AttentionBar: AttentionBar, MoneyBlock: MoneyBlock, Checklist: Checklist, BlockedPanel: BlockedPanel, ConfirmationBlock: ConfirmationBlock, HistoryLine: HistoryLine, Notice: Notice, AppHeader: AppHeader, LanguageSwitch: LanguageSwitch, BottomTabBar: BottomTabBar, PageHeader: PageHeader, GameIcon: GameIcon, LauncherTile: LauncherTile, LauncherGrid: LauncherGrid, EmptyState: EmptyState, formatLKR: fmt, words: { status: STATUS, state: STATE } };
+  var api = { BrandMark: BrandMark, NavRail: NavRail, FleetStrip: FleetStrip, Icon: Icon, StatusChip: StatusChip, StatePill: StatePill, PlateBadge: PlateBadge, VehicleSilhouette: VehicleSilhouette, VehicleImage: VehicleImage, vehicleKey: vehicleKey, VehicleCard: VehicleCard, VehicleRow: VehicleRow, ListCard: ListCard, ListRow: ListRow, Button: Button, AttentionBar: AttentionBar, MoneyBlock: MoneyBlock, Checklist: Checklist, BlockedPanel: BlockedPanel, ConfirmationBlock: ConfirmationBlock, HistoryLine: HistoryLine, Notice: Notice, AppHeader: AppHeader, LanguageSwitch: LanguageSwitch, BottomTabBar: BottomTabBar, PageHeader: PageHeader, GameIcon: GameIcon, LauncherTile: LauncherTile, LauncherGrid: LauncherGrid, EmptyState: EmptyState, formatLKR: fmt, words: { status: STATUS, state: STATE } };
   window.Plate = Object.assign(window.Plate || {}, api);
 })();

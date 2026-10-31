@@ -12,7 +12,7 @@ The sticky row of labelled counts at the top of every owner and admin screen. Ea
 **Rules:**
 - **The categories never double-count:**
     - **Overdue:** cars past their deadline.
-    - **Open items:** unresolved differences, unmatched payments and morning-check mismatches.
+    - **Open items:** unresolved differences, unmatched payments, morning-check mismatches and reservations flagged for attention (a reserved car late back or under repair, ST-18.1).
     - **Waiting for admin:** staff requests and allocations only an admin can decide.
     - **Today's decisions:** decisions staff took with a reason, such as a waiver or an override.
 - **It always counts the whole business**, even when a panel below is narrowed to one car.

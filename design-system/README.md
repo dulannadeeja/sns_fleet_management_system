@@ -44,7 +44,7 @@ Image paths inside the bundle are written from the repository root (`design-syst
 
 ## Components
 
-AppHeader, AttentionBar, BlockedPanel, BottomTabBar, BrandMark, Button, Checklist, ConfirmationBlock, EmptyState, FleetStrip, GameIcon, HistoryLine, Icon, LanguageSwitch, LauncherTile and LauncherGrid, MoneyBlock, NavRail, Notice, PageHeader, PlateBadge, StatePill, StatusChip, VehicleCard, VehicleImage, VehicleRow, VehicleSilhouette (superseded by VehicleImage). Also `Plate.formatLKR(n)` and `Plate.vehicleKey(model)`.
+AppHeader, AttentionBar, BlockedPanel, BottomTabBar, BrandMark, Button, Checklist, ConfirmationBlock, EmptyState, FleetStrip, GameIcon, HistoryLine, Icon, LanguageSwitch, LauncherTile and LauncherGrid, ListCard (with ListRow), MoneyBlock, NavRail, Notice, PageHeader, PlateBadge, StatePill, StatusChip, VehicleCard, VehicleImage, VehicleRow, VehicleSilhouette (superseded by VehicleImage). Also `Plate.formatLKR(n)` and `Plate.vehicleKey(model)`.
 
 ## When you change something here
 

@@ -61,7 +61,7 @@
   },
   "02-Home-NeedsAttention-Desktop.dc.html": {
    "expand": "fill",
-   "h": 958,
+   "h": 1091,
    "is_interactive": true,
    "page": "plate",
    "title": "02.3 Needs attention · Desktop",
@@ -70,7 +70,7 @@
    "y": 3059
   },
   "02-Home-NeedsAttention-Phone.dc.html": {
-   "h": 1082,
+   "h": 1679,
    "is_interactive": true,
    "page": "plate",
    "title": "02.3 Needs attention · Phone",
@@ -80,7 +80,7 @@
   },
   "02-Home-OwnerHome-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1770,
+   "h": 1758,
    "is_interactive": true,
    "page": "plate",
    "title": "02.1 Owner home · Desktop",
@@ -89,7 +89,7 @@
    "y": 3059
   },
   "02-Home-OwnerHome-Phone.dc.html": {
-   "h": 2361,
+   "h": 2411,
    "is_interactive": true,
    "page": "plate",
    "title": "02.1 Owner home · Phone",
@@ -127,7 +127,7 @@
   },
   "02-Home-StaffHome-Desktop.dc.html": {
    "expand": "fill",
-   "h": 980,
+   "h": 983,
    "is_interactive": true,
    "page": "plate",
    "title": "02.2 Staff home · Desktop",
@@ -136,7 +136,7 @@
    "y": 3059
   },
   "02-Home-StaffHome-Phone.dc.html": {
-   "h": 1331,
+   "h": 1344,
    "is_interactive": true,
    "page": "plate",
    "title": "02.2 Staff home · Phone",
@@ -895,7 +895,7 @@
    "y": 42829
   },
   "09-Money-EveningCheck-Phone.dc.html": {
-   "h": 3411,
+   "h": 3434,
    "is_interactive": true,
    "page": "plate",
    "title": "09.8 Evening money check · Phone",
@@ -924,7 +924,7 @@
   },
   "09-Money-MoneyToday-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1711,
+   "h": 1777,
    "is_interactive": true,
    "page": "plate",
    "title": "09.1 Money today · Desktop",
@@ -933,7 +933,7 @@
    "y": 39619
   },
   "09-Money-MoneyToday-Phone.dc.html": {
-   "h": 2990,
+   "h": 2649,
    "is_interactive": true,
    "page": "plate",
    "title": "09.1 Money today · Phone",
