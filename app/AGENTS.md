@@ -1,6 +1,6 @@
 # app/: the SNS Rent Car application (rank 7)
 
-Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The skeleton does not exist yet: creating it with the scripts below is the first Phase 1 ticket.
+Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place (ticket #8): Next.js, next-intl, Vitest and Playwright. The database, sign-in, jobs and `src/ui/` come with the next Phase 1 tickets.
 
 ## Layout
 `src/app/` routes by PRD module · `src/modules/<module>/` business rules and database access, no React · `src/db/` schema and SQL migrations · `src/ui/` Plate components · `src/documents/` printouts 16.1–16.7 · `src/jobs/` pg-boss jobs · `src/i18n/` `si.json`, `en.json` · `tests/at/` one test per AT-nn.
@@ -11,11 +11,12 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 | Install | `npm ci` |
 | Types | `npm run typecheck` |
 | Lint and format | `npm run lint` |
-| Rule and AT tests (needs the test Postgres: `npm run db:test:up`) | `npm run test` |
+| Rule and AT tests | `npm run test` (the AT tests will need the test Postgres: `npm run db:test:up`, not yet added) |
 | One test | `npx vitest run tests/at/at-03.test.ts` |
-| Every AT-nn has a test | `npm run test:at-coverage` |
-| Browser journeys | `npm run test:e2e` |
-| Migrations | `npm run db:generate`, then review the SQL; `npm run db:migrate` |
+| Which AT-nn have a test | `npm run test:at-coverage` (lists; `test:at-coverage:strict` fails on any gap: the release gate) |
+| Browser journeys (Chromium, desktop and phone sizes; first run `npx playwright install chromium`) | `npm run test:e2e` |
+| Migrations (not yet added) | `npm run db:generate`, then review the SQL; `npm run db:migrate` |
+| Build (checks Sinhala and English have the same words first) | `npm run build` |
 | Dev server | `npm run dev` |
 
 ## Rules (details in TRD › Integrity rules)
@@ -25,3 +26,13 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 - Calculations read the rental's saved terms, never the car's live package. Times are read in Asia/Colombo.
 - No business rule is invented here: if the system design, PRD or TRD does not say it, stop and ask.
 - Work test-first (skill: tdd-workflow); UI from `src/ui/` only (skill: sns-plate-component); text only from `src/i18n/`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
