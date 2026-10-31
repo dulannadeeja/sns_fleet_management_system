@@ -24,7 +24,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 - Money is whole-rupee integers; a partner share is rounded down in one shared function (`src/lib/money.ts` · `splitShare`); SNS takes the rest.
 - Earning lines, payments, payouts, adjustments, cash movements and audit events are insert-only. A correction is a new dated line. Each insert-only table gets a trigger refusing UPDATE, DELETE and TRUNCATE, and its migration grants the app role `sns_app` only SELECT and INSERT (see `src/db/migrations/0001`, `0002`).
 - Rows in insert-only tables can never be removed, also in the test database: a test tags its own rows (a random id) and never counts a whole table.
-- `splitShare` refuses negative amounts: how a negative line splits is not decided yet; ask before allowing it.
+- `splitShare`: a negative line (a correction) is the exact mirror of the positive one (DN-21, AT-84).
 - Every server action: `requirePermission`, validate input, one transaction, the activity-log entry in that transaction.
 - Calculations read the rental's saved terms, never the car's live package. Times are read in Asia/Colombo.
 - No business rule is invented here: if the system design, PRD or TRD does not say it, stop and ask.

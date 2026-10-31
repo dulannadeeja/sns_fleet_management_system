@@ -8,7 +8,7 @@ describe('splitShare', () => {
   });
 
   it('always adds up to the amount', () => {
-    for (const amount of [0, 1, 99, 4500, 5750, 123457]) {
+    for (const amount of [0, 1, 99, 4500, 5750, 123457, -1, -5750]) {
       for (const bp of [0, 1, 7500, 8500, 10000]) {
         const { partner, sns } = splitShare(amount, bp);
         expect(partner + sns).toBe(amount);
@@ -17,8 +17,19 @@ describe('splitShare', () => {
     }
   });
 
-  it('refuses a negative amount: how a negative line splits is not decided yet', () => {
-    expect(() => splitShare(-5750, 8500)).toThrow(/not decided/);
+  it('splits a negative line as the mirror of the positive one (DN-21; AT-84 figures)', () => {
+    expect(splitShare(-5750, 8500)).toEqual({ partner: -4887, sns: -863 });
+  });
+
+  it('a full correction undoes the original to the rupee', () => {
+    for (const amount of [1, 99, 5750, 123457]) {
+      for (const bp of [1, 7500, 8500, 9999]) {
+        const plus = splitShare(amount, bp);
+        const minus = splitShare(-amount, bp);
+        expect(plus.partner + minus.partner).toBe(0);
+        expect(plus.sns + minus.sns).toBe(0);
+      }
+    }
   });
 
   it('refuses amounts that are not whole rupees', () => {

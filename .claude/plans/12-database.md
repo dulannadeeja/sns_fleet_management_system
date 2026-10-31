@@ -54,7 +54,7 @@ Change:
 
 ## Deviations (after review, 31 Oct 2026)
 - The app role `sns_app` is built here after all (migration 0002, tested with `SET ROLE`), so TRD §5 and §13 are both met; the server setup only gives it a login.
-- `splitShare` refuses negative amounts: the system design does not say how a negative line splits (an owner decision, not made here).
+- `splitShare` first refused negative amounts (not decided); the owner then decided DN-21 on 31 Oct 2026: a negative line is the mirror of a positive one (AT-84).
 - The database client sets the session time zone to Asia/Colombo; the test database is migrated fresh in its own test; the password never appears in an error.
 - `server-only` is stubbed for tests; `DATABASE_URL` must be set for the app.
 - `.claude/plans/` is no longer ignored, in its own commit, so plans ride into PRs as the plan-ticket skill says.

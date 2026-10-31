@@ -20,7 +20,7 @@ Status: written with Dulan, 26 Oct 2026, for review. Technical choices are Dulan
 | T8 | Email | Resend free plan, sending from the SNS domain | Matches the proposal's email cost of LKR 0 |
 | T9 | Interface | The 26 Plate components ported to typed React components with plain CSS from the Plate tokens; no Tailwind or UI kit | One place per change; screens match the designs |
 | T10 | Languages | next-intl with `si.json` and `en.json` | Every word in one place per language; missing words caught at build |
-| T11 | Tests | Every acceptance scenario AT-01 to AT-83 is an automated test named after it | The system design's checks are the release gate |
+| T11 | Tests | Every acceptance scenario AT-01 to AT-84 is an automated test named after it | The system design's checks are the release gate |
 | T12 | Monitoring | Free uptime check and free-tier error tracking alerting Dulan; backup failures alert Dulan and show on the owner's home | Recovery within 4 working hours needs fast alerts; LKR 0 a month |
 
 ## 2. Architecture
@@ -91,7 +91,7 @@ Each row implements a rule from the system design; the AT that proves it is list
 | Rule | How | AT |
 | --- | --- | --- |
 | A car is held by one rental or reservation on any day | `btree_gist` exclusion constraint on (vehicle, held date range) across segments and reservations; handover takes a row lock on the car | AT-08, AT-30, AT-32 |
-| Money is whole rupees | Integer columns (`bigint` rupees), never floating point; a partner's share is `floor(amount × share)` and SNS takes the remainder, computed in one function | AT-03, AT-70 |
+| Money is whole rupees | Integer columns (`bigint` rupees), never floating point; a partner's share is `floor(amount × share)` and SNS takes the remainder, computed in one function; a negative line mirrors a positive one: `−floor(|amount| × share)` (DN-21) | AT-03, AT-70, AT-84 |
 | Final money is never edited | Earning lines, payments, payouts, adjustments, cash movements and audit events are insert-only: the app's database role has no UPDATE or DELETE on them, and a trigger rejects either | AT-16, AT-78 |
 | A payout or payment is recorded once | Each request carries an idempotency key with a unique constraint; payouts lock the partner's balance row (`SELECT … FOR UPDATE`) | AT-26, AT-44 |
 | Rentals keep their terms | Terms are copied into `rental_terms_snapshot` and each segment when it starts; calculations read only the snapshot | AT-05, AT-31 |

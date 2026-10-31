@@ -367,7 +367,7 @@ SNS pays partner owners even when the customer has not paid. Customer receivable
 
 Expense responsibility depends on the expense and agreement. Owner-responsible expenses paid by SNS are deducted from the owner's earnings before cash-out or repaid separately. Track the remaining balance to prevent double recovery. If deductions exceed earnings, the balance stays negative until covered by later earnings, with the option of separate repayment.
 
-Final earnings lines cannot be edited. Corrections appear as traceable adjustment lines dated when they are made. Overpayments caused by approved rental reductions are recovered from later earnings.
+Final earnings lines cannot be edited. Corrections appear as traceable adjustment lines dated when they are made; a negative line splits as the mirror of a positive one ([Derived integrity controls](#173-derived-integrity-controls), AT-84). Overpayments caused by approved rental reductions are recovered from later earnings.
 
 The business day closes when staff close it, or at 11:59 PM if nobody does (§9). Paying a partner in cash at the branch is allowed and shows as its own line in the drawer (§9). Confirmed: agreed by the owner, recorded by Dulan.
 
@@ -531,7 +531,7 @@ This section organises the confirmed behaviour for engineering. The stack and ho
 ### 17.3 Derived integrity controls
 
 - Enforce vehicle exclusivity at the server/database level, not only in the screen.
-- Use exact decimal/minor-unit monetary arithmetic. Every amount is kept and shown in whole rupees: bills, payments, refunds and deposits are whole; a partner's share of each earnings line is rounded down to the rupee and SNS takes the difference, so the shares always add up to the charge. Confirmed: agreed by the owner, recorded by Dulan.
+- Use exact decimal/minor-unit monetary arithmetic. Every amount is kept and shown in whole rupees: bills, payments, refunds and deposits are whole; a partner's share of each earnings line is rounded down to the rupee and SNS takes the difference, so the shares always add up to the charge. Confirmed: agreed by the owner, recorded by Dulan. A negative line (a correction or adjustment that reduces earnings) splits as the exact mirror of the matching positive line: the partner's share is rounded toward zero and SNS takes the difference, so a full correction undoes the original to the rupee (for example −5,750 at 85%: partner −4,887, SNS −863). Confirmed 31 Oct 2026: agreed by the owner, recorded by Dulan.
 - Record payout and payment operations atomically; make retries safe against duplication.
 - Reject invalid/missing odometer inputs; define a controlled correction path for errors or meter replacement.
 - Retain original approved financial records and add adjustments rather than destructive edits.
@@ -637,6 +637,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-81 | A rental was handed over on paper at 10:00 during an outage and entered at 14:00 | It shows pickup 10:00, marked "entered after outage" with who entered it at 14:00, and appears in the owner's daily summary |
 | AT-82 | The monthly restore test is run | Last night's backup restores to a test copy and the day's records are present |
 | AT-83 | A partner is added and the agreement printed but not yet marked signed | Cash-outs are not held back; the partner page shows "agreement not yet signed" until staff record the date |
+| AT-84 | An approved correction takes back a whole 5,750 line on a partner car at 85% | Adjustment line −5,750: partner −4,887, SNS −863; with the original line the partner and SNS each net to 0 |
 
 ## 20. Readiness and next steps
 
