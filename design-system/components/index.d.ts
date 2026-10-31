@@ -35,9 +35,17 @@ interface VehicleData { plate: string; model: string; status: VehicleStatus; sta
 /** Gallery card: photo + status over the corner, large plate, model · ownership, one warning, one next-event line. */
 export interface VehicleCardProps extends VehicleData { warning?: { label: string; icon?: IconName }; canAddPhoto?: boolean }
 export declare function VehicleCard(props: VehicleCardProps): React.ReactElement;
-/** Compact row: thumbnail, plate, model, next event, status chip. */
-export interface VehicleRowProps extends VehicleData {}
+/** Compact car line: thumbnail; plate and status chip; model · owner · next event. A link when `href` is given. */
+export interface VehicleRowProps extends VehicleData { href?: string }
 export declare function VehicleRow(props: VehicleRowProps): React.ReactElement;
+
+/** One row of a ListCard: icon, title, detail, one value (figure or meta), arrow. A link when `href` is given. */
+export interface ListRowProps { icon?: IconName; tone?: 'warning' | 'overdue' | 'key'; title?: string; detail?: string; plate?: string; tag?: string; figure?: number | string; currency?: boolean; meta?: string; href?: string; small?: boolean }
+export interface ListGroup { label?: string; rows: (ListRowProps | { car: VehicleRowProps } | { link: { label: string; href: string } })[] }
+/** A card of divided rows, optionally in labelled groups, with a "see all" link and a footnote. One kind of thing per row; figures never summed across rows. */
+export interface ListCardProps { title?: string; sub?: string; more?: { label: string; href: string }; groups?: ListGroup[]; rows?: ListGroup['rows']; foot?: string; columns?: 1 | 2; heading?: 'h2' | 'h3'; bare?: boolean; className?: string }
+export declare function ListCard(props: ListCardProps): React.ReactElement;
+export declare function ListRow(props: ListRowProps): React.ReactElement;
 
 /** A verb with an icon, 48px tall. One primary per screen. */
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> { variant?: 'primary' | 'secondary' | 'quiet' | 'danger'; icon?: IconName; full?: boolean }
@@ -118,7 +126,7 @@ declare global {
   interface Window {
     Plate: {
       Icon: typeof Icon; StatusChip: typeof StatusChip; StatePill: typeof StatePill; PlateBadge: typeof PlateBadge; VehicleSilhouette: typeof VehicleSilhouette; VehicleImage: typeof VehicleImage; vehicleKey: typeof vehicleKey;
-      VehicleCard: typeof VehicleCard; VehicleRow: typeof VehicleRow; Button: typeof Button; AttentionBar: typeof AttentionBar; MoneyBlock: typeof MoneyBlock;
+      VehicleCard: typeof VehicleCard; VehicleRow: typeof VehicleRow; ListCard: typeof ListCard; ListRow: typeof ListRow; Button: typeof Button; AttentionBar: typeof AttentionBar; MoneyBlock: typeof MoneyBlock;
       Checklist: typeof Checklist; BlockedPanel: typeof BlockedPanel; ConfirmationBlock: typeof ConfirmationBlock; HistoryLine: typeof HistoryLine; Notice: typeof Notice;
       AppHeader: typeof AppHeader; LanguageSwitch: typeof LanguageSwitch; NavRail: typeof NavRail; FleetStrip: typeof FleetStrip; BrandMark: typeof BrandMark; BottomTabBar: typeof BottomTabBar; PageHeader: typeof PageHeader; GameIcon: typeof GameIcon; LauncherTile: typeof LauncherTile; LauncherGrid: typeof LauncherGrid; EmptyState: typeof EmptyState;
       formatLKR: (n: number) => string;
