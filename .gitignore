@@ -12,5 +12,4 @@ __pycache__/
 screens/tools/.page.html
 .claude/settings.local.json
 .claude/reports/
-.claude/plans/
 CLAUDE.local.md
