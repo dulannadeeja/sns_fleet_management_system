@@ -136,6 +136,7 @@ Every decision that was Open in the system design, settled with Dulan for the ow
 | DN-18 | At most one day lost, back within 4 working hours, backups kept 30 days, restore tested monthly | [Operational and security decisions still required](SNS_SYSTEM_DESIGN.md#18-operational-and-security-decisions-still-required) | AT-82 |
 | DN-19 | Next.js and PostgreSQL on one 2 GB DigitalOcean server with daily backups; private Cloudflare R2 for documents and an off-site backup copy; about LKR 5,000 a month | [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context) | — |
 | DN-20 | The partner agreement is printed, signed on paper, and staff record the date; SNS supplies both agreements' wording, Dulan enters it in Sinhala and English, the owner approves each version | [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports) | AT-83 |
+| DN-21 | A negative earnings line (a correction) splits as the mirror of a positive one: the partner's share rounds toward zero and SNS takes the difference, so a full correction undoes the original; decided by the owner 31 Oct 2026 | [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls) | AT-84 |
 
 ## 8. Proposed, not yet agreed
 
@@ -726,9 +727,9 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Roles:** Staff request; an admin approves or rejects (ST-10.2).
 - **Story:** As staff, I ask for a wrong payment to be corrected, saying what is wrong, what it should be and why, so that the fix is approved and both records stay.
 - **Rules:** a correction needs an admin's approval; the original is never changed or deleted; an approved correction is a new dated line, and earnings already final change only by an adjustment line. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs); PR-07.
-- **Checks:** AT-16 "An approved correction affects earnings already final or cashed out: the original lines stay; a dated adjustment line changes the balance".
+- **Checks:** AT-16 "An approved correction affects earnings already final or cashed out: the original lines stay; a dated adjustment line changes the balance". AT-84 "An approved correction takes back a whole 5,750 line at 85%: partner −4,887, SNS −863; both net to 0".
 - **Screens:** 09.5 Payment correction request.
-- **Decided:** DN-01 (nobody approves their own request).
+- **Decided:** DN-01 (nobody approves their own request), DN-21 (a negative line splits as the mirror of a positive one).
 
 ### 08 Customers: write-off
 

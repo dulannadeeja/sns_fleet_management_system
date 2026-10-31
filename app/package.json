@@ -4,16 +4,21 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
+    "drizzle-orm": "^0.45.4",
     "next": "^16.4.3",
     "next-intl": "^4.14.9",
+    "pg": "^8.23.1",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "drizzle-kit": "^0.31.11",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.3",
     "typescript": "^6.0.3",
@@ -28,6 +33,10 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "test:at-coverage": "node scripts/at-coverage.mjs",
-    "test:at-coverage:strict": "node scripts/at-coverage.mjs --strict"
+    "test:at-coverage:strict": "node scripts/at-coverage.mjs --strict",
+    "db:test:up": "docker compose -f docker/compose.test.yml up -d --wait",
+    "db:test:down": "docker compose -f docker/compose.test.yml down",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   }
 }
