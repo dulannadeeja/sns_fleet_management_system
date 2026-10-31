@@ -4,7 +4,7 @@ export { BrandMark, type BrandMarkProps } from './BrandMark';
 export { LanguageSwitch, type LanguageSwitchProps } from './LanguageSwitch';
 export { AppHeader, type AppHeaderProps } from './AppHeader';
 export { PageHeader, type PageHeaderProps } from './PageHeader';
-export { NavRail, type NavRailProps } from './NavRail';
+export { NavRail, type NavRailProps, type NavRailLabels } from './NavRail';
 export { BottomTabBar, type BottomTabBarProps } from './BottomTabBar';
 export { bi, nb } from './text';
 export type { Lang, IconName, NavItem } from './types';

@@ -24,6 +24,7 @@ The desktop navigation: a 264px labelled sidebar (chosen 25 Oct 2026). The SNS l
 - **Counts sit at the end of the line.** They're red only for overdue (`badgeTone: 'overdue'`) and dark for things waiting on this person, such as approvals. A count is never the only signal; the screen behind it says what it is.
 - **The active item takes the plate-yellow pill,** as the old rail did.
 - **The search stays in `AppHeader`;** the sidebar doesn't repeat it.
+- **`labels`** (menu, overdue, waiting, show): the words screen readers hear for the menu and after a count. Pass them from the app's language files; the defaults are Sinhala · English or English.
 
 Pattern references (Mobbin):
 - [Jobber — labelled items in groups](https://mobbin.com/screens/9d13e7c9-3793-49e8-b1b8-016d669aec25)

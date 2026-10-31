@@ -31,6 +31,7 @@
   "scripts": {
     "build": "vitest run tests/messages.test.ts && next build",
     "prebuild": "node scripts/sync-plate.mjs",
+    "check:plate": "node scripts/sync-plate.mjs --check",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:test:down": "docker compose -f docker/compose.test.yml down",
@@ -38,6 +39,7 @@
     "dev": "next dev",
     "predev": "node scripts/sync-plate.mjs",
     "lint": "eslint .",
+    "prelint": "node scripts/sync-plate.mjs",
     "start": "next start",
     "sync:plate": "node scripts/sync-plate.mjs",
     "test": "vitest run",

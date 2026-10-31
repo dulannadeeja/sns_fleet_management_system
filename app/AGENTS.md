@@ -23,7 +23,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 ## Plate in the app (`src/ui/`)
 - `scripts/sync-plate.mjs` copies the tokens, styles, fonts, logo and line icons from `design-system/` into `src/ui/plate/` and `public/plate/` before `dev`, `build`, `test` and `typecheck`. The copies are git-ignored: never edit them; change `design-system/` (skill: sns-plate-component). `--check` fails on a stale copy.
 - Components keep the names, props and `rt-*` classes of `design-system/components/` (`index.d.ts`, `bundle.js`); port one when a ticket first needs it, with a test of its states. A component with event handlers is a client component (`'use client'`).
-- Words come from `src/i18n/` and are passed in as props. `/plate` (development only) previews the frame: `/plate?device=phone` for the phone.
+- Words come from `src/i18n/` and are passed in as props (`labels`, `label`, `langLabel`, `backLabel`, `newLabel`, `search`). The menu's group headings and English echoes are the design system's own bilingual words; pass `group` with every menu item so English labels group correctly. `/plate` (development only; 404 in production) previews the frame: `/plate?device=phone` for the phone.
 
 ## Rules (details in TRD › Integrity rules)
 - Money is whole-rupee integers; a partner share is rounded down in one shared function (`src/lib/money.ts` · `splitShare`); SNS takes the rest.

@@ -21,7 +21,13 @@
   "frame": {
     "search": "අංකය / මාදිලිය / නම හොයන්න",
     "newRental": "අලුත් කුලියක් · New rental",
-    "back": "ආපසු · Back"
+    "back": "ආපසු · Back",
+    "menu": "ප්‍රධාන මෙනුව",
+    "overdue": "පරක්කු",
+    "waiting": "බලාපොරොත්තුවෙන්",
+    "show": "ඒවා බලන්න",
+    "language": "භාෂාව",
+    "owner": "අයිතිකරු"
   },
   "plate": {
     "title": "Plate · app frame",

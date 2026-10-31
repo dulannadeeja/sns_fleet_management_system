@@ -25,6 +25,11 @@ describe('LanguageSwitch', () => {
     await userEvent.click(screen.getByRole('button', { name: 'EN' }));
     expect(onChange).toHaveBeenCalledWith('en');
   });
+  it('is marked unavailable while there is nothing to switch', () => {
+    render(<LanguageSwitch lang="en" label="Language" />);
+    expect(screen.getByRole('group', { name: 'Language' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'සිං' }).getAttribute('aria-disabled')).toBe('true');
+  });
 });
 
 describe('AppHeader', () => {
@@ -39,6 +44,11 @@ describe('AppHeader', () => {
   it('leaves out New rental and search when not given (partners)', () => {
     render(<AppHeader title="මගේ මුදල් · My earnings" />);
     expect(screen.queryByRole('link')).toBeNull();
+  });
+  it('can show a plain search box and the logo', () => {
+    const { container } = render(<AppHeader title="අද · Today" search="හොයන්න" showMark />);
+    expect(screen.getByRole('searchbox', { name: 'හොයන්න' })).toBeTruthy();
+    expect(container.querySelector('.rt-mark img')).toBeTruthy();
   });
 });
 
@@ -79,7 +89,33 @@ describe('NavRail', () => {
     const count = screen.getByRole('link', { name: '1 overdue, show them' });
     expect(count.getAttribute('href')).toBe('/rentals?status=overdue');
     expect(count.className).toContain('rt-side-badge-overdue');
-    expect(screen.getByLabelText('3 waiting').tagName).toBe('SPAN');
+    const waiting = screen.getByText('3', { selector: '.rt-side-badge' });
+    expect(waiting.tagName).toBe('SPAN');
+    expect(waiting.textContent).toBe('3 waiting');
+  });
+
+  it('marks only the current page', () => {
+    render(<NavRail items={items} />);
+    expect(screen.getByRole('link', { name: /වාහන/ }).getAttribute('aria-current')).toBeNull();
+  });
+
+  it('takes its screen-reader words as props, for the English interface', () => {
+    const english = [
+      { icon: 'home' as const, label: 'Today', href: '/', group: 0 as const },
+      { icon: 'car' as const, label: 'Cars', href: '/cars', group: 1 as const, badge: 2, badgeHref: '/cars?x' },
+      { icon: 'settings' as const, label: 'Settings', href: '/settings', group: 9 as const },
+    ];
+    const { container } = render(<NavRail items={english} labels={{ menu: 'Main menu', waiting: 'waiting', show: 'show them' }} />);
+    expect(screen.getByRole('navigation', { name: 'Main menu' })).toBeTruthy();
+    expect(container.querySelector('.rt-side-foot')?.textContent).toContain('Settings');
+    expect(screen.getByRole('link', { name: '2 waiting, show them' })).toBeTruthy();
+  });
+
+  it('passes a click on an item to its handler', async () => {
+    const onClick = vi.fn((e?: unknown) => (e as { preventDefault?: () => void })?.preventDefault?.());
+    render(<NavRail items={[{ icon: 'car', label: 'වාහන', onClick }]} />);
+    await userEvent.click(screen.getByRole('link', { name: /වාහන/ }));
+    expect(onClick).toHaveBeenCalled();
   });
 });
 
@@ -93,15 +129,23 @@ describe('BottomTabBar', () => {
 
   it('has labelled tabs, the current one marked, and badges', () => {
     render(<BottomTabBar tabs={tabs} />);
-    const nav = screen.getByRole('navigation', { name: 'Tabs' });
+    const nav = screen.getByRole('navigation', { name: 'ප්‍රධාන මෙනුව · Main menu' });
     expect(within(nav).getAllByRole('link').map((a) => a.textContent)).toEqual(['වාහන', 'කුලී', 'ලාච්චුව', '2තවත්']);
     expect(within(nav).getByRole('link', { name: 'වාහන' }).getAttribute('aria-current')).toBe('page');
   });
 
   it('puts the centre action in the middle, with its label', () => {
-    render(<BottomTabBar tabs={tabs} fab={{ icon: 'plus', label: 'අලුත්', href: '/rentals/new' }} />);
-    const links = within(screen.getByRole('navigation', { name: 'Tabs' })).getAllByRole('link');
+    render(<BottomTabBar tabs={tabs} fab={{ icon: 'plus', label: 'අලුත්', href: '/rentals/new' }} label="Main menu" />);
+    const links = within(screen.getByRole('navigation', { name: 'Main menu' })).getAllByRole('link');
     expect(links[2].textContent).toBe('අලුත්');
     expect(links[2].className).toContain('rt-tab-fab');
+  });
+
+  it('uses buttons for tabs without a link', async () => {
+    const onClick = vi.fn();
+    render(<BottomTabBar tabs={[{ icon: 'car', label: 'වාහන', onClick }]} fab={{ label: 'අලුත්', onClick }} />);
+    await userEvent.click(screen.getByRole('button', { name: 'වාහන' }));
+    await userEvent.click(screen.getByRole('button', { name: 'අලුත්' }));
+    expect(onClick).toHaveBeenCalledTimes(2);
   });
 });

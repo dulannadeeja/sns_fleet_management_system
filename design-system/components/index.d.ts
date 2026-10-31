@@ -83,7 +83,8 @@ export interface NoticeProps { tone?: 'info' | 'warning' | 'danger'; title?: str
 export declare function Notice(props: NoticeProps): React.ReactElement;
 
 /** "සිං | EN" switch; each option in its own script. `onLight` for the light top bar. */
-export interface LanguageSwitchProps { lang?: Lang; onChange?: (lang: Lang) => void; onLight?: boolean }
+/** Without onChange the buttons are marked aria-disabled (nothing to switch yet). `label`: the group's name for screen readers. */
+export interface LanguageSwitchProps { lang?: Lang; onChange?: (lang: Lang) => void; onLight?: boolean; label?: string }
 export declare function LanguageSwitch(props: LanguageSwitchProps): React.ReactElement;
 
 /** The SNS Rent Car logo (supplied file). `variant="mark"`: the yellow "S" alone, for app icons only. */
@@ -96,7 +97,9 @@ export declare function AppHeader(props: AppHeaderProps): React.ReactElement;
 
 /** Desktop navigation: 264px labelled sidebar grouped by job; logo on top, Settings at the bottom. Trimmed by permission. New rental lives in AppHeader. */
 export interface NavItem { icon: IconName; label: string; active?: boolean; badge?: number | string; badgeTone?: 'overdue' | 'waiting'; badgeHref?: string; group?: 0 | 1 | 2 | 3 | 9; en?: string; href?: string; onClick?: () => void }
-export interface NavRailProps { items: NavItem[]; newHref?: string; newLabel?: string; footer?: React.ReactNode; className?: string }
+/** `labels`: words for screen readers (the menu's name; after a count: overdue, waiting, and "show them" when the count is a link). Defaults are the design system's. */
+export interface NavRailLabels { menu?: string; overdue?: string; waiting?: string; show?: string }
+export interface NavRailProps { items: NavItem[]; newHref?: string; newLabel?: string; footer?: React.ReactNode; labels?: NavRailLabels; className?: string }
 export declare function NavRail(props: NavRailProps): React.ReactElement;
 
 /** Whole fleet as one tick per car, ordered overdue → available → rented → repair → unavailable, with a worded, linked legend. `warn` rings a tick (e.g. not found at the morning check). */
@@ -104,7 +107,7 @@ export interface FleetStripProps { cars: { plate: string; status: Exclude<Vehicl
 export declare function FleetStrip(props: FleetStripProps): React.ReactElement;
 
 /** Phone navigation: 4 tabs, icon above a visible label; optional raised centre action (`fab`) for the one most frequent task. */
-export interface BottomTabBarProps { tabs: NavItem[]; fab?: { icon?: IconName; label: string; href?: string; active?: boolean; onClick?: () => void }; className?: string }
+export interface BottomTabBarProps { tabs: NavItem[]; fab?: { icon?: IconName; label: string; href?: string; active?: boolean; onClick?: () => void }; label?: string; className?: string }
 export declare function BottomTabBar(props: BottomTabBarProps): React.ReactElement;
 
 /** One of the 44 SNS 3D icons. Only on launcher tiles, quick actions, empty states and done screens. */

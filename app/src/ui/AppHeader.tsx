@@ -1,3 +1,5 @@
+'use client';
+
 import { BrandMark } from './BrandMark';
 import { Icon } from './Icon';
 import { LanguageSwitch } from './LanguageSwitch';
@@ -5,7 +7,7 @@ import { bi, cx } from './text';
 import type { Lang } from './types';
 
 /** Light desktop top bar: page title + subtitle, search (a link to the search screen), New rental, language switch, initials (+ name and role at 1,100px and wider). */
-export interface AppHeaderProps { title: string; subtitle?: string; search?: string; searchHref?: string; newHref?: string; newLabel?: string; showMark?: boolean; user?: string; role?: string; lang?: Lang; onLang?: (lang: Lang) => void; className?: string }
+export interface AppHeaderProps { title: string; subtitle?: string; search?: string; searchHref?: string; newHref?: string; newLabel?: string; showMark?: boolean; user?: string; role?: string; lang?: Lang; onLang?: (lang: Lang) => void; langLabel?: string; className?: string }
 
 export function AppHeader(p: AppHeaderProps) {
   const initials = (p.user ?? '').split(' ').map((w) => w[0]).join('').slice(0, 2);
@@ -21,7 +23,7 @@ export function AppHeader(p: AppHeaderProps) {
       {p.newHref ? (
         <a className="rt-btn rt-btn-primary rt-header-new" href={p.newHref}><Icon name="plus" size={20} /><span>{bi(p.newLabel ?? 'අලුත් කුලියක් · New rental')}</span></a>
       ) : null}
-      <LanguageSwitch lang={p.lang} onChange={p.onLang} onLight />
+      <LanguageSwitch lang={p.lang} onChange={p.onLang} onLight label={p.langLabel} />
       {p.user ? (
         <div className="rt-header-user" title={p.user + (p.role ? ` · ${p.role}` : '')}>
           <span className="rt-avatar" aria-hidden="true">{initials}</span>

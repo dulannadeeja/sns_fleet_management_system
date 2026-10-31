@@ -16,6 +16,11 @@ describe('Icon', () => {
     const { getByRole } = render(<Icon name="search" title="හොයන්න · Search" />);
     expect(getByRole('img', { name: 'හොයන්න · Search' })).toBeTruthy();
   });
+  it('falls back to the info icon for an unknown name', () => {
+    const { container } = render(<Icon name={'constructor' as never} />);
+    const { container: info } = render(<Icon name="info" />);
+    expect(container.querySelector('svg')!.innerHTML).toBe(info.querySelector('svg')!.innerHTML);
+  });
   it('has every icon the design system has', () => {
     expect(iconNames).toEqual(expect.arrayContaining(['car', 'key', 'clockAlert', 'arrowLeft', 'arrowRight', 'plus', 'search', 'home', 'more']));
     expect(iconNames.length).toBe(45);

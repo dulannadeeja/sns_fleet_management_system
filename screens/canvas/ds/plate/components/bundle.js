@@ -325,9 +325,10 @@
   /* ---------- App chrome ---------- */
   function LanguageSwitch(props) {
     var lang = props.lang || 'si';
-    return h('div', { className: cx('rt-lang', props.onLight && 'rt-lang-light'), role: 'group', 'aria-label': 'භාෂාව · Language' },
-      h('button', { type: 'button', 'aria-pressed': lang === 'si' ? 'true' : 'false', lang: 'si', onClick: function () { props.onChange && props.onChange('si'); } }, 'සිං'),
-      h('button', { type: 'button', 'aria-pressed': lang === 'en' ? 'true' : 'false', lang: 'en', onClick: function () { props.onChange && props.onChange('en'); } }, 'EN'));
+    var off = !props.onChange;
+    return h('div', { className: cx('rt-lang', props.onLight && 'rt-lang-light'), role: 'group', 'aria-label': props.label || 'භාෂාව · Language' },
+      h('button', { type: 'button', 'aria-disabled': off ? 'true' : undefined, 'aria-pressed': lang === 'si' ? 'true' : 'false', lang: 'si', onClick: function () { props.onChange && props.onChange('si'); } }, 'සිං'),
+      h('button', { type: 'button', 'aria-disabled': off ? 'true' : undefined, 'aria-pressed': lang === 'en' ? 'true' : 'false', lang: 'en', onClick: function () { props.onChange && props.onChange('en'); } }, 'EN'));
   }
 
   /* The SNS logo, supplied by SNS: the yellow road "S" with the SNS RENT CAR wordmark.
@@ -366,11 +367,16 @@
       var g = it.group != null ? it.group : (NAV_GROUP[it.label] != null ? NAV_GROUP[it.label] : 0);
       if (g === 9) bottom.push(it); else (groups[g] = groups[g] || []).push(it);
     });
+    var L = Object.assign({ menu: 'ප්‍රධාන මෙනුව · Main menu', overdue: 'overdue', waiting: 'waiting', show: 'show them' }, props.labels);
     function link(it, i) {
       var en = it.en || NAV_EN[it.label];
       var tone = it.badgeTone === 'overdue';
-      var count = it.badge ? h(it.badgeHref ? 'a' : 'span', { className: cx('rt-side-badge', tone && 'rt-side-badge-overdue'), href: it.badgeHref,
-        'aria-label': it.badge + (tone ? ' overdue' : ' waiting') + (it.badgeHref ? ', show them' : '') }, it.badge) : null;
+      /* A count that is a link is named by aria-label; a plain count carries its word in a screen-reader-only span. */
+      var word = tone ? L.overdue : L.waiting;
+      var cls = cx('rt-side-badge', tone && 'rt-side-badge-overdue');
+      var count = !it.badge ? null : it.badgeHref
+        ? h('a', { className: cls, href: it.badgeHref, 'aria-label': it.badge + ' ' + word + ', ' + L.show }, it.badge)
+        : h('span', { className: cls }, it.badge, h('span', { className: 'rt-sr' }, ' ' + word));
       return h('div', { key: i, className: cx('rt-side-row', it.active && 'rt-side-row-active') },
         h('a', { href: it.href || '#', className: 'rt-side-item', 'aria-current': it.active ? 'page' : undefined, onClick: it.onClick, title: en ? it.label + ' · ' + en : it.label },
           h('span', { className: 'rt-side-ico' }, h(Icon, { name: it.icon, size: 20 })),
@@ -380,7 +386,7 @@
     var body = Object.keys(groups).sort().map(function (g) {
       return h('div', { key: g, className: 'rt-side-group' }, NAV_HEAD[g] ? h('div', { className: 'rt-side-head' }, bi(NAV_HEAD[g])) : null, groups[g].map(link));
     });
-    return h('nav', { className: cx('rt-side', props.className), 'aria-label': 'ප්‍රධාන මෙනුව · Main menu' },
+    return h('nav', { className: cx('rt-side', props.className), 'aria-label': L.menu },
       h('div', { className: 'rt-side-mark' }, h(BrandMark, { className: 'rt-side-logo' }), h(BrandMark, { variant: 'mark', className: 'rt-side-logo-mark' })),
       props.newHref ? h('a', { href: props.newHref, className: 'rt-btn rt-btn-primary rt-btn-full' }, h(Icon, { name: 'plus', size: 20 }), h('span', null, bi(props.newLabel || 'අලුත් කුලියක් · New rental'))) : null,
       h('div', { className: 'rt-side-groups' }, body),
@@ -431,7 +437,7 @@
       tabs.splice(mid, 0, h(props.fab.href ? 'a' : 'button', { key: 'fab', type: props.fab.href ? undefined : 'button', href: props.fab.href, className: 'rt-tab rt-tab-fab', 'aria-current': props.fab.active ? 'page' : undefined, onClick: props.fab.onClick },
         h('span', { className: 'rt-fab' }, h(Icon, { name: props.fab.icon || 'plus', size: 26 })), h('span', null, props.fab.label)));
     }
-    return h('nav', { className: cx('rt-tabs', props.className), 'aria-label': 'Tabs' }, tabs);
+    return h('nav', { className: cx('rt-tabs', props.className), 'aria-label': props.label || 'ප්‍රධාන මෙනුව · Main menu' }, tabs);
   }
 
   var api = { BrandMark: BrandMark, NavRail: NavRail, FleetStrip: FleetStrip, Icon: Icon, StatusChip: StatusChip, StatePill: StatePill, PlateBadge: PlateBadge, VehicleSilhouette: VehicleSilhouette, VehicleImage: VehicleImage, vehicleKey: vehicleKey, VehicleCard: VehicleCard, VehicleRow: VehicleRow, ListCard: ListCard, ListRow: ListRow, Button: Button, AttentionBar: AttentionBar, MoneyBlock: MoneyBlock, Checklist: Checklist, BlockedPanel: BlockedPanel, ConfirmationBlock: ConfirmationBlock, HistoryLine: HistoryLine, Notice: Notice, AppHeader: AppHeader, LanguageSwitch: LanguageSwitch, BottomTabBar: BottomTabBar, PageHeader: PageHeader, GameIcon: GameIcon, LauncherTile: LauncherTile, LauncherGrid: LauncherGrid, EmptyState: EmptyState, formatLKR: fmt, words: { status: STATUS, state: STATE } };

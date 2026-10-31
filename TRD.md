@@ -149,6 +149,8 @@ Jobs are singletons (never two at once) and safe to run twice.
 - **Deploy:** GitHub Actions runs lint, type check and all AT tests, builds one Docker image, and on a tagged release deploys over SSH: migrate, then start the new version; rolling back is starting the previous tag. Migrations only add (expand), so the previous version still runs during a rollback.
 - **Recovery:** at most one day lost, back within 4 working hours (DN-18): restore the droplet backup or rebuild from the repository and restore the latest R2 dump; the runbook is `app/docker/RECOVERY.md`, tested monthly.
 
+- **Build context:** the app's build copies Plate from `design-system/` and the fonts from `fonts/` (`app/scripts/sync-plate.mjs`), so the Docker build uses the repository root as its context, not `app/` alone.
+
 ## 11. Monitoring and logs
 
 - Free uptime check every few minutes and free-tier error tracking, both emailing Dulan. Personal data (names, NIC, phone, photos) is removed before anything is sent to the error tracker.

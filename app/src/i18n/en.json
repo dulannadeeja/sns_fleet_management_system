@@ -21,7 +21,13 @@
   "frame": {
     "search": "Search by plate, model or name",
     "newRental": "New rental",
-    "back": "Back"
+    "back": "Back",
+    "menu": "Main menu",
+    "overdue": "overdue",
+    "waiting": "waiting",
+    "show": "show them",
+    "language": "Language",
+    "owner": "Owner"
   },
   "plate": {
     "title": "Plate · app frame",
