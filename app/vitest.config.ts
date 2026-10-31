@@ -6,5 +6,5 @@ process.env.DATABASE_URL ||= 'postgres://postgres:postgres@localhost:5433/sns_te
 
 export default defineConfig({
   resolve: { alias: { 'server-only': fileURLToPath(new URL('./tests/setup/server-only.ts', import.meta.url)) } },
-  test: { include: ['tests/**/*.test.ts'], globalSetup: ['tests/setup/db.ts'] },
+  test: { include: ['tests/**/*.test.{ts,tsx}'], globalSetup: ['tests/setup/db.ts'] },
 });

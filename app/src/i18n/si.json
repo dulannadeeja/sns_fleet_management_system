@@ -1,1 +1,36 @@
-{"title":"SNS Rent Car"}
+{
+  "title": "SNS Rent Car",
+  "nav": {
+    "today": "අද",
+    "morningCheck": "උදේ check",
+    "cars": "වාහන",
+    "rentals": "කුලී",
+    "customers": "පාරිභෝගිකයෝ",
+    "money": "මුදල්",
+    "partners": "Partner ගණන්",
+    "payroll": "පඩි",
+    "approvals": "අනුමැති",
+    "maintenance": "නඩත්තුව",
+    "reports": "වාර්තා",
+    "settings": "සැකසුම්",
+    "drawer": "ලාච්චුව",
+    "attention": "අවධානයට",
+    "more": "තවත්",
+    "new": "අලුත්"
+  },
+  "frame": {
+    "search": "අංකය / මාදිලිය / නම හොයන්න",
+    "newRental": "අලුත් කුලියක් · New rental",
+    "back": "ආපසු · Back",
+    "menu": "ප්‍රධාන මෙනුව",
+    "overdue": "පරක්කු",
+    "waiting": "බලාපොරොත්තුවෙන්",
+    "show": "ඒවා බලන්න",
+    "language": "භාෂාව",
+    "owner": "අයිතිකරු"
+  },
+  "plate": {
+    "title": "Plate · app frame",
+    "subtitle": "උදාහරණ දත්ත · sample data, development only"
+  }
+}

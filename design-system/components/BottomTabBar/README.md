@@ -8,6 +8,7 @@ Every phone screen with tabs uses this component (39 screens, moved from hand-bu
 - **Never icon-only.** Mercury's icon-only bar is the counter-example.
 - **The owner gets:** වාහන · අවධානයට · මුදල් · අනුමැති · තවත් (Vehicles, Attention, Money, Approvals, More).
 - **An employee gets:** වාහන · කුලී · අලුත් · ලාච්චුව · තවත් (Vehicles, Rentals, New, Drawer, More).
+- **`label`**: the bar's name for screen readers (default "ප්‍රධාන මෙනුව · Main menu"); pass it from the app's language files.
 
 Pattern references (Mobbin):
 - [Turo host "Your car" — icon + label rows, status card with a word and a one-sentence explanation, labelled bottom tabs](https://mobbin.com/screens/ef84529b-4cb3-43c0-add4-edb30f96cd6a)

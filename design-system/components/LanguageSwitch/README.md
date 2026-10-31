@@ -4,5 +4,6 @@ The "සිං | EN" toggle. Each option is written in its own script, and the c
 **Provide:** `lang` and `onChange`. Add `onLight` when it sits on white.
 
 - **Sinhala is the default.** Printed documents choose their language separately, per document.
+- **Without `onChange`** the buttons are marked `aria-disabled`: nothing to switch yet. **`label`** names the group for screen readers.
 
 Pattern references: no Mobbin reference used; this follows the confirmed preference.

@@ -14,6 +14,9 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
     "@types/node": "^26.6.5",
     "@types/pg": "^8.23.1",
     "@types/react": "^19.3.0",
@@ -21,22 +24,30 @@
     "drizzle-kit": "^0.31.11",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.3",
+    "jsdom": "^30.1.3",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5"
   },
   "scripts": {
-    "dev": "next dev",
     "build": "vitest run tests/messages.test.ts && next build",
-    "start": "next start",
-    "typecheck": "tsc --noEmit",
+    "prebuild": "node scripts/sync-plate.mjs",
+    "check:plate": "node scripts/sync-plate.mjs --check",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:test:down": "docker compose -f docker/compose.test.yml down",
+    "db:test:up": "docker compose -f docker/compose.test.yml up -d --wait",
+    "dev": "next dev",
+    "predev": "node scripts/sync-plate.mjs",
     "lint": "eslint .",
+    "prelint": "node scripts/sync-plate.mjs",
+    "start": "next start",
+    "sync:plate": "node scripts/sync-plate.mjs",
     "test": "vitest run",
-    "test:e2e": "playwright test",
+    "pretest": "node scripts/sync-plate.mjs",
     "test:at-coverage": "node scripts/at-coverage.mjs",
     "test:at-coverage:strict": "node scripts/at-coverage.mjs --strict",
-    "db:test:up": "docker compose -f docker/compose.test.yml up -d --wait",
-    "db:test:down": "docker compose -f docker/compose.test.yml down",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "pretypecheck": "node scripts/sync-plate.mjs && next typegen"
   }
 }

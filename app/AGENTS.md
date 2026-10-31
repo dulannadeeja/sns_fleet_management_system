@@ -1,6 +1,6 @@
 # app/: the SNS Rent Car application (rank 7)
 
-Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12). Sign-in, jobs and `src/ui/` come with the next Phase 1 tickets.
+Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13). Sign-in and jobs come with the next Phase 1 tickets.
 
 ## Layout
 `src/app/` routes by PRD module · `src/modules/<module>/` business rules and database access, no React · `src/db/` schema and SQL migrations · `src/ui/` Plate components · `src/documents/` printouts 16.1–16.7 · `src/jobs/` pg-boss jobs · `src/i18n/` `si.json`, `en.json` · `tests/at/` one test per AT-nn.
@@ -19,6 +19,11 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 | Migrations | change `src/db/schema/`, then `npm run db:generate` and review the SQL; a rule SQL alone (a trigger) is `npx drizzle-kit generate --custom --name <what>`; apply with `npm run db:migrate`. Tests apply them by themselves |
 | Build (checks Sinhala and English have the same words first) | `npm run build` |
 | Dev server | `npm run dev` |
+
+## Plate in the app (`src/ui/`)
+- `scripts/sync-plate.mjs` copies the tokens, styles, fonts, logo and line icons from `design-system/` into `src/ui/plate/` and `public/plate/` before `dev`, `build`, `test` and `typecheck`. The copies are git-ignored: never edit them; change `design-system/` (skill: sns-plate-component). `--check` fails on a stale copy.
+- Components keep the names, props and `rt-*` classes of `design-system/components/` (`index.d.ts`, `bundle.js`); port one when a ticket first needs it, with a test of its states. A component with event handlers is a client component (`'use client'`).
+- Words come from `src/i18n/` and are passed in as props (`labels`, `label`, `langLabel`, `backLabel`, `newLabel`, `search`). The menu's group headings and English echoes are the design system's own bilingual words; pass `group` with every menu item so English labels group correctly. `/plate` (development only; 404 in production) previews the frame: `/plate?device=phone` for the phone.
 
 ## Rules (details in TRD › Integrity rules)
 - Money is whole-rupee integers; a partner share is rounded down in one shared function (`src/lib/money.ts` · `splitShare`); SNS takes the rest.
