@@ -1,1 +1,30 @@
-{"title":"SNS Rent Car"}
+{
+  "title": "SNS Rent Car",
+  "nav": {
+    "today": "Today",
+    "morningCheck": "Morning check",
+    "cars": "Cars",
+    "rentals": "Rentals",
+    "customers": "Customers",
+    "money": "Money",
+    "partners": "Partners",
+    "payroll": "Payroll",
+    "approvals": "Approvals",
+    "maintenance": "Maintenance",
+    "reports": "Reports",
+    "settings": "Settings",
+    "drawer": "Drawer",
+    "attention": "Attention",
+    "more": "More",
+    "new": "New"
+  },
+  "frame": {
+    "search": "Search by plate, model or name",
+    "newRental": "New rental",
+    "back": "Back"
+  },
+  "plate": {
+    "title": "Plate · app frame",
+    "subtitle": "sample data, development only"
+  }
+}
