@@ -7,6 +7,7 @@ One card of divided rows. Use it on home screens and summaries for "what needs y
 - `groups`: each with an optional `label` and its `rows`; or plain `rows` when there are no groups
 - `foot`: a footnote, for example what "—" means
 - `bare: true`: rows only, no title or border, for rows inside a card that already has its own head (staff home's overdue block)
+- `heading`: `h3` when the card sits under a page section that already has an `h2` (default `h2`)
 - `columns`: `2` puts the rows in two columns on desktop (one column below 900px)
 
 **A row (`ListRow`)** has:
@@ -21,5 +22,6 @@ One card of divided rows. Use it on home screens and summaries for "what needs y
 - **No invented figures.** A figure the data does not have is "—" with a `foot` saying so.
 - **Rows are rows, not cards.** Never put a card inside a row or a ListCard inside a ListCard.
 - **Touch:** rows are at least 52px tall; the `more` link is 48px.
-- **Order** follows the screen's task order, set in `brand/guidebook/07-layout-and-navigation.md` (Dashboard layout).
+- **Order:** what needs doing first goes first. The home screens' order is set in `brand/guidebook/07-layout-and-navigation.md` (Dashboard layout).
+- **Plates** in a row use `plate`, so they always show as a plate badge, never as plain text.
 

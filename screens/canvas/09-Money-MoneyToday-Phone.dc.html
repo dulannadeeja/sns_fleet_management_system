@@ -68,15 +68,16 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
   <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">SNS cars’ rent plus SNS’s commission and shares on partner cars, counted when each line becomes final. Profit is shown before depreciation, on the owner’s reports. The sample data has no total for today.</span>
 </div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Example of why it differs from money received: R‑0209’s 7,000 deposit applied to its bill counts towards earnings with no new money coming in.</div>
 </section>
+    <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--ink-muted)">උදාහරණ දත්ත · Sample data: names, plates, counts and amounts are examples.</p>
   </div>
   <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2591}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2649}}'>
 class Component extends DCLogic {
   renderVals() {
     return {
-      needs: [{"icon": "drawer", "tone": "overdue", "title": "ලාච්චුව අඩුයි · Drawer short", "detail": "Expected 48,950 · counted 47,950 · open", "figure": "− 1,000", "href": "09-Money-EveningCheck-Phone.dc.html"}, {"icon": "unlink", "tone": "warning", "title": "HNB-509377 · waiting", "detail": "R-0226 stays paid · not on today’s statement · flagged Sun 25 Oct if still missing", "figure": "7,000", "href": "09-Money-EveningCheck-Phone.dc.html"}], tabsNav: [{"icon": "home", "label": "අද", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "car", "label": "වාහන", "href": "04-Cars-AllCars-Phone.dc.html"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html", "active": true}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html"}],
+      needs: [{"icon": "drawer", "tone": "overdue", "title": "ලාච්චුව අඩුයි · Drawer short", "detail": "Expected 48,950 · counted 47,950 · open", "figure": "− 1,000", "href": "09-Money-EveningCheck-Phone.dc.html"}, {"icon": "unlink", "tone": "warning", "title": "HNB-509377 · waiting", "detail": "R-0226 stays paid · not on today’s statement · flagged Sun 25 Oct if still missing", "figure": "7,000", "href": "09-Money-BankCardCheck-Phone.dc.html"}], tabsNav: [{"icon": "home", "label": "අද", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "car", "label": "වාහන", "href": "04-Cars-AllCars-Phone.dc.html"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html", "active": true}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html"}],
       yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
       rail: [
         { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },

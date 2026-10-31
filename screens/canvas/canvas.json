@@ -61,7 +61,7 @@
   },
   "02-Home-NeedsAttention-Desktop.dc.html": {
    "expand": "fill",
-   "h": 971,
+   "h": 1091,
    "is_interactive": true,
    "page": "plate",
    "title": "02.3 Needs attention · Desktop",
@@ -70,7 +70,7 @@
    "y": 3059
   },
   "02-Home-NeedsAttention-Phone.dc.html": {
-   "h": 1373,
+   "h": 1679,
    "is_interactive": true,
    "page": "plate",
    "title": "02.3 Needs attention · Phone",
@@ -924,7 +924,7 @@
   },
   "09-Money-MoneyToday-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1735,
+   "h": 1777,
    "is_interactive": true,
    "page": "plate",
    "title": "09.1 Money today · Desktop",
@@ -933,7 +933,7 @@
    "y": 39619
   },
   "09-Money-MoneyToday-Phone.dc.html": {
-   "h": 2591,
+   "h": 2649,
    "is_interactive": true,
    "page": "plate",
    "title": "09.1 Money today · Phone",

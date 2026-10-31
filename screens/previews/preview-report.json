@@ -56,8 +56,8 @@
  {
   "name": "02-Home-NeedsAttention-Desktop",
   "w": 1280,
-  "canvasH": 971,
-  "contentH": 971,
+  "canvasH": 1091,
+  "contentH": 1091,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -65,8 +65,8 @@
  {
   "name": "02-Home-NeedsAttention-Phone",
   "w": 390,
-  "canvasH": 1373,
-  "contentH": 1373,
+  "canvasH": 1679,
+  "contentH": 1679,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -893,8 +893,8 @@
  {
   "name": "09-Money-MoneyToday-Desktop",
   "w": 1280,
-  "canvasH": 1735,
-  "contentH": 1735,
+  "canvasH": 1777,
+  "contentH": 1777,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -902,8 +902,8 @@
  {
   "name": "09-Money-MoneyToday-Phone",
   "w": 390,
-  "canvasH": 2591,
-  "contentH": 2591,
+  "canvasH": 2649,
+  "contentH": 2649,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
