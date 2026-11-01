@@ -97,7 +97,20 @@ for (const n of names) {
     const start = reportText.indexOf(`"name": "${n}"`);
     const end = reportText.indexOf('}', start);
     reportText = `${reportText.slice(0, start)}${JSON.stringify(entry, null, 1).slice(2, -2).trimStart().replace(/\n/g, '\n ')}\n ${reportText.slice(end)}`;
-  } else problems.push(`${n}: not in preview-report.json; add it`);
+  } else {
+    // A new board: add its entry after the board before it in canvas order (the report follows that order).
+    const order = Object.keys(boards).map((k) => k.replace(/\.dc\.html$/, ''));
+    const prev = order.slice(0, order.indexOf(n)).reverse().find((x) => reportText.includes(`"name": "${x}"`));
+    const block = JSON.stringify(entry, null, 1).replace(/\n/g, '\n ');
+    if (prev) {
+      const at = reportText.indexOf('}', reportText.indexOf(`"name": "${prev}"`)) + 1; // entries hold no nested objects
+      reportText = `${reportText.slice(0, at)},\n ${block}${reportText.slice(at)}`;
+    } else {
+      const at = reportText.indexOf('[') + 1;
+      reportText = `${reportText.slice(0, at)}\n ${block}${report.length ? ',' : ''}${reportText.slice(at)}`;
+    }
+    report.push(entry);
+  }
   if (errs.length || broken.length || overflowX > 0) problems.push(`${n}: ${[...errs, ...broken.map((x) => `broken image ${x}`), overflowX > 0 ? `scrolls sideways by ${overflowX}px` : ''].filter(Boolean).join('; ')}`);
   console.log(`${n}  ${b.w}×${h}${h !== b.h ? `  (grew from ${b.h})` : ''}`);
 }

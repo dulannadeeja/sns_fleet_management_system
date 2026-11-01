@@ -23,7 +23,7 @@ Later stakeholder decisions supersede this document. Update this document before
 **Companion references (latest only):**
 
 - **The repository is the master copy** of the design system, the brand guidebook and the screens, so any agent or developer can work from git alone. claude.ai artifacts are viewers: they are refreshed from the repository after a change and never edited directly. Decided 26 Oct 2026 by Dulan (project setup, not a business rule).
-- **Screen design:** `screens/` (see `screens/README.md`): 193 screen boards, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
+- **Screen design:** `screens/` (see `screens/README.md`): 195 screen boards, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
 - **Design system:** `design-system/` (see `design-system/README.md`): tokens, components (`window.Plate`) and their previews. Viewer: "SNS Design System · Plate" (https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4).
 - **Brand guidebook:** `brand/guidebook/`: identity, colour, type, language, icons, vehicle imagery, layout, money on screen and printed documents.
 - **Client proposal:** `proposal/SNS_Rent_a_Car_Proposal_SI.pdf` and `proposal/SNS Rent a Car Proposal.html` in this folder (artifact: https://claude.ai/artifact/DCDGDwQJRuL7K8AUNN4nQ5). Commercial terms and phases live there; requirements live here. **Approved by the client and frozen** (confirmed by Dulan, 24 Oct 2026; approval date to be recorded): changes to scope, phases, price, payments, timeline or the agreement go through a change request (`change-requests/`) and an addendum (`addenda/`), never by editing the proposal.
@@ -135,6 +135,8 @@ The table above is the permission catalogue. Confirmed: agreed by the owner, rec
 
 **Delegation.** The primary owner can give any permission to the admin or any employee, except adding people, changing permissions and turning accounts off or on, which stay with the primary owner. Every grant and removal is recorded. Confirmed: agreed by the owner, recorded by Dulan.
 
+**Owner settings.** The business-wide settings are the primary owner's alone: the pickup cutoff and return deadline (5.1), the reminder lead times (11) and the fuel price per litre (16). They are changed on the Business rules page in three groups (day times, reminders, fuel price), each through a short form that shows the old and new values before saving, and explains, in Sinhala first, what the setting changes and what to check before changing it. Limits stop typing mistakes: reminder days 1 to 90, service km 100 to 5,000, fuel price 1 to 2,000 rupees a litre in whole rupees, times to the minute. The fuel price stays "not set" until the owner sets it. The owner, the admin and staff can read the page; partners cannot. Per-car and per-partner settings (4.2) are changed on that car or partner, not here. Every change is in the activity log with the old and new values. The page's SNS commission row is shown only to people who may see partner earnings and terms (the table above); staff do not see it. Keeping these settings with the primary owner alone means they are not among the permissions Delegation can give. Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
+
 **No self-approval.** Nobody approves their own request (a price change, discount, payment correction or any other approval); another approver must. The primary owner may approve their own, since nobody is above them; it is marked "self-approved" and shown in the daily summary of exceptional decisions. Confirmed: agreed by the owner, recorded by Dulan.
 
 ## 4. Vehicles, packages, and historical terms
@@ -163,7 +165,7 @@ Admins can define each vehicle's package according to its condition and update p
 
 ### 4.3 Historical terms
 
-Existing rentals retain agreed prices, commission percentages, pickup cutoff, and return deadline. Extensions retain original rates. Changes apply to new rentals only.
+Existing rentals retain agreed prices, commission percentages, pickup cutoff, and return deadline. Extensions retain original rates. Changes apply to new rentals only. The fuel price per litre for a "same level" rental is kept the same way: the price when the rental was agreed (Proposed: Dulan, 1 Nov 2026; for the owner to confirm).
 
 **Derived control:** Store a snapshot/version of applicable terms on each rental and vehicle-use segment rather than recalculating old rentals using current package settings. Capture a replacement vehicle's applicable terms when it joins a rental.
 

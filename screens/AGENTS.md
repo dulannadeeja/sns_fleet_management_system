@@ -1,6 +1,6 @@
 # screens/: the screen designs (rank 4, master)
 
-193 screen boards in `canvas/` (`*.dc.html`, laid out by `canvas/canvas.json`), rendered to `previews/html/` and `previews/png/` with `previews/preview-report.json`. The claude.ai canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td) is a viewer; `README.md` says how to refresh it.
+195 screen boards in `canvas/` (`*.dc.html`, laid out by `canvas/canvas.json`), rendered to `previews/html/` and `previews/png/` with `previews/preview-report.json`. The claude.ai canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td) is a viewer; `README.md` says how to refresh it.
 
 ## Rules
 - A screen shows a rule from the system design; it never adds one. Sample data is labelled. Money in whole rupees.

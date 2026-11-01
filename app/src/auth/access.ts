@@ -13,12 +13,14 @@ export type Access =
   | { kind: 'denied'; person: SignedInPerson };
 
 /** What the server does with a request needing `permission`: let it in, send it to sign in, or refuse it. */
-export async function accessFor(headers: Headers, permission: Permission | 'owner'): Promise<Access> {
+export async function accessFor(headers: Headers, permission: Permission | 'owner' | 'employee'): Promise<Access> {
   const person = await signedInPerson(headers);
   const step = nextStep(person, person ? confirmEmailLater(headers, person.id) : false);
   if (step) return { kind: 'redirect', to: step };
   const p = person!;
   if (permission === 'owner') return p.role === 'owner' ? { kind: 'allowed', person: p } : { kind: 'denied', person: p };
+  // Everyone who works at SNS (owner, admin, staff), not partners: e.g. reading the business rules (system design 3.2).
+  if (permission === 'employee') return ['owner', 'admin', 'staff'].includes(p.role) && !p.disabledAt ? { kind: 'allowed', person: p } : { kind: 'denied', person: p };
   const granted = new Set((await db.select({ permission: permissionGrant.permission }).from(permissionGrant)
     .where(eq(permissionGrant.userId, p.id))).map((g) => g.permission));
   const disabledAt = p.disabledAt ? new Date(p.disabledAt) : null;

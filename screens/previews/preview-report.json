@@ -1467,6 +1467,24 @@
   "unresolvedBlob": false
  },
  {
+  "name": "15-Settings-ChangeSetting-Desktop",
+  "w": 1280,
+  "canvasH": 1184,
+  "contentH": 1184,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "15-Settings-ChangeSetting-Phone",
+  "w": 390,
+  "canvasH": 2146,
+  "contentH": 2146,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
   "name": "15-Settings-AddPerson-Desktop",
   "w": 1280,
   "canvasH": 1272,
@@ -1505,8 +1523,8 @@
  {
   "name": "15-Settings-BusinessRules-Desktop",
   "w": 1280,
-  "canvasH": 1379,
-  "contentH": 1379,
+  "canvasH": 1803,
+  "contentH": 1803,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1514,8 +1532,8 @@
  {
   "name": "15-Settings-BusinessRules-Phone",
   "w": 390,
-  "canvasH": 2257,
-  "contentH": 2257,
+  "canvasH": 3347,
+  "contentH": 3347,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

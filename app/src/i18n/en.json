@@ -232,6 +232,7 @@
       "admin": "Agreed admin defaults"
     },
     "activityLog": "Activity log",
+    "businessRules": "Business rules",
     "log": {
       "readOnly": "Can't be edited or deleted",
       "byPerson": "By person",
@@ -260,10 +261,227 @@
         "permission": {
           "grant": "gave {target}: {permission}",
           "remove": "took away from {target}: {permission}"
+        },
+        "setting": {
+          "change": "changed the {setting} from {old} to {new}"
         }
       },
       "reason": "reason: “{reason}”",
       "left": "{name} (left)"
+    },
+    "rules": {
+      "ownerTitle": "Owner settings",
+      "ownerNote": "Only the owner changes these. Admin and staff see them here.",
+      "change": "Change",
+      "notSet": "not set yet",
+      "setNow": "Set now",
+      "footer": "Every rule under “Set now” is agreed by the owner; changing the owner settings here is proposed, for the owner to confirm. A new rule is recorded in the system design before it appears here. Each change to an owner setting is in the activity log, with the old and new values.",
+      "groups": {
+        "dayTimes": {
+          "title": "Rental day times",
+          "note": "a pickup before the cutoff ends at the next morning’s deadline · a change applies to new rentals only",
+          "value": "cutoff {cutoff} · deadline {deadline}"
+        },
+        "reminders": {
+          "title": "Reminders",
+          "note": "insurance and licence · service (date or km) · payroll",
+          "value": "{documents} days · {serviceDays} days or {serviceKm} km · {payroll} days"
+        },
+        "fuel": {
+          "title": "Fuel price",
+          "note": "per litre, for a “same level” rental",
+          "value": "LKR {price} a litre"
+        }
+      },
+      "names": {
+        "pickupCutoff": "pickup cutoff",
+        "returnDeadline": "return deadline",
+        "documentReminderDays": "insurance and licence reminder",
+        "serviceReminderDays": "service reminder (days)",
+        "serviceReminderKm": "service reminder (km)",
+        "payrollReminderDays": "payroll reminder",
+        "fuelPricePerLitre": "fuel price per litre"
+      },
+      "fields": {
+        "pickupCutoff": {
+          "label": "Pickup cutoff",
+          "unit": "",
+          "hint": "A pickup at or after this time starts the next rental day."
+        },
+        "returnDeadline": {
+          "label": "Return deadline",
+          "unit": "",
+          "hint": "The car is due back by this time in the morning."
+        },
+        "documentReminderDays": {
+          "label": "Insurance and licence",
+          "unit": "days before expiry",
+          "hint": "1 to 90"
+        },
+        "serviceReminderDays": {
+          "label": "Service by date",
+          "unit": "days before",
+          "hint": "1 to 90"
+        },
+        "serviceReminderKm": {
+          "label": "Service by km",
+          "unit": "km before",
+          "hint": "100 to 5,000"
+        },
+        "payrollReminderDays": {
+          "label": "Payroll",
+          "unit": "days before payday",
+          "hint": "1 to 90"
+        },
+        "fuelPricePerLitre": {
+          "label": "Price per litre",
+          "unit": "rupees",
+          "hint": "Whole rupees, 1 to 2,000."
+        }
+      },
+      "intro": {
+        "dayTimes": "Times are in Sri Lanka time. A change applies to new rentals only; rentals already agreed keep their times.",
+        "reminders": "How early each reminder starts. Only the owner can change this.",
+        "fuel": "Charged only on a “same level” rental, for the litres missing at return. 100% SNS."
+      },
+      "check": "Check before saving",
+      "noChange": "Nothing changed yet.",
+      "changeLine": "{name}: {old} → {new}",
+      "logNote": "Saving is recorded in the activity log with the old and new values.",
+      "save": "Save",
+      "cancel": "Cancel",
+      "saved": "Saved.",
+      "days": "{n} days",
+      "km": "{n} km",
+      "rupees": "LKR {n}",
+      "errors": {
+        "required": "Fill this in.",
+        "number": "Type a whole number, digits only.",
+        "range": "Must be {min} to {max}.",
+        "time": "Pick a time.",
+        "notAllowed": "Only the owner can change settings.",
+        "failed": "Not saved. Try again.",
+        "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change."
+      },
+      "rows": {
+        "extraKm": {
+          "title": "Extra km",
+          "note": "beyond the km included · 17 to 27 a km by type",
+          "value": "set per car"
+        },
+        "fuel": {
+          "title": "Fuel",
+          "note": "not counted by default · “same level” for one rental: missing litres × price per litre",
+          "value": "price in Owner settings"
+        },
+        "businessDay": {
+          "title": "Business day",
+          "note": "staff close it after the evening count; otherwise it closes at 11:59 PM",
+          "value": "staff, or 11:59 PM"
+        },
+        "drawerCount": {
+          "title": "Drawer count",
+          "note": "staff see the expected cash, then type what they count",
+          "value": "expected shown first"
+        },
+        "cashOut": {
+          "title": "Cash out of the drawer",
+          "note": "partner payouts, salary and owner withdrawals · each its own line, never an expense",
+          "value": "own lines"
+        },
+        "bankCheck": {
+          "title": "Bank and card check",
+          "note": "a payment waits up to 3 days for the statement, then is flagged · card fees entered monthly",
+          "value": "3 days"
+        },
+        "expiredDocuments": {
+          "title": "Expired insurance or licence",
+          "note": "warns staff; going ahead needs an authorised person and a reason",
+          "value": "authorised override"
+        },
+        "plannedService": {
+          "title": "Planned service",
+          "note": "any garage visit, planned or not",
+          "value": "Under repair"
+        },
+        "lateReturn": {
+          "title": "Late return",
+          "note": "no fee runs on its own",
+          "value": "staff decide"
+        },
+        "partnerCashOut": {
+          "title": "Partner cash-out",
+          "note": "earnings final at the day’s close · to the bank or in cash at the branch · no limits",
+          "value": "any day"
+        },
+        "commission": {
+          "title": "SNS commission",
+          "note": "default 15% · changed on the car",
+          "value": "set per car"
+        },
+        "garageDay": {
+          "title": "Garage-day charge",
+          "note": "only for damage during the rental · staff propose the days, an admin approves",
+          "value": "LKR 5,000 a day"
+        },
+        "payrollDeductions": {
+          "title": "Payroll deductions",
+          "note": "never take a salary below zero; the rest carries to next month",
+          "value": "never below zero"
+        },
+        "money": {
+          "title": "Money",
+          "note": "whole rupees · a partner’s share rounds down, SNS takes the difference; a correction is the exact mirror of its line",
+          "value": "whole rupees"
+        },
+        "profit": {
+          "title": "Profit",
+          "note": "SNS earnings minus business expenses",
+          "value": "before depreciation"
+        },
+        "approvals": {
+          "title": "Approvals",
+          "note": "nobody approves their own request; the owner’s own is marked “self-approved”",
+          "value": "another approver"
+        }
+      },
+      "explain": {
+        "whatChanges": "What this changes",
+        "beforeChange": "Before you change it",
+        "dayTimes": {
+          "affects": [
+            "How many days a new rental is charged: a pickup before the cutoff ends at the next morning’s deadline; a pickup at or after it, the morning after.",
+            "When a new rental’s car is due back. After the deadline it is a late return, and staff decide any charge, with a reason.",
+            "Rentals already agreed, and their phone extensions, keep the times they were agreed with."
+          ],
+          "before": [
+            "Try a few pickup times near the new cutoff: a pickup may now be charged one day more or one day less.",
+            "Tell staff the new times before the next pickup.",
+            "Times are Sri Lanka time."
+          ]
+        },
+        "reminders": {
+          "affects": [
+            "When insurance and revenue licence renewals, services (by date or by km, whichever comes first) and payroll start to show in Upcoming work.",
+            "Only when a reminder starts. No date, charge or car changes."
+          ],
+          "before": [
+            "A shorter time leaves less time to renew. When insurance or a revenue licence has expired, staff are warned, and going ahead needs an authorised person and a reason.",
+            "A longer time shows reminders earlier, so Upcoming work gets longer."
+          ]
+        },
+        "fuel": {
+          "affects": [
+            "Only rentals set to “same level”: the litres missing at return × this price go on the bill, all for SNS. Staff can waive it with a reason.",
+            "By default fuel is not counted, so most rentals do not use this price.",
+            "Rentals already agreed keep the price from when they were agreed."
+          ],
+          "before": [
+            "Check today’s pump price. Whole rupees only.",
+            "Tell staff the new price: they explain the fuel charge to the customer at return."
+          ]
+        }
+      }
     }
   },
   "code": {
