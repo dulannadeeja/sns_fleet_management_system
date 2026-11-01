@@ -6,7 +6,8 @@ import { defaultPermissions, type Role } from '../../../../auth/permissions';
 import { getPerson } from '../../../../modules/people/people';
 import { Icon } from '../../../../ui';
 import { SettingsFrame } from '../../SettingsFrame';
-import { ResetPasswordForm, TurnOffForm, TurnOnForm } from './PersonForms';
+import { needsEmail } from '../../../../modules/people/people';
+import { EmailForm, ResetPasswordForm, TurnOffForm, TurnOnForm } from './PersonForms';
 
 // Screen 15.6 Person (ST-15.2; board added 1 Nov 2026): details, reset password (AT-46), turn off or on (AT-47).
 // Owner only. The owner's own account has neither: their reset is by email (#28) and they cannot be turned off.
@@ -22,6 +23,7 @@ export default async function PersonPage({ params }: { params: Promise<{ id: str
   const w = {
     required: t('requiredMark'), newPassword: p('newPassword'), newPasswordHint: p('newPasswordHint'), reset: p('reset'), resetDone: p('resetDone'),
     reason: p('reason'), reasonPlaceholder: p('reasonPlaceholder'), turnOff: p('turnOff'), turnOn: p('turnOn'), errors: t.raw('errors') as Record<string, string>,
+    newEmail: p('newEmail'), newEmailHint: p('newEmailHint'), saveEmail: p('saveEmail'), emailSaved: p('emailSaved'),
   };
   return (
     <SettingsFrame person={owner} active="people" subtitle={`${t('people')} › ${name}`} backHref="/settings/people">
@@ -37,9 +39,21 @@ export default async function PersonPage({ params }: { params: Promise<{ id: str
           <div style={{ display: 'flex', flexDirection: 'column' }}><span className="set-muted">{p('role')}</span><span style={{ fontSize: 17 }}>{t(`roles.${person.role as 'staff'}`)}</span></div>
           <div style={{ display: 'flex', flexDirection: 'column' }}><span className="set-muted">{p('permissions')}</span>
             <Link href="/settings/permissions" style={{ fontSize: 17 }}>{person.role === 'owner' ? t('everything') : isDefaults ? t(`agreedDefaults.${person.role as 'staff'}`) : t('changed')}</Link></div>
+          {needsEmail(person.role) ? (
+            <div style={{ display: 'flex', flexDirection: 'column' }}><span className="set-muted">{p('email')}</span>
+              <span style={{ fontSize: 17 }}>{person.email ?? p('noEmail')}</span>
+              {person.pendingEmail ? <span className="set-muted">{t('person.waiting', { email: person.pendingEmail })}</span> : null}</div>
+          ) : null}
         </div>
         {person.role === 'owner' ? <p className="set-muted" style={{ margin: 0 }}>{p('ownerNote')}</p> : null}
       </section>
+      {needsEmail(person.role) ? (
+        <section className="set-card">
+          <h2>{p('emailTitle')}</h2>
+          <p className="set-muted" style={{ margin: 0 }}>{p('emailHint')}</p>
+          <EmailForm personId={person.id} w={w} />
+        </section>
+      ) : null}
       {person.role === 'owner' ? null : (
         <>
           <section className="set-card">

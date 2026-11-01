@@ -47,7 +47,9 @@
     "phoneMissing": "Enter your phone number.",
     "phoneInvalid": "This is not a Sri Lankan mobile number. Type the 10 digits, starting 070, 071, 072, 074, 075, 076, 077 or 078.",
     "passwordMissing": "Enter your password.",
-    "passwordShort": "Passwords have at least 8 characters. Check what you typed."
+    "passwordShort": "Passwords have at least 8 characters. Check what you typed.",
+    "forgot": "Forgot your password?",
+    "resetDone": "Your new password is saved. Sign in with it."
   },
   "firstSignIn": {
     "title": "Your password",
@@ -116,13 +118,16 @@
       "englishHint": "Can switch any time",
       "cancel": "Cancel",
       "save": "Save",
-      "footer": "Give the first password to the person by hand; nothing is sent. Saving is recorded in the activity log."
+      "footer": "Give the first password to the person by hand; nothing is sent. Saving is recorded in the activity log.",
+      "email": "Email",
+      "emailHint": "Sign-in codes on a new device and the password reset link go here. It counts once the admin types the code sent to it.",
+      "emailRequired": "(required for Admin)"
     },
     "person": {
       "phone": "Phone",
       "role": "Role",
       "permissions": "Permissions",
-      "ownerNote": "The primary owner can do everything. The owner's own password is reset by email (coming later).",
+      "ownerNote": "The primary owner can do everything. The owner resets their own password by email (Forgot your password? on the sign-in page).",
       "resetTitle": "Reset password",
       "resetHint": "When {name} forgets the password. They are signed out everywhere and change it at their next sign-in.",
       "newPassword": "New first password",
@@ -137,7 +142,16 @@
       "offSince": "Turned off on {date}. Reason: {reason}",
       "onHint": "Turning it back on lets {name} sign in again with the same password.",
       "turnOn": "Turn on",
-      "logNote": "Every change is recorded in the activity log."
+      "logNote": "Every change is recorded in the activity log.",
+      "email": "Email",
+      "noEmail": "No confirmed email yet",
+      "waiting": "Waiting to be confirmed: {email}",
+      "emailTitle": "Change email",
+      "emailHint": "Sign-in codes on a new device and the password reset link go to this email. Only the owner and the admin have one.",
+      "newEmail": "New email",
+      "newEmailHint": "Codes keep going to the old email until the code sent to the new one is typed in at the next sign-in.",
+      "saveEmail": "Save email",
+      "emailSaved": "Saved. It counts once the code sent to it is typed in."
     },
     "permissionsPage": {
       "lock": "Only the primary owner can change these, add people or turn accounts off; those three cannot be given to anyone. The owner can do everything and is not listed.",
@@ -166,7 +180,15 @@
       "alreadyOff": "This account is already off.",
       "alreadyOn": "This account is already on.",
       "isOwner": "Not for the primary owner.",
-      "permissionInvalid": "Unknown permission."
+      "permissionInvalid": "Unknown permission.",
+      "emailMissing": "Type the email.",
+      "emailInvalid": "This does not look like an email address.",
+      "emailTaken": "Someone else already has this email.",
+      "emailNotNeeded": "Staff need no email.",
+      "codeTooSoon": "Wait a minute.",
+      "codeWrong": "That code is not right.",
+      "codeExpired": "This code has run out.",
+      "codeTooMany": "5 wrong codes."
     },
     "perms": {
       "approveFirstCustomer": "Approve a first-time customer",
@@ -207,6 +229,80 @@
     "agreedDefaults": {
       "staff": "Agreed staff defaults",
       "admin": "Agreed admin defaults"
+    }
+  },
+  "code": {
+    "back": "Back",
+    "title": "Sign-in code",
+    "subtitle": "New device",
+    "heading": "Code from your email",
+    "intro": "This device is new for this account. We sent a 6-digit code to your email. It works once, for 10 minutes.",
+    "code": "Code",
+    "required": "(required)",
+    "placeholder": "6 digits",
+    "submit": "Sign in",
+    "resend": "Send a new code",
+    "sent": "A new code was sent.",
+    "other": "Use another account",
+    "device": "After the right code, this device is remembered for 30 days; each sign-in here starts the 30 days again. A new phone, another browser or cleared browser data asks for a code again.",
+    "errors": {
+      "codeMissing": "Type the 6-digit code.",
+      "codeWrong": "That code is not right. Check the email and try again.",
+      "codeExpired": "This code has run out (10 minutes). Ask for a new one.",
+      "codeTooMany": "5 wrong codes: this code has stopped. Ask for a new one.",
+      "locked": "The account is locked after 5 wrong tries. Try again in 15 minutes.",
+      "tooSoon": "Wait a minute before asking for a new code.",
+      "notSent": "The email could not be sent. Try again in a minute, or ask the owner."
+    }
+  },
+  "forgot": {
+    "back": "Back",
+    "title": "Forgot password",
+    "subtitle": "Email link",
+    "heading": "Forgot your password?",
+    "intro": "For the owner and the admin: type your phone number. If it has a confirmed email, we send a link to set a new password.",
+    "required": "(required)",
+    "submit": "Send the link",
+    "sent": "If this number has an email, a link was sent. It works once, for 1 hour.",
+    "staff": "Staff and partners: ask the owner to reset your password.",
+    "backToSignIn": "Back to sign in"
+  },
+  "reset": {
+    "back": "Back",
+    "title": "New password",
+    "subtitle": "Email link",
+    "heading": "New password",
+    "intro": "From the link in your email (it works once, for 1 hour). Choose a new password.",
+    "password": "New password",
+    "repeat": "Type it again",
+    "required": "(required)",
+    "rule": "At least 8 characters. Saving signs you out everywhere else.",
+    "save": "Save and sign in",
+    "askAgain": "Ask for a new link",
+    "errors": {
+      "tooShort": "At least 8 characters, please.",
+      "notSame": "The two passwords are not the same.",
+      "linkOld": "This link is old or already used. Ask for a new one."
+    }
+  },
+  "confirmEmail": {
+    "title": "Confirm your email",
+    "subtitle": "Email",
+    "heading": "Confirm your new email",
+    "intro": "The owner changed your email to {email}. Send a code to it and type it here. Until you confirm, sign-in codes still go to your old email.",
+    "send": "Send the code",
+    "sent": "A code was sent to your new email.",
+    "confirm": "Confirm",
+    "later": "Later",
+    "notMine": "Not your email? Choose Later and ask the owner to correct it. The change is in the activity log.",
+    "errors": {
+      "codeMissing": "Type the 6-digit code.",
+      "codeWrong": "That code is not right.",
+      "codeExpired": "This code has run out. Send a new one.",
+      "codeTooMany": "5 wrong codes: send a new one.",
+      "codeTooSoon": "Wait a minute before sending a new code.",
+      "notFound": "There is no new email to confirm.",
+      "emailTaken": "Someone else already has this email. Ask the owner."
     }
   }
 }

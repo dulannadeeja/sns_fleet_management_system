@@ -6,8 +6,8 @@ import { listPeople, type PersonRow } from '../../../modules/people/people';
 import { Icon } from '../../../ui';
 import { SettingsFrame } from '../SettingsFrame';
 
-// Screen 15.3 People (ST-15.2): everyone with an SNS account; a row opens the person (15.6), the owner's opens
-// Permissions. Owner only (system design 3.2).
+// Screen 15.3 People (ST-15.2): everyone with an SNS account; a row opens the person (15.6), the owner's too (for
+// the owner's email, #28). Owner only (system design 3.2).
 export default async function PeoplePage() {
   const owner = await requireOwner();
   const t = await getTranslations('settings');
@@ -30,7 +30,7 @@ export default async function PeoplePage() {
           </Link>
         </div>
         {people.map((p) => (
-          <Link key={p.id} className="set-row" href={p.role === 'owner' ? '/settings/permissions' : `/settings/people/${p.id}`}>
+          <Link key={p.id} className="set-row" href={`/settings/people/${p.id}`}>
             <span aria-hidden="true" className={p.role === 'owner' ? 'set-avatar set-avatar-owner' : 'set-avatar'}>{initials(p.name)}</span>
             <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
               <span style={{ fontSize: 16, lineHeight: '24px', fontWeight: 600 }}>{p.name}</span>

@@ -9,6 +9,7 @@ export interface AddPersonWords {
   name: string; namePlaceholder: string; phone: string; phoneHint: string; password: string; passwordPlaceholder: string; passwordHint: string;
   role: string; staff: string; staffHint: string; admin: string; adminHint: string; partner: string; partnerHint: string;
   defaultsStaff: string; defaultsAdmin: string; defaultsHint: string; language: string; sinhala: string; sinhalaHint: string; english: string; englishHint: string;
+  email: string; emailHint: string; emailRequired: string;
   required: string; cancel: string; save: string; footer: string; errors: Record<string, string>;
 }
 
@@ -19,7 +20,7 @@ export function AddPersonForm({ w }: { w: AddPersonWords }) {
   const [role, setRole] = useState(state.values?.role === 'admin' ? 'admin' : 'staff');
   const e = state.error;
   const err = (...keys: string[]) => (e && keys.includes(e) ? w.errors[e] : undefined);
-  const other = e && !['nameMissing', 'phoneMissing', 'phoneInvalid', 'phoneTaken', 'passwordShort'].includes(e) ? w.errors[e] : undefined;
+  const other = e && !['nameMissing', 'phoneMissing', 'phoneInvalid', 'phoneTaken', 'passwordShort', 'emailMissing', 'emailInvalid', 'emailTaken'].includes(e) ? w.errors[e] : undefined;
   return (
     <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
       {other ? <Notice tone="danger">{other}</Notice> : null}
@@ -47,6 +48,10 @@ export function AddPersonForm({ w }: { w: AddPersonWords }) {
           </label>
         </div>
       </fieldset>
+      {role === 'admin' ? (
+        <TextField label={w.email} name="email" type="email" required requiredLabel={w.emailRequired} autoComplete="off" placeholder="name@example.com"
+          defaultValue={state.values?.email} hint={w.emailHint} error={err('emailMissing', 'emailInvalid', 'emailTaken')} />
+      ) : null}
       <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '14px 16px', background: 'var(--sunken)', borderRadius: 12 }}>
         <span style={{ flex: 'none', display: 'flex', marginTop: 2 }}><Icon name="users" size={20} /></span>
         <span style={{ display: 'flex', flexDirection: 'column' }}>

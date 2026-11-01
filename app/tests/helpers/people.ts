@@ -83,7 +83,7 @@ export function withCookies(res: Response, before = new Headers()): Headers {
 }
 
 /** Calls a Better Auth endpoint as a browser would; an error comes back as a response. */
-export async function call(fn: (o: { headers: Headers; body?: object; asResponse: true }) => Promise<Response>, headers: Headers, body?: object): Promise<Response> {
+export async function call<B>(fn: (o: { headers: Headers; body: B; asResponse: true }) => Promise<Response>, headers: Headers, body: B): Promise<Response> {
   try {
     return await fn({ headers, body, asResponse: true });
   } catch (e) {

@@ -181,12 +181,14 @@ export async function setPermission(actorId: string, personId: string, permissio
   });
 }
 
-export interface PersonRow { id: string; name: string; phone: string | null; role: string; disabledAt: Date | null; disabledReason: string | null; permissions: string[] }
+export interface PersonRow { id: string; name: string; phone: string | null; role: string; disabledAt: Date | null; disabledReason: string | null; permissions: string[]; email: string | null; pendingEmail: string | null }
 
 // Callers are owner-only pages (requireOwner): these return phone numbers and permissions.
 function peopleQuery() {
   return db.select({
     id: user.id, name: user.name, phone: user.phoneNumber, role: user.role, disabledAt: user.disabledAt, disabledReason: user.disabledReason,
+    // The confirmed email only (never the placeholder), and one waiting to be confirmed.
+    email: sql<string | null>`case when ${user.emailVerified} then ${user.email} end`, pendingEmail: user.pendingEmail,
     permissions: sql<string[]>`coalesce(array_agg(${permissionGrant.permission}) filter (where ${permissionGrant.permission} is not null), '{}')`,
   }).from(user).leftJoin(permissionGrant, eq(permissionGrant.userId, user.id));
 }
