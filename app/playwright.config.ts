@@ -1,2 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
-export default defineConfig({ testDir: './tests/e2e', use: { baseURL: 'http://127.0.0.1:3000' }, projects: [{name:'desktop', use:{...devices['Desktop Chrome']}}, {name:'phone', use:{...devices['Pixel 7']}}], webServer: {command:'npm run dev', url:'http://127.0.0.1:3000', reuseExistingServer: false, timeout:120000} });
+
+// Browser journeys run against the test database (the same one as npm run test). The dev server reads
+// BETTER_AUTH_SECRET from .env.local on a laptop; CI sets it in the workflow.
+const DATABASE_URL = process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5433/sns_test';
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  globalSetup: './tests/e2e/global-setup.ts',
+  use: { baseURL: 'http://localhost:3000' },
+  projects: [
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
+    { name: 'phone', use: { ...devices['Pixel 7'] } },
+  ],
+  webServer: { command: 'npm run dev', url: 'http://localhost:3000', reuseExistingServer: false, timeout: 120000, env: { DATABASE_URL } },
+});

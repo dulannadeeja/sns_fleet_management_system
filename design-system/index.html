@@ -105,6 +105,7 @@
       ['EmptyState', 'Nothing to show yet, said plainly.', function () { return h('div', { style: { width: '100%' } }, h(P.EmptyState, { icon: 'empty-search', title: 'කිසිවක් හමු වුණේ නැහැ', body: 'No match for that plate or NIC.' })); }]
     ]},
     { title: 'Money and history', items: [
+      ['TextField', 'A labelled input: required in words, a hint, an error. Sample.', function () { return h('div', { style: { width: '100%', maxWidth: 420, display: 'grid', gap: 16 } }, h(P.TextField, { label: 'දුරකථන අංකය · Phone number', name: 'phone', inputMode: 'tel', placeholder: '07X XXX XXXX', required: true }), h(P.TextField, { label: 'අලුත් මුරපදය · New password', name: 'pw', type: 'password', hint: 'At least 8 characters.', error: 'At least 8 characters, please.' })); }, true],
       ['AttentionBar', 'Labelled counts that open their filtered list.', function () { return h('div', { style: { width: '100%' } }, h(P.AttentionBar, { items: [{ label: 'Overdue', count: 1, tone: 'overdue', icon: 'clockAlert' }, { label: 'Open items', count: 3, tone: 'warning' }, { label: 'Waiting for admin', count: 2, tone: 'info' }] })); }, true],
       ['MoneyBlock', 'One kind of money per block, never summed with another.', function () { return [
         h('div', { key: 1, style: { width: 300 } }, h(P.MoneyBlock, { label: 'Received today · so far', icon: 'banknote', figure: 48950, lines: [{ label: 'Cash', amount: 32500, sign: 'in' }, { label: 'Bank', amount: 16450, sign: 'in' }] })),
