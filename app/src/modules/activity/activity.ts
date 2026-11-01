@@ -1,4 +1,4 @@
-import { and, desc, eq, lt, sql } from 'drizzle-orm';
+import { and, desc, eq, sql } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/pg-core';
 import { db } from '../../db/client';
 import { auditEvent, user } from '../../db/schema';
@@ -28,18 +28,39 @@ export interface Entry {
   reason: string | null; details: Record<string, unknown> | null;
 }
 
-/** One page of the log, newest first, optionally by the person who acted and by kind. `older` continues the list. */
-export async function listActivity(filter: { personId?: string; kind?: Kind; before?: Date; limit?: number }): Promise<{ entries: Entry[]; older: Date | null }> {
+/** Where "Older" continues: the last entry's exact time (microseconds, as the database keeps it) and id, so entries
+ *  with the same time are never skipped (#16 review). */
+export type Cursor = string;
+const CURSOR = /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}(?:\.\d{1,6})?[+-]\d{2}(?::\d{2})?)\|([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i;
+
+export function readCursor(raw: unknown): { at: string; id: string } | null {
+  if (typeof raw !== 'string') return null;
+  let text: string;
+  try {
+    text = Buffer.from(raw, 'base64url').toString('utf8');
+  } catch {
+    return null;
+  }
+  const m = CURSOR.exec(text);
+  return m ? { at: m[1], id: m[2] } : null;
+}
+
+/** One page of the log, newest first, optionally by the person who acted, by kind, or by the record it is about.
+ *  `older` continues the list. */
+export async function listActivity(filter: { personId?: string; kind?: Kind; targetId?: string; older?: Cursor; limit?: number }): Promise<{ entries: Entry[]; older: Cursor | null }> {
   const limit = Math.min(Math.max(filter.limit ?? 50, 1), 200);
   const actor = alias(user, 'actor');
   const target = alias(user, 'target');
   const where = [];
   if (filter.personId) where.push(eq(auditEvent.createdBy, filter.personId));
-  if (filter.before) where.push(lt(auditEvent.createdAt, filter.before));
+  if (filter.targetId) where.push(eq(auditEvent.targetId, filter.targetId));
+  const cursor = filter.older ? readCursor(filter.older) : null;
+  if (cursor) where.push(sql`(${auditEvent.createdAt}, ${auditEvent.id}) < (${cursor.at}::timestamptz, ${cursor.id}::uuid)`);
   if (filter.kind === 'decisions') where.push(sql`${auditEvent.details} ? 'reason'`);
   else if (filter.kind) where.push(sql`(${sql.join(PREFIXES[filter.kind].map((p) => sql`${auditEvent.action} like ${p + '%'}`), sql` or `)})`);
   const rows = await db.select({
-    id: auditEvent.id, createdAt: auditEvent.createdAt, action: auditEvent.action, actorId: auditEvent.createdBy, actorName: actor.name,
+    id: auditEvent.id, createdAt: auditEvent.createdAt, exactAt: sql<string>`${auditEvent.createdAt}::text`, action: auditEvent.action,
+    actorId: auditEvent.createdBy, actorName: actor.name,
     targetType: auditEvent.targetType, targetId: auditEvent.targetId, targetName: target.name, details: auditEvent.details,
   }).from(auditEvent)
     .leftJoin(actor, eq(actor.id, auditEvent.createdBy))
@@ -47,16 +68,23 @@ export async function listActivity(filter: { personId?: string; kind?: Kind; bef
     .where(where.length ? and(...where) : undefined)
     .orderBy(desc(auditEvent.createdAt), desc(auditEvent.id))
     .limit(limit + 1);
-  const entries = rows.slice(0, limit).map((r) => {
+  const shown = rows.slice(0, limit);
+  const entries: Entry[] = shown.map((r) => {
     const details = (r.details ?? null) as Record<string, unknown> | null;
-    return { ...r, details, kind: kindOf(r.action), reason: typeof details?.reason === 'string' ? details.reason : null };
+    return {
+      id: r.id, createdAt: r.createdAt, action: r.action, kind: kindOf(r.action), actorId: r.actorId, actorName: r.actorName,
+      targetType: r.targetType, targetId: r.targetId, targetName: r.targetName, details,
+      reason: typeof details?.reason === 'string' ? details.reason : null,
+    };
   });
-  return { entries, older: rows.length > limit ? entries.at(-1)!.createdAt : null };
+  const last = shown.at(-1);
+  return { entries, older: rows.length > limit && last ? Buffer.from(`${last.exactAt}|${last.id}`).toString('base64url') : null };
 }
 
-/** The people to filter by on screen 15.5: active SNS accounts (names only), plus the one already chosen. */
-export async function peopleForFilter(chosen?: string): Promise<{ id: string; name: string }[]> {
-  return db.select({ id: user.id, name: user.name }).from(user)
-    .where(sql`${user.role} <> 'partner' and (${user.disabledAt} is null${chosen ? sql` or ${user.id} = ${chosen}` : sql``})`)
-    .orderBy(sql`${user.role} = 'owner' desc`, user.name);
+/** The people to filter by on screen 15.5: everyone with an SNS account (names only), active first, so the owner can
+ *  also look up someone who has left (#16 review). */
+export async function peopleForFilter(): Promise<{ id: string; name: string; off: boolean }[]> {
+  return db.select({ id: user.id, name: user.name, off: sql<boolean>`${user.disabledAt} is not null` }).from(user)
+    .where(sql`${user.role} <> 'partner'`)
+    .orderBy(sql`${user.role} = 'owner' desc`, sql`${user.disabledAt} is not null`, user.name);
 }

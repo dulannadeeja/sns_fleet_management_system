@@ -233,7 +233,7 @@
     },
     "activityLog": "සිදු වූ දේ",
     "log": {
-      "readOnly": "කාටවත් මේවා වෙනස් කරන්න හෝ මකන්න බෑ.",
+      "readOnly": "වෙනස් කරන්න හෝ මකන්න බෑ",
       "byPerson": "කෙනා අනුව",
       "byKind": "වර්ගය අනුව",
       "allPeople": "හැමෝම",
@@ -262,7 +262,8 @@
           "remove": "{target} ගෙන් අයින් කළා: {permission}"
         }
       },
-      "reason": "හේතුව: “{reason}”"
+      "reason": "හේතුව: “{reason}”",
+      "left": "{name} (අයින් වුණා)"
     }
   },
   "code": {
