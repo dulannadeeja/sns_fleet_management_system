@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"Plate","components":[{"name":"BrandMark"},{"name":"NavRail"},{"name":"FleetStrip"},{"name":"Icon"},{"name":"StatusChip"},{"name":"StatePill"},{"name":"PlateBadge"},{"name":"VehicleSilhouette"},{"name":"VehicleImage"},{"name":"VehicleCard"},{"name":"VehicleRow"},{"name":"ListCard"},{"name":"Button"},{"name":"AttentionBar"},{"name":"MoneyBlock"},{"name":"Checklist"},{"name":"BlockedPanel"},{"name":"ConfirmationBlock"},{"name":"HistoryLine"},{"name":"Notice"},{"name":"AppHeader"},{"name":"LanguageSwitch"},{"name":"BottomTabBar"}]} */
+/* @ds-bundle: {"format":4,"namespace":"Plate","components":[{"name":"BrandMark"},{"name":"NavRail"},{"name":"FleetStrip"},{"name":"Icon"},{"name":"StatusChip"},{"name":"StatePill"},{"name":"PlateBadge"},{"name":"VehicleSilhouette"},{"name":"VehicleImage"},{"name":"VehicleCard"},{"name":"VehicleRow"},{"name":"ListCard"},{"name":"Button"},{"name":"TextField"},{"name":"AttentionBar"},{"name":"MoneyBlock"},{"name":"Checklist"},{"name":"BlockedPanel"},{"name":"ConfirmationBlock"},{"name":"HistoryLine"},{"name":"Notice"},{"name":"AppHeader"},{"name":"LanguageSwitch"},{"name":"BottomTabBar"}]} */
 (function () {
   var React = window.React;
   var h = React.createElement;
@@ -211,6 +211,21 @@
     rest.type = rest.type || 'button';
     rest.className = cx('rt-btn', 'rt-btn-' + v, props.full && 'rt-btn-full', props.className);
     return h('button', rest, props.icon ? h(Icon, { name: props.icon, size: 20 }) : null, h('span', null, props.children));
+  }
+
+  /* A labelled text input: Sinhala label with its English echo, the required mark in words, a hint, an error that says what to fix. */
+  function TextField(props) {
+    var id = props.id || props.name;
+    var hint = props.hint ? id + '-hint' : null, err = props.error ? id + '-error' : null;
+    var rest = Object.assign({}, props); ['label', 'hint', 'error', 'requiredLabel', 'className'].forEach(function (k) { delete rest[k]; });
+    rest.id = id; rest.className = 'rt-input'; rest.type = props.type || 'text';
+    rest['aria-invalid'] = props.error ? 'true' : undefined;
+    rest['aria-describedby'] = [err, hint].filter(Boolean).join(' ') || undefined;
+    return h('div', { className: cx('rt-field', props.className) },
+      h('label', { className: 'rt-field-label', htmlFor: id }, bi(props.label), props.required ? h('span', { className: 'rt-field-req' }, ' ' + (props.requiredLabel || '(අනිවාර්යයි · required)')) : null),
+      h('input', rest),
+      props.error ? h('span', { className: 'rt-field-error', id: err, role: 'alert' }, props.error) : null,
+      props.hint ? h('span', { className: 'rt-field-hint', id: hint }, props.hint) : null);
   }
 
   function AttentionBar(props) {
@@ -440,6 +455,6 @@
     return h('nav', { className: cx('rt-tabs', props.className), 'aria-label': props.label || 'ප්‍රධාන මෙනුව · Main menu' }, tabs);
   }
 
-  var api = { BrandMark: BrandMark, NavRail: NavRail, FleetStrip: FleetStrip, Icon: Icon, StatusChip: StatusChip, StatePill: StatePill, PlateBadge: PlateBadge, VehicleSilhouette: VehicleSilhouette, VehicleImage: VehicleImage, vehicleKey: vehicleKey, VehicleCard: VehicleCard, VehicleRow: VehicleRow, ListCard: ListCard, ListRow: ListRow, Button: Button, AttentionBar: AttentionBar, MoneyBlock: MoneyBlock, Checklist: Checklist, BlockedPanel: BlockedPanel, ConfirmationBlock: ConfirmationBlock, HistoryLine: HistoryLine, Notice: Notice, AppHeader: AppHeader, LanguageSwitch: LanguageSwitch, BottomTabBar: BottomTabBar, PageHeader: PageHeader, GameIcon: GameIcon, LauncherTile: LauncherTile, LauncherGrid: LauncherGrid, EmptyState: EmptyState, formatLKR: fmt, words: { status: STATUS, state: STATE } };
+  var api = { BrandMark: BrandMark, NavRail: NavRail, FleetStrip: FleetStrip, Icon: Icon, StatusChip: StatusChip, StatePill: StatePill, PlateBadge: PlateBadge, VehicleSilhouette: VehicleSilhouette, VehicleImage: VehicleImage, vehicleKey: vehicleKey, VehicleCard: VehicleCard, VehicleRow: VehicleRow, ListCard: ListCard, ListRow: ListRow, Button: Button, TextField: TextField, AttentionBar: AttentionBar, MoneyBlock: MoneyBlock, Checklist: Checklist, BlockedPanel: BlockedPanel, ConfirmationBlock: ConfirmationBlock, HistoryLine: HistoryLine, Notice: Notice, AppHeader: AppHeader, LanguageSwitch: LanguageSwitch, BottomTabBar: BottomTabBar, PageHeader: PageHeader, GameIcon: GameIcon, LauncherTile: LauncherTile, LauncherGrid: LauncherGrid, EmptyState: EmptyState, formatLKR: fmt, words: { status: STATUS, state: STATE } };
   window.Plate = Object.assign(window.Plate || {}, api);
 })();

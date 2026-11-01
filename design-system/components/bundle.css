@@ -447,3 +447,13 @@ a.rt-li:hover, a.rt-vrow:hover { background: var(--paper); color: var(--ink); }
   .rt-li-meta { font-size: 14px; }
   .rt-vrow { padding: var(--space-2) 16px; }
 }
+/* TextField: label over a 52px input; required in words; hint and error below (boards 01.1, 01.2). */
+.rt-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.rt-field-label { font-size: 16px; line-height: 26px; font-weight: 600; }
+.rt-field-req { color: var(--overdue); }
+.rt-input { min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: var(--radius-md); background: var(--card); color: var(--ink); font: inherit; font-size: 17px; width: 100%; box-sizing: border-box; }
+.rt-input:focus { outline: none; border: 2px solid var(--sapphire); padding: 11.5px 13.5px; }
+.rt-input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.rt-input[aria-invalid="true"] { border-color: var(--overdue); }
+.rt-field-hint { font-size: 14px; line-height: 22px; color: var(--ink-muted); }
+.rt-field-error { font-size: 14px; line-height: 22px; font-weight: 600; color: var(--overdue); }

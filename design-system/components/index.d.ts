@@ -51,6 +51,10 @@ export declare function ListRow(props: ListRowProps): React.ReactElement;
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> { variant?: 'primary' | 'secondary' | 'quiet' | 'danger'; icon?: IconName; full?: boolean }
 export declare function Button(props: ButtonProps): React.ReactElement;
 
+/** A labelled text input (boards 01.1, 01.2): `label` "සිංහල · English", the required mark in words, a hint, an error that says what to fix. Other props go to the <input>. */
+export interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> { label: string; name: string; hint?: string; error?: string; requiredLabel?: string; className?: string }
+export declare function TextField(props: TextFieldProps): React.ReactElement;
+
 /** Sticky labelled counts: Overdue · Open items · Waiting for admin · Today's decisions. */
 export interface AttentionItem { label: string; count: number; tone?: 'overdue' | 'warning' | 'info' | 'neutral'; icon?: IconName; href?: string; onClick?: () => void }
 export interface AttentionBarProps { items: AttentionItem[]; className?: string }
@@ -129,7 +133,7 @@ declare global {
   interface Window {
     Plate: {
       Icon: typeof Icon; StatusChip: typeof StatusChip; StatePill: typeof StatePill; PlateBadge: typeof PlateBadge; VehicleSilhouette: typeof VehicleSilhouette; VehicleImage: typeof VehicleImage; vehicleKey: typeof vehicleKey;
-      VehicleCard: typeof VehicleCard; VehicleRow: typeof VehicleRow; ListCard: typeof ListCard; ListRow: typeof ListRow; Button: typeof Button; AttentionBar: typeof AttentionBar; MoneyBlock: typeof MoneyBlock;
+      VehicleCard: typeof VehicleCard; VehicleRow: typeof VehicleRow; ListCard: typeof ListCard; ListRow: typeof ListRow; Button: typeof Button; TextField: typeof TextField; AttentionBar: typeof AttentionBar; MoneyBlock: typeof MoneyBlock;
       Checklist: typeof Checklist; BlockedPanel: typeof BlockedPanel; ConfirmationBlock: typeof ConfirmationBlock; HistoryLine: typeof HistoryLine; Notice: typeof Notice;
       AppHeader: typeof AppHeader; LanguageSwitch: typeof LanguageSwitch; NavRail: typeof NavRail; FleetStrip: typeof FleetStrip; BrandMark: typeof BrandMark; BottomTabBar: typeof BottomTabBar; PageHeader: typeof PageHeader; GameIcon: typeof GameIcon; LauncherTile: typeof LauncherTile; LauncherGrid: typeof LauncherGrid; EmptyState: typeof EmptyState;
       formatLKR: (n: number) => string;
