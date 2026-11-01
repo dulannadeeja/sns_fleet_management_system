@@ -24,3 +24,11 @@ export async function accessFor(headers: Headers, permission: Permission | 'owne
   const disabledAt = p.disabledAt ? new Date(p.disabledAt) : null;
   return allows({ role: p.role, disabledAt }, granted, permission) ? { kind: 'allowed', person: p } : { kind: 'denied', person: p };
 }
+
+/** Whether a signed-in person may do something, for showing a link (the page itself still checks). */
+export async function mayDo(person: SignedInPerson, permission: Permission): Promise<boolean> {
+  if (person.role === 'owner') return !person.disabledAt;
+  const granted = new Set((await db.select({ permission: permissionGrant.permission }).from(permissionGrant)
+    .where(eq(permissionGrant.userId, person.id))).map((g) => g.permission));
+  return allows({ role: person.role, disabledAt: person.disabledAt ? new Date(person.disabledAt) : null }, granted, permission);
+}

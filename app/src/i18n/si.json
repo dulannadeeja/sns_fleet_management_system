@@ -230,6 +230,40 @@
     "agreedDefaults": {
       "staff": "එකඟ වූ සේවක අවසර",
       "admin": "එකඟ වූ admin අවසර"
+    },
+    "activityLog": "සිදු වූ දේ",
+    "log": {
+      "readOnly": "වෙනස් කරන්න හෝ මකන්න බෑ",
+      "byPerson": "කෙනා අනුව",
+      "byKind": "වර්ගය අනුව",
+      "allPeople": "හැමෝම",
+      "allKinds": "ඔක්කොම",
+      "kinds": {
+        "decisions": "හේතුවක් එක්ක තීරණ",
+        "money": "මුදල්",
+        "customers": "පාරිභෝගිකයෝ",
+        "cars": "වාහන",
+        "settings": "සැකසුම්"
+      },
+      "empty": "තාම මෙතන කිසිම දෙයක් සටහන් වෙලා නෑ.",
+      "older": "පරණ ඒවා",
+      "system": "පද්ධතිය",
+      "actions": {
+        "person": {
+          "add": "{target} ව {role} විදියට එකතු කළා",
+          "resetPassword": "{target} ගේ මුරපදය reset කළා",
+          "turnOff": "{target} ගේ account එක නැවැත්තුවා",
+          "turnOn": "{target} ගේ account එක ආයෙත් පණගැන්නුවා",
+          "emailChange": "{target} ගේ email එක {email} කියලා වෙනස් කළා",
+          "emailConfirmed": "{email} email එක තහවුරු කළා"
+        },
+        "permission": {
+          "grant": "{target} ට දුන්නා: {permission}",
+          "remove": "{target} ගෙන් අයින් කළා: {permission}"
+        }
+      },
+      "reason": "හේතුව: “{reason}”",
+      "left": "{name} (අයින් වුණා)"
     }
   },
   "code": {

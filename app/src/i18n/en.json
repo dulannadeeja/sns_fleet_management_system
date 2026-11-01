@@ -230,6 +230,40 @@
     "agreedDefaults": {
       "staff": "Agreed staff defaults",
       "admin": "Agreed admin defaults"
+    },
+    "activityLog": "Activity log",
+    "log": {
+      "readOnly": "Can't be edited or deleted",
+      "byPerson": "By person",
+      "byKind": "By kind",
+      "allPeople": "All people",
+      "allKinds": "Everything",
+      "kinds": {
+        "decisions": "Decisions with a reason",
+        "money": "Money",
+        "customers": "Customers",
+        "cars": "Cars",
+        "settings": "Settings"
+      },
+      "empty": "Nothing recorded here yet.",
+      "older": "Older",
+      "system": "System",
+      "actions": {
+        "person": {
+          "add": "added {target} as {role}",
+          "resetPassword": "reset the password of {target}",
+          "turnOff": "turned off the account of {target}",
+          "turnOn": "turned on the account of {target}",
+          "emailChange": "changed the email of {target} to {email}",
+          "emailConfirmed": "confirmed the email {email}"
+        },
+        "permission": {
+          "grant": "gave {target}: {permission}",
+          "remove": "took away from {target}: {permission}"
+        }
+      },
+      "reason": "reason: “{reason}”",
+      "left": "{name} (left)"
     }
   },
   "code": {
