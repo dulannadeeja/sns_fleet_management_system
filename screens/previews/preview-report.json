@@ -1163,8 +1163,8 @@
  {
   "name": "11-Partners-AddPartner-Desktop",
   "w": 1280,
-  "canvasH": 1222,
-  "contentH": 1222,
+  "canvasH": 1359,
+  "contentH": 1359,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1172,8 +1172,8 @@
  {
   "name": "11-Partners-AddPartner-Phone",
   "w": 390,
-  "canvasH": 2037,
-  "contentH": 2037,
+  "canvasH": 2186,
+  "contentH": 2186,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1235,8 +1235,8 @@
  {
   "name": "11-Partners-PartnerDetails-Desktop",
   "w": 1280,
-  "canvasH": 1002,
-  "contentH": 1002,
+  "canvasH": 1157,
+  "contentH": 1157,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1244,8 +1244,8 @@
  {
   "name": "11-Partners-PartnerDetails-Phone",
   "w": 390,
-  "canvasH": 1520,
-  "contentH": 1520,
+  "canvasH": 1674,
+  "contentH": 1674,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

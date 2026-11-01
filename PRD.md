@@ -466,6 +466,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - The partner agreement covers commission, the daily cash-out arrangement and who pays which costs. The system prints it; it is signed and kept on paper, and staff record "signed on <date>". Nothing waits on it (AT-83). System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
   - A partner never sees the price a customer paid, customer details or other partners' data. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - Adding a partner is recorded in the activity log (PR-05).
+  - *Proposed (Dulan, 1 Nov 2026):* whoever may add partners creates the partner's account and types the first password; turning it off or on stays with the owner. A partner has a name, a sign-in phone number, a NIC as on the card (one partner per NIC), an optional bank account, and at least one car chosen from the partner cars not yet linked; for each, the commission and which costs the owner pays (service, tyres, repairs, battery). System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
 - **Checks:** AT-44 "A partner without a bank account asks to cash out: an authorised person pays cash at the branch and records it once" (Phase 3).
 - **Screens:** 11.3 Add a partner.
 - **Decided:** DN-20 (printed, signed on paper, date recorded), DN-01 (admin adds partners by default).
@@ -479,6 +480,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Rules:**
   - The starting balance owed on go-live day is one "Opening balance" line, marked "Imported", final from go-live, can be cashed out and never counts as earnings. Past rentals of their cars from SNS's books add nothing. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
   - Terms changed here apply to new rentals only (PR-08).
+  - *Proposed (Dulan, 1 Nov 2026):* until the owner approves the agreement wording, this page records only the date the agreement was signed (nothing waits on it); printing comes with the printouts. The starting balance comes with the starting data (Phase 4).
 - **Checks:** AT-36 "A partner's opening balance is loaded; past rentals of their cars are imported: the balance can be cashed out from go-live; the imported rentals add no earnings; nothing is paid twice".
 - **Screens:** 11.2 Partner details.
 - **Decided:** DN-20.

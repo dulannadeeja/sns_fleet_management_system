@@ -1190,7 +1190,7 @@
   },
   "11-Partners-AddPartner-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1222,
+   "h": 1359,
    "is_interactive": true,
    "page": "plate",
    "title": "11.3 Add a partner · Desktop",
@@ -1199,7 +1199,7 @@
    "y": 52586
   },
   "11-Partners-AddPartner-Phone.dc.html": {
-   "h": 2037,
+   "h": 2186,
    "is_interactive": true,
    "page": "plate",
    "title": "11.3 Add a partner · Phone",
@@ -1266,7 +1266,7 @@
   },
   "11-Partners-PartnerDetails-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1002,
+   "h": 1157,
    "is_interactive": true,
    "page": "plate",
    "title": "11.2 Partner details · Desktop",
@@ -1275,7 +1275,7 @@
    "y": 52586
   },
   "11-Partners-PartnerDetails-Phone.dc.html": {
-   "h": 1520,
+   "h": 1674,
    "is_interactive": true,
    "page": "plate",
    "title": "11.2 Partner details · Phone",
