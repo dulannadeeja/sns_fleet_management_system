@@ -174,6 +174,6 @@ Jobs are singletons (never two at once) and safe to run twice.
 
 ## 14. To check when setting up
 
-- **Resend account and the SNS sending domain** (needed before go-live for email codes and reset, #28): who opens and pays for them, and which domain sends. Open: ask the owner.
+- **Resend account and the SNS sending domain** (needed before go-live for email codes and reset, #28): the Resend free plan, no payment (T8); the account is opened by Dulan. Proposed: Dulan, 1 Nov 2026; for the owner to confirm. Still to do: verify the SNS sending domain in Resend (its DNS records) and set `RESEND_API_KEY` and `EMAIL_FROM` on the server. The free plan's current sending limits are a fact to confirm (below).
 
 These are facts to confirm, not decisions: current free-plan limits (Resend, error tracker, uptime check, Cloudflare R2), the DigitalOcean region by a speed test from Elpitiya, and the dollar exchange rate for the monthly cost.
