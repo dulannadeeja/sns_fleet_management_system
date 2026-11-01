@@ -215,7 +215,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Story:** As the owner, I decide what the admin and each staff member may do, starting from the agreed defaults, so that each person has the access their job needs.
 - **Rules:**
   - Every person starts from the agreed defaults; the owner can change them for each person. The owner can do everything and is not listed. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
-  - Payroll is one permission covering preparation, finalising and payment. Exporting reports is a separate permission (PR-11). Paying partner cash-outs is the admin's by default and may be given to chosen staff. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+  - Payroll is one permission covering preparation, finalising and payment. Exporting reports is a separate permission (PR-11). *Proposed (Dulan, 1 Nov 2026):* both are the admin's by default, not staff's. Paying partner cash-outs is the admin's by default and may be given to chosen staff. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
   - Checking payments, writing off a debt, keeping a cancellation fee and going ahead with expired papers belong to an authorised person. Until the owner names one, only the owner can do them, as the owner can do everything (Derived control); naming one is on the go-live checklist.
   - Every change is recorded with who made it and when (PR-05), and permissions are checked by the server on every request (PR-06).
 - **Checks:** AT-24 "Staff without export or payroll permission request those records directly: the server denies access, even outside normal navigation". *Proposed check:* the owner changes a permission; the activity log shows the change, who made it and when.
@@ -232,6 +232,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Rules:**
   - SNS has one primary owner, one additional admin and three staff; each partner has one account for all their cars. System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - A new person signs in with their phone number, gets a first password to change at first sign-in, and starts with their role's default permissions, which the owner can then change (ST-15.1). Sinhala is the default language (PR-01).
+  - *Proposed (Dulan, 1 Nov 2026):* the owner types the first password (8 or more characters) when adding a person or resetting a forgotten password, and gives it to them by hand; a reset ends their open sessions. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - A partner's account is made when the partner is added (ST-11.2).
   - When someone leaves, the owner turns off their account, with a reason: sign-in stops, and everything they recorded keeps their name. A partner's balance stays and can still be paid out. The owner can turn it back on. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - Adding a person and turning an account off or on are recorded in the activity log (PR-05).

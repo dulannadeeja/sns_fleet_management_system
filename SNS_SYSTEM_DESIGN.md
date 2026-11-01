@@ -84,7 +84,7 @@ Any cash introduced after launch must be recorded as a cash movement, not treate
 
 Customer-facing accounts are not confirmed. Customer document delivery is through the agreed printable documents.
 
-**Sign-in.** Everyone (owner, admins, staff, partners) signs in with their own phone number and password; a first password is changed at the first sign-in. The primary owner resets a forgotten password for staff and partners. Confirmed: agreed by the owner, recorded by Dulan.
+**Sign-in.** Everyone (owner, admins, staff, partners) signs in with their own phone number and password; a first password is changed at the first sign-in. The primary owner resets a forgotten password for staff and partners. Confirmed: agreed by the owner, recorded by Dulan. When adding a person or resetting a password, the owner types the first password (at least 8 characters) and gives it to the person by hand; resetting ends the person's open sessions. Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
 
 **Sign-in safety.** Passwords have at least 8 characters; 5 wrong tries lock the account for 15 minutes. The primary owner and the admin each give an email address: signing in on a new device asks for a one-time code sent to it, and they can reset their own forgotten password by email. No SMS is used. Confirmed: agreed by the owner, recorded by Dulan; email is the cost the approved proposal already lists (password reset, LKR 0).
 
@@ -117,8 +117,8 @@ All critical permissions are configurable. The following are agreed defaults, no
 | Override expired-document warnings | Authorised person, following the relevant admin/override permission |
 | Write off a customer debt | Authorised person |
 | Retain a cancellation fee | Authorised person |
-| Manage payroll | One payroll-management permission; no separate preparation/finalisation/payment permissions |
-| Export reports | Separate configurable export permission |
+| Manage payroll | One payroll-management permission; no separate preparation/finalisation/payment permissions. Admin by default, not staff (Proposed: Dulan, 1 Nov 2026) |
+| Export reports | Separate configurable export permission. Admin by default, not staff (Proposed: Dulan, 1 Nov 2026) |
 | See partner earnings and terms | Admin; not staff |
 | See the activity log | Admin; not staff |
 | Add or edit cars and packages | Admin; not staff |
