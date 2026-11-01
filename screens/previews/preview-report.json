@@ -1397,8 +1397,8 @@
  {
   "name": "15-Settings-AddPerson-Desktop",
   "w": 1280,
-  "canvasH": 1094,
-  "contentH": 1094,
+  "canvasH": 1116,
+  "contentH": 1116,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1469,8 +1469,8 @@
  {
   "name": "15-Settings-Permissions-Desktop",
   "w": 1280,
-  "canvasH": 2341,
-  "contentH": 2341,
+  "canvasH": 2424,
+  "contentH": 2424,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1478,8 +1478,8 @@
  {
   "name": "15-Settings-Permissions-Phone",
   "w": 390,
-  "canvasH": 5237,
-  "contentH": 5237,
+  "canvasH": 5426,
+  "contentH": 5426,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

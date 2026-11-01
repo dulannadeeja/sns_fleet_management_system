@@ -4,7 +4,7 @@ import { person, samplePerson, signIn, signedInSample, theOwner } from '../helpe
 import { resetPassword } from '../../src/modules/people/people';
 
 // AT-46 "A staff member forgets their password: the primary owner resets it; the staff member changes it at the next sign-in".
-// This is the sign-in half; the owner's reset comes with People (#15). Same path for a first password (ST-01.2).
+// Both halves: the owner's reset (People, #15) and the change at the next sign-in; a first password takes the same path (ST-01.2).
 async function sessionHeaders(phone: string, password: string): Promise<Headers> {
   const res = await signIn(phone, password);
   expect(res.status).toBe(200);
@@ -12,7 +12,7 @@ async function sessionHeaders(phone: string, password: string): Promise<Headers>
   return new Headers({ cookie });
 }
 
-describe('AT-46 (sign-in half): the first or reset password is changed at the next sign-in', () => {
+describe('AT-46: the owner resets a forgotten password; it is changed at the next sign-in', () => {
   it('sends a person with a first password to first sign-in, and nowhere else', async () => {
     const p = await samplePerson();
     const headers = await sessionHeaders(p.phone, p.password);

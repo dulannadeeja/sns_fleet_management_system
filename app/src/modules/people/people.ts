@@ -49,7 +49,7 @@ export async function addPerson(actorId: string | null, input: NewPerson): Promi
   const allowedRoles: Role[] = actorId ? ['staff', 'admin'] : ['staff', 'admin', 'owner'];
   if (!allowedRoles.includes(input.role)) return { error: 'roleInvalid' };
   const passwordHash = await hash(input.password);
-  return db.transaction(async (tx) => {
+  return withUniqueErrors(() => db.transaction(async (tx) => {
     if (actorId && !(await isOwner(tx, actorId))) return { error: 'notAllowed' } as const;
     if ((await tx.select({ id: user.id }).from(user).where(eq(user.phoneNumber, input.phone))).length) return { error: 'phoneTaken' } as const;
     if (input.role === 'owner' && (await tx.select({ id: user.id }).from(user).where(eq(user.role, 'owner'))).length) return { error: 'roleInvalid' } as const;
@@ -62,7 +62,21 @@ export async function addPerson(actorId: string | null, input: NewPerson): Promi
     if (defaults.length) await tx.insert(permissionGrant).values(defaults.map((permission) => ({ userId: created.id, permission, createdBy: actorId })));
     await log(tx, actorId, 'person.add', created.id, { name, role: input.role, permissions: defaults });
     return { ok: true, id: created.id } as const;
-  });
+  }));
+}
+
+/** Two adds at the same moment both pass the checks above; the database's unique rules stop the second one, and it
+ *  gets the same answer as if it had come later. */
+async function withUniqueErrors<T>(run: () => Promise<T>): Promise<T | { error: PeopleError }> {
+  try {
+    return await run();
+  } catch (e) {
+    const err = (e as { cause?: { code?: string; constraint?: string }; code?: string; constraint?: string });
+    const pg = err.cause ?? err;
+    if (pg.code === '23505' && pg.constraint === 'user_one_owner') return { error: 'roleInvalid' };
+    if (pg.code === '23505' && pg.constraint?.includes('phone_number')) return { error: 'phoneTaken' };
+    throw e;
+  }
 }
 
 /** The owner gives a forgotten password back as a new first password: it must be changed at the next sign-in, the lock
@@ -112,6 +126,8 @@ export async function turnOn(actorId: string, personId: string): Promise<PeopleR
     if (!target) return { error: 'notFound' } as const;
     if (!target.disabledAt) return { error: 'alreadyOn' } as const;
     await tx.update(user).set({ disabledAt: null, disabledReason: null, updatedAt: new Date() }).where(eq(user.id, personId));
+    // A sign-in that raced the turning off could have left a session; it must not come back to life.
+    await tx.delete(session).where(eq(session.userId, personId));
     await log(tx, actorId, 'person.turnOn', personId, { previousReason: target.reason });
     return { ok: true } as const;
   });
@@ -136,19 +152,21 @@ export async function setPermission(actorId: string, personId: string, permissio
 
 export interface PersonRow { id: string; name: string; phone: string | null; role: string; disabledAt: Date | null; disabledReason: string | null; permissions: string[] }
 
-/** Everyone with an SNS account (not partners: they are listed under Partners), owner first, then by name. */
-export async function listPeople(): Promise<PersonRow[]> {
-  const rows = await db.select({
+// Callers are owner-only pages (requireOwner): these return phone numbers and permissions.
+function peopleQuery() {
+  return db.select({
     id: user.id, name: user.name, phone: user.phoneNumber, role: user.role, disabledAt: user.disabledAt, disabledReason: user.disabledReason,
     permissions: sql<string[]>`coalesce(array_agg(${permissionGrant.permission}) filter (where ${permissionGrant.permission} is not null), '{}')`,
-  }).from(user).leftJoin(permissionGrant, eq(permissionGrant.userId, user.id))
-    .where(sql`${user.role} <> 'partner'`)
-    .groupBy(user.id)
-    .orderBy(sql`${user.role} = 'owner' desc`, asc(user.name));
-  return rows;
+  }).from(user).leftJoin(permissionGrant, eq(permissionGrant.userId, user.id));
 }
 
+/** Everyone with an SNS account (not partners: they are listed under Partners), owner first, then by name. */
+export async function listPeople(): Promise<PersonRow[]> {
+  return peopleQuery().where(sql`${user.role} <> 'partner'`).groupBy(user.id).orderBy(sql`${user.role} = 'owner' desc`, asc(user.name));
+}
+
+/** One person, or null for an unknown or malformed id. */
 export async function getPerson(id: string): Promise<PersonRow | null> {
   if (!UUID.test(id)) return null;
-  return (await listPeople()).find((p) => p.id === id) ?? null;
+  return (await peopleQuery().where(and(eq(user.id, id), sql`${user.role} <> 'partner'`)).groupBy(user.id))[0] ?? null;
 }

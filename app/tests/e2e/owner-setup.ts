@@ -5,6 +5,9 @@ import { db } from '../../src/db/client';
 import { account, user } from '../../src/db/schema';
 import { auth } from '../../src/auth/server';
 import { addPerson } from '../../src/modules/people/people';
+import { assertTestDatabase } from '../setup/db';
+
+assertTestDatabase(process.env.DATABASE_URL);
 
 // Sample people from earlier runs stay in the test database (people are never deleted); turning them off keeps the
 // screens as small as SNS's real team.

@@ -23,7 +23,11 @@ describe('AT-58: only the primary owner manages people and permissions', () => {
     const owner = await theOwner();
     const target = await samplePerson();
     expect(await setPermission(owner, target.id, 'exportReports', true)).toEqual({ ok: true, changed: true });
-    expect(await setPermission(owner, target.id, 'addPeople', true)).toEqual({ error: 'permissionInvalid' });
+    // AT-58: "The owner tries to give an admin the permission to change permissions → Refused".
+    const admin = await samplePerson('first-pass-1', 'admin');
+    for (const ownerOnly of ['changePermissions', 'addPeople', 'turnAccountsOff']) {
+      expect(await setPermission(owner, admin.id, ownerOnly, true)).toEqual({ error: 'permissionInvalid' });
+    }
     expect(await setPermission(owner, owner, 'exportReports', true)).toEqual({ error: 'roleInvalid' });
   });
 });

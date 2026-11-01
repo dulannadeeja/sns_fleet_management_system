@@ -24,7 +24,7 @@
 - **Turning off**: `user.disabled_at`, `disabled_reason`; one transaction sets them, deletes all the person's sessions and logs. Sign-in refuses a turned-off account with the same "wrong" answer (no new message); `requireUser` refuses too. The owner cannot be turned off. Turning on clears both and logs.
 - **Reset**: owner types a new first password → hash into `account`, `must_change_password = true`, lock count cleared, sessions deleted, logged; one transaction.
 - **Adding** a person moves from Better Auth's internal adapter to one drizzle transaction (user, account, grants, log), with the same hash function (`ctx.password.hash`). Phone must be a Sri Lankan mobile and unused.
-- **Screens** with Plate parts; Settings sub-nav shows only the live pages (Permissions, People) as links, the rest as plain text until built. Words in `si.json`/`en.json`. Sample names are labelled in the boards.
+- **Screens** with Plate parts; Settings sub-nav shows only the live pages (Permissions, People); the others appear as their tickets build them. Words in `si.json`/`en.json`. Sample names are labelled in the boards.
 
 ## Out of scope
 Activity log screen (ST-15.4); partner accounts (ST-11.2); admin email and codes (#28); the full menu by permission (each feature adds its own item).

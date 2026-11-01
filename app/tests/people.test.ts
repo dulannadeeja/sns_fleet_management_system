@@ -43,7 +43,18 @@ describe('the owner adds a person', () => {
     const logged = await db.select().from(auditEvent).where(and(eq(auditEvent.targetId, added.id), eq(auditEvent.action, 'permission.remove')));
     expect(logged).toHaveLength(1);
     expect(logged[0]).toMatchObject({ createdBy: owner, details: { permission: 'extendByPhone' } });
+    expect(Date.now() - logged[0].createdAt.getTime()).toBeLessThan(60_000);
     expect((await getPerson(added.id))!.permissions).not.toContain('extendByPhone');
     expect(await getPerson('not-an-id')).toBeNull();
+  });
+});
+
+describe('two adds with the same phone at the same moment', () => {
+  it('one is added, the other is told the number is taken', async () => {
+    const owner = await theOwner();
+    const phone = samplePhone();
+    const results = await Promise.all([1, 2].map((n) => addPerson(owner, { name: `Sample ${n}`, phone, password: 'first-pass-1', role: 'staff' })));
+    expect(results.filter((r) => 'ok' in r)).toHaveLength(1);
+    expect(results.filter((r) => 'error' in r)).toEqual([{ error: 'phoneTaken' }]);
   });
 });

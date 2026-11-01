@@ -20,8 +20,13 @@ export function PermissionBox({ personId, permission, allowed, label, errors }: 
           const next = e.target.checked;
           start(async () => {
             setShown(next);
-            const result = await setPermissionAction(personId, permission, next);
-            setError(result.error ? errors[result.error] : undefined);
+            try {
+              const result = await setPermissionAction(personId, permission, next);
+              setError(result.error ? errors[result.error] : undefined);
+            } catch {
+              // Signed out or no longer allowed while the page was open: the tick goes back and says so.
+              setError(errors.notAllowed);
+            }
           });
         }} />
       {error ? <span role="alert" className="rt-field-error" style={{ display: 'block' }}>{error}</span> : null}

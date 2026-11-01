@@ -50,6 +50,13 @@
       "when": 1793523469653,
       "tag": "0006_people_app_role",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793525180630,
+      "tag": "0007_permission_grant_id",
+      "breakpoints": true
     }
   ]
 }
