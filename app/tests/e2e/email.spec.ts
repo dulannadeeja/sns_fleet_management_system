@@ -10,6 +10,8 @@ async function signIn(page: Page, phone: string, password: string) {
   if ((await page.locator('html').getAttribute('lang')) !== 'en') {
     await page.getByRole('button', { name: 'EN', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    // Start again on a fresh page, so the language change cannot redraw the form while it is being filled.
+    await page.goto('/sign-in');
   }
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill(password);
@@ -43,11 +45,13 @@ test('AT-61: the admin on a new device needs the emailed code; then forgot passw
   await page.locator('button[type="submit"]').click();
   await expect(page).toHaveURL(/\/$/);
   await page.getByRole('button', { name: 'Sign out' }).click();
+  await expect(page).toHaveURL(/\/sign-in$/); // signed out before the next sign-in
   seen = mailCount(email);
   await signIn(page, phone, 'own-pass-123');
   await expect(page).toHaveURL(/\/$/);
   expect(mailCount(email)).toBe(seen);
   await page.getByRole('button', { name: 'Sign out' }).click();
+  await expect(page).toHaveURL(/\/sign-in$/); // signed out before the next sign-in
 
   // 01.5 and 01.6: forgot password; the link sets a new one.
   await page.getByRole('link', { name: /Forgot your password/ }).click();
