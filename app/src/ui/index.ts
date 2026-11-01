@@ -8,5 +8,6 @@ export { NavRail, type NavRailProps, type NavRailLabels } from './NavRail';
 export { BottomTabBar, type BottomTabBarProps } from './BottomTabBar';
 export { Button, type ButtonProps } from './Button';
 export { TextField, type TextFieldProps } from './TextField';
+export { Notice, type NoticeProps } from './Notice';
 export { bi, nb } from './text';
 export type { Lang, IconName, NavItem } from './types';

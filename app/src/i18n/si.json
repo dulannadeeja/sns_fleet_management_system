@@ -32,5 +32,41 @@
   "plate": {
     "title": "Plate · app frame",
     "subtitle": "උදාහරණ දත්ත · sample data, development only"
+  },
+  "signIn": {
+    "welcome": "ආයුබෝවන්",
+    "intro": "SNS Rent a Car · Elpitiya. ඔයාගේ account එකට ඇතුල් වෙන්න.",
+    "phone": "දුරකථන අංකය · Phone number",
+    "password": "මුරපදය · Password",
+    "submit": "ඇතුල් වෙන්න · Sign in",
+    "help": "මුරපදය අමතකද? Owner ට කියලා reset කරගන්න. වැරදි මුරපද 5 ක් දැම්මොත් account එක විනාඩි 15 කට lock වෙනවා.",
+    "everyone": "Owner, admin, staff සහ partners හැමෝටම තමන්ගේම account එකක් තියෙනවා.",
+    "wrong": "දුරකථන අංකය හරි මුරපදය හරි වැරදියි.",
+    "locked": "වැරදි මුරපද 5 ක් නිසා account එක lock වෙලා. විනාඩි 15 කින් ආයෙත් උත්සාහ කරන්න.",
+    "missing": "දුරකථන අංකයයි මුරපදයයි දෙකම ඕන.",
+    "language": "භාෂාව · Language"
+  },
+  "firstSignIn": {
+    "title": "මුරපදය · Your password",
+    "subtitle": "පළමු ඇතුල්වීම · First sign-in",
+    "hello": "ආයුබෝවන් {name}",
+    "intro": "මේ ඔයාගේ පළමු ඇතුල්වීම. ඔයාට දුන්න මුරපදය වෙනුවට ඔයාගේම මුරපදයක් දාන්න.",
+    "newPassword": "අලුත් මුරපදය · New password",
+    "repeat": "ආයෙත් · Type it again",
+    "required": "(අනිවාර්යයි · required)",
+    "rule": "අකුරු 8 ක් වත් ඕන. අමතක වුණොත් owner reset කරනවා.",
+    "language": "භාෂාව · Language",
+    "save": "Save කරන්න · Save and continue",
+    "tooShort": "අකුරු 8 ක් වත් ඕන.",
+    "notSame": "මුරපද දෙක එක වගේ නෑ.",
+    "signedOut": "ආයෙත් ඇතුල් වෙන්න.",
+    "newPasswordPlaceholder": "ඔයාගේ අලුත් මුරපදය",
+    "repeatPlaceholder": "ආයෙත් ඒ මුරපදයම",
+    "si": "සිංහල",
+    "en": "English"
+  },
+  "home": {
+    "signedIn": "{name} · ඇතුල් වෙලා",
+    "signOut": "පිටවෙන්න · Sign out"
   }
 }

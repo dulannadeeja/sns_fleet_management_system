@@ -2,7 +2,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Button, TextField } from '../../src/ui';
+import { Button, Notice, TextField } from '../../src/ui';
 
 afterEach(cleanup);
 
@@ -38,5 +38,14 @@ describe('Button', () => {
     const b = screen.getByRole('button', { name: 'Save' });
     expect(b.getAttribute('type')).toBe('submit');
     expect(b.className).toBe('rt-btn rt-btn-secondary rt-btn-full');
+  });
+});
+
+describe('Notice', () => {
+  it('is a note with an icon, and an alert when it is about danger', () => {
+    const { rerender } = render(<Notice title="Forgot your password?">Ask the owner.</Notice>);
+    expect(screen.getByRole('note').textContent).toBe('Forgot your password?Ask the owner.');
+    rerender(<Notice tone="danger">Locked.</Notice>);
+    expect(screen.getByRole('alert').className).toBe('rt-notice rt-notice-danger');
   });
 });

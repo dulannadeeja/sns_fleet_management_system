@@ -26,6 +26,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.3",
     "jsdom": "^30.1.3",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5"
   },
@@ -41,6 +42,7 @@
     "predev": "node scripts/sync-plate.mjs",
     "lint": "eslint .",
     "prelint": "node scripts/sync-plate.mjs",
+    "people:add": "node scripts/sync-plate.mjs && tsx --conditions=react-server --env-file-if-exists=.env.local scripts/people-add.ts",
     "start": "next start",
     "sync:plate": "node scripts/sync-plate.mjs",
     "test": "vitest run",

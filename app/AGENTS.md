@@ -1,6 +1,6 @@
 # app/: the SNS Rent Car application (rank 7)
 
-Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13). Sign-in and jobs come with the next Phase 1 tickets.
+Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13); sign-in with phone number and password, lockout and the first password (#14). Permissions, email codes (#28) and jobs come with the next Phase 1 tickets.
 
 ## Layout
 `src/app/` routes by PRD module · `src/modules/<module>/` business rules and database access, no React · `src/db/` schema and SQL migrations · `src/ui/` Plate components · `src/documents/` printouts 16.1–16.7 · `src/jobs/` pg-boss jobs · `src/i18n/` `si.json`, `en.json` · `tests/at/` one test per AT-nn.
@@ -15,15 +15,26 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 | Rule and AT tests (start the test database first) | `npm run test` |
 | One test | `npx vitest run tests/at/at-03.test.ts` |
 | Which AT-nn have a test | `npm run test:at-coverage` (lists; `test:at-coverage:strict` fails on any gap: the release gate) |
-| Browser journeys (Chromium, desktop and phone sizes; first run `npx playwright install chromium`) | `npm run test:e2e` |
+| Browser journeys (Chromium, desktop and phone sizes; needs `.env.local`; first run `npx playwright install chromium`) | `npm run test:e2e` |
 | Migrations | change `src/db/schema/`, then `npm run db:generate` and review the SQL; a rule SQL alone (a trigger) is `npx drizzle-kit generate --custom --name <what>`; apply with `npm run db:migrate`. Tests apply them by themselves |
 | Build (checks Sinhala and English have the same words first) | `npm run build` |
-| Dev server | `npm run dev` |
+| Dev server (needs `.env.local`, below) | `npm run dev` |
+| Add a person with a first password (until the People screen, #15) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX` (asks for the password; never printed) |
+
+## Settings (`app/.env.local`, git-ignored, never committed)
+- `DATABASE_URL`: the database the dev server uses. Tests and browser journeys use the test database on port 5433 by themselves.
+- `BETTER_AUTH_SECRET`: a long random value of your own, made once: `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`. The app refuses to start without it; there is no built-in fallback. Unit tests set a test-only value in `vitest.config.ts`; CI sets one in the workflow; the server has its own.
 
 ## Plate in the app (`src/ui/`)
 - `scripts/sync-plate.mjs` copies the tokens, styles, fonts, logo and line icons from `design-system/` into `src/ui/plate/` and `public/plate/` before `dev`, `build`, `test` and `typecheck`. The copies are git-ignored: never edit them; change `design-system/` (skill: sns-plate-component). `--check` fails on a stale copy.
 - Components keep the names, props and `rt-*` classes of `design-system/components/` (`index.d.ts`, `bundle.js`); port one when a ticket first needs it, with a test of its states. A component with event handlers is a client component (`'use client'`).
 - Words come from `src/i18n/` and are passed in as props (`labels`, `label`, `langLabel`, `backLabel`, `newLabel`, `search`). The menu's group headings and English echoes are the design system's own bilingual words; pass `group` with every menu item so English labels group correctly. `/plate` (development only; 404 in production) previews the frame: `/plate?device=phone` for the phone.
+
+## Sign-in (`src/auth/`, Better Auth)
+- `server.ts` is the one Better Auth set-up: phone number and password, 8+ characters, 5 wrong tries lock the account for 15 minutes (hooks, per account). No self sign-up.
+- Every signed-in page starts with `requireUser()` (`src/auth/require.ts`): no session → `/sign-in`; a first or reset password → `/first-sign-in`. Nothing else opens until the person sets their own password.
+- The signed-in person's saved language picks `si` or `en` (`src/i18n/request.ts`); Sinhala when signed out. An action that can change the language calls `revalidatePath('/', 'layout')` before `redirect`, so `<html lang>` follows.
+- People without an email get a placeholder `<id>@no-email.invalid`; nothing is ever sent to it.
 
 ## Rules (details in TRD › Integrity rules)
 - Money is whole-rupee integers; a partner share is rounded down in one shared function (`src/lib/money.ts` · `splitShare`); SNS takes the rest.

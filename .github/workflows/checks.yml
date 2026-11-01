@@ -33,6 +33,8 @@ jobs:
           --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/sns_test
+      # A throwaway value for the test database only; the real one lives on the server, never in the repository.
+      BETTER_AUTH_SECRET: ci-test-only-secret-not-for-real-use-0123456789
     steps:
       - uses: actions/checkout@v4
       - name: Is there an app yet?

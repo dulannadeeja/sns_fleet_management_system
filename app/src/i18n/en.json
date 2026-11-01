@@ -32,5 +32,41 @@
   "plate": {
     "title": "Plate · app frame",
     "subtitle": "sample data, development only"
+  },
+  "signIn": {
+    "welcome": "Welcome",
+    "intro": "SNS Rent a Car · Elpitiya. Sign in to your account.",
+    "phone": "Phone number",
+    "password": "Password",
+    "submit": "Sign in",
+    "help": "Forgot your password? Ask the owner to reset it. 5 wrong tries lock the account for 15 minutes.",
+    "everyone": "Owner, admin, staff and partners each have their own account.",
+    "wrong": "The phone number or the password is wrong.",
+    "locked": "The account is locked after 5 wrong tries. Try again in 15 minutes.",
+    "missing": "Both the phone number and the password are needed.",
+    "language": "Language"
+  },
+  "firstSignIn": {
+    "title": "Your password",
+    "subtitle": "First sign-in",
+    "hello": "Welcome, {name}",
+    "intro": "This is your first sign-in. Choose your own password to replace the one you were given.",
+    "newPassword": "New password",
+    "repeat": "Type it again",
+    "required": "(required)",
+    "rule": "At least 8 characters. If you forget it, the owner resets it.",
+    "language": "Language",
+    "save": "Save and continue",
+    "tooShort": "At least 8 characters, please.",
+    "notSame": "The two passwords are not the same.",
+    "signedOut": "Please sign in again.",
+    "newPasswordPlaceholder": "Your new password",
+    "repeatPlaceholder": "Same password again",
+    "si": "සිංහල",
+    "en": "English"
+  },
+  "home": {
+    "signedIn": "Signed in: {name}",
+    "signOut": "Sign out"
   }
 }
