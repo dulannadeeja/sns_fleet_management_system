@@ -73,7 +73,7 @@ Tables follow the system design's core records (Logical structure, Core records 
 | Area | Tables |
 | --- | --- |
 | Identity | `user`, `session`, `account`, `verification` (Better Auth), `permission_grant`, `audit_event` |
-| Customers | `customer` (NIC unique), `customer_flag` (open/closed, reason, closed_by), `reference_person`, `document` (private file metadata), `document_access` (who opened what, when) |
+| Customers | `customer` (NIC unique), `customer_flag` (open/closed, reason, closed_by), `reference_person`, `customer_document` (a customer's private copies; later agreement photos and reference-person copies get their own tables), `document_access` (who opened what, when). Copies are insert-only until the 7-year deletion list is built: that migration lets the owner's deletion remove them |
 | Cars | `vehicle` (with its `partner_owner`, once linked), `partner_owner` (the partner's `user` account, NIC, bank account, agreement signed on), `vehicle_terms_version` (rate, km, extra km, commission, surcharge, garage-day, cost responsibilities; effective from), `starting_package`, `vehicle_status_event` |
 | Rentals | `reservation`, `rental`, `rental_terms_snapshot`, `rental_vehicle_segment` (car, readings, saved terms, swap-day decision), `rental_event` (extension, swap, return) |
 | Charges and money | `charge`, `adjustment`, `payment`, `payment_allocation`, `deposit_movement`, `refund`, `cash_movement`, `reconciliation` (waiting/matched/flagged), `discrepancy` |

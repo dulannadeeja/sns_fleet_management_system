@@ -39,6 +39,7 @@ export default async function CustomersPage({ searchParams }: { searchParams: Pr
           </Link>
         )) : <p className="set-muted" style={{ margin: 0, padding: '16px 20px' }}>{q ? t('empty') : t('none')}</p>}
       </section>
+      {rows.length >= 100 ? <p className="set-muted" style={{ margin: 0 }}>{t('limitNote')}</p> : null}
     </AppFrame>
   );
 }

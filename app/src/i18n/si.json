@@ -192,7 +192,7 @@
       "notSent": "Email එක යවන්න බැරි වුණා. ආයෙත් බලන්න."
     },
     "perms": {
-      "customerAccess": "පාරිභෝගිකයන් බලන්න සහ එකතු කරන්න",
+      "customerAccess": "පාරිභෝගිකයන් බලන්න, එකතු කරන්න, නිවැරදි කරන්න සහ පිටපත් අරින්න",
       "approveFirstCustomer": "පළමු පාර එන පාරිභෝගිකයෙක් අනුමත කරන්න",
       "proceedDespiteFlag": "පාරිභෝගික සලකුණක් තිබුණත් ඉස්සරහට යන්න",
       "setOrWaiveDeposit": "Deposit එක දාන්න හෝ අත්හරින්න",
@@ -278,7 +278,9 @@
         "customer": {
           "add": "{target} පාරිභෝගිකයා එකතු කළා",
           "copyAdd": "{target} ට පිටපතක් දැම්මා: {copy}",
-          "change": "{target} ගේ {field} {old} සිට {new} දක්වා නිවැරදි කළා"
+          "change": "{target} ගේ {field} {old} සිට {new} දක්වා නිවැරදි කළා",
+          "copyOpened": "{target} ගේ පිටපතක් ඇරියා: {copy}",
+          "nicChange": "{target} ගේ NIC එක {old} සිට {new} දක්වා නිවැරදි කළා"
         }
       },
       "reason": "හේතුව: “{reason}”",
@@ -797,7 +799,7 @@
       "customer": "පාරිභෝගිකයා",
       "nic": "NIC",
       "phone": "දුරකථන",
-      "licence": "License",
+      "licence": "Licence",
       "copies": "පිටපත්"
     },
     "licenceUntil": "{date} දක්වා",
@@ -823,8 +825,8 @@
     "kinds": {
       "nicFront": "NIC · ඉස්සරහ",
       "nicBack": "NIC · පිටුපස",
-      "licenceFront": "License · ඉස්සරහ",
-      "licenceBack": "License · පිටුපස"
+      "licenceFront": "Licence · ඉස්සරහ",
+      "licenceBack": "Licence · පිටුපස"
     },
     "chooseFile": "Photo හෝ file එක",
     "replace": "වෙනස් කරන්න",
@@ -867,8 +869,17 @@
       "fileType": "Photo එකක් (JPEG, PNG, WebP, HEIC) හෝ PDF එකක් විතරයි.",
       "fileTooBig": "MB 10 උපරිම.",
       "stale": "මේ අතරේ කවුරු හරි මේ පාරිභෝගිකයා වෙනස් කළා. ඒක බලන්න පිටුව ආයෙත් අරින්න, ඊට පස්සේ ඔයාගේ වෙනස කරන්න.",
-      "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+      "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න.",
+      "nicTaken": "මේ NIC එක වෙන පාරිභෝගිකයෙක්ගේ. ඒ පාරිභෝගිකයා අරින්න.",
+      "reasonMissing": "හේතුවක් දෙන්න."
     },
-    "call": "කතා කරන්න"
+    "call": "කතා කරන්න",
+    "nicFix": "NIC එක නිවැරදි කරන්න",
+    "nicFixNote": "අයිතිකරුට හෝ admin ට විතරයි, හේතුවක් එක්ක. පරණ සහ අලුත් NIC දෙකම සටහන් වෙනවා.",
+    "nicNew": "නිවැරදි NIC",
+    "reason": "හේතුව",
+    "nicFixSave": "NIC එක නිවැරදි කරන්න",
+    "nicFixed": "NIC එක නිවැරදි කළා.",
+    "limitNote": "උපරිම පාරිභෝගිකයෝ 100යි පේන්නේ; අනිත් අය හොයන්න."
   }
 }

@@ -13,7 +13,7 @@ import '../customers.css';
 
 // Screen 08.2 Customer details (ST-08.3): details, warnings, document copies and what happened. Full NIC and phone, no
 // masking (PR-13). Flags (#24), debts and rentals (Phase 2) fill in later. Needs customer access.
-export default async function CustomerPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; existing?: string; copy?: string }> }) {
+export default async function CustomerPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; existing?: string; copy?: string; nic?: string }> }) {
   const person = await requirePermission('customerAccess');
   const c = await getCustomer((await params).id);
   if (!c) notFound();
@@ -35,6 +35,7 @@ export default async function CustomerPage({ params, searchParams }: { params: P
       {q.existing === '1' ? <Notice>{t('existing')}</Notice> : null}
       {q.saved === '1' ? <Notice>{t('saved')}</Notice> : null}
       {q.copy === '1' ? <Notice>{t('copyAdded')}</Notice> : null}
+      {q.nic === '1' ? <Notice>{t('nicFixed')}</Notice> : null}
       <section className="car-card">
         <div className="car-top">
           <span className="set-avatar">{c.name.split(/\s+/).slice(0, 2).map((x) => x[0]?.toUpperCase()).join('')}</span>

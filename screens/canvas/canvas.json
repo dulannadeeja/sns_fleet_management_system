@@ -829,7 +829,7 @@
   },
   "08-Customers-CustomerDetails-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1039,
+   "h": 1047,
    "is_interactive": true,
    "page": "plate",
    "title": "08.2 Customer details · Desktop",
@@ -838,7 +838,7 @@
    "y": 35292
   },
   "08-Customers-CustomerDetails-Phone.dc.html": {
-   "h": 2085,
+   "h": 2159,
    "is_interactive": true,
    "page": "plate",
    "title": "08.2 Customer details · Phone",

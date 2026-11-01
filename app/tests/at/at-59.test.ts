@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { db } from '../../src/db/client';
-import { documentAccess } from '../../src/db/schema';
+import { auditEvent, documentAccess } from '../../src/db/schema';
 import { accessFor } from '../../src/auth/access';
 import { setPermission } from '../../src/modules/people/people';
 import { addCustomer, getCustomer, openCopy } from '../../src/modules/customers/customers';
@@ -22,7 +22,12 @@ describe('AT-59: opening a document copy', () => {
     expect(opened).toMatchObject({ ok: true, contentType: 'image/jpeg' });
     if ('ok' in opened) expect([...opened.bytes.slice(0, 3)]).toEqual([0xff, 0xd8, 0xff]);
     const log = await db.select().from(documentAccess).where(eq(documentAccess.documentId, doc.id));
-    expect(log.map((l) => l.openedBy)).toContain(staff.id);
+    const mine = log.find((l) => l.openedBy === staff.id)!;
+    expect(Date.now() - mine.openedAt.getTime()).toBeLessThan(60_000); // who and when
+    const [entry] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'customer.copyOpened'), eq(auditEvent.targetId, added.id), eq(auditEvent.createdBy, staff.id)));
+    expect(entry.details).toMatchObject({ kind: 'nicFront' });
+    // The copy only opens under its own customer's address (#19 review).
+    expect(await openCopy(staff.id, doc.id, '00000000-0000-4000-8000-000000000000')).toEqual({ error: 'notFound' });
     // Without customer access: refused, nothing logged.
     const other = await samplePerson();
     await setPermission(owner, other.id, 'customerAccess', false);

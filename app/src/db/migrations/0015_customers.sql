@@ -48,10 +48,11 @@ CREATE TRIGGER document_access_insert_only BEFORE UPDATE OR DELETE ON document_a
 --> statement-breakpoint
 CREATE TRIGGER document_access_no_truncate BEFORE TRUNCATE ON document_access FOR EACH STATEMENT EXECUTE FUNCTION refuse_change_insert_only();
 --> statement-breakpoint
--- The app adds customers and corrects their details (never the NIC); it adds copies and records each opening.
+-- The app adds customers and corrects their details (the NIC only by the owner or the admin, in the module); it adds
+-- copies and records each opening.
 GRANT SELECT, INSERT ON customer, customer_document, document_access TO sns_app;
 --> statement-breakpoint
-GRANT UPDATE (name, phone, address, licence_number, licence_expires, updated_at) ON customer TO sns_app;
+GRANT UPDATE (name, phone, address, licence_number, licence_expires, nic, updated_at) ON customer TO sns_app;
 --> statement-breakpoint
 REVOKE DELETE, TRUNCATE ON customer, customer_document, document_access FROM sns_app;
 --> statement-breakpoint

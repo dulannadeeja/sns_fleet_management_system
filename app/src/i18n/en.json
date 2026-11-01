@@ -278,7 +278,9 @@
         "customer": {
           "add": "added the customer {target}",
           "copyAdd": "added a copy for {target}: {copy}",
-          "change": "corrected the {field} of {target} from {old} to {new}"
+          "change": "corrected the {field} of {target} from {old} to {new}",
+          "copyOpened": "opened a copy of {target}: {copy}",
+          "nicChange": "corrected the NIC of {target} from {old} to {new}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -867,8 +869,17 @@
       "fileType": "Only a photo (JPEG, PNG, WebP, HEIC) or a PDF.",
       "fileTooBig": "At most 10 MB.",
       "stale": "Someone changed this customer meanwhile. Open the page again to see it, then make your change.",
-      "failed": "Not saved. Try again."
+      "failed": "Not saved. Try again.",
+      "nicTaken": "Another customer already has this NIC. Open that customer instead.",
+      "reasonMissing": "Give a reason."
     },
-    "call": "Call"
+    "call": "Call",
+    "nicFix": "Correct the NIC",
+    "nicFixNote": "Only the owner or the admin, with a reason. The log keeps the old and new NIC.",
+    "nicNew": "Correct NIC",
+    "reason": "Reason",
+    "nicFixSave": "Correct the NIC",
+    "nicFixed": "NIC corrected.",
+    "limitNote": "Showing at most 100 customers; search to find others."
   }
 }

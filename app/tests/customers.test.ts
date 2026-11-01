@@ -3,7 +3,7 @@ import { and, eq } from 'drizzle-orm';
 import { db } from '../src/db/client';
 import { auditEvent } from '../src/db/schema';
 import { setPermission } from '../src/modules/people/people';
-import { addCopy, addCustomer, correctCustomer, getCustomer, listCustomers } from '../src/modules/customers/customers';
+import { addCopy, addCustomer, correctCustomer, correctNic, getCustomer, listCustomers } from '../src/modules/customers/customers';
 import { samplePerson, theOwner } from './helpers/people';
 import { JPEG, NOT_A_PHOTO, PDF, sampleCustomer } from './helpers/customers';
 
@@ -74,5 +74,28 @@ describe('ST-08.1: find a customer', () => {
     expect(found[0]).toMatchObject({ licenceExpired: true });
     const byNic = await getCustomer(fine.id);
     expect((await listCustomers(byNic!.nic)).map((x) => x.id)).toEqual([fine.id]);
+  });
+});
+
+describe('ST-08.3: correct a mistyped NIC (Proposed, 1 Nov 2026)', () => {
+  it('only the owner or the admin, with a reason, never to another customer\'s NIC; logged', async () => {
+    const owner = await theOwner();
+    const a = await addCustomer(owner, sampleCustomer());
+    const b = await addCustomer(owner, sampleCustomer());
+    if (!('ok' in a) || !('ok' in b)) throw new Error('setup');
+    const bNic = (await getCustomer(b.id))!.nic;
+    const fixed = String(Math.floor(Math.random() * 1e12)).padStart(12, '0');
+    expect(await correctNic((await samplePerson()).id, a.id, fixed, 'typo')).toEqual({ error: 'notAllowed' });
+    expect(await correctNic(owner, a.id, fixed, ' ')).toEqual({ error: 'reasonMissing' });
+    expect(await correctNic(owner, a.id, bNic, 'typo')).toEqual({ error: 'nicTaken' });
+    const admin = await samplePerson('first-pass-1', 'admin');
+    expect(await correctNic(admin.id, a.id, fixed, 'Sample: two digits swapped')).toEqual({ ok: true });
+    expect((await getCustomer(a.id))!.nic).toBe(fixed);
+    const [log] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'customer.nicChange'), eq(auditEvent.targetId, a.id)));
+    expect(log.details).toMatchObject({ new: fixed, reason: 'Sample: two digits swapped' });
+  });
+
+  it('a search of only %, _ or - does not list everyone (#19 review)', async () => {
+    for (const q of ['%', '_', '-']) expect((await listCustomers(q)).length).toBeLessThan(5);
   });
 });

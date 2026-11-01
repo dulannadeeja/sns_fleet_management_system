@@ -22,7 +22,7 @@ export type DetailField = (typeof DETAIL_FIELDS)[number];
 type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-export type CustomerError = 'notAllowed' | 'notFound' | 'nameMissing' | 'nicInvalid' | 'phoneInvalid' | 'licenceNumberMissing'
+export type CustomerError = 'notAllowed' | 'notFound' | 'nameMissing' | 'nicInvalid' | 'nicTaken' | 'reasonMissing' | 'phoneInvalid' | 'licenceNumberMissing'
   | 'licenceExpiresInvalid' | 'kindInvalid' | 'fileType' | 'fileTooBig' | 'stale';
 export interface Details { name: string; phone: string; address?: string | null; licenceNumber: string; licenceExpires: string }
 export interface NewCustomer extends Details { nic: string }
@@ -72,19 +72,21 @@ export type AddResult = { ok: true; id: string } | { existing: string } | { erro
  * Needs customer access. Every file is checked before anything is saved; a refusal saves nothing. Logged.
  */
 export async function addCustomer(actorId: string, input: NewCustomer, copies: Copy[] = []): Promise<AddResult> {
-  const read = readDetails(input);
-  if ('error' in read) return read;
   const nic = normalNic(input.nic ?? '');
   if (!NIC.test(nic)) return { error: 'nicInvalid' };
+  // A NIC already recorded opens that customer before anything else is checked, so a half-filled form still finds them
+  // (AT-51; #19 review).
+  if (!(await actorMay(db, actorId, 'customerAccess'))) return { error: 'notAllowed' };
+  const [known] = await db.select({ id: customer.id }).from(customer).where(eq(customer.nic, nic));
+  if (known) return { existing: known.id };
+  const read = readDetails(input);
+  if ('error' in read) return read;
   const checked = [];
   for (const c of copies) {
     const r = readCopy(c);
     if ('error' in r) return r;
     checked.push(r);
   }
-  if (!(await actorMay(db, actorId, 'customerAccess'))) return { error: 'notAllowed' };
-  const [found] = await db.select({ id: customer.id }).from(customer).where(eq(customer.nic, nic));
-  if (found) return { existing: found.id };
   const id = randomUUID();
   // Files first (outside the transaction): a refused save leaves at most an unreferenced private file, never a row
   // pointing at a missing file.
@@ -176,8 +178,12 @@ const missing = (docs: { kind: string }[]) => COPY_KINDS.filter((k) => !docs.som
  */
 export async function listCustomers(search?: string): Promise<CustomerRow[]> {
   const q = (search ?? '').trim();
-  const like = `%${q.replace(/[%_\\]/g, (m) => `\\${m}`)}%`;
-  const where = q ? or(ilike(customer.name, like), ilike(customer.nic, `%${normalNic(q).replace(/[%_\\]/g, '')}%`), ilike(customer.phone, `%${q.replace(/[\s-]/g, '').replace(/[%_\\]/g, '')}%`)) : undefined;
+  const escape = (v: string) => v.replace(/[%_\\]/g, (m) => `\\${m}`);
+  // NIC and phone are searched only on letters and digits; a search of only other characters (%, _, -) matches by name
+  // alone, never everyone (#19 review).
+  const nicPart = normalNic(q).replace(/[^0-9A-Z]/g, '');
+  const phonePart = q.replace(/[^0-9+]/g, '');
+  const where = q ? or(ilike(customer.name, `%${escape(q)}%`), ...(nicPart ? [ilike(customer.nic, `%${nicPart}%`)] : []), ...(phonePart ? [ilike(customer.phone, `%${escape(phonePart)}%`)] : [])) : undefined;
   const today = todayColombo();
   const rows = await db.select({ id: customer.id, name: customer.name, nic: customer.nic, phone: customer.phone, licenceExpires: customer.licenceExpires })
     .from(customer).where(where)
@@ -199,13 +205,49 @@ export async function getCustomer(id: string): Promise<Customer | null> {
 }
 
 /** Opens a copy for someone with customer access, recording who opened it and when (AT-59). There is no public link. */
-export async function openCopy(actorId: string, documentId: string): Promise<{ ok: true; bytes: Uint8Array; contentType: string; kind: string; customerId: string } | { error: 'notAllowed' | 'notFound' }> {
+export async function openCopy(actorId: string, documentId: string, customerId?: string): Promise<{ ok: true; bytes: Uint8Array; contentType: string; kind: string; customerId: string } | { error: 'notAllowed' | 'notFound' }> {
   if (!UUID.test(documentId)) return { error: 'notFound' };
   if (!(await actorMay(db, actorId, 'customerAccess'))) return { error: 'notAllowed' };
   const [d] = await db.select().from(customerDocument).where(and(eq(customerDocument.id, documentId)));
-  if (!d) return { error: 'notFound' };
+  // The copy must belong to the customer in the address; nothing is recorded otherwise (#19 review).
+  if (!d || (customerId && d.customerId !== customerId)) return { error: 'notFound' };
   const bytes = await getFile(d.storageKey);
   if (!bytes) return { error: 'notFound' };
-  await db.insert(documentAccess).values({ documentId, openedBy: actorId });
+  const [c] = await db.select({ name: customer.name }).from(customer).where(eq(customer.id, d.customerId));
+  await db.transaction(async (tx) => {
+    await tx.insert(documentAccess).values({ documentId, openedBy: actorId });
+    // Also in the activity log, so the owner and the admin can see who opened what (system design 6, Proposed).
+    await tx.insert(auditEvent).values({ createdBy: actorId, action: 'customer.copyOpened', targetType: 'customer', targetId: d.customerId, details: { name: c?.name ?? '', kind: d.kind } });
+  });
   return { ok: true, bytes, contentType: d.contentType, kind: d.kind, customerId: d.customerId };
+}
+
+/**
+ * Corrects a mistyped NIC (system design 6, Proposed: Dulan, 1 Nov 2026): only the primary owner or the admin, with a
+ * reason, never to a NIC another customer has. The log keeps the old and new NIC and the reason (PR-05).
+ */
+export async function correctNic(actorId: string, customerId: string, typed: string, reason: string): Promise<{ ok: true } | { error: CustomerError }> {
+  if (!UUID.test(customerId)) return { error: 'notFound' };
+  const nic = normalNic(typed ?? '');
+  if (!NIC.test(nic)) return { error: 'nicInvalid' };
+  const why = (reason ?? '').trim();
+  if (!why) return { error: 'reasonMissing' };
+  try {
+    return await db.transaction(async (tx) => {
+      const [actor] = await tx.select({ role: user.role, disabledAt: user.disabledAt }).from(user).where(eq(user.id, actorId));
+      if (!actor || actor.disabledAt || (actor.role !== 'owner' && actor.role !== 'admin')) return { error: 'notAllowed' } as const;
+      const [cur] = await tx.select({ nic: customer.nic, name: customer.name }).from(customer).where(eq(customer.id, customerId)).for('update');
+      if (!cur) return { error: 'notFound' } as const;
+      if (cur.nic === nic) return { ok: true } as const;
+      if ((await tx.select({ id: customer.id }).from(customer).where(eq(customer.nic, nic))).length) return { error: 'nicTaken' } as const;
+      await tx.update(customer).set({ nic, updatedAt: sql`now()` }).where(eq(customer.id, customerId));
+      await tx.insert(auditEvent).values({ createdBy: actorId, action: 'customer.nicChange', targetType: 'customer', targetId: customerId,
+        details: { name: cur.name, old: cur.nic, new: nic, reason: why } });
+      return { ok: true } as const;
+    });
+  } catch (e) {
+    const pg = (e as { cause?: { code?: string; constraint?: string } }).cause ?? (e as { code?: string; constraint?: string });
+    if (pg.code === '23505' && pg.constraint === 'customer_one_per_nic') return { error: 'nicTaken' };
+    throw e;
+  }
 }

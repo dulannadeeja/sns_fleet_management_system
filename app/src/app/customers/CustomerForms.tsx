@@ -1,9 +1,9 @@
 'use client';
-import { useActionState } from 'react';
+import { useActionState, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { Button, Notice, TextField } from '../../ui';
 import { useReady } from '../useReady';
-import { addCopyAction, addCustomerAction, correctCustomerAction, type CustomerFormState } from './actions';
+import { addCopyAction, addCustomerAction, correctCustomerAction, correctNicAction, type CustomerFormState } from './actions';
 
 export interface CustomerWords {
   who: string; name: string; nic: string; nicHint: string; phone: string; phoneHint: string; address: string; licence: string; licenceNumber: string;
@@ -41,9 +41,23 @@ function Details({ w, values, err, withNic }: { w: CustomerWords; values?: Recor
 export function NewCustomerForm({ w }: { w: CustomerWords }) {
   const [state, action, pending] = useActionState<CustomerFormState, FormData>(addCustomerAction, {});
   const ready = useReady();
-  const err = state.error;
+  // Checked in the browser first, so a refused save rarely happens: React empties the file boxes after a save attempt
+  // (#19 review). The server checks everything again, the files from their own bytes.
+  const [local, setLocal] = useState<{ error: string; kind?: string } | null>(null);
+  const check = (e: FormEvent<HTMLFormElement>) => {
+    const f = new FormData(e.currentTarget);
+    const missing = (['name', 'nic', 'phone', 'licenceNumber', 'licenceExpires'] as const).find((k) => !String(f.get(k) ?? '').trim());
+    const tooBig = Object.keys(w.kinds).find((k) => { const v = f.get(k); return v instanceof File && v.size > 10 * 1024 * 1024; });
+    const badType = Object.keys(w.kinds).find((k) => { const v = f.get(k); return v instanceof File && v.size > 0 && !/\.(jpe?g|png|webp|heic|heif|pdf)$/i.test(v.name); });
+    const problem = missing ? { error: { name: 'nameMissing', nic: 'nicInvalid', phone: 'phoneInvalid', licenceNumber: 'licenceNumberMissing', licenceExpires: 'licenceExpiresInvalid' }[missing] }
+      : tooBig ? { error: 'fileTooBig', kind: tooBig } : badType ? { error: 'fileType', kind: badType } : null;
+    setLocal(problem);
+    if (problem) e.preventDefault();
+  };
+  const err = local?.error ?? state.error;
+  const errKind = local ? local.kind : state.kind;
   return (
-    <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <form action={action} onSubmit={check} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <Details w={w} values={state.values} err={err} withNic />
       <section className="car-card"><h2>{w.copies}</h2>
         <div className="cus-copies">
@@ -51,7 +65,7 @@ export function NewCustomerForm({ w }: { w: CustomerWords }) {
             <label key={k} className="cus-copy">
               <span style={{ fontWeight: 600 }}>{label}</span>
               <input type="file" name={k} accept={ACCEPT} aria-label={`${label} · ${w.chooseFile}`} />
-              {state.kind === k && err ? <span className="rt-field-error" role="alert">{w.errors[err]}</span> : null}
+              {errKind === k && err ? <span className="rt-field-error" role="alert">{w.errors[err]}</span> : null}
             </label>
           ))}
         </div>
@@ -61,7 +75,7 @@ export function NewCustomerForm({ w }: { w: CustomerWords }) {
       <section className="car-card" style={{ background: 'var(--sunken)' }}>
         <h2>{w.reference}</h2><span className="set-muted">{w.referenceNote}</span>
       </section>
-      {err && !FIELD_ERRORS[err] && !state.kind ? <Notice tone="danger">{w.errors[err] ?? w.errors.failed}</Notice> : null}
+      {err && !FIELD_ERRORS[err] && !errKind ? <Notice tone="danger">{w.errors[err] ?? w.errors.failed}</Notice> : null}
       <div className="set-actions">
         <Link className="rt-btn rt-btn-quiet" href="/customers">{w.cancel}</Link>
         <Button type="submit" icon="check" disabled={pending || !ready}>{w.save}</Button>
@@ -96,6 +110,27 @@ export function AddCopyForm({ customerId, kind, has, w }: { customerId: string; 
       <input type="file" name="file" accept={ACCEPT} aria-label={`${w.kinds[kind]} · ${w.chooseFile}`} />
       {state.error ? <span className="rt-field-error" role="alert">{w.errors[state.error] ?? w.errors.failed}</span> : null}
       <div><Button type="submit" variant="secondary" disabled={pending || !ready}>{has ? w.replace : w.addCopy}</Button></div>
+    </form>
+  );
+}
+
+export interface NicWords { nicNew: string; nicHint: string; reason: string; save: string; requiredMark: string; errors: Record<string, string> }
+
+/** 08.2: correct a mistyped NIC (the owner or the admin; the module checks). */
+export function CorrectNicForm({ customerId, w }: { customerId: string; w: NicWords }) {
+  const [state, action, pending] = useActionState<CustomerFormState, FormData>(correctNicAction.bind(null, customerId), {});
+  const ready = useReady();
+  const err = state.error;
+  return (
+    <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div className="car-fields">
+        <TextField name="nic" label={w.nicNew} required requiredLabel={w.requiredMark} autoComplete="off" defaultValue={state.values?.nic} hint={w.nicHint}
+          error={err === 'nicInvalid' || err === 'nicTaken' ? w.errors[err] : undefined} />
+        <TextField name="reason" label={w.reason} required requiredLabel={w.requiredMark} autoComplete="off" defaultValue={state.values?.reason}
+          error={err === 'reasonMissing' ? w.errors[err] : undefined} />
+      </div>
+      {err && !['nicInvalid', 'nicTaken', 'reasonMissing'].includes(err) ? <Notice tone="danger">{w.errors[err] ?? w.errors.failed}</Notice> : null}
+      <div className="set-actions"><Button type="submit" variant="secondary" disabled={pending || !ready}>{w.save}</Button></div>
     </form>
   );
 }

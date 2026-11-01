@@ -12,13 +12,15 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
   if (access.kind === 'redirect') redirect(access.to);
   if (access.kind === 'denied') forbidden();
   const { id, docId } = await params;
-  const opened = await openCopy(access.person.id, docId);
+  const opened = await openCopy(access.person.id, docId, id);
   if ('error' in opened) return opened.error === 'notAllowed' ? forbidden() : notFound();
-  if (opened.customerId !== id) notFound();
   return new Response(new Blob([opened.bytes as BlobPart]), {
     headers: {
       'content-type': opened.contentType,
-      'content-disposition': `inline; filename="${opened.kind}.${EXT[opened.contentType] ?? 'bin'}"`,
+      // Most browsers cannot show HEIC: it downloads instead of opening a blank tab (#19 review).
+      'content-disposition': `${opened.contentType === 'image/heic' ? 'attachment' : 'inline'}; filename="${opened.kind}.${EXT[opened.contentType] ?? 'bin'}"`,
+      // Nothing in a copy (a PDF's scripts, say) may run or load anything.
+      'content-security-policy': "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; sandbox",
       'cache-control': 'private, no-store',
       'x-content-type-options': 'nosniff',
       'referrer-policy': 'no-referrer',

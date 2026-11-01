@@ -31,7 +31,7 @@ export async function putFile(key: string, bytes: Uint8Array, contentType: strin
     return;
   }
   const path = localPath(key);
-  await mkdir(join(path, '..'), { recursive: true });
+  await mkdir(join(path, '..'), { recursive: true, mode: 0o700 });
   await writeFile(path, bytes, { mode: 0o600 });
 }
 

@@ -26,9 +26,11 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
   const before = one(q.before) && readCursor(one(q.before)) ? one(q.before) : undefined;
   const [{ entries: all, older }, people, seeTerms, tCarsRaw] = await Promise.all([
     listActivity({ personId, kind, older: before }), peopleForFilter(), mayDo(viewer, 'seePartnerEarnings'), getTranslations('cars')]);
+  const seeCustomers = await mayDo(viewer, 'customerAccess');
   const tCust = await getTranslations('customers');
   // A car's commission is a partner term: hidden from people who may not see partner terms (system design 4.2).
-  const entries = seeTerms ? all : all.filter((e) => !isPartnerTermEntry(e));
+  // Customers' details are for people with customer access (system design 3.2, Proposed; #19 review).
+  const entries = all.filter((e) => (seeTerms || !isPartnerTermEntry(e)) && (seeCustomers || !e.action.startsWith('customer.')));
   const tCars = tCarsRaw as unknown as (k: string, v?: Record<string, string>) => string;
   const t = await getTranslations('settings');
   const format = await getFormatter();

@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../../auth/require';
 import { getCustomer } from '../../../../modules/customers/customers';
 import { AppFrame } from '../../../AppFrame';
-import { CorrectCustomerForm } from '../../CustomerForms';
+import { CorrectCustomerForm, CorrectNicForm } from '../../CustomerForms';
 import { customerWords } from '../../words';
 import '../../../cars/cars.css';
 import '../../customers.css';
@@ -19,6 +19,12 @@ export default async function EditCustomerPage({ params }: { params: Promise<{ i
     <AppFrame person={person} active="customers" title={c.name} subtitle={t('edit')} backHref={`/customers/${c.id}`}>
       <p className="set-muted" style={{ margin: 0 }}>{`NIC ${c.nic}`}</p>
       <CorrectCustomerForm customerId={c.id} saved={saved} w={w} />
+      {person.role === 'owner' || person.role === 'admin' ? (
+        <section className="car-card" aria-labelledby="nic-fix"><h2 id="nic-fix">{t('nicFix')}</h2>
+          <span className="set-muted">{t('nicFixNote')}</span>
+          <CorrectNicForm customerId={c.id} w={{ nicNew: t('nicNew'), nicHint: t('nicHint'), reason: t('reason'), save: t('nicFixSave'), requiredMark: w.requiredMark, errors: { ...w.errors, nicTaken: t('errors.nicTaken'), reasonMissing: t('errors.reasonMissing') } }} />
+        </section>
+      ) : null}
     </AppFrame>
   );
 }
