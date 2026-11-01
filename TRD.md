@@ -94,7 +94,7 @@ Each row implements a rule from the system design; the AT that proves it is list
 | Money is whole rupees | Integer columns (`bigint` rupees), never floating point; a partner's share is `floor(amount × share)` and SNS takes the remainder, computed in one function; a negative line mirrors a positive one: `−floor(|amount| × share)` (DN-21) | AT-03, AT-70, AT-84 |
 | Final money is never edited | Earning lines, payments, payouts, adjustments, cash movements and audit events are insert-only: the app's database role has no UPDATE or DELETE on them, and a trigger rejects either | AT-16, AT-78 |
 | A payout or payment is recorded once | Each request carries an idempotency key with a unique constraint; payouts lock the partner's balance row (`SELECT … FOR UPDATE`) | AT-26, AT-44 |
-| Rentals keep their terms | Terms are copied into `rental_terms_snapshot` and each segment when it starts; calculations read only the snapshot | AT-05, AT-31 |
+| Rentals keep their terms | Terms (with the cutoff, deadline and fuel price per litre from the owner settings) are copied into `rental_terms_snapshot` and each segment when it starts; calculations read only the snapshot | AT-05, AT-31 |
 | Earnings show only when final | `earning_line.final_at` is set at the day close (rent) or at return (extra km, late charge); partner pages read only final lines | AT-14, AT-22, AT-27 |
 | Items waiting for an admin stay out | Lines needing a decision are created with `pending_approval` and excluded until the approval is decided | AT-41, AT-54, AT-62 |
 | Permissions are checked by the server | Every server action and route calls `requirePermission(user, action)`; partner routes also filter by the partner's own id; tests call the server directly | AT-22, AT-24, AT-57, AT-58 |

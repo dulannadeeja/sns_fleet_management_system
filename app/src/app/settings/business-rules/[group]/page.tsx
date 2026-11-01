@@ -35,6 +35,15 @@ export default async function ChangeSettingPage({ params }: { params: Promise<{ 
     <SettingsFrame person={person} active="rules" subtitle={t(`groups.${group}.title`)} backHref="/settings/business-rules">
       <h2 className="set-rules-title" style={{ margin: 0 }}>{t(`groups.${group}.title`)}</h2>
       <p className="set-muted" style={{ margin: 0 }}>{t(`intro.${group}`)}</p>
+      {/* What the setting changes and what to check first (system design 3.2 "Owner settings"). */}
+      <section className="set-card set-explain" aria-label={t('explain.whatChanges')}>
+        {(['affects', 'before'] as const).map((part) => (
+          <div key={part}>
+            <h3>{t(part === 'affects' ? 'explain.whatChanges' : 'explain.beforeChange')}</h3>
+            <ul>{(t.raw(`explain.${group}.${part}`) as string[]).map((line) => <li key={line}>{line}</li>)}</ul>
+          </div>
+        ))}
+      </section>
       <ChangeForm group={group} fields={fields} w={w} lang={lang} />
     </SettingsFrame>
   );

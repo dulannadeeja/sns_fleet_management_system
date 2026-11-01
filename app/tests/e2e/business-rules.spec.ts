@@ -54,6 +54,8 @@ test('ST-15.3: staff read the rules; the owner changes a setting, checks old →
   expect(await noSideScroll(page)).toBe(false);
   await page.locator('a[href="/settings/business-rules/reminders"]').click();
   await expect(page).toHaveURL(/\/settings\/business-rules\/reminders$/);
+  await expect(page.getByRole('heading', { name: 'What this changes' })).toBeVisible();
+  await expect(page.getByText(/A shorter time leaves less time to renew/)).toBeVisible();
   const box = page.getByLabel(mine.label, { exact: true });
   const before = await box.inputValue();
   const next = mine.other(before);

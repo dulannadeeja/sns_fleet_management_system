@@ -1513,7 +1513,7 @@
   },
   "15-Settings-ChangeSetting-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1000,
+   "h": 1184,
    "is_interactive": true,
    "page": "plate",
    "title": "15.7 Change a setting · Desktop",
@@ -1522,7 +1522,7 @@
    "y": 73965
   },
   "15-Settings-ChangeSetting-Phone.dc.html": {
-   "h": 1590,
+   "h": 2146,
    "is_interactive": true,
    "page": "plate",
    "title": "15.7 Change a setting · Phone",
@@ -1570,7 +1570,7 @@
   },
   "15-Settings-BusinessRules-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1737,
+   "h": 1803,
    "is_interactive": true,
    "page": "plate",
    "title": "15.2 Business rules · Desktop",
@@ -1579,7 +1579,7 @@
    "y": 68365
   },
   "15-Settings-BusinessRules-Phone.dc.html": {
-   "h": 2905,
+   "h": 3347,
    "is_interactive": true,
    "page": "plate",
    "title": "15.2 Business rules · Phone",

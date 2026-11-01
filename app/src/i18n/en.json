@@ -444,6 +444,43 @@
           "note": "nobody approves their own request; the owner’s own is marked “self-approved”",
           "value": "another approver"
         }
+      },
+      "explain": {
+        "whatChanges": "What this changes",
+        "beforeChange": "Before you change it",
+        "dayTimes": {
+          "affects": [
+            "How many days a new rental is charged: a pickup before the cutoff ends at the next morning’s deadline; a pickup at or after it, the morning after.",
+            "When a new rental’s car is due back. After the deadline it is a late return, and staff decide any charge, with a reason.",
+            "Rentals already agreed, and their phone extensions, keep the times they were agreed with."
+          ],
+          "before": [
+            "Try a few pickup times near the new cutoff: a pickup may now be charged one day more or one day less.",
+            "Tell staff the new times before the next pickup.",
+            "Times are Sri Lanka time."
+          ]
+        },
+        "reminders": {
+          "affects": [
+            "When insurance and revenue licence renewals, services (by date or by km, whichever comes first) and payroll start to show in Upcoming work.",
+            "Only when a reminder starts. No date, charge or car changes."
+          ],
+          "before": [
+            "A shorter time leaves less time to renew. When insurance or a revenue licence has expired, staff are warned, and going ahead needs an authorised person and a reason.",
+            "A longer time shows reminders earlier, so Upcoming work gets longer."
+          ]
+        },
+        "fuel": {
+          "affects": [
+            "Only rentals set to “same level”: the litres missing at return × this price go on the bill, all for SNS. Staff can waive it with a reason.",
+            "By default fuel is not counted, so most rentals do not use this price.",
+            "Rentals already agreed keep the price from when they were agreed."
+          ],
+          "before": [
+            "Check today’s pump price. Whole rupees only.",
+            "Tell staff the new price: they explain the fuel charge to the customer at return."
+          ]
+        }
       }
     }
   },
