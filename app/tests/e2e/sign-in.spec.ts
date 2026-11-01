@@ -31,14 +31,16 @@ test('the sign-in page can switch to English before signing in', async ({ page }
   await expect(page.getByRole('heading', { name: 'Welcome' })).toBeVisible();
 });
 
-test('the phone box takes digits only, 10 at most', async ({ page }) => {
+test('ST-01.1: the phone box takes digits only, 10 at most', async ({ page }) => {
   await page.goto('/sign-in');
   const phone = page.locator('input[name="phone"]');
   await phone.pressSequentially('07a7 123-45678999');
   await expect(phone).toHaveValue('0771234567');
+  await phone.fill('077-123 4567abc99');
+  await expect(phone).toHaveValue('0771234567');
 });
 
-test('each box says exactly what is wrong with what was typed', async ({ page }) => {
+test('ST-01.1: each box says exactly what is wrong with what was typed', async ({ page }) => {
   await page.goto('/sign-in');
   await page.locator('button[type="submit"]').click();
   const errors = page.locator('.rt-field-error');
