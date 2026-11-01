@@ -15,7 +15,9 @@ describe('AT-05 (car half, partial): a package change applies to new rentals; th
     const owner = await theOwner();
     const added = await addCar(owner, { registration: samplePlate(), model: 'Wagon R', ownership: 'sns' });
     if (!('ok' in added)) throw new Error(added.error);
-    const before = new Date();
+    // The database's own time of the first version (not the app's clock): a rental agreed then keeps it.
+    const [{ effective_from: first }] = (await pool.query('select effective_from from vehicle_terms_version where vehicle_id = $1', [added.id])).rows;
+    const before = new Date((first as Date).getTime() + 1); // a JS date drops the database's microseconds
     const car = (await getCar(added.id))!;
     const changed = await editCar(owner, added.id, { ...car.terms, dailyRate: 4800 }, car.terms);
     expect(changed).toEqual({ ok: true, changed: ['dailyRate'] });

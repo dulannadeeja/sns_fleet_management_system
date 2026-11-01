@@ -30,15 +30,12 @@ function wasTerms(form: FormData, base: Terms): Terms {
 export async function addCarAction(_: CarFormState, form: FormData): Promise<CarFormState> {
   const person = await requirePermission('editCarsAndPackages');
   const values = Object.fromEntries([...form.entries()].filter(([k]) => !k.startsWith('$')).map(([k, v]) => [k, String(v)]));
-  const added = await addCar(person.id, { registration: text(form, 'registration'), model: text(form, 'model'), ownership: text(form, 'ownership') });
-  if ('error' in added) return { error: added.error, values };
-  // The package as typed: saved as a change from the starting package, so the log shows both (PR-05).
-  const start = (await getCar(added.id))!.terms;
+  // The package as typed, saved with the car in one transaction; the commission only if the person may change it.
   const commissionShown = (await mayDo(person, 'editPartners')) && (await mayDo(person, 'seePartnerEarnings'));
-  const typed = typedTerms(form, start, commissionShown);
-  const changed = await editCar(person.id, added.id, typed, start);
+  const typed = Object.fromEntries(TERM_FIELDS.filter((f) => form.has(f) && (f !== 'commissionPercent' || commissionShown)).map((f) => [f, num(text(form, f))]));
+  const added = await addCar(person.id, { registration: text(form, 'registration'), model: text(form, 'model'), ownership: text(form, 'ownership') }, typed);
+  if ('error' in added) return { error: added.error, fields: 'fields' in added ? added.fields : undefined, values };
   revalidatePath('/cars');
-  if ('error' in changed) redirect(`/cars/${added.id}/edit?from=new`); // the car is saved; fix the package there
   redirect(`/cars/${added.id}?saved=1`);
 }
 

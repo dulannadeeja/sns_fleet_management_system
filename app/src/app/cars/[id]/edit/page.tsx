@@ -4,7 +4,7 @@ import { requirePermission } from '../../../../auth/require';
 import { mayDo } from '../../../../auth/access';
 import { getCar } from '../../../../modules/cars/cars';
 import { listActivity } from '../../../../modules/activity/activity';
-import { Notice, PlateBadge, type Lang } from '../../../../ui';
+import { PlateBadge, type Lang } from '../../../../ui';
 import { AppFrame } from '../../../AppFrame';
 import { EditCarForm } from '../../CarForms';
 import { carValues, isPartnerTermEntry } from '../../words';
@@ -13,16 +13,17 @@ import '../../cars.css';
 
 // Screen 04.4 Edit car, package and terms (ST-04.3): a change applies to new rentals only (4.3, PR-08). Papers, service
 // dates and the photo come with #23; who pays which costs with #20.
-export default async function EditCarPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ from?: string }> }) {
+export default async function EditCarPage({ params, }: { params: Promise<{ id: string }> }) {
   const person = await requirePermission('editCarsAndPackages');
   const { id } = await params;
   const car = await getCar(id);
   if (!car) notFound();
-  const [t, tLog, w, lang, format, q, seeCommission, editCommission, { entries }] = await Promise.all([
-    getTranslations('cars'), getTranslations('settings.log'), carWords(), getLocale(), getFormatter(), searchParams,
+  const [t, tLog, w, lang, format, seeCommission, editCommission, { entries }] = await Promise.all([
+    getTranslations('cars'), getTranslations('settings.log'), carWords(), getLocale(), getFormatter(),
     mayDo(person, 'seePartnerEarnings'), mayDo(person, 'editPartners'), listActivity({ targetId: car.id, limit: 50 }),
   ]);
   const tc = t as unknown as (k: string, v?: Record<string, string>) => string;
+  // Partner terms never reach the browser of someone who may not see them (#18 review).
   const changes = entries.filter((e) => e.action === 'car.change' && (seeCommission || !isPartnerTermEntry(e)));
   return (
     <AppFrame person={person} active="cars" title={car.registration} subtitle={t('edit')} backHref={`/cars/${car.id}`}>
@@ -30,10 +31,9 @@ export default async function EditCarPage({ params, searchParams }: { params: Pr
         <PlateBadge plate={car.registration} size="lg" lang={lang as Lang} />
         <span>{`${car.model} · ${car.ownership === 'sns' ? t('ownerSns') : t('ownerPartner')}`}</span>
       </div></section>
-      {q.from === 'new' ? <Notice tone="warning">{t('added')} {t('errors.invalid')}</Notice> : null}
-      <div className="car-cols">
+            <div className="car-cols">
         <div>
-          <EditCarForm carId={car.id} terms={{ ...car.terms }} partnerCar={car.ownership === 'partner'} seeCommission={seeCommission} editCommission={editCommission} w={w} />
+          <EditCarForm carId={car.id} terms={{ ...car.terms, commissionPercent: seeCommission ? car.terms.commissionPercent : null }} partnerCar={car.ownership === 'partner'} seeCommission={seeCommission} editCommission={editCommission} w={w} />
         </div>
         <div>
           <section className="car-card" aria-labelledby="changes"><h2 id="changes">{t('changes')}</h2>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button, Notice, TextField } from '../../ui';
 import { addCarAction, editCarAction, type CarFormState } from './actions';
 
-export interface FieldWords { label: string; unit: string; hint: string }
+export interface FieldWords { label: string; unit: string; hint: string; range: string }
 export interface CarWords {
   fields: Record<string, FieldWords>; errors: Record<string, string>; package: string; packageFrom: string; partnerTerms: string; partnerNote: string;
   newRentalsOnly: string; save: string; saveChanges: string; cancel: string; car: string; registration: string; registrationHint: string;
@@ -20,8 +20,8 @@ function Fields({ keys, values, onChange, w, bad, readOnly }: {
     <div className="car-fields">
       {keys.map((k) => (
         <TextField key={k} name={k} label={w.fields[k].label} inputMode="numeric" autoComplete="off" readOnly={readOnly}
-          hint={[w.fields[k].unit, w.fields[k].hint].filter(Boolean).join(' · ')} value={values[k] ?? ''}
-          onChange={(e) => onChange(k, e.target.value)} error={bad.includes(k) ? w.errors.invalid : undefined} />
+          hint={[w.fields[k].unit, w.fields[k].hint, w.fields[k].range].filter(Boolean).join(' · ')} value={values[k] ?? ''}
+          onChange={(e) => onChange(k, e.target.value)} error={bad.includes(k) ? w.fields[k].range : undefined} />
       ))}
     </div>
   );
@@ -97,12 +97,12 @@ export function AddCarForm({ models, starting, defaults, seeCommission, editComm
       </section>
       <section className="car-card"><h2>{w.package}</h2>
         <span className="set-muted">{w.packageFrom.replace('{model}', model)}</span>
-        <Fields keys={PACKAGE} values={values} onChange={set} w={w} bad={[]} />
+        <Fields keys={PACKAGE} values={values} onChange={set} w={w} bad={state.fields ?? []} />
         <Notice icon="lock">{w.newRentalsOnly}</Notice>
       </section>
       {ownership === 'partner' && seeCommission ? (
         <section className="car-card"><h2>{w.partnerTerms}</h2>
-          <Fields keys={['commissionPercent']} values={values} onChange={set} w={w} bad={[]} readOnly={!editCommission} />
+          <Fields keys={["commissionPercent"]} values={values} onChange={set} w={w} bad={state.fields ?? []} readOnly={!editCommission} />
           <span className="set-muted">{w.partnerNote}</span>
         </section>
       ) : null}

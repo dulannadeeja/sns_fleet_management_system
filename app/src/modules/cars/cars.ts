@@ -46,11 +46,12 @@ async function actorMay(tx: Tx, actorId: string, permission: Permission): Promis
   return allows(actor, granted, permission);
 }
 
-// Whole numbers in sensible bounds; no business limit is set for these (only that money is whole rupees).
-const BOUNDS: Record<TermField, [number, number]> = {
-  dailyRate: [1, 1_000_000], kmPerDay: [1, 10_000], extraKmRate: [0, 100_000], longRentalExtra: [0, 1_000_000],
-  longRentalFromDay: [1, 366], garageDayCharge: [0, 1_000_000], commissionPercent: [0, 100],
+/** Limits to stop typing mistakes (system design 4.2; Proposed: Dulan, 1 Nov 2026). Whole numbers only. */
+export const LIMITS: Record<TermField, [number, number]> = {
+  dailyRate: [1, 100_000], kmPerDay: [1, 1_000], extraKmRate: [0, 1_000], longRentalExtra: [0, 100_000],
+  longRentalFromDay: [2, 60], garageDayCharge: [0, 100_000], commissionPercent: [0, 100],
 };
+const BOUNDS = LIMITS;
 function badFields(terms: Terms, ownership: Ownership): TermField[] {
   return TERM_FIELDS.filter((f) => {
     const v = terms[f];
@@ -65,13 +66,17 @@ const termsColumns = {
   longRentalFromDay: vehicleTermsVersion.longRentalFromDay, garageDayCharge: vehicleTermsVersion.garageDayCharge,
 };
 
-export type AddResult = { ok: true; id: string } | { error: 'notAllowed' | 'registrationMissing' | 'registrationInvalid' | 'registrationTaken' | 'modelInvalid' | 'ownershipInvalid' };
+export type AddResult =
+  | { ok: true; id: string }
+  | { error: 'notAllowed' | 'registrationMissing' | 'registrationInvalid' | 'registrationTaken' | 'modelInvalid' | 'ownershipInvalid' }
+  | { error: 'invalid'; fields: TermField[] };
 
 /**
- * Adds a car with its model's starting package and the 4.2 defaults (ST-04.3). Needs "Add or edit cars and packages";
- * logged (PR-05). The package is changed afterwards with editCar.
+ * Adds a car (ST-04.3): its model's starting package and the 4.2 defaults, with any changes typed on the form, in one
+ * transaction. Needs "Add or edit cars and packages"; a commission other than the default also needs "Add or edit
+ * partners". Logged: the car, then each typed change from the starting package with its old and new value (PR-05).
  */
-export async function addCar(actorId: string, input: { registration: string; model: string; ownership: string }): Promise<AddResult> {
+export async function addCar(actorId: string, input: { registration: string; model: string; ownership: string }, typed: Partial<Terms> = {}): Promise<AddResult> {
   const registration = normalPlate(input.registration ?? '');
   if (!registration) return { error: 'registrationMissing' };
   if (!PLATE.test(registration)) return { error: 'registrationInvalid' };
@@ -79,15 +84,23 @@ export async function addCar(actorId: string, input: { registration: string; mod
   if (input.ownership !== 'sns' && input.ownership !== 'partner') return { error: 'ownershipInvalid' };
   const ownership = input.ownership;
   const model = input.model;
+  const start: Terms = { ...STARTING_PACKAGES[model], ...DEFAULT_TERMS, commissionPercent: ownership === 'partner' ? DEFAULT_TERMS.commissionPercent : null };
+  const terms: Terms = { ...start };
+  for (const f of TERM_FIELDS) if (f in typed && !(f === 'commissionPercent' && ownership === 'sns')) (terms as Record<TermField, number | null>)[f] = typed[f] as number;
+  const changed = TERM_FIELDS.filter((f) => terms[f] !== start[f]);
+  const bad = badFields(terms, ownership).filter((f) => changed.includes(f));
+  if (bad.length) return { error: 'invalid', fields: bad };
   try {
     return await db.transaction(async (tx) => {
       if (!(await actorMay(tx, actorId, 'editCarsAndPackages'))) return { error: 'notAllowed' } as const;
+      if (changed.includes('commissionPercent') && !(await actorMay(tx, actorId, 'editPartners'))) return { error: 'notAllowed' } as const;
       const [car] = await tx.insert(vehicle).values({ registration, model, ownership, createdBy: actorId }).returning({ id: vehicle.id });
-      await tx.insert(vehicleTermsVersion).values({
-        vehicleId: car.id, createdBy: actorId, ...STARTING_PACKAGES[model], ...DEFAULT_TERMS,
-        commissionPercent: ownership === 'partner' ? DEFAULT_TERMS.commissionPercent : null,
-      });
+      await tx.insert(vehicleTermsVersion).values({ vehicleId: car.id, createdBy: actorId, ...terms, effectiveFrom: sql`clock_timestamp()` });
       await tx.insert(auditEvent).values({ createdBy: actorId, action: 'car.add', targetType: 'car', targetId: car.id, details: { plate: registration, model, ownership } });
+      for (const field of changed) {
+        await tx.insert(auditEvent).values({ createdBy: actorId, action: 'car.change', targetType: 'car', targetId: car.id,
+          details: { plate: registration, field, old: start[field], new: terms[field] } });
+      }
       return { ok: true, id: car.id } as const;
     });
   } catch (e) {
@@ -109,11 +122,14 @@ export async function editCar(actorId: string, carId: string, input: Terms, was:
   if (!UUID.test(carId)) return { error: 'notFound' };
   return db.transaction(async (tx) => {
     if (!(await actorMay(tx, actorId, 'editCarsAndPackages'))) return { error: 'notAllowed' } as const;
-    // One change to a car at a time, so "old" is always the value really replaced.
-    const [car] = await tx.select({ ownership: vehicle.ownership, registration: vehicle.registration }).from(vehicle).where(eq(vehicle.id, carId)).for('update');
+    // One change to a car at a time, so "old" is always the value really replaced. An advisory lock, not a row lock:
+    // the app role may not update cars, and FOR UPDATE would need that (#18 review).
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.vehicle:${carId}`}))`);
+    const [car] = await tx.select({ ownership: vehicle.ownership, registration: vehicle.registration }).from(vehicle).where(eq(vehicle.id, carId));
     if (!car) return { error: 'notFound' } as const;
     const ownership = car.ownership as Ownership;
     const current = await currentTerms(tx, carId);
+    // A field the person changed (a NaN from a bad entry counts as changed and is refused below as invalid).
     const touched = TERM_FIELDS.filter((f) => input[f] !== was[f]);
     const next: Terms = { ...current };
     for (const f of touched) (next as Record<TermField, number | null>)[f] = input[f];
@@ -124,7 +140,8 @@ export async function editCar(actorId: string, carId: string, input: Terms, was:
     if (stale.length) return { error: 'stale', fields: stale } as const;
     const changed = touched.filter((f) => current[f] !== next[f]);
     if (!changed.length) return { ok: true, changed: [] } as const;
-    await tx.insert(vehicleTermsVersion).values({ vehicleId: carId, createdBy: actorId, ...next });
+    // The time of this insert, after the lock (now() would be the transaction's start, which can be earlier).
+    await tx.insert(vehicleTermsVersion).values({ vehicleId: carId, createdBy: actorId, ...next, effectiveFrom: sql`clock_timestamp()` });
     for (const field of changed) {
       await tx.insert(auditEvent).values({ createdBy: actorId, action: 'car.change', targetType: 'car', targetId: carId,
         details: { plate: car.registration, field, old: current[field], new: next[field] } });

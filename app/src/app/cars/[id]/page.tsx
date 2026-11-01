@@ -7,7 +7,7 @@ import { getCar, TERM_FIELDS } from '../../../modules/cars/cars';
 import { listActivity } from '../../../modules/activity/activity';
 import { Notice, PlateBadge, StatusChip, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
-import { carValues, isPartnerTermEntry, showTerm } from '../words';
+import { carValues, showTerm } from '../words';
 import '../cars.css';
 
 // Screens 04.2 Car details · owner and 04.3 Car details · staff (ST-04.2). Everyone who works at SNS opens a car; the
@@ -22,7 +22,8 @@ export default async function CarPage({ params, searchParams }: { params: Promis
     getTranslations('cars'), getTranslations('settings.log'), getLocale(), getFormatter(), searchParams,
     mayDo(person, 'seePartnerEarnings'), mayDo(person, 'editCarsAndPackages'), listActivity({ targetId: car.id, limit: 50 }),
   ]);
-  const history = seeTerms ? entries : entries.filter((e) => !isPartnerTermEntry(e));
+  // The terms are for people who may see them (board 04.3 shows staff no terms): staff see no changes to them either.
+  const history = seeTerms ? entries : entries.filter((e) => e.action !== 'car.change');
   const fields = TERM_FIELDS.filter((f) => f !== 'commissionPercent' || car.ownership === 'partner');
   const tc = t as unknown as (k: string, v?: Record<string, string>) => string;
   const sentence = (e: (typeof entries)[number]) => {

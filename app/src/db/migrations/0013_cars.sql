@@ -12,15 +12,16 @@ CREATE TABLE "vehicle" (
 CREATE TABLE "vehicle_terms_version" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"vehicle_id" uuid NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"effective_from" timestamp with time zone DEFAULT now() NOT NULL,
 	"created_by" uuid,
-	"daily_rate" integer NOT NULL,
+	"daily_rate" bigint NOT NULL,
 	"km_per_day" integer NOT NULL,
-	"extra_km_rate" integer NOT NULL,
+	"extra_km_rate" bigint NOT NULL,
 	"commission_percent" integer,
-	"long_rental_extra" integer NOT NULL,
+	"long_rental_extra" bigint NOT NULL,
 	"long_rental_from_day" integer NOT NULL,
-	"garage_day_charge" integer NOT NULL
+	"garage_day_charge" bigint NOT NULL
 );
 --> statement-breakpoint
 ALTER TABLE "vehicle" ADD CONSTRAINT "vehicle_created_by_user_id_fk" FOREIGN KEY ("created_by") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
@@ -36,7 +37,8 @@ CREATE TRIGGER vehicle_terms_version_no_truncate
   BEFORE TRUNCATE ON vehicle_terms_version
   FOR EACH STATEMENT EXECUTE FUNCTION refuse_change_insert_only();
 --> statement-breakpoint
--- The app reads and adds cars and term versions; a car is never deleted (retiring comes with #22).
+-- The app reads and adds cars and term versions; it never changes or removes them (retiring comes with #22). editCar
+-- takes an advisory lock, since a row lock (FOR UPDATE) would need UPDATE (#18 review).
 GRANT SELECT, INSERT ON vehicle TO sns_app;
 --> statement-breakpoint
 GRANT SELECT, INSERT ON vehicle_terms_version TO sns_app;

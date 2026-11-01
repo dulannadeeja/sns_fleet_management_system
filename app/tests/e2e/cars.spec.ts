@@ -14,7 +14,7 @@ const noSideScroll = (page: Page) => page.evaluate(() => document.documentElemen
 
 test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its terms', async ({ page, browser }) => {
   test.setTimeout(90_000);
-  const plate = `SMP ${randomUUID().slice(0, 4).toUpperCase()}`;
+  const plate = `SMP ${randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`;
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
   await expect(page).toHaveURL(/\/$/);
 
@@ -43,7 +43,7 @@ test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its 
   await page.getByRole('link', { name: 'Edit package and terms' }).click();
   await page.locator('input[name="kmPerDay"]').fill('12.5');
   await page.getByRole('button', { name: 'Save changes' }).click();
-  await expect(page.getByText('Type a whole number in the range.')).toBeVisible();
+  await expect(page.locator('.rt-field-error', { hasText: 'Whole number, 1 to 1,000.' })).toBeVisible();
   await page.locator('input[name="kmPerDay"]').fill('120');
   await page.getByRole('button', { name: 'Save changes' }).click();
   await expect(page).toHaveURL(/\?saved=1$/);
@@ -58,7 +58,8 @@ test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its 
   // 04.3: a staff member sees the car, but not its terms, and may not add or edit.
   const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
   await page.goto('/settings/people/new');
-  await page.locator('input[name="name"]').fill(`Sample cars ${randomUUID().slice(0, 6)}`);
+  const staffName = `Sample cars ${randomUUID().slice(0, 8)}`;
+  await page.locator('input[name="name"]').fill(staffName);
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill('first-pass-1');
   await page.getByRole('button', { name: 'Save' }).click();
@@ -76,5 +77,19 @@ test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its 
   await expect(staff.locator(`a[href$="/edit"]`)).toHaveCount(0);
   expect((await staff.goto('/cars/new'))?.status()).toBe(403);
   expect((await staff.goto(`${carUrl}/edit`))?.status()).toBe(403);
+
+  // Given "Add or edit cars and packages" only, the staff member edits the package; the commission (a partner term)
+  // is not on the page and not in what the server sends (#18 review).
+  await page.goto('/settings/permissions');
+  await page.getByRole('checkbox', { name: `Add or edit cars and packages · ${staffName}` }).check();
+  await expect(async () => {
+    await page.reload();
+    await expect(page.getByRole('checkbox', { name: `Add or edit cars and packages · ${staffName}` })).toBeChecked({ timeout: 1000 });
+  }).toPass({ timeout: 15000 });
+  const res = await staff.goto(`${carUrl}/edit`);
+  expect(res?.status()).toBe(200);
+  await expect(staff.locator('input[name="dailyRate"]')).toHaveValue('6800');
+  await expect(staff.locator('input[name="commissionPercent"]')).toHaveCount(0);
+  expect(await res!.text()).not.toMatch(/commissionPercent\\?":15/);
   await staff.close();
 });

@@ -154,7 +154,8 @@ Admins can define each vehicle's package according to its condition and update p
 
 ### 4.2 Per-vehicle settings
 
-- Ownership: SNS or partner. Each car has its registration number, one car per number. A partner car is added before its owner: it shows "not linked yet" until the partner is added and linked to it (ST-11.2).
+- Ownership: SNS or partner. Each car has its registration number, one car per number. A partner car may be saved before its partner: it shows "not linked yet" until the partner is added and linked to it (ST-11.2). Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
+- Limits on a car's package and terms, to stop typing mistakes, all whole rupees: per day LKR 1 to 100,000; km a day 1 to 1,000; extra km LKR 0 to 1,000 a km; long-rental extra LKR 0 to 100,000 a day, starting on day 2 to 60; garage-day charge LKR 0 to 100,000 a day; SNS commission a whole percent from 0 to 100. The form says the range when a value is outside it. Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
 - Daily rate, included daily kilometres, and extra-kilometre rate.
 - SNS commission percentage, default 15%. It is a partner term: on the car it is seen only with "See partner earnings and terms" and changed only with "Add or edit partners" (both the admin's by default); the rest of the car's package needs "Add or edit cars and packages" (Proposed: Dulan, 1 Nov 2026; for the owner to confirm).
 - Long-rental surcharge amount, default LKR 500 per applicable day.

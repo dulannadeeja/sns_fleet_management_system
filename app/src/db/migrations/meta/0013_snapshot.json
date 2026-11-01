@@ -1,5 +1,5 @@
 {
-  "id": "9c5bf22d-66db-433b-84b1-733a90d7e9ae",
+  "id": "6c79a627-dddc-4cb9-b8fe-f40df637f46e",
   "prevId": "17cb1e07-b569-43da-9ee1-ace39b126eeb",
   "version": "7",
   "dialect": "postgresql",
@@ -857,6 +857,13 @@
           "primaryKey": false,
           "notNull": true
         },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
         "effective_from": {
           "name": "effective_from",
           "type": "timestamp with time zone",
@@ -872,7 +879,7 @@
         },
         "daily_rate": {
           "name": "daily_rate",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
@@ -884,7 +891,7 @@
         },
         "extra_km_rate": {
           "name": "extra_km_rate",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
@@ -896,7 +903,7 @@
         },
         "long_rental_extra": {
           "name": "long_rental_extra",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
@@ -908,7 +915,7 @@
         },
         "garage_day_charge": {
           "name": "garage_day_charge",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         }

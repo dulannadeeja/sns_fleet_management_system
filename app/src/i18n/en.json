@@ -678,6 +678,7 @@
       "stale": "Someone changed this car meanwhile. Open the page again to see it, then make your change.",
       "failed": "Not saved. Try again."
     },
-    "noChange": "Nothing changed yet."
+    "noChange": "Nothing changed yet.",
+    "range": "Whole number, {min} to {max}."
   }
 }
