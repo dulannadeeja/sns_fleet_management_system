@@ -43,8 +43,11 @@
     "everyone": "Owner, admin, staff සහ partners හැමෝටම තමන්ගේම account එකක් තියෙනවා.",
     "wrong": "දුරකථන අංකය හරි මුරපදය හරි වැරදියි.",
     "locked": "වැරදි මුරපද 5 ක් නිසා account එක lock වෙලා. විනාඩි 15 කින් ආයෙත් උත්සාහ කරන්න.",
-    "missing": "දුරකථන අංකයයි මුරපදයයි දෙකම ඕන.",
-    "language": "භාෂාව · Language"
+    "language": "භාෂාව · Language",
+    "phoneMissing": "දුරකථන අංකය දාන්න.",
+    "phoneInvalid": "මේක ලංකාවේ mobile අංකයක් නෙවෙයි. 070, 071, 072, 074, 075, 076, 077 හෝ 078 න් පටන් ගන්න ඉලක්කම් 10 දාන්න.",
+    "passwordMissing": "මුරපදය දාන්න.",
+    "passwordShort": "මුරපදයක අකුරු 8 ක් වත් තියෙනවා. දාපු එක ආයෙත් බලන්න."
   },
   "firstSignIn": {
     "title": "මුරපදය · Your password",

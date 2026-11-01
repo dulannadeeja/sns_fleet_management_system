@@ -10,7 +10,7 @@ export default async function globalSetup() {
   process.env.DATABASE_URL ||= 'postgres://postgres:postgres@localhost:5433/sns_test';
   await migrateTestDatabase();
   for (const project of ['desktop', 'phone']) {
-    const phone = `07${String(Math.floor(Math.random() * 1e8)).padStart(8, '0')}`;
+    const phone = `077${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
     execFileSync('npx', ['tsx', '--conditions=react-server', 'scripts/people-add.ts', '--name', `Sample ${project}`, '--phone', phone], {
       stdio: 'pipe',
       env: { ...process.env, FIRST_PASSWORD: E2E_FIRST_PASSWORD },

@@ -6,10 +6,12 @@ import { phoneNumber } from 'better-auth/plugins/phone-number';
 import { sql } from 'drizzle-orm';
 import { db } from '../db/client';
 import * as schema from '../db/schema';
+import { SRI_LANKA_MOBILE } from './phone';
+import { MIN_PASSWORD_LENGTH } from './rules';
 
 // Sign-in (TRD › Sign-in and permissions; system design 3.1; DN-03): phone number and password, at least 8 characters;
 // 5 wrong tries lock the account for 15 minutes. No SMS, no sign-up: people are added by the owner (#15) or `npm run people:add`.
-export const MIN_PASSWORD = 8;
+export const MIN_PASSWORD = MIN_PASSWORD_LENGTH;
 export const MAX_TRIES = 5;
 export const LOCK_MINUTES = 15;
 const SIGN_IN = '/sign-in/phone-number';
@@ -61,7 +63,12 @@ export const auth = betterAuth({
       await db.execute(sql`update "user" set failed_sign_ins = 0, locked_until = null where phone_number = ${ctx.body.phoneNumber}`);
     }),
   },
-  plugins: [phoneNumber(), nextCookies()],
+  // Only Sri Lankan mobile numbers are accepted, also when called directly (system design 3.1).
+  plugins: [phoneNumber({
+    phoneNumberValidator: (phone) => SRI_LANKA_MOBILE.test(phone),
+    // No SMS (system design 3.1); the code paths are closed by OPEN_PATHS anyway.
+    sendOTP: () => { throw new APIError('NOT_FOUND'); },
+  }), nextCookies()],
 });
 
 export type Session = typeof auth.$Infer.Session;

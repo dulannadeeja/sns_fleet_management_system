@@ -43,8 +43,11 @@
     "everyone": "Owner, admin, staff and partners each have their own account.",
     "wrong": "The phone number or the password is wrong.",
     "locked": "The account is locked after 5 wrong tries. Try again in 15 minutes.",
-    "missing": "Both the phone number and the password are needed.",
-    "language": "Language"
+    "language": "Language",
+    "phoneMissing": "Enter your phone number.",
+    "phoneInvalid": "This is not a Sri Lankan mobile number. Type the 10 digits, starting 070, 071, 072, 074, 075, 076, 077 or 078.",
+    "passwordMissing": "Enter your password.",
+    "passwordShort": "Passwords have at least 8 characters. Check what you typed."
   },
   "firstSignIn": {
     "title": "Your password",

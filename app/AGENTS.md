@@ -36,6 +36,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 - Each try is counted before the password is checked, in one `update … where not locked`, so parallel tries still get at most 5 checks.
 - Every signed-in page starts with `requireUser()` (`src/auth/require.ts`): no session → `/sign-in`; a first or reset password → `/first-sign-in`. Nothing else opens until the person sets their own password (a *Proposed* check in ST-01.2, built here).
 - The signed-in person's saved language picks `si` or `en` (`src/i18n/request.ts`); before sign-in, the sign-in page's switch (a cookie); otherwise Sinhala. An action that can change the language calls `revalidatePath('/', 'layout')` before `redirect`, so `<html lang>` follows.
+- Phone numbers are Sri Lankan mobiles, 10 digits, digits only (`src/auth/phone.ts`, system design 3.1, Proposed). `signInProblems` (`src/auth/sign-in-check.ts`) is the one box-by-box check, run in the browser and again in the action; `addPerson` and Better Auth refuse other numbers too. A failed sign-in with well-formed input does not say whether the number or the password was wrong; only the lock message (AT-60) shows that an account exists.
 - People without an email get a placeholder `<id>@no-email.invalid`; nothing is ever sent to it.
 
 ## Rules (details in TRD › Integrity rules)

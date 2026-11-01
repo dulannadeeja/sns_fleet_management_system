@@ -8,7 +8,7 @@ import { user } from '../../src/db/schema';
 
 /** A person with a unique sample phone number and the given first password. */
 export async function samplePerson(password = 'first-pass-1') {
-  const phone = `07${String(Math.floor(Math.random() * 1e8)).padStart(8, '0')}`;
+  const phone = `077${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
   const id = await addPerson({ name: `Sample ${randomUUID().slice(0, 6)}`, phone, password });
   return { id, phone, password };
 }

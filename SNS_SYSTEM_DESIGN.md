@@ -88,6 +88,8 @@ Customer-facing accounts are not confirmed. Customer document delivery is throug
 
 **Sign-in safety.** Passwords have at least 8 characters; 5 wrong tries lock the account for 15 minutes. The primary owner and the admin each give an email address: signing in on a new device asks for a one-time code sent to it, and they can reset their own forgotten password by email. No SMS is used. Confirmed: agreed by the owner, recorded by Dulan; email is the cost the approved proposal already lists (password reset, LKR 0).
 
+**Sign-in phone numbers.** A sign-in phone number is a Sri Lankan mobile number: 10 digits, starting 070, 071, 072, 074, 075, 076, 077 or 078. It is typed and saved as digits only, with no spaces or +94. The sign-in form says exactly what is wrong with what was typed (a box left empty, a number not in this form, a password shorter than 8 characters). When the number and password are well formed but do not match an account, it gives one message that does not say which was wrong. The one exception is the lock message after 5 wrong tries (AT-60), which only an account can reach; that trade-off is known. Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
+
 **Turning off an account.** When a staff member or admin leaves, or a partner stops, the primary owner turns off their account, with a reason. Their sign-in stops at once. Nothing they recorded changes, and their name stays on it. A partner's cars, final earnings and balance stay; an authorised person can still pay out what is owed. The owner can turn the account back on. Confirmed: agreed by the owner, recorded by Dulan.
 
 ### 3.2 Default permissions
