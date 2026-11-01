@@ -63,7 +63,7 @@ Agreed with Dulan, 26 Oct 2026.
 
 | Module | Screens | Phase | Section |
 | --- | --- | --- | --- |
-| 01 Start | 01.1–01.3 | 1 | [01 Start](#01-start) |
+| 01 Start | 01.1–01.7 | 1 | [01 Start](#01-start) |
 | 15 Settings | 15.1–15.6 | 1 | [15 Settings](#15-settings) |
 | 08 Customers | 08.1–08.5 | 1 | [08 Customers](#08-customers) |
 | 04 Cars | 04.1–04.7 | 1 | [04 Cars](#04-cars) |
@@ -171,10 +171,11 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Story:** As anyone who works with SNS, I sign in with my own phone number and password, so that everything I do is recorded under my name.
 - **Rules:**
   - Everyone has their own account; nobody shares one. Every transaction records who entered it, even though staff share one cash drawer. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
-  - A forgotten password is reset by the primary owner until login recovery is decided. There is no self-service reset. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
+  - Staff and partners who forget their password ask the primary owner to reset it; the owner and the admin can also reset their own by email (DN-03). System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
+  - *Proposed (Dulan, 1 Nov 2026):* a device is remembered for 30 days after a code; codes are 6 digits, 10 minutes, 5 tries; the owner sets the owner's and the admin's email, confirmed by a code; the email reset link works once for 1 hour and never shows which numbers have accounts. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - After signing in, each person reaches only what their permissions allow; a partner reaches only the partner pages (PR-06).
 - **Checks:** AT-46 "A staff member forgets their password: the primary owner resets it; the staff member changes it at the next sign-in". AT-24 "Staff without a permission request those records directly: the server denies access".
-- **Screens:** 01.1 Sign in.
+- **Screens:** 01.1 Sign in, 01.4 Sign-in code, 01.5 Forgot password, 01.6 New password, 01.7 Confirm your email.
   - Passwords have at least 8 characters; 5 wrong tries lock the account for 15 minutes. The owner and the admin get an emailed one-time code when signing in on a new device and reset their own password by email (AT-60, AT-61).
   - *Proposed (Dulan, 1 Nov 2026):* the phone number is a Sri Lankan mobile number (10 digits, 070, 071, 072, 074, 075, 076, 077 or 078). The form names the box that is wrong for an empty box, a number not in that form, or a password under 8 characters; a well-formed number and password that do not match give one message that does not say which (the lock message after 5 wrong tries is the known exception, AT-60). System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
 - **Decided:** DN-03.
