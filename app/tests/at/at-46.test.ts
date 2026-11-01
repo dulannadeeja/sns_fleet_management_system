@@ -57,5 +57,12 @@ describe('AT-46 (sign-in half): the first or reset password is changed at the ne
     expect(await signedInPerson(other)).toBeNull();
     expect(await signedInPerson(headers)).not.toBeNull();
   });
+
+  it('two submissions at the same moment: only one sets the password', async () => {
+    const p = await samplePerson();
+    const headers = await sessionHeaders(p.phone, p.password);
+    const results = await Promise.all(['own-pass-one', 'own-pass-two'].map((pw) => setOwnPassword(headers, { password: pw, repeat: pw, language: 'si' })));
+    expect(results.filter((r) => 'ok' in r)).toHaveLength(1);
+  });
 });
 

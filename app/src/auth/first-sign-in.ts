@@ -38,10 +38,15 @@ export async function setOwnPassword(headers: Headers, input: { password: string
   if (input.password !== input.repeat) return { error: 'notSame' };
   const hash = await (await auth.$context).password.hash(input.password);
   const id = current.user.id;
-  await db.transaction(async (tx) => {
+  // The flag is cleared first and only while still set, so two submissions at the same moment cannot both change it.
+  const done = await db.transaction(async (tx) => {
+    const cleared = await tx.update(user).set({ mustChangePassword: false, language: input.language === 'en' ? 'en' : 'si', updatedAt: new Date() })
+      .where(and(eq(user.id, id), eq(user.mustChangePassword, true))).returning({ id: user.id });
+    if (!cleared.length) return false;
     await tx.update(account).set({ password: hash, updatedAt: new Date() }).where(and(eq(account.userId, id), eq(account.providerId, 'credential')));
-    await tx.update(user).set({ mustChangePassword: false, language: input.language === 'en' ? 'en' : 'si', updatedAt: new Date() }).where(eq(user.id, id));
     await tx.delete(session).where(and(eq(session.userId, id), ne(session.token, current.session.token)));
+    return true;
   });
+  if (!done) return { error: 'notNeeded' };
   return { ok: true };
 }
