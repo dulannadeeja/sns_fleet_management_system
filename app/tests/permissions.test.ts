@@ -5,7 +5,7 @@ import { allows, defaultPermissions, PERMISSION_KEYS } from '../src/auth/permiss
 describe('permission catalogue', () => {
   it('staff start with the "employees or admins" rows only', () => {
     expect(defaultPermissions('staff').sort()).toEqual([
-      'allowPaymentAfterReturn', 'approveFirstCustomer', 'decideDamageCharge', 'decideLateCharge', 'extendByPhone',
+      'allowPaymentAfterReturn', 'approveFirstCustomer', 'customerAccess', 'decideDamageCharge', 'decideLateCharge', 'extendByPhone',
       'markCarUnavailable', 'proceedDespiteFlag', 'refundsAndExpenses', 'setOrWaiveDeposit',
     ]);
   });

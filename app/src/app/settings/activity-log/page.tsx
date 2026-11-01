@@ -26,6 +26,7 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
   const before = one(q.before) && readCursor(one(q.before)) ? one(q.before) : undefined;
   const [{ entries: all, older }, people, seeTerms, tCarsRaw] = await Promise.all([
     listActivity({ personId, kind, older: before }), peopleForFilter(), mayDo(viewer, 'seePartnerEarnings'), getTranslations('cars')]);
+  const tCust = await getTranslations('customers');
   // A car's commission is a partner term: hidden from people who may not see partner terms (system design 4.2).
   const entries = seeTerms ? all : all.filter((e) => !isPartnerTermEntry(e));
   const tCars = tCarsRaw as unknown as (k: string, v?: Record<string, string>) => string;
@@ -52,6 +53,13 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       cars: Array.isArray(e.details?.cars) ? (e.details.cars as unknown[]).map(String).join(', ') : '',
       // car.add and car.change: the plate, the term's name and its values with units (#18).
       ...(e.action.startsWith('car.') ? carValues(tCars, e) : {}),
+      // customer.*: the customer's name, the detail's name and values, the copy's kind (#19).
+      ...(e.action.startsWith('customer.') ? {
+        target: String(e.details?.name ?? e.targetId ?? ''),
+        field: tCust.has(`fieldNames.${String(e.details?.field)}` as 'fieldNames.name') ? tCust(`fieldNames.${String(e.details?.field)}` as 'fieldNames.name') : String(e.details?.field ?? ''),
+        copy: tCust.has(`kinds.${String(e.details?.kind)}` as 'kinds.nicFront') ? tCust(`kinds.${String(e.details?.kind)}` as 'kinds.nicFront') : String(e.details?.kind ?? ''),
+        old: String(e.details?.old ?? ''), new: String(e.details?.new ?? ''),
+      } : {}),
     };
     // Only a sentence (a string) counts: an action named like a group of sentences shows its raw name.
     const key = `log.actions.${e.action}`;

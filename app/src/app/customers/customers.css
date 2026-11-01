@@ -1,0 +1,18 @@
+/* 08.1 Customers, 08.2 Customer details, 08.3 New customer (boards 08.x). */
+.cus-search { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+.cus-search .rt-field { flex: 1 1 260px; }
+.cus-row { display: grid; grid-template-columns: 44px minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 64px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: 15px; line-height: 24px; }
+.cus-row-head { min-height: 44px; border-top: 0; font-size: 14px; color: var(--ink-muted); font-weight: 600; }
+a.cus-row:hover { background: var(--sunken); }
+.cus-tag { display: inline-flex; padding: 2px 10px; border-radius: 10px; font-size: 14px; line-height: 22px; font-weight: 600; background: var(--sunken); color: var(--ink); }
+.cus-tag-warn { background: var(--warning-tint, var(--sunken)); color: var(--warning, var(--ink)); }
+.cus-tag-bad { background: var(--overdue-tint, var(--sunken)); color: var(--overdue); }
+.cus-copies { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.cus-copy { display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1.5px dashed var(--line-strong); border-radius: 12px; }
+.cus-copy-on { border-style: solid; }
+.cus-copy input[type='file'] { font: inherit; font-size: 14px; max-width: 100%; }
+@media (max-width: 699px) {
+  .cus-row { grid-template-columns: 44px minmax(0, 1fr) auto; padding: 10px 16px; }
+  .cus-row > :nth-child(3), .cus-row > :nth-child(4), .cus-row > :nth-child(5) { display: none; }
+  .cus-row-head { display: none; }
+}
