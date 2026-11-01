@@ -10,7 +10,7 @@ import './settings.css';
 // with a back link; then the Settings list and the page. The menu holds only what is built so far (each feature adds
 // its own item); the Settings list shows only the Settings pages that exist.
 export async function SettingsFrame({ person, active, subtitle, backHref, children }: {
-  person: SignedInPerson; active: 'people' | 'permissions'; subtitle: string; backHref: string; children: ReactNode;
+  person: SignedInPerson; active: 'people' | 'permissions' | 'activity'; subtitle: string; backHref: string; children: ReactNode;
 }) {
   const t = await getTranslations();
   const lang = (await getLocale()) as Lang;
@@ -20,7 +20,7 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
     <div className="set-desktop">
       <NavRail labels={{ menu: t('frame.menu') }} items={[
         { icon: 'home', label: t('nav.today'), en: echo('today'), group: 0, href: '/' },
-        { icon: 'settings', label: t('nav.settings'), en: echo('settings'), group: 9, href: '/settings/people', active: true },
+        { icon: 'settings', label: t('nav.settings'), en: echo('settings'), group: 9, href: person.role === 'owner' ? '/settings/people' : '/settings/activity-log', active: true },
       ]} />
       <div className="set-body">
         <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
@@ -29,8 +29,14 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
         </div>
         <main className="set-main">
           <nav className="set-nav" aria-label={t('settings.menu')}>
-            <Link href="/settings/permissions" aria-current={active === 'permissions' ? 'page' : undefined}><Icon name="users" size={20} />{t('settings.permissions')}</Link>
-            <Link href="/settings/people" aria-current={active === 'people' ? 'page' : undefined}><Icon name="idcard" size={20} />{t('settings.people')}</Link>
+            {person.role === 'owner' ? (
+              <>
+                <Link href="/settings/permissions" aria-current={active === 'permissions' ? 'page' : undefined}><Icon name="users" size={20} />{t('settings.permissions')}</Link>
+                <Link href="/settings/people" aria-current={active === 'people' ? 'page' : undefined}><Icon name="idcard" size={20} />{t('settings.people')}</Link>
+              </>
+            ) : null}
+            {/* Shown on owner pages (the owner may see the log) and on the log page itself (whoever may see it). */}
+            <Link href="/settings/activity-log" aria-current={active === 'activity' ? 'page' : undefined}><Icon name="clock" size={20} />{t('settings.activityLog')}</Link>
           </nav>
           <div className="set-content">{children}</div>
         </main>

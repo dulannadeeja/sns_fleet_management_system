@@ -42,3 +42,10 @@
   .set-row > :nth-child(3) { display: none; }
   .set-perm th:first-child { min-width: 160px; }
 }
+/* 15.5 Activity log: chips to filter, rows grouped by day (board 15.5). */
+.set-chips { display: flex; flex-wrap: wrap; gap: 8px 12px; }
+.set-chip { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); color: var(--ink); font-size: 15px; text-decoration: none; }
+.set-chip-on { background: var(--ink); border-color: var(--ink); color: var(--card); font-weight: 600; }
+.set-day { margin: 0; padding: 10px 20px; border-top: 1px solid var(--line); background: var(--sunken); font-size: 14px; line-height: 22px; font-weight: 600; }
+.set-entry { display: grid; grid-template-columns: 52px 36px minmax(0, 1fr); gap: 8px 16px; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line); font-size: 15px; line-height: 24px; }
+.set-entry-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: var(--sunken); color: var(--ink); }
