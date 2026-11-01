@@ -9,6 +9,8 @@ export type PermissionGroup = 'rentals' | 'money' | 'running';
 
 export const PERMISSIONS = {
   // Rentals
+  // Customer access (Proposed, Dulan 1 Nov 2026): find, add and correct customers, open their document copies.
+  customerAccess: { group: 'rentals', startsWith: 'staffAndAdmin' },
   approveFirstCustomer: { group: 'rentals', startsWith: 'staffAndAdmin' },
   proceedDespiteFlag: { group: 'rentals', startsWith: 'staffAndAdmin' },
   setOrWaiveDeposit: { group: 'rentals', startsWith: 'staffAndAdmin' },
