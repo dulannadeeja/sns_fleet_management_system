@@ -25,6 +25,13 @@ export interface NewPartner {
   cars: { carId: string; commissionPercent: number; ownerPays: string[] }[];
 }
 
+/** One chosen car: its commission within the limits and known costs, each once. */
+function okCar(c: NewPartner['cars'][number]): boolean {
+  const [lo, hi] = LIMITS.commissionPercent;
+  return UUID.test(c.carId) && Number.isInteger(c.commissionPercent) && c.commissionPercent >= lo && c.commissionPercent <= hi
+    && Array.isArray(c.ownerPays) && c.ownerPays.every(isCost) && new Set(c.ownerPays).size === c.ownerPays.length;
+}
+
 class Refusal extends Error { constructor(readonly code: PartnerError) { super(code); } }
 
 async function actorMay(tx: Tx, actorId: string, permission: Permission): Promise<boolean> {
@@ -42,7 +49,8 @@ async function actorMay(tx: Tx, actorId: string, permission: Permission): Promis
 export async function addPartner(actorId: string, input: NewPartner): Promise<{ ok: true; id: string; userId: string } | { error: PartnerError }> {
   const name = (input.name ?? '').trim();
   if (!name) return { error: 'nameMissing' };
-  const phoneIssue = phoneProblem(input.phone ?? '');
+  const phone = (input.phone ?? '').trim();
+  const phoneIssue = phoneProblem(phone);
   if (phoneIssue) return { error: phoneIssue };
   if ((input.password ?? '').length < MIN_PASSWORD_LENGTH) return { error: 'passwordShort' };
   const nic = normalNic(input.nic ?? '');
@@ -51,19 +59,17 @@ export async function addPartner(actorId: string, input: NewPartner): Promise<{ 
   if (bankAccount && bankAccount.length > 120) return { error: 'bankTooLong' };
   const cars = input.cars ?? [];
   if (!cars.length) return { error: 'carsMissing' };
-  const [lo, hi] = LIMITS.commissionPercent;
-  const okCar = (c: NewPartner['cars'][number]) => UUID.test(c.carId) && Number.isInteger(c.commissionPercent) && c.commissionPercent >= lo && c.commissionPercent <= hi
-    && Array.isArray(c.ownerPays) && c.ownerPays.every(isCost) && new Set(c.ownerPays).size === c.ownerPays.length;
   if (!cars.every(okCar) || new Set(cars.map((c) => c.carId)).size !== cars.length) return { error: 'carsInvalid' };
   const passwordHash = await hashPassword(input.password);
   try {
     return await db.transaction(async (tx) => {
       if (!(await actorMay(tx, actorId, 'editPartners'))) throw new Refusal('notAllowed');
       if ((await tx.select({ id: partnerOwner.id }).from(partnerOwner).where(eq(partnerOwner.nic, nic))).length) throw new Refusal('nicTaken');
-      const account = await createPartnerAccount(tx, { name, phone: input.phone, passwordHash });
+      const account = await createPartnerAccount(tx, { name, phone, passwordHash });
       if ('error' in account) throw new Refusal(account.error);
       const [partner] = await tx.insert(partnerOwner).values({ userId: account.id, nic, bankAccount, createdBy: actorId }).returning({ id: partnerOwner.id });
-      for (const c of cars) {
+      // Cars in one fixed order, so two adds at once never wait on each other's locks (#20 review).
+      for (const c of [...cars].sort((a, b) => a.carId.localeCompare(b.carId))) {
         const linked = await linkCarToPartner(tx, actorId, c.carId, partner.id, { commissionPercent: c.commissionPercent, ownerPays: c.ownerPays as Cost[] });
         if (linked === 'carNotFree') throw new Refusal('carNotFree');
         if (linked === 'invalid') throw new Refusal('carsInvalid');
@@ -82,24 +88,58 @@ export async function addPartner(actorId: string, input: NewPartner): Promise<{ 
   }
 }
 
+/**
+ * Links more partner cars not yet linked to an existing partner (board 11.2 "Add a car"; #20 review): each with its
+ * commission and the costs the owner pays, in one transaction, under the per-car locks in a fixed order. Logged.
+ */
+export async function addCarsToPartner(actorId: string, partnerId: string, cars: NewPartner['cars']): Promise<{ ok: true } | { error: PartnerError }> {
+  if (!UUID.test(partnerId)) return { error: 'notFound' };
+  if (!cars?.length) return { error: 'carsMissing' };
+  if (!cars.every(okCar) || new Set(cars.map((c) => c.carId)).size !== cars.length) return { error: 'carsInvalid' };
+  try {
+    return await db.transaction(async (tx) => {
+      if (!(await actorMay(tx, actorId, 'editPartners'))) throw new Refusal('notAllowed');
+      const [p] = await tx.select({ userId: partnerOwner.userId }).from(partnerOwner).where(eq(partnerOwner.id, partnerId));
+      if (!p) throw new Refusal('notFound');
+      const before = new Set((await tx.execute(sql`select registration from vehicle where partner_owner_id = ${partnerId}`)).rows.map((r) => String(r.registration)));
+      for (const c of [...cars].sort((a, b) => a.carId.localeCompare(b.carId))) {
+        const linked = await linkCarToPartner(tx, actorId, c.carId, partnerId, { commissionPercent: c.commissionPercent, ownerPays: c.ownerPays as Cost[] });
+        if (linked === 'carNotFree') throw new Refusal('carNotFree');
+        if (linked === 'invalid') throw new Refusal('carsInvalid');
+      }
+      const plates = (await tx.execute(sql`select registration from vehicle where partner_owner_id = ${partnerId} order by registration`)).rows.map((r) => String(r.registration)).filter((r) => !before.has(r));
+      await tx.insert(auditEvent).values({ createdBy: actorId, action: 'partner.addCars', targetType: 'person', targetId: p.userId, details: { cars: plates } });
+      return { ok: true } as const;
+    });
+  } catch (e) {
+    if (e instanceof Refusal) return { error: e.code };
+    throw e;
+  }
+}
+
+/** A real calendar day as YYYY-MM-DD (not 30 February: #20 review). */
+const realDate = (d: string) => /^\d{4}-\d{2}-\d{2}$/.test(d) && !Number.isNaN(Date.parse(`${d}T00:00:00Z`)) && new Date(`${d}T00:00:00Z`).toISOString().slice(0, 10) === d;
+
 /** Today in Sri Lanka, as YYYY-MM-DD. */
 const todayColombo = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Colombo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 
 /** Records the date the paper agreement was signed (ST-11.3; system design 14): not in the future. Nothing waits on it. */
 export async function recordAgreementSigned(actorId: string, partnerId: string, signedOn: string): Promise<{ ok: true } | { error: PartnerError }> {
   if (!UUID.test(partnerId)) return { error: 'notFound' };
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(signedOn) || Number.isNaN(Date.parse(`${signedOn}T00:00:00Z`)) || signedOn > todayColombo() || signedOn < '2000-01-01') return { error: 'dateInvalid' };
+  if (!realDate(signedOn) || signedOn > todayColombo()) return { error: 'dateInvalid' };
   return db.transaction(async (tx) => {
     if (!(await actorMay(tx, actorId, 'editPartners'))) return { error: 'notAllowed' } as const;
-    const [p] = await tx.update(partnerOwner).set({ agreementSignedOn: signedOn }).where(eq(partnerOwner.id, partnerId)).returning({ userId: partnerOwner.userId });
+    // The old date too (PR-05), read under a row lock so two records at once each log what they replaced.
+    const [p] = await tx.select({ userId: partnerOwner.userId, old: partnerOwner.agreementSignedOn }).from(partnerOwner).where(eq(partnerOwner.id, partnerId)).for('update');
     if (!p) return { error: 'notFound' } as const;
-    await tx.insert(auditEvent).values({ createdBy: actorId, action: 'partner.agreementSigned', targetType: 'person', targetId: p.userId, details: { signedOn } });
+    await tx.update(partnerOwner).set({ agreementSignedOn: signedOn }).where(eq(partnerOwner.id, partnerId));
+    await tx.insert(auditEvent).values({ createdBy: actorId, action: 'partner.agreementSigned', targetType: 'person', targetId: p.userId, details: { signedOn, old: p.old } });
     return { ok: true } as const;
   });
 }
 
-export interface PartnerRow { id: string; userId: string; name: string; phone: string | null; active: boolean; cars: number; commission: number[] }
-export interface Partner extends Omit<PartnerRow, 'cars' | 'commission'> { nic: string; bankAccount: string | null; agreementSignedOn: string | null; cars: Car[] }
+export interface PartnerRow { id: string; userId: string; name: string; phone: string | null; active: boolean; cars: number; plates: string[]; commission: number[] }
+export interface Partner extends Omit<PartnerRow, 'cars' | 'commission' | 'plates'> { nic: string; bankAccount: string | null; agreementSignedOn: string | null; cars: Car[] }
 
 async function partnerRows() {
   return db.select({ id: partnerOwner.id, userId: partnerOwner.userId, name: user.name, phone: user.phoneNumber, disabledAt: user.disabledAt,
@@ -112,7 +152,7 @@ export async function listPartners(): Promise<PartnerRow[]> {
   const [rows, cars] = await Promise.all([partnerRows(), listCars()]);
   return rows.map((r) => {
     const own = cars.filter((c) => c.partnerId === r.id);
-    return { id: r.id, userId: r.userId, name: r.name, phone: r.phone, active: !r.disabledAt, cars: own.length,
+    return { id: r.id, userId: r.userId, name: r.name, phone: r.phone, active: !r.disabledAt, cars: own.length, plates: own.map((c) => c.registration),
       commission: [...new Set(own.map((c) => c.terms.commissionPercent ?? 0))].sort((a, b) => a - b) };
   });
 }

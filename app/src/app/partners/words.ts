@@ -15,6 +15,6 @@ export async function partnerWords(): Promise<PartnerWords> {
     commission: tc('fields.commissionPercent.label'), commissionHint: `% · ${tc('range', { min: String(LIMITS.commissionPercent[0]), max: String(LIMITS.commissionPercent[1]) })}`,
     ownerPays: tc('ownerPays.label'), ownerPaysNote: tc('ownerPays.note'), costs: tc.raw('costs') as Record<string, string>,
     save: t('save'), cancel: t('cancel'), requiredMark: ts('requiredMark'), errors: Object.fromEntries(keys.map((k) => [k, t(`errors.${k}`)])),
-    signedLabel: t('signedLabel'), record: t('record'),
+    signedLabel: t('signedLabel'), record: t('record'), addCarSave: t('addCarSave'),
   };
 }

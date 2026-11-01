@@ -3,8 +3,6 @@ import { getFormatter, getLocale, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../../auth/require';
 import { mayDo } from '../../../../auth/access';
 import { getCar, TERM_FIELDS, type Terms } from '../../../../modules/cars/cars';
-
-const TERM_FIELDS_ONLY = (t: Terms) => Object.fromEntries(TERM_FIELDS.map((f) => [f, t[f]])) as Record<string, number | null>;
 import { listActivity } from '../../../../modules/activity/activity';
 import { PlateBadge, type Lang } from '../../../../ui';
 import { AppFrame } from '../../../AppFrame';
@@ -12,6 +10,8 @@ import { EditCarForm } from '../../CarForms';
 import { carValues, isPartnerTermEntry } from '../../words';
 import { carWords } from '../../words-server';
 import '../../cars.css';
+
+const TERM_FIELDS_ONLY = (t: Terms) => Object.fromEntries(TERM_FIELDS.map((f) => [f, t[f]])) as Record<string, number | null>;
 
 // Screen 04.4 Edit car, package and terms (ST-04.3): a change applies to new rentals only (4.3, PR-08). Papers, service
 // dates and the photo come with #23; who pays which costs with #20.

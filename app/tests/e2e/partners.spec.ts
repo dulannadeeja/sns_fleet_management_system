@@ -62,6 +62,25 @@ test('ST-11.1 to 11.3: the owner adds a partner with a car; the partner signs in
   await page.getByRole('button', { name: 'Record' }).click();
   await expect(page.locator('[data-agreement]')).toHaveText('Signed on Oct 30, 2026');
 
+  // A partner car added later is linked from the partner's page (board 11.2 "Add a car").
+  const partnerUrl = page.url().replace(/\?.*$/, '');
+  const plate2 = `SMP ${randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`;
+  await page.goto('/cars/new');
+  await page.getByLabel('Registration number').fill(plate2);
+  await page.getByRole('radio', { name: 'Every' }).check();
+  await page.getByRole('radio', { name: /Partner/ }).check();
+  await page.getByRole('button', { name: 'Save car' }).click();
+  await expect(page).toHaveURL(/\?saved=1$/);
+  await page.goto(partnerUrl);
+  await page.locator('label.ptn-car', { hasText: plate2 }).locator('input').check();
+  await page.getByRole('button', { name: 'Link the car' }).click();
+  await expect(page).toHaveURL(/\?added=1$/);
+  await expect(page.locator(`[data-terms="${plate2}"]`)).toHaveText('15% commission · cash-out any day · costs decided case by case');
+
+  // The owner opens the partner's sign-in to reset the password or turn the account off.
+  await page.getByRole('link', { name: 'Sign-in: reset password, turn off or on' }).click();
+  await expect(page.getByRole('button', { name: 'Turn off' })).toBeVisible();
+
   // The car now shows its owner; the partner signs in and changes the first password.
   await page.goto(carUrl);
   await expect(page.getByText(`Alto · Partner · ${name}`)).toBeVisible();

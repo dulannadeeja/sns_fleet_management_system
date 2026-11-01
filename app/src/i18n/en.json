@@ -271,7 +271,8 @@
         },
         "partner": {
           "add": "added the partner {target}",
-          "agreementSigned": "recorded {target}’s agreement as signed on {date}"
+          "agreementSigned": "recorded {target}’s agreement as signed on {date}",
+          "addCars": "linked {cars} to the partner {target}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -741,7 +742,7 @@
     "afterTitle": "After saving",
     "after": [
       "The partner gets a first password to change when they sign in.",
-      "The partner agreement is printed once the owner approves its wording. It is signed on paper; staff record the date.",
+      "The partner agreement is printed once the owner approves its wording. It is signed on paper; the date is recorded on the partner's page.",
       "Recorded in the activity log."
     ],
     "save": "Save partner",
@@ -771,6 +772,13 @@
       "carNotFree": "One of these cars was just linked to someone else. Open the page again.",
       "dateInvalid": "Choose a date, not in the future.",
       "failed": "Not saved. Try again."
-    }
+    },
+    "addCar": "Add a car",
+    "addCarHint": "Partner cars not linked to an owner yet. Each one gets its commission and the costs the owner pays.",
+    "addCarSave": "Link the car",
+    "noFreeCarsHere": "No partner cars are waiting for an owner. Add the car first on Cars, as Partner.",
+    "signIn": "Sign-in: reset password, turn off or on",
+    "carsAdded": "Cars linked.",
+    "plates": "{plates}"
   }
 }

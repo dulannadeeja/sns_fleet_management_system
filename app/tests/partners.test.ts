@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest';
 import { randomUUID } from 'node:crypto';
 import { and, eq } from 'drizzle-orm';
 import { db } from '../src/db/client';
-import { auditEvent, user } from '../src/db/schema';
+import { auditEvent, user, vehicle } from '../src/db/schema';
 import { addCar, getCar } from '../src/modules/cars/cars';
-import { addPartner, getPartner, listPartners, normalNic, recordAgreementSigned, unlinkedPartnerCars } from '../src/modules/partners/partners';
+import { addCarsToPartner, addPartner, getPartner, listPartners, normalNic, recordAgreementSigned, unlinkedPartnerCars } from '../src/modules/partners/partners';
 import { samplePerson, samplePhone, signIn, theOwner } from './helpers/people';
 import { samplePlate } from './helpers/cars';
 
@@ -104,6 +104,45 @@ describe('ST-11.3: the agreement date', () => {
     expect(await recordAgreementSigned(owner, added.id, '2026-10-30')).toEqual({ ok: true });
     expect((await getPartner(added.id))!.agreementSignedOn).toBe('2026-10-30');
     const [log] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'partner.agreementSigned'), eq(auditEvent.targetId, added.userId)));
-    expect(log.details).toMatchObject({ signedOn: '2026-10-30' });
+    expect(log.details).toMatchObject({ signedOn: '2026-10-30', old: null });
+  });
+});
+
+describe('ST-11.3: more cars for a partner (board 11.2 "Add a car")', () => {
+  it('links a partner car added later, with its terms; refuses a car already linked; logged', async () => {
+    const owner = await theOwner();
+    const added = await addPartner(owner, { ...base(), cars: [{ carId: await partnerCar(), commissionPercent: 15, ownerPays: [] }] });
+    if (!('ok' in added)) throw new Error(added.error);
+    const later = await partnerCar('Every');
+    expect(await addCarsToPartner((await samplePerson()).id, added.id, [{ carId: later, commissionPercent: 10, ownerPays: [] }])).toEqual({ error: 'notAllowed' });
+    expect(await addCarsToPartner(owner, added.id, [{ carId: later, commissionPercent: 10, ownerPays: ['repairs'] }])).toEqual({ ok: true });
+    expect((await getCar(later))!).toMatchObject({ partnerId: added.id, terms: { commissionPercent: 10, ownerPays: ['repairs'] } });
+    expect(await addCarsToPartner(owner, added.id, [{ carId: later, commissionPercent: 10, ownerPays: [] }])).toEqual({ error: 'carNotFree' });
+    const [log] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'partner.addCars'), eq(auditEvent.targetId, added.userId)));
+    expect(log.details).toEqual({ cars: [(await getCar(later))!.registration] });
+  });
+
+  it('a 30 February is refused, not an error (#20 review); the old date is logged', async () => {
+    const owner = await theOwner();
+    const added = await addPartner(owner, { ...base(), cars: [{ carId: await partnerCar(), commissionPercent: 15, ownerPays: [] }] });
+    if (!('ok' in added)) throw new Error(added.error);
+    expect(await recordAgreementSigned(owner, added.id, '2026-02-30')).toEqual({ error: 'dateInvalid' });
+    expect(await recordAgreementSigned(owner, added.id, '2026-10-01')).toEqual({ ok: true });
+    expect(await recordAgreementSigned(owner, added.id, '2026-10-02')).toEqual({ ok: true });
+    const logs = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'partner.agreementSigned'), eq(auditEvent.targetId, added.userId)));
+    expect(logs.map((l) => l.details)).toEqual(expect.arrayContaining([{ signedOn: '2026-10-02', old: '2026-10-01' }]));
+  });
+});
+
+describe('a car\'s partner is set once (#20 review)', () => {
+  it('can never be changed or removed afterwards, by anyone', async () => {
+    const owner = await theOwner();
+    const car = await partnerCar();
+    const first = await addPartner(owner, { ...base(), cars: [{ carId: car, commissionPercent: 15, ownerPays: [] }] });
+    const second = await addPartner(owner, { ...base(), cars: [{ carId: await partnerCar(), commissionPercent: 15, ownerPays: [] }] });
+    if (!('ok' in first) || !('ok' in second)) throw new Error('setup');
+    const refused = async (q: Promise<unknown>) => { try { await q; return 'saved'; } catch (e) { return String((e as { cause?: Error }).cause?.message ?? e); } };
+    expect(await refused(db.update(vehicle).set({ partnerOwnerId: second.id }).where(eq(vehicle.id, car)))).toMatch(/set once/);
+    expect(await refused(db.update(vehicle).set({ partnerOwnerId: null }).where(eq(vehicle.id, car)))).toMatch(/set once/);
   });
 });

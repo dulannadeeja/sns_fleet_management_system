@@ -216,10 +216,11 @@ export async function listPeople(): Promise<PersonRow[]> {
   return peopleQuery().where(sql`${user.role} <> 'partner'`).groupBy(user.id).orderBy(sql`${user.role} = 'owner' desc`, asc(user.name));
 }
 
-/** One person, or null for an unknown or malformed id. */
+/** One person, or null for an unknown or malformed id. A partner opens too (15.6, from 11.2): the owner resets their
+ *  password and turns their account off or on (system design 3.1; #20 review). */
 export async function getPerson(id: string): Promise<PersonRow | null> {
   if (!UUID.test(id)) return null;
-  return (await peopleQuery().where(and(eq(user.id, id), sql`${user.role} <> 'partner'`)).groupBy(user.id))[0] ?? null;
+  return (await peopleQuery().where(eq(user.id, id)).groupBy(user.id))[0] ?? null;
 }
 
 /**

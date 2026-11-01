@@ -480,7 +480,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Rules:**
   - The starting balance owed on go-live day is one "Opening balance" line, marked "Imported", final from go-live, can be cashed out and never counts as earnings. Past rentals of their cars from SNS's books add nothing. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
   - Terms changed here apply to new rentals only (PR-08).
-  - *Proposed (Dulan, 1 Nov 2026):* until the owner approves the agreement wording, this page records only the date the agreement was signed (nothing waits on it); printing comes with the printouts. The starting balance comes with the starting data (Phase 4).
+  - *Proposed (Dulan, 1 Nov 2026):* until the owner approves the agreement wording, this page records only the date the agreement was signed (nothing waits on it), by whoever may add or edit partners; printing comes with the printouts. More partner cars not yet linked can be added to the partner here (a car's partner is set once). The owner opens the partner's sign-in from here to reset the password or turn the account off or on. The starting balance comes with the starting data (Phase 4).
 - **Checks:** AT-36 "A partner's opening balance is loaded; past rentals of their cars are imported: the balance can be cashed out from go-live; the imported rentals add no earnings; nothing is paid twice".
 - **Screens:** 11.2 Partner details.
 - **Decided:** DN-20.

@@ -25,9 +25,10 @@ describe('the app role on the car tables', () => {
     await expect(asAppRole('insert into vehicle_terms_version select * from vehicle_terms_version where false')).resolves.toBeTruthy();
     await expect(asAppRole("select pg_advisory_xact_lock(hashtext('sns.vehicle:sample'))")).resolves.toBeTruthy();
   });
-  it('may add a partner, record their agreement date and bank account, and link a car to them (#20)', async () => {
+  it('may add a partner, record their agreement date, and link a car to them (#20)', async () => {
     await expect(asAppRole('insert into partner_owner select * from partner_owner where false')).resolves.toBeTruthy();
-    await expect(asAppRole('update partner_owner set agreement_signed_on = agreement_signed_on, bank_account = bank_account where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update partner_owner set agreement_signed_on = agreement_signed_on where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update partner_owner set bank_account = bank_account where false')).rejects.toThrow(/permission denied/);
     await expect(asAppRole('update vehicle set partner_owner_id = partner_owner_id where false')).resolves.toBeTruthy();
     await expect(asAppRole('update partner_owner set nic = nic where false')).rejects.toThrow(/permission denied/);
     await expect(asAppRole('delete from partner_owner where false')).rejects.toThrow(/permission denied/);

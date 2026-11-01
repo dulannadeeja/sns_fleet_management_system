@@ -1,6 +1,7 @@
 'use client';
 import { useActionState, useState } from 'react';
 import Link from 'next/link';
+import { useReady } from '../useReady';
 import { Button, Notice, TextField } from '../../ui';
 import { addCarAction, editCarAction, type CarFormState } from './actions';
 
@@ -51,6 +52,7 @@ export function EditCarForm({ carId, terms, costs, partnerCar, seeCommission, ed
 }) {
   const [chosen, setChosen] = useState(costs);
   const [state, action, pending] = useActionState<CarFormState, FormData>(editCarAction.bind(null, carId), {});
+  const ready = useReady();
   const [values, setValues] = useState(() => asText(terms));
   const set = (k: string, v: string) => setValues((s) => ({ ...s, [k]: v }));
   const keysShown = [...PACKAGE, ...(partnerCar && seeCommission ? ['commissionPercent'] : [])];
@@ -72,7 +74,7 @@ export function EditCarForm({ carId, terms, costs, partnerCar, seeCommission, ed
       ) : null}
       <div className="set-actions">
         <Link className="rt-btn rt-btn-quiet" href={`/cars/${carId}`}>{w.cancel}</Link>
-        <Button type="submit" icon="check" disabled={pending}>{w.saveChanges}</Button>
+        <Button type="submit" icon="check" disabled={pending || !ready}>{w.saveChanges}</Button>
       </div>
     </form>
   );
@@ -83,6 +85,7 @@ export function AddCarForm({ models, starting, defaults, seeCommission, editComm
   models: string[]; starting: Record<string, Pkg>; defaults: Pkg; seeCommission: boolean; editCommission: boolean; w: CarWords;
 }) {
   const [state, action, pending] = useActionState<CarFormState, FormData>(addCarAction, {});
+  const ready = useReady();
   const [model, setModel] = useState(state.values?.model ?? models[0]);
   const [ownership, setOwnership] = useState(state.values?.ownership ?? 'sns');
   const [values, setValues] = useState(() => asText({ ...defaults, ...starting[models[0]] }));
@@ -131,7 +134,7 @@ export function AddCarForm({ models, starting, defaults, seeCommission, editComm
       {err && !err.startsWith('registration') ? <Notice tone="danger">{w.errors[err] ?? w.errors.failed}</Notice> : null}
       <div className="set-actions">
         <Link className="rt-btn rt-btn-quiet" href="/cars">{w.cancel}</Link>
-        <Button type="submit" icon="check" disabled={pending}>{w.save}</Button>
+        <Button type="submit" icon="check" disabled={pending || !ready}>{w.save}</Button>
       </div>
     </form>
   );

@@ -3,29 +3,31 @@ import { notFound } from 'next/navigation';
 import { getFormatter, getLocale, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../auth/require';
 import { mayDo } from '../../../auth/access';
-import { getPartner } from '../../../modules/partners/partners';
+import { getPartner, unlinkedPartnerCars } from '../../../modules/partners/partners';
 import { Notice, PlateBadge, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
 import { showTerm } from '../../cars/words';
-import { SignedForm } from '../PartnerForms';
+import { AddCarsForm, SignedForm } from '../PartnerForms';
 import { partnerWords } from '../words';
 import '../../cars/cars.css';
 import '../partners.css';
 
 // Screen 11.2 Partner details (ST-11.3): cars and terms, account and agreement. Partner terms: people who may see them
 // (the owner and the admin by default). Earnings, cash-outs and the starting balance come with their own tickets.
-export default async function PartnerPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string }> }) {
+export default async function PartnerPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; added?: string }> }) {
   const person = await requirePermission('seePartnerEarnings');
   const { id } = await params;
   const partner = await getPartner(id);
   if (!partner) notFound();
   const [t, tc, w, lang, format, q, mayEdit] = await Promise.all([getTranslations('partners'), getTranslations('cars'), partnerWords(), getLocale(), getFormatter(), searchParams, mayDo(person, 'editPartners')]);
   const tcf = tc as unknown as (k: string, v?: Record<string, string>) => string;
+  const free = mayEdit ? (await unlinkedPartnerCars()).map((c) => ({ id: c.id, plate: c.registration, model: c.model, commission: c.terms.commissionPercent ?? 15, perDay: showTerm(tcf, 'dailyRate', c.terms.dailyRate) })) : [];
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Colombo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   const costs = (c: string[]) => (c.length ? t('costsPaid', { costs: c.map((x) => tc(`costs.${x}`)).join(', ') }) : t('costsNone'));
   return (
     <AppFrame person={person} active="partners" title={t('title')} subtitle={partner.name} backHref="/partners">
       {q.saved === '1' ? <Notice>{t('saved')}</Notice> : null}
+      {q.added === '1' ? <Notice>{t('carsAdded')}</Notice> : null}
       <section className="car-card">
         <div className="car-top">
           <span className="set-avatar">{partner.name.split(/\s+/).slice(0, 2).map((x) => x[0]?.toUpperCase()).join('')}</span>
@@ -46,9 +48,17 @@ export default async function PartnerPage({ params, searchParams }: { params: Pr
         ))}
         <span className="set-muted">{t('startingBalance')}</span>
       </section>
+      {mayEdit ? (
+        <section className="car-card" aria-labelledby="add-car"><h2 id="add-car">{t('addCar')}</h2>
+          <span className="set-muted">{t('addCarHint')}</span>
+          <AddCarsForm partnerId={partner.id} cars={free} w={{ ...w, noFreeCars: t('noFreeCarsHere') }} lang={lang as Lang} />
+        </section>
+      ) : null}
       <section className="car-card" aria-labelledby="account"><h2 id="account">{t('account', { name: partner.name })}</h2>
         <span><span className={`set-status${partner.active ? '' : ' set-status-off'}`}>{partner.active ? t('active') : t('off')}</span></span>
         <span className="set-muted">{t('accountNote', { name: partner.name })}</span>
+        {/* Resetting a partner's password and turning their account off or on stay with the owner (system design 3.1). */}
+        {person.role === 'owner' ? <Link href={`/settings/people/${partner.userId}`}>{t('signIn')}</Link> : null}
       </section>
       <section className="car-card" aria-labelledby="agreement"><h2 id="agreement">{t('agreement')}</h2>
         <span className="set-muted">{t('agreementNote')}</span>

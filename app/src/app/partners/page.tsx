@@ -28,7 +28,7 @@ export default async function PartnersPage() {
           <Link key={p.id} className="ptn-row" href={`/partners/${p.id}`} data-partner={p.name}>
             <span className="set-avatar">{initials(p.name)}</span>
             <span>{p.name}<span className="car-sub">{p.phone}</span></span>
-            <span>{t('carsCount', { n: p.cars })}</span>
+            <span>{t('carsCount', { n: p.cars })}<span className="car-sub">{p.plates.join(', ')}</span></span>
             <span>{pct(p.commission)}</span>
             <span><span className={`set-status${p.active ? '' : ' set-status-off'}`}>{p.active ? t('active') : t('off')}</span></span>
           </Link>
