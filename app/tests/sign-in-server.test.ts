@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { addPerson } from '../src/auth/people';
+import { addPerson } from '../src/modules/people/people';
 import { samplePerson, signIn } from './helpers/people';
 
 // System design 3.1 "Sign-in phone numbers" (Proposed), on the server side.
 describe('sign-in numbers on the server', () => {
   it('a person cannot be added with a number that is not a Sri Lankan mobile', async () => {
-    await expect(addPerson({ name: 'Sample', phone: '0731234567', password: 'first-pass-1' })).rejects.toThrow(/Sri Lankan mobile/);
-    await expect(addPerson({ name: 'Sample', phone: '077 123 4567', password: 'first-pass-1' })).rejects.toThrow(/Sri Lankan mobile/);
+    expect(await addPerson(null, { name: 'Sample', phone: '0731234567', password: 'first-pass-1', role: 'staff' })).toEqual({ error: 'phoneInvalid' });
+    expect(await addPerson(null, { name: 'Sample', phone: '077 123 4567', password: 'first-pass-1', role: 'staff' })).toEqual({ error: 'phoneInvalid' });
   });
 
   it('Better Auth refuses such a number even when called directly', async () => {

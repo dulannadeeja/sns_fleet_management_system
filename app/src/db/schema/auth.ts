@@ -1,4 +1,5 @@
-import { boolean, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
+import { boolean, check, integer, pgTable, text, timestamp, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
 
 // Better Auth's tables (TRD › Data model, Identity), checked against getAuthTables() of better-auth 1.7.10
 // with the phone-number plugin and SNS's extra user fields. The JavaScript keys are Better Auth's field names.
@@ -21,8 +22,17 @@ export const user = pgTable('user', {
   language: text('language').notNull().default('si'),
   failedSignIns: integer('failed_sign_ins').notNull().default(0),
   lockedUntil: timestamp('locked_until', { withTimezone: true }),
+  // System design 3.1: one primary owner, admins, staff, partners (partner accounts come with ST-11.2).
+  role: text('role').notNull().default('staff'),
+  // Turned off by the owner, with a reason: sign-in stops; the person and everything they recorded stay (AT-47).
+  disabledAt: timestamp('disabled_at', { withTimezone: true }),
+  disabledReason: text('disabled_reason'),
   ...times,
-});
+}, (t) => [
+  check('user_role', sql`${t.role} in ('owner', 'admin', 'staff', 'partner')`),
+  check('user_disabled_has_reason', sql`(${t.disabledAt} is null) = (${t.disabledReason} is null)`),
+  uniqueIndex('user_one_owner').on(t.role).where(sql`${t.role} = 'owner'`),
+]);
 
 export const session = pgTable('session', {
   id: uuid('id').primaryKey().defaultRandom(),
