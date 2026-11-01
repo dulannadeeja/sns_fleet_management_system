@@ -17,7 +17,7 @@ async function signIn(page: Page, phone: string, password: string) {
 }
 
 test('AT-61: the admin on a new device needs the emailed code; then forgot password by email', async ({ page, browser }, info) => {
-  test.setTimeout(120_000); // one long journey: two sign-ins with codes, a reset and the owner's change
+  test.setTimeout(180_000); // one long journey: two sign-ins with codes, a reset and the owner's change
   const P = info.project.name.toUpperCase();
   const phone = process.env[`E2E_ADMIN_PHONE_${P}`]!;
   const email = process.env[`E2E_ADMIN_EMAIL_${P}`]!;
@@ -62,7 +62,18 @@ test('AT-61: the admin on a new device needs the emailed code; then forgot passw
   await page.locator('input[name="repeat"]').fill('brand-new-pass-1');
   await page.getByRole('button', { name: 'Save and sign in' }).click();
   await expect(page).toHaveURL(/\/sign-in\?reset=done$/);
+  // A reset forgets remembered devices: the code is asked again (one a minute, so wait for a new one).
+  seen = mailCount(email);
   await signIn(page, phone, 'brand-new-pass-1');
+  await expect(page).toHaveURL(/\/sign-in\/code/);
+  await expect(async () => {
+    if (mailCount(email) === seen) {
+      await page.getByRole('button', { name: 'Send a new code' }).click();
+      await expect(page.getByText('A new code was sent.')).toBeVisible({ timeout: 2000 });
+    }
+  }).toPass({ timeout: 75_000, intervals: [5_000] });
+  await page.locator('input[name="code"]').fill((await nextMail(email, seen)).match(/\b(\d{6})\b/)![1]);
+  await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page).toHaveURL(/\/$/);
 
   // 15.6 and 01.7: the owner changes the admin's email; the admin is asked to confirm it (or later).

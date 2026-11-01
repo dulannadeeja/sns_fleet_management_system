@@ -34,11 +34,15 @@ export const user = pgTable('user', {
   twoFactorEnabled: boolean('two_factor_enabled').notNull().default(false),
   // When the last code was emailed: at most one a minute.
   codeSentAt: timestamp('code_sent_at', { withTimezone: true }),
+  // When the last reset link was emailed: at most one a minute (#28 review).
+  resetSentAt: timestamp('reset_sent_at', { withTimezone: true }),
   ...times,
 }, (t) => [
   check('user_role', sql`${t.role} in ('owner', 'admin', 'staff', 'partner')`),
   check('user_disabled_has_reason', sql`(${t.disabledAt} is null) = (${t.disabledReason} is null)`),
   uniqueIndex('user_one_owner').on(t.role).where(sql`${t.role} = 'owner'`),
+  // Two people can never wait on the same new email (#28 review).
+  uniqueIndex('user_pending_email_once').on(t.pendingEmail).where(sql`${t.pendingEmail} is not null`),
 ]);
 
 export const session = pgTable('session', {

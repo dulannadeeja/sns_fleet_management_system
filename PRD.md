@@ -233,12 +233,13 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Rules:**
   - SNS has one primary owner, one additional admin and three staff; each partner has one account for all their cars. System design → [Goals and operating context](SNS_SYSTEM_DESIGN.md#2-goals-and-operating-context), [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - A new person signs in with their phone number, gets a first password to change at first sign-in, and starts with their role's default permissions, which the owner can then change (ST-15.1). Sinhala is the default language (PR-01).
-  - *Proposed (Dulan, 1 Nov 2026):* the owner types the first password (8 or more characters) when adding a person or resetting a forgotten password, and gives it to them by hand; a reset ends their open sessions. The owner can reset the admin's password too (the admin's own email reset comes with the email codes). System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
+  - *Proposed (Dulan, 1 Nov 2026):* the owner types the first password (8 or more characters) when adding a person or resetting a forgotten password, and gives it to them by hand; a reset ends their open sessions. The owner can reset the admin's password too; the admin can also reset their own by email. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - A partner's account is made when the partner is added (ST-11.2).
   - When someone leaves, the owner turns off their account, with a reason: sign-in stops, and everything they recorded keeps their name. A partner's balance stays and can still be paid out. The owner can turn it back on. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
   - Adding a person and turning an account off or on are recorded in the activity log (PR-05).
 - **Checks:** AT-46. AT-47 "The owner turns off the account of a staff member who left: they can no longer sign in; everything they recorded keeps their name". *Proposed check:* a new staff member starts with the agreed staff defaults and must change the first password before anything else.
-- **Screens:** 15.3 People, 15.4 Add a person, 15.6 Person (reset a password, turn an account off or on).
+  - *Proposed (Dulan, 1 Nov 2026):* the owner types the admin's email on 15.4 (required for an admin) and can change the owner's or the admin's email on 15.6; a new email counts once a code sent to it is typed in. The owner's own row on 15.3 opens 15.6 for this. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts).
+- **Screens:** 15.3 People, 15.4 Add a person, 15.6 Person (email, reset a password, turn an account off or on).
 - **Decided:** DN-01 (only the owner adds people), DN-03 (the admin gives an email address for one-time codes).
 
 #### ST-15.3 · Business rules

@@ -1,0 +1,2 @@
+ALTER TABLE "user" ADD COLUMN "reset_sent_at" timestamp with time zone;--> statement-breakpoint
+CREATE UNIQUE INDEX "user_pending_email_once" ON "user" USING btree ("pending_email") WHERE "user"."pending_email" is not null;

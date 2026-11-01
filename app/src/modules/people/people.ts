@@ -1,4 +1,4 @@
-import { createHash, randomInt, randomUUID } from 'node:crypto';
+import { createHmac, randomInt, randomUUID, timingSafeEqual } from 'node:crypto';
 import { and, asc, eq, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
 import { account, auditEvent, permissionGrant, session, user, verification } from '../../db/schema';
@@ -7,7 +7,7 @@ import { confirmMail } from '../../mail/messages';
 import { phoneProblem } from '../../auth/phone';
 import { defaultPermissions, isPermission, type Role } from '../../auth/permissions';
 import { MIN_PASSWORD_LENGTH } from '../../auth/rules';
-import { auth, CODE_MINUTES, CODE_TRIES } from '../../auth/server';
+import { auth, CODE_MINUTES, CODE_TRIES, forgetDevices } from '../../auth/server';
 
 // ST-15.1 Set permissions and ST-15.2 People (system design 3.1, 3.2). Only the primary owner adds people, changes
 // permissions, resets passwords and turns accounts off or on (AT-58); each change is one transaction with its
@@ -19,7 +19,7 @@ export type Language = 'si' | 'en';
 export type PeopleError =
   | 'notAllowed' | 'notFound' | 'nameMissing' | 'phoneMissing' | 'phoneInvalid' | 'phoneTaken'
   | 'passwordShort' | 'roleInvalid' | 'reasonMissing' | 'alreadyOff' | 'alreadyOn' | 'isOwner' | 'permissionInvalid'
-  | 'emailMissing' | 'emailInvalid' | 'emailTaken' | 'emailNotNeeded' | 'codeTooSoon' | 'codeWrong' | 'codeExpired' | 'codeTooMany';
+  | 'emailMissing' | 'emailInvalid' | 'emailTaken' | 'emailNotNeeded' | 'codeTooSoon' | 'codeWrong' | 'codeExpired' | 'codeTooMany' | 'notSent';
 export type PeopleResult<T = object> = ({ ok: true } & T) | { error: PeopleError };
 
 /** The acting person must be the primary owner, signed in and not turned off. Checked inside each change too. */
@@ -105,6 +105,7 @@ async function withUniqueErrors<T>(run: () => Promise<T>): Promise<T | { error: 
     const err = (e as { cause?: { code?: string; constraint?: string }; code?: string; constraint?: string });
     const pg = err.cause ?? err;
     if (pg.code === '23505' && pg.constraint === 'user_one_owner') return { error: 'roleInvalid' };
+    if (pg.code === '23505' && pg.constraint === 'user_pending_email_once') return { error: 'emailTaken' };
     if (pg.code === '23505' && pg.constraint?.includes('phone_number')) return { error: 'phoneTaken' };
     throw e;
   }
@@ -124,6 +125,7 @@ export async function resetPassword(actorId: string, personId: string, password:
     await tx.update(account).set({ password: passwordHash, updatedAt: new Date() }).where(and(eq(account.userId, personId), eq(account.providerId, 'credential')));
     await tx.update(user).set({ mustChangePassword: true, failedSignIns: 0, lockedUntil: null, updatedAt: new Date() }).where(eq(user.id, personId));
     await tx.delete(session).where(eq(session.userId, personId));
+    await forgetDevices(personId, (q) => tx.execute(q));
     await log(tx, actorId, 'person.resetPassword', personId);
     return { ok: true } as const;
   });
@@ -143,6 +145,7 @@ export async function turnOff(actorId: string, personId: string, reason: string)
     if (target.disabledAt) return { error: 'alreadyOff' } as const;
     await tx.update(user).set({ disabledAt: new Date(), disabledReason: why, updatedAt: new Date() }).where(eq(user.id, personId));
     await tx.delete(session).where(eq(session.userId, personId));
+    await forgetDevices(personId, (q) => tx.execute(q));
     await log(tx, actorId, 'person.turnOff', personId, { reason: why });
     return { ok: true } as const;
   });
@@ -213,7 +216,7 @@ export async function setEmail(actorId: string, personId: string, typed: string)
   if (!UUID.test(personId)) return { error: 'notFound' };
   const read = readEmail(typed);
   if ('error' in read) return read;
-  return db.transaction(async (tx) => {
+  return withUniqueErrors(() => db.transaction(async (tx) => {
     if (!(await isOwner(tx, actorId))) return { error: 'notAllowed' } as const;
     const [target] = await tx.select({ role: user.role }).from(user).where(eq(user.id, personId)).for('update');
     if (!target) return { error: 'notFound' } as const;
@@ -222,11 +225,13 @@ export async function setEmail(actorId: string, personId: string, typed: string)
     await tx.update(user).set({ pendingEmail: read.email, twoFactorEnabled: true, updatedAt: new Date() }).where(eq(user.id, personId));
     await log(tx, actorId, 'person.emailChange', personId, { email: read.email });
     return { ok: true } as const;
-  });
+  }));
 }
 
 const CONFIRM = (personId: string) => `confirm-email:${personId}`;
-const sha256 = (text: string) => createHash('sha256').update(text).digest('hex');
+// Keyed with the server secret, so a copy of the database alone does not give the code (#28 review).
+const codeHash = (personId: string, code: string) => createHmac('sha256', process.env.BETTER_AUTH_SECRET ?? '').update(`${personId}:${code}`).digest('hex');
+const sameHash = (a: string, b: string) => a.length === b.length && timingSafeEqual(Buffer.from(a), Buffer.from(b));
 
 /** Emails a code to the person's new (pending) email; at most one a minute (#28). */
 export async function sendEmailConfirmCode(personId: string): Promise<PeopleResult> {
@@ -239,10 +244,16 @@ export async function sendEmailConfirmCode(personId: string): Promise<PeopleResu
   await db.transaction(async (tx) => {
     await tx.delete(verification).where(eq(verification.identifier, CONFIRM(personId)));
     await tx.insert(verification).values({
-      identifier: CONFIRM(personId), value: `${sha256(code)}:0:${person.pending}`, expiresAt: new Date(Date.now() + CODE_MINUTES * 60_000),
+      identifier: CONFIRM(personId), value: `${codeHash(personId, code)}:0:${person.pending}`, expiresAt: new Date(Date.now() + CODE_MINUTES * 60_000),
     });
   });
-  await sendMail({ to: person.pending, ...confirmMail(person.language === 'en' ? 'en' : 'si', code) });
+  try {
+    await sendMail({ to: person.pending, ...confirmMail(person.language === 'en' ? 'en' : 'si', code) });
+  } catch {
+    // Not sent: give the minute back so they can try again at once.
+    await db.update(user).set({ codeSentAt: null }).where(eq(user.id, personId));
+    return { error: 'notSent' };
+  }
   return { ok: true };
 }
 
@@ -253,7 +264,7 @@ export async function confirmPendingEmail(personId: string, code: string): Promi
     if (!stored || stored.expiresAt <= new Date()) return { error: 'codeExpired' } as const;
     const [hash, tries, email] = stored.value.split(':');
     if (Number(tries) >= CODE_TRIES) return { error: 'codeTooMany' } as const;
-    if (sha256(code.trim()) !== hash) {
+    if (!sameHash(codeHash(personId, code.trim()), hash)) {
       await tx.update(verification).set({ value: `${hash}:${Number(tries) + 1}:${email}` }).where(eq(verification.id, stored.id));
       return { error: 'codeWrong' } as const;
     }

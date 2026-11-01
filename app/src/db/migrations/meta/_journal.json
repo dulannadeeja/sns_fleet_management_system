@@ -71,6 +71,13 @@
       "when": 1793531766855,
       "tag": "0009_email_codes_app_role",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793535103483,
+      "tag": "0010_email_review",
+      "breakpoints": true
     }
   ]
 }

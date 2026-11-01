@@ -188,7 +188,8 @@
       "codeTooSoon": "Wait a minute.",
       "codeWrong": "That code is not right.",
       "codeExpired": "This code has run out.",
-      "codeTooMany": "5 wrong codes."
+      "codeTooMany": "5 wrong codes.",
+      "notSent": "The email could not be sent. Try again."
     },
     "perms": {
       "approveFirstCustomer": "Approve a first-time customer",
@@ -302,7 +303,8 @@
       "codeTooMany": "5 wrong codes: send a new one.",
       "codeTooSoon": "Wait a minute before sending a new code.",
       "notFound": "There is no new email to confirm.",
-      "emailTaken": "Someone else already has this email. Ask the owner."
+      "emailTaken": "Someone else already has this email. Ask the owner.",
+      "notSent": "The email could not be sent. Try again."
     }
   }
 }

@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { eq, like } from 'drizzle-orm';
+import { and, eq, like } from 'drizzle-orm';
 import { randomUUID } from 'node:crypto';
 import { auth } from '../src/auth/server';
 import { db } from '../src/db/client';
-import { user, verification } from '../src/db/schema';
+import { auditEvent, user, verification } from '../src/db/schema';
 import { signedInPerson } from '../src/auth/first-sign-in';
 import { requestResetByPhone } from '../src/auth/reset';
 import { confirmPendingEmail, sendEmailConfirmCode, setEmail } from '../src/modules/people/people';
@@ -115,5 +115,58 @@ describe('forgot password by email', () => {
     expect((await call((o) => auth.api.resetPassword(o), new Headers(), { token, newPassword: 'another-pass-2' })).status).toBe(400);
     expect((await signIn(a.phone, 'brand-new-pass-1')).status).toBe(200);
     expect((await person(a.id)).mustChangePassword).toBe(false);
+  });
+});
+
+describe('review fixes', () => {
+  it('a right password with a code still to type does not clear the wrong-try count', async () => {
+    const a = await adminWaitingForCode();
+    await sendCode(a.waiting);
+    const code = lastCode(a.email);
+    for (let i = 0; i < 3; i++) await checkCode(a.waiting, wrong(code));
+    await signIn(a.phone, a.password);
+    expect((await person(a.id)).failedSignIns).toBeGreaterThan(0);
+  });
+
+  it('a remembered device must type a code again after a password reset', async () => {
+    const a = await adminWaitingForCode();
+    await sendCode(a.waiting);
+    const device = withCookies(await checkCode(a.waiting, lastCode(a.email)), a.waiting);
+    await requestResetByPhone(a.phone);
+    const token = mailsTo(a.email).filter((m) => /reset-password\//.test(m.text)).at(-1)!.text.match(/reset-password\/([^?\s]+)/)![1];
+    await call((o) => auth.api.resetPassword(o), new Headers(), { token, newPassword: 'brand-new-pass-1' });
+    const again = await call((o) => auth.api.signInPhoneNumber(o), device, { phoneNumber: a.phone, password: 'brand-new-pass-1' });
+    expect(await again.json()).toMatchObject({ twoFactorRedirect: true });
+  });
+
+  it('at most one reset email a minute', async () => {
+    const a = await adminWaitingForCode();
+    await sendCode(a.waiting);
+    await checkCode(a.waiting, lastCode(a.email));
+    await requestResetByPhone(a.phone);
+    await requestResetByPhone(a.phone);
+    expect(mailsTo(a.email).filter((m) => /reset-password\//.test(m.text))).toHaveLength(1);
+  });
+});
+
+describe('more rules from the spec review', () => {
+  it('a reset link stops working after 1 hour', async () => {
+    const a = await adminWaitingForCode();
+    await sendCode(a.waiting);
+    await checkCode(a.waiting, lastCode(a.email));
+    await requestResetByPhone(a.phone);
+    const token = mailsTo(a.email).filter((m) => /reset-password\//.test(m.text)).at(-1)!.text.match(/reset-password\/([^?\s]+)/)![1];
+    await db.update(verification).set({ expiresAt: new Date(Date.now() - 1000) }).where(eq(verification.identifier, `reset-password:${token}`));
+    expect((await call((o) => auth.api.resetPassword(o), new Headers(), { token, newPassword: 'brand-new-pass-1' })).status).toBe(400);
+  });
+
+  it('an email change is in the activity log with who and when', async () => {
+    const owner = await theOwner();
+    const a = await samplePerson('first-pass-1', 'admin');
+    const newEmail = `sample-${randomUUID()}@example.net`;
+    expect(await setEmail(owner, a.id, newEmail)).toEqual({ ok: true });
+    const [logged] = await db.select().from(auditEvent).where(and(eq(auditEvent.targetId, a.id), eq(auditEvent.action, 'person.emailChange')));
+    expect(logged).toMatchObject({ createdBy: owner, details: { email: newEmail } });
+    expect(Date.now() - logged.createdAt.getTime()).toBeLessThan(60_000);
   });
 });

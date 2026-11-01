@@ -10,6 +10,8 @@ export type ConfirmState = { error?: PeopleError | 'codeMissing'; sent?: boolean
 async function me() {
   const person = await signedInPerson(await headers());
   if (!person) redirect('/sign-in');
+  // Nothing opens before a first or reset password is changed (ST-01.2).
+  if (person.mustChangePassword) redirect('/first-sign-in');
   return person;
 }
 

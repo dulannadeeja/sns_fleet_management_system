@@ -40,6 +40,23 @@ async function personAwaitingCode(ctx: GenericEndpointContext): Promise<string |
   return found && found.expiresAt > new Date() ? found.value : null;
 }
 
+/** Whether this browser holds the plugin's remembered-device cookie for this person, still valid (signed with the
+ *  secret; its record in `verification` holds the person's id). */
+async function rememberedDevice(ctx: GenericEndpointContext, personId: string): Promise<boolean> {
+  const cookie = ctx.context.createAuthCookie('trust_device');
+  const value = await ctx.getSignedCookie(cookie.name, ctx.context.secret);
+  const identifier = typeof value === 'string' ? value.split('!')[1] : undefined;
+  if (!identifier) return false;
+  const found = await ctx.context.internalAdapter.findVerificationValue(identifier);
+  return !!found && found.value === personId && found.expiresAt > new Date();
+}
+
+/** Forgets every remembered device of a person: after a password reset or turning the account off, a code is needed
+ *  again everywhere (#28 review). */
+export async function forgetDevices(personId: string, run: (q: ReturnType<typeof sql>) => Promise<unknown> = (q) => db.execute(q)): Promise<void> {
+  await run(sql`delete from verification where identifier like 'trust-device-%' and value = ${personId}`);
+}
+
 const lockedError = (until: unknown) => new APIError('TOO_MANY_REQUESTS', { code: 'ACCOUNT_LOCKED', message: 'Account locked', lockedUntil: until });
 
 /** One try counted before the check; refused if the account is locked (AT-60; wrong codes count too, #28). */
@@ -75,6 +92,7 @@ export const auth = betterAuth({
     },
     onPasswordReset: async ({ user }) => {
       await db.execute(sql`update "user" set failed_sign_ins = 0, locked_until = null, must_change_password = false where id = ${user.id}`);
+      await forgetDevices(user.id);
     },
   },
   user: {
@@ -114,13 +132,22 @@ export const auth = betterAuth({
       if (off.rows.length) throw new APIError('UNAUTHORIZED', { code: 'INVALID_PHONE_NUMBER_OR_PASSWORD', message: 'Invalid phone number or password' });
       await countTry(sql`phone_number = ${phone}`);
     }),
-    // The right password (for staff) or the right code (owner, admin) clears the count and the lock. A right code sent to
+    // A right password with no code to come, or the right code (owner, admin), clears the count and the lock. A right code sent to
     // a first, not yet confirmed email confirms it (#28).
     after: createAuthMiddleware(async (ctx) => {
       const signedIn = ctx.context.newSession;
       if (!signedIn) return;
-      if (ctx.path === SIGN_IN || ctx.path === CHECK_CODE) {
+      // This hook runs before the two-factor plugin's, so after a right password the session is still here even when a
+      // code is still to come. Clear the count only when no code is needed: no two-step for this person, or a
+      // remembered device (the plugin then keeps the session). Otherwise the right code clears it (CHECK_CODE).
+      const needsCode = ctx.path === SIGN_IN && (signedIn.user as { twoFactorEnabled?: boolean }).twoFactorEnabled
+        && !(await rememberedDevice(ctx, signedIn.user.id));
+      if ((ctx.path === SIGN_IN && !needsCode) || ctx.path === CHECK_CODE) {
         await db.execute(sql`update "user" set failed_sign_ins = 0, locked_until = null where id = ${signedIn.user.id}`);
+      } else if (needsCode) {
+        // A right password with a code still to come: it was counted before the check; take back just that one try,
+        // so it neither counts as wrong nor wipes out earlier wrong tries or a lock.
+        await db.execute(sql`update "user" set failed_sign_ins = greatest(failed_sign_ins - 1, 0) where id = ${signedIn.user.id}`);
       }
       if (ctx.path === CHECK_CODE) await confirmFirstEmail(signedIn.user.id);
     }),
@@ -153,6 +180,7 @@ async function confirmFirstEmail(personId: string): Promise<void> {
     with confirmed as (
       update "user" set email = pending_email, email_verified = true, pending_email = null, updated_at = now()
       where id = ${personId} and email_verified = false and pending_email is not null
+        and not exists (select 1 from "user" other where other.email = "user".pending_email and other.id <> "user".id)
       returning id, email
     )
     insert into audit_event (created_by, action, target_type, target_id, details)

@@ -28,8 +28,8 @@ export async function signInAction(_: SignInState, form: FormData): Promise<Sign
   }
   // The owner or the admin on a new device: email the code, then ask for it (01.4; AT-61).
   if (needsCode) {
-    await sendSignInCode();
-    redirect('/sign-in/code');
+    const problem = await sendSignInCode();
+    redirect(problem ? `/sign-in/code?problem=${problem}` : '/sign-in/code');
   }
   // The language can change here; refresh the root layout too, so <html lang> follows (the layout is otherwise kept).
   revalidatePath('/', 'layout');

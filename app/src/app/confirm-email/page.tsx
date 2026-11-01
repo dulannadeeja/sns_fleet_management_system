@@ -11,6 +11,7 @@ import { ConfirmForm } from './ConfirmForm';
 export default async function ConfirmEmailPage() {
   const person = await signedInPerson(await headers());
   if (!person) redirect('/sign-in');
+  if (person.mustChangePassword) redirect('/first-sign-in');
   if (!person.pendingEmail || !person.emailVerified) redirect('/');
   const t = await getTranslations('confirmEmail');
   const c = await getTranslations('code');
