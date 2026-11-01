@@ -31,6 +31,28 @@ test('the sign-in page can switch to English before signing in', async ({ page }
   await expect(page.getByRole('heading', { name: 'Welcome' })).toBeVisible();
 });
 
+test('the phone box takes digits only, 10 at most', async ({ page }) => {
+  await page.goto('/sign-in');
+  const phone = page.locator('input[name="phone"]');
+  await phone.pressSequentially('07a7 123-45678999');
+  await expect(phone).toHaveValue('0771234567');
+});
+
+test('each box says exactly what is wrong with what was typed', async ({ page }) => {
+  await page.goto('/sign-in');
+  await page.locator('button[type="submit"]').click();
+  const errors = page.locator('.rt-field-error');
+  await expect(errors).toHaveCount(2);
+  await page.locator('input[name="phone"]').fill('0731234567');
+  await page.locator('input[name="password"]').fill('short');
+  await page.locator('button[type="submit"]').click();
+  await expect(page.locator('input[name="phone"]')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('input[name="password"]')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('.rt-notice-danger')).toHaveCount(0);
+  await page.locator('input[name="phone"]').fill('0771234567');
+  await expect(page.locator('input[name="phone"]')).not.toHaveAttribute('aria-invalid', 'true');
+});
+
 test('a wrong password shows the message and stays on sign in', async ({ page }) => {
   await signIn(page, '0700000000', 'not-the-password');
   await expect(page.getByRole('alert')).toBeVisible();

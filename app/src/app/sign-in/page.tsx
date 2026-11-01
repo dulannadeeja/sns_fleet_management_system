@@ -25,7 +25,7 @@ export default async function SignInPage() {
             <h1 style={{ margin: 0, fontSize: 28, lineHeight: '38px', fontWeight: 600 }}>{t('welcome')}</h1>
             <p style={{ margin: 0, fontSize: 16, lineHeight: '26px', color: 'var(--ink-muted)' }}>{t('intro')}</p>
           </div>
-          <SignInForm words={{ phone: t('phone'), password: t('password'), submit: t('submit'), wrong: t('wrong'), locked: t('locked'), missing: t('missing') }} />
+          <SignInForm words={{ phone: t('phone'), password: t('password'), submit: t('submit'), wrong: t('wrong'), locked: t('locked'), phoneMissing: t('phoneMissing'), phoneInvalid: t('phoneInvalid'), passwordMissing: t('passwordMissing'), passwordShort: t('passwordShort') }} />
           <div style={{ display: 'flex', gap: 10, padding: '12px 14px', background: 'var(--sunken)', borderRadius: 12, fontSize: 14, lineHeight: '22px', color: 'var(--ink-muted)' }}>
             <span style={{ flex: 'none', display: 'flex' }}><Icon name="info" size={20} /></span>
             <span>{t('help')}</span>
