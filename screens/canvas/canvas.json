@@ -428,6 +428,25 @@
    "x": 3860,
    "y": 21037
   },
+  "04-Cars-AddCar-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1664,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.8 Add a car · Desktop",
+   "w": 1280,
+   "x": 7580,
+   "y": 14060
+  },
+  "04-Cars-AddCar-Phone.dc.html": {
+   "h": 2544,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "04.8 Add a car · Phone",
+   "w": 390,
+   "x": 8920,
+   "y": 14060
+  },
   "05-NewRental-Cancel-Desktop.dc.html": {
    "expand": "fill",
    "h": 831,
@@ -2094,6 +2113,8 @@
   "04-Cars-Packages-Desktop.dc.html",
   "04-Cars-Packages-Phone.dc.html",
   "04-Cars-StatusBlocks-Desktop.dc.html",
+  "04-Cars-AddCar-Desktop.dc.html",
+  "04-Cars-AddCar-Phone.dc.html",
   "05-NewRental-Customer-Desktop.dc.html",
   "05-NewRental-Customer-Phone.dc.html",
   "05-NewRental-ChooseCar-Desktop.dc.html",

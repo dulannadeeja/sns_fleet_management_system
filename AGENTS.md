@@ -32,7 +32,7 @@ Every change follows the **sns-change-control** skill: change the highest docume
 
 | Path | What |
 | --- | --- |
-| `brand/`, `design-system/`, `screens/` | Brand guidebook, Plate design system, 195 screen boards (each has an `AGENTS.md`) |
+| `brand/`, `design-system/`, `screens/` | Brand guidebook, Plate design system, 197 screen boards (each has an `AGENTS.md`) |
 | `app/` | The application (Next.js, PostgreSQL); `app/AGENTS.md` has its commands |
 | `change-requests/`, `addenda/`, `proposal/`, `reference/` | Changes to the frozen proposal, the proposal itself, client material |
 | `audits/` | Dated review records; `audits/README.md` says which findings are still open |

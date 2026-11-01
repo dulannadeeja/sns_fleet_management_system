@@ -66,7 +66,7 @@ Agreed with Dulan, 26 Oct 2026.
 | 01 Start | 01.1–01.7 | 1 | [01 Start](#01-start) |
 | 15 Settings | 15.1–15.7 | 1 | [15 Settings](#15-settings) |
 | 08 Customers | 08.1–08.5 | 1 | [08 Customers](#08-customers) |
-| 04 Cars | 04.1–04.7 | 1 | [04 Cars](#04-cars) |
+| 04 Cars | 04.1–04.8 | 1 | [04 Cars](#04-cars) |
 | 11 Partners: owners | 11.1–11.3 | 1 | [11 Partners: owners](#11-partners-owners) |
 | 05 New rental | 05.1–05.8 | 2 | [05 New rental](#05-new-rental) |
 | 06 Rentals | 06.1–06.8 | 2 | [06 Rentals](#06-rentals) |
@@ -381,9 +381,10 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - A car records: SNS or partner (and which partner); daily rate, km included a day and extra-km rate; SNS commission, default 15%; long-rental extra, default LKR 500 a day from day 6; garage-day charge, default LKR 5,000 a day; agreed payment terms and who pays which costs. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
   - A new car starts with its type's starting package (ST-04.4) and can then be changed. System design → [Initial defaults](SNS_SYSTEM_DESIGN.md#41-initial-defaults).
   - Changes apply to new rentals only; running rentals and their extensions keep their terms (PR-08). Each change records who, when, and the old and new values (PR-05).
+  - A car is one of the starting-package models; it records its registration number (one car per number). A partner car may be saved before its partner; it shows "not linked yet" until ST-11.2 links it. The SNS commission is seen with "See partner earnings and terms" and changed with "Add or edit partners"; the rest with "Add or edit cars and packages". Limits stop typing mistakes (per day LKR 1 to 100,000; km a day 1 to 1,000; extra km LKR 0 to 1,000; long-rental extra LKR 0 to 100,000 from day 2 to 60; garage-day charge LKR 0 to 100,000; commission 0 to 100%, whole numbers). Staff see a car's history without changes to its terms. *Proposed: Dulan, 1 Nov 2026; for the owner to confirm.* System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
   - Fuel income is always SNS's. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
 - **Checks:** AT-05 "Admin changes the package while a rental is active: the old rental and its extension keep the old terms; a new rental uses the new ones".
-- **Screens:** 04.4 Edit car, package and terms.
+- **Screens:** 04.4 Edit car, package and terms, 04.8 Add a car.
 - **Decided:** DN-04 (garage days only for damage during the rental; ST-07.2).
 
 #### ST-04.4 · Starting packages

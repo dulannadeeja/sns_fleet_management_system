@@ -264,6 +264,10 @@
         },
         "setting": {
           "change": "changed the {setting} from {old} to {new}"
+        },
+        "car": {
+          "add": "added the car {target}",
+          "change": "changed the {field} of {target} from {old} to {new}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -558,5 +562,123 @@
       "emailTaken": "Someone else already has this email. Ask the owner.",
       "notSent": "The email could not be sent. Try again."
     }
+  },
+  "cars": {
+    "title": "Cars",
+    "all": "All",
+    "sns": "SNS",
+    "partner": "Partner",
+    "add": "Add a car",
+    "ownerSns": "SNS",
+    "ownerPartner": "Partner · not linked yet",
+    "cols": {
+      "car": "Car",
+      "owner": "Owner",
+      "perDay": "Per day",
+      "kmDay": "km a day",
+      "extraKm": "Extra km",
+      "status": "Status"
+    },
+    "empty": "No cars yet.",
+    "listNote": "Prices are each car’s own package. A new car starts with its model’s starting package.",
+    "details": "Car details",
+    "edit": "Edit package and terms",
+    "back": "Cars",
+    "termsTitle": "Terms for new rentals",
+    "termsNote": "Changes apply to new rentals only.",
+    "history": "History",
+    "historyEmpty": "Nothing recorded yet.",
+    "added": "Saved.",
+    "saved": "Saved. New rentals use the new terms.",
+    "fields": {
+      "dailyRate": {
+        "label": "Per day",
+        "unit": "LKR",
+        "hint": "whole rupees",
+        "show": "LKR {n}",
+        "name": "daily rate"
+      },
+      "kmPerDay": {
+        "label": "km a day",
+        "unit": "km",
+        "hint": "pooled over the rental",
+        "show": "{n} km",
+        "name": "km a day"
+      },
+      "extraKmRate": {
+        "label": "Extra km",
+        "unit": "LKR a km",
+        "hint": "beyond the km included",
+        "show": "LKR {n} a km",
+        "name": "extra-km rate"
+      },
+      "longRentalExtra": {
+        "label": "Long-rental extra",
+        "unit": "LKR a day",
+        "hint": "from the day below",
+        "show": "LKR {n} a day",
+        "name": "long-rental extra"
+      },
+      "longRentalFromDay": {
+        "label": "Extra starts on day",
+        "unit": "",
+        "hint": "the days before have none",
+        "show": "day {n}",
+        "name": "long-rental start day"
+      },
+      "garageDayCharge": {
+        "label": "Garage-day charge",
+        "unit": "LKR a day",
+        "hint": "only for damage during a rental · admin approves",
+        "show": "LKR {n} a day",
+        "name": "garage-day charge"
+      },
+      "commissionPercent": {
+        "label": "SNS commission",
+        "unit": "%",
+        "hint": "default 15%",
+        "show": "{n}%",
+        "name": "SNS commission"
+      }
+    },
+    "package": "Package",
+    "packageFrom": "{model} starting package · can be changed for this car",
+    "partnerTerms": "Partner terms",
+    "partnerNote": "Shown only to people who may see partner terms; changed only by people who may add or edit partners. Who pays which costs is agreed when the partner is added.",
+    "newRentalsOnly": "Changes apply to new rentals only. Rentals already running, and their extensions, keep the terms they started with.",
+    "car": "Car",
+    "registration": "Registration number",
+    "registrationHint": "One car per number, as written on the plate.",
+    "model": "Model",
+    "modelHint": "A model not listed is added on Starting packages first, with its own package.",
+    "owner": "Owner",
+    "snsHint": "SNS’s own car",
+    "partnerHint": "linked to its owner on Partners › Add a partner",
+    "afterTitle": "After saving",
+    "after": [
+      "The car is on All cars as Available.",
+      "A partner car shows “Partner · not linked yet” until its owner is added on Partners.",
+      "Papers, service dates and the photo are added on the car’s page.",
+      "Recorded in the activity log."
+    ],
+    "save": "Save car",
+    "saveChanges": "Save changes",
+    "cancel": "Cancel",
+    "changes": "Package changes",
+    "changesEmpty": "No changes since the car was added.",
+    "errors": {
+      "registrationMissing": "Type the registration number.",
+      "registrationInvalid": "Letters, numbers, spaces and - only, as on the plate.",
+      "registrationTaken": "This number is already a car. Open it from All cars.",
+      "modelInvalid": "Choose a model.",
+      "ownershipInvalid": "Choose SNS or Partner.",
+      "notAllowed": "You may not change this.",
+      "notFound": "This car was not found.",
+      "invalid": "Type a whole number in the range.",
+      "stale": "Someone changed this car meanwhile. Open the page again to see it, then make your change.",
+      "failed": "Not saved. Try again."
+    },
+    "noChange": "Nothing changed yet.",
+    "range": "Whole number, {min} to {max}."
   }
 }

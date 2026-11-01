@@ -6,6 +6,8 @@ import { KINDS, listActivity, peopleForFilter, readCursor, type Entry, type Kind
 import { Icon, type IconName } from '../../../ui';
 import { isSettingKey } from '../../../modules/settings/settings';
 import { showSetting } from '../business-rules/show';
+import { mayDo } from '../../../auth/access';
+import { carValues, isPartnerTermEntry } from '../../cars/words';
 import { SettingsFrame } from '../SettingsFrame';
 
 // Screen 15.5 Activity log (ST-15.4): read only, newest first, by person and by kind. The owner, and whoever has
@@ -22,7 +24,11 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
   const personId = one(q.person) && UUID.test(one(q.person)!) ? one(q.person) : undefined;
   const kind = KINDS.includes(one(q.kind) as Kind) ? (one(q.kind) as Kind) : undefined;
   const before = one(q.before) && readCursor(one(q.before)) ? one(q.before) : undefined;
-  const [{ entries, older }, people] = await Promise.all([listActivity({ personId, kind, older: before }), peopleForFilter()]);
+  const [{ entries: all, older }, people, seeTerms, tCarsRaw] = await Promise.all([
+    listActivity({ personId, kind, older: before }), peopleForFilter(), mayDo(viewer, 'seePartnerEarnings'), getTranslations('cars')]);
+  // A car's commission is a partner term: hidden from people who may not see partner terms (system design 4.2).
+  const entries = seeTerms ? all : all.filter((e) => !isPartnerTermEntry(e));
+  const tCars = tCarsRaw as unknown as (k: string, v?: Record<string, string>) => string;
   const t = await getTranslations('settings');
   const format = await getFormatter();
   const lang = await getLocale();
@@ -41,6 +47,9 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       setting: typeof e.details?.key === 'string' && isSettingKey(e.details.key) ? t(`rules.names.${e.details.key}`) : String(e.details?.key ?? ''),
       old: showSetting(String(e.details?.key ?? ''), String(e.details?.old ?? ''), words, lang),
       new: showSetting(String(e.details?.key ?? ''), String(e.details?.new ?? ''), words, lang),
+      field: '',
+      // car.add and car.change: the plate, the term's name and its values with units (#18).
+      ...(e.action.startsWith('car.') ? carValues(tCars, e) : {}),
     };
     // Only a sentence (a string) counts: an action named like a group of sentences shows its raw name.
     const key = `log.actions.${e.action}`;

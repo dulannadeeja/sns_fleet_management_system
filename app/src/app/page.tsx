@@ -13,6 +13,7 @@ export default async function Home() {
     <main style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
       <h1 style={{ margin: 0 }}>{t('title')}</h1>
       <p style={{ margin: 0 }}>{t('home.signedIn', { name: person.name })}</p>
+      {['owner', 'admin', 'staff'].includes(person.role) ? <Link href="/cars">{t('nav.cars')}</Link> : null}
       {person.role === 'owner' ? <Link href="/settings/people">{t('settings.homeSettings')}</Link> : null}
       {person.role === 'admin' || person.role === 'staff' ? <Link href="/settings/business-rules">{t('settings.businessRules')}</Link> : null}
       {person.role !== 'owner' && (await mayDo(person, 'seeActivityLog')) ? <Link href="/settings/activity-log">{t('settings.activityLog')}</Link> : null}
