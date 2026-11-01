@@ -2,13 +2,15 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { nextStep, signedInPerson } from '../../auth/first-sign-in';
-import { BrandMark, Icon, type Lang } from '../../ui';
+import Link from 'next/link';
+import { BrandMark, Icon, Notice, type Lang } from '../../ui';
 import { SignInForm } from './SignInForm';
 import { SignInLanguage } from './SignInLanguage';
 import '../start.css';
 
 // Screen 01.1 Sign in (ST-01.1). Email reset for owner and admin is not offered until #28.
-export default async function SignInPage() {
+export default async function SignInPage({ searchParams }: { searchParams: Promise<{ reset?: string }> }) {
+  const { reset } = await searchParams;
   const person = await signedInPerson(await headers());
   if (person) redirect(nextStep(person) ?? '/');
   const t = await getTranslations('signIn');
@@ -25,7 +27,9 @@ export default async function SignInPage() {
             <h1 style={{ margin: 0, fontSize: 28, lineHeight: '38px', fontWeight: 600 }}>{t('welcome')}</h1>
             <p style={{ margin: 0, fontSize: 16, lineHeight: '26px', color: 'var(--ink-muted)' }}>{t('intro')}</p>
           </div>
+          {reset === 'done' ? <Notice>{t('resetDone')}</Notice> : null}
           <SignInForm words={{ phone: t('phone'), password: t('password'), submit: t('submit'), wrong: t('wrong'), locked: t('locked'), phoneMissing: t('phoneMissing'), phoneInvalid: t('phoneInvalid'), passwordMissing: t('passwordMissing'), passwordShort: t('passwordShort') }} />
+          <Link href="/forgot-password" style={{ alignSelf: 'center', fontSize: 15, lineHeight: '24px' }}>{t('forgot')}</Link>
           <div style={{ display: 'flex', gap: 10, padding: '12px 14px', background: 'var(--sunken)', borderRadius: 12, fontSize: 14, lineHeight: '22px', color: 'var(--ink-muted)' }}>
             <span style={{ flex: 'none', display: 'flex' }}><Icon name="info" size={20} /></span>
             <span>{t('help')}</span>

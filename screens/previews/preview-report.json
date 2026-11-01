@@ -38,6 +38,24 @@
  {
   "name": "01-Start-SignIn-Desktop",
   "w": 1280,
+  "canvasH": 830,
+  "contentH": 830,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-SignIn-Phone",
+  "w": 390,
+  "canvasH": 844,
+  "contentH": 844,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-SignInCode-Desktop",
+  "w": 1280,
   "canvasH": 800,
   "contentH": 800,
   "missing": [],
@@ -45,7 +63,61 @@
   "unresolvedBlob": false
  },
  {
-  "name": "01-Start-SignIn-Phone",
+  "name": "01-Start-SignInCode-Phone",
+  "w": 390,
+  "canvasH": 844,
+  "contentH": 844,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-ForgotPassword-Desktop",
+  "w": 1280,
+  "canvasH": 800,
+  "contentH": 800,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-ForgotPassword-Phone",
+  "w": 390,
+  "canvasH": 844,
+  "contentH": 844,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-NewPassword-Desktop",
+  "w": 1280,
+  "canvasH": 800,
+  "contentH": 800,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-NewPassword-Phone",
+  "w": 390,
+  "canvasH": 844,
+  "contentH": 844,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-ConfirmEmail-Desktop",
+  "w": 1280,
+  "canvasH": 800,
+  "contentH": 800,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "01-Start-ConfirmEmail-Phone",
   "w": 390,
   "canvasH": 844,
   "contentH": 844,
@@ -1397,8 +1469,8 @@
  {
   "name": "15-Settings-AddPerson-Desktop",
   "w": 1280,
-  "canvasH": 1116,
-  "contentH": 1116,
+  "canvasH": 1272,
+  "contentH": 1272,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1406,8 +1478,8 @@
  {
   "name": "15-Settings-AddPerson-Phone",
   "w": 390,
-  "canvasH": 1840,
-  "contentH": 1840,
+  "canvasH": 2044,
+  "contentH": 2044,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1415,8 +1487,8 @@
  {
   "name": "15-Settings-Person-Desktop",
   "w": 1280,
-  "canvasH": 1200,
-  "contentH": 1200,
+  "canvasH": 1480,
+  "contentH": 1480,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1424,8 +1496,8 @@
  {
   "name": "15-Settings-Person-Phone",
   "w": 390,
-  "canvasH": 1638,
-  "contentH": 1638,
+  "canvasH": 2156,
+  "contentH": 2156,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

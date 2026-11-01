@@ -42,7 +42,7 @@
   },
   "01-Start-SignIn-Desktop.dc.html": {
    "expand": "fill",
-   "h": 800,
+   "h": 830,
    "is_interactive": true,
    "page": "plate",
    "title": "01.1 Sign in · Desktop",
@@ -57,6 +57,82 @@
    "title": "01.1 Sign in · Phone",
    "w": 390,
    "x": 1340,
+   "y": 360
+  },
+  "01-Start-SignInCode-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.4 Sign-in code · Desktop",
+   "w": 1280,
+   "x": 5790,
+   "y": 360
+  },
+  "01-Start-SignInCode-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.4 Sign-in code · Phone",
+   "w": 390,
+   "x": 7130,
+   "y": 360
+  },
+  "01-Start-ForgotPassword-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.5 Forgot password · Desktop",
+   "w": 1280,
+   "x": 7720,
+   "y": 360
+  },
+  "01-Start-ForgotPassword-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.5 Forgot password · Phone",
+   "w": 390,
+   "x": 9060,
+   "y": 360
+  },
+  "01-Start-NewPassword-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.6 New password · Desktop",
+   "w": 1280,
+   "x": 9650,
+   "y": 360
+  },
+  "01-Start-NewPassword-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.6 New password · Phone",
+   "w": 390,
+   "x": 10990,
+   "y": 360
+  },
+  "01-Start-ConfirmEmail-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 800,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.7 Confirm your email · Desktop",
+   "w": 1280,
+   "x": 11580,
+   "y": 360
+  },
+  "01-Start-ConfirmEmail-Phone.dc.html": {
+   "h": 844,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "01.7 Confirm your email · Phone",
+   "w": 390,
+   "x": 12920,
    "y": 360
   },
   "02-Home-NeedsAttention-Desktop.dc.html": {
@@ -1437,7 +1513,7 @@
   },
   "15-Settings-AddPerson-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1116,
+   "h": 1272,
    "is_interactive": true,
    "page": "plate",
    "title": "15.4 Add a person · Desktop",
@@ -1446,7 +1522,7 @@
    "y": 68365
   },
   "15-Settings-AddPerson-Phone.dc.html": {
-   "h": 1840,
+   "h": 2044,
    "is_interactive": true,
    "page": "plate",
    "title": "15.4 Add a person · Phone",
@@ -1456,7 +1532,7 @@
   },
   "15-Settings-Person-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1200,
+   "h": 1480,
    "is_interactive": true,
    "page": "plate",
    "title": "15.6 Person · Desktop",
@@ -1465,7 +1541,7 @@
    "y": 68365
   },
   "15-Settings-Person-Phone.dc.html": {
-   "h": 1638,
+   "h": 2156,
    "is_interactive": true,
    "page": "plate",
    "title": "15.6 Person · Phone",
@@ -1960,6 +2036,14 @@
   "01-Start-FirstPassword-Phone.dc.html",
   "01-Start-ReadyToStart-Desktop.dc.html",
   "01-Start-ReadyToStart-Phone.dc.html",
+  "01-Start-SignInCode-Desktop.dc.html",
+  "01-Start-SignInCode-Phone.dc.html",
+  "01-Start-ForgotPassword-Desktop.dc.html",
+  "01-Start-ForgotPassword-Phone.dc.html",
+  "01-Start-NewPassword-Desktop.dc.html",
+  "01-Start-NewPassword-Phone.dc.html",
+  "01-Start-ConfirmEmail-Desktop.dc.html",
+  "01-Start-ConfirmEmail-Phone.dc.html",
   "02-Home-OwnerHome-Desktop.dc.html",
   "02-Home-OwnerHome-Phone.dc.html",
   "02-Home-StaffHome-Desktop.dc.html",

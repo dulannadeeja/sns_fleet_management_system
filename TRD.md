@@ -107,6 +107,8 @@ Each row implements a rule from the system design; the AT that proves it is list
 - **Better Auth** with the phone-number plugin and password; passwords of 8 or more characters, hashed by the library; sessions in the database, in secure, http-only cookies.
 - **Lockout:** 5 wrong tries lock the account for 15 minutes (a hook on failed sign-in) (AT-60).
 - **Owner and admin:** the two-factor plugin sends a one-time code by email on a new device, and they can reset their own password by email (AT-61). Staff and partners are reset by the owner (AT-46).
+- **Email** (codes, reset links, confirming a new address) goes through Resend's HTTPS API from the SNS domain (T8), with `RESEND_API_KEY` and `EMAIL_FROM` set on the server; production refuses to send without them. In development and tests, emails are written to a local outbox file (`MAIL_OUTBOX_FILE`) that tests read, and in development they are also printed in the dev server's console so a developer can read sign-in codes; nothing leaves the machine.
+- **Trusted devices:** the two-factor plugin's signed device cookie, 30 days from the last code-free sign-in on that device; codes are stored hashed.
 - **Turning an account off** revokes its sessions at once (AT-47).
 - **Permissions** are SNS's own table (`permission_grant`), seeded from the defaults table; only the primary owner may change permissions, add people or turn accounts off (AT-58). Approvals refuse a person approving their own request, except the owner, whose own is marked self-approved (AT-57).
 
@@ -171,5 +173,7 @@ Jobs are singletons (never two at once) and safe to run twice.
 - Partner data isolation is checked on every request (AT-22).
 
 ## 14. To check when setting up
+
+- **Resend account and the SNS sending domain** (needed before go-live for email codes and reset, #28): who opens and pays for them, and which domain sends. Open: ask the owner.
 
 These are facts to confirm, not decisions: current free-plan limits (Resend, error tracker, uptime check, Cloudflare R2), the DigitalOcean region by a speed test from Elpitiya, and the dollar exchange rate for the monthly cost.

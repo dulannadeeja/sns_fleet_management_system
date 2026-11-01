@@ -18,10 +18,21 @@ async function signedInSession(headers: Headers): Promise<Session | null> {
   return found && !found.user.disabledAt ? found : null;
 }
 
-/** Where a person must go before anything else: sign-in, first sign-in, or nowhere (null). */
-export function nextStep(person: Pick<SignedInPerson, 'mustChangePassword'> | null): '/sign-in' | '/first-sign-in' | null {
+export const EMAIL_LATER_COOKIE = 'sns-email-later';
+
+/** Whether these request headers carry "confirm my new email later" for this person (01.7, for this browser session). */
+export function confirmEmailLater(headers: Headers, personId: string): boolean {
+  return (headers.get('cookie') ?? '').split(/;\s*/).includes(`${EMAIL_LATER_COOKIE}=${personId}`);
+}
+
+/** Where a person must go before anything else: sign-in, first sign-in, confirm a new email (#28), or nowhere (null). */
+export function nextStep(
+  person: Pick<SignedInPerson, 'mustChangePassword'> & { emailVerified?: boolean; pendingEmail?: string | null } | null,
+  emailLater = false,
+): '/sign-in' | '/first-sign-in' | '/confirm-email' | null {
   if (!person) return '/sign-in';
   if (person.mustChangePassword) return '/first-sign-in';
+  if (person.pendingEmail && person.emailVerified && !emailLater) return '/confirm-email';
   return null;
 }
 

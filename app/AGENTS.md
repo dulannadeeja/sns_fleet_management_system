@@ -1,6 +1,6 @@
 # app/: the SNS Rent Car application (rank 7)
 
-Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13); sign-in with phone number and password, lockout and the first password (#14); permissions and people (#15). Email codes (#28) and jobs come with the next Phase 1 tickets.
+Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13); sign-in with phone number and password, lockout and the first password (#14); permissions and people (#15); emailed sign-in codes and email reset for the owner and admin (#28). Jobs come with the next Phase 1 tickets.
 
 ## Layout
 `src/app/` routes by PRD module · `src/modules/<module>/` business rules and database access, no React · `src/db/` schema and SQL migrations · `src/ui/` Plate components · `src/documents/` printouts 16.1–16.7 · `src/jobs/` pg-boss jobs · `src/i18n/` `si.json`, `en.json` · `tests/at/` one test per AT-nn.
@@ -19,10 +19,11 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 | Migrations | change `src/db/schema/`, then `npm run db:generate` and review the SQL; a rule SQL alone (a trigger) is `npx drizzle-kit generate --custom --name <what>`; apply with `npm run db:migrate`. Tests apply them by themselves |
 | Build (checks Sinhala and English have the same words first) | `npm run build` |
 | Dev server (needs `.env.local`, below) | `npm run dev` |
-| Add the primary owner once (then the owner adds people on screen 15.4) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX --role owner` (asks for the password; it shows while typed, and is never printed or logged) |
+| Add the primary owner once (then the owner adds people on screen 15.4) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX --role owner --email name@example.com` (asks for the password; it shows while typed, and is never printed or logged) |
 
 ## Settings (`app/.env.local`, git-ignored, never committed)
 - `DATABASE_URL`: the database the dev server uses. Tests and browser journeys use the test database on port 5433 by themselves.
+- Email: `RESEND_API_KEY` and `EMAIL_FROM` (the SNS sending domain) on the server. Without them, outside production, emails are printed in the dev server's console (so you can read sign-in codes) and written to `MAIL_OUTBOX_FILE` if set; production refuses to send.
 - `BETTER_AUTH_SECRET`: a long random value of your own, made once: `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`. The app refuses to start without it; there is no built-in fallback. Unit tests set a test-only value in `vitest.config.ts`; CI sets one in the workflow; the server has its own.
 
 ## Plate in the app (`src/ui/`)
@@ -32,7 +33,8 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 
 ## Sign-in (`src/auth/`, Better Auth)
 - `server.ts` is the one Better Auth set-up: phone number and password, 8+ characters, 5 wrong tries lock the account for 15 minutes (hooks, per account). No self sign-up.
-- Only three Better Auth paths are open: phone sign-in, sign-out and get-session (`OPEN_PATHS`). Every other path answers 404, so nothing checks a password outside the lock. Opening one (email codes, #28) needs its own lock test.
+- Only these Better Auth paths are open (`OPEN_PATHS`): phone sign-in, sign-out, get-session, the two emailed-code paths and the email reset paths (#28). Every other path answers 404, so nothing checks a password or code outside the lock. Opening another needs its own lock test.
+- Owner and admin (#28): the two-factor plugin with emailed codes only (6 digits, 10 minutes, 5 tries, hashed; a device remembered 30 days). SNS sets `two_factor_enabled`, counts wrong codes toward the lock, allows one code a minute (`code_sent_at`), and keeps a new email in `pending_email` until a code sent to it is typed in (`/confirm-email`, or the first sign-in code for a first email). Reset links go only to an owner or admin with a confirmed email (`src/auth/reset.ts`).
 - Each try is counted before the password is checked, in one `update … where not locked`, so parallel tries still get at most 5 checks.
 - Every signed-in page starts with `requireUser()` (`src/auth/require.ts`): no session → `/sign-in`; a first or reset password → `/first-sign-in`. Nothing else opens until the person sets their own password (a *Proposed* check in ST-01.2, built here).
 - The signed-in person's saved language picks `si` or `en` (`src/i18n/request.ts`); before sign-in, the sign-in page's switch (a cookie); otherwise Sinhala. An action that can change the language calls `revalidatePath('/', 'layout')` before `redirect`, so `<html lang>` follows.
@@ -43,7 +45,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 - The catalogue has one key per row of system design 3.2, each with who starts with it. Adding people, changing permissions and turning accounts off or on are owner-only and never in it. A new row there means a new key here.
 - Pages and actions call `requirePermission(key)` or `requireOwner()` (`src/auth/require.ts`): a missing permission is a 403 (`forbidden()`, `src/app/forbidden.tsx`). The check itself is `accessFor(headers, key)` (`src/auth/access.ts`), which tests call directly (AT-24).
 - People changes (add, reset password, turn off/on, set permission) take the acting owner's id, check it again inside one transaction, and write `audit_event` there. A turned-off person has no sessions, cannot sign in (answered like a wrong password) and is refused everywhere.
-- Browser tests sign in as the test database's one owner: `tests/e2e/owner-setup.ts` gives it a test password and turns off sample people left from earlier runs.
+- Browser tests sign in as the test database's one owner: `tests/e2e/owner-setup.ts` gives it a test password, turns codes off for it (test-only: many journeys sign in as it within a minute) and turns off sample people left from earlier runs. The code step is proved with a sample admin per project (`email.spec.ts`), reading emails from the test outbox.
 
 ## Rules (details in TRD › Integrity rules)
 - Money is whole-rupee integers; a partner share is rounded down in one shared function (`src/lib/money.ts` · `splitShare`); SNS takes the rest.

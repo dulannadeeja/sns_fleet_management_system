@@ -20,6 +20,7 @@ export default async function AddPersonPage() {
           admin: role('admin'), adminHint: a('adminHint'), partner: t('roles.partner'), partnerHint: a('partnerHint'),
           defaultsStaff: a('defaultsTitle', { role: role('staff') }), defaultsAdmin: a('defaultsTitle', { role: role('admin') }), defaultsHint: a('defaultsHint'),
           language: a('language'), sinhala: a('sinhala'), sinhalaHint: a('sinhalaHint'), english: a('english'), englishHint: a('englishHint'),
+          email: a('email'), emailHint: a('emailHint'), emailRequired: a('emailRequired'),
           required: t('requiredMark'), cancel: a('cancel'), save: a('save'), footer: a('footer'), errors: t.raw('errors') as Record<string, string>,
         }} />
       </section>

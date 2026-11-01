@@ -27,11 +27,22 @@ export const user = pgTable('user', {
   // Turned off by the owner, with a reason: sign-in stops; the person and everything they recorded stay (AT-47).
   disabledAt: timestamp('disabled_at', { withTimezone: true }),
   disabledReason: text('disabled_reason'),
+  // #28 (system design 3.1 "Email codes and email reset"): owner and admin only. `email` above is the confirmed address
+  // (email_verified) or the placeholder; a new one waits here until a code sent to it is typed in.
+  pendingEmail: text('pending_email'),
+  // Better Auth two-factor: set by SNS (owner or admin with an email to send to), never by the person.
+  twoFactorEnabled: boolean('two_factor_enabled').notNull().default(false),
+  // When the last code was emailed: at most one a minute.
+  codeSentAt: timestamp('code_sent_at', { withTimezone: true }),
+  // When the last reset link was emailed: at most one a minute (#28 review).
+  resetSentAt: timestamp('reset_sent_at', { withTimezone: true }),
   ...times,
 }, (t) => [
   check('user_role', sql`${t.role} in ('owner', 'admin', 'staff', 'partner')`),
   check('user_disabled_has_reason', sql`(${t.disabledAt} is null) = (${t.disabledReason} is null)`),
   uniqueIndex('user_one_owner').on(t.role).where(sql`${t.role} = 'owner'`),
+  // Two people can never wait on the same new email (#28 review).
+  uniqueIndex('user_pending_email_once').on(t.pendingEmail).where(sql`${t.pendingEmail} is not null`),
 ]);
 
 export const session = pgTable('session', {
@@ -65,4 +76,16 @@ export const verification = pgTable('verification', {
   value: text('value').notNull(),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   ...times,
+});
+
+/** Better Auth two-factor plugin's table (checked against better-auth 1.7.10). SNS uses emailed codes only, so no
+ *  authenticator secret is ever stored; the table must exist for the plugin. */
+export const twoFactor = pgTable('two_factor', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  secret: text('secret').notNull(),
+  backupCodes: text('backup_codes').notNull(),
+  userId: uuid('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  verified: boolean('verified').default(true),
+  failedVerificationCount: integer('failed_verification_count').default(0),
+  lockedUntil: timestamp('locked_until', { withTimezone: true }),
 });

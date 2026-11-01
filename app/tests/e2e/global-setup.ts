@@ -19,6 +19,16 @@ export default async function globalSetup() {
     });
     process.env[`E2E_PHONE_${project.toUpperCase()}`] = phone;
   }
+  // One sample admin per browser project, with a first email (codes are one a minute per person).
+  for (const project of ['desktop', 'phone']) {
+    const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
+    const email = `sample-admin-${project}-${Date.now()}@example.com`;
+    execFileSync('npx', ['tsx', '--conditions=react-server', 'scripts/people-add.ts', '--name', `Sample admin ${project}`, '--phone', phone, '--role', 'admin', '--email', email], {
+      stdio: 'pipe', env: { ...process.env, FIRST_PASSWORD: E2E_FIRST_PASSWORD },
+    });
+    process.env[`E2E_ADMIN_PHONE_${project.toUpperCase()}`] = phone;
+    process.env[`E2E_ADMIN_EMAIL_${project.toUpperCase()}`] = email;
+  }
   process.env.E2E_OWNER_PHONE = execFileSync('npx', ['tsx', '--conditions=react-server', 'tests/e2e/owner-setup.ts'], {
     encoding: 'utf8', env: { ...process.env, E2E_OWNER_PASSWORD },
   }).trim().split('\n').pop();

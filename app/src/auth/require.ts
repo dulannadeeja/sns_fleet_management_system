@@ -2,13 +2,14 @@ import 'server-only';
 import { headers } from 'next/headers';
 import { forbidden, redirect } from 'next/navigation';
 import { accessFor } from './access';
-import { nextStep, signedInPerson, type SignedInPerson } from './first-sign-in';
+import { confirmEmailLater, nextStep, signedInPerson, type SignedInPerson } from './first-sign-in';
 import type { Permission } from './permissions';
 
 /** For every signed-in page and action: the signed-in person, or a redirect to sign-in or first sign-in (ST-01.1, ST-01.2). */
 export async function requireUser(): Promise<SignedInPerson> {
-  const person = await signedInPerson(await headers());
-  const step = nextStep(person);
+  const h = await headers();
+  const person = await signedInPerson(h);
+  const step = nextStep(person, person ? confirmEmailLater(h, person.id) : false);
   if (step) redirect(step);
   return person!;
 }
