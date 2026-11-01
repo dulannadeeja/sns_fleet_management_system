@@ -15,6 +15,7 @@ export async function firstSignInAction(_: FirstSignInState, form: FormData): Pr
   });
   if ('error' in result) {
     if (result.error === 'signedOut') redirect('/sign-in');
+    if (result.error === 'notNeeded') redirect('/');
     return { error: result.error };
   }
   // The language can change here; refresh the root layout too, so <html lang> follows (the layout is otherwise kept).

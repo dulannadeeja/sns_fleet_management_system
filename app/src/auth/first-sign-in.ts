@@ -1,6 +1,6 @@
-import { eq } from 'drizzle-orm';
+import { and, eq, ne } from 'drizzle-orm';
 import { db } from '../db/client';
-import { user } from '../db/schema';
+import { account, session, user } from '../db/schema';
 import { auth, MIN_PASSWORD, type Session } from './server';
 
 // ST-01.2 First sign-in: a first (or reset) password is replaced before anything else; the person picks their language.
@@ -9,8 +9,11 @@ export type SignedInPerson = Session['user'];
 
 /** The signed-in person for these request headers, or null. */
 export async function signedInPerson(headers: Headers): Promise<SignedInPerson | null> {
-  const session = await auth.api.getSession({ headers, query: { disableCookieCache: true } });
-  return session?.user ?? null;
+  return (await signedInSession(headers))?.user ?? null;
+}
+
+async function signedInSession(headers: Headers): Promise<Session | null> {
+  return auth.api.getSession({ headers, query: { disableCookieCache: true } });
 }
 
 /** Where a person must go before anything else: sign-in, first sign-in, or nowhere (null). */
@@ -20,16 +23,25 @@ export function nextStep(person: Pick<SignedInPerson, 'mustChangePassword'> | nu
   return null;
 }
 
-export type SetOwnPasswordResult = { ok: true } | { error: 'signedOut' | 'tooShort' | 'notSame' };
+export type SetOwnPasswordResult = { ok: true } | { error: 'signedOut' | 'notNeeded' | 'tooShort' | 'notSame' };
 
-/** Replaces the first or reset password with the person's own, saves their language and lets them in. */
+/**
+ * Replaces the first or reset password with the person's own, saves their language and lets them in (ST-01.2, AT-46).
+ * Only while the account still has a first or reset password: changing an own password would need the current one.
+ * One transaction: the password, the flag and the language, and every other session of the person is ended.
+ */
 export async function setOwnPassword(headers: Headers, input: { password: string; repeat: string; language: Language }): Promise<SetOwnPasswordResult> {
-  const person = await signedInPerson(headers);
-  if (!person) return { error: 'signedOut' };
+  const current = await signedInSession(headers);
+  if (!current) return { error: 'signedOut' };
+  if (!current.user.mustChangePassword) return { error: 'notNeeded' };
   if (input.password.length < MIN_PASSWORD) return { error: 'tooShort' };
   if (input.password !== input.repeat) return { error: 'notSame' };
-  const ctx = await auth.$context;
-  await ctx.internalAdapter.updatePassword(person.id, await ctx.password.hash(input.password));
-  await db.update(user).set({ mustChangePassword: false, language: input.language === 'en' ? 'en' : 'si', updatedAt: new Date() }).where(eq(user.id, person.id));
+  const hash = await (await auth.$context).password.hash(input.password);
+  const id = current.user.id;
+  await db.transaction(async (tx) => {
+    await tx.update(account).set({ password: hash, updatedAt: new Date() }).where(and(eq(account.userId, id), eq(account.providerId, 'credential')));
+    await tx.update(user).set({ mustChangePassword: false, language: input.language === 'en' ? 'en' : 'si', updatedAt: new Date() }).where(eq(user.id, id));
+    await tx.delete(session).where(and(eq(session.userId, id), ne(session.token, current.session.token)));
+  });
   return { ok: true };
 }

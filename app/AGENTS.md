@@ -19,7 +19,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 | Migrations | change `src/db/schema/`, then `npm run db:generate` and review the SQL; a rule SQL alone (a trigger) is `npx drizzle-kit generate --custom --name <what>`; apply with `npm run db:migrate`. Tests apply them by themselves |
 | Build (checks Sinhala and English have the same words first) | `npm run build` |
 | Dev server (needs `.env.local`, below) | `npm run dev` |
-| Add a person with a first password (until the People screen, #15) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX` (asks for the password; never printed) |
+| Add a person with a first password (until the People screen, #15) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX` (asks for the password; it shows while typed, and is never printed or logged) |
 
 ## Settings (`app/.env.local`, git-ignored, never committed)
 - `DATABASE_URL`: the database the dev server uses. Tests and browser journeys use the test database on port 5433 by themselves.
@@ -32,8 +32,10 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 
 ## Sign-in (`src/auth/`, Better Auth)
 - `server.ts` is the one Better Auth set-up: phone number and password, 8+ characters, 5 wrong tries lock the account for 15 minutes (hooks, per account). No self sign-up.
-- Every signed-in page starts with `requireUser()` (`src/auth/require.ts`): no session → `/sign-in`; a first or reset password → `/first-sign-in`. Nothing else opens until the person sets their own password.
-- The signed-in person's saved language picks `si` or `en` (`src/i18n/request.ts`); Sinhala when signed out. An action that can change the language calls `revalidatePath('/', 'layout')` before `redirect`, so `<html lang>` follows.
+- Only three Better Auth paths are open: phone sign-in, sign-out and get-session (`OPEN_PATHS`). Every other path answers 404, so nothing checks a password outside the lock. Opening one (email codes, #28) needs its own lock test.
+- Each try is counted before the password is checked, in one `update … where not locked`, so parallel tries still get at most 5 checks.
+- Every signed-in page starts with `requireUser()` (`src/auth/require.ts`): no session → `/sign-in`; a first or reset password → `/first-sign-in`. Nothing else opens until the person sets their own password (a *Proposed* check in ST-01.2, built here).
+- The signed-in person's saved language picks `si` or `en` (`src/i18n/request.ts`); before sign-in, the sign-in page's switch (a cookie); otherwise Sinhala. An action that can change the language calls `revalidatePath('/', 'layout')` before `redirect`, so `<html lang>` follows.
 - People without an email get a placeholder `<id>@no-email.invalid`; nothing is ever sent to it.
 
 ## Rules (details in TRD › Integrity rules)
