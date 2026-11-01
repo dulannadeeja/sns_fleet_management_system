@@ -17,6 +17,7 @@ const noSideScroll = (page: Page) => page.evaluate(() => document.documentElemen
 test('ST-15.3: staff read the rules; the owner changes a setting, checks old → new, and the log keeps it', async ({ page, browser }, info) => {
   test.setTimeout(90_000);
   // Desktop changes the payroll reminder; phone the service km (each its own, put back at the end).
+  // Only the value a form changes is saved, so the two projects never undo each other (#17 review).
   const mine = info.project.name === 'phone'
     ? { key: 'serviceReminderKm', label: 'Service by km', name: 'service reminder (km)', unit: (n: string) => `${Number(n).toLocaleString('en-US')} km`, other: (n: string) => (n === '600' ? '700' : '600') }
     : { key: 'payrollReminderDays', label: 'Payroll', name: 'payroll reminder', unit: (n: string) => `${n} days`, other: (n: string) => (n === '5' ? '6' : '5') };
@@ -42,12 +43,14 @@ test('ST-15.3: staff read the rules; the owner changes a setting, checks old →
   await staff.locator('a[href="/settings/business-rules"]').first().click();
   await expect(staff.locator('[data-group="reminders"]')).toBeVisible();
   await expect(staff.locator('a[href^="/settings/business-rules/"]')).toHaveCount(0);
+  await expect(staff.getByText('SNS commission')).toHaveCount(0); // partner terms: not for staff
   expect((await staff.goto('/settings/business-rules/reminders'))?.status()).toBe(403);
   await staff.close();
 
   // The owner opens the reminders group from 15.2.
   await page.goto('/settings/business-rules');
   await expect(page.getByRole('heading', { name: 'Owner settings' })).toBeVisible();
+  await expect(page.getByText('SNS commission')).toBeVisible();
   expect(await noSideScroll(page)).toBe(false);
   await page.locator('a[href="/settings/business-rules/reminders"]').click();
   await expect(page).toHaveURL(/\/settings\/business-rules\/reminders$/);

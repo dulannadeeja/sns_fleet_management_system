@@ -19,6 +19,7 @@ export function ChangeForm({ group, fields, w, lang }: { group: string; fields: 
   return (
     <form action={action} noValidate className="set-card" style={{ gap: 18 }}>
       {formError ? <Notice tone="danger">{w.formErrors[formError] ?? w.formErrors.failed}</Notice> : null}
+      {fields.map((f) => <input key={f.key} type="hidden" name={`was.${f.key}`} value={f.saved} />)}
       <div className="set-fields">
         {fields.map((f) => {
           const code = state.errors?.[f.key];

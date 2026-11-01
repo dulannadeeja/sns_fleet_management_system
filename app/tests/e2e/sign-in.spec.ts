@@ -57,7 +57,8 @@ test('ST-01.1: each box says exactly what is wrong with what was typed', async (
 
 test('a wrong password shows the message and stays on sign in', async ({ page }) => {
   await signIn(page, '0700000000', 'not-the-password');
-  await expect(page.getByRole('alert')).toBeVisible();
+  // The message box only: Next.js's own route announcer is also an alert (#17, seen in a full run).
+  await expect(page.locator('.rt-notice[role="alert"]')).toBeVisible();
   await expect(page).toHaveURL(/\/sign-in$/);
 });
 

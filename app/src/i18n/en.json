@@ -275,7 +275,7 @@
       "change": "Change",
       "notSet": "not set yet",
       "setNow": "Set now",
-      "footer": "Every rule here is agreed by the owner. A new rule is recorded in the system design before it appears here. Each change to an owner setting is in the activity log, with the old and new values.",
+      "footer": "Every rule under “Set now” is agreed by the owner; changing the owner settings here is proposed, for the owner to confirm. A new rule is recorded in the system design before it appears here. Each change to an owner setting is in the activity log, with the old and new values.",
       "groups": {
         "dayTimes": {
           "title": "Rental day times",
@@ -360,7 +360,8 @@
         "range": "Must be {min} to {max}.",
         "time": "Pick a time.",
         "notAllowed": "Only the owner can change settings.",
-        "failed": "Not saved. Try again."
+        "failed": "Not saved. Try again.",
+        "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change."
       },
       "rows": {
         "extraKm": {
@@ -395,7 +396,7 @@
         },
         "expiredDocuments": {
           "title": "Expired insurance or licence",
-          "note": "warns everyone; going ahead needs an authorised person and a reason",
+          "note": "warns staff; going ahead needs an authorised person and a reason",
           "value": "authorised override"
         },
         "plannedService": {
@@ -415,8 +416,8 @@
         },
         "commission": {
           "title": "SNS commission",
-          "note": "default 15% · changed on the partner",
-          "value": "set per partner"
+          "note": "default 15% · changed on the car",
+          "value": "set per car"
         },
         "garageDay": {
           "title": "Garage-day charge",

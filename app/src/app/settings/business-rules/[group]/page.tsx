@@ -29,7 +29,7 @@ export default async function ChangeSettingPage({ params }: { params: Promise<{ 
   const w: ChangeWords = {
     check: t('check'), noChange: t('noChange'), changeLine: t.raw('changeLine') as string, logNote: t('logNote'), save: t('save'), cancel: t('cancel'),
     days: t.raw('days') as string, km: t.raw('km') as string, rupees: t.raw('rupees') as string, notSet: t('notSet'),
-    formErrors: { notAllowed: t('errors.notAllowed'), failed: t('errors.failed') },
+    formErrors: { notAllowed: t('errors.notAllowed'), failed: t('errors.failed'), stale: t('errors.stale') },
   };
   return (
     <SettingsFrame person={person} active="rules" subtitle={t(`groups.${group}.title`)} backHref="/settings/business-rules">

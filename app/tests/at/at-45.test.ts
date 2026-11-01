@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { and, desc, eq } from 'drizzle-orm';
 import { db } from '../../src/db/client';
-import { auditEvent } from '../../src/db/schema';
+import { auditEvent, user } from '../../src/db/schema';
 import { accessFor } from '../../src/auth/access';
 import { SETTINGS, changeGroup, readSettings } from '../../src/modules/settings/settings';
 import { signedInSample, theOwner } from '../helpers/people';
@@ -10,7 +10,7 @@ import { signedInSample, theOwner } from '../helpers/people';
 // 30 days, with the starting reminder settings: it appears in Upcoming work; the owner can change how early."
 // System design 11 (reminders, Confirmed) and 3.2 "Owner settings" (Proposed: Dulan, 1 Nov 2026).
 // Settings are shared by the whole test database: this file alone changes the insurance and licence reminder, and puts
-// back what it found.
+// back what it found. Only the value a form changes is saved, so the other reminders are never written here.
 describe('AT-45 (settings part, partial): the owner can change how early the insurance reminder starts', () => {
   it('starts at 30 days; the owner changes it; the log keeps the old and new values', async () => {
     expect(SETTINGS.documentReminderDays.start).toBe(30);
@@ -18,11 +18,8 @@ describe('AT-45 (settings part, partial): the owner can change how early the ins
     const before = (await readSettings()).documentReminderDays;
     const next = before === 45 ? 46 : 45;
     try {
-      const current = await readSettings();
-      const result = await changeGroup(owner, 'reminders', {
-        documentReminderDays: String(next), serviceReminderDays: String(current.serviceReminderDays),
-        serviceReminderKm: String(current.serviceReminderKm), payrollReminderDays: String(current.payrollReminderDays),
-      });
+      const was = await asForm();
+      const result = await changeGroup(owner, 'reminders', { ...was, documentReminderDays: String(next) }, was);
       expect(result).toEqual({ ok: true, changed: ['documentReminderDays'] });
       expect((await readSettings()).documentReminderDays).toBe(next);
       const [entry] = await db.select().from(auditEvent)
@@ -30,7 +27,8 @@ describe('AT-45 (settings part, partial): the owner can change how early the ins
         .orderBy(desc(auditEvent.createdAt)).limit(1);
       expect(entry.details).toEqual({ key: 'documentReminderDays', old: String(before), new: String(next) });
     } finally {
-      await changeGroup(owner, 'reminders', { ...(await asForm()), documentReminderDays: String(before) });
+      const was = await asForm();
+      await changeGroup(owner, 'reminders', { ...was, documentReminderDays: String(before) }, was);
     }
     expect((await readSettings()).documentReminderDays).toBe(before);
   });
@@ -40,8 +38,16 @@ describe('AT-45 (settings part, partial): the owner can change how early the ins
       const p = await signedInSample(role);
       expect((await accessFor(p.headers, 'employee')).kind).toBe('allowed');
       expect((await accessFor(p.headers, 'owner')).kind).toBe('denied');
-      expect(await changeGroup(p.id, 'reminders', { ...(await asForm()), documentReminderDays: '60' })).toEqual({ error: 'notAllowed' });
+      const was = await asForm();
+      expect(await changeGroup(p.id, 'reminders', { ...was, documentReminderDays: '60' }, was)).toEqual({ error: 'notAllowed' });
     }
+  });
+
+  it('a partner cannot even read them', async () => {
+    // Partner accounts come with Partners (#15); a sample staff account turned into a partner stands in for one.
+    const p = await signedInSample('staff');
+    await db.update(user).set({ role: 'partner' }).where(eq(user.id, p.id));
+    expect((await accessFor(p.headers, 'employee')).kind).toBe('denied');
   });
 });
 

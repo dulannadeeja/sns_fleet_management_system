@@ -1523,8 +1523,8 @@
  {
   "name": "15-Settings-BusinessRules-Desktop",
   "w": 1280,
-  "canvasH": 1715,
-  "contentH": 1715,
+  "canvasH": 1737,
+  "contentH": 1737,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1532,8 +1532,8 @@
  {
   "name": "15-Settings-BusinessRules-Phone",
   "w": 390,
-  "canvasH": 2883,
-  "contentH": 2883,
+  "canvasH": 2905,
+  "contentH": 2905,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

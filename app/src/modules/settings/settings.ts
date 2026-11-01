@@ -72,25 +72,37 @@ export function checkGroup(group: Group, input: Record<string, string>):
   return Object.keys(errors).length ? { ok: false, errors } : { ok: true, values };
 }
 
-export type ChangeResult = { ok: true; changed: SettingKey[] } | { error: 'notAllowed' } | { error: 'invalid'; errors: Record<string, FieldError> };
+export type ChangeResult =
+  | { ok: true; changed: SettingKey[] }
+  | { error: 'notAllowed' }
+  | { error: 'invalid'; errors: Record<string, FieldError> }
+  | { error: 'stale'; keys: SettingKey[] };
 
 /**
- * The owner saves one group (15.7). Only the primary owner, checked again in the transaction; only values that differ
- * are saved, each with one activity-log entry holding the old and new values (PR-05). Nothing is saved on a mistake.
+ * The owner saves one group (15.7). `input` is what the form holds now; `was` is what it showed when it was opened.
+ * Only the values the owner changed (input differs from was) are saved, so a form left open never puts back an older
+ * value; if someone saved one of them meanwhile, nothing is saved ("stale") and the owner sees the new value first.
+ * Only the primary owner, checked again in the transaction; each saved value gets one activity-log entry with the old
+ * and new values (PR-05). Nothing is saved on a mistake.
  */
-export async function changeGroup(actorId: string, group: Group, input: Record<string, string>): Promise<ChangeResult> {
+export async function changeGroup(actorId: string, group: Group, input: Record<string, string>, was: Record<string, string>): Promise<ChangeResult> {
   const checked = checkGroup(group, input);
   if (!checked.ok) return { error: 'invalid', errors: checked.errors };
   return db.transaction(async (tx) => {
     const [actor] = await tx.select({ role: user.role, disabledAt: user.disabledAt }).from(user).where(eq(user.id, actorId));
     if (actor?.role !== 'owner' || actor.disabledAt) return { error: 'notAllowed' } as const;
-    const keys = keysOf(group);
-    // Lock the group's saved rows so two saves at once each see the other's value as "old".
-    const saved = new Map((await tx.select({ key: setting.key, value: setting.value }).from(setting)
-      .where(inArray(setting.key, keys)).for('update')).map((r) => [r.key, r.value]));
+    // One save at a time, also for settings with no row yet (a row lock would not cover those), so each log entry's
+    // "old" is the value really replaced (#17 review).
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext('sns.setting'))`);
+    const keys = keysOf(group).filter((k) => checked.values[k] !== String(was[k] ?? '').trim());
+    const saved = new Map((keys.length ? await tx.select({ key: setting.key, value: setting.value }).from(setting).where(inArray(setting.key, keys)) : [])
+      .map((r) => [r.key, r.value]));
+    const current = (key: SettingKey) => saved.get(key) ?? asText(SETTINGS[key].start);
+    const stale = keys.filter((k) => current(k) !== String(was[k] ?? '').trim());
+    if (stale.length) return { error: 'stale', keys: stale } as const;
     const changed: SettingKey[] = [];
     for (const key of keys) {
-      const old = saved.get(key) ?? asText(SETTINGS[key].start);
+      const old = current(key);
       const next = checked.values[key];
       if (old === next) continue;
       await tx.insert(setting).values({ key, value: next, updatedBy: actorId })

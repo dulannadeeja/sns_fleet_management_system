@@ -1,11 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { GROUPS, SETTINGS, changeGroup, checkGroup, readSettings } from '../src/modules/settings/settings';
+import { GROUPS, SETTINGS, asText, changeGroup, checkGroup, readSettings } from '../src/modules/settings/settings';
 import { theOwner } from './helpers/people';
 
 // ST-15.3 Business rules: the owner settings, their limits and the check before saving (system design 3.2 "Owner
-// settings", Proposed: Dulan, 1 Nov 2026). Only the fuel price is changed here (AT-45 changes the insurance reminder),
-// and it is put back afterwards; the day times are only checked, never saved, since other tests may read them.
+// settings", Proposed: Dulan, 1 Nov 2026). Settings are shared by the whole test database: this file saves only the
+// service reminder in days (AT-45 changes the insurance reminder, the browser test the payroll reminder and the
+// service km) and puts it back; the fuel price is never saved here, so it stays as the database has it.
 const reminders = { documentReminderDays: '30', serviceReminderDays: '7', serviceReminderKm: '500', payrollReminderDays: '3' };
+const remindersNow = async () => {
+  const s = await readSettings();
+  return { documentReminderDays: asText(s.documentReminderDays), serviceReminderDays: asText(s.serviceReminderDays), serviceReminderKm: asText(s.serviceReminderKm), payrollReminderDays: asText(s.payrollReminderDays) };
+};
 
 describe('ST-15.3: owner settings', () => {
   it('has the agreed starting values and three groups', () => {
@@ -34,17 +39,26 @@ describe('ST-15.3: owner settings', () => {
     expect(checkGroup('nothing' as never, {}).errors).toEqual({ group: 'unknown' });
   });
 
-  it('saves only what changed, and nothing for an unchanged form or a mistake', async () => {
+  it('saves only what the owner changed; a form left open never puts back an older value (#17 review)', async () => {
     const owner = await theOwner();
-    const before = (await readSettings()).fuelPricePerLitre;
-    const next = before === 370 ? 371 : 370;
+    const opened = await remindersNow(); // two tabs open the reminders page
+    const before = opened.serviceReminderDays;
+    const next = before === '8' ? '9' : '8';
     try {
-      expect(await changeGroup(owner, 'fuel', { fuelPricePerLitre: '0' })).toEqual({ error: 'invalid', errors: { fuelPricePerLitre: 'range' } });
-      expect(await changeGroup(owner, 'fuel', { fuelPricePerLitre: String(next) })).toEqual({ ok: true, changed: ['fuelPricePerLitre'] });
-      expect(await changeGroup(owner, 'fuel', { fuelPricePerLitre: String(next) })).toEqual({ ok: true, changed: [] });
-      expect((await readSettings()).fuelPricePerLitre).toBe(next);
+      expect(await changeGroup(owner, 'fuel', { fuelPricePerLitre: '0' }, { fuelPricePerLitre: '' })).toEqual({ error: 'invalid', errors: { fuelPricePerLitre: 'range' } });
+      expect(await changeGroup(owner, 'reminders', opened, opened)).toEqual({ ok: true, changed: [] }); // nothing changed
+      // Tab A saves the service days.
+      expect(await changeGroup(owner, 'reminders', { ...opened, serviceReminderDays: next }, opened)).toEqual({ ok: true, changed: ['serviceReminderDays'] });
+      // Tab B, opened before, saves nothing new: the service days it still shows are not put back.
+      expect(await changeGroup(owner, 'reminders', opened, opened)).toEqual({ ok: true, changed: [] });
+      expect((await readSettings()).serviceReminderDays).toBe(Number(next));
+      // Tab B now changes the service days too: refused, since it shows an old value; nothing is saved.
+      expect(await changeGroup(owner, 'reminders', { ...opened, serviceReminderDays: '12' }, opened)).toEqual({ error: 'stale', keys: ['serviceReminderDays'] });
+      expect((await readSettings()).serviceReminderDays).toBe(Number(next));
     } finally {
-      if (before !== null) await changeGroup(owner, 'fuel', { fuelPricePerLitre: String(before) });
+      const now = await remindersNow();
+      await changeGroup(owner, 'reminders', { ...now, serviceReminderDays: before }, now);
     }
+    expect(asText((await readSettings()).serviceReminderDays)).toBe(before);
   });
 });
