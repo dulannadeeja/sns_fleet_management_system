@@ -57,6 +57,20 @@
       "when": 1793525180630,
       "tag": "0007_permission_grant_id",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793531765811,
+      "tag": "0008_email_codes",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793531766855,
+      "tag": "0009_email_codes_app_role",
+      "breakpoints": true
     }
   ]
 }

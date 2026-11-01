@@ -50,11 +50,12 @@ describe('AT-60: 5 wrong passwords lock the account for 15 minutes', () => {
     expect((await signIn(p.phone, p.password)).status).toBe(429);
   });
 
-  it('no other way to check a password is open (email sign-in, resets, password change)', async () => {
+  it('no other way to check a password is open (email sign-in, password change, other code paths)', async () => {
     const p = await samplePerson();
     const email = (await person(p.id)).email;
     await expect(auth.api.signInEmail({ body: { email, password: p.password } })).rejects.toThrow();
-    for (const path of ['/sign-in/email', '/request-password-reset', '/reset-password', '/change-password', '/phone-number/send-otp', '/phone-number/request-password-reset']) {
+    // The email reset paths are open since #28, but their link only ever goes to a confirmed owner or admin email.
+    for (const path of ['/sign-in/email', '/change-password', '/phone-number/send-otp', '/phone-number/request-password-reset', '/two-factor/enable', '/two-factor/verify-totp']) {
       const res = await auth.handler(new Request(`http://localhost:3000/api/auth${path}`, { method: 'POST', headers: { 'content-type': 'application/json', origin: 'http://localhost:3000' }, body: JSON.stringify({ email, password: p.password, phoneNumber: p.phone }) }));
       expect(res.status, path).toBe(404);
     }
