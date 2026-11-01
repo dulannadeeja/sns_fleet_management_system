@@ -22,6 +22,12 @@ describe('the app role on the sign-in tables', () => {
     await expect(asAppRole('select count(*) from "user"')).resolves.toBeTruthy();
     await expect(asAppRole("delete from session where false")).resolves.toBeTruthy();
   });
+  it('may count wrong tries, lock, change a password and add a person', async () => {
+    await expect(asAppRole('update "user" set failed_sign_ins = failed_sign_ins, locked_until = locked_until, must_change_password = must_change_password, language = language where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update account set password = password where false')).resolves.toBeTruthy();
+    await expect(asAppRole('insert into account select * from account where false')).resolves.toBeTruthy();
+    await expect(asAppRole('insert into "user" select * from "user" where false')).resolves.toBeTruthy();
+  });
   it('may not delete a person or a password row', async () => {
     await expect(asAppRole('delete from "user" where false')).rejects.toThrow(/permission denied/);
     await expect(asAppRole('delete from account where false')).rejects.toThrow(/permission denied/);

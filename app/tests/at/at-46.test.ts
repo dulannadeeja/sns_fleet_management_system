@@ -40,4 +40,22 @@ describe('AT-46 (sign-in half): the first or reset password is changed at the ne
   it('refuses without a signed-in person', async () => {
     expect(await setOwnPassword(new Headers(), { password: 'my-own-pass', repeat: 'my-own-pass', language: 'si' })).toEqual({ error: 'signedOut' });
   });
+
+  it('refuses on an account that already has its own password (that needs the current password)', async () => {
+    const p = await samplePerson();
+    const headers = await sessionHeaders(p.phone, p.password);
+    expect(await setOwnPassword(headers, { password: 'my-own-pass', repeat: 'my-own-pass', language: 'si' })).toEqual({ ok: true });
+    expect(await setOwnPassword(headers, { password: 'taken-over-1', repeat: 'taken-over-1', language: 'si' })).toEqual({ error: 'notNeeded' });
+    expect((await signIn(p.phone, 'my-own-pass')).status).toBe(200);
+  });
+
+  it('signs the person out everywhere else when the password is set', async () => {
+    const p = await samplePerson();
+    const other = await sessionHeaders(p.phone, p.password);
+    const headers = await sessionHeaders(p.phone, p.password);
+    expect(await setOwnPassword(headers, { password: 'my-own-pass', repeat: 'my-own-pass', language: 'si' })).toEqual({ ok: true });
+    expect(await signedInPerson(other)).toBeNull();
+    expect(await signedInPerson(headers)).not.toBeNull();
+  });
 });
+
