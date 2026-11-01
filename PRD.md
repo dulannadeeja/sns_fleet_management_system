@@ -64,7 +64,7 @@ Agreed with Dulan, 26 Oct 2026.
 | Module | Screens | Phase | Section |
 | --- | --- | --- | --- |
 | 01 Start | 01.1–01.7 | 1 | [01 Start](#01-start) |
-| 15 Settings | 15.1–15.6 | 1 | [15 Settings](#15-settings) |
+| 15 Settings | 15.1–15.7 | 1 | [15 Settings](#15-settings) |
 | 08 Customers | 08.1–08.5 | 1 | [08 Customers](#08-customers) |
 | 04 Cars | 04.1–04.7 | 1 | [04 Cars](#04-cars) |
 | 11 Partners: owners | 11.1–11.3 | 1 | [11 Partners: owners](#11-partners-owners) |
@@ -246,14 +246,15 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 
 - **Status:** Confirmed.
 - **Phase:** 1.
-- **Roles:** Owner changes owner settings; everyone with settings access sees them.
+- **Roles:** Owner changes owner settings; the owner, the admin and staff see them; partners do not (Proposed: Dulan, 1 Nov 2026; for the owner to confirm).
 - **Story:** As the owner, I see the business rules in force and I change the settings that are mine, so that everyone works to the same rules.
 - **Rules:**
   - Set now: extra-km rates per car, starting at LKR 17 to 27 a km by type (System design → [Initial defaults](SNS_SYSTEM_DESIGN.md#41-initial-defaults)); fuel price per litre, an owner setting with no agreed figure ([Optional and excluded scope](SNS_SYSTEM_DESIGN.md#16-optional-and-excluded-scope)); staff see the expected drawer cash first, then type what they count ([Cash drawer and daily reconciliation](SNS_SYSTEM_DESIGN.md#9-cash-drawer-and-daily-reconciliation)); expired insurance or licence warns, and going ahead needs an authorised person and a reason; any garage visit is Under repair; reminder lead times, starting at 30 days for insurance and licence, 7 days or 500 km for service and 3 days for payroll, changeable by the owner ([Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability)); no late fee runs on its own, staff decide ([Early and late return](SNS_SYSTEM_DESIGN.md#74-early-and-late-return)); partners cash out any day, to the bank or in cash at the branch ([Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out)); SNS commission per partner car, default 15%; garage-day charge LKR 5,000 a day per car ([Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings)).
   - No decision is left open. A rule the owner adds later is recorded in the system design before it appears here.
   - Every change to a setting is recorded with who, when, and the old and new values (PR-05).
-- **Checks:** AT-45 "A car's insurance expires in 30 days, with the starting reminder settings: it appears in Upcoming work; the owner can change how early" (the reminders themselves are Phase 3).
-- **Screens:** 15.2 Business rules.
+  - The owner changes the business-wide settings here in three groups: rental day times (pickup cutoff, return deadline), reminders, fuel price. Each has its own short form that shows old → new before saving. Limits: reminder days 1 to 90, service km 100 to 5,000, fuel price LKR 1 to 2,000 a litre, times to the minute; the fuel price is "not set" until the owner sets it. Per-car and per-partner settings are changed on that car or partner. A changed cutoff or deadline applies to new rentals only (PR-08). *Proposed: Dulan, 1 Nov 2026; for the owner to confirm.* System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
+- **Checks:** AT-45 "A car's insurance expires in 30 days, with the starting reminder settings: it appears in Upcoming work; the owner can change how early" (the reminders themselves are Phase 3). *Proposed check:* the owner changes a setting; the activity log shows who, when, and the old and new values; the admin and staff can read the page but not change it, also when calling the server directly.
+- **Screens:** 15.2 Business rules, 15.7 Change a setting.
 - **Decided:** shown here as set now: DN-04 (garage days for damage only, admin approves), DN-06 (fuel not counted by default, same level per rental), DN-11 (staff close the day, or 11:59 PM), DN-12 (cash leaving the drawer), DN-15 (payroll deductions), DN-16 (SNS earnings and profit before depreciation).
 
 #### ST-15.4 · Activity log

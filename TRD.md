@@ -81,7 +81,7 @@ Tables follow the system design's core records (Logical structure, Core records 
 | Expenses | `expense` (category, car, who bears it, paid by) |
 | Maintenance and checks | `maintenance_record`, `reminder`, `vehicle_check`, `vehicle_check_item` |
 | Payroll | `payroll_period`, `payroll_entry`, `payroll_adjustment`, `employee_loan`, `salary_payment` |
-| Decisions | `approval` (kind, requester, approver, self-approved, reason, note), `setting` (owner settings: cutoff, deadline, reminder lead times, fuel price) |
+| Decisions | `approval` (kind, requester, approver, self-approved, reason, note), `setting` (owner settings: cutoff, deadline, reminder lead times, fuel price; one row per key with its value, who changed it and when; built-in starting values until the owner changes one) |
 | Starting data | `import_batch` (approved_by, approved_at); every imported row carries `import_batch_id` and shows "Imported" |
 
 ## 5. Integrity rules and how they are enforced
@@ -111,6 +111,7 @@ Each row implements a rule from the system design; the AT that proves it is list
 - **Trusted devices:** the two-factor plugin's signed device cookie, 30 days from the last code-free sign-in on that device; codes are stored hashed.
 - **Turning an account off** revokes its sessions at once (AT-47).
 - **Permissions** are SNS's own table (`permission_grant`), seeded from the defaults table; only the primary owner may change permissions, add people or turn accounts off (AT-58). Approvals refuse a person approving their own request, except the owner, whose own is marked self-approved (AT-57).
+- **Owner settings** are changed only by the primary owner (`requireOwner`), checked again in the transaction that saves the value and writes the activity-log entry with the old and new values; the owner, the admin and staff can read them (ST-15.3, AT-45 settings part).
 
 ## 7. Documents and PDFs
 

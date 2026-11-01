@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>15.7 Change a setting · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+.m-row{grid-template-columns:minmax(0,1fr) fit-content(55%)!important;gap:2px 12px!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important}
+.m-row>*{grid-column:1;text-align:left!important;min-width:0}
+.m-row>:last-child{overflow-wrap:anywhere;grid-column:2;grid-row:1/span 8;align-self:center;text-align:right!important}
+.m-row>:nth-child(n+3):not(:last-child){font-size:14px!important;line-height:22px;color:var(--ink-muted)}
+.m-head{display:none!important}
+.m-g4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.m-g3{grid-template-columns:minmax(0,1fr)!important}
+.m-g1{grid-template-columns:minmax(0,1fr)!important}
+.m-lbl{color:var(--ink-muted);font-weight:400}
+.m-row.m-lastwide>:last-child{grid-column:1/-1;grid-row:auto;text-align:left!important;justify-self:start}
+.m-body h2{font-size:20px!important}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 844px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="15-Settings-BusinessRules-Phone.dc.html" title="Change a setting" subtitle="සැකසුම් · Settings"></x-import>
+  <div class="m-body" style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px; min-width: 0"><div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 0 1 300px; min-width: 280px"><nav aria-label="Settings" style="display: flex; flex-direction: column; gap: 4px; padding: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 16px"><a href="15-Settings-Permissions-Phone.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="users" size="{{twenty}}"></x-import>අවසර <span class="rt-en">· Permissions</span></a><a href="15-Settings-People-Phone.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="idcard" size="{{twenty}}"></x-import>සේවකයෝ <span class="rt-en">· People</span></a><a href="15-Settings-BusinessRules-Phone.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; background: var(--sapphire-tint); color: var(--sapphire-strong); font-weight: 600; font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="file" size="{{twenty}}"></x-import>නීති <span class="rt-en">· Business rules</span></a><a href="04-Cars-Packages-Phone.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="car" size="{{twenty}}"></x-import>වාහන <span class="rt-en">· Cars and packages</span></a><a href="11-Partners-PartnerOwners-Phone.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="handshake" size="{{twenty}}"></x-import>Partners <span class="rt-en">· Partners</span></a><a href="16-Documents-RentalAgreementSI.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="receipt" size="{{twenty}}"></x-import>ලියකියවිලි <span class="rt-en">· Printed documents</span></a><a href="15-Settings-ActivityLog-Phone.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none"><x-import component-from-global-scope="Plate.Icon" name="clock" size="{{twenty}}"></x-import>සිදු වූ දේ <span class="rt-en">· Activity log</span></a></nav></div>
+<div style="flex: 1 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px"><section style="display: flex; flex-direction: column; gap: 18px; padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; max-width: 760px"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">සිහිකැඳවීම් <span class="rt-en">· Reminders</span></h2><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">How early each reminder starts. Only the owner can change this.</div><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Insurance and licence</span><span style="display: flex; align-items: center; gap: 10px"><input inputmode="numeric" value="45" style="min-height: 52px; padding: 0 14px; border: 2px solid var(--sapphire); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; max-width: 160px"><span style="font-size: 15px; line-height: 24px">days before expiry</span></span><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">1 to 90 · was 30</div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Service by date</span><span style="display: flex; align-items: center; gap: 10px"><input inputmode="numeric" value="7" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; max-width: 160px"><span style="font-size: 15px; line-height: 24px">days before</span></span><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">1 to 90</div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Service by km</span><span style="display: flex; align-items: center; gap: 10px"><input inputmode="numeric" value="500" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; max-width: 160px"><span style="font-size: 15px; line-height: 24px">km before</span></span><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">100 to 5,000</div></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 16px; line-height: 26px; font-weight: 600">Payroll</span><span style="display: flex; align-items: center; gap: 10px"><input inputmode="numeric" value="3" style="min-height: 52px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%; max-width: 160px"><span style="font-size: 15px; line-height: 24px">days before payday</span></span><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">1 to 90</div></div></div><div style="display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 12px; background: var(--sapphire-tint)"><span style="font-size: 15px; line-height: 24px; font-weight: 600">බලන්න <span class="rt-en">· Check before saving</span></span><span class="rt-num" style="font-size: 15px; line-height: 24px">Insurance and licence: 30 days → 45 days</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Example change. Saving is recorded in the activity log with the old and new values.</span></div><div style="display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap"><a href="15-Settings-BusinessRules-Phone.dc.html" class="rt-btn rt-btn-quiet" style="box-sizing: border-box; text-decoration: none; color: var(--sapphire)"><span>අවලංගු · Cancel</span></a><a href="15-Settings-BusinessRules-Phone.dc.html" class="rt-btn rt-btn-primary" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{twenty}}"></x-import><span>Save කරන්න · Save</span></a></div><div style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">The other two groups open the same way: Rental day times (cutoff and deadline, any time to the minute; new rentals only) and Fuel price (LKR 1 to 2,000 a litre, whole rupees).</div></section></div>
+</div></div>
+  <x-import component-from-global-scope="Plate.BottomTabBar" tabs="{{tabsNav}}"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1590}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { tabsNav: [{"icon": "car", "label": "වාහන", "href": "02-Home-OwnerHome-Phone.dc.html"}, {"icon": "flag", "label": "අවධානයට", "href": "02-Home-NeedsAttention-Phone.dc.html", "badge": "2"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Phone.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Phone.dc.html", "badge": "3"}, {"icon": "more", "label": "තවත්", "href": "02-Home-OwnerMore-Phone.dc.html", "active": true}], yes: true, eighteen: 18, twenty: 20, twentytwo: 22, twentyfour: 24, twentysix: 26,
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railX: [{ icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' }, { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' }, { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'idcard', label: 'පඩි', href: '13-Payroll-Payroll-Phone.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html', active: true }]
+    };
+  }
+}
+</script>
+</body>
+</html>
