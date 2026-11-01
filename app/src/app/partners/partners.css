@@ -1,0 +1,17 @@
+/* 11.1 Partner owners, 11.2 Partner details, 11.3 Add a partner (boards 11.x). */
+.ptn-row { display: grid; grid-template-columns: 44px minmax(0, 1.4fr) repeat(3, minmax(0, 0.8fr)); gap: 12px; align-items: center; min-height: 64px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: 15px; line-height: 24px; }
+.ptn-row-head { min-height: 44px; border-top: 0; font-size: 14px; color: var(--ink-muted); font-weight: 600; }
+a.ptn-row:hover { background: var(--sunken); }
+.ptn-cars { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.ptn-car { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); cursor: pointer; }
+.ptn-car:has(input:checked) { border: 2px solid var(--sapphire); background: var(--sapphire-tint); }
+.ptn-car input { width: 20px; height: 20px; margin: 0; accent-color: var(--sapphire); }
+.ptn-terms { display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; }
+.ptn-terms h3 { margin: 0; font-size: 16px; line-height: 24px; font-weight: 600; }
+.ptn-line { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); }
+.ptn-line:first-of-type { border-top: 0; }
+@media (max-width: 699px) {
+  .ptn-row { grid-template-columns: 44px minmax(0, 1fr) auto; padding: 10px 16px; }
+  .ptn-row > :nth-child(3), .ptn-row > :nth-child(4) { display: none; }
+  .ptn-row-head { display: none; }
+}

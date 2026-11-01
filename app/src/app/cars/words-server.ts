@@ -16,5 +16,6 @@ export async function carWords(): Promise<CarWords> {
     newRentalsOnly: t('newRentalsOnly'), save: t('save'), saveChanges: t('saveChanges'), cancel: t('cancel'), car: t('car'),
     registration: t('registration'), registrationHint: t('registrationHint'), model: t('model'), modelHint: t('modelHint'), owner: t('owner'),
     sns: t('sns'), snsHint: t('snsHint'), partner: t('partner'), partnerHint: t('partnerHint'), requiredMark: ts('requiredMark'),
+    costs: t.raw('costs') as Record<string, string>, ownerPays: t('ownerPays.label'), ownerPaysNote: t('ownerPays.note'),
   };
 }

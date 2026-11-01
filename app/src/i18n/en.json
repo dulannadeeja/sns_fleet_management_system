@@ -268,6 +268,10 @@
         "car": {
           "add": "added the car {target}",
           "change": "changed the {field} of {target} from {old} to {new}"
+        },
+        "partner": {
+          "add": "added the partner {target}",
+          "agreementSigned": "recorded {target}’s agreement as signed on {date}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -679,6 +683,94 @@
       "failed": "Not saved. Try again."
     },
     "noChange": "Nothing changed yet.",
-    "range": "Whole number, {min} to {max}."
+    "range": "Whole number, {min} to {max}.",
+    "costs": {
+      "service": "Service",
+      "tyres": "Tyres",
+      "repairs": "Repairs",
+      "battery": "Battery"
+    },
+    "ownerPays": {
+      "label": "Owner pays for",
+      "name": "costs the owner pays",
+      "none": "none",
+      "note": "Anything not ticked is decided case by case by the admin."
+    },
+    "ownerPartnerNamed": "Partner · {name}"
+  },
+  "partners": {
+    "title": "Partner owners",
+    "add": "Add partner",
+    "cols": {
+      "owner": "Owner",
+      "cars": "Cars",
+      "commission": "Commission",
+      "account": "Account"
+    },
+    "carsCount": "{n, plural, one {# car} other {# cars}}",
+    "active": "Active",
+    "off": "Turned off",
+    "empty": "No partners yet.",
+    "unlinkedTitle": "Partner cars not linked to an owner",
+    "unlinkedNote": "Each partner gets one account for all their cars. Every partner car is linked to its owner before go-live.",
+    "unlinkedNone": "Every partner car has its owner.",
+    "details": "Partner details",
+    "owner": "Partner owner",
+    "call": "Call",
+    "cars": "Cars",
+    "termsLine": "{commission}% commission · cash-out any day · {costs}",
+    "costsNone": "costs decided case by case",
+    "costsPaid": "{costs} paid by the owner",
+    "account": "Account · {name}’s sign-in",
+    "accountNote": "One account for every car. {name} sees final earnings and cash-outs only; never today’s not-final amounts, other partners or customers’ details.",
+    "nic": "NIC",
+    "nicHint": "As on the card: 9 digits and V or X, or 12 digits.",
+    "phone": "Phone",
+    "phoneHint": "Used to sign in.",
+    "name": "Name",
+    "password": "First password",
+    "passwordHint": "At least 8 characters. Give it to the partner by hand; they change it when they first sign in. Nothing is sent.",
+    "bank": "Bank account · for cash-outs",
+    "bankHint": "Optional. Without it, cash-outs are paid in cash at the branch.",
+    "bankNone": "No bank account · cash-outs in cash at the branch",
+    "chooseCars": "Cars",
+    "chooseCarsHint": "Partner cars not linked to an owner yet. One account covers every car chosen.",
+    "noFreeCars": "No partner cars are waiting for an owner. Add the car first on Cars, as Partner.",
+    "termsFor": "Terms for {plate}",
+    "perDayNote": "Per day {rate} · set on the car, not here.",
+    "afterTitle": "After saving",
+    "after": [
+      "The partner gets a first password to change when they sign in.",
+      "The partner agreement is printed once the owner approves its wording. It is signed on paper; staff record the date.",
+      "Recorded in the activity log."
+    ],
+    "save": "Save partner",
+    "cancel": "Cancel",
+    "saved": "Saved.",
+    "agreement": "Partner agreement",
+    "agreementNote": "Printed, signed and kept on paper. Nothing waits on it.",
+    "notSigned": "Not yet recorded as signed · cash-outs are not held back.",
+    "signedOn": "Signed on {date}",
+    "signedLabel": "Signed on",
+    "record": "Record",
+    "printLater": "Printing comes once the owner approves the agreement wording.",
+    "startingBalance": "The starting balance owed on go-live day is loaded with the starting data.",
+    "errors": {
+      "notAllowed": "You may not do this.",
+      "notFound": "This partner was not found.",
+      "nameMissing": "Type the name.",
+      "phoneMissing": "Type the phone number.",
+      "phoneInvalid": "A Sri Lankan mobile number, 10 digits, starting 07.",
+      "phoneTaken": "This phone number already has an account.",
+      "passwordShort": "At least 8 characters.",
+      "nicInvalid": "9 digits and V or X, or 12 digits, as on the card.",
+      "nicTaken": "A partner with this NIC is already recorded.",
+      "bankTooLong": "At most 120 characters.",
+      "carsMissing": "Choose at least one car.",
+      "carsInvalid": "Each chosen car needs a commission from 0 to 100%.",
+      "carNotFree": "One of these cars was just linked to someone else. Open the page again.",
+      "dateInvalid": "Choose a date, not in the future.",
+      "failed": "Not saved. Try again."
+    }
   }
 }

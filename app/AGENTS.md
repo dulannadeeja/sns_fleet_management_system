@@ -1,6 +1,6 @@
 # app/: the SNS Rent Car application (rank 7)
 
-Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13); sign-in with phone number and password, lockout and the first password (#14); permissions and people (#15); emailed sign-in codes and email reset for the owner and admin (#28); the activity log screen (#16); business rules and owner settings (#17); cars, their package and terms (#18). Jobs come with the next Phase 1 tickets.
+Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13); sign-in with phone number and password, lockout and the first password (#14); permissions and people (#15); emailed sign-in codes and email reset for the owner and admin (#28); the activity log screen (#16); business rules and owner settings (#17); cars, their package and terms (#18); partner owners (#20). Jobs come with the next Phase 1 tickets.
 
 ## Layout
 `src/app/` routes by PRD module · `src/modules/<module>/` business rules and database access, no React · `src/db/` schema and SQL migrations · `src/ui/` Plate components · `src/documents/` printouts 16.1–16.7 · `src/jobs/` pg-boss jobs · `src/i18n/` `si.json`, `en.json` · `tests/at/` one test per AT-nn.
@@ -44,7 +44,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 - The catalogue has one key per row of system design 3.2, each with who starts with it. Adding people, changing permissions and turning accounts off or on are owner-only and never in it. A new row there means a new key here.
 - Pages and actions call `requirePermission(key)` or `requireOwner()` (`src/auth/require.ts`): a missing permission is a 403 (`forbidden()`, `src/app/forbidden.tsx`). The check itself is `accessFor(headers, key)` (`src/auth/access.ts`), which tests call directly (AT-24).
 - People changes (add, reset password, turn off/on, set permission) take the acting owner's id, check it again inside one transaction, and write `audit_event` there. A turned-off person has no sessions, cannot sign in (answered like a wrong password) and is refused everywhere.
-- Each module's own notes (activity log, owner settings, cars, and later ones) are in `src/modules/AGENTS.md`.
+- Each module's own notes (activity log, owner settings, cars, partners, and later ones) are in `src/modules/AGENTS.md`.
 - Browser tests sign in as the test database's one owner: `tests/e2e/owner-setup.ts` gives it a test password, turns codes off for it (test-only: many journeys sign in as it within a minute) and turns off sample people left from earlier runs. The code step is proved with a sample admin per project (`email.spec.ts`), reading emails from the test outbox.
 
 ## Rules (details in TRD › Integrity rules)

@@ -48,6 +48,7 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       old: showSetting(String(e.details?.key ?? ''), String(e.details?.old ?? ''), words, lang),
       new: showSetting(String(e.details?.key ?? ''), String(e.details?.new ?? ''), words, lang),
       field: '',
+      date: String(e.details?.signedOn ?? ''),
       // car.add and car.change: the plate, the term's name and its values with units (#18).
       ...(e.action.startsWith('car.') ? carValues(tCars, e) : {}),
     };

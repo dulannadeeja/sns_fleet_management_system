@@ -20,7 +20,7 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
   const title = lang === 'si' ? `${t('settings.title')} · ${en.settings.title}` : t('settings.title');
   return (
     <div className="set-desktop">
-      <NavRail labels={{ menu: t('frame.menu') }} items={railItems(person, 'settings', t, lang)} />
+      <NavRail labels={{ menu: t('frame.menu') }} items={railItems(person, 'settings', t, lang, { partners: await mayDo(person, 'seePartnerEarnings') })} />
       <div className="set-body">
         <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
         <div className="set-phone-head">
