@@ -14,7 +14,7 @@ import { auth, CODE_MINUTES, CODE_TRIES, forgetDevices } from '../../auth/server
 // activity-log entry, naming who did it (PR-05). Passwords are never written to the log.
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
+export type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 export type Language = 'si' | 'en';
 export type PeopleError =
   | 'notAllowed' | 'notFound' | 'nameMissing' | 'phoneMissing' | 'phoneInvalid' | 'phoneTaken'
@@ -34,6 +34,21 @@ async function log(tx: Tx, actorId: string | null, action: string, targetId: str
 
 async function hash(password: string): Promise<string> {
   return (await auth.$context).password.hash(password);
+}
+export const hashPassword = hash;
+
+/**
+ * A partner's sign-in account, inside the caller's transaction (ST-11.2; system design 3.2 "Partner accounts",
+ * Proposed): a first password to change at the first sign-in, no permissions (a partner sees only their own earnings),
+ * no email. The caller checks who may add partners and writes the activity log.
+ */
+export async function createPartnerAccount(tx: Tx, input: { name: string; phone: string; passwordHash: string; language?: Language }): Promise<{ id: string } | { error: 'phoneTaken' }> {
+  if ((await tx.select({ id: user.id }).from(user).where(eq(user.phoneNumber, input.phone))).length) return { error: 'phoneTaken' };
+  const [created] = await tx.insert(user).values({
+    name: input.name, email: `${randomUUID()}@no-email.invalid`, phoneNumber: input.phone, role: 'partner', language: input.language === 'en' ? 'en' : 'si',
+  }).returning({ id: user.id });
+  await tx.insert(account).values({ userId: created.id, accountId: created.id, providerId: 'credential', password: input.passwordHash });
+  return { id: created.id };
 }
 
 export interface NewPerson { name: string; phone: string; password: string; role: Role; language?: Language; email?: string }
@@ -201,10 +216,11 @@ export async function listPeople(): Promise<PersonRow[]> {
   return peopleQuery().where(sql`${user.role} <> 'partner'`).groupBy(user.id).orderBy(sql`${user.role} = 'owner' desc`, asc(user.name));
 }
 
-/** One person, or null for an unknown or malformed id. */
+/** One person, or null for an unknown or malformed id. A partner opens too (15.6, from 11.2): the owner resets their
+ *  password and turns their account off or on (system design 3.1; #20 review). */
 export async function getPerson(id: string): Promise<PersonRow | null> {
   if (!UUID.test(id)) return null;
-  return (await peopleQuery().where(and(eq(user.id, id), sql`${user.role} <> 'partner'`)).groupBy(user.id))[0] ?? null;
+  return (await peopleQuery().where(eq(user.id, id)).groupBy(user.id))[0] ?? null;
 }
 
 /**

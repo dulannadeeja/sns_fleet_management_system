@@ -37,7 +37,7 @@ export default async function CarPage({ params, searchParams }: { params: Promis
         <div className="car-top">
           <PlateBadge plate={car.registration} size="lg" lang={lang as Lang} />
           <span style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: 16, lineHeight: '26px' }}>{`${car.model} · ${car.ownership === 'sns' ? t('ownerSns') : t('ownerPartner')}`}</span>
+            <span style={{ fontSize: 16, lineHeight: '26px' }}>{`${car.model} · ${car.ownership === 'sns' ? t('ownerSns') : car.partnerName ? t('ownerPartnerNamed', { name: car.partnerName }) : t('ownerPartner')}`}</span>
             <StatusChip status={car.status} lang={lang as Lang} />
           </span>
           {mayEdit ? <Link className="rt-btn rt-btn-secondary" style={{ marginLeft: 'auto', textDecoration: 'none' }} href={`/cars/${car.id}/edit`}>{t('edit')}</Link> : null}
@@ -50,6 +50,9 @@ export default async function CarPage({ params, searchParams }: { params: Promis
             {fields.map((f) => (
               <div key={f}><dt>{t(`fields.${f}.label`)}</dt><dd data-term={f}>{showTerm(tc, f, car.terms[f])}</dd></div>
             ))}
+            {car.ownership === 'partner' ? (
+              <div><dt>{t('ownerPays.label')}</dt><dd data-term="ownerPays">{car.terms.ownerPays.length ? car.terms.ownerPays.map((c) => t(`costs.${c}`)).join(', ') : t('ownerPays.none')}</dd></div>
+            ) : null}
           </dl>
           <span className="set-muted">{t('termsNote')}</span>
         </section>

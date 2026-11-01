@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getFormatter, getLocale, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../../auth/require';
 import { mayDo } from '../../../../auth/access';
-import { getCar } from '../../../../modules/cars/cars';
+import { getCar, TERM_FIELDS, type Terms } from '../../../../modules/cars/cars';
 import { listActivity } from '../../../../modules/activity/activity';
 import { PlateBadge, type Lang } from '../../../../ui';
 import { AppFrame } from '../../../AppFrame';
@@ -10,6 +10,8 @@ import { EditCarForm } from '../../CarForms';
 import { carValues, isPartnerTermEntry } from '../../words';
 import { carWords } from '../../words-server';
 import '../../cars.css';
+
+const TERM_FIELDS_ONLY = (t: Terms) => Object.fromEntries(TERM_FIELDS.map((f) => [f, t[f]])) as Record<string, number | null>;
 
 // Screen 04.4 Edit car, package and terms (ST-04.3): a change applies to new rentals only (4.3, PR-08). Papers, service
 // dates and the photo come with #23; who pays which costs with #20.
@@ -29,11 +31,12 @@ export default async function EditCarPage({ params, }: { params: Promise<{ id: s
     <AppFrame person={person} active="cars" title={car.registration} subtitle={t('edit')} backHref={`/cars/${car.id}`}>
       <section className="car-card"><div className="car-top">
         <PlateBadge plate={car.registration} size="lg" lang={lang as Lang} />
-        <span>{`${car.model} · ${car.ownership === 'sns' ? t('ownerSns') : t('ownerPartner')}`}</span>
+        <span>{`${car.model} · ${car.ownership === 'sns' ? t('ownerSns') : car.partnerName ? t('ownerPartnerNamed', { name: car.partnerName }) : t('ownerPartner')}`}</span>
       </div></section>
             <div className="car-cols">
         <div>
-          <EditCarForm carId={car.id} terms={{ ...car.terms, commissionPercent: seeCommission ? car.terms.commissionPercent : null }} partnerCar={car.ownership === 'partner'} seeCommission={seeCommission} editCommission={editCommission} w={w} />
+          <EditCarForm carId={car.id} terms={{ ...TERM_FIELDS_ONLY(car.terms), commissionPercent: seeCommission ? car.terms.commissionPercent : null }}
+            costs={seeCommission ? car.terms.ownerPays : []} partnerCar={car.ownership === 'partner'} seeCommission={seeCommission} editCommission={editCommission} w={w} />
         </div>
         <div>
           <section className="car-card" aria-labelledby="changes"><h2 id="changes">{t('changes')}</h2>

@@ -14,7 +14,7 @@ const PREFIXES: Record<Exclude<Kind, 'decisions'>, string[]> = {
   money: ['payment.', 'refund.', 'expense.', 'cash.', 'payout.', 'deposit.', 'charge.'],
   customers: ['customer.'],
   cars: ['car.', 'vehicle.', 'package.'],
-  settings: ['person.', 'permission.', 'setting.'],
+  settings: ['person.', 'permission.', 'setting.', 'partner.'],
 };
 
 export function kindOf(action: string): Exclude<Kind, 'decisions'> | null {

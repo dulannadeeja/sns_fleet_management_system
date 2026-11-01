@@ -1,14 +1,17 @@
 import { bigint, check, index, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
+import { partnerOwner } from './partners';
 
-/** A car (system design 4.2; TRD › Data model, Cars). One car per registration number. A partner car is saved before its
+/** A car (system design 4.2; TRD › Data model, Cars). One car per registration number. A partner car may be saved before its
  *  partner and is linked to them on Partners (#20). Its status comes with #22. */
 export const vehicle = pgTable('vehicle', {
   id: uuid('id').primaryKey().defaultRandom(),
   registration: text('registration').notNull().unique('vehicle_one_per_registration'),
   model: text('model').notNull(),
   ownership: text('ownership').notNull(),
+  // A partner car's owner, once linked (ST-11.2); null for SNS cars and for partner cars not linked yet.
+  partnerOwnerId: uuid('partner_owner_id').references(() => partnerOwner.id),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   createdBy: uuid('created_by').references(() => user.id),
 }, () => [check('vehicle_ownership', sql`ownership in ('sns', 'partner')`)]);
@@ -29,4 +32,6 @@ export const vehicleTermsVersion = pgTable('vehicle_terms_version', {
   longRentalExtra: bigint('long_rental_extra', { mode: 'number' }).notNull(),
   longRentalFromDay: integer('long_rental_from_day').notNull(),
   garageDayCharge: bigint('garage_day_charge', { mode: 'number' }).notNull(),
+  // Partner cars: the costs the owner pays (service, tyres, repairs, battery); anything else the admin decides.
+  ownerPays: text('owner_pays').array().notNull().default([]),
 }, (t) => [index('vehicle_terms_newest').on(t.vehicleId, t.effectiveFrom.desc())]);

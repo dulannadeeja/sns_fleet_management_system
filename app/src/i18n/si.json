@@ -268,6 +268,11 @@
         "car": {
           "add": "{target} කාර් එක එකතු කළා",
           "change": "{target} හි {field} {old} සිට {new} දක්වා වෙනස් කළා"
+        },
+        "partner": {
+          "add": "{target} partner ලෙස එකතු කළා",
+          "agreementSigned": "{target} ගේ ගිවිසුම {date} අත්සන් කළා ලෙස සටහන් කළා",
+          "addCars": "{cars} partner {target} ට සම්බන්ධ කළා"
         }
       },
       "reason": "හේතුව: “{reason}”",
@@ -679,6 +684,101 @@
       "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
     },
     "noChange": "තවම මොකුත් වෙනස් කළේ නැහැ.",
-    "range": "සම්පූර්ණ ඉලක්කමක්, {min} සිට {max} දක්වා."
+    "range": "සම්පූර්ණ ඉලක්කමක්, {min} සිට {max} දක්වා.",
+    "costs": {
+      "service": "Service",
+      "tyres": "ටයර්",
+      "repairs": "අලුත්වැඩියා",
+      "battery": "බැටරිය"
+    },
+    "ownerPays": {
+      "label": "අයිතිකරු ගෙවන්නේ",
+      "name": "අයිතිකරු ගෙවන වියදම්",
+      "none": "නැහැ",
+      "note": "ටික් නොකළ ඕනම දෙයක් admin එක එක වෙලාවට තීරණය කරනවා."
+    },
+    "ownerPartnerNamed": "Partner · {name}"
+  },
+  "partners": {
+    "title": "Partner අයිතිකරුවෝ",
+    "add": "Partner කෙනෙක්",
+    "cols": {
+      "owner": "අයිතිකරු",
+      "cars": "කාර්",
+      "commission": "කොමිස්",
+      "account": "Account"
+    },
+    "carsCount": "කාර් {n}",
+    "active": "Active",
+    "off": "නවත්තලා",
+    "empty": "තවම partner ලා නැහැ.",
+    "unlinkedTitle": "අයිතිකරුට සම්බන්ධ කරලා නැති partner කාර්",
+    "unlinkedNote": "හැම partner කෙනෙක්ටම තමන්ගේ කාර් ඔක්කොටම එක account එකයි. Go-live වෙන්න කලින් හැම partner කාර් එකක්ම අයිතිකරුට සම්බන්ධ කරනවා.",
+    "unlinkedNone": "හැම partner කාර් එකකටම අයිතිකරු ඉන්නවා.",
+    "details": "Partner විස්තර",
+    "owner": "Partner අයිතිකරු",
+    "call": "කතා කරන්න",
+    "cars": "කාර්",
+    "termsLine": "කොමිස් {commission}% · ඕනම දවසක cash-out · {costs}",
+    "costsNone": "වියදම් එක එක වෙලාවට තීරණය කරනවා",
+    "costsPaid": "{costs} අයිතිකරු ගෙවනවා",
+    "account": "Account · {name} ගේ sign-in",
+    "accountNote": "හැම කාර් එකකටම එක account එකයි. {name} ට පේන්නේ අවසන් ඉපැයීම් සහ cash-out විතරයි; අද තවම අවසන් නැති ගණන්, වෙන partner ලා හෝ පාරිභෝගික විස්තර කවදාවත් නැහැ.",
+    "nic": "NIC",
+    "nicHint": "කාඩ් එකේ විදියට: ඉලක්කම් 9 යි V හෝ X, නැත්නම් ඉලක්කම් 12.",
+    "phone": "දුරකථන",
+    "phoneHint": "Sign in වෙන්න පාවිච්චි කරනවා.",
+    "name": "නම",
+    "password": "පළමු මුරපදය",
+    "passwordHint": "අකුරු 8ක් හෝ වැඩි. Partner ට අතින් දෙන්න; මුලින්ම sign in වෙද්දී ඒක වෙනස් කරනවා. මොකුත් යවන්නේ නැහැ.",
+    "bank": "බැංකු ගිණුම · cash-out වලට",
+    "bankHint": "අනිවාර්ය නැහැ. නැත්නම් cash-out ශාඛාවේදී මුදලින් ගෙවනවා.",
+    "bankNone": "බැංකු ගිණුමක් නැහැ · cash-out ශාඛාවේදී මුදලින්",
+    "chooseCars": "කාර්",
+    "chooseCarsHint": "තවම අයිතිකරුට සම්බන්ධ කරලා නැති partner කාර්. තෝරන හැම කාර් එකකටම එක account එකයි.",
+    "noFreeCars": "අයිතිකරු බලාගෙන ඉන්න partner කාර් නැහැ. මුලින් වාහන වල Partner ලෙස කාර් එක එකතු කරන්න.",
+    "termsFor": "{plate} ට කොන්දේසි",
+    "perDayNote": "දවසකට {rate} · කාර් එකේ දානවා, මෙතන නෙවෙයි.",
+    "afterTitle": "Save කළාම",
+    "after": [
+      "Partner ට මුලින් sign in වෙද්දී වෙනස් කරන්න පළමු මුරපදයක් ලැබෙනවා.",
+      "අයිතිකරු වචන අනුමත කළාම partner ගිවිසුම print කරනවා. ඒක කඩදාසියේ අත්සන් කරනවා; දිනය partner ගේ පිටුවේ සටහන් කරනවා.",
+      "සිදු වූ දේ ලැයිස්තුවේ සටහන් වෙනවා."
+    ],
+    "save": "Partner save කරන්න",
+    "cancel": "අවලංගු",
+    "saved": "Save වුණා.",
+    "agreement": "Partner ගිවිසුම",
+    "agreementNote": "Print කරලා, අත්සන් කරලා කඩදාසියේ තියාගන්නවා. මොකුත් ඒක බලාගෙන නවතින්නේ නැහැ.",
+    "notSigned": "තවම අත්සන් කළා කියලා සටහන් කරලා නැහැ · cash-out නවත්තන්නේ නැහැ.",
+    "signedOn": "{date} අත්සන් කළා",
+    "signedLabel": "අත්සන් කළ දිනය",
+    "record": "සටහන් කරන්න",
+    "printLater": "අයිතිකරු ගිවිසුමේ වචන අනුමත කළාම print කරන්න පුළුවන්.",
+    "startingBalance": "Go-live දවසේ ගෙවන්න තියෙන මුල් ශේෂය ආරම්භක දත්ත එක්ක දානවා.",
+    "errors": {
+      "notAllowed": "ඔයාට මේක කරන්න බැහැ.",
+      "notFound": "මේ partner හම්බ වුණේ නැහැ.",
+      "nameMissing": "නම ගහන්න.",
+      "phoneMissing": "දුරකථන අංකය ගහන්න.",
+      "phoneInvalid": "07 න් පටන් ගන්න ඉලක්කම් 10ක ශ්‍රී ලංකා ජංගම අංකයක්.",
+      "phoneTaken": "මේ අංකයට දැනටමත් account එකක් තියෙනවා.",
+      "passwordShort": "අකුරු 8ක් හෝ වැඩි.",
+      "nicInvalid": "කාඩ් එකේ විදියට: ඉලක්කම් 9 යි V හෝ X, නැත්නම් ඉලක්කම් 12.",
+      "nicTaken": "මේ NIC එකෙන් partner කෙනෙක් දැනටමත් ඉන්නවා.",
+      "bankTooLong": "අකුරු 120ක් උපරිම.",
+      "carsMissing": "අඩුම තරමින් එක කාර් එකක් තෝරන්න.",
+      "carsInvalid": "තෝරන හැම කාර් එකකටම 0 සිට 100% දක්වා කොමිස් එකක් ඕන.",
+      "carNotFree": "මේ කාර් එකක් දැන් වෙන කෙනෙක්ට සම්බන්ධ කළා. පිටුව ආයෙත් අරින්න.",
+      "dateInvalid": "අනාගතයේ නැති දිනයක් තෝරන්න.",
+      "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+    },
+    "addCar": "Car එකක් එකතු කරන්න",
+    "addCarHint": "තවම අයිතිකරුට සම්බන්ධ කරලා නැති partner කාර්. හැම එකකටම කොමිස් එක සහ අයිතිකරු ගෙවන වියදම් දානවා.",
+    "addCarSave": "කාර් එක සම්බන්ධ කරන්න",
+    "noFreeCarsHere": "අයිතිකරු බලාගෙන ඉන්න partner කාර් නැහැ. මුලින් වාහන වල Partner ලෙස කාර් එක එකතු කරන්න.",
+    "signIn": "Sign-in: මුරපදය reset කරන්න, නවත්තන්න හෝ ආයෙත් පටන් ගන්න",
+    "carsAdded": "කාර් සම්බන්ධ කළා.",
+    "plates": "{plates}"
   }
 }

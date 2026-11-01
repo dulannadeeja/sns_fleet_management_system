@@ -37,8 +37,11 @@ export default async function PersonPage({ params }: { params: Promise<{ id: str
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}><span className="set-muted">{p('phone')}</span><span className="rt-num" style={{ fontSize: 17 }}>{person.phone}</span></div>
           <div style={{ display: 'flex', flexDirection: 'column' }}><span className="set-muted">{p('role')}</span><span style={{ fontSize: 17 }}>{t(`roles.${person.role as 'staff'}`)}</span></div>
+          {/* A partner has no permissions: their account sees only their own final earnings (system design 3.1). */}
+          {person.role === 'partner' ? null : (
           <div style={{ display: 'flex', flexDirection: 'column' }}><span className="set-muted">{p('permissions')}</span>
             <Link href="/settings/permissions" style={{ fontSize: 17 }}>{person.role === 'owner' ? t('everything') : isDefaults ? t(`agreedDefaults.${person.role as 'staff'}`) : t('changed')}</Link></div>
+          )}
           {needsEmail(person.role) ? (
             <div style={{ display: 'flex', flexDirection: 'column' }}><span className="set-muted">{p('email')}</span>
               <span style={{ fontSize: 17 }}>{person.email ?? p('noEmail')}</span>

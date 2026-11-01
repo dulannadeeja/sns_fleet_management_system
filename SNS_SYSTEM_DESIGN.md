@@ -127,13 +127,15 @@ All critical permissions are configurable. The following are agreed defaults, no
 | Add or edit partners | Admin; not staff |
 | Mark a car under repair or unavailable | Employees or admins |
 | Mark a car available again | Admin (the authorised person for availability) |
-| Add people, change permissions, turn accounts off or on | Primary owner only; cannot be given to anyone |
+| Add people, change permissions, turn accounts off or on | Primary owner only; cannot be given to anyone. A partner's account is created with the partner: see "Partner accounts" below (Proposed) |
 
 Every exceptional decision requires a reason, actor, date, and time. Each transaction must identify the staff member who recorded it, even though staff share one cash drawer.
 
 The table above is the permission catalogue. Confirmed: agreed by the owner, recorded by Dulan.
 
 **Delegation.** The primary owner can give any permission to the admin or any employee, except adding people, changing permissions and turning accounts off or on, which stay with the primary owner. Every grant and removal is recorded. Confirmed: agreed by the owner, recorded by Dulan.
+
+**Partner accounts.** A partner's sign-in account is created with the partner, by whoever may add partners (the admin by default): they type the partner's first password, which the partner changes at the first sign-in. "Add people" above means staff and admins. Turning a partner's account off or on stays with the primary owner. A partner is recorded with their name, sign-in phone number, NIC as on the card (9 digits and V or X, or 12 digits; one partner per NIC), an optional bank account, and their cars: partner cars not yet linked to an owner, each with its commission and which costs the owner pays (service, tyres, repairs, battery; anything else is decided case by case by the admin). A bank account is written as one line of up to 120 characters. More partner cars can be linked to a partner later, from the partner's page; a car's partner, once set, is never changed. The owner resets a partner's password and turns their account off or on from the partner's page. Recording the date the agreement was signed (14) is done by whoever may add or edit partners; staff do not open partner pages. Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
 
 **Owner settings.** The business-wide settings are the primary owner's alone: the pickup cutoff and return deadline (5.1), the reminder lead times (11) and the fuel price per litre (16). They are changed on the Business rules page in three groups (day times, reminders, fuel price), each through a short form that shows the old and new values before saving, and explains, in Sinhala first, what the setting changes and what to check before changing it. Limits stop typing mistakes: reminder days 1 to 90, service km 100 to 5,000, fuel price 1 to 2,000 rupees a litre in whole rupees, times to the minute. The fuel price stays "not set" until the owner sets it. The owner, the admin and staff can read the page; partners cannot. Per-car and per-partner settings (4.2) are changed on that car or partner, not here. Every change is in the activity log with the old and new values. The page's SNS commission row is shown only to people who may see partner earnings and terms (the table above); staff do not see it. Keeping these settings with the primary owner alone means they are not among the permissions Delegation can give. Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
 
@@ -430,7 +432,7 @@ Agreements, receipts, and bills support Sinhala or English. Sinhala is also the 
 
 The customer agreement will be redesigned for SNS review. Applicable customer, vehicle, dates, and agreed prices are filled automatically. Print for signature and upload the signed copy before handover.
 
-Vehicle-partner agreements cover commission, the daily cash-out arrangement, and expense responsibilities. The system prints the agreement, filled with the partner's vehicles and terms, in Sinhala or English; it is signed and kept on paper, and staff record "signed on <date>". There is no upload and nothing is blocked by it; when terms change, a new version is printed. Confirmed: agreed by the owner, recorded by Dulan.
+Vehicle-partner agreements cover commission, the daily cash-out arrangement, and expense responsibilities. The system prints the agreement, filled with the partner's vehicles and terms, in Sinhala or English; it is signed and kept on paper, and staff record "signed on <date>". There is no upload and nothing is blocked by it; when terms change, a new version is printed. Confirmed: agreed by the owner, recorded by Dulan. Until the owner approves the agreement wording, the partner's page records only the date it was signed; printing comes with the printouts (Proposed: Dulan, 1 Nov 2026; for the owner to confirm).
 
 **Agreement wording.** SNS supplies the wording of the customer and partner agreements; Dulan enters it in Sinhala and English; the owner approves each version before it is used. It is on the go-live checklist (Starting data). Confirmed: agreed by the owner, recorded by Dulan.
 

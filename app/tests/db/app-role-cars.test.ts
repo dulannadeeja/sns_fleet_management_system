@@ -25,10 +25,19 @@ describe('the app role on the car tables', () => {
     await expect(asAppRole('insert into vehicle_terms_version select * from vehicle_terms_version where false')).resolves.toBeTruthy();
     await expect(asAppRole("select pg_advisory_xact_lock(hashtext('sns.vehicle:sample'))")).resolves.toBeTruthy();
   });
-  it('may not change or remove them, nor row-lock a car (#18 review: editCar uses the advisory lock)', async () => {
+  it('may add a partner, record their agreement date, and link a car to them (#20)', async () => {
+    await expect(asAppRole('insert into partner_owner select * from partner_owner where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update partner_owner set agreement_signed_on = agreement_signed_on where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update partner_owner set bank_account = bank_account where false')).rejects.toThrow(/permission denied/);
+    await expect(asAppRole('update vehicle set partner_owner_id = partner_owner_id where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update partner_owner set nic = nic where false')).rejects.toThrow(/permission denied/);
+    await expect(asAppRole('delete from partner_owner where false')).rejects.toThrow(/permission denied/);
+  });
+  // Since #20 the app may set a car's partner link (one column), so a row lock would also be allowed; editCar keeps the
+  // advisory lock, which also covers cars with no partner column change.
+  it('may not change or remove them, apart from the partner link', async () => {
     await expect(asAppRole('update vehicle set model = model where false')).rejects.toThrow(/permission denied/);
     await expect(asAppRole('delete from vehicle where false')).rejects.toThrow(/permission denied/);
-    await expect(asAppRole('select id from vehicle where false for update')).rejects.toThrow(/permission denied/);
     await expect(asAppRole('update vehicle_terms_version set daily_rate = daily_rate where false')).rejects.toThrow(/permission denied/);
   });
 });

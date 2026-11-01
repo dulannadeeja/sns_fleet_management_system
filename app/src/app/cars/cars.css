@@ -31,3 +31,8 @@ a.car-row:hover { background: var(--sunken); }
   .car-history li { grid-template-columns: 1fr; gap: 2px; }
 }
 @media (min-width: 700px) { .car-price { display: none; } }
+.car-costs { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; margin: 0; padding: 0; border: 0; }
+.car-costs legend { width: 100%; margin-bottom: 6px; font-size: 15px; line-height: 24px; font-weight: 600; }
+.car-costs label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 15px; }
+.car-costs input[type='checkbox'] { width: 20px; height: 20px; margin: 0; accent-color: var(--sapphire); }
+.car-costs .set-muted { width: 100%; }

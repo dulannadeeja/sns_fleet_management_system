@@ -34,7 +34,7 @@ export default async function CarsPage({ searchParams }: { searchParams: Promise
         {shown.length ? shown.map((c) => (
           <Link key={c.id} className="car-row" href={`/cars/${c.id}`} data-plate={c.registration}>
             <span><PlateBadge plate={c.registration} size="sm" lang={lang as Lang} /><span className="car-sub">{c.model}</span></span>
-            <span>{c.ownership === 'sns' ? t('ownerSns') : t('ownerPartner')}</span>
+            <span>{c.ownership === 'sns' ? t('ownerSns') : c.partnerName ? t('ownerPartnerNamed', { name: c.partnerName }) : t('ownerPartner')}</span>
             <span className="car-num">{showNumber(c.terms.dailyRate)}</span>
             <span className="car-num">{showNumber(c.terms.kmPerDay)}</span>
             <span className="car-num">{showNumber(c.terms.extraKmRate)}</span>

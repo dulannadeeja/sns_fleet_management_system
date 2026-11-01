@@ -19,7 +19,8 @@ describe('ST-04.3: add or edit a car and its package', () => {
     if (!('ok' in added)) throw new Error(added.error);
     const car = (await getCar(added.id))!;
     expect(car).toMatchObject({ registration: plate, model: 'Alto', ownership: 'partner', status: 'available' });
-    expect(car.terms).toEqual({ dailyRate: 4000, kmPerDay: 100, extraKmRate: 17, commissionPercent: 15, longRentalExtra: 500, longRentalFromDay: 6, garageDayCharge: 5000 });
+    expect(car.terms).toEqual({ dailyRate: 4000, kmPerDay: 100, extraKmRate: 17, commissionPercent: 15, longRentalExtra: 500, longRentalFromDay: 6, garageDayCharge: 5000, ownerPays: [] });
+    expect(car).toMatchObject({ partnerId: null, partnerName: null });
     // One car per number, however it is typed.
     expect(await addCar(owner, { registration: plate.replace(' ', '  ').toLowerCase(), model: 'Alto', ownership: 'sns' })).toEqual({ error: 'registrationTaken' });
     expect(normalPlate(' cbk   4127 ')).toBe('CBK 4127');
