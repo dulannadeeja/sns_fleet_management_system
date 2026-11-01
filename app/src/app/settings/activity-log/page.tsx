@@ -1,9 +1,11 @@
 import Link from 'next/link';
-import { getFormatter, getTranslations } from 'next-intl/server';
+import { getFormatter, getLocale, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../auth/require';
 import { isPermission } from '../../../auth/permissions';
 import { KINDS, listActivity, peopleForFilter, readCursor, type Entry, type Kind } from '../../../modules/activity/activity';
 import { Icon, type IconName } from '../../../ui';
+import { isSettingKey } from '../../../modules/settings/settings';
+import { showSetting } from '../business-rules/show';
 import { SettingsFrame } from '../SettingsFrame';
 
 // Screen 15.5 Activity log (ST-15.4): read only, newest first, by person and by kind. The owner, and whoever has
@@ -23,6 +25,8 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
   const [{ entries, older }, people] = await Promise.all([listActivity({ personId, kind, older: before }), peopleForFilter()]);
   const t = await getTranslations('settings');
   const format = await getFormatter();
+  const lang = await getLocale();
+  const words = { days: t.raw('rules.days') as string, km: t.raw('rules.km') as string, rupees: t.raw('rules.rupees') as string, notSet: t('rules.notSet') };
   const link = (p: { person?: string; kind?: string; before?: string }) => {
     const params = new URLSearchParams(Object.entries(p).filter(([, v]) => v) as [string, string][]);
     return `/settings/activity-log${params.size ? `?${params}` : ''}`;
@@ -33,6 +37,10 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       permission: typeof e.details?.permission === 'string' && isPermission(e.details.permission) ? t(`perms.${e.details.permission}`) : String(e.details?.permission ?? ''),
       role: typeof e.details?.role === 'string' && ROLES.includes(e.details.role) ? t(`roles.${e.details.role as 'staff'}`) : '',
       email: String(e.details?.email ?? ''),
+      // setting.change: the setting's name and its old and new values as people read them (#17).
+      setting: typeof e.details?.key === 'string' && isSettingKey(e.details.key) ? t(`rules.names.${e.details.key}`) : String(e.details?.key ?? ''),
+      old: showSetting(String(e.details?.key ?? ''), String(e.details?.old ?? ''), words, lang),
+      new: showSetting(String(e.details?.key ?? ''), String(e.details?.new ?? ''), words, lang),
     };
     // Only a sentence (a string) counts: an action named like a group of sentences shows its raw name.
     const key = `log.actions.${e.action}`;

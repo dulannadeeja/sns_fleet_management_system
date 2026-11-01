@@ -85,6 +85,13 @@
       "when": 1793538051818,
       "tag": "0011_activity_log_index",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1793549487808,
+      "tag": "0012_owner_settings",
+      "breakpoints": true
     }
   ]
 }

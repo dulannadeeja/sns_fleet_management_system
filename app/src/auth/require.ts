@@ -25,6 +25,11 @@ export async function requireOwner(): Promise<SignedInPerson> {
   return settle(await accessFor(await headers(), 'owner'));
 }
 
+/** Everyone who works at SNS: the owner, the admin and staff; not partners (system design 3.2 "Owner settings"). */
+export async function requireEmployee(): Promise<SignedInPerson> {
+  return settle(await accessFor(await headers(), 'employee'));
+}
+
 function settle(access: Awaited<ReturnType<typeof accessFor>>): SignedInPerson {
   if (access.kind === 'redirect') redirect(access.to);
   if (access.kind === 'denied') forbidden();

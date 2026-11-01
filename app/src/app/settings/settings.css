@@ -49,3 +49,16 @@
 .set-day { margin: 0; padding: 10px 20px; border-top: 1px solid var(--line); background: var(--sunken); font-size: 14px; line-height: 22px; font-weight: 600; }
 .set-entry { display: grid; grid-template-columns: 52px 36px minmax(0, 1fr); gap: 8px 16px; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line); font-size: 15px; line-height: 24px; }
 .set-entry-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: var(--sunken); color: var(--ink); }
+/* 15.2 Business rules and 15.7 Change a setting (boards 15.2, 15.7). */
+.set-rules-title { margin: 0; font-size: 16px; line-height: 26px; font-weight: 600; }
+.set-rule { display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; align-items: center; min-height: 56px; padding: 8px 20px; border-top: 1px solid var(--line); }
+.set-rule-owner { grid-template-columns: minmax(0, 1fr) auto; }
+.set-rule-text { display: flex; flex-direction: column; font-size: 15px; line-height: 24px; min-width: 0; }
+.set-rule-value { font-size: 15px; line-height: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.set-rule-end { text-align: right; }
+.set-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.set-check { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 12px; background: var(--sapphire-tint); font-size: 15px; line-height: 24px; }
+@media (max-width: 699px) {
+  .set-rule { padding: 10px 16px; }
+}
+.set-content a.rt-btn { text-decoration: none; }
