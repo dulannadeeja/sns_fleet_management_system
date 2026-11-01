@@ -1,0 +1,7 @@
+# app/src/modules/: business rules and database access (no React)
+
+One folder per PRD module. Each change function checks the person's permission again inside its own transaction and writes the activity log there (TRD › Integrity rules). Rules in `app/AGENTS.md` apply here too.
+
+- The activity log (`src/modules/activity/`, screen 15.5) is read only: no code changes or deletes an entry. Its page needs `seeActivityLog` (the admin by default); kinds come from the action's name (`person.*` is Settings, and so on); every action written to `audit_event` needs a sentence under `settings.log.actions` in both word files (`tests/log-words.test.ts`).
+- Owner settings (`src/modules/settings/`, screens 15.2 and 15.7): the catalogue holds each setting's group, limits and starting value; `setting` keeps only values the owner changed. Only the owner changes them (`changeGroup` checks again in its transaction and logs `setting.change` with old and new); owner, admin and staff read them (`requireEmployee`). Settings are shared by the whole test database: a test changes only its own setting and puts it back.
+- Cars (`src/modules/cars/`, screens 04.1–04.4, 04.8): a car's package and terms are dated versions in `vehicle_terms_version` (insert-only); a change adds one, so rentals keep theirs (AT-05). The commission is a partner term: seen with `seePartnerEarnings`, changed with `editPartners`; history and the log hide it from others. Pages use `AppFrame` and `railItems` (`src/app/rail.ts`).
