@@ -405,6 +405,24 @@
   "unresolvedBlob": false
  },
  {
+  "name": "04-Cars-AddCar-Desktop",
+  "w": 1280,
+  "canvasH": 1664,
+  "contentH": 1664,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "04-Cars-AddCar-Phone",
+  "w": 390,
+  "canvasH": 2544,
+  "contentH": 2544,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
   "name": "05-NewRental-Cancel-Desktop",
   "w": 1280,
   "canvasH": 831,

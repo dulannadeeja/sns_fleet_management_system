@@ -23,7 +23,7 @@ Later stakeholder decisions supersede this document. Update this document before
 **Companion references (latest only):**
 
 - **The repository is the master copy** of the design system, the brand guidebook and the screens, so any agent or developer can work from git alone. claude.ai artifacts are viewers: they are refreshed from the repository after a change and never edited directly. Decided 26 Oct 2026 by Dulan (project setup, not a business rule).
-- **Screen design:** `screens/` (see `screens/README.md`): 195 screen boards, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
+- **Screen design:** `screens/` (see `screens/README.md`): 197 screen boards, desktop and phone versions, in numbered modules (`NN-Module-Screen-Desktop|Phone`), with source in `screens/canvas/` and static HTML and PNG in `screens/previews/`. They show examples and sample data, not requirements. Viewer: canvas "SNS Rent Car · Screens" (https://claude.ai/artifact/QwHjboTyDUzjNg2U4HY9td).
 - **Design system:** `design-system/` (see `design-system/README.md`): tokens, components (`window.Plate`) and their previews. Viewer: "SNS Design System · Plate" (https://claude.ai/artifact/3iqJRN9jkgBAGqvGSx7RK4).
 - **Brand guidebook:** `brand/guidebook/`: identity, colour, type, language, icons, vehicle imagery, layout, money on screen and printed documents.
 - **Client proposal:** `proposal/SNS_Rent_a_Car_Proposal_SI.pdf` and `proposal/SNS Rent a Car Proposal.html` in this folder (artifact: https://claude.ai/artifact/DCDGDwQJRuL7K8AUNN4nQ5). Commercial terms and phases live there; requirements live here. **Approved by the client and frozen** (confirmed by Dulan, 24 Oct 2026; approval date to be recorded): changes to scope, phases, price, payments, timeline or the agreement go through a change request (`change-requests/`) and an addendum (`addenda/`), never by editing the proposal.
@@ -150,13 +150,13 @@ The table above is the permission catalogue. Confirmed: agreed by the owner, rec
 | Alto | 4,000 | 100 | 17 |
 | Prius, Axio | 6,500 | 100 | 27 |
 
-Admins can define each vehicle's package according to its condition and update packages later. These are starting packages: a new vehicle starts with its type's package. Changing a starting package changes only vehicles added afterwards; existing vehicles keep their own package until an admin changes it on that vehicle. Confirmed: agreed by the owner, recorded by Dulan. The extra-km rates above are design rates; final rates will be set per vehicle.
+Admins can define each vehicle's package according to its condition and update packages later. These are starting packages: a new vehicle starts with its type's package. Changing a starting package changes only vehicles added afterwards; existing vehicles keep their own package until an admin changes it on that vehicle. Confirmed: agreed by the owner, recorded by Dulan. The extra-km rates above are design rates; final rates will be set per vehicle. A new car is one of these models; a model not listed is added with its own starting package first (Proposed: Dulan, 1 Nov 2026; for the owner to confirm).
 
 ### 4.2 Per-vehicle settings
 
-- Ownership: SNS or partner.
+- Ownership: SNS or partner. Each car has its registration number, one car per number. A partner car is added before its owner: it shows "not linked yet" until the partner is added and linked to it (ST-11.2).
 - Daily rate, included daily kilometres, and extra-kilometre rate.
-- SNS commission percentage, default 15%.
+- SNS commission percentage, default 15%. It is a partner term: on the car it is seen only with "See partner earnings and terms" and changed only with "Add or edit partners" (both the admin's by default); the rest of the car's package needs "Add or edit cars and packages" (Proposed: Dulan, 1 Nov 2026; for the owner to confirm).
 - Long-rental surcharge amount, default LKR 500 per applicable day.
 - Surcharge starting day, default day six.
 - Garage-day charge, default LKR 5,000 per day. It applies only when the vehicle goes to the garage because of damage during that rental. Staff propose the days at return; an admin approves the days and the amount, and corrects the days when the vehicle is back from the garage. On a partner vehicle the admin decides the split, as for damage recovery. Confirmed: agreed by the owner, recorded by Dulan.
