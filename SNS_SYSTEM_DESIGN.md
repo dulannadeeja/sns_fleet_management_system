@@ -121,6 +121,7 @@ All critical permissions are configurable. The following are agreed defaults, no
 | Retain a cancellation fee | Authorised person |
 | Manage payroll | One payroll-management permission; no separate preparation/finalisation/payment permissions. Admin by default, not staff (Proposed: Dulan, 1 Nov 2026) |
 | Export reports | Separate configurable export permission. Admin by default, not staff (Proposed: Dulan, 1 Nov 2026) |
+| Customer access: find, add and correct customers, see full NIC and phone numbers, open their document copies | Staff and admin by default; the owner can take it away from one person (Proposed: Dulan, 1 Nov 2026; for the owner to confirm) |
 | See partner earnings and terms | Admin; not staff |
 | See the activity log | Admin; not staff |
 | Add or edit cars and packages | Admin; not staff |
@@ -234,7 +235,7 @@ An expired customer driving licence triggers a warning. An authorised person may
 
 Staff may flag a customer for unpaid balances, damage, or other issues. Warnings appear before future rentals; employees may proceed with a recorded reason. Employees or admins close a flag with a reason (for example, the money was paid); it stops warning but stays in the customer's history with who closed it and when. Nothing is deleted. Confirmed: agreed by the owner, recorded by Dulan. An unpaid customer debt warns on its own, as a flag does, before every new rental until it is paid or written off; employees may proceed with a recorded reason. Confirmed: agreed by the owner, recorded by Dulan.
 
-**Document copies.** Customer and reference-person ID and licence copies are kept while the customer is active and for 7 years after their last rental or settled debt. The system then lists them for the primary owner, who deletes them; a signed agreement stays with its rental. Staff and admins with customer access can open copies; every opening is logged with who and when. Copies are never shared outside the system. Confirmed: agreed by the owner, recorded by Dulan; SNS should check the period against Sri Lankan law (Personal Data Protection Act) before go-live.
+**Document copies.** Customer and reference-person ID and licence copies are kept while the customer is active and for 7 years after their last rental or settled debt. The system then lists them for the primary owner, who deletes them; a signed agreement stays with its rental. Staff and admins with customer access can open copies; every opening is logged with who and when. Copies are never shared outside the system. Confirmed: agreed by the owner, recorded by Dulan; SNS should check the period against Sri Lankan law (Personal Data Protection Act) before go-live. The copies are four photos or scans: NIC front and back, licence front and back; each is a photo (JPEG, PNG, WebP or HEIC) or a PDF of up to 10 MB, kept as taken. Whether a reference person is needed is decided for each rental, with the rental (Phase 2). Proposed: Dulan, 1 Nov 2026; for the owner to confirm.
 
 A customer may rent multiple vehicles simultaneously. Each has its own agreement and bill. Separate actual-driver records per vehicle are outside the agreed scope.
 
