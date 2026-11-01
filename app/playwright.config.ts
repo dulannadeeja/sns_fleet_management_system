@@ -7,6 +7,8 @@ const DATABASE_URL = process.env.DATABASE_URL || 'postgres://postgres:postgres@l
 export default defineConfig({
   testDir: './tests/e2e',
   globalSetup: './tests/e2e/global-setup.ts',
+  // The dev server compiles each page on its first visit; under parallel tests that can take more than the 5 s default.
+  expect: { timeout: 10000 },
   use: { baseURL: 'http://localhost:3000' },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },

@@ -1,0 +1,44 @@
+/* Screens 15.x: the desktop frame (menu and top bar) from 700px, the phone page header below it, as the boards show. */
+.set-desktop { min-height: 100vh; display: flex; flex-wrap: nowrap; }
+.set-phone-head { display: none; }
+.set-body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.set-main { padding: 24px 28px 56px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box; }
+.set-nav { flex: 0 1 300px; min-width: 260px; display: flex; flex-direction: column; gap: 4px; padding: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-sizing: border-box; }
+.set-nav a { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--ink); font-size: 15px; text-decoration: none; }
+.set-nav a[aria-current='page'] { background: var(--sapphire-tint); color: var(--sapphire-strong); font-weight: 600; }
+.set-content { flex: 1 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.set-card { display: flex; flex-direction: column; gap: 14px; padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; max-width: 760px; box-sizing: border-box; }
+.set-card h2 { margin: 0; font-size: 18px; line-height: 28px; font-weight: 600; }
+.set-muted { font-size: 14px; line-height: 22px; color: var(--ink-muted); }
+.set-list { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.set-list-head { display: flex; align-items: center; gap: 12px; padding: 14px 20px; flex-wrap: wrap; }
+.set-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.set-avatar { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600; }
+.set-avatar-owner { background: var(--sapphire); }
+.set-status { padding: 2px 10px; border-radius: 10px; font-size: 14px; line-height: 22px; font-weight: 600; background: var(--available-tint); color: var(--available); }
+.set-status-off { background: var(--unavailable-tint); color: var(--unavailable); }
+.set-choices { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.set-choice { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border: 1.5px solid var(--line-strong); background: var(--card); border-radius: 12px; cursor: pointer; }
+.set-choice:has(input:checked) { border: 2px solid var(--sapphire); background: var(--sapphire-tint); }
+.set-choice:has(input:disabled) { cursor: not-allowed; color: var(--ink-muted); }
+.set-choice-title { display: flex; align-items: center; gap: 8px; font-size: 16px; line-height: 24px; font-weight: 600; }
+.set-choice-title input { width: 18px; height: 18px; margin: 0; }
+.set-choice-hint { font-size: 14px; line-height: 22px; color: var(--ink-muted); padding-left: 26px; }
+.set-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+.set-perm-scroll { overflow-x: auto; }
+.set-perm { border-collapse: collapse; width: 100%; min-width: 560px; }
+.set-perm th, .set-perm td { padding: 10px 12px; border-top: 1px solid var(--line); text-align: center; vertical-align: middle; }
+.set-perm th:first-child, .set-perm td:first-child { text-align: left; }
+.set-perm th:first-child { min-width: 240px; max-width: 320px; position: sticky; left: 0; z-index: 1; background: var(--card); }
+.set-perm thead th { border-top: 0; font-size: 14px; line-height: 20px; }
+.set-perm input { width: 24px; height: 24px; margin: 0; accent-color: var(--sapphire); cursor: pointer; }
+@media (max-width: 699px) {
+  .set-desktop > .rt-side, .set-desktop .rt-header { display: none; }
+  .set-phone-head { display: block; }
+  .set-main { padding: 16px; }
+  .set-nav { flex-basis: 100%; min-width: 0; }
+  .set-card { padding: 16px; }
+  .set-row { grid-template-columns: 44px minmax(0, 1fr) auto; }
+  .set-row > :nth-child(3) { display: none; }
+  .set-perm th:first-child { min-width: 160px; }
+}

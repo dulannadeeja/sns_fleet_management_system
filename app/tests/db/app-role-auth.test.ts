@@ -33,3 +33,12 @@ describe('the app role on the sign-in tables', () => {
     await expect(asAppRole('delete from account where false')).rejects.toThrow(/permission denied/);
   });
 });
+
+describe('the app role on permission grants', () => {
+  it('may read, add and remove grants, but not change one in place', async () => {
+    await expect(asAppRole('select count(*) from permission_grant')).resolves.toBeTruthy();
+    await expect(asAppRole('insert into permission_grant select * from permission_grant where false')).resolves.toBeTruthy();
+    await expect(asAppRole('delete from permission_grant where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update permission_grant set permission = permission where false')).rejects.toThrow(/permission denied/);
+  });
+});

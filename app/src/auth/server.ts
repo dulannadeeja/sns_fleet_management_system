@@ -35,6 +35,8 @@ export const auth = betterAuth({
       language: { type: 'string', defaultValue: 'si', input: false, required: true },
       failedSignIns: { type: 'number', defaultValue: 0, input: false, required: true },
       lockedUntil: { type: 'date', input: false, required: false },
+      role: { type: 'string', defaultValue: 'staff', input: false, required: true },
+      disabledAt: { type: 'date', input: false, required: false },
     },
   },
   hooks: {
@@ -45,6 +47,9 @@ export const auth = betterAuth({
       if (!OPEN_PATHS.has(ctx.path)) throw new APIError('NOT_FOUND');
       if (ctx.path !== SIGN_IN || typeof ctx.body?.phoneNumber !== 'string') return;
       const phone = ctx.body.phoneNumber;
+      // A turned-off account answers like a wrong password and is not counted (AT-47; system design 3.1 "Sign-in phone numbers").
+      const off = await db.execute(sql`select 1 from "user" where phone_number = ${phone} and disabled_at is not null`);
+      if (off.rows.length) throw new APIError('UNAUTHORIZED', { code: 'INVALID_PHONE_NUMBER_OR_PASSWORD', message: 'Invalid phone number or password' });
       const counted = await db.execute(sql`
         update "user" set
           locked_until = case when failed_sign_ins + 1 >= ${MAX_TRIES} then now() + make_interval(mins => ${LOCK_MINUTES}) else null end,

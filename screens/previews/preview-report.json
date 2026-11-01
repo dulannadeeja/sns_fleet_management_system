@@ -1397,8 +1397,8 @@
  {
   "name": "15-Settings-AddPerson-Desktop",
   "w": 1280,
-  "canvasH": 982,
-  "contentH": 982,
+  "canvasH": 1116,
+  "contentH": 1116,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1406,8 +1406,26 @@
  {
   "name": "15-Settings-AddPerson-Phone",
   "w": 390,
-  "canvasH": 1702,
-  "contentH": 1702,
+  "canvasH": 1840,
+  "contentH": 1840,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "15-Settings-Person-Desktop",
+  "w": 1280,
+  "canvasH": 1200,
+  "contentH": 1200,
+  "missing": [],
+  "broken": [],
+  "unresolvedBlob": false
+ },
+ {
+  "name": "15-Settings-Person-Phone",
+  "w": 390,
+  "canvasH": 1638,
+  "contentH": 1638,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1451,8 +1469,8 @@
  {
   "name": "15-Settings-Permissions-Desktop",
   "w": 1280,
-  "canvasH": 2341,
-  "contentH": 2341,
+  "canvasH": 2424,
+  "contentH": 2424,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -1460,8 +1478,8 @@
  {
   "name": "15-Settings-Permissions-Phone",
   "w": 390,
-  "canvasH": 5237,
-  "contentH": 5237,
+  "canvasH": 5426,
+  "contentH": 5426,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

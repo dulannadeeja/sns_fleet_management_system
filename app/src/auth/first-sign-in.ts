@@ -12,8 +12,10 @@ export async function signedInPerson(headers: Headers): Promise<SignedInPerson |
   return (await signedInSession(headers))?.user ?? null;
 }
 
+/** The session for these headers; a turned-off account has none, even if a session row were left (AT-47). */
 async function signedInSession(headers: Headers): Promise<Session | null> {
-  return auth.api.getSession({ headers, query: { disableCookieCache: true } });
+  const found = await auth.api.getSession({ headers, query: { disableCookieCache: true } });
+  return found && !found.user.disabledAt ? found : null;
 }
 
 /** Where a person must go before anything else: sign-in, first sign-in, or nowhere (null). */

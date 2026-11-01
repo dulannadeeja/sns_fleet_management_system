@@ -16,7 +16,22 @@ function where(url: string | undefined): string {
   }
 }
 
+/** Refuses to go on unless DATABASE_URL names a test database (its name ends in _test): test setup adds sample
+ *  people, and the browser-test setup changes the owner's password, so it must never touch a real database. */
+export function assertTestDatabase(url: string | undefined): void {
+  let name = '';
+  try {
+    name = new URL(url ?? '').pathname.slice(1);
+  } catch {
+    // unreadable: refused below
+  }
+  if (!name.endsWith('_test')) {
+    throw new Error(`Refusing to run tests on ${where(url)}: the database name must end in _test.`);
+  }
+}
+
 export default async function setup() {
+  assertTestDatabase(process.env.DATABASE_URL);
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   try {
     await pool.query('select 1');

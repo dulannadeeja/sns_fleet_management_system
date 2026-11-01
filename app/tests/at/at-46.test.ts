@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { nextStep, setOwnPassword, signedInPerson } from '../../src/auth/first-sign-in';
-import { person, samplePerson, signIn } from '../helpers/people';
+import { person, samplePerson, signIn, signedInSample, theOwner } from '../helpers/people';
+import { resetPassword } from '../../src/modules/people/people';
 
 // AT-46 "A staff member forgets their password: the primary owner resets it; the staff member changes it at the next sign-in".
-// This is the sign-in half; the owner's reset comes with People (#15). Same path for a first password (ST-01.2).
+// Both halves: the owner's reset (People, #15) and the change at the next sign-in; a first password takes the same path (ST-01.2).
 async function sessionHeaders(phone: string, password: string): Promise<Headers> {
   const res = await signIn(phone, password);
   expect(res.status).toBe(200);
@@ -11,7 +12,7 @@ async function sessionHeaders(phone: string, password: string): Promise<Headers>
   return new Headers({ cookie });
 }
 
-describe('AT-46 (sign-in half): the first or reset password is changed at the next sign-in', () => {
+describe('AT-46: the owner resets a forgotten password; it is changed at the next sign-in', () => {
   it('sends a person with a first password to first sign-in, and nowhere else', async () => {
     const p = await samplePerson();
     const headers = await sessionHeaders(p.phone, p.password);
@@ -63,6 +64,18 @@ describe('AT-46 (sign-in half): the first or reset password is changed at the ne
     const headers = await sessionHeaders(p.phone, p.password);
     const results = await Promise.all(['own-pass-one', 'own-pass-two'].map((pw) => setOwnPassword(headers, { password: pw, repeat: pw, language: 'si' })));
     expect(results.filter((r) => 'ok' in r)).toHaveLength(1);
+  });
+
+  it('the owner resets a forgotten password: the old one stops, the new first one must be changed, sessions end', async () => {
+    const staff = await signedInSample('staff');
+    const owner = await theOwner();
+    expect(await resetPassword(owner, staff.id, 'short')).toEqual({ error: 'passwordShort' });
+    expect(await resetPassword(owner, staff.id, 'given-by-owner-1')).toEqual({ ok: true });
+    expect(await signedInPerson(staff.headers)).toBeNull();
+    expect((await signIn(staff.phone, staff.password)).status).toBe(401);
+    const again = await sessionHeaders(staff.phone, 'given-by-owner-1');
+    expect(nextStep(await signedInPerson(again))).toBe('/first-sign-in');
+    expect((await person(staff.id)).mustChangePassword).toBe(true);
   });
 });
 

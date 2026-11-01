@@ -1424,7 +1424,7 @@
    "title": "15.5 Activity log · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 73776
+   "y": 73965
   },
   "15-Settings-ActivityLog-Phone.dc.html": {
    "h": 1543,
@@ -1433,11 +1433,11 @@
    "title": "15.5 Activity log · Phone",
    "w": 390,
    "x": 1340,
-   "y": 73776
+   "y": 73965
   },
   "15-Settings-AddPerson-Desktop.dc.html": {
    "expand": "fill",
-   "h": 982,
+   "h": 1116,
    "is_interactive": true,
    "page": "plate",
    "title": "15.4 Add a person · Desktop",
@@ -1446,12 +1446,31 @@
    "y": 68365
   },
   "15-Settings-AddPerson-Phone.dc.html": {
-   "h": 1702,
+   "h": 1840,
    "is_interactive": true,
    "page": "plate",
    "title": "15.4 Add a person · Phone",
    "w": 390,
    "x": 7130,
+   "y": 68365
+  },
+  "15-Settings-Person-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1200,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.6 Person · Desktop",
+   "w": 1280,
+   "x": 7580,
+   "y": 68365
+  },
+  "15-Settings-Person-Phone.dc.html": {
+   "h": 1638,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.6 Person · Phone",
+   "w": 390,
+   "x": 8920,
    "y": 68365
   },
   "15-Settings-BusinessRules-Desktop.dc.html": {
@@ -1494,7 +1513,7 @@
   },
   "15-Settings-Permissions-Desktop.dc.html": {
    "expand": "fill",
-   "h": 2341,
+   "h": 2424,
    "is_interactive": true,
    "page": "plate",
    "title": "15.1 Permissions · Desktop",
@@ -1503,7 +1522,7 @@
    "y": 68365
   },
   "15-Settings-Permissions-Phone.dc.html": {
-   "h": 5237,
+   "h": 5426,
    "is_interactive": true,
    "page": "plate",
    "title": "15.1 Permissions · Phone",
@@ -1517,7 +1536,7 @@
    "title": "16.3 Final bill · print",
    "w": 794,
    "x": 1988,
-   "y": 76199
+   "y": 76388
   },
   "16-Documents-PartnerAgreement.dc.html": {
    "h": 1123,
@@ -1525,7 +1544,7 @@
    "title": "16.6 Partner agreement · print",
    "w": 794,
    "x": 4478,
-   "y": 76199
+   "y": 76388
   },
   "16-Documents-PartnerStatement.dc.html": {
    "h": 1123,
@@ -1533,7 +1552,7 @@
    "title": "16.5 Partner earnings statement · print",
    "w": 794,
    "x": 3484,
-   "y": 76199
+   "y": 76388
   },
   "16-Documents-PaymentReceipt.dc.html": {
    "h": 540,
@@ -1541,7 +1560,7 @@
    "title": "16.4 Payment receipt · 80 mm slip · print",
    "w": 302,
    "x": 2982,
-   "y": 76199
+   "y": 76388
   },
   "16-Documents-Payslip.dc.html": {
    "h": 1123,
@@ -1549,7 +1568,7 @@
    "title": "16.7 Payslip · print",
    "w": 794,
    "x": 5472,
-   "y": 76199
+   "y": 76388
   },
   "16-Documents-RentalAgreementEN.dc.html": {
    "h": 1123,
@@ -1557,7 +1576,7 @@
    "title": "16.2 Rental agreement · English · print",
    "w": 794,
    "x": 994,
-   "y": 76199
+   "y": 76388
   },
   "16-Documents-RentalAgreementSI.dc.html": {
    "h": 1123,
@@ -1565,7 +1584,7 @@
    "title": "16.1 Rental agreement · Sinhala · print",
    "w": 794,
    "x": 0,
-   "y": 76199
+   "y": 76388
   },
   "17-System-DesignNotes.dc.html": {
    "h": 2410,
@@ -1573,7 +1592,7 @@
    "title": "17.2 Design notes · navigation and components",
    "w": 1440,
    "x": 1480,
-   "y": 78202
+   "y": 78391
   },
   "17-System-States.dc.html": {
    "expand": "fill",
@@ -1583,7 +1602,7 @@
    "title": "17.1 System states · empty, offline, error, permission",
    "w": 1280,
    "x": 0,
-   "y": 78202
+   "y": 78391
   },
   "19-Nav-A-Sidebar-Desktop.dc.html": {
    "w": 1440,
@@ -1640,7 +1659,7 @@
    "title": "18.1 Reservations · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 81887,
+   "y": 82076,
    "expand": "fill"
   },
   "18-Reservations-AllReservations-Phone.dc.html": {
@@ -1650,7 +1669,7 @@
    "title": "18.1 Reservations · Phone",
    "w": 390,
    "x": 1340,
-   "y": 81887
+   "y": 82076
   },
   "18-Reservations-NewReservation-Desktop.dc.html": {
    "h": 1002,
@@ -1659,7 +1678,7 @@
    "title": "18.2 New reservation · Desktop",
    "w": 1280,
    "x": 1930,
-   "y": 81887,
+   "y": 82076,
    "expand": "fill"
   },
   "18-Reservations-NewReservation-Phone.dc.html": {
@@ -1669,7 +1688,7 @@
    "title": "18.2 New reservation · Phone",
    "w": 390,
    "x": 3270,
-   "y": 81887
+   "y": 82076
   },
   "18-Reservations-ReservationDetails-Desktop.dc.html": {
    "h": 706,
@@ -1678,7 +1697,7 @@
    "title": "18.3 Reservation details · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 84067,
+   "y": 84256,
    "expand": "fill"
   },
   "18-Reservations-ReservationDetails-Phone.dc.html": {
@@ -1688,7 +1707,7 @@
    "title": "18.3 Reservation details · Phone",
    "w": 390,
    "x": 1340,
-   "y": 84067
+   "y": 84256
   },
   "18-Reservations-MoveCar-Desktop.dc.html": {
    "h": 973,
@@ -1697,7 +1716,7 @@
    "title": "18.4 Move to another car · Desktop",
    "w": 1280,
    "x": 1930,
-   "y": 84067,
+   "y": 84256,
    "expand": "fill"
   },
   "18-Reservations-MoveCar-Phone.dc.html": {
@@ -1707,7 +1726,7 @@
    "title": "18.4 Move to another car · Phone",
    "w": 390,
    "x": 3270,
-   "y": 84067
+   "y": 84256
   },
   "18-Reservations-CancelNoShow-Desktop.dc.html": {
    "h": 1207,
@@ -1716,7 +1735,7 @@
    "title": "18.5 Cancel or no-show · Desktop",
    "w": 1280,
    "x": 0,
-   "y": 85597,
+   "y": 85786,
    "expand": "fill"
   },
   "18-Reservations-CancelNoShow-Phone.dc.html": {
@@ -1726,7 +1745,7 @@
    "title": "18.5 Cancel or no-show · Phone",
    "w": 390,
    "x": 1340,
-   "y": 85597
+   "y": 85786
   }
  },
  "createdOnFiles": {
@@ -1888,7 +1907,7 @@
    "text": "16 · Printed documents · ලියකියවිලි",
    "w": 240,
    "x": 0,
-   "y": 75524
+   "y": 75713
   },
   "plate_17": {
    "kind": "title1",
@@ -1897,7 +1916,7 @@
    "text": "17 · System reference",
    "w": 240,
    "x": 0,
-   "y": 77527
+   "y": 77716
   },
   "plate_intro": {
    "page": "plate",
@@ -1931,7 +1950,7 @@
    "text": "18 · Reservations · වෙන්කිරීම්",
    "w": 240,
    "x": 0,
-   "y": 81212
+   "y": 81401
   }
  },
  "order": [
@@ -2092,6 +2111,8 @@
   "15-Settings-People-Phone.dc.html",
   "15-Settings-AddPerson-Desktop.dc.html",
   "15-Settings-AddPerson-Phone.dc.html",
+  "15-Settings-Person-Desktop.dc.html",
+  "15-Settings-Person-Phone.dc.html",
   "15-Settings-ActivityLog-Desktop.dc.html",
   "15-Settings-ActivityLog-Phone.dc.html",
   "16-Documents-RentalAgreementSI.dc.html",
