@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import migrateTestDatabase from '../setup/db';
 
 export const E2E_FIRST_PASSWORD = 'first-pass-e2e';
+export const E2E_OWNER_PASSWORD = 'owner-pass-e2e';
 
 export default async function globalSetup() {
   process.env.DATABASE_URL ||= 'postgres://postgres:postgres@localhost:5433/sns_test';
@@ -17,4 +18,7 @@ export default async function globalSetup() {
     });
     process.env[`E2E_PHONE_${project.toUpperCase()}`] = phone;
   }
+  process.env.E2E_OWNER_PHONE = execFileSync('npx', ['tsx', '--conditions=react-server', 'tests/e2e/owner-setup.ts'], {
+    encoding: 'utf8', env: { ...process.env, E2E_OWNER_PASSWORD },
+  }).trim().split('\n').pop();
 }

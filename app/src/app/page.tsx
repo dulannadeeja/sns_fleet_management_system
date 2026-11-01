@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { requireUser } from '../auth/require';
 import { Button } from '../ui';
@@ -11,6 +12,7 @@ export default async function Home() {
     <main style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
       <h1 style={{ margin: 0 }}>{t('title')}</h1>
       <p style={{ margin: 0 }}>{t('home.signedIn', { name: person.name })}</p>
+      {person.role === 'owner' ? <Link href="/settings/people">{t('settings.homeSettings')}</Link> : null}
       <form action={signOutAction}><Button type="submit" variant="secondary" icon="arrowLeft">{t('home.signOut')}</Button></form>
     </main>
   );

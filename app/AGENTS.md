@@ -1,6 +1,6 @@
 # app/: the SNS Rent Car application (rank 7)
 
-Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13); sign-in with phone number and password, lockout and the first password (#14). Permissions, email codes (#28) and jobs come with the next Phase 1 tickets.
+Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Drizzle, Better Auth, pg-boss jobs, next-intl, the Plate components ported to `src/ui/`. The foundation is in place: Next.js, next-intl, Vitest and Playwright (#8); PostgreSQL with Drizzle, the test database and the insert-only activity log (#12); Plate and the app frame in `src/ui/` (#13); sign-in with phone number and password, lockout and the first password (#14); permissions and people (#15). Email codes (#28) and jobs come with the next Phase 1 tickets.
 
 ## Layout
 `src/app/` routes by PRD module · `src/modules/<module>/` business rules and database access, no React · `src/db/` schema and SQL migrations · `src/ui/` Plate components · `src/documents/` printouts 16.1–16.7 · `src/jobs/` pg-boss jobs · `src/i18n/` `si.json`, `en.json` · `tests/at/` one test per AT-nn.
@@ -19,7 +19,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 | Migrations | change `src/db/schema/`, then `npm run db:generate` and review the SQL; a rule SQL alone (a trigger) is `npx drizzle-kit generate --custom --name <what>`; apply with `npm run db:migrate`. Tests apply them by themselves |
 | Build (checks Sinhala and English have the same words first) | `npm run build` |
 | Dev server (needs `.env.local`, below) | `npm run dev` |
-| Add a person with a first password (until the People screen, #15) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX` (asks for the password; it shows while typed, and is never printed or logged) |
+| Add the primary owner once (then the owner adds people on screen 15.4) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX --role owner` (asks for the password; it shows while typed, and is never printed or logged) |
 
 ## Settings (`app/.env.local`, git-ignored, never committed)
 - `DATABASE_URL`: the database the dev server uses. Tests and browser journeys use the test database on port 5433 by themselves.
@@ -38,6 +38,12 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 - The signed-in person's saved language picks `si` or `en` (`src/i18n/request.ts`); before sign-in, the sign-in page's switch (a cookie); otherwise Sinhala. An action that can change the language calls `revalidatePath('/', 'layout')` before `redirect`, so `<html lang>` follows.
 - Phone numbers are Sri Lankan mobiles, 10 digits, digits only (`src/auth/phone.ts`, system design 3.1, Proposed). `signInProblems` (`src/auth/sign-in-check.ts`) is the one box-by-box check, run in the browser and again in the action; `addPerson` and Better Auth refuse other numbers too. A failed sign-in with well-formed input does not say whether the number or the password was wrong; only the lock message (AT-60) shows that an account exists.
 - People without an email get a placeholder `<id>@no-email.invalid`; nothing is ever sent to it.
+
+## Permissions and people (`src/auth/permissions.ts`, `src/modules/people/`)
+- The catalogue has one key per row of system design 3.2, each with who starts with it. Adding people, changing permissions and turning accounts off or on are owner-only and never in it. A new row there means a new key here.
+- Pages and actions call `requirePermission(key)` or `requireOwner()` (`src/auth/require.ts`): a missing permission is a 403 (`forbidden()`, `src/app/forbidden.tsx`). The check itself is `accessFor(headers, key)` (`src/auth/access.ts`), which tests call directly (AT-24).
+- People changes (add, reset password, turn off/on, set permission) take the acting owner's id, check it again inside one transaction, and write `audit_event` there. A turned-off person has no sessions, cannot sign in (answered like a wrong password) and is refused everywhere.
+- Browser tests sign in as the test database's one owner: `tests/e2e/owner-setup.ts` gives it a test password and turns off sample people left from earlier runs.
 
 ## Rules (details in TRD › Integrity rules)
 - Money is whole-rupee integers; a partner share is rounded down in one shared function (`src/lib/money.ts` · `splitShare`); SNS takes the rest.
