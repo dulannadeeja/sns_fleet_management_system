@@ -1,17 +1,17 @@
 # Plan: #15 Permissions and people
 
 ## Goal
-`requirePermission` guards every server action and page. The owner sets permissions (15.1), sees people (15.3), adds a person with their role's defaults (15.4), and on one person's page (15.5, new) resets a password and turns the account off or on. Every change writes the activity log in the same transaction.
+`requirePermission` guards every server action and page. The owner sets permissions (15.1), sees people (15.3), adds a person with their role's defaults (15.4), and on one person's page (15.6, new) resets a password and turns the account off or on. Every change writes the activity log in the same transaction.
 
 ## Inherited, not re-decided
 - System design 3.1 Accounts (sign-in, turning off an account), 3.2 Default permissions (the catalogue), Delegation (owner-only: add people, change permissions, turn accounts off or on), PR-05, PR-06; DN-01, DN-03.
 - PRD ST-15.1, ST-15.2; AT-24, AT-46 (owner reset half), AT-47; AT-58 (TRD: only the owner changes permissions, adds people or turns accounts off). Proposed checks: a permission change is logged with who and when; a new staff member starts with the staff defaults and must change the first password.
 - TRD §4 (`permission_grant`, `audit_event`), §5 (permissions checked by the server; every server action: `requirePermission`, one transaction, log entry), §6 (turning off revokes sessions at once).
-- Screens 15.1 Permissions, 15.3 People, 15.4 Add a person; new 15.5 Person.
+- Screens 15.1 Permissions, 15.3 People, 15.4 Add a person; new 15.6 Person.
 
 ## Decided with Dulan, 1 Nov 2026 (recorded as Proposed where a rule)
 1. The owner types the first password (8+ characters), on add and on reset; a reset ends open sessions. System design 3.1, PRD ST-15.2: Proposed.
-2. New board 15.5 Person (desktop and phone) before the code.
+2. New board 15.6 Person (desktop and phone) before the code.
 3. #15 adds Staff and Admin only; the Partner choice comes with the partners ticket (ST-11.2). Board 15.4 shows it as "comes with Partners".
 4. The admin's email waits for #28.
 5. Manage payroll and Export reports: admin by default, not staff. System design 3.2, PRD ST-15.1: Proposed.
@@ -35,15 +35,15 @@ Activity log screen (ST-15.4); partner accounts (ST-11.2); admin email and codes
 - `tests/at/at-47.test.ts`: turned off → sessions gone, sign-in refused with the usual "wrong" answer, their audit rows still name them; turned on → signs in again.
 - `tests/at/at-58.test.ts`: admin and staff calling add / set permission / turn off are refused; the owner is allowed.
 - Unit: catalogue defaults per role; staff defaults on a new person; every change writes one log row with who and when.
-- Browser: 15.1, 15.3, 15.4, 15.5 at 1280 and 390, owner flow; staff opening `/settings/people` gets 403.
+- Browser: 15.1, 15.3, 15.4, 15.6 at 1280 and 390, owner flow; staff opening `/settings/people` gets 403.
 
 ## Tasks (test first)
-1. Boards: new 15.5 Person (desktop, phone); 15.4 adds the first-password box, Partner "comes with Partners", fixes the language radio group; sample names labelled. Render, check, refresh the canvas viewer. Dulan checks.
+1. Boards: new 15.6 Person (desktop, phone); 15.4 adds the first-password box, Partner "comes with Partners", fixes the language radio group; sample names labelled. Render, check, refresh the canvas viewer. Dulan checks.
 2. Schema and migration: `user.role`, `disabled_at`, `disabled_reason`; one-owner index; `permission_grant`; grants for `sns_app`. VALIDATE: `npm run test -- tests/db`.
 3. Catalogue + `requirePermission`/`requireOwner` (AT-24, AT-58).
 4. People module `src/modules/people/`: add, reset, turn off/on, set permission, each one transaction with its log row (AT-46, AT-47).
 5. Sign-in refuses turned-off accounts; `people:add --role`.
-6. Screens 15.1, 15.3, 15.4, 15.5; browser tests.
+6. Screens 15.1, 15.3, 15.4, 15.6; browser tests.
 7. `app/AGENTS.md`. VALIDATE: `validate` skill.
 
 ## Validation at the end

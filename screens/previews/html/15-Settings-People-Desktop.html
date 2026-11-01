@@ -517,6 +517,16 @@ a.rt-li:hover, a.rt-vrow:hover { background: var(--paper); color: var(--ink); }
   .rt-li-meta { font-size: 14px; }
   .rt-vrow { padding: var(--space-2) 16px; }
 }
+/* TextField: label over a 52px input; required in words; hint and error below (boards 01.1, 01.2). */
+.rt-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.rt-field-label { font-size: 16px; line-height: 26px; font-weight: 600; }
+.rt-field-req { color: var(--overdue); }
+.rt-input { min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: var(--radius-md); background: var(--card); color: var(--ink); font: inherit; font-size: 17px; width: 100%; box-sizing: border-box; }
+.rt-input:focus { outline: none; border: 2px solid var(--sapphire); padding: 11.5px 13.5px; }
+.rt-input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.rt-input[aria-invalid="true"] { border-color: var(--overdue); }
+.rt-field-hint { font-size: 14px; line-height: 22px; color: var(--ink-muted); }
+.rt-field-error { font-size: 14px; line-height: 22px; font-weight: 600; color: var(--overdue); }
 </style>
 
 
@@ -539,22 +549,22 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
   <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">S D De Silva</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Primary owner · අයිතිකරු</span></span>
   <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Everything</span>
   <span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600">Active</span>
-</a><a href="15-Settings-Permissions-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+</a><a href="15-Settings-Person-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
   <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">KA</span>
   <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Kamal</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Admin</span></span>
   <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Agreed admin defaults</span>
   <span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600">Active</span>
-</a><a href="15-Settings-Permissions-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+</a><a href="15-Settings-Person-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
   <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">NI</span>
   <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Nimal</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Staff · සේවක</span></span>
   <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Agreed staff defaults</span>
   <span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600">Active</span>
-</a><a href="15-Settings-Permissions-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+</a><a href="15-Settings-Person-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
   <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">SA</span>
   <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Sanduni</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Staff · සේවක</span></span>
   <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Agreed staff defaults</span>
   <span style="padding: 2px 10px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 14px; line-height: 22px; font-weight: 600">Active</span>
-</a><a href="15-Settings-Permissions-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
+</a><a href="15-Settings-Person-Desktop.html" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: center; min-height: 68px; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none">
   <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 14px; font-weight: 600">RU</span>
   <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Ruwan</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Staff · සේවක</span></span>
   <span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Agreed staff defaults</span>

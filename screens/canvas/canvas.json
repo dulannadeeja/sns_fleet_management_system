@@ -1437,7 +1437,7 @@
   },
   "15-Settings-AddPerson-Desktop.dc.html": {
    "expand": "fill",
-   "h": 982,
+   "h": 1094,
    "is_interactive": true,
    "page": "plate",
    "title": "15.4 Add a person · Desktop",
@@ -1446,12 +1446,31 @@
    "y": 68365
   },
   "15-Settings-AddPerson-Phone.dc.html": {
-   "h": 1702,
+   "h": 1840,
    "is_interactive": true,
    "page": "plate",
    "title": "15.4 Add a person · Phone",
    "w": 390,
    "x": 7130,
+   "y": 68365
+  },
+  "15-Settings-Person-Desktop.dc.html": {
+   "expand": "fill",
+   "h": 1200,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.6 Person · Desktop",
+   "w": 1280,
+   "x": 7580,
+   "y": 68365
+  },
+  "15-Settings-Person-Phone.dc.html": {
+   "h": 1638,
+   "is_interactive": true,
+   "page": "plate",
+   "title": "15.6 Person · Phone",
+   "w": 390,
+   "x": 8920,
    "y": 68365
   },
   "15-Settings-BusinessRules-Desktop.dc.html": {
@@ -2092,6 +2111,8 @@
   "15-Settings-People-Phone.dc.html",
   "15-Settings-AddPerson-Desktop.dc.html",
   "15-Settings-AddPerson-Phone.dc.html",
+  "15-Settings-Person-Desktop.dc.html",
+  "15-Settings-Person-Phone.dc.html",
   "15-Settings-ActivityLog-Desktop.dc.html",
   "15-Settings-ActivityLog-Phone.dc.html",
   "16-Documents-RentalAgreementSI.dc.html",
