@@ -1,5 +1,6 @@
 import type { Entry } from '../../modules/activity/activity';
 import { isCost, TERM_FIELDS, type TermField } from '../../modules/cars/cars';
+import { isCarState } from '../../modules/cars/status';
 import { showNumber } from '../settings/business-rules/show';
 
 // How a car's history line reads (car.add, car.change), shared by the car page and the activity log.
@@ -14,6 +15,11 @@ export function showTerm(tCars: T, field: TermField, value: unknown): string {
 /** The values a car or starting-package entry's sentence needs (car.*, package.*). */
 export function carValues(tCars: T, e: Entry): Record<string, string> {
   const d = e.details ?? {};
+  if (e.action === 'car.status') {
+    // A status change (#22): the plate and the old and new status in words.
+    const name = (v: unknown) => (typeof v === 'string' && isCarState(v) ? tCars(`status.names.${v}`) : String(v ?? ''));
+    return { target: typeof d.plate === 'string' ? d.plate : (e.targetId ?? ''), field: '', old: name(d.old), new: name(d.new) };
+  }
   if (e.action.startsWith('package.')) {
     const field = isTermField(d.field) ? d.field : null;
     return {

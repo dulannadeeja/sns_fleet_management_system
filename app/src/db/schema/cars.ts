@@ -1,4 +1,4 @@
-import { bigint, check, index, integer, pgTable, primaryKey, smallint, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { bigint, check, date, index, integer, pgTable, primaryKey, smallint, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
 import { partnerOwner } from './partners';
@@ -66,3 +66,20 @@ export const packageDefault = pgTable('package_default', {
   longRentalFromDay: integer('long_rental_from_day').notNull(),
   garageDayCharge: bigint('garage_day_charge', { mode: 'number' }).notNull(),
 }, () => [check('package_default_one_row', sql`id = 1`)]);
+
+/** A car's status changes (system design 11; ST-04.5; #22), insert-only: the newest row is the car's status; none means
+ *  Available. Rented and Overdue come from rentals (Phase 2), never from here. */
+export const vehicleStatusEvent = pgTable('vehicle_status_event', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  vehicleId: uuid('vehicle_id').notNull().references(() => vehicle.id),
+  status: text('status').notNull(),
+  reason: text('reason'),
+  expectedBack: date('expected_back', { mode: 'string' }),
+  retiredOn: date('retired_on', { mode: 'string' }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
+  createdBy: uuid('created_by').references(() => user.id),
+}, (t) => [
+  index('vehicle_status_newest').on(t.vehicleId, t.createdAt.desc()),
+  check('vehicle_status_kind', sql`status in ('available', 'repair', 'unavailable', 'retired')`),
+  check('vehicle_status_retired_on', sql`(status = 'retired') = (retired_on is not null)`),
+]);
