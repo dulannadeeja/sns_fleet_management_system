@@ -16,7 +16,6 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
 }) {
   const t = await getTranslations();
   const seeLog = await mayDo(person, 'seeActivityLog');
-  const editPackages = await mayDo(person, 'editCarsAndPackages');
   const lang = (await getLocale()) as Lang;
   const title = lang === 'si' ? `${t('settings.title')} · ${en.settings.title}` : t('settings.title');
   return (
@@ -37,8 +36,8 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
             ) : null}
             {/* Everyone who works at SNS reads the business rules (15.2); the log only for whoever may see it (15.5). */}
             <Link href="/settings/business-rules" aria-current={active === 'rules' ? 'page' : undefined}><Icon name="file" size={20} />{t('settings.businessRules')}</Link>
-            {/* Starting packages (04.6) for whoever may add or edit cars and packages (the admin by default, #21). */}
-            {editPackages ? <Link href="/settings/packages" aria-current={active === 'packages' ? 'page' : undefined}><Icon name="car" size={20} />{t('settings.packages')}</Link> : null}
+            {/* Everyone who works at SNS reads the starting packages (04.6, #21); changing them needs the permission. */}
+            <Link href="/settings/packages" aria-current={active === 'packages' ? 'page' : undefined}><Icon name="car" size={20} />{t('settings.packages')}</Link>
             {seeLog ? <Link href="/settings/activity-log" aria-current={active === 'activity' ? 'page' : undefined}><Icon name="clock" size={20} />{t('settings.activityLog')}</Link> : null}
           </nav>
           <div className="set-content">{children}</div>

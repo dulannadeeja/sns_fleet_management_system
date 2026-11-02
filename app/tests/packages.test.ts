@@ -75,6 +75,31 @@ describe('ST-04.4: starting packages', () => {
     expect(await changePackage(owner, made.id, { ...was, extraKmRate: 22, addModels: [extra.toUpperCase()] }, { ...was, extraKmRate: 22 })).toEqual({ ok: true, changed: [] });
   });
 
+  it('takes a model out of a package; a package keeps at least one; the log keeps the models before and after', async () => {
+    const owner = await theOwner();
+    const t = tag();
+    const [a, b] = [`Sample model ${t}`, `Sample second ${t}`];
+    const made = await addPackage(owner, { ...sample(t), models: [a, b] });
+    if (!('ok' in made)) throw new Error(made.error);
+    const car = await addCar(owner, { registration: samplePlate(), model: b, ownership: 'sns' });
+    if (!('ok' in car)) throw new Error(car.error);
+    const was = { name: `Sample package ${t}`, dailyRate: 5000, kmPerDay: 100, extraKmRate: 20 };
+    expect(await changePackage(owner, made.id, { ...was, addModels: [], removeModels: [b] }, was)).toEqual({ ok: true, changed: ['models'] });
+    expect(await packagesFor(b)).toEqual([]);
+    // A car added before keeps its model and terms; no new car of that model now.
+    expect((await getCar(car.id))!).toMatchObject({ model: b, terms: { dailyRate: 5000 } });
+    expect(await addCar(owner, { registration: samplePlate(), model: b, ownership: 'sns' })).toEqual({ error: 'modelInvalid' });
+    const [entry] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'package.removeModel'), eq(auditEvent.targetId, made.id)));
+    expect(entry.details).toEqual({ package: was.name, model: b, old: [a, b], new: [a] });
+    // The last model stays, unless another comes in with the same save.
+    expect(await changePackage(owner, made.id, { ...was, addModels: [], removeModels: [a] }, was)).toEqual({ error: 'lastModel' });
+    expect(await changePackage(owner, made.id, { ...was, addModels: [b], removeModels: [a] }, was)).toEqual({ ok: true, changed: ['models'] });
+    expect((await packagesFor(b))[0].id).toBe(made.id);
+    // Staff without the permission cannot.
+    const staff = await samplePerson();
+    expect(await changePackage(staff.id, made.id, { ...was, addModels: [], removeModels: [b] }, was)).toEqual({ error: 'notAllowed' });
+  });
+
   it('an Add-a-car form opened before a package change is refused, not saved with the old rate (#21 review)', async () => {
     const owner = await theOwner();
     const t = tag();

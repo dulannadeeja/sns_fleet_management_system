@@ -13,7 +13,7 @@ async function signIn(page: Page, phone: string, password: string) {
 }
 const noSideScroll = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
 
-test('ST-04.4: two packages for one model; a change applies to cars added afterwards; a new car picks its package', async ({ page }) => {
+test('ST-04.4: two packages for one model; a change applies to cars added afterwards; a new car picks its package', async ({ page, browser }) => {
   test.setTimeout(90_000);
   const tag = randomUUID().slice(0, 8);
   const model = `E2E model ${tag}`;
@@ -70,4 +70,36 @@ test('ST-04.4: two packages for one model; a change applies to cars added afterw
   await page.getByRole('button', { name: 'Save car' }).click();
   await expect(page).toHaveURL(/\/cars\/[0-9a-f-]+\?saved=1$/);
   await expect(page.locator('[data-term="dailyRate"]')).toHaveText('LKR 6,000');
+
+  // The older package has one model: it cannot be taken out (a package keeps at least one).
+  await page.goto('/settings/packages');
+  await page.getByRole('link', { name: `Change: ${older}` }).click();
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled();
+  await page.getByRole('checkbox', { name: model, exact: true }).check();
+  await page.getByRole('button', { name: 'Save' }).click();
+  await expect(page.getByText('A package needs at least one model.', { exact: false })).toBeVisible();
+
+  // A staff member reads 04.6 without the Change buttons or the commission, and may not open the forms.
+  const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
+  await page.goto('/settings/people/new');
+  await page.locator('input[name="name"]').fill(`Sample packages ${tag}`);
+  await page.locator('input[name="phone"]').fill(phone);
+  await page.locator('input[name="password"]').fill('first-pass-1');
+  await page.getByRole('button', { name: 'Save' }).click();
+  await expect(page).toHaveURL(/\/settings\/people$/);
+  const staff = await browser.newPage();
+  await signIn(staff, phone, 'first-pass-1');
+  await expect(staff).toHaveURL(/\/first-sign-in$/);
+  await staff.locator('input[name="password"]').fill('own-pass-123');
+  await staff.locator('input[name="repeat"]').fill('own-pass-123');
+  await staff.locator('button[type="submit"]').click();
+  await expect(staff).toHaveURL(/\/$/);
+  await staff.goto('/settings/business-rules');
+  await staff.locator('a[href="/settings/packages"]').first().click();
+  await expect(staff.locator('[data-package="Alto"]')).toBeVisible();
+  await expect(staff.locator('a[href^="/settings/packages/"]')).toHaveCount(0);
+  await expect(staff.getByText('SNS කොමිස් එක')).toHaveCount(0);
+  expect((await staff.goto('/settings/packages/new'))?.status()).toBe(403);
+  expect((await staff.goto('/settings/packages/defaults'))?.status()).toBe(403);
+  await staff.close();
 });
