@@ -286,7 +286,8 @@
           "add": "added the starting package {target} ({models})",
           "change": "changed the {field} of the starting package {target} from {old} to {new}",
           "addModel": "added the model {model} to the starting package {target}",
-          "defaults": "changed the starting {field} for every car from {old} to {new}"
+          "defaults": "changed the starting {field} for every car from {old} to {new}",
+          "removeModel": "took the model {model} out of the starting package {target}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -752,8 +753,11 @@
         "invalid": "Type a whole number in the range.",
         "stale": "Someone changed this meanwhile. Open the page again to see it, then make your change.",
         "failed": "Not saved. Try again.",
-        "tooManyModels": "Up to 20 models at a time."
-      }
+        "tooManyModels": "Up to 20 models at a time.",
+        "lastModel": "A package needs at least one model. Add another before taking this one out."
+      },
+      "removeModels": "Models · tick one to take it out",
+      "removeHint": "A model taken out changes only cars added afterwards; cars already added keep their model and terms. A package keeps at least one model."
     }
   },
   "partners": {

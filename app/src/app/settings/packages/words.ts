@@ -17,5 +17,6 @@ export async function packageWords(): Promise<PackageWords> {
     errors: p.raw('errors') as Record<string, string>,
     name: p('name'), nameHint: p('nameHint'), models: p('models'), modelsHint: p('modelsHint'), addModel: p('addModel'), addModelHint: p('addModelHint'),
     onlyNew: p('onlyNew'), commissionNote: p('commissionNote'), save: p('save'), cancel: p('cancel'), requiredMark: (await getTranslations('settings'))('requiredMark'),
+    removeModels: p('removeModels'), removeHint: p('removeHint'),
   };
 }

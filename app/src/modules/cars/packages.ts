@@ -1,4 +1,4 @@
-import { asc, count, eq, sql } from 'drizzle-orm';
+import { and, asc, count, eq, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
 import { auditEvent, packageDefault, startingPackage, startingPackageModel, vehicle } from '../../db/schema';
 import type { Permission } from '../../auth/permissions';
@@ -112,15 +112,15 @@ export async function addPackage(actorId: string, input: { name: string; models:
 export type PackageChange = 'name' | PackageField | 'models';
 export type ChangePackageResult =
   | { ok: true; changed: PackageChange[] }
-  | { error: 'notAllowed' | 'notFound' | NameError | 'modelInvalid' | 'tooManyModels' }
+  | { error: 'notAllowed' | 'notFound' | NameError | 'modelInvalid' | 'tooManyModels' | 'lastModel' }
   | { error: 'invalid' | 'stale'; fields: PackageChange[] };
 
 /**
- * Changes a package's name and rates and adds models to it; models are never taken out (a car may have started from
- * the package). `was` is what the form showed: only fields the person changed are saved, none if someone saved one of
+ * Changes a package's name and rates, and adds models to it or takes them out (a package keeps at least one; cars
+ * already added keep their model and terms). `was` is what the form showed: only fields the person changed are saved, none if someone saved one of
  * them meanwhile. Cars already added keep their own terms (AT-50).
  */
-export async function changePackage(actorId: string, id: string, input: { name: string; addModels: string[] } & Rates, was: { name: string } & Rates): Promise<ChangePackageResult> {
+export async function changePackage(actorId: string, id: string, input: { name: string; addModels: string[]; removeModels?: string[] } & Rates, was: { name: string } & Rates): Promise<ChangePackageResult> {
   const name = tidy(input.name);
   const typed = PACKAGE_FIELDS.filter((f) => input[f] !== was[f]);
   const fields = typed.filter((f) => outOfLimits(f, input[f]));
@@ -144,6 +144,10 @@ export async function changePackage(actorId: string, id: string, input: { name: 
       if (!m) return { error: 'modelInvalid' } as const;
       if (![...have.map((h) => h.model), ...adding].some((x) => x.toLowerCase() === m.toLowerCase())) adding.push(m);
     }
+    // Models taken out: those the package has now (one taken out meanwhile is already gone). A package keeps at least
+    // one model (Derived control, 4.1).
+    const removing = have.map((h) => h.model).filter((m) => (input.removeModels ?? []).some((r) => tidy(r).toLowerCase() === m.toLowerCase()));
+    if (have.length - removing.length + adding.length < 1) return { error: 'lastModel' } as const;
     const changed: PackageChange[] = [...(renamed ? ['name' as const] : []), ...typed];
     if (changed.length) {
       await tx.update(startingPackage).set({ ...(renamed ? { name } : {}), ...Object.fromEntries(typed.map((f) => [f, input[f]])) }).where(eq(startingPackage.id, id));
@@ -161,7 +165,13 @@ export async function changePackage(actorId: string, id: string, input: { name: 
         details: { package: renamed ? name : now.name, model, old: models, new: [...models, model] } });
       models = [...models, model];
     }
-    return { ok: true, changed: adding.length ? [...changed, 'models'] : changed } as const;
+    for (const model of removing) {
+      await tx.delete(startingPackageModel).where(and(eq(startingPackageModel.packageId, id), eq(startingPackageModel.model, model)));
+      await tx.insert(auditEvent).values({ createdBy: actorId, action: 'package.removeModel', targetType: 'package', targetId: id,
+        details: { package: renamed ? name : now.name, model, old: models, new: models.filter((m) => m !== model) } });
+      models = models.filter((m) => m !== model);
+    }
+    return { ok: true, changed: adding.length || removing.length ? [...changed, 'models'] : changed } as const;
   });
 }
 

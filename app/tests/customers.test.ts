@@ -65,7 +65,8 @@ describe('ST-08.3: correct a customer', () => {
 describe('ST-08.1: find a customer', () => {
   it('finds by name, NIC or phone; an expired licence comes first', async () => {
     const owner = await theOwner();
-    const tag = Math.random().toString(36).slice(2, 8);
+    // Letters only: digits in the search also match phone numbers, so a tag with digits could find other customers.
+    const tag = Array.from({ length: 8 }, () => 'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)]).join('');
     const fine = await addCustomer(owner, { ...sampleCustomer(), name: `Aaa ${tag}` });
     const expired = await addCustomer(owner, { ...sampleCustomer(), name: `Zzz ${tag}`, licenceExpires: '2020-01-01' });
     if (!('ok' in fine) || !('ok' in expired)) throw new Error('setup');

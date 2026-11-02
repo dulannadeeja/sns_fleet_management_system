@@ -28,7 +28,7 @@ export async function addPackageAction(_: PackageFormState, form: FormData): Pro
 export async function changePackageAction(id: string, _: PackageFormState, form: FormData): Promise<PackageFormState> {
   const person = await requirePermission('editCarsAndPackages');
   const result = await changePackage(person.id, id,
-    { name: text(form, 'name'), addModels: text(form, 'addModel').split(','), ...rates(form) },
+    { name: text(form, 'name'), addModels: text(form, 'addModel').split(','), removeModels: form.getAll('removeModel').map(String), ...rates(form) },
     { name: text(form, 'was.name'), ...rates(form, 'was.') });
   if ('error' in result) return { error: result.error, fields: 'fields' in result ? result.fields : undefined, values: values(form) };
   done();

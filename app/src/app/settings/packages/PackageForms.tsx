@@ -1,5 +1,5 @@
 'use client';
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import Link from 'next/link';
 import { useReady } from '../../useReady';
 import { Button, Notice, TextField } from '../../../ui';
@@ -10,7 +10,7 @@ import { addPackageAction, changeDefaultsAction, changePackageAction, type Packa
 export interface PackageWords {
   fields: Record<string, { label: string; hint: string; range: string }>; errors: Record<string, string>;
   name: string; nameHint: string; models: string; modelsHint: string; addModel: string; addModelHint: string;
-  onlyNew: string; commissionNote: string; save: string; cancel: string; requiredMark: string;
+  onlyNew: string; commissionNote: string; save: string; cancel: string; requiredMark: string; removeModels: string; removeHint: string;
 }
 const RATES = ['dailyRate', 'kmPerDay', 'extraKmRate'];
 
@@ -26,7 +26,7 @@ function Numbers({ keys, start, state, w, readOnly = [] }: { keys: string[]; sta
   );
 }
 const Problem = ({ state, w }: { state: PackageFormState; w: PackageWords }) =>
-  state.error && state.error !== 'invalid' && !state.error.startsWith('name') && !state.error.startsWith('model') && state.error !== 'tooManyModels'
+  state.error && state.error !== 'invalid' && !state.error.startsWith('name') && !state.error.startsWith('model') && state.error !== 'tooManyModels' && state.error !== 'lastModel'
     ? <Notice tone="danger">{w.errors[state.error] ?? w.errors.failed}</Notice> : null;
 function Actions({ pending, w }: { pending: boolean; w: PackageWords }) {
   const ready = useReady();
@@ -57,17 +57,28 @@ export function AddPackageForm({ w }: { w: PackageWords }) {
   );
 }
 
-/** Change a package: its name and rates, and add models (models are never taken out). */
+/** Change a package: its name and rates; add models or take them out. */
 export function ChangePackageForm({ id, pkg, w }: { id: string; pkg: { name: string; models: string[]; dailyRate: number; kmPerDay: number; extraKmRate: number }; w: PackageWords }) {
   const [state, action, pending] = useActionState<PackageFormState, FormData>(changePackageAction.bind(null, id), {});
   const start: Record<string, number> = { dailyRate: pkg.dailyRate, kmPerDay: pkg.kmPerDay, extraKmRate: pkg.extraKmRate };
+  // Sent from React's state, not the boxes: React resets a form's fields after each save attempt.
+  const [removing, setRemoving] = useState<string[]>([]);
   return (
     <form action={action} noValidate className="car-card">
       <input type="hidden" name="was.name" value={pkg.name} />
       {RATES.map((k) => <input key={k} type="hidden" name={`was.${k}`} value={String(start[k])} />)}
       <TextField name="name" label={w.name} required requiredLabel={w.requiredMark} autoComplete="off" defaultValue={state.values?.name ?? pkg.name}
         error={nameError(state, w) ?? (state.error === 'stale' && state.fields?.includes('name') ? w.errors.stale : undefined)} />
-      <p className="set-muted" style={{ margin: 0 }}>{`${w.models}: ${pkg.models.join(', ')}`}</p>
+      <fieldset className="car-costs">
+        <legend>{w.removeModels}</legend>
+        {removing.map((m) => <input key={m} type="hidden" name="removeModel" value={m} />)}
+        {pkg.models.map((m) => (
+          <label key={m}><input type="checkbox" value={m} checked={removing.includes(m)}
+            onChange={(e) => setRemoving((r) => (e.target.checked ? [...r, m] : r.filter((x) => x !== m)))} />{m}</label>
+        ))}
+        <span className={state.error === 'lastModel' ? 'rt-field-error' : 'set-muted'} role={state.error === 'lastModel' ? 'alert' : undefined}>
+          {state.error === 'lastModel' ? w.errors.lastModel : w.removeHint}</span>
+      </fieldset>
       <TextField name="addModel" label={w.addModel} autoComplete="off" hint={w.addModelHint} defaultValue={state.values?.addModel} error={modelError(state, w)} />
       <Numbers keys={RATES} start={start} state={state} w={w} />
       <Notice icon="lock">{w.onlyNew}</Notice>

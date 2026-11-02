@@ -120,6 +120,13 @@
       "when": 1793581218976,
       "tag": "0016_starting_packages",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1793594741610,
+      "tag": "0017_package_model_removal",
+      "breakpoints": true
     }
   ]
 }
