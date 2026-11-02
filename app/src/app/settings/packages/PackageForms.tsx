@@ -26,7 +26,7 @@ function Numbers({ keys, start, state, w, readOnly = [] }: { keys: string[]; sta
   );
 }
 const Problem = ({ state, w }: { state: PackageFormState; w: PackageWords }) =>
-  state.error && state.error !== 'invalid' && !state.error.startsWith('name') && !state.error.startsWith('model')
+  state.error && state.error !== 'invalid' && !state.error.startsWith('name') && !state.error.startsWith('model') && state.error !== 'tooManyModels'
     ? <Notice tone="danger">{w.errors[state.error] ?? w.errors.failed}</Notice> : null;
 function Actions({ pending, w }: { pending: boolean; w: PackageWords }) {
   const ready = useReady();
@@ -38,7 +38,7 @@ function Actions({ pending, w }: { pending: boolean; w: PackageWords }) {
   );
 }
 const nameError = (s: PackageFormState, w: PackageWords) => (s.error?.startsWith('name') ? w.errors[s.error] : undefined);
-const modelError = (s: PackageFormState, w: PackageWords) => (s.error?.startsWith('model') ? w.errors[s.error] : undefined);
+const modelError = (s: PackageFormState, w: PackageWords) => (s.error?.startsWith('model') || s.error === 'tooManyModels' ? w.errors[s.error] : undefined);
 
 /** Add a package: its name, models and rates (a new model comes in this way). */
 export function AddPackageForm({ w }: { w: PackageWords }) {

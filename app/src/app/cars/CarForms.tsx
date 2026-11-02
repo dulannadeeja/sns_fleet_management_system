@@ -95,9 +95,11 @@ export function AddCarForm({ models, packages, defaults, seeCommission, editComm
   const [pkgId, setPkgId] = useState(() => (choicesOf(models[0]).length === 1 ? choicesOf(models[0])[0].id : ''));
   const [ownership, setOwnership] = useState(state.values?.ownership ?? 'sns');
   const [values, setValues] = useState(() => ({ ...asText(defaults), ...(choicesOf(models[0]).length === 1 ? rates(choicesOf(models[0])[0]) : {}) }));
+  // The starting package and defaults as shown, sent as was.* so a change made meanwhile is refused (#21 review).
+  const [shown, setShown] = useState(values);
   const [chosen, setChosen] = useState<string[]>([]);
   const set = (k: string, v: string) => setValues((s) => ({ ...s, [k]: v }));
-  const choosePkg = (p: StartPkg | undefined) => { setPkgId(p?.id ?? ''); setValues((s) => ({ ...s, ...rates(p) })); };
+  const choosePkg = (p: StartPkg | undefined) => { setPkgId(p?.id ?? ''); setValues((s) => ({ ...s, ...rates(p) })); setShown((s) => ({ ...s, ...rates(p) })); };
   const pick = (m: string) => { setModel(m); const c = choicesOf(m); choosePkg(c.length === 1 ? c[0] : undefined); };
   const choices = choicesOf(model);
   const pkg = choices.find((p) => p.id === pkgId);
@@ -130,6 +132,7 @@ export function AddCarForm({ models, packages, defaults, seeCommission, editComm
       </section>
       <section className="car-card"><h2>{w.package}</h2>
         <input type="hidden" name="packageId" value={pkgId} />
+        {Object.entries(shown).map(([k, v]) => <input key={k} type="hidden" name={`was.${k}`} value={v} />)}
         {choices.length > 1 ? (
           <fieldset className="set-card" style={{ border: 0, padding: 0, gap: 8 }}>
             <legend className="set-rules-title">{`${w.pick} ${w.requiredMark}`}</legend>

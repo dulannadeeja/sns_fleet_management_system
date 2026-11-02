@@ -21,6 +21,8 @@ export interface Package extends Rates { id: string; name: string; models: strin
 /** A name or model as typed: single spaces, none at the ends. */
 const tidy = (raw: string) => String(raw ?? '').trim().replace(/\s+/g, ' ');
 const NAME_MAX = 60;
+/** At most this many models in one save, to stop a pasted list (#21 review). */
+export const MODELS_MAX = 20;
 const MODEL = /^[\p{L}\p{N}][\p{L}\p{N} ()./-]{0,39}$/u;
 const outOfLimits = (f: PackageField | DefaultField, v: number) => !Number.isInteger(v) || v < LIMITS[f][0] || v > LIMITS[f][1];
 
@@ -76,7 +78,7 @@ const nameProblem = (name: string): NameError | null => (!name ? 'nameMissing' :
 
 export type AddPackageResult =
   | { ok: true; id: string }
-  | { error: 'notAllowed' | NameError | 'modelsMissing' | 'modelInvalid' }
+  | { error: 'notAllowed' | NameError | 'modelsMissing' | 'modelInvalid' | 'tooManyModels' }
   | { error: 'invalid'; fields: PackageField[] };
 
 /** Adds a package with its models (a new model comes in this way). Needs "Add or edit cars and packages". */
@@ -85,6 +87,7 @@ export async function addPackage(actorId: string, input: { name: string; models:
   const bad = nameProblem(name);
   if (bad) return { error: bad };
   if (!input.models.some((m) => tidy(m))) return { error: 'modelsMissing' };
+  if (input.models.filter((m) => tidy(m)).length > MODELS_MAX) return { error: 'tooManyModels' };
   const fields = PACKAGE_FIELDS.filter((f) => outOfLimits(f, input[f]));
   if (fields.length) return { error: 'invalid', fields };
   return db.transaction(async (tx) => {
@@ -109,7 +112,7 @@ export async function addPackage(actorId: string, input: { name: string; models:
 export type PackageChange = 'name' | PackageField | 'models';
 export type ChangePackageResult =
   | { ok: true; changed: PackageChange[] }
-  | { error: 'notAllowed' | 'notFound' | NameError | 'modelInvalid' }
+  | { error: 'notAllowed' | 'notFound' | NameError | 'modelInvalid' | 'tooManyModels' }
   | { error: 'invalid' | 'stale'; fields: PackageChange[] };
 
 /**
@@ -122,6 +125,7 @@ export async function changePackage(actorId: string, id: string, input: { name: 
   const typed = PACKAGE_FIELDS.filter((f) => input[f] !== was[f]);
   const fields = typed.filter((f) => outOfLimits(f, input[f]));
   if (fields.length) return { error: 'invalid', fields };
+  if (input.addModels.filter((m) => tidy(m)).length > MODELS_MAX) return { error: 'tooManyModels' };
   const renamed = name !== tidy(was.name);
   if (renamed) { const bad = nameProblem(name); if (bad) return { error: bad }; }
   return db.transaction(async (tx) => {
@@ -149,9 +153,13 @@ export async function changePackage(actorId: string, id: string, input: { name: 
       }
     }
     const last = Math.max(0, ...have.map((h) => h.position));
+    let models = have.sort((a, b) => a.position - b.position).map((h) => h.model);
     for (const [i, model] of adding.entries()) {
       await tx.insert(startingPackageModel).values({ packageId: id, model, position: last + i + 1 });
-      await tx.insert(auditEvent).values({ createdBy: actorId, action: 'package.addModel', targetType: 'package', targetId: id, details: { package: renamed ? name : now.name, model } });
+      // The package's models before and after, as for any other change (4.1).
+      await tx.insert(auditEvent).values({ createdBy: actorId, action: 'package.addModel', targetType: 'package', targetId: id,
+        details: { package: renamed ? name : now.name, model, old: models, new: [...models, model] } });
+      models = [...models, model];
     }
     return { ok: true, changed: adding.length ? [...changed, 'models'] : changed } as const;
   });

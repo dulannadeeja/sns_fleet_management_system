@@ -402,7 +402,7 @@
   },
   "04-Cars-Packages-Desktop.dc.html": {
    "expand": "fill",
-   "h": 969,
+   "h": 1097,
    "is_interactive": true,
    "page": "plate",
    "title": "04.6 Starting packages · Desktop",
@@ -411,7 +411,7 @@
    "y": 21037
   },
   "04-Cars-Packages-Phone.dc.html": {
-   "h": 1940,
+   "h": 2132,
    "is_interactive": true,
    "page": "plate",
    "title": "04.6 Starting packages · Phone",

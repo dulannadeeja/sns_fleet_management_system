@@ -5,7 +5,7 @@ import { db } from '../../src/db/client';
 import { auditEvent } from '../../src/db/schema';
 import { addCar, getCar } from '../../src/modules/cars/cars';
 import { addPackage, changePackage, listPackages } from '../../src/modules/cars/packages';
-import { theOwner } from '../helpers/people';
+import { samplePerson } from '../helpers/people';
 import { samplePlate } from '../helpers/cars';
 
 // AT-50: "An admin changes the Alto starting package from 4,000 to 4,200 a day: Alto cars already in the system stay at
@@ -17,16 +17,17 @@ describe('AT-50: changing a starting package changes only cars added afterwards'
     const alto = (await listPackages()).find((p) => p.name === 'Alto')!;
     expect(alto).toMatchObject({ models: ['Alto'], dailyRate: 4000, kmPerDay: 100, extraKmRate: 17 });
 
-    const owner = await theOwner();
+    // An admin, with the permissions an admin starts with ("Add or edit cars and packages").
+    const owner = (await samplePerson(undefined, 'admin')).id;
     const tag = randomUUID().slice(0, 8);
-    const model = `AT50 sample ${tag}`;
-    const made = await addPackage(owner, { name: `AT50 sample package ${tag}`, models: [model], dailyRate: 4000, kmPerDay: 100, extraKmRate: 17 });
+    const model = `Sample AT50 model ${tag}`;
+    const made = await addPackage(owner, { name: `Sample AT50 package ${tag}`, models: [model], dailyRate: 4000, kmPerDay: 100, extraKmRate: 17 });
     if (!('ok' in made)) throw new Error(made.error);
     const before = await addCar(owner, { registration: samplePlate(), model, ownership: 'sns' });
     if (!('ok' in before)) throw new Error(before.error);
     expect((await getCar(before.id))!.terms.dailyRate).toBe(4000);
 
-    const was = { name: `AT50 sample package ${tag}`, dailyRate: 4000, kmPerDay: 100, extraKmRate: 17 };
+    const was = { name: `Sample AT50 package ${tag}`, dailyRate: 4000, kmPerDay: 100, extraKmRate: 17 };
     expect(await changePackage(owner, made.id, { ...was, dailyRate: 4200, addModels: [] }, was)).toEqual({ ok: true, changed: ['dailyRate'] });
 
     expect((await getCar(before.id))!.terms.dailyRate).toBe(4000); // already in the system: stays

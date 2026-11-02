@@ -380,8 +380,8 @@
  {
   "name": "04-Cars-Packages-Desktop",
   "w": 1280,
-  "canvasH": 969,
-  "contentH": 969,
+  "canvasH": 1097,
+  "contentH": 1097,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -389,8 +389,8 @@
  {
   "name": "04-Cars-Packages-Phone",
   "w": 390,
-  "canvasH": 1940,
-  "contentH": 1940,
+  "canvasH": 2132,
+  "contentH": 2132,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

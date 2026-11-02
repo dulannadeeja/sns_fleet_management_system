@@ -31,6 +31,14 @@ ALTER TABLE "starting_package" ADD CONSTRAINT "starting_package_created_by_user_
 ALTER TABLE "starting_package_model" ADD CONSTRAINT "starting_package_model_package_id_starting_package_id_fk" FOREIGN KEY ("package_id") REFERENCES "public"."starting_package"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 CREATE INDEX "starting_package_model_by_model" ON "starting_package_model" USING btree ("model");--> statement-breakpoint
 ALTER TABLE "vehicle" ADD CONSTRAINT "vehicle_starting_package_id_starting_package_id_fk" FOREIGN KEY ("starting_package_id") REFERENCES "public"."starting_package"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+-- One package per name, however it is written (the app also checks under its lock, #21 review).
+CREATE UNIQUE INDEX starting_package_name_any_case ON starting_package (lower(name));
+--> statement-breakpoint
+-- The car limits (system design 4.2), also in the database (#21 review).
+ALTER TABLE starting_package ADD CONSTRAINT starting_package_limits CHECK (daily_rate BETWEEN 1 AND 100000 AND km_per_day BETWEEN 1 AND 1000 AND extra_km_rate BETWEEN 0 AND 1000);
+--> statement-breakpoint
+ALTER TABLE package_default ADD CONSTRAINT package_default_limits CHECK (commission_percent BETWEEN 0 AND 100 AND long_rental_extra BETWEEN 0 AND 100000 AND long_rental_from_day BETWEEN 2 AND 60 AND garage_day_charge BETWEEN 0 AND 100000);
+--> statement-breakpoint
 -- The starting packages and defaults of system design 4.1 and 4.2 (Confirmed; the extra-km rates are design rates).
 INSERT INTO package_default (id, commission_percent, long_rental_extra, long_rental_from_day, garage_day_charge) VALUES (1, 15, 500, 6, 5000);
 --> statement-breakpoint

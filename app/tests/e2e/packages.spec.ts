@@ -59,6 +59,7 @@ test('ST-04.4: two packages for one model; a change applies to cars added afterw
 
   // 04.8 Add a car: the model has two packages, so one must be picked; the older one's rate fills in.
   await page.goto('/cars/new');
+  await expect(page.getByRole('button', { name: 'Save car' })).toBeEnabled(); // ready for clicks (useReady)
   await page.getByLabel('Registration number').fill(`SMP ${randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`);
   await page.getByRole('radio', { name: model, exact: true }).check();
   await page.getByRole('button', { name: 'Save car' }).click();

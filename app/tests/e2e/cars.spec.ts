@@ -22,6 +22,8 @@ test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its 
   await page.goto('/cars');
   await page.getByRole('link', { name: 'Add a car' }).click();
   await expect(page).toHaveURL(/\/cars\/new$/);
+  // The form answers clicks once the page is ready, when Save turns on (useReady).
+  await expect(page.getByRole('button', { name: 'Save car' })).toBeEnabled();
   await page.getByLabel('Registration number').fill(plate.toLowerCase());
   await page.getByRole('radio', { name: 'Prius' }).check();
   await expect(page.locator('input[name="dailyRate"]')).toHaveValue('6500');

@@ -723,7 +723,7 @@
       "models": "Models",
       "modelsHint": "Separate models with a comma, for example Prius, Axio",
       "addModel": "Add a model",
-      "addModelHint": "Optional. A model in another package can be in this one too. Models are never taken out.",
+      "addModelHint": "Optional. A model in another package can be in this one too.",
       "cars": "Cars",
       "change": "Change",
       "add": "Add a package",
@@ -751,7 +751,8 @@
         "notFound": "This package was not found.",
         "invalid": "Type a whole number in the range.",
         "stale": "Someone changed this meanwhile. Open the page again to see it, then make your change.",
-        "failed": "Not saved. Try again."
+        "failed": "Not saved. Try again.",
+        "tooManyModels": "Up to 20 models at a time."
       }
     }
   },

@@ -64,15 +64,16 @@ const termsColumns = {
 export type AddResult =
   | { ok: true; id: string }
   | { error: 'notAllowed' | 'registrationMissing' | 'registrationInvalid' | 'registrationTaken' | 'modelInvalid' | 'ownershipInvalid' | 'packageMissing' | 'packageInvalid' }
-  | { error: 'invalid'; fields: TermKey[] };
+  | { error: 'invalid' | 'stale'; fields: TermKey[] };
 
 /**
  * Adds a car (ST-04.3): a starting package of its model and the 4.2 defaults, with any changes typed on the form, in one
  * transaction. A model in more than one package needs `packageId`, one of them; a model in one gets it (ST-04.4,
- * Proposed: Dulan, 2 Nov 2026). Needs "Add or edit cars and packages"; a commission other than the default also needs "Add or edit
+ * Proposed: Dulan, 2 Nov 2026). `shown` is the starting package and defaults the form showed: if one changed meanwhile,
+ * nothing is saved (`stale`), so a car never keeps an old rate logged as a person's change (#21 review). Needs "Add or edit cars and packages"; a commission other than the default also needs "Add or edit
  * partners". Logged: the car, then each typed change from the starting package with its old and new value (PR-05).
  */
-export async function addCar(actorId: string, input: { registration: string; model: string; ownership: string; packageId?: string }, typed: Partial<Terms> = {}): Promise<AddResult> {
+export async function addCar(actorId: string, input: { registration: string; model: string; ownership: string; packageId?: string }, typed: Partial<Terms> = {}, shown: Partial<Terms> = {}): Promise<AddResult> {
   const registration = normalPlate(input.registration ?? '');
   if (!registration) return { error: 'registrationMissing' };
   if (!PLATE.test(registration)) return { error: 'registrationInvalid' };
@@ -92,6 +93,9 @@ export async function addCar(actorId: string, input: { registration: string; mod
         dailyRate: pkg.dailyRate, kmPerDay: pkg.kmPerDay, extraKmRate: pkg.extraKmRate, longRentalExtra: d.longRentalExtra,
         longRentalFromDay: d.longRentalFromDay, garageDayCharge: d.garageDayCharge, commissionPercent: ownership === 'partner' ? d.commissionPercent : null, ownerPays: [],
       };
+      // An SNS car has no commission, whatever default the form showed.
+      const stale = TERM_FIELDS.filter((f) => f in shown && !(PARTNER_TERMS.includes(f) && ownership === 'sns') && !sameTerm(shown[f], start[f]));
+      if (stale.length) return { error: 'stale', fields: stale } as const;
       const terms: Terms = { ...start };
       for (const f of TERM_KEYS) if (f in typed && !(PARTNER_TERMS.includes(f) && ownership === 'sns')) (terms as Record<TermKey, unknown>)[f] = typed[f];
       const changed = TERM_KEYS.filter((f) => !sameTerm(terms[f], start[f]));
