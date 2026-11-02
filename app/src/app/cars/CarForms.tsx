@@ -10,8 +10,10 @@ export interface CarWords {
   fields: Record<string, FieldWords>; errors: Record<string, string>; package: string; packageFrom: string; partnerTerms: string; partnerNote: string;
   newRentalsOnly: string; save: string; saveChanges: string; cancel: string; car: string; registration: string; registrationHint: string;
   model: string; modelHint: string; owner: string; sns: string; snsHint: string; partner: string; partnerHint: string; requiredMark: string;
-  costs: Record<string, string>; ownerPays: string; ownerPaysNote: string;
+  costs: Record<string, string>; ownerPays: string; ownerPaysNote: string; pick: string; pickHint: string;
 }
+/** A starting package as the add-car form needs it (#21). */
+export interface StartPkg { id: string; name: string; models: string[]; dailyRate: number; kmPerDay: number; extraKmRate: number }
 type Pkg = Record<string, number | null>;
 const PACKAGE = ['dailyRate', 'kmPerDay', 'extraKmRate', 'longRentalExtra', 'longRentalFromDay', 'garageDayCharge'];
 
@@ -80,18 +82,25 @@ export function EditCarForm({ carId, terms, costs, partnerCar, seeCommission, ed
   );
 }
 
-/** 04.8: a new car. Choosing a model fills its starting package, which can be changed before saving. */
-export function AddCarForm({ models, starting, defaults, seeCommission, editCommission, w }: {
-  models: string[]; starting: Record<string, Pkg>; defaults: Pkg; seeCommission: boolean; editCommission: boolean; w: CarWords;
+/** 04.8: a new car. Choosing a model fills its starting package (picked, if the model has more than one: #21), which can
+ *  be changed before saving. */
+export function AddCarForm({ models, packages, defaults, seeCommission, editCommission, w }: {
+  models: string[]; packages: StartPkg[]; defaults: Pkg; seeCommission: boolean; editCommission: boolean; w: CarWords;
 }) {
   const [state, action, pending] = useActionState<CarFormState, FormData>(addCarAction, {});
   const ready = useReady();
+  const choicesOf = (m: string) => packages.filter((p) => p.models.includes(m));
+  const rates = (p: StartPkg | undefined) => (p ? asText({ dailyRate: p.dailyRate, kmPerDay: p.kmPerDay, extraKmRate: p.extraKmRate }) : {});
   const [model, setModel] = useState(state.values?.model ?? models[0]);
+  const [pkgId, setPkgId] = useState(() => (choicesOf(models[0]).length === 1 ? choicesOf(models[0])[0].id : ''));
   const [ownership, setOwnership] = useState(state.values?.ownership ?? 'sns');
-  const [values, setValues] = useState(() => asText({ ...defaults, ...starting[models[0]] }));
+  const [values, setValues] = useState(() => ({ ...asText(defaults), ...(choicesOf(models[0]).length === 1 ? rates(choicesOf(models[0])[0]) : {}) }));
   const [chosen, setChosen] = useState<string[]>([]);
   const set = (k: string, v: string) => setValues((s) => ({ ...s, [k]: v }));
-  const pick = (m: string) => { setModel(m); setValues((s) => ({ ...s, ...asText(starting[m]) })); };
+  const choosePkg = (p: StartPkg | undefined) => { setPkgId(p?.id ?? ''); setValues((s) => ({ ...s, ...rates(p) })); };
+  const pick = (m: string) => { setModel(m); const c = choicesOf(m); choosePkg(c.length === 1 ? c[0] : undefined); };
+  const choices = choicesOf(model);
+  const pkg = choices.find((p) => p.id === pkgId);
   const err = state.error;
   return (
     <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -120,7 +129,22 @@ export function AddCarForm({ models, starting, defaults, seeCommission, editComm
         </fieldset>
       </section>
       <section className="car-card"><h2>{w.package}</h2>
-        <span className="set-muted">{w.packageFrom.replace('{model}', model)}</span>
+        <input type="hidden" name="packageId" value={pkgId} />
+        {choices.length > 1 ? (
+          <fieldset className="set-card" style={{ border: 0, padding: 0, gap: 8 }}>
+            <legend className="set-rules-title">{`${w.pick} ${w.requiredMark}`}</legend>
+            <div className="set-choices">
+              {choices.map((p) => (
+                <label key={p.id} className="set-choice"><span className="set-choice-title">
+                  <input type="radio" name="packageChoice" value={p.id} checked={pkgId === p.id} onChange={() => choosePkg(p)} />{p.name}</span>
+                  <span className="set-choice-hint">{w.fields.dailyRate.unit} {p.dailyRate.toLocaleString('en-US')} · {p.kmPerDay} km · {w.fields.extraKmRate.unit} {p.extraKmRate}</span></label>
+              ))}
+            </div>
+            <span className={err === 'packageMissing' || err === 'packageInvalid' ? 'rt-field-error' : 'set-muted'} role={err === 'packageMissing' || err === 'packageInvalid' ? 'alert' : undefined}>
+              {err === 'packageMissing' || err === 'packageInvalid' ? w.errors[err] : w.pickHint}</span>
+          </fieldset>
+        ) : null}
+        {pkg ? <span className="set-muted">{w.packageFrom.replace('{package}', pkg.name)}</span> : null}
         <Fields keys={PACKAGE} values={values} onChange={set} w={w} bad={state.fields ?? []} />
         <Notice icon="lock">{w.newRentalsOnly}</Notice>
       </section>
@@ -131,7 +155,7 @@ export function AddCarForm({ models, starting, defaults, seeCommission, editComm
           <span className="set-muted">{w.partnerNote}</span>
         </section>
       ) : null}
-      {err && !err.startsWith('registration') ? <Notice tone="danger">{w.errors[err] ?? w.errors.failed}</Notice> : null}
+      {err && !err.startsWith('registration') && !err.startsWith('package') ? <Notice tone="danger">{w.errors[err] ?? w.errors.failed}</Notice> : null}
       <div className="set-actions">
         <Link className="rt-btn rt-btn-quiet" href="/cars">{w.cancel}</Link>
         <Button type="submit" icon="check" disabled={pending || !ready}>{w.save}</Button>

@@ -37,7 +37,7 @@ export async function addCarAction(_: CarFormState, form: FormData): Promise<Car
   const commissionShown = (await mayDo(person, 'editPartners')) && (await mayDo(person, 'seePartnerEarnings'));
   const typed: Partial<Terms> = Object.fromEntries(TERM_FIELDS.filter((f) => form.has(f) && (f !== 'commissionPercent' || commissionShown)).map((f) => [f, num(text(form, f))]));
   if (commissionShown && form.has('ownerPaysShown')) typed.ownerPays = form.getAll('ownerPays').map(String).filter(isCost) as Cost[];
-  const added = await addCar(person.id, { registration: text(form, 'registration'), model: text(form, 'model'), ownership: text(form, 'ownership') }, typed);
+  const added = await addCar(person.id, { registration: text(form, 'registration'), model: text(form, 'model'), ownership: text(form, 'ownership'), packageId: text(form, 'packageId') || undefined }, typed);
   if ('error' in added) return { error: added.error, fields: 'fields' in added ? added.fields : undefined, values };
   revalidatePath('/cars');
   redirect(`/cars/${added.id}?saved=1`);

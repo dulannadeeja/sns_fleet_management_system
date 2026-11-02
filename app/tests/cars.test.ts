@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { and, desc, eq } from 'drizzle-orm';
 import { db } from '../src/db/client';
 import { auditEvent } from '../src/db/schema';
-import { MODELS, STARTING_PACKAGES, addCar, editCar, getCar, listCars, normalPlate } from '../src/modules/cars/cars';
+import { addCar, editCar, getCar, listCars, normalPlate } from '../src/modules/cars/cars';
 import { setPermission } from '../src/modules/people/people';
 import { samplePerson, theOwner } from './helpers/people';
 import { samplePlate } from './helpers/cars';
@@ -11,8 +11,6 @@ import { samplePlate } from './helpers/cars';
 // with random sample plates; the car tables are never cleaned up.
 describe('ST-04.3: add or edit a car and its package', () => {
   it('starts a new car with its model\'s starting package and the agreed defaults', async () => {
-    expect(MODELS).toEqual(['Wagon R', 'Spacia', 'Every', 'Alto', 'Prius', 'Axio']);
-    expect(STARTING_PACKAGES.Alto).toEqual({ dailyRate: 4000, kmPerDay: 100, extraKmRate: 17 });
     const owner = await theOwner();
     const plate = samplePlate();
     const added = await addCar(owner, { registration: `  ${plate.toLowerCase()} `, model: 'Alto', ownership: 'partner' });

@@ -1,25 +1,15 @@
 import { and, desc, eq, lte, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { auditEvent, partnerOwner, permissionGrant, user, vehicle, vehicleTermsVersion } from '../../db/schema';
-import { allows, type Permission } from '../../auth/permissions';
+import { auditEvent, partnerOwner, startingPackage, startingPackageModel, user, vehicle, vehicleTermsVersion } from '../../db/schema';
+import { actorMay, LIMITS, type Tx } from './rules';
+import { packagesFor, readDefaults } from './packages';
+
+export { LIMITS };
 
 // Cars (ST-04.1 to ST-04.3; system design 4.1, 4.2, 4.3). A car's package and terms are dated versions: a change adds a
-// new one and never alters the old (PR-08, AT-05). Decisions of 1 Nov 2026 (Proposed, Dulan): the six models, one car
-// per registration number, a partner car saved before its partner, the commission behind the partner permissions.
+// new one and never alters the old (PR-08, AT-05). Decisions of 1 Nov 2026 (Proposed, Dulan): one car per registration
+// number, a partner car saved before its partner, the commission behind the partner permissions.
 
-export const MODELS = ['Wagon R', 'Spacia', 'Every', 'Alto', 'Prius', 'Axio'] as const;
-export type Model = (typeof MODELS)[number];
-/** System design 4.1 starting packages (Confirmed; the extra-km rates are design rates). Editable later in #21. */
-export const STARTING_PACKAGES: Record<Model, { dailyRate: number; kmPerDay: number; extraKmRate: number }> = {
-  'Wagon R': { dailyRate: 4500, kmPerDay: 100, extraKmRate: 25 },
-  Spacia: { dailyRate: 4500, kmPerDay: 100, extraKmRate: 25 },
-  Every: { dailyRate: 5000, kmPerDay: 100, extraKmRate: 25 },
-  Alto: { dailyRate: 4000, kmPerDay: 100, extraKmRate: 17 },
-  Prius: { dailyRate: 6500, kmPerDay: 100, extraKmRate: 27 },
-  Axio: { dailyRate: 6500, kmPerDay: 100, extraKmRate: 27 },
-};
-/** System design 4.2 defaults (Confirmed). */
-export const DEFAULT_TERMS = { commissionPercent: 15, longRentalExtra: 500, longRentalFromDay: 6, garageDayCharge: 5000 };
 /** The costs a partner may pay on their car (board 11.3; system design 3.2 "Partner accounts", Proposed). */
 export const COSTS = ['service', 'tyres', 'repairs', 'battery'] as const;
 export type Cost = (typeof COSTS)[number];
@@ -46,27 +36,13 @@ export interface Car {
   partnerId: string | null; partnerName: string | null;
 }
 
-type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** A registration number as written on the plate: capitals, single spaces, no spaces at the ends. */
 export const normalPlate = (raw: string) => raw.trim().replace(/\s+/g, ' ').toUpperCase();
 const PLATE = /^[A-Z0-9][A-Z0-9 -]{1,14}$/;
-export const isModel = (m: string): m is Model => (MODELS as readonly string[]).includes(m);
 
-async function actorMay(tx: Tx, actorId: string, permission: Permission): Promise<boolean> {
-  const [actor] = await tx.select({ role: user.role, disabledAt: user.disabledAt }).from(user).where(eq(user.id, actorId));
-  if (!actor) return false;
-  const granted = new Set((await tx.select({ p: permissionGrant.permission }).from(permissionGrant).where(eq(permissionGrant.userId, actorId))).map((g) => g.p));
-  return allows(actor, granted, permission);
-}
-
-/** Limits to stop typing mistakes (system design 4.2; Proposed: Dulan, 1 Nov 2026). Whole numbers only. */
-export const LIMITS: Record<TermField, [number, number]> = {
-  dailyRate: [1, 100_000], kmPerDay: [1, 1_000], extraKmRate: [0, 1_000], longRentalExtra: [0, 100_000],
-  longRentalFromDay: [2, 60], garageDayCharge: [0, 100_000], commissionPercent: [0, 100],
-};
-const BOUNDS = LIMITS;
+const BOUNDS: Record<TermField, readonly [number, number]> = LIMITS;
 function badFields(terms: Terms, ownership: Ownership): TermKey[] {
   const bad: TermKey[] = TERM_FIELDS.filter((f) => {
     const v = terms[f];
@@ -87,35 +63,44 @@ const termsColumns = {
 
 export type AddResult =
   | { ok: true; id: string }
-  | { error: 'notAllowed' | 'registrationMissing' | 'registrationInvalid' | 'registrationTaken' | 'modelInvalid' | 'ownershipInvalid' }
+  | { error: 'notAllowed' | 'registrationMissing' | 'registrationInvalid' | 'registrationTaken' | 'modelInvalid' | 'ownershipInvalid' | 'packageMissing' | 'packageInvalid' }
   | { error: 'invalid'; fields: TermKey[] };
 
 /**
- * Adds a car (ST-04.3): its model's starting package and the 4.2 defaults, with any changes typed on the form, in one
- * transaction. Needs "Add or edit cars and packages"; a commission other than the default also needs "Add or edit
+ * Adds a car (ST-04.3): a starting package of its model and the 4.2 defaults, with any changes typed on the form, in one
+ * transaction. A model in more than one package needs `packageId`, one of them; a model in one gets it (ST-04.4,
+ * Proposed: Dulan, 2 Nov 2026). Needs "Add or edit cars and packages"; a commission other than the default also needs "Add or edit
  * partners". Logged: the car, then each typed change from the starting package with its old and new value (PR-05).
  */
-export async function addCar(actorId: string, input: { registration: string; model: string; ownership: string }, typed: Partial<Terms> = {}): Promise<AddResult> {
+export async function addCar(actorId: string, input: { registration: string; model: string; ownership: string; packageId?: string }, typed: Partial<Terms> = {}): Promise<AddResult> {
   const registration = normalPlate(input.registration ?? '');
   if (!registration) return { error: 'registrationMissing' };
   if (!PLATE.test(registration)) return { error: 'registrationInvalid' };
-  if (!isModel(input.model)) return { error: 'modelInvalid' };
   if (input.ownership !== 'sns' && input.ownership !== 'partner') return { error: 'ownershipInvalid' };
   const ownership = input.ownership;
-  const model = input.model;
-  const start: Terms = { ...STARTING_PACKAGES[model], ...DEFAULT_TERMS, commissionPercent: ownership === 'partner' ? DEFAULT_TERMS.commissionPercent : null, ownerPays: [] };
-  const terms: Terms = { ...start };
-  for (const f of TERM_KEYS) if (f in typed && !(PARTNER_TERMS.includes(f) && ownership === 'sns')) (terms as Record<TermKey, unknown>)[f] = typed[f];
-  const changed = TERM_KEYS.filter((f) => !sameTerm(terms[f], start[f]));
-  const bad = badFields(terms, ownership).filter((f) => changed.includes(f));
-  if (bad.length) return { error: 'invalid', fields: bad };
   try {
     return await db.transaction(async (tx) => {
       if (!(await actorMay(tx, actorId, 'editCarsAndPackages'))) return { error: 'notAllowed' } as const;
+      const choices = await packagesFor(input.model ?? '', tx);
+      if (!choices.length) return { error: 'modelInvalid' } as const;
+      const pkg = input.packageId ? choices.find((p) => p.id === input.packageId) : choices.length === 1 ? choices[0] : undefined;
+      if (!pkg) return { error: input.packageId ? 'packageInvalid' : 'packageMissing' } as const;
+      // The model as the package writes it.
+      const model = pkg.models.find((m) => m.toLowerCase() === input.model.trim().replace(/\s+/g, ' ').toLowerCase())!;
+      const d = await readDefaults(tx);
+      const start: Terms = {
+        dailyRate: pkg.dailyRate, kmPerDay: pkg.kmPerDay, extraKmRate: pkg.extraKmRate, longRentalExtra: d.longRentalExtra,
+        longRentalFromDay: d.longRentalFromDay, garageDayCharge: d.garageDayCharge, commissionPercent: ownership === 'partner' ? d.commissionPercent : null, ownerPays: [],
+      };
+      const terms: Terms = { ...start };
+      for (const f of TERM_KEYS) if (f in typed && !(PARTNER_TERMS.includes(f) && ownership === 'sns')) (terms as Record<TermKey, unknown>)[f] = typed[f];
+      const changed = TERM_KEYS.filter((f) => !sameTerm(terms[f], start[f]));
+      const bad = badFields(terms, ownership).filter((f) => changed.includes(f));
+      if (bad.length) return { error: 'invalid', fields: bad } as const;
       if (changed.some((f) => PARTNER_TERMS.includes(f)) && !(await actorMay(tx, actorId, 'editPartners'))) return { error: 'notAllowed' } as const;
-      const [car] = await tx.insert(vehicle).values({ registration, model, ownership, createdBy: actorId }).returning({ id: vehicle.id });
+      const [car] = await tx.insert(vehicle).values({ registration, model, ownership, startingPackageId: pkg.id, createdBy: actorId }).returning({ id: vehicle.id });
       await tx.insert(vehicleTermsVersion).values({ vehicleId: car.id, createdBy: actorId, ...terms, effectiveFrom: sql`clock_timestamp()` });
-      await tx.insert(auditEvent).values({ createdBy: actorId, action: 'car.add', targetType: 'car', targetId: car.id, details: { plate: registration, model, ownership } });
+      await tx.insert(auditEvent).values({ createdBy: actorId, action: 'car.add', targetType: 'car', targetId: car.id, details: { plate: registration, model, ownership, package: pkg.name } });
       for (const field of changed) {
         await tx.insert(auditEvent).values({ createdBy: actorId, action: 'car.change', targetType: 'car', targetId: car.id,
           details: { plate: registration, field, old: start[field], new: terms[field] } });
@@ -208,7 +193,10 @@ const toCar = (r: Row): Car => ({
 
 /** Every car (ST-04.1). Callers decide what a person may see: the commission is a partner term. */
 export async function listCars(): Promise<Car[]> {
-  return (await carsQuery().orderBy(sql`array_position(${sql.raw(`array[${MODELS.map((m) => `'${m}'`).join(',')}]`)}::text[], ${vehicle.model})`, vehicle.registration)).map(toCar);
+  // By model in package order (system design 4.1 first), then by plate.
+  const order = sql`(select min(${startingPackage.position} * 1000 + ${startingPackageModel.position}) from ${startingPackageModel}
+    join ${startingPackage} on ${startingPackage.id} = ${startingPackageModel.packageId} where lower(${startingPackageModel.model}) = lower(${vehicle.model}))`;
+  return (await carsQuery().orderBy(sql`${order} nulls last`, vehicle.model, vehicle.registration)).map(toCar);
 }
 
 export async function getCar(id: string): Promise<Car | null> {

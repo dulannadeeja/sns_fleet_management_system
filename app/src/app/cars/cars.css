@@ -36,3 +36,11 @@ a.car-row:hover { background: var(--sunken); }
 .car-costs label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 15px; }
 .car-costs input[type='checkbox'] { width: 20px; height: 20px; margin: 0; accent-color: var(--sapphire); }
 .car-costs .set-muted { width: 100%; }
+/* 04.6 Starting packages (#21). */
+.pkg-row { grid-template-columns: minmax(0, 1.6fr) repeat(4, minmax(0, 0.6fr)) auto; }
+.pkg-row .rt-btn { text-decoration: none; }
+.pkg-phone { display: none; }
+@media (max-width: 699px) {
+  .pkg-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .pkg-phone { display: inline; }
+}
