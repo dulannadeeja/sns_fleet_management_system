@@ -33,6 +33,17 @@ describe('the app role on the car tables', () => {
     await expect(asAppRole('update partner_owner set nic = nic where false')).rejects.toThrow(/permission denied/);
     await expect(asAppRole('delete from partner_owner where false')).rejects.toThrow(/permission denied/);
   });
+  it('may read and add starting packages, change their name and rates and the defaults, and never remove them (#21)', async () => {
+    await expect(asAppRole('insert into starting_package select * from starting_package where false')).resolves.toBeTruthy();
+    await expect(asAppRole('insert into starting_package_model select * from starting_package_model where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update starting_package set name = name, daily_rate = daily_rate, km_per_day = km_per_day, extra_km_rate = extra_km_rate where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update package_default set commission_percent = commission_percent, garage_day_charge = garage_day_charge where false')).resolves.toBeTruthy();
+    await expect(asAppRole('update starting_package_model set model = model where false')).rejects.toThrow(/permission denied/);
+    await expect(asAppRole('update starting_package set position = position where false')).rejects.toThrow(/permission denied/);
+    await expect(asAppRole('delete from starting_package where false')).rejects.toThrow(/permission denied/);
+    await expect(asAppRole('delete from starting_package_model where false')).rejects.toThrow(/permission denied/);
+    await expect(asAppRole('insert into package_default select * from package_default where false')).rejects.toThrow(/permission denied/);
+  });
   // Since #20 the app may set a car's partner link (one column), so a row lock would also be allowed; editCar keeps the
   // advisory lock, which also covers cars with no partner column change.
   it('may not change or remove them, apart from the partner link', async () => {

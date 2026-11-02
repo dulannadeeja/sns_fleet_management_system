@@ -7,7 +7,7 @@ import type { CarWords } from './CarForms';
 export async function carWords(): Promise<CarWords> {
   const t = await getTranslations('cars');
   const ts = await getTranslations('settings');
-  const keys = ['registrationMissing', 'registrationInvalid', 'registrationTaken', 'modelInvalid', 'ownershipInvalid', 'notAllowed', 'notFound', 'invalid', 'stale', 'failed'] as const;
+  const keys = ['registrationMissing', 'registrationInvalid', 'registrationTaken', 'modelInvalid', 'ownershipInvalid', 'packageMissing', 'packageInvalid', 'notAllowed', 'notFound', 'invalid', 'stale', 'failed'] as const;
   return {
     fields: Object.fromEntries(TERM_FIELDS.map((f) => [f, { label: t(`fields.${f}.label`), unit: t(`fields.${f}.unit`), hint: t(`fields.${f}.hint`),
       range: t('range', { min: showNumber(LIMITS[f][0]), max: showNumber(LIMITS[f][1]) }) }])),
@@ -17,5 +17,6 @@ export async function carWords(): Promise<CarWords> {
     registration: t('registration'), registrationHint: t('registrationHint'), model: t('model'), modelHint: t('modelHint'), owner: t('owner'),
     sns: t('sns'), snsHint: t('snsHint'), partner: t('partner'), partnerHint: t('partnerHint'), requiredMark: ts('requiredMark'),
     costs: t.raw('costs') as Record<string, string>, ownerPays: t('ownerPays.label'), ownerPaysNote: t('ownerPays.note'),
+    pick: t('packages.pick'), pickHint: t('packages.pickHint'),
   };
 }

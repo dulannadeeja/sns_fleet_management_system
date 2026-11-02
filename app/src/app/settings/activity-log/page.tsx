@@ -53,8 +53,8 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       field: '',
       date: String(e.details?.signedOn ?? ''),
       cars: Array.isArray(e.details?.cars) ? (e.details.cars as unknown[]).map(String).join(', ') : '',
-      // car.add and car.change: the plate, the term's name and its values with units (#18).
-      ...(e.action.startsWith('car.') ? carValues(tCars, e) : {}),
+      // car.add and car.change: the plate, (package.*: the package, #21) the term's name and its values with units (#18).
+      ...(e.action.startsWith('car.') || e.action.startsWith('package.') ? carValues(tCars, e) : {}),
       // customer.*: the customer's name, the detail's name and values, the copy's kind (#19).
       ...(e.action.startsWith('customer.') ? {
         target: String(e.details?.name ?? e.targetId ?? ''),

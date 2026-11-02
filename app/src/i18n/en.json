@@ -281,6 +281,12 @@
           "change": "corrected the {field} of {target} from {old} to {new}",
           "copyOpened": "opened a copy of {target}: {copy}",
           "nicChange": "corrected the NIC of {target} from {old} to {new}"
+        },
+        "package": {
+          "add": "added the starting package {target} ({models})",
+          "change": "changed the {field} of the starting package {target} from {old} to {new}",
+          "addModel": "added the model {model} to the starting package {target}",
+          "defaults": "changed the starting {field} for every car from {old} to {new}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -499,7 +505,8 @@
           ]
         }
       }
-    }
+    },
+    "packages": "Cars and packages"
   },
   "code": {
     "back": "Back",
@@ -655,7 +662,7 @@
       }
     },
     "package": "Package",
-    "packageFrom": "{model} starting package · can be changed for this car",
+    "packageFrom": "Starting package: {package} · can be changed for this car",
     "partnerTerms": "Partner terms",
     "partnerNote": "Shown only to people who may see partner terms; changed only by people who may add or edit partners. Who pays which costs is agreed when the partner is added.",
     "newRentalsOnly": "Changes apply to new rentals only. Rentals already running, and their extensions, keep the terms they started with.",
@@ -663,7 +670,7 @@
     "registration": "Registration number",
     "registrationHint": "One car per number, as written on the plate.",
     "model": "Model",
-    "modelHint": "A model not listed is added on Starting packages first, with its own package.",
+    "modelHint": "A model not listed is added on Starting packages first, with a package.",
     "owner": "Owner",
     "snsHint": "SNS’s own car",
     "partnerHint": "linked to its owner on Partners › Add a partner",
@@ -689,7 +696,9 @@
       "notFound": "This car was not found.",
       "invalid": "Type a whole number in the range.",
       "stale": "Someone changed this car meanwhile. Open the page again to see it, then make your change.",
-      "failed": "Not saved. Try again."
+      "failed": "Not saved. Try again.",
+      "packageMissing": "Pick a package.",
+      "packageInvalid": "That package is not for this model. Pick one of its packages."
     },
     "noChange": "Nothing changed yet.",
     "range": "Whole number, {min} to {max}.",
@@ -705,7 +714,47 @@
       "none": "none",
       "note": "Anything not ticked is decided case by case by the admin."
     },
-    "ownerPartnerNamed": "Partner · {name}"
+    "ownerPartnerNamed": "Partner · {name}",
+    "packages": {
+      "title": "Starting packages",
+      "lkr": "LKR",
+      "name": "Package name",
+      "nameHint": "For example Prius (new)",
+      "models": "Models",
+      "modelsHint": "Separate models with a comma, for example Prius, Axio",
+      "addModel": "Add a model",
+      "addModelHint": "Optional. A model in another package can be in this one too.",
+      "cars": "Cars",
+      "change": "Change",
+      "add": "Add a package",
+      "changeDefaults": "Change the defaults",
+      "defaults": "For every car",
+      "saved": "Saved.",
+      "changeTitle": "Change a package",
+      "addTitle": "Add a package",
+      "defaultsTitle": "Change the defaults",
+      "onlyNew": "Cars already added keep their own package. Only cars added afterwards start with this.",
+      "commissionNote": "The commission default changes only with “Add or edit partners”.",
+      "note": "A new car starts with a package of its model; changing one here changes only cars added afterwards. Each car can then be changed on its own page. Changing a package never changes rentals already running. A model can be in more than one package (for example a new and an old Prius); a new car then picks one. A new model comes in with a package. Each change is in the activity log with the old and new values.",
+      "fieldName": "name",
+      "pick": "Package",
+      "pickHint": "This model has more than one package. Pick one.",
+      "save": "Save",
+      "cancel": "Cancel",
+      "errors": {
+        "nameMissing": "Type a name for the package.",
+        "nameTooLong": "Use 60 letters or fewer.",
+        "nameTaken": "A package already has this name. Use another.",
+        "modelsMissing": "Type at least one model.",
+        "modelInvalid": "A model name has letters, numbers, spaces and ( ) . / - only, up to 40.",
+        "notAllowed": "You may not change this.",
+        "notFound": "This package was not found.",
+        "invalid": "Type a whole number in the range.",
+        "stale": "Someone changed this meanwhile. Open the page again to see it, then make your change.",
+        "failed": "Not saved. Try again.",
+        "tooManyModels": "Up to 20 models at a time."
+      }
+    }
   },
   "partners": {
     "title": "Partner owners",

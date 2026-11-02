@@ -113,6 +113,13 @@
       "when": 1793560229577,
       "tag": "0015_customers",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1793581218976,
+      "tag": "0016_starting_packages",
+      "breakpoints": true
     }
   ]
 }

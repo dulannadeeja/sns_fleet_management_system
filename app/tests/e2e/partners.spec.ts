@@ -24,6 +24,7 @@ test('ST-11.1 to 11.3: the owner adds a partner with a car; the partner signs in
 
   // A partner car, not linked yet.
   await page.goto('/cars/new');
+  await expect(page.getByRole('button', { name: 'Save car' })).toBeEnabled(); // ready for clicks (useReady)
   await page.getByLabel('Registration number').fill(plate);
   await page.getByRole('radio', { name: 'Alto' }).check();
   await page.getByRole('radio', { name: /Partner/ }).check();
@@ -66,6 +67,7 @@ test('ST-11.1 to 11.3: the owner adds a partner with a car; the partner signs in
   const partnerUrl = page.url().replace(/\?.*$/, '');
   const plate2 = `SMP ${randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`;
   await page.goto('/cars/new');
+  await expect(page.getByRole('button', { name: 'Save car' })).toBeEnabled(); // ready for clicks (useReady)
   await page.getByLabel('Registration number').fill(plate2);
   await page.getByRole('radio', { name: 'Every' }).check();
   await page.getByRole('radio', { name: /Partner/ }).check();
