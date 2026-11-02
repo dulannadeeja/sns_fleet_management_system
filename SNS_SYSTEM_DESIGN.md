@@ -393,6 +393,7 @@ Track servicing by date and mileage, repairs, insurance expiry, vehicle-licence 
 - Expired insurance/licence documents warn staff; proceeding requires the authorised admin decision and reason.
 - Temporary owner use can mark the vehicle unavailable with a reason and expected return date, without trip or kilometre tracking.
 - Permanently returned/sold vehicles are retired while all historical rental, maintenance, and financial records remain accessible to authorised users. An admin or the primary owner retires a vehicle, with a reason and date, only when it is not rented or reserved. A partner's balance from it stays payable (Confirmed: agreed by the owner, recorded by Dulan).
+- Changing a car's status (Proposed: Dulan, 2 Nov 2026; for the owner to confirm): the expected return date is optional for both Under repair and Temporarily unavailable, and can be changed later. This changes the Confirmed line above, which gives owner use an expected return date: the owner must confirm it. Under repair, Temporarily unavailable and retiring each need a reason; marking a car available needs none. A car is retired on today's date or an earlier one, never before the car was added. Only the primary owner can bring a retired car back, with a reason; it comes back as Available. Every status change is in the activity log with the old and new status.
 
 Detailed non-rental movement/odometer tracking is a future extension, not a launch requirement.
 

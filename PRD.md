@@ -414,6 +414,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - The owner's own use marks the car unavailable with a reason and an expected return date, with no trip or km tracking.
   - A car that is sold or returned for good is retired by an admin or the owner, with a reason and date, only when it is not rented or reserved: no new rentals, every past record kept, and a partner's balance from it stays payable.
   - Rented and Overdue come from the rental itself, not from this screen.
+  - *Proposed (Dulan, 2 Nov 2026):* the expected return date is optional for Under repair and Unavailable (it changes a Confirmed line: the owner must confirm); a reason for each status except Available; retire on today or an earlier date, not before the car was added; only the owner brings a retired car back, with a reason; each change logged with old and new. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability).
 - **Checks:** AT-20 "Vehicle marked under repair: rental handover blocked until an authorised availability change". AT-25 "Retire a vehicle: no new rentals; history and money owed kept". AT-52 "Staff try to retire a car; an admin retires a car reserved next week: staff cannot; the admin is refused until the reservation is moved or cancelled".
 - **Screens:** 04.5 Change a car's status, 04.7 Car status blocks · reference.
 - **Decided:** DN-01 (staff and admins set Under repair or Unavailable; the admin marks a car available).
