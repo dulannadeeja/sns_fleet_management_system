@@ -4,19 +4,19 @@ import { auditEvent, partnerOwner, permissionGrant, user } from '../../db/schema
 import { allows, type Permission } from '../../auth/permissions';
 import { phoneProblem } from '../../auth/phone';
 import { MIN_PASSWORD_LENGTH } from '../../auth/rules';
+import { NIC, normalNic } from '../../lib/nic';
+import { realDate, todayColombo } from '../../lib/dates';
 import { createPartnerAccount, hashPassword, type Tx } from '../people/people';
 import { isCost, linkCarToPartner, listCars, LIMITS, type Car, type Cost } from '../cars/cars';
 
 export { unlinkedPartnerCars } from '../cars/cars';
+export { normalNic } from '../../lib/nic';
 
 // Partner owners (ST-11.1 to ST-11.3; system design 3.2 "Partner accounts", 10, 14; Proposed: Dulan, 1 Nov 2026).
 // Whoever may add or edit partners (the admin by default) adds one, with their sign-in account and their cars; turning
 // the account off or on stays with the owner (people module). Earnings, cash-outs and the starting balance come later.
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-/** A NIC as on the card: 9 digits and V or X (old cards), or 12 digits (new cards). */
-const NIC = /^(\d{9}[VX]|\d{12})$/;
-export const normalNic = (raw: string) => raw.replace(/\s+/g, '').toUpperCase();
 
 export type PartnerError = 'notAllowed' | 'notFound' | 'nameMissing' | 'phoneMissing' | 'phoneInvalid' | 'phoneTaken' | 'passwordShort'
   | 'nicInvalid' | 'nicTaken' | 'bankTooLong' | 'carsMissing' | 'carsInvalid' | 'carNotFree' | 'dateInvalid';
@@ -116,12 +116,6 @@ export async function addCarsToPartner(actorId: string, partnerId: string, cars:
     throw e;
   }
 }
-
-/** A real calendar day as YYYY-MM-DD (not 30 February: #20 review). */
-const realDate = (d: string) => /^\d{4}-\d{2}-\d{2}$/.test(d) && !Number.isNaN(Date.parse(`${d}T00:00:00Z`)) && new Date(`${d}T00:00:00Z`).toISOString().slice(0, 10) === d;
-
-/** Today in Sri Lanka, as YYYY-MM-DD. */
-const todayColombo = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Colombo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 
 /** Records the date the paper agreement was signed (ST-11.3; system design 14): not in the future. Nothing waits on it. */
 export async function recordAgreementSigned(actorId: string, partnerId: string, signedOn: string): Promise<{ ok: true } | { error: PartnerError }> {

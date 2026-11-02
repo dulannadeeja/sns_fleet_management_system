@@ -73,7 +73,7 @@ Tables follow the system design's core records (Logical structure, Core records 
 | Area | Tables |
 | --- | --- |
 | Identity | `user`, `session`, `account`, `verification` (Better Auth), `permission_grant`, `audit_event` |
-| Customers | `customer` (NIC unique), `customer_flag` (open/closed, reason, closed_by), `reference_person`, `document` (private file metadata), `document_access` (who opened what, when) |
+| Customers | `customer` (NIC unique), `customer_flag` (open/closed, reason, closed_by), `reference_person`, `customer_document` (a customer's private copies; later agreement photos and reference-person copies get their own tables), `document_access` (who opened what, when). Copies are insert-only until the 7-year deletion list is built: that migration lets the owner's deletion remove them |
 | Cars | `vehicle` (with its `partner_owner`, once linked), `partner_owner` (the partner's `user` account, NIC, bank account, agreement signed on), `vehicle_terms_version` (rate, km, extra km, commission, surcharge, garage-day, cost responsibilities; effective from), `starting_package`, `vehicle_status_event` |
 | Rentals | `reservation`, `rental`, `rental_terms_snapshot`, `rental_vehicle_segment` (car, readings, saved terms, swap-day decision), `rental_event` (extension, swap, return) |
 | Charges and money | `charge`, `adjustment`, `payment`, `payment_allocation`, `deposit_movement`, `refund`, `cash_movement`, `reconciliation` (waiting/matched/flagged), `discrepancy` |
@@ -98,7 +98,7 @@ Each row implements a rule from the system design; the AT that proves it is list
 | Earnings show only when final | `earning_line.final_at` is set at the day close (rent) or at return (extra km, late charge); partner pages read only final lines | AT-14, AT-22, AT-27 |
 | Items waiting for an admin stay out | Lines needing a decision are created with `pending_approval` and excluded until the approval is decided | AT-41, AT-54, AT-62 |
 | Permissions are checked by the server | Every server action and route calls `requirePermission(user, action)`; partner routes also filter by the partner's own id; tests call the server directly | AT-22, AT-24, AT-57, AT-58 |
-| Private documents are never public | Files in a private R2 bucket; opened only through an app route that checks permission, logs the opening and streams the file | AT-59 |
+| Private documents are never public | Files in a private R2 bucket; opened only through an app route that checks permission, logs the opening and streams the file. Outside production, without R2 settings, files go to a private folder outside the web root (`DOCUMENTS_DIR`); production refuses to store without R2 | AT-59 |
 | Handover requirements | Handover action refuses until ID copy, licence copy, signed agreement photo, outgoing odometer and (if needed) reference copies exist; fuel and accessories must be recorded | AT-06, AT-07, AT-35, AT-53 |
 | Business days | One function maps a pickup time to its deadline using the owner's cutoff and deadline settings in Asia/Colombo | AT-01, AT-02 |
 

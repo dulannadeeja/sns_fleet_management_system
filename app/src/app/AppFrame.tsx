@@ -9,14 +9,14 @@ import './settings/settings.css';
 // The frame of the module pages (cars first): on a computer the menu and the top bar, on a phone the page header with a
 // back link, as the boards show. Shares its layout classes with the Settings frame.
 export async function AppFrame({ person, active, title, subtitle, backHref, children }: {
-  person: SignedInPerson; active: 'cars' | 'partners'; title: string; subtitle?: string; backHref: string; children: ReactNode;
+  person: SignedInPerson; active: 'cars' | 'customers' | 'partners'; title: string; subtitle?: string; backHref: string; children: ReactNode;
 }) {
   const t = await getTranslations();
   const lang = (await getLocale()) as Lang;
-  const partners = await mayDo(person, 'seePartnerEarnings');
+  const [partners, customers] = await Promise.all([mayDo(person, 'seePartnerEarnings'), mayDo(person, 'customerAccess')]);
   return (
     <div className="set-desktop">
-      <NavRail labels={{ menu: t('frame.menu') }} items={railItems(person, active, t, lang, { partners })} />
+      <NavRail labels={{ menu: t('frame.menu') }} items={railItems(person, active, t, lang, { partners, customers })} />
       <div className="set-body">
         <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
         <div className="set-phone-head">

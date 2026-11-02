@@ -8,6 +8,8 @@ const DATABASE_URL = process.env.DATABASE_URL || 'postgres://postgres:postgres@l
 // Emails from the dev server land in this file; email.spec.ts reads the codes and links from it (TRD §6).
 process.env.MAIL_OUTBOX_FILE ||= join(tmpdir(), 'sns-e2e-outbox.jsonl');
 const MAIL_OUTBOX_FILE = process.env.MAIL_OUTBOX_FILE;
+// Sample document copies from the dev server go to a private folder of this run only (#19).
+const DOCUMENTS_DIR = process.env.DOCUMENTS_DIR || join(tmpdir(), `sns-e2e-documents-${process.pid}`);
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -19,5 +21,5 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
     { name: 'phone', use: { ...devices['Pixel 7'] } },
   ],
-  webServer: { command: 'npm run dev', url: 'http://localhost:3000', reuseExistingServer: false, timeout: 120000, env: { DATABASE_URL, MAIL_OUTBOX_FILE } },
+  webServer: { command: 'npm run dev', url: 'http://localhost:3000', reuseExistingServer: false, timeout: 120000, env: { DATABASE_URL, MAIL_OUTBOX_FILE, DOCUMENTS_DIR } },
 });

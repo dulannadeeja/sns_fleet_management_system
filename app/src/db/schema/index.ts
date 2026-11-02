@@ -4,3 +4,4 @@ export * from './permissions';
 export * from './settings';
 export * from './cars';
 export * from './partners';
+export * from './customers';
