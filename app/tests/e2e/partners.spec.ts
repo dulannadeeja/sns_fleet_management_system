@@ -94,6 +94,7 @@ test('ST-11.1 to 11.3: the owner adds a partner with a car; the partner signs in
   // Staff see no partner pages (partner terms are not theirs, DN-01).
   const staffPhone = newPhone();
   await page.goto('/settings/people/new');
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(`Sample staff ${randomUUID().slice(0, 8)}`);
   await page.locator('input[name="phone"]').fill(staffPhone);
   await page.locator('input[name="password"]').fill('first-pass-1');

@@ -14,6 +14,12 @@ export const vehicle = pgTable('vehicle', {
   partnerOwnerId: uuid('partner_owner_id').references(() => partnerOwner.id),
   // The starting package the car was added from (#21); its own terms are in vehicle_terms_version.
   startingPackageId: uuid('starting_package_id').references(() => startingPackage.id),
+  // Papers and service dates (system design 11; #23, Proposed: Dulan, 3 Nov 2026): empty until entered; everyone at SNS
+  // enters them; old values are in the activity log. Reminders from them come in Phase 3.
+  insuranceExpires: date('insurance_expires', { mode: 'string' }),
+  licenceExpires: date('licence_expires', { mode: 'string' }),
+  nextServiceOn: date('next_service_on', { mode: 'string' }),
+  nextServiceKm: integer('next_service_km'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   createdBy: uuid('created_by').references(() => user.id),
 }, () => [check('vehicle_ownership', sql`ownership in ('sns', 'partner')`)]);
@@ -82,4 +88,20 @@ export const vehicleStatusEvent = pgTable('vehicle_status_event', {
   index('vehicle_status_newest').on(t.vehicleId, t.createdAt.desc()),
   check('vehicle_status_kind', sql`status in ('available', 'repair', 'unavailable', 'retired')`),
   check('vehicle_status_retired_on', sql`(status = 'retired') = (retired_on is not null)`),
+]);
+
+/** A car's catalogue photo (system design 4.2; CR-001, ADD-003; #23), insert-only: the newest row is the photo, and a
+ *  row with no file means it was removed (the model's standard image shows). The file is in private storage. */
+export const vehiclePhoto = pgTable('vehicle_photo', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  vehicleId: uuid('vehicle_id').notNull().references(() => vehicle.id),
+  storageKey: text('storage_key'),
+  contentType: text('content_type'),
+  size: integer('size'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
+  createdBy: uuid('created_by').references(() => user.id),
+}, (t) => [
+  index('vehicle_photo_newest').on(t.vehicleId, t.createdAt.desc()),
+  check('vehicle_photo_file', sql`(storage_key is null) = (content_type is null) and (storage_key is null) = (size is null)`),
+  check('vehicle_photo_kind', sql`content_type is null or content_type in ('image/jpeg', 'image/png', 'image/webp')`),
 ]);

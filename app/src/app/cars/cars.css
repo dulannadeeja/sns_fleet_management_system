@@ -3,7 +3,7 @@
 .car-head h2 { margin: 0; font-size: 18px; line-height: 28px; font-weight: 600; }
 .car-head .rt-btn { margin-left: auto; text-decoration: none; }
 .car-list { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.car-row { display: grid; grid-template-columns: 150px minmax(0, 1.4fr) repeat(3, minmax(0, 0.7fr)) minmax(0, 1fr); gap: 12px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: 15px; line-height: 24px; }
+.car-row { display: grid; grid-template-columns: 230px minmax(0, 1.4fr) repeat(3, minmax(0, 0.7fr)) minmax(0, 1fr); gap: 12px; align-items: center; min-height: 60px; padding: 8px 20px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: 15px; line-height: 24px; }
 .car-row-head { min-height: 44px; border-top: 0; font-size: 14px; color: var(--ink-muted); font-weight: 600; }
 a.car-row:hover { background: var(--sunken); }
 .car-num { font-variant-numeric: tabular-nums; text-align: right; }
@@ -44,3 +44,13 @@ a.car-row:hover { background: var(--sunken); }
   .pkg-row { grid-template-columns: minmax(0, 1fr) auto; }
   .pkg-phone { display: inline; }
 }
+/* Car pictures (#23): the catalogue photo or the model's standard image, never cropped for the standard image. */
+.car-pic { display: flex; align-items: center; justify-content: center; flex: none; width: 64px; height: 48px; border-radius: 10px; background: var(--sunken); overflow: hidden; }
+.car-pic-lg { width: 160px; height: 120px; border-radius: 14px; }
+.car-pic-photo { width: 100%; height: 100%; object-fit: cover; }
+.car-pic .rt-vimg { width: 88%; height: 92%; }
+.car-papers { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px 20px; margin: 0; }
+.car-papers dt { font-size: 14px; line-height: 22px; color: var(--ink-muted); }
+.car-papers dd { margin: 0; font-size: 16px; line-height: 26px; font-weight: 600; }
+.car-papers dd[data-expired] { color: var(--overdue); }
+.car-cell { display: flex; align-items: center; gap: 12px; min-width: 0; }

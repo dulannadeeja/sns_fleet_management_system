@@ -11,5 +11,6 @@ export { TextField, type TextFieldProps } from './TextField';
 export { Notice, type NoticeProps } from './Notice';
 export { PlateBadge, type PlateBadgeProps } from './PlateBadge';
 export { StatusChip, type StatusChipProps, type VehicleStatus } from './StatusChip';
+export { VehicleImage, vehicleKey, type VehicleImageProps } from './VehicleImage';
 export { bi, nb } from './text';
 export type { Lang, IconName, NavItem } from './types';

@@ -60,6 +60,7 @@ test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its 
   // 04.3: a staff member sees the car, but not its terms, and may not add or edit.
   const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
   await page.goto('/settings/people/new');
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   const staffName = `Sample cars ${randomUUID().slice(0, 8)}`;
   await page.locator('input[name="name"]').fill(staffName);
   await page.locator('input[name="phone"]').fill(phone);

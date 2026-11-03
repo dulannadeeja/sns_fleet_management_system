@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useActionState, useState } from 'react';
+import { useReady } from '../../../useReady';
 import { phoneDigits } from '../../../../auth/phone';
 import { Button, Icon, Notice, TextField } from '../../../../ui';
 import { addPersonAction, type FormState } from '../actions';
@@ -16,6 +17,7 @@ export interface AddPersonWords {
 /** Screen 15.4's form: name, phone (digits only, 10 at most), first password, Staff or Admin, language. */
 export function AddPersonForm({ w }: { w: AddPersonWords }) {
   const [state, action, pending] = useActionState<FormState, FormData>(addPersonAction, {});
+  const ready = useReady(); // Save stays off until the page is ready, so nothing typed before is lost
   const [phone, setPhone] = useState(state.values?.phone ?? '');
   const [role, setRole] = useState(state.values?.role === 'admin' ? 'admin' : 'staff');
   const e = state.error;
@@ -72,7 +74,7 @@ export function AddPersonForm({ w }: { w: AddPersonWords }) {
       </fieldset>
       <div className="set-actions">
         <Link href="/settings/people" className="rt-btn rt-btn-quiet" style={{ textDecoration: 'none' }}>{w.cancel}</Link>
-        <Button type="submit" icon="check" disabled={pending}>{w.save}</Button>
+        <Button type="submit" icon="check" disabled={pending || !ready}>{w.save}</Button>
       </div>
       <p className="set-muted" style={{ margin: 0 }}>{w.footer}</p>
     </form>

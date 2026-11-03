@@ -82,6 +82,7 @@ test('ST-04.4: two packages for one model; a change applies to cars added afterw
   // A staff member reads 04.6 without the Change buttons or the commission, and may not open the forms.
   const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
   await page.goto('/settings/people/new');
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(`Sample packages ${tag}`);
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill('first-pass-1');

@@ -30,6 +30,8 @@ test('ST-15.2: the owner adds a person, resets their password, turns the account
   await page.getByRole('link', { name: 'Add person' }).click();
   await page.getByRole('button', { name: 'Save' }).click();
   await expect(page.locator('.rt-field-error')).toHaveCount(1);
+  // Wait for that save attempt to finish: React clears the form when it does, which would wipe what is typed next.
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled();
   await page.locator('input[name="name"]').fill(name);
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill('first-pass-1');
@@ -45,6 +47,8 @@ test('ST-15.2: the owner adds a person, resets their password, turns the account
   await row.click();
   await expect(page.getByRole('heading', { name })).toBeVisible();
   await noSidewaysScroll(page);
+  // Type only once the page is ready (its buttons turn on): React clears boxes typed into before that.
+  await expect(page.getByRole('button', { name: 'Reset password' })).toBeEnabled();
   await page.locator('input[name="password"]').fill('given-by-owner-1');
   await page.getByRole('button', { name: 'Reset password' }).click();
   await expect(page.getByText(/Give the new first password/)).toBeVisible();
@@ -63,6 +67,7 @@ test('ST-15.1: the owner gives a permission; staff cannot open Settings (403)', 
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
   await expect(page).toHaveURL(/\/$/);
   await page.goto('/settings/people/new');
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(name);
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill('first-pass-1');

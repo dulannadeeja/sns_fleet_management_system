@@ -19,6 +19,7 @@ test('ST-15.4: the owner reads the log and filters it; staff are refused (403)',
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
   await expect(page).toHaveURL(/\/$/);
   await page.goto('/settings/people/new');
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(name);
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill('first-pass-1');
