@@ -33,6 +33,10 @@ test('ST-04.6, AT-29: papers and service dates; the standard image, then a photo
   expect(await shows(page)).toBe('standard');
   await expect(page.locator('.car-pic-lg img')).toHaveAttribute('src', '/plate/vehicles/512/sns-vehicle-wagon-r.png');
   await expect(page.locator('[data-paper="insuranceExpires"]')).toHaveText('not recorded');
+  // The card on All cars shows the standard image too, before any photo.
+  await page.goto('/cars');
+  await expect(page.locator(`[data-plate="${plate}"] .car-pic`)).toHaveAttribute('data-photo', 'standard');
+  await page.goto(carUrl);
 
   // Papers and service: a mistake is refused, then saved and shown, and logged.
   await page.getByRole('link', { name: 'Change papers and service' }).click();
@@ -45,7 +49,7 @@ test('ST-04.6, AT-29: papers and service dates; the standard image, then a photo
   expect(await noSideScroll(page)).toBe(false);
   await page.getByRole('button', { name: 'Save' }).click();
   await expect(page).toHaveURL(/\?papers=1$/);
-  await expect(page.locator('[data-paper="insuranceExpires"]')).toContainText('until');
+  await expect(page.locator('[data-paper="insuranceExpires"]')).toContainText(/until .* · \d+ days? left|expired/);
   await expect(page.locator('[data-paper="nextServiceKm"]')).toHaveText('25,500 km');
   await expect(page.getByText(`changed the next service km of ${plate} from not recorded to 25,500 km`)).toBeVisible();
 

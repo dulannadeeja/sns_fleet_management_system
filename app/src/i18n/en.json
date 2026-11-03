@@ -684,7 +684,7 @@
     "after": [
       "The car is on All cars as Available.",
       "A partner car shows “Partner · not linked yet” until its owner is added on Partners.",
-      "Papers, service dates and the photo are added on the car’s page.",
+      "Papers and service dates are entered on the car’s page; the photo on Edit car.",
       "Recorded in the activity log."
     ],
     "save": "Save car",
@@ -841,7 +841,8 @@
         "notAllowed": "You may not change this.",
         "notFound": "This car was not found.",
         "failed": "Not saved. Try again."
-      }
+      },
+      "left": "{n, plural, one {# day left} other {# days left}}"
     },
     "photo": {
       "title": "Catalogue photo",

@@ -431,7 +431,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Every car's insurance and licence dates are on the go-live checklist (ST-01.3).
   - *Proposed (Dulan, 3 Nov 2026):* each car keeps insurance expiry, revenue-licence expiry, next service date and next service km; everyone at SNS enters and changes them on the car's page; each change logged with old and new. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability).
 - **Checks:** AT-43. AT-45 (Phase 3).
-- **Screens:** 04.2 Car details · owner and 04.4 Edit car (papers and service).
+- **Screens:** 04.2 Car details · owner and 04.3 Car details · staff (papers and service, entered on the car's page); 04.4 Edit car points there.
 
 #### ST-04.7 · Catalogue photo
 

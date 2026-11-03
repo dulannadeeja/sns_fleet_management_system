@@ -36,6 +36,9 @@ describe('ST-04.6: papers and service dates', () => {
     const staff = await samplePerson();
     expect(await changePapers(staff.id, car.id, { ...empty, licenceExpires: '2026-02-30', nextServiceKm: -1 }, empty))
       .toEqual({ error: 'invalid', fields: ['licenceExpires', 'nextServiceKm'] });
+    // Year 0 is a date to JavaScript but not to the database: refused as a mistake, never an error page (#23 review).
+    expect(await changePapers(staff.id, car.id, { ...empty, insuranceExpires: '0000-12-01', nextServiceOn: '2101-01-01' }, empty))
+      .toEqual({ error: 'invalid', fields: ['insuranceExpires', 'nextServiceOn'] });
     expect(await changePapers(staff.id, car.id, { ...empty, nextServiceOn: '2026-12-01' }, empty)).toMatchObject({ ok: true });
     expect(await changePapers(staff.id, car.id, { ...empty, nextServiceOn: '2026-12-15' }, empty)).toEqual({ error: 'stale', fields: ['nextServiceOn'] });
     const partner = await samplePerson();
@@ -43,12 +46,15 @@ describe('ST-04.6: papers and service dates', () => {
     expect(await changePapers(partner.id, car.id, { ...empty, licenceExpires: '2027-01-01' }, empty)).toEqual({ error: 'notAllowed' });
   });
 
-  it('the app may set only these four columns on a car', async () => {
-    const c = await pool.connect();
-    try {
-      await c.query('begin');
-      await c.query('set local role sns_app');
-      await c.query('update vehicle set insurance_expires = insurance_expires, licence_expires = licence_expires, next_service_on = next_service_on, next_service_km = next_service_km where false');
-    } finally { await c.query('rollback'); c.release(); }
+  it('the app may set only these four columns on a car, and never change or remove a photo row', async () => {
+    const asApp = async (q: string) => {
+      const c = await pool.connect();
+      try { await c.query('begin'); await c.query('set local role sns_app'); return await c.query(q); } finally { await c.query('rollback'); c.release(); }
+    };
+    await expect(asApp('update vehicle set insurance_expires = insurance_expires, licence_expires = licence_expires, next_service_on = next_service_on, next_service_km = next_service_km where false')).resolves.toBeTruthy();
+    await expect(asApp('update vehicle set registration = registration where false')).rejects.toThrow(/permission denied/);
+    await expect(asApp('insert into vehicle_photo select * from vehicle_photo where false')).resolves.toBeTruthy();
+    await expect(asApp('update vehicle_photo set size = size where false')).rejects.toThrow(/permission denied/);
+    await expect(asApp('delete from vehicle_photo where false')).rejects.toThrow(/permission denied/);
   });
 });

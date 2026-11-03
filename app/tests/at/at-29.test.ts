@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, afterAll } from 'vitest';
+import { Pool } from 'pg';
 import { readFileSync } from 'node:fs';
 import { and, eq } from 'drizzle-orm';
 import { db } from '../../src/db/client';
@@ -12,6 +13,8 @@ import { samplePlate } from '../helpers/cars';
 // image, then the photo; handover requirements are unchanged; staff without admin rights cannot add or replace it."
 // System design 4.2 (Confirmed; who and which files Proposed: Dulan, 3 Nov 2026). The card and page are checked in the
 // browser (tests/e2e/car-papers.spec.ts); handovers come in Phase 2, and nothing here touches them.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+afterAll(() => pool.end());
 const SAMPLE_PHOTO = new Uint8Array(readFileSync(new URL('../../../brand/vehicles/256/sns-vehicle-alto.png', import.meta.url)));
 
 describe('AT-29: a catalogue photo, added by an admin; staff cannot add or replace it', () => {
@@ -29,6 +32,9 @@ describe('AT-29: a catalogue photo, added by an admin; staff cannot add or repla
     expect(await setPhoto(admin.id, car.id, SAMPLE_PHOTO)).toEqual({ ok: true, changed: true });
     const first = (await photoOf(car.id))!;
     expect(first).toMatchObject({ contentType: 'image/png', size: SAMPLE_PHOTO.length });
+    // A photo row is never changed or removed, by anyone.
+    await expect(pool.query('update vehicle_photo set size = 1 where id = $1', [first.id])).rejects.toThrow(/insert-only/);
+    await expect(pool.query('delete from vehicle_photo where id = $1', [first.id])).rejects.toThrow(/insert-only/);
     // Staff see it (it is shown to everyone at SNS) but still cannot replace or remove it.
     expect((await readPhoto(staff.id, car.id, first.id))!.bytes).toEqual(SAMPLE_PHOTO);
     expect(await setPhoto(staff.id, car.id, SAMPLE_PHOTO)).toEqual({ error: 'notAllowed' });
@@ -52,6 +58,8 @@ describe('AT-29: a catalogue photo, added by an admin; staff cannot add or repla
     expect(await setPhoto(owner, car.id, heic)).toEqual({ error: 'fileType' });
     expect(await setPhoto(owner, car.id, new Uint8Array(10 * 1024 * 1024 + 1))).toEqual({ error: 'fileTooBig' });
     expect(await setPhoto(owner, car.id, new Uint8Array())).toEqual({ error: 'fileMissing' });
+    // A car that does not exist: refused before anything is stored.
+    expect(await setPhoto(owner, '00000000-0000-4000-8000-000000000000', SAMPLE_PHOTO)).toEqual({ error: 'notFound' });
     expect(await photoOf(car.id)).toBeNull();
   });
 });

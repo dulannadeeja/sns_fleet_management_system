@@ -16,7 +16,8 @@ export default async function CarPapersPage({ params }: { params: Promise<{ id: 
   const car = await getCar(id);
   if (!car) notFound();
   const [papers, t, lang] = await Promise.all([papersOf(car.id), getTranslations('cars.papers'), getLocale()]);
-  const was = Object.fromEntries(Object.entries(papers!).map(([k, v]) => [k, v === null ? '' : String(v)]));
+  if (!papers) notFound();
+  const was = Object.fromEntries(Object.entries(papers).map(([k, v]) => [k, v === null ? '' : String(v)]));
   return (
     <AppFrame person={person} active="cars" title={t('title')} subtitle={car.registration} backHref={`/cars/${car.id}`}>
       <section className="car-card">

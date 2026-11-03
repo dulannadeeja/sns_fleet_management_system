@@ -3,7 +3,7 @@ import { desc, eq, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
 import { auditEvent, user, vehicle, vehiclePhoto } from '../../db/schema';
 import { realDate } from '../../lib/dates';
-import { getFile, putFile } from '../../storage/files';
+import { dropFile, getFile, putFile } from '../../storage/files';
 import { copyType, MAX_COPY_BYTES } from '../../storage/kinds';
 import { actorMay, type Tx } from './rules';
 
@@ -36,9 +36,11 @@ export function readPaper(field: PaperField, raw: string): string | number | nul
   if (field === 'nextServiceKm') return /^\d{1,7}$/.test(v.replace(/,/g, '')) ? Number(v.replace(/,/g, '')) : Number.NaN;
   return v;
 }
+/** Dates from 2000 to 2100: a real calendar day the database also accepts (it has no year 0), to stop typing mistakes. */
+export const DATE_RANGE = ['2000-01-01', '2100-12-31'] as const;
 const badPaper = (field: PaperField, v: string | number | null) => v !== null && (field === 'nextServiceKm'
   ? !Number.isInteger(v) || (v as number) < 0 || (v as number) > SERVICE_KM_MAX
-  : typeof v !== 'string' || !realDate(v));
+  : typeof v !== 'string' || !realDate(v) || v < DATE_RANGE[0] || v > DATE_RANGE[1]);
 
 export async function papersOf(carId: string, q: Tx | typeof db = db): Promise<Papers | null> {
   if (!UUID.test(carId)) return null;
@@ -96,17 +98,30 @@ export async function setPhoto(actorId: string, carId: string, bytes: Uint8Array
   if (bytes.length > MAX_COPY_BYTES) return { error: 'fileTooBig' };
   const type = copyType(bytes);
   if (!type || !(PHOTO_TYPES as readonly string[]).includes(type)) return { error: 'fileType' };
-  // Checked before the file is stored, and again in the transaction that records it.
-  if (!(await db.transaction((tx) => actorMay(tx, actorId, 'editCarsAndPackages')))) return { error: 'notAllowed' };
+  // Checked before the file is stored (the person, and that the car exists), and again in the transaction that records it.
+  const first = await db.transaction(async (tx) => {
+    if (!(await actorMay(tx, actorId, 'editCarsAndPackages'))) return 'notAllowed' as const;
+    const [car] = await tx.select({ id: vehicle.id }).from(vehicle).where(eq(vehicle.id, carId));
+    return car ? null : ('notFound' as const);
+  });
+  if (first) return { error: first };
   const storageKey = `cars/${carId.toLowerCase()}/${randomUUID()}`;
   await putFile(storageKey, bytes, type);
+  // If recording it fails, the stored file points nowhere: remove it (#23 review).
+  let saved: PhotoResult;
+  try { saved = await recordPhoto(actorId, carId, storageKey, type as PhotoType, bytes.length); } catch (e) { await dropFile(storageKey); throw e; }
+  if ('error' in saved) await dropFile(storageKey);
+  return saved;
+}
+
+async function recordPhoto(actorId: string, carId: string, storageKey: string, type: PhotoType, size: number): Promise<PhotoResult> {
   return db.transaction(async (tx) => {
     if (!(await actorMay(tx, actorId, 'editCarsAndPackages'))) return { error: 'notAllowed' } as const;
     await lockCar(tx, carId);
     const [car] = await tx.select({ registration: vehicle.registration }).from(vehicle).where(eq(vehicle.id, carId));
     if (!car) return { error: 'notFound' } as const;
     const before = await photoOf(carId, tx);
-    await tx.insert(vehiclePhoto).values({ vehicleId: carId, storageKey, contentType: type, size: bytes.length, createdBy: actorId });
+    await tx.insert(vehiclePhoto).values({ vehicleId: carId, storageKey, contentType: type, size, createdBy: actorId });
     await tx.insert(auditEvent).values({ createdBy: actorId, action: before ? 'car.photoReplace' : 'car.photoAdd', targetType: 'car', targetId: carId, details: { plate: car.registration } });
     return { ok: true, changed: true } as const;
   });

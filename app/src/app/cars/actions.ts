@@ -5,7 +5,7 @@ import { requireEmployee, requirePermission } from '../../auth/require';
 import { mayDo } from '../../auth/access';
 import { addCar, editCar, getCar, isCost, TERM_FIELDS, type Cost, type Terms } from '../../modules/cars/cars';
 import { changeStatus } from '../../modules/cars/status';
-import { changePapers, PAPER_FIELDS, readPaper, removePhoto, setPhoto, type PaperField } from '../../modules/cars/papers';
+import { changePapers, PAPER_FIELDS, papersOf, readPaper, removePhoto, setPhoto, type PaperField } from '../../modules/cars/papers';
 import { MAX_COPY_BYTES } from '../../storage/kinds';
 
 // Screens 04.4 and 04.8: requirePermission("Add or edit cars and packages"), then the cars module, which checks again in
@@ -77,7 +77,7 @@ export async function changeStatusAction(carId: string, _: StatusFormState, form
   redirect(result.changed ? `/cars/${carId}?status=1` : `/cars/${carId}`);
 }
 
-export type PapersFormState = { error?: string; fields?: string[]; values?: Record<string, string> };
+export type PapersFormState = { error?: string; fields?: string[]; values?: Record<string, string>; was?: Record<string, string> };
 
 /** Papers and service dates (ST-04.6): everyone at SNS; the cars module checks again in its transaction. */
 export async function changePapersAction(carId: string, _: PapersFormState, form: FormData): Promise<PapersFormState> {
@@ -85,7 +85,12 @@ export async function changePapersAction(carId: string, _: PapersFormState, form
   const read = (prefix: string) => Object.fromEntries(PAPER_FIELDS.map((f) => [f, readPaper(f, text(form, `${prefix}${f}`))])) as Record<PaperField, string | number | null>;
   const values = Object.fromEntries(PAPER_FIELDS.map((f) => [f, text(form, f)]));
   const result = await changePapers(person.id, carId, read(''), read('was.'));
-  if ('error' in result) return { error: result.error, fields: 'fields' in result ? result.fields : undefined, values };
+  if ('error' in result) {
+    // After "changed meanwhile", the form compares against what is saved now, so the next save can go through.
+    const now = result.error === 'stale' ? await papersOf(carId) : null;
+    const was = now ? Object.fromEntries(PAPER_FIELDS.map((f) => [f, now[f] === null ? '' : String(now[f])])) : undefined;
+    return { error: result.error, fields: 'fields' in result ? result.fields : undefined, values, was };
+  }
   revalidatePath(`/cars/${carId}`);
   redirect(`/cars/${carId}?papers=1`);
 }

@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { AwsClient } from 'aws4fetch';
@@ -33,6 +33,18 @@ export async function putFile(key: string, bytes: Uint8Array, contentType: strin
   const path = localPath(key);
   await mkdir(join(path, '..'), { recursive: true, mode: 0o700 });
   await writeFile(path, bytes, { mode: 0o600 });
+}
+
+/** Removes a file that no record points to (a save that failed after storing it). Best effort: never throws. */
+export async function dropFile(key: string): Promise<void> {
+  if (!KEY.test(key)) return;
+  try {
+    const remote = r2();
+    if (remote) await remote.client.fetch(`${remote.base}/${key}`, { method: 'DELETE' });
+    else await rm(localPath(key), { force: true });
+  } catch {
+    // Left for a later clean-up; nothing points to it, so nobody can open it.
+  }
 }
 
 export async function getFile(key: string): Promise<Uint8Array | null> {

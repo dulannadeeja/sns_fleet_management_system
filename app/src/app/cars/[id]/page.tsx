@@ -77,9 +77,11 @@ export default async function CarPage({ params, searchParams }: { params: Promis
           {(['insuranceExpires', 'licenceExpires', 'nextServiceOn'] as const).map((f) => {
             const v = papers?.[f] ?? null;
             const expired = !!v && f !== 'nextServiceOn' && v < today;
+            // Whole days from today in Sri Lanka, as boards 04.2/04.3 show ("43 days left").
+            const left = v && !expired ? Math.round((Date.parse(`${v}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86_400_000) : null;
             return (
               <div key={f}><dt>{tp(f)}</dt>
-                <dd data-paper={f} data-expired={expired ? '' : undefined}>{v ? tp(expired ? 'expired' : 'until', { date: day(v) }) : tp('notRecorded')}</dd></div>
+                <dd data-paper={f} data-expired={expired ? '' : undefined}>{v ? `${tp(expired ? 'expired' : 'until', { date: day(v) })}${left !== null && f !== 'nextServiceOn' ? ` · ${tp('left', { n: left })}` : ''}` : tp('notRecorded')}</dd></div>
             );
           })}
           <div><dt>{tp('nextServiceKm')}</dt>

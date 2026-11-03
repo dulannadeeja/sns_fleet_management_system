@@ -16,7 +16,7 @@ export function PapersForm({ carId, was, w }: { carId: string; was: Record<strin
   const bad = (k: string) => (state.fields?.includes(k) ? (state.error === 'stale' ? w.errors.stale : w.errors.invalid) : undefined);
   return (
     <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-      {Object.entries(was).map(([k, v]) => <input key={k} type="hidden" name={`was.${k}`} value={v} />)}
+      {Object.entries(state.was ?? was).map(([k, v]) => <input key={k} type="hidden" name={`was.${k}`} value={v} />)}
       <div className="car-fields">
         {DATES.map((k) => (
           <TextField key={k} name={k} type="date" label={w.labels[k]} hint={w.hint} defaultValue={state.values?.[k] ?? was[k]} error={bad(k)} />
