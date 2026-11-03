@@ -7,8 +7,10 @@ import { actorMay, type Tx } from './rules';
 // A car's status (ST-04.5; system design 11). Confirmed: staff and admins set Under repair or Temporarily unavailable
 // with a reason; only the authorised person (the admin by default) marks a car available again; only an admin or the
 // primary owner retires a car, with a reason and date, never while rented or reserved, keeping its history (DN-01).
-// Proposed (Dulan, 2 Nov 2026): the expected return date is optional for both; no reason for Available; retire on today
-// or earlier, never before the car was added; only the owner brings a retired car back, with a reason.
+// The expected return date is optional for both (Confirmed: agreed by the owner, recorded by Dulan, 3 Nov 2026).
+// Proposed (Dulan, 2 Nov 2026): a reason of up to 500 letters, none for Available; an away status can be saved again;
+// retire on today or earlier, never before the car was added; only the owner brings a retired car back, with a reason.
+// Still to build (Phase 2, with rentals and reservations): refuse to retire a car that is rented or reserved (AT-52).
 // Rented and Overdue come from rentals (Phase 2), not from here.
 
 export const CAR_STATES = ['available', 'repair', 'unavailable', 'retired'] as const;
@@ -75,6 +77,7 @@ export async function changeStatus(actorId: string, carId: string, input: { stat
     const needsReason = next !== 'available' || now.status === 'retired';
     if (needsReason && !reason) return { error: 'reasonMissing' } as const;
     if (retiredOn && retiredOn < car.addedOn) return { error: 'retireDateBeforeAdded' } as const;
+    // TODO(Phase 2, AT-52): refuse 'retired' while the car is rented or reserved (system design 11, Confirmed).
     // Nothing new: the same status with the same date (an away status may be set again to change its date or reason).
     if (next === now.status && (!away || (expectedBack === now.expectedBack && reason === (now.reason ?? '')))) return { ok: true, changed: false } as const;
 

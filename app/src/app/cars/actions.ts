@@ -71,5 +71,6 @@ export async function changeStatusAction(carId: string, _: StatusFormState, form
   if ('error' in result) return { error: result.error, values };
   revalidatePath('/cars');
   revalidatePath(`/cars/${carId}`);
-  redirect(`/cars/${carId}?status=1`);
+  // "Status changed." only when something was saved (#22 review).
+  redirect(result.changed ? `/cars/${carId}?status=1` : `/cars/${carId}`);
 }
