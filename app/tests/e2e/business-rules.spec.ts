@@ -28,6 +28,7 @@ test('ST-15.3: staff read the rules; the owner changes a setting, checks old →
   // A staff member, added by the owner, reads 15.2 without Change buttons and is refused 15.7.
   const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
   await page.goto('/settings/people/new');
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(`Sample rules ${info.project.name} ${randomUUID().slice(0, 8)}`);
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill('first-pass-1');

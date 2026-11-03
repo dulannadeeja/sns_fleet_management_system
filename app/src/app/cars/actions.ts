@@ -5,6 +5,8 @@ import { requireEmployee, requirePermission } from '../../auth/require';
 import { mayDo } from '../../auth/access';
 import { addCar, editCar, getCar, isCost, TERM_FIELDS, type Cost, type Terms } from '../../modules/cars/cars';
 import { changeStatus } from '../../modules/cars/status';
+import { changePapers, PAPER_FIELDS, readPaper, removePhoto, setPhoto, type PaperField } from '../../modules/cars/papers';
+import { MAX_COPY_BYTES } from '../../storage/kinds';
 
 // Screens 04.4 and 04.8: requirePermission("Add or edit cars and packages"), then the cars module, which checks again in
 // its transaction (the commission also needs "Add or edit partners") and writes the activity log (PR-05).
@@ -73,4 +75,36 @@ export async function changeStatusAction(carId: string, _: StatusFormState, form
   revalidatePath(`/cars/${carId}`);
   // "Status changed." only when something was saved (#22 review).
   redirect(result.changed ? `/cars/${carId}?status=1` : `/cars/${carId}`);
+}
+
+export type PapersFormState = { error?: string; fields?: string[]; values?: Record<string, string> };
+
+/** Papers and service dates (ST-04.6): everyone at SNS; the cars module checks again in its transaction. */
+export async function changePapersAction(carId: string, _: PapersFormState, form: FormData): Promise<PapersFormState> {
+  const person = await requireEmployee();
+  const read = (prefix: string) => Object.fromEntries(PAPER_FIELDS.map((f) => [f, readPaper(f, text(form, `${prefix}${f}`))])) as Record<PaperField, string | number | null>;
+  const values = Object.fromEntries(PAPER_FIELDS.map((f) => [f, text(form, f)]));
+  const result = await changePapers(person.id, carId, read(''), read('was.'));
+  if ('error' in result) return { error: result.error, fields: 'fields' in result ? result.fields : undefined, values };
+  revalidatePath(`/cars/${carId}`);
+  redirect(`/cars/${carId}?papers=1`);
+}
+
+export type PhotoFormState = { error?: string };
+
+/** The catalogue photo (ST-04.7, AT-29): add or replace with "photo", or remove with "remove"; "Add or edit cars and packages". */
+export async function photoAction(carId: string, _: PhotoFormState, form: FormData): Promise<PhotoFormState> {
+  const person = await requirePermission('editCarsAndPackages');
+  let result;
+  if (form.get('remove') === '1') result = await removePhoto(person.id, carId);
+  else {
+    const f = form.get('photo');
+    if (!(f instanceof File) || !f.size) return { error: 'fileMissing' };
+    if (f.size > MAX_COPY_BYTES) return { error: 'fileTooBig' }; // before reading it
+    result = await setPhoto(person.id, carId, new Uint8Array(await f.arrayBuffer()));
+  }
+  if ('error' in result) return { error: result.error };
+  revalidatePath('/cars');
+  revalidatePath(`/cars/${carId}`);
+  redirect(`/cars/${carId}/edit?photo=${form.get('remove') === '1' ? 'removed' : 'saved'}`);
 }

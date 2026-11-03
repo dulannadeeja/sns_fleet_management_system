@@ -134,6 +134,13 @@
       "when": 1793596040601,
       "tag": "0018_car_status",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1793743677291,
+      "tag": "0019_car_papers_photo",
+      "breakpoints": true
     }
   ]
 }

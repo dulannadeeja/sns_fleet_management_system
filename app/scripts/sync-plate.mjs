@@ -45,6 +45,9 @@ export type IconName = ${iconNames.map((n) => `'${n}'`).join(' | ')};
 export const ICON_PATHS: Record<IconName, string> = ${iconBlock[1]};
 `;
 
+/** The vehicle families SNS runs (design-system/components/VehicleImage), plus the generic car. */
+const VEHICLES = ['alto', 'axio', 'every', 'generic', 'prius', 'spacia', 'wagon-r'];
+
 /** [target relative to the output root, content as a Buffer] */
 const copies = [
   ['src/ui/plate/tokens.css', Buffer.from(tokensCss)],
@@ -53,6 +56,9 @@ const copies = [
   ['src/ui/plate/fonts.css', Buffer.from(fontsCss.replace(/url\(["']\.\.\/fonts\//g, 'url("/plate/fonts/'))],
   ...fontFiles.map((f) => [`public/plate/fonts/${f}`, readFileSync(join(repo, 'fonts', f))]),
   ...['sns-logo.png', 'sns-logo-mark.png'].map((f) => [`public/plate/brand/${f}`, readFileSync(join(ds, 'assets/brand', f))]),
+  // The model images VehicleImage shows (SNS vehicle pack v2): 256px for cards and rows, 512px for the car page (#23).
+  ...VEHICLES.map((k) => [`public/plate/vehicles/256/sns-vehicle-${k}.png`, readFileSync(join(repo, 'brand/vehicles/256', `sns-vehicle-${k}.png`))]),
+  ...VEHICLES.map((k) => [`public/plate/vehicles/512/sns-vehicle-${k}.png`, readFileSync(join(ds, 'assets/vehicles-512', `sns-vehicle-${k}.png`))]),
 ];
 
 const check = process.argv.includes('--check');

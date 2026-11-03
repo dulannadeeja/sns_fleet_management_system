@@ -269,7 +269,11 @@
         "car": {
           "add": "added the car {target}",
           "change": "changed the {field} of {target} from {old} to {new}",
-          "status": "changed the status of {target} from {old} to {new}"
+          "status": "changed the status of {target} from {old} to {new}",
+          "papers": "changed the {field} of {target} from {old} to {new}",
+          "photoAdd": "added a photo of {target}",
+          "photoReplace": "replaced the photo of {target}",
+          "photoRemove": "removed the photo of {target}"
         },
         "partner": {
           "add": "added the partner {target}",
@@ -805,6 +809,57 @@
         "retiredFirst": "Bring the car back first, as Available.",
         "retireDateFuture": "Use today or an earlier date.",
         "retireDateBeforeAdded": "This date is before the car was added.",
+        "failed": "Not saved. Try again."
+      }
+    },
+    "papers": {
+      "title": "Papers and service",
+      "insuranceExpires": "Insurance expires",
+      "licenceExpires": "Revenue licence expires",
+      "nextServiceOn": "Next service date",
+      "nextServiceKm": "Next service at km",
+      "notRecorded": "not recorded",
+      "until": "until {date}",
+      "expired": "expired {date}",
+      "km": "{n} km",
+      "change": "Change papers and service",
+      "save": "Save",
+      "cancel": "Cancel",
+      "saved": "Papers and service saved.",
+      "hint": "Leave a box empty if it is not known yet.",
+      "kmHint": "Whole km, as on the odometer",
+      "note": "Reminders will come only from dates entered here (Phase 3). Each change is in the activity log.",
+      "names": {
+        "insuranceExpires": "insurance expiry",
+        "licenceExpires": "revenue licence expiry",
+        "nextServiceOn": "next service date",
+        "nextServiceKm": "next service km"
+      },
+      "errors": {
+        "invalid": "Check the marked boxes: a real date, or whole km.",
+        "stale": "Someone changed these meanwhile. Open the page again to see them, then make your change.",
+        "notAllowed": "You may not change this.",
+        "notFound": "This car was not found.",
+        "failed": "Not saved. Try again."
+      }
+    },
+    "photo": {
+      "title": "Catalogue photo",
+      "add": "Add photo",
+      "replace": "Replace photo",
+      "remove": "Remove photo",
+      "choose": "Photo file",
+      "hint": "JPEG, PNG or WebP, up to 10 MB. Shown on the car’s card and page.",
+      "standard": "Until a photo is added, the model’s standard image is shown.",
+      "notCondition": "It is not a condition photo and not needed for a handover.",
+      "saved": "Photo saved.",
+      "removed": "Photo removed: the standard image is shown again.",
+      "errors": {
+        "fileMissing": "Choose a photo first.",
+        "fileTooBig": "The photo is over 10 MB.",
+        "fileType": "Use a JPEG, PNG or WebP photo. (An iPhone can send its photos as JPEG.)",
+        "notAllowed": "You may not change this.",
+        "notFound": "This car was not found.",
         "failed": "Not saved. Try again."
       }
     }

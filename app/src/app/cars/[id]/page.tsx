@@ -6,6 +6,10 @@ import { mayDo } from '../../../auth/access';
 import { getCar, TERM_FIELDS } from '../../../modules/cars/cars';
 import { listActivity } from '../../../modules/activity/activity';
 import { statusOf } from '../../../modules/cars/status';
+import { papersOf } from '../../../modules/cars/papers';
+import { todayColombo } from '../../../lib/dates';
+import { showNumber } from '../../settings/business-rules/show';
+import { CarPicture } from '../CarPicture';
 import { statusChoices } from '../status-choices';
 import { Notice, PlateBadge, StatusChip, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
@@ -15,7 +19,7 @@ import '../cars.css';
 // Screens 04.2 Car details · owner and 04.3 Car details · staff (ST-04.2). Everyone who works at SNS opens a car; the
 // terms are shown to people who may see partner terms (the owner and the admin by default, DN-01). Rentals, papers,
 // reservations and earnings fill in with their own tickets.
-export default async function CarPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; status?: string }> }) {
+export default async function CarPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; status?: string; papers?: string }> }) {
   const person = await requireEmployee();
   const { id } = await params;
   const car = await getCar(id);
@@ -25,7 +29,8 @@ export default async function CarPage({ params, searchParams }: { params: Promis
     mayDo(person, 'seePartnerEarnings'), mayDo(person, 'editCarsAndPackages'), listActivity({ targetId: car.id, limit: 50 }),
   ]);
   // The status now and what this person may change it to (04.5, 04.7; #22).
-  const [now, ts] = await Promise.all([statusOf(car.id), getTranslations('cars.status')]);
+  const [now, ts, papers, tp] = await Promise.all([statusOf(car.id), getTranslations('cars.status'), papersOf(car.id), getTranslations('cars.papers')]);
+  const today = todayColombo();
   const choices = await statusChoices(person, now.status);
   const day = (d: string) => format.dateTime(new Date(`${d}T00:00:00+05:30`), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Asia/Colombo' });
   const statusLine = [now.reason, now.status === 'retired' && now.retiredOn ? ts('retiredSince', { date: day(now.retiredOn) })
@@ -43,8 +48,10 @@ export default async function CarPage({ params, searchParams }: { params: Promis
     <AppFrame person={person} active="cars" title={t('title')} subtitle={car.registration} backHref="/cars">
       {q.saved === '1' && mayEdit ? <Notice>{t('saved')}</Notice> : null}
       {q.status === '1' ? <Notice>{ts('saved')}</Notice> : null}
+      {q.papers === '1' ? <Notice>{tp('saved')}</Notice> : null}
       <section className="car-card">
         <div className="car-top">
+          <CarPicture carId={car.id} model={car.model} photoId={car.photoId} size="lg" />
           <PlateBadge plate={car.registration} size="lg" lang={lang as Lang} />
           <span style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontSize: 16, lineHeight: '26px' }}>{`${car.model} · ${car.ownership === 'sns' ? t('ownerSns') : car.partnerName ? t('ownerPartnerNamed', { name: car.partnerName }) : t('ownerPartner')}`}</span>
@@ -61,6 +68,23 @@ export default async function CarPage({ params, searchParams }: { params: Promis
             {now.status !== 'retired' ? <Link className="rt-btn rt-btn-quiet" style={{ textDecoration: 'none' }} href={`/cars/${car.id}/status`}>{ts('change')}</Link> : null}
           </div>
         ) : now.status === 'repair' || now.status === 'unavailable' ? <span className="set-muted">{ts('onlyAuthorised')}</span> : null}
+      </section>
+      {/* Papers and service (ST-04.6): everyone at SNS sees and changes them. */}
+      <section className="car-card" aria-labelledby="papers">
+        <div className="car-head"><h2 id="papers">{tp('title')}</h2>
+          <Link className="rt-btn rt-btn-quiet" href={`/cars/${car.id}/papers`}>{tp('change')}</Link></div>
+        <dl className="car-papers">
+          {(['insuranceExpires', 'licenceExpires', 'nextServiceOn'] as const).map((f) => {
+            const v = papers?.[f] ?? null;
+            const expired = !!v && f !== 'nextServiceOn' && v < today;
+            return (
+              <div key={f}><dt>{tp(f)}</dt>
+                <dd data-paper={f} data-expired={expired ? '' : undefined}>{v ? tp(expired ? 'expired' : 'until', { date: day(v) }) : tp('notRecorded')}</dd></div>
+            );
+          })}
+          <div><dt>{tp('nextServiceKm')}</dt>
+            <dd data-paper="nextServiceKm">{papers?.nextServiceKm != null ? tp('km', { n: showNumber(papers.nextServiceKm) }) : tp('notRecorded')}</dd></div>
+        </dl>
       </section>
       {seeTerms ? (
         <section className="car-card" aria-labelledby="terms">

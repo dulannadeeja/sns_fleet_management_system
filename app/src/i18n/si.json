@@ -269,7 +269,11 @@
         "car": {
           "add": "{target} කාර් එක එකතු කළා",
           "change": "{target} හි {field} {old} සිට {new} දක්වා වෙනස් කළා",
-          "status": "{target} හි තත්වය {old} සිට {new} දක්වා වෙනස් කළා"
+          "status": "{target} හි තත්වය {old} සිට {new} දක්වා වෙනස් කළා",
+          "papers": "{target} හි {field} {old} සිට {new} දක්වා වෙනස් කළා",
+          "photoAdd": "{target} හි photo එකක් දැම්මා",
+          "photoReplace": "{target} හි photo එක මාරු කළා",
+          "photoRemove": "{target} හි photo එක අයින් කළා"
         },
         "partner": {
           "add": "{target} partner ලෙස එකතු කළා",
@@ -805,6 +809,57 @@
         "retiredFirst": "මුලින්ම කාර් එක නිදහස් විදිහට ආපසු ගන්න.",
         "retireDateFuture": "අද හෝ ඊට කලින් දිනයක් දාන්න.",
         "retireDateBeforeAdded": "මේ දිනය කාර් එක එකතු කරපු දිනයට කලින්.",
+        "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+      }
+    },
+    "papers": {
+      "title": "ලියකියවිලි සහ සර්විස්",
+      "insuranceExpires": "රක්ෂණය ඉවර වෙන දිනය",
+      "licenceExpires": "ආදායම් බලපත්‍රය ඉවර වෙන දිනය",
+      "nextServiceOn": "ඊළඟ සර්විස් දිනය",
+      "nextServiceKm": "ඊළඟ සර්විස් km",
+      "notRecorded": "සටහන් කර නැහැ",
+      "until": "{date} දක්වා",
+      "expired": "{date} ඉවර වුණා",
+      "km": "km {n}",
+      "change": "ලියකියවිලි සහ සර්විස් වෙනස් කරන්න",
+      "save": "Save කරන්න",
+      "cancel": "එපා",
+      "saved": "ලියකියවිලි සහ සර්විස් save කළා.",
+      "hint": "තාම දන්නේ නැත්නම් කොටුව හිස්ව තියන්න.",
+      "kmHint": "Odometer එකේ වගේ සම්පූර්ණ km",
+      "note": "මතක් කිරීම් එන්නේ මෙතැන දාපු දින වලින් විතරයි (Phase 3). හැම වෙනසක්ම Activity log එකේ තියෙනවා.",
+      "names": {
+        "insuranceExpires": "රක්ෂණය ඉවර වෙන දිනය",
+        "licenceExpires": "ආදායම් බලපත්‍රය ඉවර වෙන දිනය",
+        "nextServiceOn": "ඊළඟ සර්විස් දිනය",
+        "nextServiceKm": "ඊළඟ සර්විස් km"
+      },
+      "errors": {
+        "invalid": "ලකුණු කරපු කොටු බලන්න: ඇත්ත දිනයක්, හෝ සම්පූර්ණ km.",
+        "stale": "මේ අතරේ කවුරු හරි මේවා වෙනස් කළා. ඒවා බලන්න පිටුව ආයෙත් අරින්න, ඊට පස්සේ ඔයාගේ වෙනස කරන්න.",
+        "notAllowed": "ඔයාට මේක වෙනස් කරන්න බැහැ.",
+        "notFound": "මේ කාර් එක හම්බ වුණේ නැහැ.",
+        "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+      }
+    },
+    "photo": {
+      "title": "කාර් එකේ photo එක",
+      "add": "Photo එකක් දාන්න",
+      "replace": "Photo එක මාරු කරන්න",
+      "remove": "Photo එක අයින් කරන්න",
+      "choose": "Photo file එක",
+      "hint": "JPEG, PNG හෝ WebP, 10 MB දක්වා. කාර් එකේ card එකේ සහ පිටුවේ පෙන්නනවා.",
+      "standard": "Photo එකක් දාන කම් මොඩලයේ සාමාන්‍ය පින්තූරය පෙන්නනවා.",
+      "notCondition": "මේක කාර් එකේ තත්වය පෙන්නන photo එකක් නෙවෙයි, භාර දෙන්නත් ඕන නැහැ.",
+      "saved": "Photo එක save කළා.",
+      "removed": "Photo එක අයින් කළා: ආයෙත් සාමාන්‍ය පින්තූරය පෙන්නනවා.",
+      "errors": {
+        "fileMissing": "මුලින් photo එකක් තෝරන්න.",
+        "fileTooBig": "Photo එක 10 MB ට වැඩියි.",
+        "fileType": "JPEG, PNG හෝ WebP photo එකක් දාන්න. (iPhone එකකින් photo JPEG විදිහට යවන්න පුළුවන්.)",
+        "notAllowed": "ඔයාට මේක වෙනස් කරන්න බැහැ.",
+        "notFound": "මේ කාර් එක හම්බ වුණේ නැහැ.",
         "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
       }
     }

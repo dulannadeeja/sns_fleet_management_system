@@ -28,6 +28,7 @@ test('ST-04.5: staff mark a car under repair; only the owner side marks it avail
   // A staff member marks it Under repair with a reason; they may not mark it available or retire it.
   const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
   await page.goto('/settings/people/new');
+  await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(`Sample status ${randomUUID().slice(0, 8)}`);
   await page.locator('input[name="phone"]').fill(phone);
   await page.locator('input[name="password"]').fill('first-pass-1');

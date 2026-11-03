@@ -1,6 +1,6 @@
 import { and, desc, eq, lte, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { auditEvent, partnerOwner, startingPackage, startingPackageModel, user, vehicle, vehicleStatusEvent, vehicleTermsVersion } from '../../db/schema';
+import { auditEvent, partnerOwner, startingPackage, startingPackageModel, user, vehicle, vehiclePhoto, vehicleStatusEvent, vehicleTermsVersion } from '../../db/schema';
 import { isCarState, type CarState } from './status';
 import { actorMay, LIMITS, type Tx } from './rules';
 import { packagesFor, readDefaults } from './packages';
@@ -35,6 +35,8 @@ export interface Car {
   id: string; registration: string; model: string; ownership: Ownership; status: CarStatus; terms: Terms; createdAt: Date;
   /** A partner car's owner once linked (#20): the partner and their name. */
   partnerId: string | null; partnerName: string | null;
+  /** The catalogue photo's id, or null: the model's standard image shows (#23, CR-001). */
+  photoId: string | null;
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -182,14 +184,17 @@ function carsQuery() {
   // The newest status change of each car; none means Available (#22).
   const state = db.selectDistinctOn([vehicleStatusEvent.vehicleId], { vehicleId: vehicleStatusEvent.vehicleId, status: vehicleStatusEvent.status })
     .from(vehicleStatusEvent).orderBy(vehicleStatusEvent.vehicleId, desc(vehicleStatusEvent.createdAt), desc(vehicleStatusEvent.id)).as('state');
+  // The newest photo row of each car; one without a file means the photo was removed (#23).
+  const photo = db.selectDistinctOn([vehiclePhoto.vehicleId], { vehicleId: vehiclePhoto.vehicleId, photoId: vehiclePhoto.id, photoKey: vehiclePhoto.storageKey })
+    .from(vehiclePhoto).orderBy(vehiclePhoto.vehicleId, desc(vehiclePhoto.createdAt), desc(vehiclePhoto.id)).as('photo');
   return db.select({
-    id: vehicle.id, status: state.status, registration: vehicle.registration, model: vehicle.model, ownership: vehicle.ownership, createdAt: vehicle.createdAt,
+    id: vehicle.id, status: state.status, photoId: photo.photoId, photoKey: photo.photoKey, registration: vehicle.registration, model: vehicle.model, ownership: vehicle.ownership, createdAt: vehicle.createdAt,
     dailyRate: newest.dailyRate, kmPerDay: newest.kmPerDay, extraKmRate: newest.extraKmRate, commissionPercent: newest.commissionPercent,
     longRentalExtra: newest.longRentalExtra, longRentalFromDay: newest.longRentalFromDay, garageDayCharge: newest.garageDayCharge,
     ownerPays: newest.ownerPays, partnerId: vehicle.partnerOwnerId, partnerName: user.name,
   }).from(vehicle).innerJoin(newest, eq(newest.vehicleId, vehicle.id))
     .leftJoin(partnerOwner, eq(partnerOwner.id, vehicle.partnerOwnerId)).leftJoin(user, eq(user.id, partnerOwner.userId))
-    .leftJoin(state, eq(state.vehicleId, vehicle.id));
+    .leftJoin(state, eq(state.vehicleId, vehicle.id)).leftJoin(photo, eq(photo.vehicleId, vehicle.id));
 }
 type Row = Awaited<ReturnType<ReturnType<typeof carsQuery>['execute']>>[number];
 const toCar = (r: Row): Car => ({
@@ -198,6 +203,7 @@ const toCar = (r: Row): Car => ({
   terms: { dailyRate: r.dailyRate, kmPerDay: r.kmPerDay, extraKmRate: r.extraKmRate, commissionPercent: r.commissionPercent,
     longRentalExtra: r.longRentalExtra, longRentalFromDay: r.longRentalFromDay, garageDayCharge: r.garageDayCharge, ownerPays: (r.ownerPays ?? []).filter(isCost) },
   partnerId: r.partnerId, partnerName: r.partnerName,
+  photoId: r.photoKey ? r.photoId : null,
 });
 
 /** Every car (ST-04.1). Callers decide what a person may see: the commission is a partner term. */

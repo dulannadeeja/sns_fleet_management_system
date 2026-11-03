@@ -1,6 +1,9 @@
 import type { Entry } from '../../modules/activity/activity';
 import { isCost, TERM_FIELDS, type TermField } from '../../modules/cars/cars';
 import { isCarState } from '../../modules/cars/status';
+import { PAPER_FIELDS, type PaperField } from '../../modules/cars/papers';
+
+const isPaperField = (f: string): f is PaperField => (PAPER_FIELDS as readonly string[]).includes(f);
 import { showNumber } from '../settings/business-rules/show';
 
 // How a car's history line reads (car.add, car.change), shared by the car page and the activity log.
@@ -19,6 +22,12 @@ export function carValues(tCars: T, e: Entry): Record<string, string> {
     // A status change (#22): the plate and the old and new status in words.
     const name = (v: unknown) => (typeof v === 'string' && isCarState(v) ? tCars(`status.names.${v}`) : String(v ?? ''));
     return { target: typeof d.plate === 'string' ? d.plate : (e.targetId ?? ''), field: '', old: name(d.old), new: name(d.new) };
+  }
+  if (e.action === 'car.papers') {
+    // Papers and service dates (#23): the field's name and its old and new value ("not recorded" when empty).
+    const show = (v: unknown) => (v === null || v === undefined || v === '' ? tCars('papers.notRecorded') : typeof v === 'number' ? tCars('papers.km', { n: showNumber(v) }) : String(v));
+    const f = typeof d.field === 'string' && isPaperField(d.field) ? tCars(`papers.names.${d.field}`) : String(d.field ?? '');
+    return { target: typeof d.plate === 'string' ? d.plate : (e.targetId ?? ''), field: f, old: show(d.old), new: show(d.new) };
   }
   if (e.action.startsWith('package.')) {
     const field = isTermField(d.field) ? d.field : null;

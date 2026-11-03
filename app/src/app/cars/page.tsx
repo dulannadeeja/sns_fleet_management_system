@@ -6,6 +6,7 @@ import { listCars } from '../../modules/cars/cars';
 import { PlateBadge, StatusChip, type Lang } from '../../ui';
 import { AppFrame } from '../AppFrame';
 import { showNumber } from '../settings/business-rules/show';
+import { CarPicture } from './CarPicture';
 import './cars.css';
 
 // Screen 04.1 All cars (ST-04.1): everyone who works at SNS sees every car with its owner, package and status.
@@ -33,7 +34,8 @@ export default async function CarsPage({ searchParams }: { searchParams: Promise
         </div>
         {shown.length ? shown.map((c) => (
           <Link key={c.id} className="car-row" href={`/cars/${c.id}`} data-plate={c.registration}>
-            <span><PlateBadge plate={c.registration} size="sm" lang={lang as Lang} /><span className="car-sub">{c.model}</span></span>
+            <span className="car-cell"><CarPicture carId={c.id} model={c.model} photoId={c.photoId} />
+              <span><PlateBadge plate={c.registration} size="sm" lang={lang as Lang} /><span className="car-sub">{c.model}</span></span></span>
             <span>{c.ownership === 'sns' ? t('ownerSns') : c.partnerName ? t('ownerPartnerNamed', { name: c.partnerName }) : t('ownerPartner')}</span>
             <span className="car-num">{showNumber(c.terms.dailyRate)}</span>
             <span className="car-num">{showNumber(c.terms.kmPerDay)}</span>
