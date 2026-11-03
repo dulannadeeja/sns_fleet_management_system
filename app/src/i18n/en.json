@@ -268,7 +268,8 @@
         },
         "car": {
           "add": "added the car {target}",
-          "change": "changed the {field} of {target} from {old} to {new}"
+          "change": "changed the {field} of {target} from {old} to {new}",
+          "status": "changed the status of {target} from {old} to {new}"
         },
         "partner": {
           "add": "added the partner {target}",
@@ -758,6 +759,54 @@
       },
       "removeModels": "Models · tick one to take it out",
       "removeHint": "A model taken out changes only cars added afterwards; cars already added keep their model and terms. A package keeps at least one model."
+    },
+    "status": {
+      "names": {
+        "available": "Available",
+        "repair": "Under repair",
+        "unavailable": "Temporarily unavailable",
+        "retired": "Retired"
+      },
+      "hints": {
+        "available": "Ready for rentals again",
+        "repair": "In the garage or being fixed, a planned service included",
+        "unavailable": "For example, the owner took it",
+        "retired": "Sold, or returned to its owner for good. Admin or owner only, never while rented or reserved. Its history stays."
+      },
+      "title": "Change a car’s status",
+      "now": "Now: {status}",
+      "change": "Change status",
+      "markAvailable": "Mark available",
+      "bringBack": "Bring back",
+      "reason": "Reason",
+      "reasonHint": "Needed for every status except Available",
+      "reasonBack": "Why it comes back",
+      "expectedBack": "Expected back (optional)",
+      "expectedHint": "Can be changed later",
+      "retiredOn": "Retired on",
+      "retiredHint": "Today or an earlier date, not before the car was added",
+      "save": "Change status",
+      "cancel": "Cancel",
+      "saved": "Status changed.",
+      "since": "since {date}",
+      "back": "back {date}",
+      "retiredSince": "retired on {date}",
+      "by": "by {name}",
+      "note": "Only an authorised person marks a car available again. Only the owner can bring a retired car back, with a reason. Each change is in the activity log.",
+      "onlyAuthorised": "Only an authorised person can mark it available.",
+      "errors": {
+        "notAllowed": "You may not make this change.",
+        "notFound": "This car was not found.",
+        "stale": "Someone changed this car’s status meanwhile. Open the page again to see it.",
+        "statusInvalid": "Choose a status.",
+        "reasonMissing": "Type the reason.",
+        "reasonTooLong": "Use 500 letters or fewer.",
+        "dateInvalid": "Choose a real date.",
+        "retiredFirst": "Bring the car back first, as Available.",
+        "retireDateFuture": "Use today or an earlier date.",
+        "retireDateBeforeAdded": "This date is before the car was added.",
+        "failed": "Not saved. Try again."
+      }
     }
   },
   "partners": {

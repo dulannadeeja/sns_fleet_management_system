@@ -127,6 +127,13 @@
       "when": 1793594741610,
       "tag": "0017_package_model_removal",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1793596040601,
+      "tag": "0018_car_status",
+      "breakpoints": true
     }
   ]
 }

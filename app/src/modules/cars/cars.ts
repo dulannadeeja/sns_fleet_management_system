@@ -1,6 +1,7 @@
 import { and, desc, eq, lte, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { auditEvent, partnerOwner, startingPackage, startingPackageModel, user, vehicle, vehicleTermsVersion } from '../../db/schema';
+import { auditEvent, partnerOwner, startingPackage, startingPackageModel, user, vehicle, vehicleStatusEvent, vehicleTermsVersion } from '../../db/schema';
+import { isCarState, type CarState } from './status';
 import { actorMay, LIMITS, type Tx } from './rules';
 import { packagesFor, readDefaults } from './packages';
 
@@ -29,7 +30,7 @@ export const PARTNER_TERMS: readonly TermKey[] = ['commissionPercent', 'ownerPay
 const norm = (v: unknown) => (Array.isArray(v) ? JSON.stringify([...v].sort()) : v);
 /** Whether two values of a term are the same (the costs in any order). */
 export const sameTerm = (a: unknown, b: unknown) => norm(a) === norm(b);
-export type CarStatus = 'available';
+export type CarStatus = CarState;
 export interface Car {
   id: string; registration: string; model: string; ownership: Ownership; status: CarStatus; terms: Terms; createdAt: Date;
   /** A partner car's owner once linked (#20): the partner and their name. */
@@ -178,18 +179,22 @@ export async function termsAt(carId: string, at: Date): Promise<Terms | null> {
 function carsQuery() {
   const newest = db.selectDistinctOn([vehicleTermsVersion.vehicleId], { vehicleId: vehicleTermsVersion.vehicleId, ...termsColumns })
     .from(vehicleTermsVersion).orderBy(vehicleTermsVersion.vehicleId, desc(vehicleTermsVersion.effectiveFrom), desc(vehicleTermsVersion.id)).as('newest');
+  // The newest status change of each car; none means Available (#22).
+  const state = db.selectDistinctOn([vehicleStatusEvent.vehicleId], { vehicleId: vehicleStatusEvent.vehicleId, status: vehicleStatusEvent.status })
+    .from(vehicleStatusEvent).orderBy(vehicleStatusEvent.vehicleId, desc(vehicleStatusEvent.createdAt), desc(vehicleStatusEvent.id)).as('state');
   return db.select({
-    id: vehicle.id, registration: vehicle.registration, model: vehicle.model, ownership: vehicle.ownership, createdAt: vehicle.createdAt,
+    id: vehicle.id, status: state.status, registration: vehicle.registration, model: vehicle.model, ownership: vehicle.ownership, createdAt: vehicle.createdAt,
     dailyRate: newest.dailyRate, kmPerDay: newest.kmPerDay, extraKmRate: newest.extraKmRate, commissionPercent: newest.commissionPercent,
     longRentalExtra: newest.longRentalExtra, longRentalFromDay: newest.longRentalFromDay, garageDayCharge: newest.garageDayCharge,
     ownerPays: newest.ownerPays, partnerId: vehicle.partnerOwnerId, partnerName: user.name,
   }).from(vehicle).innerJoin(newest, eq(newest.vehicleId, vehicle.id))
-    .leftJoin(partnerOwner, eq(partnerOwner.id, vehicle.partnerOwnerId)).leftJoin(user, eq(user.id, partnerOwner.userId));
+    .leftJoin(partnerOwner, eq(partnerOwner.id, vehicle.partnerOwnerId)).leftJoin(user, eq(user.id, partnerOwner.userId))
+    .leftJoin(state, eq(state.vehicleId, vehicle.id));
 }
 type Row = Awaited<ReturnType<ReturnType<typeof carsQuery>['execute']>>[number];
 const toCar = (r: Row): Car => ({
   id: r.id, registration: r.registration, model: r.model, ownership: r.ownership as Ownership, createdAt: r.createdAt,
-  status: 'available', // status changes come with #22
+  status: r.status && isCarState(r.status) ? r.status : 'available',
   terms: { dailyRate: r.dailyRate, kmPerDay: r.kmPerDay, extraKmRate: r.extraKmRate, commissionPercent: r.commissionPercent,
     longRentalExtra: r.longRentalExtra, longRentalFromDay: r.longRentalFromDay, garageDayCharge: r.garageDayCharge, ownerPays: (r.ownerPays ?? []).filter(isCost) },
   partnerId: r.partnerId, partnerName: r.partnerName,
@@ -200,7 +205,9 @@ export async function listCars(): Promise<Car[]> {
   // By model in package order (system design 4.1 first), then by plate.
   const order = sql`(select min(${startingPackage.position} * 1000 + ${startingPackageModel.position}) from ${startingPackageModel}
     join ${startingPackage} on ${startingPackage.id} = ${startingPackageModel.packageId} where lower(${startingPackageModel.model}) = lower(${vehicle.model}))`;
-  return (await carsQuery().orderBy(sql`${order} nulls last`, vehicle.model, vehicle.registration)).map(toCar);
+  const cars = (await carsQuery().orderBy(sql`${order} nulls last`, vehicle.model, vehicle.registration)).map(toCar);
+  // Retired cars last: their history stays, but they no longer go out (#22).
+  return [...cars.filter((c) => c.status !== 'retired'), ...cars.filter((c) => c.status === 'retired')];
 }
 
 export async function getCar(id: string): Promise<Car | null> {

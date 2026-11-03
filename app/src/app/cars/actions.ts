@@ -1,9 +1,10 @@
 'use server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { requirePermission } from '../../auth/require';
+import { requireEmployee, requirePermission } from '../../auth/require';
 import { mayDo } from '../../auth/access';
 import { addCar, editCar, getCar, isCost, TERM_FIELDS, type Cost, type Terms } from '../../modules/cars/cars';
+import { changeStatus } from '../../modules/cars/status';
 
 // Screens 04.4 and 04.8: requirePermission("Add or edit cars and packages"), then the cars module, which checks again in
 // its transaction (the commission also needs "Add or edit partners") and writes the activity log (PR-05).
@@ -58,4 +59,18 @@ export async function editCarAction(carId: string, _: CarFormState, form: FormDa
   revalidatePath('/cars');
   revalidatePath(`/cars/${carId}`);
   redirect(`/cars/${carId}?saved=1`);
+}
+
+export type StatusFormState = { error?: string; values?: Record<string, string> };
+
+/** 04.5 (ST-04.5): any employee may try; the cars module checks who may set which status, in its transaction. */
+export async function changeStatusAction(carId: string, _: StatusFormState, form: FormData): Promise<StatusFormState> {
+  const person = await requireEmployee();
+  const values = { status: text(form, 'status'), reason: text(form, 'reason'), expectedBack: text(form, 'expectedBack'), retiredOn: text(form, 'retiredOn') };
+  const result = await changeStatus(person.id, carId, values, text(form, 'was'));
+  if ('error' in result) return { error: result.error, values };
+  revalidatePath('/cars');
+  revalidatePath(`/cars/${carId}`);
+  // "Status changed." only when something was saved (#22 review).
+  redirect(result.changed ? `/cars/${carId}?status=1` : `/cars/${carId}`);
 }
