@@ -429,6 +429,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Servicing is tracked by date and km, with repairs, insurance and revenue-licence expiry. Reminders come only from dates entered. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability).
   - Expired insurance or licence warns staff; going ahead needs the authorised person and a reason.
   - Every car's insurance and licence dates are on the go-live checklist (ST-01.3).
+  - *Proposed (Dulan, 3 Nov 2026):* each car keeps insurance expiry, revenue-licence expiry, next service date and next service km; everyone at SNS enters and changes them on the car's page; each change logged with old and new. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability).
 - **Checks:** AT-43. AT-45 (Phase 3).
 - **Screens:** 04.2 Car details · owner and 04.4 Edit car (papers and service).
 
@@ -438,7 +439,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
 - **Phase:** 1.
 - **Roles:** Admin adds or replaces it.
 - **Story:** As an admin, I add one photo of a car for its card and page, so that staff recognise it.
-- **Rules:** one optional photo per car; until one is added, the model's standard image shows. It is not a condition photo, not a handover requirement and not a customer document. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
+- **Rules:** one optional photo per car; until one is added, the model's standard image shows. It is not a condition photo, not a handover requirement and not a customer document. *Proposed (Dulan, 3 Nov 2026):* adding, replacing or removing it needs "Add or edit cars and packages"; JPEG, PNG or WebP up to 10 MB; stored privately; removing brings back the standard image; each change logged. System design → [Per-vehicle settings](SNS_SYSTEM_DESIGN.md#42-per-vehicle-settings).
 - **Checks:** AT-29.
 - **Screens:** 04.4 Edit car (Add photo).
 
