@@ -1,0 +1,15 @@
+/* 01.3 Ready to start (#25). */
+.gl-list { gap: 0; padding: 0; }
+.gl-item { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 14px 20px; border-top: 1px solid var(--line); }
+.gl-item:first-child { border-top: 0; }
+.gl-mark { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; background: var(--sunken); color: var(--ink-muted); }
+.gl-mark-done { background: var(--available-tint); color: var(--available); }
+.gl-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 15px; line-height: 24px; overflow-wrap: anywhere; }
+.gl-state { font-size: 14px; font-weight: 600; }
+.gl-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.gl-reason { min-width: 200px; }
+@media (max-width: 699px) {
+  .gl-item { grid-template-columns: 32px minmax(0, 1fr); padding: 12px 16px; }
+  .gl-actions { grid-column: 2; align-items: flex-start; }
+  .gl-reason { min-width: 0; width: 100%; }
+}
