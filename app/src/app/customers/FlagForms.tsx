@@ -45,7 +45,7 @@ export function CloseFlagForm({ customerId, flagId, w }: { customerId: string; f
   const ready = useReady();
   return (
     <form action={action} noValidate style={{ display: 'flex', gap: 8, alignItems: 'flex-end', flexWrap: 'wrap' }}>
-      <TextField name="reason" label={s(w, 'closeReason')} autoComplete="off" hint={s(w, 'closeHint')} defaultValue={state.values?.reason}
+      <TextField id={`close-${flagId}`} name="reason" label={s(w, 'closeReason')} autoComplete="off" hint={s(w, 'closeHint')} defaultValue={state.values?.reason}
         error={err(w, state)} style={{ minWidth: 0 }} className="cus-close-reason" />
       <Button type="submit" variant="secondary" disabled={pending || !ready}>{s(w, 'close')}</Button>
     </form>

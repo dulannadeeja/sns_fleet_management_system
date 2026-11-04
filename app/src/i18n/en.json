@@ -296,6 +296,10 @@
           "addModel": "added the model {model} to the starting package {target}",
           "defaults": "changed the starting {field} for every car from {old} to {new}",
           "removeModel": "took the model {model} out of the starting package {target}"
+        },
+        "golive": {
+          "tick": "marked “{item}” done on the go-live checklist",
+          "untick": "marked “{item}” not done on the go-live checklist: {reason}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -515,7 +519,82 @@
         }
       }
     },
-    "packages": "Cars and packages"
+    "packages": "Cars and packages",
+    "golive": {
+      "nav": "Ready to start",
+      "title": "Ready to start",
+      "intro": "Go-live waits until everything on this list is done. The system checks some items by itself; you tick the others when they are done.",
+      "home": "Ready to start: {ready} of {total} done",
+      "ready": "Done",
+      "notReady": "Not ready",
+      "later": {
+        "printouts": "Not ready · comes with the printouts",
+        "money": "Not ready · comes with Money"
+      },
+      "blocked": "Go-live is blocked until every item is done.",
+      "allDone": "Every item is done.",
+      "items": {
+        "businessDetails": "Business details on printouts",
+        "carsEntered": "Every car entered",
+        "startingPackages": "Starting packages",
+        "carDates": "Insurance and licence dates for every car",
+        "partnerCars": "Every partner car linked to its owner",
+        "staffAccounts": "Staff accounts",
+        "authorisedPerson": "The authorised person named",
+        "openingCash": "Opening cash in the drawer",
+        "agreementWording": "SNS’s agreement wording",
+        "openDecisions": "Every Open decision settled"
+      },
+      "facts": {
+        "cars": "{n} cars in the fleet",
+        "packages": "{n} starting packages",
+        "people": "{n} people with an active account",
+        "datesMissing": "No insurance date: {insurance} · no licence date: {licence}",
+        "datesAll": "Every car has both dates",
+        "unlinked": "No owner yet: {cars}",
+        "allLinked": "Every partner car has its owner",
+        "notNamed": "Nobody named for: {tasks}",
+        "allNamed": "Someone is named for each task",
+        "openingCash": "Counted and entered before the first transaction",
+        "agreementWording": "SNS’s own wording, Sinhala and English, approved by the owner",
+        "businessDetails": "Name, registration, address and phone on every printout",
+        "openDecisions": "Check the Open list in the system design (section 18) before ticking this."
+      },
+      "tasks": {
+        "reconcilePayments": "checking payments",
+        "writeOffDebt": "writing off a debt",
+        "keepCancellationFee": "keeping a cancellation fee",
+        "overrideExpiredDocuments": "going ahead with expired papers"
+      },
+      "auto": "Checked by the system",
+      "tickedBy": "Ticked by {name}, {date}",
+      "untickedBy": "Marked not done by {name}, {date}: {reason}",
+      "tick": "Mark done",
+      "untick": "Mark not done",
+      "reason": "Why it is not done",
+      "go": {
+        "carDates": "Add dates",
+        "partnerCars": "Add partner",
+        "authorisedPerson": "Permissions",
+        "startingPackages": "Packages",
+        "staffAccounts": "People",
+        "carsEntered": "Cars"
+      },
+      "errors": {
+        "notAllowed": "Only the owner can do this.",
+        "itemInvalid": "This item is checked by the system.",
+        "reasonMissing": "Write why it is not done.",
+        "tooLong": "Use 500 letters or fewer.",
+        "stale": "This changed meanwhile. Open the page again to see it.",
+        "failed": "Not saved. Try again."
+      },
+      "groups": {
+        "business": "Business and cars",
+        "people": "People and permissions",
+        "firstDay": "For the first day"
+      },
+      "groupCount": "{ready} of {total} ready"
+    }
   },
   "code": {
     "back": "Back",

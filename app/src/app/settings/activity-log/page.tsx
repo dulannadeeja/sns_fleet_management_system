@@ -48,6 +48,9 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       email: String(e.details?.email ?? ''),
       // setting.change: the setting's name and its old and new values as people read them (#17).
       setting: typeof e.details?.key === 'string' && isSettingKey(e.details.key) ? t(`rules.names.${e.details.key}`) : String(e.details?.key ?? ''),
+      // golive.*: the checklist item's name (#25).
+      item: t.has(`golive.items.${String(e.details?.item)}` as 'golive.items.carDates') ? t(`golive.items.${String(e.details?.item)}` as 'golive.items.carDates') : String(e.details?.item ?? ''),
+      reason: String(e.details?.reason ?? ''),
       old: showSetting(String(e.details?.key ?? ''), String(e.details?.old ?? ''), words, lang),
       new: showSetting(String(e.details?.key ?? ''), String(e.details?.new ?? ''), words, lang),
       field: '',

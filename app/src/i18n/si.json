@@ -296,6 +296,10 @@
           "addModel": "{model} මොඩලය {target} මුල් පැකේජයට එකතු කළා",
           "defaults": "හැම car එකකටම මුල් {field} {old} සිට {new} දක්වා වෙනස් කළා",
           "removeModel": "{model} මොඩලය {target} මුල් පැකේජයෙන් අයින් කළා"
+        },
+        "golive": {
+          "tick": "පටන් ගැනීමේ ලැයිස්තුවේ “{item}” ඉවරයි කියලා දැම්මා",
+          "untick": "පටන් ගැනීමේ ලැයිස්තුවේ “{item}” ඉවර නැහැ කියලා දැම්මා: {reason}"
         }
       },
       "reason": "හේතුව: “{reason}”",
@@ -515,7 +519,82 @@
         }
       }
     },
-    "packages": "වාහන"
+    "packages": "වාහන",
+    "golive": {
+      "nav": "පටන් ගන්න සූදානම්",
+      "title": "පටන් ගන්න සූදානම්",
+      "intro": "මේ ලැයිස්තුවේ හැම දෙයක්ම කරලා ඉවර වෙනකම් පද්ධතිය පටන් ගන්නේ නැහැ. සමහර ඒවා පද්ධතියම බලනවා; අනිත් ඒවා ඉවර වුණාම ඔයා tick කරන්න.",
+      "home": "පටන් ගන්න සූදානම්: {total} න් {ready} ක් ඉවරයි",
+      "ready": "ඉවරයි",
+      "notReady": "තාම නැහැ",
+      "later": {
+        "printouts": "තාම නැහැ · printouts එක්ක එනවා",
+        "money": "තාම නැහැ · මුදල් එක්ක එනවා"
+      },
+      "blocked": "හැම දෙයක්ම ඉවර වෙනකම් පටන් ගන්න බැහැ.",
+      "allDone": "හැම දෙයක්ම ඉවරයි.",
+      "items": {
+        "businessDetails": "Printouts වල ව්‍යාපාරයේ විස්තර",
+        "carsEntered": "හැම කාර් එකක්ම එකතු කළා",
+        "startingPackages": "මුල් පැකේජ",
+        "carDates": "හැම කාර් එකකටම රක්ෂණ සහ බලපත්‍ර දින",
+        "partnerCars": "හැම partner කාර් එකක්ම අයිතිකරුට සම්බන්ධයි",
+        "staffAccounts": "සේවක accounts",
+        "authorisedPerson": "අවසරය තියෙන කෙනා නම් කළා",
+        "openingCash": "Drawer එකේ මුල් සල්ලි",
+        "agreementWording": "SNS ගිවිසුම් වචන",
+        "openDecisions": "හැම විවෘත තීරණයක්ම විසඳුවා"
+      },
+      "facts": {
+        "cars": "කාර් {n}",
+        "packages": "මුල් පැකේජ {n}",
+        "people": "ක්‍රියාත්මක accounts {n}",
+        "datesMissing": "රක්ෂණ දිනය නැහැ: {insurance} · බලපත්‍ර දිනය නැහැ: {licence}",
+        "datesAll": "හැම කාර් එකකටම දින දෙකම තියෙනවා",
+        "unlinked": "තාම අයිතිකරු නැහැ: {cars}",
+        "allLinked": "හැම partner කාර් එකකටම අයිතිකරු ඉන්නවා",
+        "notNamed": "නම් කරලා නැහැ: {tasks}",
+        "allNamed": "හැම වැඩකටම කෙනෙක් නම් කරලා",
+        "openingCash": "පළමු ගනුදෙනුවට කලින් ගණන් කරලා දාන්න",
+        "agreementWording": "SNS ගේම වචන, සිංහල සහ ඉංග්‍රීසි, අයිතිකරු අනුමත කරපු",
+        "businessDetails": "හැම printout එකකම නම, ලියාපදිංචි අංකය, ලිපිනය සහ දුරකථනය",
+        "openDecisions": "මේක tick කරන්න කලින් පද්ධති සැලසුමේ Open ලැයිස්තුව (18 කොටස) බලන්න."
+      },
+      "tasks": {
+        "reconcilePayments": "ගෙවීම් බලන්න",
+        "writeOffDebt": "ණයක් කපා හරින්න",
+        "keepCancellationFee": "අවලංගු කිරීමේ ගාස්තුව තියාගන්න",
+        "overrideExpiredDocuments": "ඉවර වුණු ලියකියවිලි තිබුණත් යන්න"
+      },
+      "auto": "පද්ධතිය බලනවා",
+      "tickedBy": "{name} tick කළා, {date}",
+      "untickedBy": "{name} ඉවර නැහැ කිව්වා, {date}: {reason}",
+      "tick": "ඉවරයි කියලා දාන්න",
+      "untick": "ඉවර නැහැ කියලා දාන්න",
+      "reason": "ඉවර නැත්තේ ඇයි?",
+      "go": {
+        "carDates": "දින දාන්න",
+        "partnerCars": "Partner එකතු කරන්න",
+        "authorisedPerson": "අවසර",
+        "startingPackages": "පැකේජ",
+        "staffAccounts": "සේවකයෝ",
+        "carsEntered": "කාර්"
+      },
+      "errors": {
+        "notAllowed": "මේක කරන්න පුළුවන් අයිතිකරුට විතරයි.",
+        "itemInvalid": "මේක පද්ධතියම බලනවා.",
+        "reasonMissing": "ඉවර නැත්තේ ඇයි කියලා ලියන්න.",
+        "tooLong": "අකුරු 500ක් හෝ අඩුවෙන් ලියන්න.",
+        "stale": "මේ අතරේ මේක වෙනස් වුණා. අලුත් තත්වය බලන්න පිටුව ආයෙත් අරින්න.",
+        "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+      },
+      "groups": {
+        "business": "ව්‍යාපාරය සහ වාහන",
+        "people": "සේවකයෝ සහ අවසර",
+        "firstDay": "පළමු දවසට"
+      },
+      "groupCount": "{total} න් {ready} ක් සූදානම්"
+    }
   },
   "code": {
     "back": "ආපසු",
