@@ -141,6 +141,13 @@
       "when": 1793743677291,
       "tag": "0019_car_papers_photo",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1793762991306,
+      "tag": "0020_customer_flags",
+      "breakpoints": true
     }
   ]
 }

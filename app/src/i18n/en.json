@@ -210,7 +210,7 @@
       "reconcilePayments": "Check payments and resolve differences",
       "writeOffDebt": "Write off a customer debt",
       "keepCancellationFee": "Keep a cancellation fee",
-      "overrideExpiredDocuments": "Go ahead with expired insurance or licence",
+      "overrideExpiredDocuments": "Go ahead with expired car papers or an expired driving licence",
       "payPartnerCashouts": "Pay partner cash-outs and record them",
       "seePartnerEarnings": "See partner earnings and terms",
       "seeActivityLog": "See the activity log",
@@ -285,7 +285,10 @@
           "copyAdd": "added a copy for {target}: {copy}",
           "change": "corrected the {field} of {target} from {old} to {new}",
           "copyOpened": "opened a copy of {target}: {copy}",
-          "nicChange": "corrected the NIC of {target} from {old} to {new}"
+          "nicChange": "corrected the NIC of {target} from {old} to {new}",
+          "flagAdd": "flagged {target}: {kind} · {details}",
+          "flagClose": "closed a flag on {target} ({kind}): {reason}",
+          "goAhead": "went ahead with {target} despite the warnings: {reason}"
         },
         "package": {
           "add": "added the starting package {target} ({models})",
@@ -1005,7 +1008,7 @@
     "warnings": "Warnings",
     "licenceWarning": "The driving licence expired on {date}. Everyone sees a warning before renting to this customer.",
     "noWarnings": "No warnings.",
-    "flagsLater": "Flags and money owed show here once they come in.",
+    "flagsLater": "Money owed shows here once rentals come in.",
     "history": "What happened",
     "historyEmpty": "Nothing recorded yet.",
     "fieldNames": {
@@ -1038,6 +1041,60 @@
     "reason": "Reason",
     "nicFixSave": "Correct the NIC",
     "nicFixed": "NIC corrected.",
-    "limitNote": "Showing at most 100 customers; search to find others."
+    "limitNote": "Showing at most 100 customers; search to find others.",
+    "flags": {
+      "kinds": {
+        "unpaid": "Unpaid money",
+        "damage": "Damaged a car",
+        "other": "Something else"
+      },
+      "add": "Add a flag",
+      "addTitle": "Flag {name}",
+      "why": "Why",
+      "what": "What happened",
+      "whatHint": "Write what happened, so everyone understands it.",
+      "addNote": "Shown to everyone before this customer’s next rental. Staff can still go ahead, with a reason. No ratings or scores.",
+      "save": "Add flag",
+      "cancel": "Cancel",
+      "added": "Flag added.",
+      "title": "Flags",
+      "none": "No flags.",
+      "open": "Open",
+      "closed": "Closed",
+      "by": "Added by {name}, {date}",
+      "closedBy": "Closed by {name}, {date}: {reason}",
+      "close": "Close flag",
+      "closeReason": "Why it is closed",
+      "closeHint": "For example: the money was paid.",
+      "closedDone": "Flag closed. It no longer warns, and it stays in the history.",
+      "check": "Check before a rental",
+      "checkTitle": "Before you continue",
+      "checkNone": "Nothing to warn about: you can rent to this customer.",
+      "flagWarn": "Flag · {kind}",
+      "flagNote": "Staff can still go ahead, with a reason.",
+      "licenceWarn": "Licence expired · {date}",
+      "licenceNote": "Only an authorised person can go ahead, with a reason. Going ahead does not make the licence valid.",
+      "reason": "Reason to continue",
+      "reasonNote": "Recorded with your name and the time.",
+      "continue": "Continue with reason",
+      "dontRent": "Don’t rent",
+      "decided": "Your decision to continue is recorded.",
+      "decisions": "Decisions to continue",
+      "decision": "{name}, {date}: {reason}",
+      "required": "required",
+      "errors": {
+        "kindInvalid": "Choose why.",
+        "detailsMissing": "Write what happened.",
+        "reasonMissing": "Write the reason.",
+        "tooLong": "Use 500 letters or fewer.",
+        "alreadyClosed": "This flag is already closed.",
+        "notAllowed": "You may not do this.",
+        "licenceNotAllowed": "Only an authorised person can go ahead with an expired licence.",
+        "stale": "The warnings changed meanwhile. Check them again.",
+        "nothingToCheck": "There is nothing to warn about.",
+        "notFound": "Not found.",
+        "failed": "Not saved. Try again."
+      }
+    }
   }
 }

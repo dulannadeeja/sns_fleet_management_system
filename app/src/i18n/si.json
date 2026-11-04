@@ -210,7 +210,7 @@
       "reconcilePayments": "ගෙවීම් check කරලා වෙනස්කම් විසඳන්න",
       "writeOffDebt": "පාරිභෝගික ණයක් කපා හරින්න",
       "keepCancellationFee": "අවලංගු ගාස්තුව තියාගන්න",
-      "overrideExpiredDocuments": "කල් ඉකුත් වූ insurance හෝ license එකක් තිබුණත් යන්න",
+      "overrideExpiredDocuments": "Car ලියකියවිලි හෝ රියදුරු බලපත්‍රය ඉවර වුණත් ඉස්සරහට යන්න",
       "payPartnerCashouts": "Partner cash-outs ගෙවලා සටහන් කරන්න",
       "seePartnerEarnings": "Partner ආදායම් සහ කොන්දේසි බලන්න",
       "seeActivityLog": "Activity log එක බලන්න",
@@ -285,7 +285,10 @@
           "copyAdd": "{target} ට පිටපතක් දැම්මා: {copy}",
           "change": "{target} ගේ {field} {old} සිට {new} දක්වා නිවැරදි කළා",
           "copyOpened": "{target} ගේ පිටපතක් ඇරියා: {copy}",
-          "nicChange": "{target} ගේ NIC එක {old} සිට {new} දක්වා නිවැරදි කළා"
+          "nicChange": "{target} ගේ NIC එක {old} සිට {new} දක්වා නිවැරදි කළා",
+          "flagAdd": "{target} ට flag එකක් දැම්මා: {kind} · {details}",
+          "flagClose": "{target} ගේ flag එකක් වැහුවා ({kind}): {reason}",
+          "goAhead": "අවවාද තිබුණත් {target} එක්ක ඉස්සරහට ගියා: {reason}"
         },
         "package": {
           "add": "{target} මුල් පැකේජය එකතු කළා ({models})",
@@ -1005,7 +1008,7 @@
     "warnings": "අවවාද",
     "licenceWarning": "රියදුරු බලපත්‍රය {date} කල් ඉකුත් වුණා. මේ පාරිභෝගිකයාට කුලියට දෙන්න කලින් හැමෝටම අනතුරු ඇඟවීමක් පේනවා.",
     "noWarnings": "අවවාද නැහැ.",
-    "flagsLater": "Flag සහ ණය ආවාම මෙතන පේනවා.",
+    "flagsLater": "කුලී ආවට පස්සේ ණය මෙතැන පෙන්නනවා.",
     "history": "සිදු වූ දේ",
     "historyEmpty": "තවම මොකුත් සටහන් වෙලා නැහැ.",
     "fieldNames": {
@@ -1038,6 +1041,60 @@
     "reason": "හේතුව",
     "nicFixSave": "NIC එක නිවැරදි කරන්න",
     "nicFixed": "NIC එක නිවැරදි කළා.",
-    "limitNote": "උපරිම පාරිභෝගිකයෝ 100යි පේන්නේ; අනිත් අය හොයන්න."
+    "limitNote": "උපරිම පාරිභෝගිකයෝ 100යි පේන්නේ; අනිත් අය හොයන්න.",
+    "flags": {
+      "kinds": {
+        "unpaid": "ගෙවලා නැහැ",
+        "damage": "Car එකට හානි",
+        "other": "වෙන දෙයක්"
+      },
+      "add": "Flag එකක් දාන්න",
+      "addTitle": "{name} ට flag එකක් දාන්න",
+      "why": "මොකද?",
+      "what": "විස්තරය",
+      "whatHint": "හැමෝටම තේරෙන්න වුණේ මොකක්ද කියලා ලියන්න.",
+      "addNote": "මේ පාරිභෝගිකයාගේ ඊළඟ කුලියට කලින් හැමෝටම පෙන්නනවා. හේතුවක් එක්ක staff ට ඉස්සරහට යන්න පුළුවන්. Ratings හෝ ලකුණු නැහැ.",
+      "save": "Flag එක දාන්න",
+      "cancel": "එපා",
+      "added": "Flag එක දැම්මා.",
+      "title": "Flags",
+      "none": "Flags නැහැ.",
+      "open": "තියෙනවා",
+      "closed": "වහලා",
+      "by": "{name} දැම්මා, {date}",
+      "closedBy": "{name} වැහුවා, {date}: {reason}",
+      "close": "Flag එක වහන්න",
+      "closeReason": "වහන හේතුව",
+      "closeHint": "උදාහරණ: සල්ලි ගෙව්වා.",
+      "closedDone": "Flag එක වැහුවා. ඒක තවදුරටත් අවවාද කරන්නේ නැහැ, ඉතිහාසයේ තියෙනවා.",
+      "check": "කුලියට කලින් බලන්න",
+      "checkTitle": "දැනගන්න ඕන දේවල්",
+      "checkNone": "අවවාද කරන්න දෙයක් නැහැ: මේ පාරිභෝගිකයාට කුලියට දෙන්න පුළුවන්.",
+      "flagWarn": "Flag · {kind}",
+      "flagNote": "හේතුවක් එක්ක staff ට ඉස්සරහට යන්න පුළුවන්.",
+      "licenceWarn": "බලපත්‍රය ඉවරයි · {date}",
+      "licenceNote": "හේතුවක් එක්ක ඉස්සරහට යන්න පුළුවන් අවසරය තියෙන කෙනෙකුට විතරයි. ඉස්සරහට ගියාට බලපත්‍රය වලංගු වෙන්නේ නැහැ.",
+      "reason": "ඉදිරියට යන්නේ ඇයි?",
+      "reasonNote": "ඔයාගේ නම සහ වෙලාව එක්ක සටහන් වෙනවා.",
+      "continue": "හේතුව සටහන් කර ඉදිරියට",
+      "dontRent": "නවත්වන්න",
+      "decided": "ඉදිරියට යන්න ගත්ත තීරණය සටහන් කළා.",
+      "decisions": "ඉදිරියට යන්න ගත්ත තීරණ",
+      "decision": "{name}, {date}: {reason}",
+      "required": "අනිවාර්යයි",
+      "errors": {
+        "kindInvalid": "හේතුවක් තෝරන්න.",
+        "detailsMissing": "වුණේ මොකක්ද කියලා ලියන්න.",
+        "reasonMissing": "හේතුව ලියන්න.",
+        "tooLong": "අකුරු 500ක් හෝ අඩුවෙන් ලියන්න.",
+        "alreadyClosed": "මේ flag එක දැනටමත් වහලා.",
+        "notAllowed": "ඔයාට මේක කරන්න බැහැ.",
+        "licenceNotAllowed": "බලපත්‍රය ඉවර නම් ඉස්සරහට යන්න පුළුවන් අවසරය තියෙන කෙනෙකුට විතරයි.",
+        "stale": "මේ අතරේ අවවාද වෙනස් වුණා. ආයෙත් බලන්න.",
+        "nothingToCheck": "අවවාද කරන්න දෙයක් නැහැ.",
+        "notFound": "හම්බ වුණේ නැහැ.",
+        "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import type { CustomerWords } from './CustomerForms';
+import type { FlagWords } from './FlagForms';
 
 /** The words the customer forms need, in the person's language. */
 export async function customerWords(): Promise<CustomerWords> {
@@ -13,4 +14,10 @@ export async function customerWords(): Promise<CustomerWords> {
     chooseFile: t('chooseFile'), reference: t('reference'), referenceNote: t('referenceNote'), save: t('save'), saveChanges: t('saveChanges'),
     cancel: t('cancel'), requiredMark: ts('requiredMark'), replace: t('replace'), addCopy: t('addCopy'), errors: Object.fromEntries(keys.map((k) => [k, t(`errors.${k}`)])),
   };
+}
+
+/** The words of the flag and warning screens (08.4, 08.5; #24). */
+export async function flagWords(): Promise<FlagWords> {
+  const t = await getTranslations('customers');
+  return t.raw('flags') as FlagWords;
 }

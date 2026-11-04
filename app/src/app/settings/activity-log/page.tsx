@@ -60,6 +60,9 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
         target: String(e.details?.name ?? e.targetId ?? ''),
         field: tCust.has(`fieldNames.${String(e.details?.field)}` as 'fieldNames.name') ? tCust(`fieldNames.${String(e.details?.field)}` as 'fieldNames.name') : String(e.details?.field ?? ''),
         copy: tCust.has(`kinds.${String(e.details?.kind)}` as 'kinds.nicFront') ? tCust(`kinds.${String(e.details?.kind)}` as 'kinds.nicFront') : String(e.details?.kind ?? ''),
+        // Flags and decisions to continue (#24): the flag's reason in words, what happened, the reason given.
+        kind: tCust.has(`flags.kinds.${String(e.details?.kind)}` as 'flags.kinds.unpaid') ? tCust(`flags.kinds.${String(e.details?.kind)}` as 'flags.kinds.unpaid') : String(e.details?.kind ?? ''),
+        details: String(e.details?.details ?? ''), reason: String(e.details?.reason ?? ''),
         old: String(e.details?.old ?? ''), new: String(e.details?.new ?? ''),
       } : {}),
     };
