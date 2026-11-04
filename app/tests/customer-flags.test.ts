@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { db } from '../src/db/client';
-import { customer, user } from '../src/db/schema';
+import { auditEvent, customer, customerGoAhead, user } from '../src/db/schema';
 import { addCustomer } from '../src/modules/customers/customers';
 import { addFlag, goAhead, warningsFor } from '../src/modules/customers/flags';
 import { setPermission } from '../src/modules/people/people';
@@ -41,10 +41,23 @@ describe('ST-08.4: warnings before a rental', () => {
     // The screen showed no flag, but there is one now: refused.
     expect(await goAhead(staff.id, id, { reason: 'Sample: regular customer', shownFlagIds: [], shownLicenceExpired: false })).toEqual({ error: 'stale' });
     const ok = await goAhead(staff.id, id, { reason: 'Sample: regular customer, mirror paid', shownFlagIds: [flag.id], shownLicenceExpired: false });
-    expect(ok).toMatchObject({ ok: true });
+    if (!('ok' in ok)) throw new Error(ok.error);
+    // The reason, the name and the time are recorded, with the flag that was shown.
+    const [row] = await db.select().from(customerGoAhead).where(eq(customerGoAhead.id, ok.id));
+    expect(row).toMatchObject({ customerId: id, reason: 'Sample: regular customer, mirror paid', createdBy: staff.id, flagIds: [flag.id], licenceExpired: false });
+    expect(Date.now() - row.createdAt.getTime()).toBeLessThan(60_000);
+    const [log] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'customer.goAhead'), eq(auditEvent.targetId, id)));
+    expect(log).toMatchObject({ createdBy: staff.id, details: { reason: 'Sample: regular customer, mirror paid', flags: 1 } });
     // Without "Go ahead despite a customer flag" (the owner can take it away), staff cannot.
     await setPermission(await theOwner(), staff.id, 'proceedDespiteFlag', false);
     expect(await goAhead(staff.id, id, { reason: 'Sample', shownFlagIds: [flag.id], shownLicenceExpired: false })).toEqual({ error: 'notAllowed' });
+    // The flag shows to every person, whoever added it: another staff member and an admin both get it, and it was
+    // still shown to the staff member who may no longer continue.
+    const other = await samplePerson();
+    const admin = await samplePerson('first-pass-1', 'admin');
+    expect(await goAhead(other.id, id, { reason: 'Sample: seen', shownFlagIds: [], shownLicenceExpired: false })).toEqual({ error: 'stale' });
+    expect(await goAhead(admin.id, id, { reason: 'Sample: seen by the admin', shownFlagIds: [flag.id], shownLicenceExpired: false })).toMatchObject({ ok: true });
+    expect((await warningsFor(id))!.openFlags.map((f) => f.id)).toEqual([flag.id]);
   });
 
   it('with an expired licence, staff cannot continue; the authorised person can, and the licence stays expired', async () => {

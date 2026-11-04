@@ -803,8 +803,8 @@
  {
   "name": "08-Customers-CustomerDetails-Desktop",
   "w": 1280,
-  "canvasH": 1095,
-  "contentH": 1095,
+  "canvasH": 1167,
+  "contentH": 1167,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -812,8 +812,8 @@
  {
   "name": "08-Customers-CustomerDetails-Phone",
   "w": 390,
-  "canvasH": 2229,
-  "contentH": 2229,
+  "canvasH": 2301,
+  "contentH": 2301,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

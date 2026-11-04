@@ -1069,7 +1069,7 @@
       "closedDone": "Flag closed. It no longer warns, and it stays in the history.",
       "check": "Check before a rental",
       "checkTitle": "Before you continue",
-      "checkNone": "Nothing to warn about: you can rent to this customer.",
+      "checkNone": "No flags, and the driving licence is valid. Money owed and missing copies are checked at New rental (Phase 2).",
       "flagWarn": "Flag · {kind}",
       "flagNote": "Staff can still go ahead, with a reason.",
       "licenceWarn": "Licence expired · {date}",
