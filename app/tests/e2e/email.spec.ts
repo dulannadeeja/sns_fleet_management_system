@@ -43,13 +43,15 @@ test('AT-61: the admin on a new device needs the emailed code; then forgot passw
   await page.locator('input[name="repeat"]').fill('own-pass-123');
   await page.getByRole('button', { name: 'English', exact: true }).click();
   await page.locator('button[type="submit"]').click();
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
+  await page.goto('/settings/business-rules'); // Sign out is at the bottom of the Settings menu
   await page.getByRole('button', { name: 'Sign out' }).click();
   await expect(page).toHaveURL(/\/sign-in$/); // signed out before the next sign-in
   seen = mailCount(email);
   await signIn(page, phone, 'own-pass-123');
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   expect(mailCount(email)).toBe(seen);
+  await page.goto('/settings/business-rules'); // Sign out is at the bottom of the Settings menu
   await page.getByRole('button', { name: 'Sign out' }).click();
   await expect(page).toHaveURL(/\/sign-in$/); // signed out before the next sign-in
 
@@ -78,12 +80,12 @@ test('AT-61: the admin on a new device needs the emailed code; then forgot passw
   }).toPass({ timeout: 75_000, intervals: [5_000] });
   await page.locator('input[name="code"]').fill((await nextMail(email, seen)).match(/\b(\d{6})\b/)![1]);
   await page.getByRole('button', { name: 'Sign in' }).click();
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 
   // 15.6 and 01.7: the owner changes the admin's email; the admin is asked to confirm it (or later).
   const owner = await browser.newPage();
   await signIn(owner, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(owner).toHaveURL(/\/$/);
+  await expect(owner).toHaveURL(/\/(cars)?$/);
   await owner.goto('/settings/people');
   // Earlier runs left turned-off sample admins with the same name: open the active one.
   await owner.getByRole('link', { name: new RegExp(`Sample admin ${info.project.name}.*Active`) }).first().click();
@@ -97,5 +99,5 @@ test('AT-61: the admin on a new device needs the emailed code; then forgot passw
   await expect(page).toHaveURL(/\/confirm-email$/);
   await expect(page.getByText(newEmail)).toBeVisible();
   await page.getByRole('button', { name: 'Later' }).click();
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 });

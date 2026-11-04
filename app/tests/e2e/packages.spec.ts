@@ -19,7 +19,7 @@ test('ST-04.4: two packages for one model; a change applies to cars added afterw
   const model = `E2E model ${tag}`;
   const [newer, older] = [`Sample E2E ${tag} new`, `Sample E2E ${tag} old`];
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 
   // 04.6 from the Settings menu: the 4.1 packages and the defaults, the commission included for the owner.
   await page.goto('/settings/business-rules');
@@ -94,7 +94,7 @@ test('ST-04.4: two packages for one model; a change applies to cars added afterw
   await staff.locator('input[name="password"]').fill('own-pass-123');
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
-  await expect(staff).toHaveURL(/\/$/);
+  await expect(staff).toHaveURL(/\/(cars)?$/);
   await staff.goto('/settings/business-rules');
   await staff.locator('a[href="/settings/packages"]').first().click();
   await expect(staff.locator('[data-package="Alto"]')).toBeVisible();

@@ -3,7 +3,8 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { requireEmployee } from '../../auth/require';
 import { mayDo } from '../../auth/access';
 import { listCars } from '../../modules/cars/cars';
-import { PlateBadge, StatusChip, type Lang } from '../../ui';
+import { readChecklist } from '../../modules/golive/golive';
+import { Notice, PlateBadge, StatusChip, type Lang } from '../../ui';
 import { AppFrame } from '../AppFrame';
 import { showNumber } from '../settings/business-rules/show';
 import { CarPicture } from './CarPicture';
@@ -14,7 +15,9 @@ const OWNERS = ['sns', 'partner'] as const;
 
 export default async function CarsPage({ searchParams }: { searchParams: Promise<{ owner?: string }> }) {
   const person = await requireEmployee();
-  const [cars, t, lang, q] = await Promise.all([listCars(), getTranslations('cars'), getLocale(), searchParams]);
+  const [cars, t, lang, q, ts] = await Promise.all([listCars(), getTranslations('cars'), getLocale(), searchParams, getTranslations('settings.golive')]);
+  // Until go-live, the owner sees how much of the checklist is done (ST-01.3), here while Cars is the first page.
+  const golive = person.role === 'owner' ? await readChecklist() : null;
   const owner = OWNERS.find((o) => o === q.owner);
   const shown = owner ? cars.filter((c) => c.ownership === owner) : cars;
   const count = (o?: string) => (o ? cars.filter((c) => c.ownership === o).length : cars.length);
@@ -23,6 +26,7 @@ export default async function CarsPage({ searchParams }: { searchParams: Promise
   );
   return (
     <AppFrame person={person} active="cars" title={t('title')} backHref="/">
+      {golive ? <Notice><Link href="/settings/golive" data-golive>{ts('home', { ready: golive.ready, total: golive.total })}</Link></Notice> : null}
       <div className="car-head">
         <nav className="set-chips" aria-label={t('cols.owner')}>{chip(undefined, t('all'))}{chip('sns', t('sns'))}{chip('partner', t('partner'))}</nav>
         {(await mayDo(person, 'editCarsAndPackages')) ? <Link className="rt-btn rt-btn-primary" href="/cars/new">{t('add')}</Link> : null}

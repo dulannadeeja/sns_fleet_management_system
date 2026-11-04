@@ -16,7 +16,7 @@ test('ST-08.5, ST-08.4, AT-48: flag a customer, check before a rental, continue 
   const nic = String(Math.floor(Math.random() * 1e12)).padStart(12, '0');
   const name = `Sample flagged ${nic.slice(-6)}`;
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 
   // A sample customer whose licence has expired.
   await page.goto('/customers/new');

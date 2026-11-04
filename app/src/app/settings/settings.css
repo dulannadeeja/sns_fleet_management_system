@@ -64,3 +64,5 @@
 .set-content a.rt-btn { text-decoration: none; }
 .set-explain h3 { margin: 0 0 6px; font-size: 15px; line-height: 24px; font-weight: 600; }
 .set-explain ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 24px; }
+.set-signout { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+.set-signout .rt-btn { width: 100%; justify-content: flex-start; }

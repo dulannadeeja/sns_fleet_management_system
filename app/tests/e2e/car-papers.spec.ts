@@ -20,7 +20,7 @@ test('ST-04.6, AT-29: papers and service dates; the standard image, then a photo
   test.setTimeout(120_000);
   const plate = `SMP ${randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`;
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   await page.goto('/cars/new');
   await expect(page.getByRole('button', { name: 'Save car' })).toBeEnabled();
   await page.getByLabel('Registration number').fill(plate);

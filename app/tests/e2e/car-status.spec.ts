@@ -16,7 +16,7 @@ test('ST-04.5: staff mark a car under repair; only the owner side marks it avail
   test.setTimeout(120_000);
   const plate = `SMP ${randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`;
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   await page.goto('/cars/new');
   await expect(page.getByRole('button', { name: 'Save car' })).toBeEnabled();
   await page.getByLabel('Registration number').fill(plate);
@@ -40,7 +40,7 @@ test('ST-04.5: staff mark a car under repair; only the owner side marks it avail
   await staff.locator('input[name="password"]').fill('own-pass-123');
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
-  await expect(staff).toHaveURL(/\/$/);
+  await expect(staff).toHaveURL(/\/(cars)?$/);
   await staff.goto(`${carUrl}/status`);
   await expect(staff.getByRole('button', { name: 'තත්වය වෙනස් කරන්න' })).toBeEnabled();
   await expect(staff.getByRole('radio')).toHaveCount(2); // Under repair and Unavailable: no Retire, no Available

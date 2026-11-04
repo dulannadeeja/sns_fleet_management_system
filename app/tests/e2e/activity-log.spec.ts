@@ -17,7 +17,7 @@ test('ST-15.4: the owner reads the log and filters it; staff are refused (403)',
 
   // The owner adds a staff member (so there is something to read).
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   await page.goto('/settings/people/new');
   await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(name);
@@ -33,7 +33,7 @@ test('ST-15.4: the owner reads the log and filters it; staff are refused (403)',
   await staff.locator('input[name="password"]').fill('own-pass-123');
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
-  await expect(staff).toHaveURL(/\/$/);
+  await expect(staff).toHaveURL(/\/(cars)?$/);
   expect((await staff.goto('/settings/activity-log'))?.status()).toBe(403);
   await staff.close();
 

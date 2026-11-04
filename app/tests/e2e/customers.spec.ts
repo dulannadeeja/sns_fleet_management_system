@@ -17,7 +17,7 @@ test('ST-08.1 to 08.3: a customer is added with one copy, opened, corrected; the
   const nic = String(Math.floor(Math.random() * 1e12)).padStart(12, '0');
   const name = `Sample customer ${nic.slice(-6)}`;
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 
   // 08.3: saved with only the NIC front copy (AT-49: copies missing).
   await page.goto('/customers/new');

@@ -83,10 +83,14 @@ test('first sign-in: set an own password, choose English, then sign out', async 
   await page.getByRole('button', { name: 'English', exact: true }).click();
   await page.locator('button[type="submit"]').click();
 
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await expect(page.getByText(`Signed in: Sample ${info.project.name}`)).toBeVisible();
+  // Owner, admin and staff open Cars after sign-in; the top bar names who is signed in.
+  await expect(page).toHaveURL(/\/cars$/);
+  await expect(page.locator('.rt-header-user')).toHaveAttribute('title', new RegExp(`^Sample ${info.project.name}`));
 
+  // Sign out is at the bottom of the Settings menu.
+  await page.goto('/settings/business-rules');
   await page.getByRole('button', { name: 'Sign out' }).click();
   await expect(page).toHaveURL(/\/sign-in$/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'si');
@@ -95,5 +99,5 @@ test('first sign-in: set an own password, choose English, then sign out', async 
   await signIn(page, phone, E2E_FIRST_PASSWORD);
   await expect(page.getByRole('alert')).toBeVisible();
   await signIn(page, phone, NEW_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 });
