@@ -21,7 +21,7 @@ test('ST-15.2: the owner adds a person, resets their password, turns the account
   const name = `Sample ${info.project.name} ${randomUUID().slice(0, 8)}`;
   const phone = newPhone();
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   await page.getByRole('link', { name: /people and permissions/ }).click();
   await expect(page).toHaveURL(/\/settings\/people$/);
   await noSidewaysScroll(page);
@@ -65,7 +65,7 @@ test('ST-15.1: the owner gives a permission; staff cannot open Settings (403)', 
   const name = `Sample perm ${info.project.name} ${randomUUID().slice(0, 8)}`;
   const phone = newPhone();
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   await page.goto('/settings/people/new');
   await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled(); // ready: typing before this is cleared
   await page.locator('input[name="name"]').fill(name);
@@ -92,7 +92,7 @@ test('ST-15.1: the owner gives a permission; staff cannot open Settings (403)', 
   await staff.locator('input[name="password"]').fill('own-pass-123');
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
-  await expect(staff).toHaveURL(/\/$/);
+  await expect(staff).toHaveURL(/\/(cars)?$/);
   const res = await staff.goto('/settings/people');
   expect(res?.status()).toBe(403);
   await expect(staff.getByRole('heading', { level: 1 })).toBeVisible();

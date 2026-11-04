@@ -15,7 +15,7 @@ test('ST-01.3: the owner sees what is missing, ticks an item done and not done a
   test.setTimeout(90_000);
   const mine = info.project.name === 'phone' ? 'staffAccounts' : 'openDecisions';
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
   await expect(page.locator('[data-golive]')).toContainText(/Ready to start: \d+ of 10 done/);
   await page.locator('[data-golive]').click();
   await expect(page).toHaveURL(/\/settings\/golive$/);

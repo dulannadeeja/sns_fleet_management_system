@@ -2,6 +2,8 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { mayDo } from '../../auth/access';
+import { signOutAction } from '../actions';
+import { Button } from '../../ui';
 import { railItems } from '../rail';
 import { AppHeader, Icon, NavRail, PageHeader, type Lang } from '../../ui';
 import type { SignedInPerson } from '../../auth/first-sign-in';
@@ -41,6 +43,8 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
             {/* Everyone who works at SNS reads the starting packages (04.6, #21); changing them needs the permission. */}
             <Link href="/settings/packages" aria-current={active === 'packages' ? 'page' : undefined}><Icon name="car" size={20} />{t('settings.packages')}</Link>
             {seeLog ? <Link href="/settings/activity-log" aria-current={active === 'activity' ? 'page' : undefined}><Icon name="clock" size={20} />{t('settings.activityLog')}</Link> : null}
+                      {/* Sign out, for everyone who works at SNS (no board shows it yet; the old start page had it). */}
+            <form action={signOutAction} className="set-signout"><Button type="submit" variant="quiet" icon="arrowLeft">{t('home.signOut')}</Button></form>
           </nav>
           <div className="set-content">{children}</div>
         </main>

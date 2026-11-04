@@ -16,7 +16,7 @@ test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its 
   test.setTimeout(90_000);
   const plate = `SMP ${randomUUID().replace(/-/g, '').slice(0, 10).toUpperCase()}`;
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 
   // 04.8: a partner Prius; its starting package fills in, and the rate is changed before saving.
   await page.goto('/cars');
@@ -73,7 +73,7 @@ test('ST-04.1 to 04.3: the owner adds and edits a car; staff see it without its 
   await staff.locator('input[name="password"]').fill('own-pass-123');
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
-  await expect(staff).toHaveURL(/\/$/);
+  await expect(staff).toHaveURL(/\/(cars)?$/);
   await staff.goto(carUrl);
   await expect(staff.getByLabel(`අංකය ${plate}`).first()).toBeVisible();
   await expect(staff.locator('[data-term]')).toHaveCount(0);

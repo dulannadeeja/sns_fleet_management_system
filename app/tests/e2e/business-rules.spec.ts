@@ -23,7 +23,7 @@ test('ST-15.3: staff read the rules; the owner changes a setting, checks old →
     : { key: 'payrollReminderDays', label: 'Payroll', name: 'payroll reminder', unit: (n: string) => `${n} days`, other: (n: string) => (n === '5' ? '6' : '5') };
 
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 
   // A staff member, added by the owner, reads 15.2 without Change buttons and is refused 15.7.
   const phone = `078${String(Math.floor(Math.random() * 1e7)).padStart(7, '0')}`;
@@ -40,7 +40,7 @@ test('ST-15.3: staff read the rules; the owner changes a setting, checks old →
   await staff.locator('input[name="password"]').fill('own-pass-123');
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
-  await expect(staff).toHaveURL(/\/$/);
+  await expect(staff).toHaveURL(/\/(cars)?$/);
   await staff.locator('a[href="/settings/business-rules"]').first().click();
   await expect(staff.locator('[data-group="reminders"]')).toBeVisible();
   await expect(staff.locator('a[href^="/settings/business-rules/"]')).toHaveCount(0);

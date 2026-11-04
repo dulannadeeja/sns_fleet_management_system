@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { requireUser } from '../auth/require';
 import { mayDo } from '../auth/access';
@@ -6,9 +7,11 @@ import { Button } from '../ui';
 import { signOutAction } from './actions';
 import { readChecklist } from '../modules/golive/golive';
 
-// Until the home screens (Phase 2 and 4), the signed-in start page only says who is signed in.
+// Until the home screens (02.1 and 02.2, Phases 2 and 4), owner, admin and staff open Cars after sign-in (Dulan, 4 Nov
+// 2026); a partner, who has no pages yet, sees who is signed in and can sign out.
 export default async function Home() {
   const person = await requireUser();
+  if (['owner', 'admin', 'staff'].includes(person.role)) redirect('/cars');
   const t = await getTranslations();
   const golive = person.role === 'owner' ? await readChecklist() : null;
   return (

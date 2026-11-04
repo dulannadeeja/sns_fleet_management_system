@@ -20,7 +20,7 @@ test('ST-11.1 to 11.3: the owner adds a partner with a car; the partner signs in
   const phone = newPhone();
   const nic = String(Math.floor(Math.random() * 1e12)).padStart(12, '0');
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/(cars)?$/);
 
   // A partner car, not linked yet.
   await page.goto('/cars/new');
@@ -106,7 +106,7 @@ test('ST-11.1 to 11.3: the owner adds a partner with a car; the partner signs in
   await staff.locator('input[name="password"]').fill('own-pass-123');
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
-  await expect(staff).toHaveURL(/\/$/);
+  await expect(staff).toHaveURL(/\/(cars)?$/);
   expect((await staff.goto('/partners'))?.status()).toBe(403);
   expect((await staff.goto('/partners/new'))?.status()).toBe(403);
   await staff.close();
