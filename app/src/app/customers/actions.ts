@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { requirePermission } from '../../auth/require';
 import { addCopy, addCustomer, COPY_KINDS, correctCustomer, correctNic, type Copy } from '../../modules/customers/customers';
 import { MAX_COPY_BYTES } from '../../storage/kinds';
+import { addFlag, closeFlag, goAhead } from '../../modules/customers/flags';
 
 // Screens 08.2 and 08.3: requirePermission("Customer access"), then the customers module, which checks again and writes
 // the activity log. Files are checked by the module from their own bytes (type and size) before anything is saved.
@@ -67,4 +68,45 @@ export async function correctNicAction(customerId: string, _: CustomerFormState,
   revalidatePath(`/customers/${customerId}`);
   revalidatePath('/customers');
   redirect(`/customers/${customerId}?nic=1`);
+}
+
+export type FlagFormState = { error?: string; values?: Record<string, string> };
+
+/** 08.5 Add a customer flag (ST-08.5): "Customer access"; the module checks again in its transaction. */
+export async function addFlagAction(customerId: string, _: FlagFormState, form: FormData): Promise<FlagFormState> {
+  const person = await requirePermission('customerAccess');
+  const values = { kind: text(form, 'kind'), details: text(form, 'details') };
+  const result = await addFlag(person.id, customerId, values);
+  if ('error' in result) return { error: result.error, values };
+  revalidatePath(`/customers/${customerId}`);
+  redirect(`/customers/${customerId}?flag=added`);
+}
+
+/** Closes a flag with a reason (AT-48). */
+export async function closeFlagAction(customerId: string, flagId: string, _: FlagFormState, form: FormData): Promise<FlagFormState> {
+  const person = await requirePermission('customerAccess');
+  const values = { reason: text(form, 'reason') };
+  const result = await closeFlag(person.id, flagId, values.reason, customerId);
+  if ('error' in result) {
+    if (result.error === 'alreadyClosed') revalidatePath(`/customers/${customerId}`); // show it closed
+    return { error: result.error, values };
+  }
+  revalidatePath(`/customers/${customerId}`);
+  redirect(`/customers/${customerId}?flag=closed`);
+}
+
+/** 08.4: a decision to continue despite the warnings shown, with a reason (ST-08.4). */
+export async function goAheadAction(customerId: string, _: FlagFormState, form: FormData): Promise<FlagFormState> {
+  const person = await requirePermission('customerAccess');
+  const values = { reason: text(form, 'reason') };
+  const result = await goAhead(person.id, customerId, {
+    reason: values.reason, shownFlagIds: form.getAll('shownFlag').map(String), shownLicenceExpired: text(form, 'shownLicenceExpired') === '1',
+  });
+  if ('error' in result) {
+    // "Changed meanwhile": the page is drawn again with the warnings as they are now, so the next try can go through.
+    if (result.error === 'stale') revalidatePath(`/customers/${customerId}/check`);
+    return { error: result.error, values };
+  }
+  revalidatePath(`/customers/${customerId}`);
+  redirect(`/customers/${customerId}?flag=decided`);
 }

@@ -829,7 +829,7 @@
   },
   "08-Customers-CustomerDetails-Desktop.dc.html": {
    "expand": "fill",
-   "h": 1047,
+   "h": 1167,
    "is_interactive": true,
    "page": "plate",
    "title": "08.2 Customer details · Desktop",
@@ -838,7 +838,7 @@
    "y": 35292
   },
   "08-Customers-CustomerDetails-Phone.dc.html": {
-   "h": 2159,
+   "h": 2301,
    "is_interactive": true,
    "page": "plate",
    "title": "08.2 Customer details · Phone",
@@ -901,7 +901,7 @@
    "title": "08.6 Write off a debt · Phone",
    "w": 390,
    "x": 3270,
-   "y": 37592
+   "y": 37692
   },
   "09-Money-BankCardCheck-Desktop.dc.html": {
    "expand": "fill",
@@ -958,7 +958,7 @@
    "title": "09.6 Count the drawer · expected shown · Phone",
    "w": 390,
    "x": 3270,
-   "y": 42829
+   "y": 42929
   },
   "09-Money-Drawer-Desktop.dc.html": {
    "expand": "fill",
@@ -977,7 +977,7 @@
    "title": "09.2 Drawer and payments · Phone",
    "w": 390,
    "x": 3270,
-   "y": 39619
+   "y": 39719
   },
   "09-Money-EveningCheck-Desktop.dc.html": {
    "expand": "fill",
@@ -1072,7 +1072,7 @@
    "title": "09.10 Money received by staff · Phone",
    "w": 390,
    "x": 3270,
-   "y": 46421
+   "y": 46521
   },
   "09-Money-RecordExpense-Desktop.dc.html": {
    "expand": "fill",
@@ -1167,7 +1167,7 @@
    "title": "10.2 Approve · confirm · Phone",
    "w": 390,
    "x": 3270,
-   "y": 50746
+   "y": 50846
   },
   "10-Approvals-Reject-Desktop.dc.html": {
    "expand": "fill",
@@ -1281,7 +1281,7 @@
    "title": "11.2 Partner details · Phone",
    "w": 390,
    "x": 3270,
-   "y": 52586
+   "y": 52686
   },
   "11-Partners-PartnerEarnings-Desktop.dc.html": {
    "expand": "fill",
@@ -1338,7 +1338,7 @@
    "title": "11.6 Pay and record a cash-out · Phone",
    "w": 390,
    "x": 3270,
-   "y": 54843
+   "y": 54943
   },
   "12-Maintenance-Maintenance-Desktop.dc.html": {
    "expand": "fill",
@@ -1376,7 +1376,7 @@
    "title": "12.2 Add a service or repair record · Phone",
    "w": 390,
    "x": 3270,
-   "y": 57777
+   "y": 57877
   },
   "13-Payroll-Adjustment-Desktop.dc.html": {
    "expand": "fill",
@@ -1395,7 +1395,7 @@
    "title": "13.2 Add an adjustment · Phone",
    "w": 390,
    "x": 3270,
-   "y": 60697
+   "y": 60797
   },
   "13-Payroll-Advance-Desktop.dc.html": {
    "expand": "fill",
@@ -1490,7 +1490,7 @@
    "title": "14.2 Car performance · Phone",
    "w": 390,
    "x": 3270,
-   "y": 64821
+   "y": 64921
   },
   "14-Reports-Reports-Desktop.dc.html": {
    "expand": "fill",
@@ -1547,7 +1547,7 @@
    "title": "15.7 Change a setting · Phone",
    "w": 390,
    "x": 3270,
-   "y": 74065
+   "y": 74165
   },
   "15-Settings-AddPerson-Desktop.dc.html": {
    "expand": "fill",
@@ -1604,7 +1604,7 @@
    "title": "15.2 Business rules · Phone",
    "w": 390,
    "x": 3270,
-   "y": 68365
+   "y": 68465
   },
   "15-Settings-People-Desktop.dc.html": {
    "expand": "fill",
@@ -1666,7 +1666,7 @@
    "title": "16.5 Partner earnings statement · print",
    "w": 794,
    "x": 3484,
-   "y": 76488
+   "y": 76588
   },
   "16-Documents-PaymentReceipt.dc.html": {
    "h": 540,
@@ -1674,7 +1674,7 @@
    "title": "16.4 Payment receipt · 80 mm slip · print",
    "w": 302,
    "x": 2982,
-   "y": 76488
+   "y": 76588
   },
   "16-Documents-Payslip.dc.html": {
    "h": 1123,
@@ -1802,7 +1802,7 @@
    "title": "18.2 New reservation · Phone",
    "w": 390,
    "x": 3270,
-   "y": 82176
+   "y": 82276
   },
   "18-Reservations-ReservationDetails-Desktop.dc.html": {
    "h": 706,
@@ -1840,7 +1840,7 @@
    "title": "18.4 Move to another car · Phone",
    "w": 390,
    "x": 3270,
-   "y": 84356
+   "y": 84456
   },
   "18-Reservations-CancelNoShow-Desktop.dc.html": {
    "h": 1207,

@@ -16,3 +16,9 @@ a.cus-row:hover { background: var(--sunken); }
   .cus-row > :nth-child(3), .cus-row > :nth-child(4), .cus-row > :nth-child(5) { display: none; }
   .cus-row-head { display: none; }
 }
+/* 08.4 and the flags on 08.2 (#24). */
+.cus-warning { display: flex; flex-direction: column; gap: 6px; }
+.cus-flags { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.cus-flags > li { display: flex; flex-direction: column; gap: 8px; padding: 12px 0; border-top: 1px solid var(--line); }
+.cus-flags > li:first-child { border-top: 0; }
+.cus-close-reason { flex: 1 1 240px; }
