@@ -24,6 +24,10 @@ describe('AT-48: closing a flag stops the warning and keeps the history', () => 
     expect((await warningsFor(added.id))!.openFlags.map((f) => f.id)).toEqual([flag.id]);
 
     expect(await closeFlag(staff.id, flag.id, '  ')).toEqual({ error: 'reasonMissing' });
+    // A flag closes only from its own customer's page.
+    const other = await addCustomer(await theOwner(), sampleCustomer());
+    if (!('ok' in other)) throw new Error('sample customer not added');
+    expect(await closeFlag(staff.id, flag.id, 'Sample', other.id)).toEqual({ error: 'notFound' });
     expect(await closeFlag(staff.id, flag.id, 'Sample: paid in full on 3 Nov')).toEqual({ ok: true, id: flag.id });
     expect((await warningsFor(added.id))!.openFlags).toEqual([]); // no warning at the next rental
     expect(await closeFlag(staff.id, flag.id, 'again')).toEqual({ error: 'alreadyClosed' });

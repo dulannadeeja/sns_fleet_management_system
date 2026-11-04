@@ -13,7 +13,7 @@ const err = (w: FlagWords, state: FlagFormState) => (state.error ? (w.errors[sta
 export function AddFlagForm({ customerId, w }: { customerId: string; w: FlagWords }) {
   const [state, action, pending] = useActionState<FlagFormState, FormData>(addFlagAction.bind(null, customerId), {});
   const ready = useReady();
-  // The reason is sent from React's state: React resets a form's fields after each save attempt.
+  // The chosen reason (why) is sent from React's state: React resets a form's fields after each save attempt.
   const [kind, setKind] = useState(state.values?.kind ?? '');
   return (
     <form action={action} noValidate className="car-card">

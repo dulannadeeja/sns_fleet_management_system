@@ -86,8 +86,11 @@ export async function addFlagAction(customerId: string, _: FlagFormState, form: 
 export async function closeFlagAction(customerId: string, flagId: string, _: FlagFormState, form: FormData): Promise<FlagFormState> {
   const person = await requirePermission('customerAccess');
   const values = { reason: text(form, 'reason') };
-  const result = await closeFlag(person.id, flagId, values.reason);
-  if ('error' in result) return { error: result.error, values };
+  const result = await closeFlag(person.id, flagId, values.reason, customerId);
+  if ('error' in result) {
+    if (result.error === 'alreadyClosed') revalidatePath(`/customers/${customerId}`); // show it closed
+    return { error: result.error, values };
+  }
   revalidatePath(`/customers/${customerId}`);
   redirect(`/customers/${customerId}?flag=closed`);
 }
@@ -99,7 +102,11 @@ export async function goAheadAction(customerId: string, _: FlagFormState, form: 
   const result = await goAhead(person.id, customerId, {
     reason: values.reason, shownFlagIds: form.getAll('shownFlag').map(String), shownLicenceExpired: text(form, 'shownLicenceExpired') === '1',
   });
-  if ('error' in result) return { error: result.error, values };
+  if ('error' in result) {
+    // "Changed meanwhile": the page is drawn again with the warnings as they are now, so the next try can go through.
+    if (result.error === 'stale') revalidatePath(`/customers/${customerId}/check`);
+    return { error: result.error, values };
+  }
   revalidatePath(`/customers/${customerId}`);
   redirect(`/customers/${customerId}?flag=decided`);
 }

@@ -72,15 +72,16 @@ export async function addFlag(actorId: string, customerId: string, input: { kind
 }
 
 /** Closes an open flag with a reason (AT-48): it stops warning and stays in the history. Logged as customer.flagClose. */
-export async function closeFlag(actorId: string, flagId: string, reasonRaw: string): Promise<FlagResult> {
-  if (!UUID.test(flagId)) return { error: 'notFound' };
+export async function closeFlag(actorId: string, flagId: string, reasonRaw: string, customerId?: string): Promise<FlagResult> {
+  if (!UUID.test(flagId) || (customerId !== undefined && !UUID.test(customerId))) return { error: 'notFound' };
   const reason = tidy(reasonRaw);
   if (!reason) return { error: 'reasonMissing' };
   if (reason.length > TEXT_MAX) return { error: 'tooLong' };
   return db.transaction(async (tx) => {
     if (!(await actorMay(tx, actorId, 'customerAccess'))) return { error: 'notAllowed' } as const;
     const [f] = await tx.select({ customerId: customerFlag.customerId }).from(customerFlag).where(eq(customerFlag.id, flagId));
-    if (!f) return { error: 'notFound' } as const;
+    // The flag must belong to the customer the page shows, when one is given (#24 review).
+    if (!f || (customerId !== undefined && f.customerId !== customerId)) return { error: 'notFound' } as const;
     await lockCustomer(tx, f.customerId);
     const closed = await tx.update(customerFlag).set({ closedAt: sql`now()`, closedBy: actorId, closeReason: reason })
       .where(and(eq(customerFlag.id, flagId), isNull(customerFlag.closedAt))).returning({ kind: customerFlag.kind });
