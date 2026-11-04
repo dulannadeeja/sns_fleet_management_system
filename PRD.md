@@ -329,6 +329,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - An expired driving licence warns; only an authorised person may go ahead, with a reason. Going ahead does not make the licence valid. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
   - The reason is recorded with the name and the time, and goes into the owner's daily summary. System design → [Daily vehicle checks and exception monitoring](SNS_SYSTEM_DESIGN.md#12-daily-vehicle-checks-and-exception-monitoring).
 - **Checks:** *Proposed check:* with an expired licence, staff without the permission cannot go ahead; the authorised person can, with a reason, and the licence still shows as expired. *Proposed check:* with a flag, staff go ahead only after typing a reason; the reason, name and time are recorded.
+- *Proposed (Dulan, 4 Nov 2026):* until New rental exists, "Check before a rental" on the customer's page shows the warnings and records a decision to continue (name, time, reason); an expired licence needs "Override expired-document warnings". System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
 - **Screens:** 08.4 Flag and expired licence warning.
 
 #### ST-08.5 · Flag a customer
@@ -342,6 +343,7 @@ Month 1: who signs in and what they may do, customers and their documents, cars 
   - Staff or admins close a flag with a reason, for example when the money is paid. A closed flag stops warning but stays in the customer's history with who closed it and when; nothing is deleted. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
   - No ratings or scores (PR-14). Flags from SNS's books come with imported customers. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
 - **Checks:** AT-48 "Staff close a customer's flag with a reason: no warning at the next rental; the flag, its reason, who closed it and when stay in the history". *Proposed check:* a flagged customer shows the flag before the next rental, to every person.
+- *Proposed (Dulan, 4 Nov 2026):* people with "Customer access" add and close flags. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
 - **Screens:** 08.5 Add a customer flag.
 
 ### 04 Cars
