@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getFormatter, getTranslations } from 'next-intl/server';
 import { requireOwner } from '../../../auth/require';
-import { readChecklist, type Item } from '../../../modules/golive/golive';
+import { GROUPS, readChecklist, type Item } from '../../../modules/golive/golive';
 import { Icon, Notice } from '../../../ui';
 import { SettingsFrame } from '../SettingsFrame';
 import { TickForm } from './TickForm';
@@ -36,8 +36,13 @@ export default async function GoLivePage() {
     <SettingsFrame person={person} active="golive" subtitle={t('title')} backHref="/">
       <p className="set-muted" style={{ margin: 0 }}>{t('intro')}</p>
       <Notice tone={list.blocked ? 'warning' : undefined}>{`${t('home', { ready: list.ready, total: list.total })} · ${list.blocked ? t('blocked') : t('allDone')}`}</Notice>
-      <section className="car-card gl-list" aria-label={t('title')}>
-        {list.items.map((i) => (
+      {(Object.keys(GROUPS) as (keyof typeof GROUPS)[]).map((g) => {
+        const items = list.items.filter((i) => (GROUPS[g] as readonly string[]).includes(i.key));
+        return (
+      <section key={g} className="car-card gl-list" aria-labelledby={`gl-${g}`} data-group={g}>
+        <div className="gl-head"><h2 id={`gl-${g}`}>{t(`groups.${g}`)}</h2>
+          <span className="set-muted">{t('groupCount', { ready: items.filter((i) => i.done).length, total: items.length })}</span></div>
+        {items.map((i) => (
           <div key={i.key} className="gl-item" data-item={i.key} data-done={i.done ? 'yes' : 'no'}>
             <span className={i.done ? 'gl-mark gl-mark-done' : 'gl-mark'} aria-hidden="true"><Icon name={i.done ? 'check' : 'clock'} size={18} /></span>
             <span className="gl-text">
@@ -54,6 +59,8 @@ export default async function GoLivePage() {
           </div>
         ))}
       </section>
+        );
+      })}
     </SettingsFrame>
   );
 }

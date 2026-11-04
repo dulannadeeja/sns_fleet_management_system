@@ -13,3 +13,7 @@
   .gl-actions { grid-column: 2; align-items: flex-start; }
   .gl-reason { min-width: 0; width: 100%; }
 }
+.gl-head { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.gl-head h2 { margin: 0; font-size: 18px; line-height: 28px; font-weight: 600; }
+.gl-head .set-muted { margin-left: auto; }
+.gl-head + .gl-item { border-top: 0; }

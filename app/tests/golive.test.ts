@@ -4,10 +4,32 @@ import { db } from '../src/db/client';
 import { auditEvent } from '../src/db/schema';
 import { ITEMS, readChecklist, tick } from '../src/modules/golive/golive';
 import { samplePerson, theOwner } from './helpers/people';
+import { samplePlate } from './helpers/cars';
+import { addCar } from '../src/modules/cars/cars';
+import { changeStatus } from '../src/modules/cars/status';
 
 // ST-01.3 go-live checklist (system design, starting data; Proposed: Dulan, 4 Nov 2026). Ticks are shared by the whole
 // test database: only this file ticks, and it puts back what it found.
 describe('ST-01.3: the go-live checklist', () => {
+  it('counts only cars in the fleet: a retired car needs no dates and no owner; an unlinked partner car is named', async () => {
+    const owner = await theOwner();
+    const partnerPlate = samplePlate();
+    const retiredPlate = samplePlate();
+    const p = await addCar(owner, { registration: partnerPlate, model: 'Alto', ownership: 'partner' });
+    const r = await addCar(owner, { registration: retiredPlate, model: 'Alto', ownership: 'partner' });
+    if (!('ok' in p) || !('ok' in r)) throw new Error('sample cars not added');
+    let list = await readChecklist();
+    const item = (k: string) => list.items.find((i) => i.key === k)!;
+    expect(item('partnerCars').facts.unlinked).toEqual(expect.arrayContaining([partnerPlate, retiredPlate]));
+    expect(item('carDates').facts.noInsurance).toEqual(expect.arrayContaining([partnerPlate, retiredPlate]));
+    expect(await changeStatus(owner, r.id, { status: 'retired', reason: 'Sample: sold' }, 'available')).toMatchObject({ ok: true });
+    list = await readChecklist();
+    expect(item('partnerCars').facts.unlinked).toContain(partnerPlate);
+    expect(item('partnerCars').facts.unlinked).not.toContain(retiredPlate);
+    expect(item('carDates').facts.noInsurance).not.toContain(retiredPlate);
+    expect(item('partnerCars').done).toBe(false);
+  });
+
   it('has the ten agreed items; the ones not built yet are "Not ready" and block', async () => {
     expect(ITEMS.map((i) => i.key)).toEqual(['businessDetails', 'carsEntered', 'startingPackages', 'carDates', 'partnerCars', 'staffAccounts',
       'authorisedPerson', 'openingCash', 'agreementWording', 'openDecisions']);
@@ -34,7 +56,7 @@ describe('ST-01.3: the go-live checklist', () => {
       expect(await tick(owner, 'openDecisions', false, 'Sample: one decision reopened', true)).toEqual({ ok: true });
       item = (await readChecklist()).items.find((i) => i.key === 'openDecisions')!;
       expect(item).toMatchObject({ done: false, tick: { done: false, reason: 'Sample: one decision reopened' } });
-      const [log] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'golive.untick'), eq(auditEvent.createdBy, owner)))
+      const [log] = await db.select().from(auditEvent).where(and(eq(auditEvent.action, 'golive.untick'), eq(auditEvent.createdBy, owner), eq(auditEvent.targetId, 'openDecisions')))
         .orderBy(desc(auditEvent.createdAt)).limit(1);
       expect(log.details).toEqual({ item: 'openDecisions', reason: 'Sample: one decision reopened' });
     } finally {

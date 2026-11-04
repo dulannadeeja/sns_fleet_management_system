@@ -555,10 +555,10 @@
         "allLinked": "Every partner car has its owner",
         "notNamed": "Nobody named for: {tasks}",
         "allNamed": "Someone is named for each task",
-        "openingCash": "Counted and entered on the first morning",
+        "openingCash": "Counted and entered before the first transaction",
         "agreementWording": "SNS’s own wording, Sinhala and English, approved by the owner",
         "businessDetails": "Name, registration, address and phone on every printout",
-        "openDecisions": "Every item marked Open in the system design"
+        "openDecisions": "Check the Open list in the system design (section 18) before ticking this."
       },
       "tasks": {
         "reconcilePayments": "checking payments",
@@ -574,7 +574,7 @@
       "reason": "Why it is not done",
       "go": {
         "carDates": "Add dates",
-        "partnerCars": "Partners",
+        "partnerCars": "Add partner",
         "authorisedPerson": "Permissions",
         "startingPackages": "Packages",
         "staffAccounts": "People",
@@ -587,7 +587,13 @@
         "tooLong": "Use 500 letters or fewer.",
         "stale": "This changed meanwhile. Open the page again to see it.",
         "failed": "Not saved. Try again."
-      }
+      },
+      "groups": {
+        "business": "Business and cars",
+        "people": "People and permissions",
+        "firstDay": "For the first day"
+      },
+      "groupCount": "{ready} of {total} ready"
     }
   },
   "code": {

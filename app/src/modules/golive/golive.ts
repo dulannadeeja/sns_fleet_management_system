@@ -1,8 +1,7 @@
 import { and, desc, eq, inArray, isNull, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { auditEvent, goliveTick, permissionGrant, startingPackage, user, vehicle } from '../../db/schema';
+import { auditEvent, goliveTick, permissionGrant, startingPackage, user, vehicle, vehicleStatusEvent } from '../../db/schema';
 import type { Permission } from '../../auth/permissions';
-import { listCars } from '../cars/cars';
 
 // The go-live checklist (ST-01.3; system design, starting data). Confirmed: the system goes live only when all of
 // these are done: business details on printouts; every car entered; starting packages; insurance and licence dates for
@@ -12,6 +11,8 @@ import { listCars } from '../cars/cars';
 // (untick with a reason); items whose part is not built yet show "Not ready" and block. Going live itself is Phase 4.
 
 export type ItemKind = 'auto' | 'tick' | 'later';
+/** The three groups of board 01.3. */
+export const GROUPS = { business: ['businessDetails', 'carsEntered', 'startingPackages', 'carDates', 'partnerCars'], people: ['staffAccounts', 'authorisedPerson'], firstDay: ['openingCash', 'agreementWording', 'openDecisions'] } as const;
 export const ITEMS = [
   { key: 'businessDetails', kind: 'later', part: 'printouts' },
   { key: 'carsEntered', kind: 'tick' },
@@ -41,25 +42,26 @@ export interface Checklist { items: Item[]; ready: number; total: number; blocke
 
 /** The checklist now. Retired cars are not in the fleet, so they need no dates and no owner link. */
 export async function readChecklist(): Promise<Checklist> {
-  const fleet = (await listCars()).filter((c) => c.status !== 'retired');
-  const papers = fleet.length
-    ? await db.select({ id: vehicle.id, insurance: vehicle.insuranceExpires, licence: vehicle.licenceExpires }).from(vehicle).where(inArray(vehicle.id, fleet.map((c) => c.id)))
-    : [];
-  const byId = new Map(papers.map((p) => [p.id, p]));
-  const noInsurance = fleet.filter((c) => !byId.get(c.id)?.insurance).map((c) => c.registration);
-  const noLicence = fleet.filter((c) => !byId.get(c.id)?.licence).map((c) => c.registration);
-  const unlinked = fleet.filter((c) => c.ownership === 'partner' && !c.partnerId).map((c) => c.registration);
+  // One light read of the cars (the owner's home runs this too): only what the checks need, with each car's newest status.
+  const state = db.selectDistinctOn([vehicleStatusEvent.vehicleId], { vehicleId: vehicleStatusEvent.vehicleId, status: vehicleStatusEvent.status })
+    .from(vehicleStatusEvent).orderBy(vehicleStatusEvent.vehicleId, desc(vehicleStatusEvent.createdAt), desc(vehicleStatusEvent.id)).as('state');
+  const [cars, named, [{ people }], [{ packages }], ticks] = await Promise.all([
+    db.select({ plate: vehicle.registration, ownership: vehicle.ownership, partnerId: vehicle.partnerOwnerId, insurance: vehicle.insuranceExpires,
+      licence: vehicle.licenceExpires, status: state.status }).from(vehicle).leftJoin(state, eq(state.vehicleId, vehicle.id)).orderBy(vehicle.registration),
+    // Someone active, other than the owner, holds each authorised task.
+    db.selectDistinct({ p: permissionGrant.permission }).from(permissionGrant).innerJoin(user, eq(user.id, permissionGrant.userId))
+      .where(and(inArray(permissionGrant.permission, AUTHORISED), isNull(user.disabledAt), inArray(user.role, ['admin', 'staff']))),
+    db.select({ people: sql<number>`count(*)::int` }).from(user).where(and(isNull(user.disabledAt), inArray(user.role, ['owner', 'admin', 'staff']))),
+    db.select({ packages: sql<number>`count(*)::int` }).from(startingPackage),
+    db.selectDistinctOn([goliveTick.item], { item: goliveTick.item, done: goliveTick.done, reason: goliveTick.reason, at: goliveTick.createdAt, byName: user.name })
+      .from(goliveTick).leftJoin(user, eq(user.id, goliveTick.createdBy)).orderBy(goliveTick.item, desc(goliveTick.createdAt), desc(goliveTick.id)),
+  ]);
+  const fleet = cars.filter((c) => c.status !== 'retired');
+  const noInsurance = fleet.filter((c) => !c.insurance).map((c) => c.plate);
+  const noLicence = fleet.filter((c) => !c.licence).map((c) => c.plate);
+  const unlinked = fleet.filter((c) => c.ownership === 'partner' && !c.partnerId).map((c) => c.plate);
   const partnerCars = fleet.filter((c) => c.ownership === 'partner').length;
-
-  // Someone active, other than the owner, holds each authorised task.
-  const named = await db.selectDistinct({ p: permissionGrant.permission }).from(permissionGrant).innerJoin(user, eq(user.id, permissionGrant.userId))
-    .where(and(inArray(permissionGrant.permission, AUTHORISED), isNull(user.disabledAt), inArray(user.role, ['admin', 'staff'])));
   const notNamed = AUTHORISED.filter((p) => !named.some((n) => n.p === p));
-  const [{ people }] = await db.select({ people: sql<number>`count(*)::int` }).from(user).where(and(isNull(user.disabledAt), inArray(user.role, ['owner', 'admin', 'staff'])));
-  const [{ packages }] = await db.select({ packages: sql<number>`count(*)::int` }).from(startingPackage);
-
-  const ticks = await db.selectDistinctOn([goliveTick.item], { item: goliveTick.item, done: goliveTick.done, reason: goliveTick.reason, at: goliveTick.createdAt, byName: user.name })
-    .from(goliveTick).leftJoin(user, eq(user.id, goliveTick.createdBy)).orderBy(goliveTick.item, desc(goliveTick.createdAt), desc(goliveTick.id));
   const tickOf = (k: string) => ticks.find((t) => t.item === k) ?? null;
 
   const items: Item[] = ITEMS.map((i) => {
@@ -95,9 +97,9 @@ export async function tick(actorId: string, item: string, done: boolean, reasonR
   if (!done && !reason) return { error: 'reasonMissing' };
   if (reason.length > REASON_MAX) return { error: 'tooLong' };
   return db.transaction(async (tx) => {
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext('sns.golive'))`);
     const [actor] = await tx.select({ role: user.role, disabledAt: user.disabledAt }).from(user).where(eq(user.id, actorId));
     if (!actor || actor.disabledAt || actor.role !== 'owner') return { error: 'notAllowed' } as const;
-    await tx.execute(sql`select pg_advisory_xact_lock(hashtext('sns.golive'))`);
     const [now] = await tx.select({ done: goliveTick.done }).from(goliveTick).where(eq(goliveTick.item, item)).orderBy(desc(goliveTick.createdAt), desc(goliveTick.id)).limit(1);
     if ((now?.done ?? false) !== was) return { error: 'stale' } as const;
     if (was === done) return { ok: true } as const;

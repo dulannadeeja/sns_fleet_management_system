@@ -19,8 +19,7 @@ describe('AT-43: a car with no insurance date keeps go-live blocked until the da
     let dates = list.items.find((i) => i.key === 'carDates')!;
     expect(dates.done).toBe(false);
     expect(dates.facts.noInsurance).toContain(plate);
-    expect(list.blocked).toBe(true);
-    expect(list.blockers).toContain('carDates');
+    expect(list.blockers).toContain('carDates'); // this item, not only the ones not built yet
 
     const empty = { insuranceExpires: null, licenceExpires: null, nextServiceOn: null, nextServiceKm: null };
     expect(await changePapers(owner, car.id, { ...empty, insuranceExpires: '2027-03-31' }, empty)).toMatchObject({ ok: true });

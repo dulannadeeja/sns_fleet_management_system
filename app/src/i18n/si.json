@@ -548,17 +548,17 @@
       "facts": {
         "cars": "කාර් {n}",
         "packages": "මුල් පැකේජ {n}",
-        "people": "Active accounts {n}",
+        "people": "ක්‍රියාත්මක accounts {n}",
         "datesMissing": "රක්ෂණ දිනය නැහැ: {insurance} · බලපත්‍ර දිනය නැහැ: {licence}",
         "datesAll": "හැම කාර් එකකටම දින දෙකම තියෙනවා",
         "unlinked": "තාම අයිතිකරු නැහැ: {cars}",
         "allLinked": "හැම partner කාර් එකකටම අයිතිකරු ඉන්නවා",
         "notNamed": "නම් කරලා නැහැ: {tasks}",
         "allNamed": "හැම වැඩකටම කෙනෙක් නම් කරලා",
-        "openingCash": "පළමු උදේ ගණන් කරලා දාන්න",
+        "openingCash": "පළමු ගනුදෙනුවට කලින් ගණන් කරලා දාන්න",
         "agreementWording": "SNS ගේම වචන, සිංහල සහ ඉංග්‍රීසි, අයිතිකරු අනුමත කරපු",
         "businessDetails": "හැම printout එකකම නම, ලියාපදිංචි අංකය, ලිපිනය සහ දුරකථනය",
-        "openDecisions": "පද්ධති සැලසුමේ Open කියලා තියෙන හැම එකක්ම"
+        "openDecisions": "මේක tick කරන්න කලින් පද්ධති සැලසුමේ Open ලැයිස්තුව (18 කොටස) බලන්න."
       },
       "tasks": {
         "reconcilePayments": "ගෙවීම් බලන්න",
@@ -574,20 +574,26 @@
       "reason": "ඉවර නැත්තේ ඇයි?",
       "go": {
         "carDates": "දින දාන්න",
-        "partnerCars": "Partners",
+        "partnerCars": "Partner එකතු කරන්න",
         "authorisedPerson": "අවසර",
         "startingPackages": "පැකේජ",
         "staffAccounts": "සේවකයෝ",
-        "carsEntered": "වාහන"
+        "carsEntered": "කාර්"
       },
       "errors": {
         "notAllowed": "මේක කරන්න පුළුවන් අයිතිකරුට විතරයි.",
         "itemInvalid": "මේක පද්ධතියම බලනවා.",
         "reasonMissing": "ඉවර නැත්තේ ඇයි කියලා ලියන්න.",
         "tooLong": "අකුරු 500ක් හෝ අඩුවෙන් ලියන්න.",
-        "stale": "මේ අතරේ මේක වෙනස් වුණා. ඒක බලන්න පිටුව ආයෙත් අරින්න.",
+        "stale": "මේ අතරේ මේක වෙනස් වුණා. අලුත් තත්වය බලන්න පිටුව ආයෙත් අරින්න.",
         "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
-      }
+      },
+      "groups": {
+        "business": "ව්‍යාපාරය සහ වාහන",
+        "people": "සේවකයෝ සහ අවසර",
+        "firstDay": "පළමු දවසට"
+      },
+      "groupCount": "{total} න් {ready} ක් සූදානම්"
     }
   },
   "code": {
