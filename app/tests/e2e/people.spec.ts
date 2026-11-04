@@ -22,7 +22,7 @@ test('ST-15.2: the owner adds a person, resets their password, turns the account
   const phone = newPhone();
   await signIn(page, process.env.E2E_OWNER_PHONE!, E2E_OWNER_PASSWORD);
   await expect(page).toHaveURL(/\/(cars)?$/);
-  await page.getByRole('link', { name: /people and permissions/ }).click();
+  await page.goto('/settings/people'); // the start page's links are gone: owner, admin and staff open Cars
   await expect(page).toHaveURL(/\/settings\/people$/);
   await noSidewaysScroll(page);
 

@@ -41,7 +41,7 @@ test('ST-15.3: staff read the rules; the owner changes a setting, checks old →
   await staff.locator('input[name="repeat"]').fill('own-pass-123');
   await staff.locator('button[type="submit"]').click();
   await expect(staff).toHaveURL(/\/(cars)?$/);
-  await staff.locator('a[href="/settings/business-rules"]').first().click();
+  await staff.goto('/settings/business-rules'); // the start page's links are gone: staff open Cars
   await expect(staff.locator('[data-group="reminders"]')).toBeVisible();
   await expect(staff.locator('a[href^="/settings/business-rules/"]')).toHaveCount(0);
   await expect(staff.getByText('SNS commission')).toHaveCount(0); // partner terms: not for staff
