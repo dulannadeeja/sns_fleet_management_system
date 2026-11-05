@@ -3,7 +3,7 @@ import { requireOwner } from '../../../../auth/require';
 import { SettingsFrame } from '../../SettingsFrame';
 import { AddPersonForm } from './AddPersonForm';
 
-// Screen 15.4 Add a person (ST-15.2): Staff or Admin with a first password the owner types (Confirmed 5 Nov 2026;
+// Screen 15.4 Add a person (ST-15.2): Staff or Admin with a first password the owner types (Confirmed 5 Nov 2026);
 // partners are added with their partner record (ST-11.2). Owner only.
 export default async function AddPersonPage() {
   const owner = await requireOwner();

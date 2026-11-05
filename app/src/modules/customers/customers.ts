@@ -11,7 +11,7 @@ import { copyType, MAX_COPY_BYTES } from '../../storage/kinds';
 // Customers (ST-08.1 to ST-08.3; system design 6). One NIC is one customer (AT-51). Saved with name, NIC, phone and
 // licence number and expiry; the four copies may come later and the customer shows "copies missing" until they are in
 // (AT-49). Copies are private files, opened only with customer access, each opening recorded (AT-59). "Customer access"
-// is its own permission (Confirmed 5 Nov 2026. Flags and debts come with #24 and Phase 2.
+// is its own permission (Confirmed 5 Nov 2026). Flags and debts come with #24 and Phase 2.
 
 export const COPY_KINDS = ['nicFront', 'nicBack', 'licenceFront', 'licenceBack'] as const;
 export type CopyKind = (typeof COPY_KINDS)[number];
