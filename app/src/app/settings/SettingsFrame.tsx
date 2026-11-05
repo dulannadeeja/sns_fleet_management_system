@@ -1,0 +1,54 @@
+import Link from 'next/link';
+import type { ReactNode } from 'react';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { mayDo } from '../../auth/access';
+import { signOutAction } from '../actions';
+import { Button } from '../../ui';
+import { railItems } from '../rail';
+import { AppHeader, Icon, NavRail, PageHeader, type Lang } from '../../ui';
+import type { SignedInPerson } from '../../auth/first-sign-in';
+import en from '../../i18n/en.json';
+import './settings.css';
+
+// The frame of screens 15.1 to 15.7: on a computer the menu and the top bar, on a phone the page header
+// with a back link; then the Settings list and the page. The menu holds only what is built so far (each feature adds
+// its own item); the Settings list shows only the Settings pages that exist.
+export async function SettingsFrame({ person, active, subtitle, backHref, children }: {
+  person: SignedInPerson; active: 'people' | 'permissions' | 'activity' | 'rules' | 'packages' | 'golive'; subtitle: string; backHref: string; children: ReactNode;
+}) {
+  const t = await getTranslations();
+  const seeLog = await mayDo(person, 'seeActivityLog');
+  const lang = (await getLocale()) as Lang;
+  const title = lang === 'si' ? `${t('settings.title')} · ${en.settings.title}` : t('settings.title');
+  return (
+    <div className="set-desktop">
+      <NavRail labels={{ menu: t('frame.menu') }} items={railItems(person, 'settings', t, lang, { partners: await mayDo(person, 'seePartnerEarnings'), customers: await mayDo(person, 'customerAccess') })} />
+      <div className="set-body">
+        <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
+        <div className="set-phone-head">
+          <PageHeader backHref={backHref} backLabel={t('settings.back')} title={subtitle} subtitle={title} />
+        </div>
+        <main className="set-main">
+          <nav className="set-nav" aria-label={t('settings.menu')}>
+            {person.role === 'owner' ? (
+              <>
+                <Link href="/settings/permissions" aria-current={active === 'permissions' ? 'page' : undefined}><Icon name="users" size={20} />{t('settings.permissions')}</Link>
+                <Link href="/settings/people" aria-current={active === 'people' ? 'page' : undefined}><Icon name="idcard" size={20} />{t('settings.people')}</Link>
+                {/* Ready to start (01.3, #25): the go-live checklist, the owner only. */}
+                <Link href="/settings/golive" aria-current={active === 'golive' ? 'page' : undefined}><Icon name="clipboard" size={20} />{t('settings.golive.nav')}</Link>
+              </>
+            ) : null}
+            {/* Everyone who works at SNS reads the business rules (15.2); the log only for whoever may see it (15.5). */}
+            <Link href="/settings/business-rules" aria-current={active === 'rules' ? 'page' : undefined}><Icon name="file" size={20} />{t('settings.businessRules')}</Link>
+            {/* Everyone who works at SNS reads the starting packages (04.6, #21); changing them needs the permission. */}
+            <Link href="/settings/packages" aria-current={active === 'packages' ? 'page' : undefined}><Icon name="car" size={20} />{t('settings.packages')}</Link>
+            {seeLog ? <Link href="/settings/activity-log" aria-current={active === 'activity' ? 'page' : undefined}><Icon name="clock" size={20} />{t('settings.activityLog')}</Link> : null}
+                      {/* Sign out, for everyone who works at SNS (no board shows it yet; the old start page had it). */}
+            <form action={signOutAction} className="set-signout"><Button type="submit" variant="quiet" icon="arrowLeft">{t('home.signOut')}</Button></form>
+          </nav>
+          <div className="set-content">{children}</div>
+        </main>
+      </div>
+    </div>
+  );
+}

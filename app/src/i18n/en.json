@@ -1,0 +1,1179 @@
+{
+  "title": "SNS Rent Car",
+  "nav": {
+    "today": "Today",
+    "morningCheck": "Morning check",
+    "cars": "Cars",
+    "rentals": "Rentals",
+    "customers": "Customers",
+    "money": "Money",
+    "partners": "Partners",
+    "payroll": "Payroll",
+    "approvals": "Approvals",
+    "maintenance": "Maintenance",
+    "reports": "Reports",
+    "settings": "Settings",
+    "drawer": "Drawer",
+    "attention": "Attention",
+    "more": "More",
+    "new": "New"
+  },
+  "frame": {
+    "search": "Search by plate, model or name",
+    "newRental": "New rental",
+    "back": "Back",
+    "menu": "Main menu",
+    "overdue": "overdue",
+    "waiting": "waiting",
+    "show": "show them",
+    "language": "Language",
+    "owner": "Owner"
+  },
+  "plate": {
+    "title": "Plate · app frame",
+    "subtitle": "sample data, development only"
+  },
+  "signIn": {
+    "welcome": "Welcome",
+    "intro": "SNS Rent a Car · Elpitiya. Sign in to your account.",
+    "phone": "Phone number",
+    "password": "Password",
+    "submit": "Sign in",
+    "help": "Forgot your password? Ask the owner to reset it. 5 wrong tries lock the account for 15 minutes.",
+    "everyone": "Owner, admin, staff and partners each have their own account.",
+    "wrong": "The phone number or the password is wrong.",
+    "locked": "The account is locked after 5 wrong tries. Try again in 15 minutes.",
+    "language": "Language",
+    "phoneMissing": "Enter your phone number.",
+    "phoneInvalid": "This is not a Sri Lankan mobile number. Type the 10 digits, starting 070, 071, 072, 074, 075, 076, 077 or 078.",
+    "passwordMissing": "Enter your password.",
+    "passwordShort": "Passwords have at least 8 characters. Check what you typed.",
+    "forgot": "Forgot your password?",
+    "resetDone": "Your new password is saved. Sign in with it."
+  },
+  "firstSignIn": {
+    "title": "Your password",
+    "subtitle": "First sign-in",
+    "hello": "Welcome, {name}",
+    "intro": "This is your first sign-in. Choose your own password to replace the one you were given.",
+    "newPassword": "New password",
+    "repeat": "Type it again",
+    "required": "(required)",
+    "rule": "At least 8 characters. If you forget it, the owner resets it.",
+    "language": "Language",
+    "save": "Save and continue",
+    "tooShort": "At least 8 characters, please.",
+    "notSame": "The two passwords are not the same.",
+    "signedOut": "Please sign in again.",
+    "newPasswordPlaceholder": "Your new password",
+    "repeatPlaceholder": "Same password again",
+    "si": "සිංහල",
+    "en": "English"
+  },
+  "home": {
+    "signedIn": "Signed in: {name}",
+    "signOut": "Sign out"
+  },
+  "settings": {
+    "title": "Settings",
+    "menu": "Settings",
+    "permissions": "Permissions",
+    "people": "People",
+    "back": "Back",
+    "roles": {
+      "owner": "Primary owner",
+      "admin": "Admin",
+      "staff": "Staff",
+      "partner": "Partner"
+    },
+    "status": {
+      "active": "Active",
+      "off": "Turned off"
+    },
+    "team": "SNS team",
+    "addPerson": "Add person",
+    "everything": "Everything",
+    "changed": "Changed for this person",
+    "peopleNote": "Nobody shares an account. Every action is saved under the name of the person signed in, even though staff share one cash drawer. When someone leaves, open their row and turn the account off, with a reason: sign-in stops, and their name stays on everything they recorded.",
+    "partnersLater": "Partner owners get their account when they are added on Partners.",
+    "add": {
+      "title": "Add a person",
+      "name": "Name",
+      "namePlaceholder": "Full name",
+      "phone": "Phone",
+      "phoneHint": "Used to sign in.",
+      "password": "First password",
+      "passwordPlaceholder": "At least 8 characters",
+      "passwordHint": "You type it and give it to the person by hand. They change it at their first sign-in.",
+      "role": "Role",
+      "staffHint": "Rentals, payments, morning check",
+      "adminHint": "Approvals and partner cash-outs by default",
+      "partnerHint": "Added with the partner, on Partners: one account for all their cars",
+      "defaultsTitle": "Starts with the agreed {role} permissions",
+      "defaultsHint": "You can change them for this person after saving, on the Permissions page.",
+      "language": "Language",
+      "sinhala": "Sinhala",
+      "english": "English",
+      "sinhalaHint": "Default",
+      "englishHint": "Can switch any time",
+      "cancel": "Cancel",
+      "save": "Save",
+      "footer": "Give the first password to the person by hand; nothing is sent. Saving is recorded in the activity log.",
+      "email": "Email",
+      "emailHint": "Sign-in codes on a new device and the password reset link go here. It counts once the admin types the code sent to it.",
+      "emailRequired": "(required for Admin)"
+    },
+    "person": {
+      "phone": "Phone",
+      "role": "Role",
+      "permissions": "Permissions",
+      "ownerNote": "The primary owner can do everything. The owner resets their own password by email (Forgot your password? on the sign-in page).",
+      "resetTitle": "Reset password",
+      "resetHint": "When {name} forgets the password. They are signed out everywhere and change it at their next sign-in.",
+      "newPassword": "New first password",
+      "newPasswordHint": "You type it and give it to {name} by hand. At least 8 characters.",
+      "reset": "Reset password",
+      "resetDone": "Done. Give the new first password to {name} by hand.",
+      "offTitle": "Turn off account",
+      "offHint": "When {name} leaves. Sign-in stops at once. Everything {name} recorded keeps the name. You can turn it back on.",
+      "reason": "Reason",
+      "reasonPlaceholder": "For example: left SNS",
+      "turnOff": "Turn off",
+      "offSince": "Turned off on {date}. Reason: {reason}",
+      "onHint": "Turning it back on lets {name} sign in again with the same password.",
+      "turnOn": "Turn on",
+      "logNote": "Every change is recorded in the activity log.",
+      "email": "Email",
+      "noEmail": "No confirmed email yet",
+      "waiting": "Waiting to be confirmed: {email}",
+      "emailTitle": "Change email",
+      "emailHint": "Sign-in codes on a new device and the password reset link go to this email. Only the owner and the admin have one.",
+      "newEmail": "New email",
+      "newEmailHint": "Codes keep going to the old email until the code sent to the new one is typed in at the next sign-in.",
+      "saveEmail": "Save email",
+      "emailSaved": "Saved. It counts once the code sent to it is typed in."
+    },
+    "permissionsPage": {
+      "lock": "Only the primary owner can change these, add people or turn accounts off; those three cannot be given to anyone. The owner can do everything and is not listed.",
+      "permission": "Permission",
+      "groups": {
+        "rentals": "Rentals",
+        "money": "Money",
+        "running": "Running SNS"
+      },
+      "authorised": "authorised person · not set yet",
+      "authorisedHint": "Not set yet: only the owner until given to someone.",
+      "selfApproval": "Nobody approves their own request; another approver must. The owner's own is marked \"self-approved\".",
+      "noPeople": "No admin or staff yet. Add people first.",
+      "saved": "Saved"
+    },
+    "errors": {
+      "nameMissing": "Enter the person's name.",
+      "phoneMissing": "Enter the phone number.",
+      "phoneInvalid": "This is not a Sri Lankan mobile number. Type the 10 digits, starting 070, 071, 072, 074, 075, 076, 077 or 078.",
+      "phoneTaken": "Someone already has this phone number.",
+      "passwordShort": "At least 8 characters, please.",
+      "roleInvalid": "Choose Staff or Admin.",
+      "reasonMissing": "Write why the account is turned off.",
+      "notAllowed": "Only the primary owner can do this.",
+      "notFound": "This person was not found.",
+      "alreadyOff": "This account is already off.",
+      "alreadyOn": "This account is already on.",
+      "isOwner": "Not for the primary owner.",
+      "permissionInvalid": "Unknown permission.",
+      "emailMissing": "Type the email.",
+      "emailInvalid": "This does not look like an email address.",
+      "emailTaken": "Someone else already has this email.",
+      "emailNotNeeded": "Staff need no email.",
+      "codeTooSoon": "Wait a minute.",
+      "codeWrong": "That code is not right.",
+      "codeExpired": "This code has run out.",
+      "codeTooMany": "5 wrong codes.",
+      "notSent": "The email could not be sent. Try again."
+    },
+    "perms": {
+      "customerAccess": "Customer access",
+      "approveFirstCustomer": "Approve a first-time customer",
+      "proceedDespiteFlag": "Go ahead despite a customer flag",
+      "setOrWaiveDeposit": "Set or waive a deposit",
+      "allowPaymentAfterReturn": "Allow payment after return",
+      "extendByPhone": "Extend a rental by phone",
+      "decideLateCharge": "Decide a late-return charge",
+      "decideDamageCharge": "Decide a damage charge",
+      "allocateDamageProceeds": "Split damage or accessory charges",
+      "sharePartnerCarSurcharge": "Share an above-package price on a partner car",
+      "changePriceOrDiscount": "Change an agreed price or give a discount",
+      "reduceEarlyReturnCharges": "Reduce charges for an early return",
+      "decideSwapPricing": "Swap pricing and swap-day split",
+      "refundsAndExpenses": "Issue refunds and pay expenses",
+      "correctPayment": "Correct a recorded payment",
+      "reconcilePayments": "Check payments and resolve differences",
+      "writeOffDebt": "Write off a customer debt",
+      "keepCancellationFee": "Keep a cancellation fee",
+      "overrideExpiredDocuments": "Go ahead with expired car papers or an expired driving licence",
+      "payPartnerCashouts": "Pay partner cash-outs and record them",
+      "seePartnerEarnings": "See partner earnings and terms",
+      "seeActivityLog": "See the activity log",
+      "editCarsAndPackages": "Add or edit cars and packages",
+      "editPartners": "Add or edit partners",
+      "markCarUnavailable": "Mark a car under repair or unavailable",
+      "markCarAvailable": "Mark a car available again",
+      "managePayroll": "Manage payroll",
+      "exportReports": "Export reports"
+    },
+    "forbidden": {
+      "title": "Not for this account",
+      "body": "Your account does not have permission for this page. Ask the owner if you need it.",
+      "home": "Back to the start"
+    },
+    "homeSettings": "Settings: people and permissions",
+    "requiredMark": "(required)",
+    "agreedDefaults": {
+      "staff": "Agreed staff defaults",
+      "admin": "Agreed admin defaults"
+    },
+    "activityLog": "Activity log",
+    "businessRules": "Business rules",
+    "log": {
+      "readOnly": "Can't be edited or deleted",
+      "byPerson": "By person",
+      "byKind": "By kind",
+      "allPeople": "All people",
+      "allKinds": "Everything",
+      "kinds": {
+        "decisions": "Decisions with a reason",
+        "money": "Money",
+        "customers": "Customers",
+        "cars": "Cars",
+        "settings": "Settings"
+      },
+      "empty": "Nothing recorded here yet.",
+      "older": "Older",
+      "system": "System",
+      "actions": {
+        "person": {
+          "add": "added {target} as {role}",
+          "resetPassword": "reset the password of {target}",
+          "turnOff": "turned off the account of {target}",
+          "turnOn": "turned on the account of {target}",
+          "emailChange": "changed the email of {target} to {email}",
+          "emailConfirmed": "confirmed the email {email}"
+        },
+        "permission": {
+          "grant": "gave {target}: {permission}",
+          "remove": "took away from {target}: {permission}"
+        },
+        "setting": {
+          "change": "changed the {setting} from {old} to {new}"
+        },
+        "car": {
+          "add": "added the car {target}",
+          "change": "changed the {field} of {target} from {old} to {new}",
+          "status": "changed the status of {target} from {old} to {new}",
+          "papers": "changed the {field} of {target} from {old} to {new}",
+          "photoAdd": "added a photo of {target}",
+          "photoReplace": "replaced the photo of {target}",
+          "photoRemove": "removed the photo of {target}"
+        },
+        "partner": {
+          "add": "added the partner {target}",
+          "agreementSigned": "recorded {target}’s agreement as signed on {date}",
+          "addCars": "linked {cars} to the partner {target}"
+        },
+        "customer": {
+          "add": "added the customer {target}",
+          "copyAdd": "added a copy for {target}: {copy}",
+          "change": "corrected the {field} of {target} from {old} to {new}",
+          "copyOpened": "opened a copy of {target}: {copy}",
+          "nicChange": "corrected the NIC of {target} from {old} to {new}",
+          "flagAdd": "flagged {target}: {kind} · {details}",
+          "flagClose": "closed a flag on {target} ({kind}): {reason}",
+          "goAhead": "went ahead with {target} despite the warnings: {reason}"
+        },
+        "package": {
+          "add": "added the starting package {target} ({models})",
+          "change": "changed the {field} of the starting package {target} from {old} to {new}",
+          "addModel": "added the model {model} to the starting package {target}",
+          "defaults": "changed the starting {field} for every car from {old} to {new}",
+          "removeModel": "took the model {model} out of the starting package {target}"
+        },
+        "golive": {
+          "tick": "marked “{item}” done on the go-live checklist",
+          "untick": "marked “{item}” not done on the go-live checklist: {reason}"
+        }
+      },
+      "reason": "reason: “{reason}”",
+      "left": "{name} (left)"
+    },
+    "rules": {
+      "ownerTitle": "Owner settings",
+      "ownerNote": "Only the owner changes these. Admin and staff see them here.",
+      "change": "Change",
+      "notSet": "not set yet",
+      "setNow": "Set now",
+      "footer": "Every rule under “Set now” is agreed by the owner; changing the owner settings here is proposed, for the owner to confirm. A new rule is recorded in the system design before it appears here. Each change to an owner setting is in the activity log, with the old and new values.",
+      "groups": {
+        "dayTimes": {
+          "title": "Rental day times",
+          "note": "a pickup before the cutoff ends at the next morning’s deadline · a change applies to new rentals only",
+          "value": "cutoff {cutoff} · deadline {deadline}"
+        },
+        "reminders": {
+          "title": "Reminders",
+          "note": "insurance and licence · service (date or km) · payroll",
+          "value": "{documents} days · {serviceDays} days or {serviceKm} km · {payroll} days"
+        },
+        "fuel": {
+          "title": "Fuel price",
+          "note": "per litre, for a “same level” rental",
+          "value": "LKR {price} a litre"
+        }
+      },
+      "names": {
+        "pickupCutoff": "pickup cutoff",
+        "returnDeadline": "return deadline",
+        "documentReminderDays": "insurance and licence reminder",
+        "serviceReminderDays": "service reminder (days)",
+        "serviceReminderKm": "service reminder (km)",
+        "payrollReminderDays": "payroll reminder",
+        "fuelPricePerLitre": "fuel price per litre"
+      },
+      "fields": {
+        "pickupCutoff": {
+          "label": "Pickup cutoff",
+          "unit": "",
+          "hint": "A pickup at or after this time starts the next rental day."
+        },
+        "returnDeadline": {
+          "label": "Return deadline",
+          "unit": "",
+          "hint": "The car is due back by this time in the morning."
+        },
+        "documentReminderDays": {
+          "label": "Insurance and licence",
+          "unit": "days before expiry",
+          "hint": "1 to 90"
+        },
+        "serviceReminderDays": {
+          "label": "Service by date",
+          "unit": "days before",
+          "hint": "1 to 90"
+        },
+        "serviceReminderKm": {
+          "label": "Service by km",
+          "unit": "km before",
+          "hint": "100 to 5,000"
+        },
+        "payrollReminderDays": {
+          "label": "Payroll",
+          "unit": "days before payday",
+          "hint": "1 to 90"
+        },
+        "fuelPricePerLitre": {
+          "label": "Price per litre",
+          "unit": "rupees",
+          "hint": "Whole rupees, 1 to 2,000."
+        }
+      },
+      "intro": {
+        "dayTimes": "Times are in Sri Lanka time. A change applies to new rentals only; rentals already agreed keep their times.",
+        "reminders": "How early each reminder starts. Only the owner can change this.",
+        "fuel": "Charged only on a “same level” rental, for the litres missing at return. 100% SNS."
+      },
+      "check": "Check before saving",
+      "noChange": "Nothing changed yet.",
+      "changeLine": "{name}: {old} → {new}",
+      "logNote": "Saving is recorded in the activity log with the old and new values.",
+      "save": "Save",
+      "cancel": "Cancel",
+      "saved": "Saved.",
+      "days": "{n} days",
+      "km": "{n} km",
+      "rupees": "LKR {n}",
+      "errors": {
+        "required": "Fill this in.",
+        "number": "Type a whole number, digits only.",
+        "range": "Must be {min} to {max}.",
+        "time": "Pick a time.",
+        "notAllowed": "Only the owner can change settings.",
+        "failed": "Not saved. Try again.",
+        "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change."
+      },
+      "rows": {
+        "extraKm": {
+          "title": "Extra km",
+          "note": "beyond the km included · 17 to 27 a km by type",
+          "value": "set per car"
+        },
+        "fuel": {
+          "title": "Fuel",
+          "note": "not counted by default · “same level” for one rental: missing litres × price per litre",
+          "value": "price in Owner settings"
+        },
+        "businessDay": {
+          "title": "Business day",
+          "note": "staff close it after the evening count; otherwise it closes at 11:59 PM",
+          "value": "staff, or 11:59 PM"
+        },
+        "drawerCount": {
+          "title": "Drawer count",
+          "note": "staff see the expected cash, then type what they count",
+          "value": "expected shown first"
+        },
+        "cashOut": {
+          "title": "Cash out of the drawer",
+          "note": "partner payouts, salary and owner withdrawals · each its own line, never an expense",
+          "value": "own lines"
+        },
+        "bankCheck": {
+          "title": "Bank and card check",
+          "note": "a payment waits up to 3 days for the statement, then is flagged · card fees entered monthly",
+          "value": "3 days"
+        },
+        "expiredDocuments": {
+          "title": "Expired insurance or licence",
+          "note": "warns staff; going ahead needs an authorised person and a reason",
+          "value": "authorised override"
+        },
+        "plannedService": {
+          "title": "Planned service",
+          "note": "any garage visit, planned or not",
+          "value": "Under repair"
+        },
+        "lateReturn": {
+          "title": "Late return",
+          "note": "no fee runs on its own",
+          "value": "staff decide"
+        },
+        "partnerCashOut": {
+          "title": "Partner cash-out",
+          "note": "earnings final at the day’s close · to the bank or in cash at the branch · no limits",
+          "value": "any day"
+        },
+        "commission": {
+          "title": "SNS commission",
+          "note": "default 15% · changed on the car",
+          "value": "set per car"
+        },
+        "garageDay": {
+          "title": "Garage-day charge",
+          "note": "only for damage during the rental · staff propose the days, an admin approves",
+          "value": "LKR 5,000 a day"
+        },
+        "payrollDeductions": {
+          "title": "Payroll deductions",
+          "note": "never take a salary below zero; the rest carries to next month",
+          "value": "never below zero"
+        },
+        "money": {
+          "title": "Money",
+          "note": "whole rupees · a partner’s share rounds down, SNS takes the difference; a correction is the exact mirror of its line",
+          "value": "whole rupees"
+        },
+        "profit": {
+          "title": "Profit",
+          "note": "SNS earnings minus business expenses",
+          "value": "before depreciation"
+        },
+        "approvals": {
+          "title": "Approvals",
+          "note": "nobody approves their own request; the owner’s own is marked “self-approved”",
+          "value": "another approver"
+        }
+      },
+      "explain": {
+        "whatChanges": "What this changes",
+        "beforeChange": "Before you change it",
+        "dayTimes": {
+          "affects": [
+            "How many days a new rental is charged: a pickup before the cutoff ends at the next morning’s deadline; a pickup at or after it, the morning after.",
+            "When a new rental’s car is due back. After the deadline it is a late return, and staff decide any charge, with a reason.",
+            "Rentals already agreed, and their phone extensions, keep the times they were agreed with."
+          ],
+          "before": [
+            "Try a few pickup times near the new cutoff: a pickup may now be charged one day more or one day less.",
+            "Tell staff the new times before the next pickup.",
+            "Times are Sri Lanka time."
+          ]
+        },
+        "reminders": {
+          "affects": [
+            "When insurance and revenue licence renewals, services (by date or by km, whichever comes first) and payroll start to show in Upcoming work.",
+            "Only when a reminder starts. No date, charge or car changes."
+          ],
+          "before": [
+            "A shorter time leaves less time to renew. When insurance or a revenue licence has expired, staff are warned, and going ahead needs an authorised person and a reason.",
+            "A longer time shows reminders earlier, so Upcoming work gets longer."
+          ]
+        },
+        "fuel": {
+          "affects": [
+            "Only rentals set to “same level”: the litres missing at return × this price go on the bill, all for SNS. Staff can waive it with a reason.",
+            "By default fuel is not counted, so most rentals do not use this price.",
+            "Rentals already agreed keep the price from when they were agreed."
+          ],
+          "before": [
+            "Check today’s pump price. Whole rupees only.",
+            "Tell staff the new price: they explain the fuel charge to the customer at return."
+          ]
+        }
+      }
+    },
+    "packages": "Cars and packages",
+    "golive": {
+      "nav": "Ready to start",
+      "title": "Ready to start",
+      "intro": "Go-live waits until everything on this list is done. The system checks some items by itself; you tick the others when they are done.",
+      "home": "Ready to start: {ready} of {total} done",
+      "ready": "Done",
+      "notReady": "Not ready",
+      "later": {
+        "printouts": "Not ready · comes with the printouts",
+        "money": "Not ready · comes with Money"
+      },
+      "blocked": "Go-live is blocked until every item is done.",
+      "allDone": "Every item is done.",
+      "items": {
+        "businessDetails": "Business details on printouts",
+        "carsEntered": "Every car entered",
+        "startingPackages": "Starting packages",
+        "carDates": "Insurance and licence dates for every car",
+        "partnerCars": "Every partner car linked to its owner",
+        "staffAccounts": "Staff accounts",
+        "authorisedPerson": "The authorised person named",
+        "openingCash": "Opening cash in the drawer",
+        "agreementWording": "SNS’s agreement wording",
+        "openDecisions": "Every Open decision settled"
+      },
+      "facts": {
+        "cars": "{n} cars in the fleet",
+        "packages": "{n} starting packages",
+        "people": "{n} people with an active account",
+        "datesMissing": "No insurance date: {insurance} · no licence date: {licence}",
+        "datesAll": "Every car has both dates",
+        "unlinked": "No owner yet: {cars}",
+        "allLinked": "Every partner car has its owner",
+        "notNamed": "Nobody named for: {tasks}",
+        "allNamed": "Someone is named for each task",
+        "openingCash": "Counted and entered before the first transaction",
+        "agreementWording": "SNS’s own wording, Sinhala and English, approved by the owner",
+        "businessDetails": "Name, registration, address and phone on every printout",
+        "openDecisions": "Check the Open list in the system design (section 18) before ticking this."
+      },
+      "tasks": {
+        "reconcilePayments": "checking payments",
+        "writeOffDebt": "writing off a debt",
+        "keepCancellationFee": "keeping a cancellation fee",
+        "overrideExpiredDocuments": "going ahead with expired papers"
+      },
+      "auto": "Checked by the system",
+      "tickedBy": "Ticked by {name}, {date}",
+      "untickedBy": "Marked not done by {name}, {date}: {reason}",
+      "tick": "Mark done",
+      "untick": "Mark not done",
+      "reason": "Why it is not done",
+      "go": {
+        "carDates": "Add dates",
+        "partnerCars": "Add partner",
+        "authorisedPerson": "Permissions",
+        "startingPackages": "Packages",
+        "staffAccounts": "People",
+        "carsEntered": "Cars"
+      },
+      "errors": {
+        "notAllowed": "Only the owner can do this.",
+        "itemInvalid": "This item is checked by the system.",
+        "reasonMissing": "Write why it is not done.",
+        "tooLong": "Use 500 letters or fewer.",
+        "stale": "This changed meanwhile. Open the page again to see it.",
+        "failed": "Not saved. Try again."
+      },
+      "groups": {
+        "business": "Business and cars",
+        "people": "People and permissions",
+        "firstDay": "For the first day"
+      },
+      "groupCount": "{ready} of {total} ready"
+    }
+  },
+  "code": {
+    "back": "Back",
+    "title": "Sign-in code",
+    "subtitle": "New device",
+    "heading": "Code from your email",
+    "intro": "This device is new for this account. We sent a 6-digit code to your email. It works once, for 10 minutes.",
+    "code": "Code",
+    "required": "(required)",
+    "placeholder": "6 digits",
+    "submit": "Sign in",
+    "resend": "Send a new code",
+    "sent": "A new code was sent.",
+    "other": "Use another account",
+    "device": "After the right code, this device is remembered for 30 days; each sign-in here starts the 30 days again. A new phone, another browser or cleared browser data asks for a code again.",
+    "errors": {
+      "codeMissing": "Type the 6-digit code.",
+      "codeWrong": "That code is not right. Check the email and try again.",
+      "codeExpired": "This code has run out (10 minutes). Ask for a new one.",
+      "codeTooMany": "5 wrong codes: this code has stopped. Ask for a new one.",
+      "locked": "The account is locked after 5 wrong tries. Try again in 15 minutes.",
+      "tooSoon": "Wait a minute before asking for a new code.",
+      "notSent": "The email could not be sent. Try again in a minute, or ask the owner."
+    }
+  },
+  "forgot": {
+    "back": "Back",
+    "title": "Forgot password",
+    "subtitle": "Email link",
+    "heading": "Forgot your password?",
+    "intro": "For the owner and the admin: type your phone number. If it has a confirmed email, we send a link to set a new password.",
+    "required": "(required)",
+    "submit": "Send the link",
+    "sent": "If this number has an email, a link was sent. It works once, for 1 hour.",
+    "staff": "Staff and partners: ask the owner to reset your password.",
+    "backToSignIn": "Back to sign in"
+  },
+  "reset": {
+    "back": "Back",
+    "title": "New password",
+    "subtitle": "Email link",
+    "heading": "New password",
+    "intro": "From the link in your email (it works once, for 1 hour). Choose a new password.",
+    "password": "New password",
+    "repeat": "Type it again",
+    "required": "(required)",
+    "rule": "At least 8 characters. Saving signs you out everywhere else.",
+    "save": "Save and sign in",
+    "askAgain": "Ask for a new link",
+    "errors": {
+      "tooShort": "At least 8 characters, please.",
+      "notSame": "The two passwords are not the same.",
+      "linkOld": "This link is old or already used. Ask for a new one."
+    }
+  },
+  "confirmEmail": {
+    "title": "Confirm your email",
+    "subtitle": "Email",
+    "heading": "Confirm your new email",
+    "intro": "The owner changed your email to {email}. Send a code to it and type it here. Until you confirm, sign-in codes still go to your old email.",
+    "send": "Send the code",
+    "sent": "A code was sent to your new email.",
+    "confirm": "Confirm",
+    "later": "Later",
+    "notMine": "Not your email? Choose Later and ask the owner to correct it. The change is in the activity log.",
+    "errors": {
+      "codeMissing": "Type the 6-digit code.",
+      "codeWrong": "That code is not right.",
+      "codeExpired": "This code has run out. Send a new one.",
+      "codeTooMany": "5 wrong codes: send a new one.",
+      "codeTooSoon": "Wait a minute before sending a new code.",
+      "notFound": "There is no new email to confirm.",
+      "emailTaken": "Someone else already has this email. Ask the owner.",
+      "notSent": "The email could not be sent. Try again."
+    }
+  },
+  "cars": {
+    "title": "Cars",
+    "all": "All",
+    "sns": "SNS",
+    "partner": "Partner",
+    "add": "Add a car",
+    "ownerSns": "SNS",
+    "ownerPartner": "Partner · not linked yet",
+    "cols": {
+      "car": "Car",
+      "owner": "Owner",
+      "perDay": "Per day",
+      "kmDay": "km a day",
+      "extraKm": "Extra km",
+      "status": "Status"
+    },
+    "empty": "No cars yet.",
+    "listNote": "Prices are each car’s own package. A new car starts with its model’s starting package.",
+    "details": "Car details",
+    "edit": "Edit package and terms",
+    "back": "Cars",
+    "termsTitle": "Terms for new rentals",
+    "termsNote": "Changes apply to new rentals only.",
+    "history": "History",
+    "historyEmpty": "Nothing recorded yet.",
+    "added": "Saved.",
+    "saved": "Saved. New rentals use the new terms.",
+    "fields": {
+      "dailyRate": {
+        "label": "Per day",
+        "unit": "LKR",
+        "hint": "whole rupees",
+        "show": "LKR {n}",
+        "name": "daily rate"
+      },
+      "kmPerDay": {
+        "label": "km a day",
+        "unit": "km",
+        "hint": "pooled over the rental",
+        "show": "{n} km",
+        "name": "km a day"
+      },
+      "extraKmRate": {
+        "label": "Extra km",
+        "unit": "LKR a km",
+        "hint": "beyond the km included",
+        "show": "LKR {n} a km",
+        "name": "extra-km rate"
+      },
+      "longRentalExtra": {
+        "label": "Long-rental extra",
+        "unit": "LKR a day",
+        "hint": "from the day below",
+        "show": "LKR {n} a day",
+        "name": "long-rental extra"
+      },
+      "longRentalFromDay": {
+        "label": "Extra starts on day",
+        "unit": "",
+        "hint": "the days before have none",
+        "show": "day {n}",
+        "name": "long-rental start day"
+      },
+      "garageDayCharge": {
+        "label": "Garage-day charge",
+        "unit": "LKR a day",
+        "hint": "only for damage during a rental · admin approves",
+        "show": "LKR {n} a day",
+        "name": "garage-day charge"
+      },
+      "commissionPercent": {
+        "label": "SNS commission",
+        "unit": "%",
+        "hint": "default 15%",
+        "show": "{n}%",
+        "name": "SNS commission"
+      }
+    },
+    "package": "Package",
+    "packageFrom": "Starting package: {package} · can be changed for this car",
+    "partnerTerms": "Partner terms",
+    "partnerNote": "Shown only to people who may see partner terms; changed only by people who may add or edit partners. Who pays which costs is agreed when the partner is added.",
+    "newRentalsOnly": "Changes apply to new rentals only. Rentals already running, and their extensions, keep the terms they started with.",
+    "car": "Car",
+    "registration": "Registration number",
+    "registrationHint": "One car per number, as written on the plate.",
+    "model": "Model",
+    "modelHint": "A model not listed is added on Starting packages first, with a package.",
+    "owner": "Owner",
+    "snsHint": "SNS’s own car",
+    "partnerHint": "linked to its owner on Partners › Add a partner",
+    "afterTitle": "After saving",
+    "after": [
+      "The car is on All cars as Available.",
+      "A partner car shows “Partner · not linked yet” until its owner is added on Partners.",
+      "Papers and service dates are entered on the car’s page; the photo on Edit car.",
+      "Recorded in the activity log."
+    ],
+    "save": "Save car",
+    "saveChanges": "Save changes",
+    "cancel": "Cancel",
+    "changes": "Package changes",
+    "changesEmpty": "No changes since the car was added.",
+    "errors": {
+      "registrationMissing": "Type the registration number.",
+      "registrationInvalid": "Letters, numbers, spaces and - only, as on the plate.",
+      "registrationTaken": "This number is already a car. Open it from All cars.",
+      "modelInvalid": "Choose a model.",
+      "ownershipInvalid": "Choose SNS or Partner.",
+      "notAllowed": "You may not change this.",
+      "notFound": "This car was not found.",
+      "invalid": "Type a whole number in the range.",
+      "stale": "Someone changed this car meanwhile. Open the page again to see it, then make your change.",
+      "failed": "Not saved. Try again.",
+      "packageMissing": "Pick a package.",
+      "packageInvalid": "That package is not for this model. Pick one of its packages."
+    },
+    "noChange": "Nothing changed yet.",
+    "range": "Whole number, {min} to {max}.",
+    "costs": {
+      "service": "Service",
+      "tyres": "Tyres",
+      "repairs": "Repairs",
+      "battery": "Battery"
+    },
+    "ownerPays": {
+      "label": "Owner pays for",
+      "name": "costs the owner pays",
+      "none": "none",
+      "note": "Anything not ticked is decided case by case by the admin."
+    },
+    "ownerPartnerNamed": "Partner · {name}",
+    "packages": {
+      "title": "Starting packages",
+      "lkr": "LKR",
+      "name": "Package name",
+      "nameHint": "For example Prius (new)",
+      "models": "Models",
+      "modelsHint": "Separate models with a comma, for example Prius, Axio",
+      "addModel": "Add a model",
+      "addModelHint": "Optional. A model in another package can be in this one too.",
+      "cars": "Cars",
+      "change": "Change",
+      "add": "Add a package",
+      "changeDefaults": "Change the defaults",
+      "defaults": "For every car",
+      "saved": "Saved.",
+      "changeTitle": "Change a package",
+      "addTitle": "Add a package",
+      "defaultsTitle": "Change the defaults",
+      "onlyNew": "Cars already added keep their own package. Only cars added afterwards start with this.",
+      "commissionNote": "The commission default changes only with “Add or edit partners”.",
+      "note": "A new car starts with a package of its model; changing one here changes only cars added afterwards. Each car can then be changed on its own page. Changing a package never changes rentals already running. A model can be in more than one package (for example a new and an old Prius); a new car then picks one. A new model comes in with a package. Each change is in the activity log with the old and new values.",
+      "fieldName": "name",
+      "pick": "Package",
+      "pickHint": "This model has more than one package. Pick one.",
+      "save": "Save",
+      "cancel": "Cancel",
+      "errors": {
+        "nameMissing": "Type a name for the package.",
+        "nameTooLong": "Use 60 letters or fewer.",
+        "nameTaken": "A package already has this name. Use another.",
+        "modelsMissing": "Type at least one model.",
+        "modelInvalid": "A model name has letters, numbers, spaces and ( ) . / - only, up to 40.",
+        "notAllowed": "You may not change this.",
+        "notFound": "This package was not found.",
+        "invalid": "Type a whole number in the range.",
+        "stale": "Someone changed this meanwhile. Open the page again to see it, then make your change.",
+        "failed": "Not saved. Try again.",
+        "tooManyModels": "Up to 20 models at a time.",
+        "lastModel": "A package needs at least one model. Add another before taking this one out."
+      },
+      "removeModels": "Models · tick one to take it out",
+      "removeHint": "A model taken out changes only cars added afterwards; cars already added keep their model and terms. A package keeps at least one model."
+    },
+    "status": {
+      "names": {
+        "available": "Available",
+        "repair": "Under repair",
+        "unavailable": "Temporarily unavailable",
+        "retired": "Retired"
+      },
+      "hints": {
+        "available": "Ready for rentals again",
+        "repair": "In the garage or being fixed, a planned service included",
+        "unavailable": "For example, the owner took it",
+        "retired": "Sold, or returned to its owner for good. Admin or owner only, never while rented or reserved. Its history stays."
+      },
+      "title": "Change a car’s status",
+      "now": "Now: {status}",
+      "change": "Change status",
+      "markAvailable": "Mark available",
+      "bringBack": "Bring back",
+      "reason": "Reason",
+      "reasonHint": "Needed for every status except Available",
+      "reasonBack": "Why it comes back",
+      "expectedBack": "Expected back (optional)",
+      "expectedHint": "Can be changed later",
+      "retiredOn": "Retired on",
+      "retiredHint": "Today or an earlier date, not before the car was added",
+      "save": "Change status",
+      "cancel": "Cancel",
+      "saved": "Status changed.",
+      "since": "since {date}",
+      "back": "back {date}",
+      "retiredSince": "retired on {date}",
+      "by": "by {name}",
+      "note": "Only an authorised person marks a car available again. Only the owner can bring a retired car back, with a reason. Each change is in the activity log.",
+      "onlyAuthorised": "Only an authorised person can mark it available.",
+      "errors": {
+        "notAllowed": "You may not make this change.",
+        "notFound": "This car was not found.",
+        "stale": "Someone changed this car’s status meanwhile. Open the page again to see it.",
+        "statusInvalid": "Choose a status.",
+        "reasonMissing": "Type the reason.",
+        "reasonTooLong": "Use 500 letters or fewer.",
+        "dateInvalid": "Choose a real date.",
+        "retiredFirst": "Bring the car back first, as Available.",
+        "retireDateFuture": "Use today or an earlier date.",
+        "retireDateBeforeAdded": "This date is before the car was added.",
+        "failed": "Not saved. Try again."
+      }
+    },
+    "papers": {
+      "title": "Papers and service",
+      "insuranceExpires": "Insurance expires",
+      "licenceExpires": "Revenue licence expires",
+      "nextServiceOn": "Next service date",
+      "nextServiceKm": "Next service at km",
+      "notRecorded": "not recorded",
+      "until": "until {date}",
+      "expired": "expired {date}",
+      "km": "{n} km",
+      "change": "Change papers and service",
+      "save": "Save",
+      "cancel": "Cancel",
+      "saved": "Papers and service saved.",
+      "hint": "Leave a box empty if it is not known yet.",
+      "kmHint": "Whole km, as on the odometer",
+      "note": "Reminders will come only from dates entered here (Phase 3). Each change is in the activity log.",
+      "names": {
+        "insuranceExpires": "insurance expiry",
+        "licenceExpires": "revenue licence expiry",
+        "nextServiceOn": "next service date",
+        "nextServiceKm": "next service km"
+      },
+      "errors": {
+        "invalid": "Check the marked boxes: a real date, or whole km.",
+        "stale": "Someone changed these meanwhile. Open the page again to see them, then make your change.",
+        "notAllowed": "You may not change this.",
+        "notFound": "This car was not found.",
+        "failed": "Not saved. Try again."
+      },
+      "left": "{n, plural, one {# day left} other {# days left}}"
+    },
+    "photo": {
+      "title": "Catalogue photo",
+      "add": "Add photo",
+      "replace": "Replace photo",
+      "remove": "Remove photo",
+      "choose": "Photo file",
+      "hint": "JPEG, PNG or WebP, up to 10 MB. Shown on the car’s card and page.",
+      "standard": "Until a photo is added, the model’s standard image is shown.",
+      "notCondition": "It is not a condition photo and not needed for a handover.",
+      "saved": "Photo saved.",
+      "removed": "Photo removed: the standard image is shown again.",
+      "errors": {
+        "fileMissing": "Choose a photo first.",
+        "fileTooBig": "The photo is over 10 MB.",
+        "fileType": "Use a JPEG, PNG or WebP photo. (An iPhone can send its photos as JPEG.)",
+        "notAllowed": "You may not change this.",
+        "notFound": "This car was not found.",
+        "failed": "Not saved. Try again."
+      }
+    }
+  },
+  "partners": {
+    "title": "Partner owners",
+    "add": "Add partner",
+    "cols": {
+      "owner": "Owner",
+      "cars": "Cars",
+      "commission": "Commission",
+      "account": "Account"
+    },
+    "carsCount": "{n, plural, one {# car} other {# cars}}",
+    "active": "Active",
+    "off": "Turned off",
+    "empty": "No partners yet.",
+    "unlinkedTitle": "Partner cars not linked to an owner",
+    "unlinkedNote": "Each partner gets one account for all their cars. Every partner car is linked to its owner before go-live.",
+    "unlinkedNone": "Every partner car has its owner.",
+    "details": "Partner details",
+    "owner": "Partner owner",
+    "call": "Call",
+    "cars": "Cars",
+    "termsLine": "{commission}% commission · cash-out any day · {costs}",
+    "costsNone": "costs decided case by case",
+    "costsPaid": "{costs} paid by the owner",
+    "account": "Account · {name}’s sign-in",
+    "accountNote": "One account for every car. {name} sees final earnings and cash-outs only; never today’s not-final amounts, other partners or customers’ details.",
+    "nic": "NIC",
+    "nicHint": "As on the card: 9 digits and V or X, or 12 digits.",
+    "phone": "Phone",
+    "phoneHint": "Used to sign in.",
+    "name": "Name",
+    "password": "First password",
+    "passwordHint": "At least 8 characters. Give it to the partner by hand; they change it when they first sign in. Nothing is sent.",
+    "bank": "Bank account · for cash-outs",
+    "bankHint": "Optional. Without it, cash-outs are paid in cash at the branch.",
+    "bankNone": "No bank account · cash-outs in cash at the branch",
+    "chooseCars": "Cars",
+    "chooseCarsHint": "Partner cars not linked to an owner yet. One account covers every car chosen.",
+    "noFreeCars": "No partner cars are waiting for an owner. Add the car first on Cars, as Partner.",
+    "termsFor": "Terms for {plate}",
+    "perDayNote": "Per day {rate} · set on the car, not here.",
+    "afterTitle": "After saving",
+    "after": [
+      "The partner gets a first password to change when they sign in.",
+      "The partner agreement is printed once the owner approves its wording. It is signed on paper; the date is recorded on the partner's page.",
+      "Recorded in the activity log."
+    ],
+    "save": "Save partner",
+    "cancel": "Cancel",
+    "saved": "Saved.",
+    "agreement": "Partner agreement",
+    "agreementNote": "Printed, signed and kept on paper. Nothing waits on it.",
+    "notSigned": "Not yet recorded as signed · cash-outs are not held back.",
+    "signedOn": "Signed on {date}",
+    "signedLabel": "Signed on",
+    "record": "Record",
+    "printLater": "Printing comes once the owner approves the agreement wording.",
+    "startingBalance": "The starting balance owed on go-live day is loaded with the starting data.",
+    "errors": {
+      "notAllowed": "You may not do this.",
+      "notFound": "This partner was not found.",
+      "nameMissing": "Type the name.",
+      "phoneMissing": "Type the phone number.",
+      "phoneInvalid": "A Sri Lankan mobile number, 10 digits, starting 07.",
+      "phoneTaken": "This phone number already has an account.",
+      "passwordShort": "At least 8 characters.",
+      "nicInvalid": "9 digits and V or X, or 12 digits, as on the card.",
+      "nicTaken": "A partner with this NIC is already recorded.",
+      "bankTooLong": "At most 120 characters.",
+      "carsMissing": "Choose at least one car.",
+      "carsInvalid": "Each chosen car needs a commission from 0 to 100%.",
+      "carNotFree": "One of these cars was just linked to someone else. Open the page again.",
+      "dateInvalid": "Choose a date, not in the future.",
+      "failed": "Not saved. Try again."
+    },
+    "addCar": "Add a car",
+    "addCarHint": "Partner cars not linked to an owner yet. Each one gets its commission and the costs the owner pays.",
+    "addCarSave": "Link the car",
+    "noFreeCarsHere": "No partner cars are waiting for an owner. Add the car first on Cars, as Partner.",
+    "signIn": "Sign-in: reset password, turn off or on",
+    "carsAdded": "Cars linked.",
+    "plates": "{plates}"
+  },
+  "customers": {
+    "title": "Customers",
+    "add": "New customer",
+    "search": "Name, NIC or phone",
+    "searchButton": "Find",
+    "firstNote": "People with an expired licence come first; people who owe money or are flagged join them once rentals run.",
+    "cols": {
+      "customer": "Customer",
+      "nic": "NIC",
+      "phone": "Phone",
+      "licence": "Licence",
+      "copies": "Copies"
+    },
+    "licenceUntil": "until {date}",
+    "licenceExpired": "expired {date}",
+    "copiesMissing": "copies missing",
+    "copiesIn": "copies in",
+    "empty": "No customers found.",
+    "none": "No customers yet.",
+    "who": "Who",
+    "name": "Name",
+    "nic": "NIC",
+    "nicHint": "As on the card: 9 digits and V or X, or 12 digits. A NIC already recorded opens that customer.",
+    "phone": "Phone",
+    "phoneHint": "9 to 15 digits; a + at the start for a foreign number.",
+    "address": "Address",
+    "licence": "Driving licence",
+    "licenceNumber": "Number",
+    "licenceExpires": "Expires",
+    "licenceNote": "If the licence has expired, everyone sees a warning before renting to this customer.",
+    "copies": "Document copies",
+    "copiesNote": "A photo (JPEG, PNG, WebP, HEIC) or PDF, up to 10 MB each, kept as taken. Only people with customer access can open these copies, and each opening is recorded. Make sure every number is clear.",
+    "copiesLater": "Copies can be added later; handover waits for them.",
+    "kinds": {
+      "nicFront": "NIC · front",
+      "nicBack": "NIC · back",
+      "licenceFront": "Licence · front",
+      "licenceBack": "Licence · back"
+    },
+    "chooseFile": "Photo or file",
+    "replace": "Replace",
+    "addCopy": "Add",
+    "open": "Open",
+    "onFile": "on file",
+    "notYet": "not added yet",
+    "reference": "Reference person",
+    "referenceNote": "Decided for each rental, when staff think one is needed. Their NIC and licence copies are then added with the rental.",
+    "save": "Save customer",
+    "cancel": "Cancel",
+    "saved": "Saved.",
+    "existing": "This NIC is already a customer. Here they are; nothing new was saved.",
+    "copyAdded": "Copy added.",
+    "details": "Customer details",
+    "edit": "Correct details",
+    "saveChanges": "Save changes",
+    "warnings": "Warnings",
+    "licenceWarning": "The driving licence expired on {date}. Everyone sees a warning before renting to this customer.",
+    "noWarnings": "No warnings.",
+    "flagsLater": "Money owed shows here once rentals come in.",
+    "history": "What happened",
+    "historyEmpty": "Nothing recorded yet.",
+    "fieldNames": {
+      "name": "name",
+      "phone": "phone",
+      "address": "address",
+      "licenceNumber": "licence number",
+      "licenceExpires": "licence expiry"
+    },
+    "errors": {
+      "notAllowed": "You may not do this.",
+      "notFound": "This customer was not found.",
+      "nameMissing": "Type the name.",
+      "nicInvalid": "9 digits and V or X, or 12 digits, as on the card.",
+      "phoneInvalid": "9 to 15 digits; a + at the start for a foreign number.",
+      "licenceNumberMissing": "Type the licence number.",
+      "licenceExpiresInvalid": "Choose the expiry date.",
+      "kindInvalid": "Not saved. Try again.",
+      "fileType": "Only a photo (JPEG, PNG, WebP, HEIC) or a PDF.",
+      "fileTooBig": "At most 10 MB.",
+      "stale": "Someone changed this customer meanwhile. Open the page again to see it, then make your change.",
+      "failed": "Not saved. Try again.",
+      "nicTaken": "Another customer already has this NIC. Open that customer instead.",
+      "reasonMissing": "Give a reason."
+    },
+    "call": "Call",
+    "nicFix": "Correct the NIC",
+    "nicFixNote": "Only the owner or the admin, with a reason. The log keeps the old and new NIC.",
+    "nicNew": "Correct NIC",
+    "reason": "Reason",
+    "nicFixSave": "Correct the NIC",
+    "nicFixed": "NIC corrected.",
+    "limitNote": "Showing at most 100 customers; search to find others.",
+    "flags": {
+      "kinds": {
+        "unpaid": "Unpaid money",
+        "damage": "Damaged a car",
+        "other": "Something else"
+      },
+      "add": "Add a flag",
+      "addTitle": "Flag {name}",
+      "why": "Why",
+      "what": "What happened",
+      "whatHint": "Write what happened, so everyone understands it.",
+      "addNote": "Shown to everyone before this customer’s next rental. Staff can still go ahead, with a reason. No ratings or scores.",
+      "save": "Add flag",
+      "cancel": "Cancel",
+      "added": "Flag added.",
+      "title": "Flags",
+      "none": "No flags.",
+      "open": "Open",
+      "closed": "Closed",
+      "by": "Added by {name}, {date}",
+      "closedBy": "Closed by {name}, {date}: {reason}",
+      "close": "Close flag",
+      "closeReason": "Why it is closed",
+      "closeHint": "For example: the money was paid.",
+      "closedDone": "Flag closed. It no longer warns, and it stays in the history.",
+      "check": "Check before a rental",
+      "checkTitle": "Before you continue",
+      "checkNone": "No flags, and the driving licence is valid. Money owed and missing copies are checked at New rental (Phase 2).",
+      "flagWarn": "Flag · {kind}",
+      "flagNote": "Staff can still go ahead, with a reason.",
+      "licenceWarn": "Licence expired · {date}",
+      "licenceNote": "Only an authorised person can go ahead, with a reason. Going ahead does not make the licence valid.",
+      "reason": "Reason to continue",
+      "reasonNote": "Recorded with your name and the time.",
+      "continue": "Continue with reason",
+      "dontRent": "Don’t rent",
+      "decided": "Your decision to continue is recorded.",
+      "decisions": "Decisions to continue",
+      "decision": "{name}, {date}: {reason}",
+      "required": "required",
+      "errors": {
+        "kindInvalid": "Choose why.",
+        "detailsMissing": "Write what happened.",
+        "reasonMissing": "Write the reason.",
+        "tooLong": "Use 500 letters or fewer.",
+        "alreadyClosed": "This flag is already closed.",
+        "notAllowed": "You may not do this.",
+        "licenceNotAllowed": "Only an authorised person can go ahead with an expired licence.",
+        "stale": "The warnings changed meanwhile. Check them again.",
+        "nothingToCheck": "There is nothing to warn about.",
+        "notFound": "Not found.",
+        "failed": "Not saved. Try again."
+      }
+    }
+  }
+}

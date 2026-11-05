@@ -1,0 +1,25 @@
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { defineConfig, devices } from '@playwright/test';
+
+// Browser journeys run against the test database (the same one as npm run test). The dev server reads
+// BETTER_AUTH_SECRET from .env.local on a laptop; CI sets it in the workflow.
+const DATABASE_URL = process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5433/sns_test';
+// Emails from the dev server land in this file; email.spec.ts reads the codes and links from it (TRD §6).
+process.env.MAIL_OUTBOX_FILE ||= join(tmpdir(), 'sns-e2e-outbox.jsonl');
+const MAIL_OUTBOX_FILE = process.env.MAIL_OUTBOX_FILE;
+// Sample document copies from the dev server go to a private folder of this run only (#19).
+const DOCUMENTS_DIR = process.env.DOCUMENTS_DIR || join(tmpdir(), `sns-e2e-documents-${process.pid}`);
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  globalSetup: './tests/e2e/global-setup.ts',
+  // The dev server compiles each page on its first visit; under parallel tests that can take more than the 5 s default.
+  expect: { timeout: 10000 },
+  use: { baseURL: 'http://localhost:3000' },
+  projects: [
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
+    { name: 'phone', use: { ...devices['Pixel 7'] } },
+  ],
+  webServer: { command: 'npm run dev', url: 'http://localhost:3000', reuseExistingServer: false, timeout: 120000, env: { DATABASE_URL, MAIL_OUTBOX_FILE, DOCUMENTS_DIR } },
+});

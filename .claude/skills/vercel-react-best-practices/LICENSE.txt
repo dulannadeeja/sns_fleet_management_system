@@ -1,0 +1,3 @@
+MIT License
+
+Copyright (c) Vercel, Inc. (vercel-labs/agent-skills, react-best-practices). Licensed under the MIT License, as stated in the source repository README.

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>02.1 Owner home · Desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="min-height: 100vh; display: flex; flex-wrap: nowrap; align-items: stretch; background: var(--paper); color: var(--ink); font-family: var(--font-sans)">
+  <x-import component-from-global-scope="Plate.NavRail" items="{{rail}}" style="flex: none"></x-import>
+  <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column">
+    <x-import component-from-global-scope="Plate.AppHeader" title="අද · Today" subtitle="Thu 22 Oct 2026 · 11:05" search="අංකය / මාදිලිය / නම හොයන්න" user="S D De Silva" role="Owner · අයිතිකරු" lang="si" new-href="05-NewRental-Customer-Desktop.dc.html" search-href="02-Home-Search-Desktop.dc.html"></x-import>
+    <main style="padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 24px; max-width: 1600px; width: 100%; margin: 0 auto; box-sizing: border-box">
+      <x-import component-from-global-scope="Plate.AttentionBar" items="{{attention}}"></x-import>
+      <div style="display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(400px, 1fr); gap: 24px; align-items: start">
+        <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
+          <x-import component-from-global-scope="Plate.ListCard" title="{{decide.title}}" more="{{decide.more}}" groups="{{decide.groups}}"></x-import>
+          <x-import component-from-global-scope="Plate.ListCard" title="{{coming.title}}" more="{{coming.more}}" rows="{{coming.rows}}"></x-import>
+        </div>
+        <x-import component-from-global-scope="Plate.ListCard" title="{{money.title}}" more="{{money.more}}" sub="{{money.sub}}" groups="{{money.groups}}" foot="{{money.foot}}"></x-import>
+      </div>
+      <section style="display: flex; flex-direction: column; gap: 16px" aria-labelledby="h-cars">
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+          <h2 id="h-cars" style="margin: 0; font-size: 22px; line-height: 32px; font-weight: 600">වාහන 30 <span class="rt-en">· Vehicles</span></h2>
+          <a class="rt-lc-more" href="14-Reports-CarPerformance-Desktop.dc.html">වාහන වැඩ <span class="rt-en">· Car performance</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
+          <a class="rt-lc-more" href="04-Cars-AllCars-Desktop.dc.html" style="margin-left: 0">වාහන 30ම බලන්න <span class="rt-en">· See all 30 cars</span> <x-import component-from-global-scope="Plate.Icon" name="arrowRight" size="{{eighteen}}"></x-import></a>
+        </div>
+        <x-import component-from-global-scope="Plate.FleetStrip" cars="{{fleet}}" hrefs="{{fleetHrefs}}"></x-import>
+        <x-import component-from-global-scope="Plate.ListCard" title="{{look.title}}" sub="{{look.sub}}" rows="{{look.rows}}" columns="{{two}}"></x-import>
+      </section>
+      <p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--ink-muted)">උදාහරණ දත්ත · Sample data: names, plates, counts and amounts are examples.</p>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var fleet = [{ plate: 'CBC 5409', status: 'overdue' }];
+    ['CBK 4127', 'CBF 7720', 'CAX 8834'].forEach(function (p) { fleet.push({ plate: p, status: 'available' }); });
+    fleet.push({ plate: 'CBG 2967', status: 'available', warn: true });
+    ['CBL 0458', 'CBD 3375', 'CAZ 4490', 'CBA 1802', 'CAU 7765', 'PG 7754', 'PK 2216', 'CAQ 6680', 'CAR 2049', 'CAT 7046', 'CAN 5521', 'CBB 8826', 'CBN 4473'].forEach(function (p) { fleet.push({ plate: p, status: 'available' }); });
+    ['CBE 6612', 'PH 4521', 'CBM 1340', 'CBJ 1186', 'CAY 3051', 'CBH 2210', 'CAV 6127', 'KX 5531', 'CAS 3318'].forEach(function (p) { fleet.push({ plate: p, status: 'rented' }); });
+    fleet.push({ plate: 'CAA 9083', status: 'repair' }, { plate: 'PJ 0937', status: 'repair' }, { plate: 'CAP 9912', status: 'unavailable' });
+    var data = {"decide": {"title": "ඔබ බලන්න ඕන · For you to decide", "more": {"label": "සියල්ල · All", "href": "02-Home-NeedsAttention-Desktop.dc.html"}, "groups": [{"label": "Admin අනුමැතියට 3 · Waiting for approval", "rows": [{"icon": "stamp", "title": "මිල වෙනස · Price change", "detail": "R-0233 · CBJ 1186 · asked by Nimal · 4,500 → 4,000 a day × 10 days · if approved", "figure": "− 5,000", "href": "10-Approvals-Approvals-Desktop.dc.html"}, {"icon": "swap", "title": "Swap දවස බෙදීම · Swap-day split", "detail": "R-0231 · partner Sunil J. · swap on 20 Oct", "meta": "1 day", "href": "10-Approvals-Approvals-Desktop.dc.html"}, {"icon": "box", "title": "Accessory ගාස්තුව · Accessory charge", "detail": "R-0218 · missing air pump · waiting for admin, not yet earnings", "figure": "2,000", "href": "10-Approvals-Approvals-Desktop.dc.html"}]}, {"label": "විසඳන්න ඕන 3 · Open items", "rows": [{"icon": "drawer", "tone": "warning", "title": "ලාච්චුව අඩුයි · Drawer short", "detail": "Evening count · not yet explained", "figure": "− 1,000", "href": "02-Home-NeedsAttention-Desktop.dc.html"}, {"icon": "question", "tone": "warning", "title": "CBG 2967 හම්බුණේ නැහැ · Not found at the 7:30 check", "detail": "Morning check · not yet explained", "meta": "7:30", "href": "03-MorningCheck-Finished-Desktop.dc.html"}, {"icon": "calendar", "tone": "warning", "title": "වෙන්කළ වාහනය සූදානම් නැහැ · Reserved car not ready", "detail": "RV-0012 · PH 7734 · in repair until 27 Oct · move before Mon 26 Oct", "href": "18-Reservations-AllReservations-Desktop.dc.html"}]}]}, "coming": {"title": "ඉදිරි වැඩ · Coming up", "more": {"label": "කුලී · Rentals", "href": "06-Rentals-AllRentals-Desktop.dc.html"}, "rows": [{"icon": "returnCar", "title": "හෙට 8:00 ට කලින් එන්න ඕන · Due back by tomorrow 8:00", "detail": "CBE 6612 · PH 4521 · CBM 1340", "meta": "3 cars", "href": "06-Rentals-AllRentals-Desktop.dc.html"}, {"icon": "wrench", "title": "PJ 0937 service", "detail": "Partner car · under repair now", "meta": "Fri 23 Oct", "href": "12-Maintenance-Maintenance-Desktop.dc.html"}, {"icon": "pause", "title": "CAP 9912 owner use ඉවරයි · Back from owner use", "detail": "Temporarily unavailable until then", "meta": "Sun 25 Oct", "href": "04-Cars-AllCars-Desktop.dc.html"}, {"icon": "calendar", "title": "Insurance සහ licence · Renewals", "detail": "Shown 30 days before expiry", "figure": "—", "href": "04-Cars-AllCars-Desktop.dc.html"}, {"icon": "idcard", "title": "පඩි · Payroll", "detail": "Shown 3 days before payday", "figure": "—", "href": "13-Payroll-Payroll-Desktop.dc.html"}]}, "money": {"title": "මුදල් · Money", "more": {"label": "අද මුදල් · Money today", "href": "09-Money-MoneyToday-Desktop.dc.html"}, "sub": "හැම එකක්ම වෙනම · each figure is separate, never added together", "groups": [{"rows": [{"icon": "wallet", "title": "අද ලැබුණු මුදල් · Collected today", "detail": "Cash, bank, card, refunds and expenses apart · not SNS earnings", "figure": "—", "href": "09-Money-MoneyToday-Desktop.dc.html"}, {"icon": "chart", "title": "SNS ආදායම · SNS earnings", "detail": "Month to date, against the same days last month · profit before depreciation", "figure": "—", "href": "14-Reports-Reports-Desktop.dc.html"}, {"icon": "users", "title": "Customer ණය · Customer debt", "detail": "Unpaid bills · 1 over 30 days", "meta": "4 customers", "href": "08-Customers-AllCustomers-Desktop.dc.html"}, {"icon": "handshake", "title": "Partner ට ගෙවන්න · Partner payable", "detail": "Final · owed to partners, not SNS money", "figure": 63808, "currency": true, "href": "11-Partners-CashOuts-Desktop.dc.html"}, {"icon": "hourglass", "title": "Cash-out ඉල්ලීම් · Cash-out requests", "detail": "A partner asks for a final amount · SNS pays and records it", "figure": "—", "small": true, "href": "11-Partners-CashOuts-Desktop.dc.html"}]}, {"label": "තියාගෙන ඉන්න · Held, not income", "rows": [{"icon": "banknote", "title": "Deposit තියාගෙන · Deposits held", "detail": "ආදායම නොවේ · not income", "figure": "—", "small": true, "href": "09-Money-MoneyToday-Desktop.dc.html"}]}, {"label": "තවම අවසන් නැහැ · Not final yet", "rows": [{"icon": "eyeOff", "title": "අද, තවම අවසන් නැහැ · Partners today, not final", "detail": "Owner only · final when the day closes", "figure": "—", "small": true, "href": "11-Partners-CashOuts-Desktop.dc.html"}]}, {"label": "තවම බැලුවේ නැහැ · Not yet checked", "rows": [{"icon": "drawer", "title": "ලාච්චුව · Drawer", "detail": "Expected figure after the count", "meta": "ගණන් කළේ නැහැ", "small": true, "href": "09-Money-Drawer-Desktop.dc.html"}, {"icon": "link", "title": "ගැලපීම · Bank & card", "detail": "Paid now · checked at day end", "meta": "බැලුවේ නැහැ", "small": true, "href": "09-Money-BankCardCheck-Desktop.dc.html"}]}], "foot": "— : the sample data has no figure for this yet. Figures are whole rupees."}, "look": {"title": "අවධානයට ඕන වාහන 5 · Cars that need a look", "sub": "The other 25 are ready or rented on time", "rows": [{"car": {"plate": "CBC 5409", "model": "Wagon R", "partner": true, "status": "overdue", "statusDetail": "+3h 05m", "next": "Pradeep W. · R-0216 · due 22 Oct 8:00", "href": "06-Rentals-Overdue-Desktop.dc.html"}}, {"car": {"plate": "CBG 2967", "model": "Wagon R", "partner": true, "status": "available", "next": "not found at the 7:30 check", "href": "03-MorningCheck-Finished-Desktop.dc.html"}}, {"car": {"plate": "CAA 9083", "model": "Alto", "status": "repair", "next": "AC fault · since 21 Oct", "href": "12-Maintenance-Maintenance-Desktop.dc.html"}}, {"car": {"plate": "PJ 0937", "model": "Every", "partner": true, "status": "repair", "next": "service on 23 Oct", "href": "12-Maintenance-Maintenance-Desktop.dc.html"}}, {"car": {"plate": "CAP 9912", "model": "Prius", "partner": true, "status": "unavailable", "next": "owner use · back 25 Oct", "href": "04-Cars-AllCars-Desktop.dc.html"}}, {"link": {"label": "වාහන 30ම බලන්න · See all 30 cars, with photos", "href": "04-Cars-AllCars-Desktop.dc.html"}}]}, "attention": [{"label": "පරක්කු · Overdue", "count": 1, "tone": "overdue", "icon": "clockAlert", "href": "06-Rentals-Overdue-Desktop.dc.html"}, {"label": "විසඳන්න ඕන · Open items", "count": 3, "tone": "warning", "icon": "alert", "href": "02-Home-NeedsAttention-Desktop.dc.html"}, {"label": "Admin බලාපොරොත්තුවෙන් · Waiting for admin", "count": 3, "tone": "info", "icon": "hourglass", "href": "10-Approvals-Approvals-Desktop.dc.html"}, {"label": "අද විශේෂ තීරණ · Today’s decisions", "count": 2, "tone": "neutral", "icon": "flag", "href": "02-Home-NeedsAttention-Desktop.dc.html"}], "fleetHrefs": {"overdue": "06-Rentals-Overdue-Desktop.dc.html", "available": "04-Cars-AllCars-Desktop.dc.html", "rented": "06-Rentals-AllRentals-Desktop.dc.html", "repair": "12-Maintenance-Maintenance-Desktop.dc.html", "unavailable": "04-Cars-AllCars-Desktop.dc.html"}, "rail": [{"icon": "home", "label": "අද", "href": "02-Home-OwnerHome-Desktop.dc.html", "active": true}, {"icon": "car", "label": "වාහන", "href": "04-Cars-AllCars-Desktop.dc.html"}, {"icon": "clipboard", "label": "කුලී", "href": "06-Rentals-AllRentals-Desktop.dc.html", "badge": 1, "badgeTone": "overdue", "badgeHref": "06-Rentals-Overdue-Desktop.dc.html"}, {"icon": "users", "label": "පාරිභෝගිකයෝ", "href": "08-Customers-AllCustomers-Desktop.dc.html"}, {"icon": "wallet", "label": "මුදල්", "href": "09-Money-MoneyToday-Desktop.dc.html"}, {"icon": "handshake", "label": "Partner ගණන්", "href": "11-Partners-CashOuts-Desktop.dc.html"}, {"icon": "stamp", "label": "අනුමැති", "href": "10-Approvals-Approvals-Desktop.dc.html", "badge": 3}, {"icon": "wrench", "label": "නඩත්තුව", "href": "12-Maintenance-Maintenance-Desktop.dc.html"}, {"icon": "idcard", "label": "පඩි", "href": "13-Payroll-Payroll-Desktop.dc.html"}, {"icon": "chart", "label": "වාර්තා", "href": "14-Reports-Reports-Desktop.dc.html"}, {"icon": "settings", "label": "සැකසුම්", "href": "15-Settings-Permissions-Desktop.dc.html"}], "eighteen": 18, "two": 2};
+    data.fleet = fleet;
+    return data;
+  }
+}
+</script>
+</body>
+</html>

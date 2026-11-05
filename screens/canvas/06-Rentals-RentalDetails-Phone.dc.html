@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<title>06.2 Rental details · Phone</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/plate/tokens.css">
+<link rel="stylesheet" href="ds/plate/components/bundle.css">
+<script src="ds/plate/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#eef1f0}
+a{color:#1756a9}a:hover{color:#0f3e7e}
+</style>
+</helmet>
+<div class="rt" style="width: 100%; min-width: 320px; min-height: 2300px; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow: clip">
+  <x-import component-from-global-scope="Plate.PageHeader" back-href="06-Rentals-AllRentals-Phone.dc.html" title="R‑0218" numeric="{{yes}}" subtitle="Nimal · Staff · 11:30"></x-import>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 12px; border-radius: 10px; background: var(--available-tint); color: var(--available); font-size: 15px; line-height: 24px; font-weight: 600"><x-import component-from-global-scope="Plate.Icon" name="check" size="{{eighteen}}"></x-import>වසා ඇත · paid in full</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 10px; background: var(--warning-tint); color: var(--warning); font-size: 14px; line-height: 22px; font-weight: 500"><x-import component-from-global-scope="Plate.Icon" name="hourglass" size="{{eighteen}}"></x-import>Admin තීරණය බලාපොරොත්තුවෙන්</span>
+      </div>
+      <div style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Kasun P. · CBK 4127 · 20 Oct → 22 Oct · 2 days</div>
+    </div>
+    <section aria-label="Balance" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden">
+  <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 12px"><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">බිල · Bill</span><span class="rt-num" style="font-size: 20px; line-height: 28px; font-weight: 600">15,675</span></div>
+  <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 12px; border-left: 1px solid var(--line)"><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">ගෙව්වා · Paid</span><span class="rt-num" style="font-size: 20px; line-height: 28px; font-weight: 600; color: var(--available)">15,675</span></div>
+  <div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 12px; border-left: 1px solid var(--line)"><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">ඉතිරිය · Balance</span><span class="rt-num" style="font-size: 20px; line-height: 28px; font-weight: 600">0</span></div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">බිල <span class="rt-en">· Bill</span></h2></div>
+  <div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink)">කුලිය · Rent · 2 days × 4,500</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink); text-align: right">9,000</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink)">වැඩි km · Extra km · 91 × 25</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">291 km driven · 200 included</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink); text-align: right">2,275</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink)">ඉන්ධන · Fuel · same level · 8 L short × 300 (example price)</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">100% to SNS</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink); text-align: right">2,400</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink)">වායු පොම්පය නැහැ · Air pump missing</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Who gets the 2,000 · admin decides</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink); text-align: right">2,000</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink-muted)">පරක්කු 1h 40m · Late 1h 40m</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Waived by Nimal: “under 2 h, regular customer”</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink-muted); text-align: right">0</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink)">එකතුව · Total</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink); text-align: right">LKR 15,675</span>
+</div></div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">ගෙවීම් <span class="rt-en">· Payments</span></h2></div>
+  <div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink)">Deposit applied</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">held 10,000 since 20 Oct · now 0</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink); text-align: right">10,000</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink)">Cash · Nimal 9:52</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink); text-align: right">3,000</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink)">Bank · BOC‑448812 · Nimal 9:52</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">තවම බැලුවේ නැහැ · not yet checked</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 400; color: var(--ink); text-align: right">2,675</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink)">ගෙවූ මුළු මුදල · Paid</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink); text-align: right">LKR 15,675</span>
+</div><div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 16px; padding: 10px 0; border-top: 1px solid var(--line)">
+  <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink)">ඉතිරිය · Balance</span></span>
+  <span class="rt-num" style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--ink); text-align: right">LKR 0</span>
+</div></div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">වාහනය <span class="rt-en">· Vehicle</span></h2></div>
+  <div style="display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; align-items: center">
+    <span style="display: flex; align-items: center; justify-content: center; height: 58px; padding: 6px; background: var(--sunken); border-radius: 10px"><x-import component-from-global-scope="Plate.VehicleImage" model="Wagon R" style="width: 100%; height: 100%"></x-import></span>
+    <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><x-import component-from-global-scope="Plate.PlateBadge" plate="CBK 4127" size="sm"></x-import><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · Partner</span></span>
+  </div>
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; line-height: 24px">
+    <span style="color: var(--ink-muted)">භාර දුන්නා · Out</span><span class="rt-num" style="font-weight: 600; text-align: left; margin-bottom: 6px">Tue 20 Oct 10:42 · 24,831 km</span><span style="color: var(--ink-muted)">ආපසු ආවා · Back</span><span class="rt-num" style="font-weight: 600; text-align: left; margin-bottom: 6px">Thu 22 Oct 9:40 · 25,122 km</span><span style="color: var(--ink-muted)">නියමිත වේලාව · Deadline</span><span class="rt-num" style="font-weight: 600; text-align: left; margin-bottom: 6px">Thu 22 Oct 8:00</span>
+  </div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">පාරිභෝගිකයා <span class="rt-en">· Customer</span></h2></div>
+  <div style="display: flex; align-items: center; gap: 12px">
+    <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 16px; font-weight: 600">KP</span>
+    <span style="display: flex; flex-direction: column"><a href="08-Customers-CustomerDetails-Phone.dc.html" style="font-size: 16px; line-height: 26px; font-weight: 600">Kasun P.</a><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">ID, licence and signed agreement on file</span></span>
+  </div>
+  <div style="display: flex; gap: 10px; padding: 12px 14px; background: var(--warning-tint); border-radius: 12px; color: var(--warning); font-size: 14px; line-height: 22px">
+    <x-import component-from-global-scope="Plate.Icon" name="alert" size="{{eighteen}}" style="flex: none; margin-top: 2px"></x-import>
+    <span><b>පරණ ණය · Old bill R‑0197 · LKR 8,500 · 34 days.</b> Not part of this rental.</span>
+  </div>
+</section>
+    <section style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 16px">
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 style="margin: 0; font-size: 18px; line-height: 28px; font-weight: 600">සිදු වූ දේ <span class="rt-en">· What happened</span></h2></div>
+  <div style="display: flex; flex-direction: column"><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">22 Oct 9:52</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px"><b>Nimal</b> · ගෙවීම සටහන් කළා · LKR 5,675 + deposit 10,000</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">cash 3,000 · bank BOC‑448812 2,675</span></span>
+    </div><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">22 Oct 9:40</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px"><b>Nimal</b> · ආපසු ගත්තා · 25,122 km</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">late 1h 40m · charge waived · air pump missing, charged 2,000</span></span>
+    </div><div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line)">
+      <span class="rt-num" style="font-size: 14px; line-height: 24px; color: var(--ink-muted)">20 Oct 10:42</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 15px; line-height: 24px">භාර දුන්නා · 24,831 km · deposit 10,000</span></span>
+    </div></div>
+</section>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px 16px; background: var(--card); border-top: 1px solid var(--line)">
+    <a href="16-Documents-RentalAgreementSI.dc.html" class="rt-btn rt-btn-secondary" style="box-sizing: border-box; text-decoration: none; color: var(--ink)"><x-import component-from-global-scope="Plate.Icon" name="file" size="{{twenty}}"></x-import><span>Agreement</span></a>
+    <a href="16-Documents-PaymentReceipt.dc.html" class="rt-btn rt-btn-primary" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><x-import component-from-global-scope="Plate.Icon" name="receipt" size="{{twenty}}"></x-import><span>Receipt</span></a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true, eighteen: 18, twenty: 20, twentyfour: 24, twentysix: 26, twentytwo: 22,
+      rail: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' },
+        { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html', active: true },
+        { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html' },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' },
+        { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' },
+        { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 },
+        { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' },
+        { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' },
+        { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      railR: [
+        { icon: 'home', label: 'අද', href: '02-Home-OwnerHome-Phone.dc.html' }, { icon: 'car', label: 'වාහන', href: '04-Cars-AllCars-Phone.dc.html' }, { icon: 'clipboard', label: 'කුලී', href: '06-Rentals-AllRentals-Phone.dc.html', active: true },
+        { icon: 'users', label: 'පාරිභෝගිකයෝ', href: '08-Customers-AllCustomers-Phone.dc.html' }, { icon: 'wallet', label: 'මුදල්', href: '09-Money-MoneyToday-Phone.dc.html' }, { icon: 'handshake', label: 'Partner ගණන්', href: '11-Partners-CashOuts-Phone.dc.html' },
+        { icon: 'stamp', label: 'අනුමැති', href: '10-Approvals-Approvals-Phone.dc.html', badge: 3 }, { icon: 'wrench', label: 'නඩත්තුව', href: '12-Maintenance-Maintenance-Phone.dc.html' }, { icon: 'chart', label: 'වාර්තා', href: '14-Reports-Reports-Phone.dc.html' }, { icon: 'settings', label: 'සැකසුම්', href: '15-Settings-Permissions-Phone.dc.html' }
+      ],
+      tabs: [{ icon: 'car', label: 'වාහන' }, { icon: 'clipboard', label: 'කුලී', active: true }, { icon: 'drawer', label: 'ලාච්චුව' }, { icon: 'more', label: 'තවත්' }],
+      fab: { icon: 'plus', label: 'අලුත්' }
+    };
+  }
+}
+</script>
+</body>
+</html>

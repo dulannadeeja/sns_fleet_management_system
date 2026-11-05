@@ -1,0 +1,32 @@
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
+import { requireUser } from '../auth/require';
+import { mayDo } from '../auth/access';
+import { Button } from '../ui';
+import { signOutAction } from './actions';
+import { readChecklist } from '../modules/golive/golive';
+
+// Until the home screens (02.1 and 02.2, Phases 2 and 4), owner, admin and staff open Cars after sign-in (Dulan, 4 Nov
+// 2026); a partner, who has no pages yet, sees who is signed in and can sign out.
+export default async function Home() {
+  const person = await requireUser();
+  if (['owner', 'admin', 'staff'].includes(person.role)) redirect('/cars');
+  const t = await getTranslations();
+  const golive = person.role === 'owner' ? await readChecklist() : null;
+  return (
+    <main style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start' }}>
+      <h1 style={{ margin: 0 }}>{t('title')}</h1>
+      <p style={{ margin: 0 }}>{t('home.signedIn', { name: person.name })}</p>
+      {['owner', 'admin', 'staff'].includes(person.role) ? <Link href="/cars">{t('nav.cars')}</Link> : null}
+      {(await mayDo(person, 'customerAccess')) ? <Link href="/customers">{t('nav.customers')}</Link> : null}
+      {(await mayDo(person, 'seePartnerEarnings')) ? <Link href="/partners">{t('nav.partners')}</Link> : null}
+      {person.role === 'owner' ? <Link href="/settings/people">{t('settings.homeSettings')}</Link> : null}
+      {/* Until go-live, the owner sees how much of the checklist is done (ST-01.3, #25). */}
+      {golive ? <Link href="/settings/golive" data-golive>{t('settings.golive.home', { ready: golive.ready, total: golive.total })}</Link> : null}
+      {person.role === 'admin' || person.role === 'staff' ? <Link href="/settings/business-rules">{t('settings.businessRules')}</Link> : null}
+      {person.role !== 'owner' && (await mayDo(person, 'seeActivityLog')) ? <Link href="/settings/activity-log">{t('settings.activityLog')}</Link> : null}
+      <form action={signOutAction}><Button type="submit" variant="secondary" icon="arrowLeft">{t('home.signOut')}</Button></form>
+    </main>
+  );
+}

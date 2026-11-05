@@ -89,4 +89,4 @@ Generate all 18 in one session with the same reference image so they match. Chec
    - Add a `LauncherTile` component (icon, Sinhala label, English echo, `href`, optional count) and a "Launcher icons" asset group.
    - Update the imagery rule in the README: "3D objects only on launcher tiles; line icons everywhere else".
 3. **Screens.** 02.5 Owner · More and 02.6 Staff · More switch from list rows to tile grids, then I re-measure and render both.
-4. **Records.** One `CHANGELOG.md` line (visual change, no rule). The system design and the proposal don't change.
+4. **Records.** Commit the change with a clear message (visual change, no rule). The system design and the proposal don't change.
