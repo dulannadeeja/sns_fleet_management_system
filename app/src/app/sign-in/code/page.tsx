@@ -3,7 +3,7 @@ import { Icon, Notice, PageHeader } from '../../../ui';
 import '../../start.css';
 import { CodeForm } from './CodeForm';
 
-// Screen 01.4 Sign-in code (ST-01.1, AT-61; system design 3.1 "Email codes and email reset", Proposed).
+// Screen 01.4 Sign-in code (ST-01.1, AT-61; system design 3.1 "Email codes and email reset", Confirmed 5 Nov 2026).
 export default async function SignInCodePage({ searchParams }: { searchParams: Promise<{ problem?: string }> }) {
   const { problem } = await searchParams;
   const t = await getTranslations('code');

@@ -6,7 +6,7 @@ import { Icon, PageHeader } from '../../ui';
 import '../start.css';
 import { ConfirmForm } from './ConfirmForm';
 
-// Screen 01.7 Confirm your email (#28; system design 3.1 "Email codes and email reset", Proposed): after the owner
+// Screen 01.7 Confirm your email (#28; system design 3.1 "Email codes and email reset", Confirmed 5 Nov 2026): after the owner
 // changes an email, the person types the code sent to the new one. Until then, codes go to the old one.
 export default async function ConfirmEmailPage() {
   const person = await signedInPerson(await headers());

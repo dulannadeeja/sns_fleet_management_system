@@ -52,6 +52,6 @@ export function carValues(tCars: T, e: Entry): Record<string, string> {
   };
 }
 
-/** Commission and cost changes are partner terms: hidden from people who may not see them (system design 4.2, Proposed). */
+/** Commission and cost changes are partner terms: hidden from people who may not see them (system design 4.2, Confirmed 5 Nov 2026). */
 export const isPartnerTermEntry = (e: Entry) => (e.action === 'car.change' && (e.details?.field === 'commissionPercent' || e.details?.field === 'ownerPays'))
   || (e.action === 'package.defaults' && e.details?.field === 'commissionPercent');

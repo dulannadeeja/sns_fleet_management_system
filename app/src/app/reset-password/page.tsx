@@ -4,7 +4,7 @@ import { PageHeader } from '../../ui';
 import '../start.css';
 import { ResetForm } from './ResetForm';
 
-// Screen 01.6 New password, opened from the emailed link (system design 3.1 "Email codes and email reset", Proposed).
+// Screen 01.6 New password, opened from the emailed link (system design 3.1 "Email codes and email reset", Confirmed 5 Nov 2026).
 export default async function ResetPasswordPage({ searchParams }: { searchParams: Promise<{ token?: string; error?: string }> }) {
   const { token, error } = await searchParams;
   const t = await getTranslations('reset');

@@ -21,7 +21,7 @@ describe('AT-24: the server checks permissions on every request', () => {
     expect((await accessFor(staff.headers, 'exportReports')).kind).toBe('denied');
   });
 
-  it('the admin has both by default (Proposed); staff and admin keep their defaults', async () => {
+  it('the admin has both by default (Confirmed 5 Nov 2026); staff and admin keep their defaults', async () => {
     const admin = await signedInSample('admin');
     expect((await accessFor(admin.headers, 'exportReports')).kind).toBe('allowed');
     expect((await accessFor(admin.headers, 'managePayroll')).kind).toBe('allowed');

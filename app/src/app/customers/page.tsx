@@ -8,7 +8,7 @@ import '../cars/cars.css';
 import './customers.css';
 
 // Screen 08.1 Customers (ST-08.1): find a customer by name, NIC or phone; an expired licence comes first. Full NIC and
-// phone numbers, no masking (PR-13); no ratings or scores (PR-14). Needs customer access (Proposed, 1 Nov 2026).
+// phone numbers, no masking (PR-13); no ratings or scores (PR-14). Needs customer access (Confirmed 5 Nov 2026).
 const initials = (name: string) => name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]!.toUpperCase()).join('');
 
 export default async function CustomersPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {

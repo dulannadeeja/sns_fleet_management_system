@@ -8,7 +8,7 @@ import { call, person, samplePerson, signIn, withCookies } from '../helpers/peop
 import { lastCode, mailsTo } from '../helpers/outbox';
 
 // AT-61 "The admin signs in on a new phone: a one-time code is emailed to the admin; sign-in finishes only with it"
-// (system design 3.1 Sign-in safety, DN-03; "Email codes and email reset", Proposed).
+// (system design 3.1 Sign-in safety, DN-03; "Email codes and email reset", Confirmed 5 Nov 2026).
 async function adminWithOwnPassword() {
   const p = await samplePerson('own-pass-123', 'admin');
   await db.update(user).set({ mustChangePassword: false }).where(eq(user.id, p.id));

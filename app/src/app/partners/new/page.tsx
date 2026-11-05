@@ -11,7 +11,7 @@ import { partnerWords } from '../words';
 import '../../cars/cars.css';
 import '../partners.css';
 
-// Screen 11.3 Add a partner (ST-11.2; system design 3.2 "Partner accounts", Proposed): people who may add or edit
+// Screen 11.3 Add a partner (ST-11.2; system design 3.2 "Partner accounts", Confirmed 5 Nov 2026): people who may add or edit
 // partners and see partner terms (the admin by default) add a partner, their account and their cars.
 export default async function NewPartnerPage() {
   const person = await requirePermission('editPartners');

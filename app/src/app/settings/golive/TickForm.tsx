@@ -4,7 +4,7 @@ import { useReady } from '../../useReady';
 import { Button, TextField } from '../../../ui';
 import { tickAction, type TickState } from './actions';
 
-// "Mark done", or "Mark not done" with a reason (ST-01.3; Proposed: Dulan, 4 Nov 2026).
+// "Mark done", or "Mark not done" with a reason (ST-01.3; Confirmed 5 Nov 2026.
 export function TickForm({ item, done, w }: { item: string; done: boolean; w: { tick: string; untick: string; reason: string; errors: Record<string, string> } }) {
   const [state, action, pending] = useActionState<TickState, FormData>(tickAction.bind(null, item, done), {});
   const ready = useReady();

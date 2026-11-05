@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { addPerson } from '../src/modules/people/people';
 import { samplePerson, signIn } from './helpers/people';
 
-// System design 3.1 "Sign-in phone numbers" (Proposed), on the server side.
+// System design 3.1 "Sign-in phone numbers" (Confirmed 5 Nov 2026), on the server side.
 describe('sign-in numbers on the server', () => {
   it('a person cannot be added with a number that is not a Sri Lankan mobile', async () => {
     expect(await addPerson(null, { name: 'Sample', phone: '0731234567', password: 'first-pass-1', role: 'staff' })).toEqual({ error: 'phoneInvalid' });

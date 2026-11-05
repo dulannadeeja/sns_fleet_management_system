@@ -8,7 +8,7 @@ import { SettingsFrame } from '../SettingsFrame';
 import { showNumber, showTime } from './show';
 
 // Screen 15.2 Business rules (ST-15.3): the owner, the admin and staff read the rules in force; only the owner sees
-// "Change" (system design 3.2 "Owner settings", Proposed: Dulan, 1 Nov 2026). Partners are refused (403); the commission
+// "Change" (system design 3.2 "Owner settings", Confirmed 5 Nov 2026. Partners are refused (403); the commission
 // row only for those who may see partner terms.
 const ROWS = ['extraKm', 'fuel', 'businessDay', 'drawerCount', 'cashOut', 'bankCheck', 'expiredDocuments', 'plannedService', 'lateReturn',
   'partnerCashOut', 'commission', 'garageDay', 'payrollDeductions', 'money', 'profit', 'approvals'] as const;

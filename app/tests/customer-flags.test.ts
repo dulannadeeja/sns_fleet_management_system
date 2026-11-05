@@ -8,7 +8,7 @@ import { setPermission } from '../src/modules/people/people';
 import { samplePerson, theOwner } from './helpers/people';
 import { sampleCustomer } from './helpers/customers';
 
-// ST-08.4 and ST-08.5 (system design 6, 3.2; Proposed: Dulan, 4 Nov 2026). Each test adds its own sample customer.
+// ST-08.4 and ST-08.5 (system design 6, 3.2; Confirmed 5 Nov 2026. Each test adds its own sample customer.
 const newCustomer = async (licenceExpires?: string) => {
   const c = await addCustomer(await theOwner(), { ...sampleCustomer(), ...(licenceExpires ? { licenceExpires } : {}) });
   if (!('ok' in c)) throw new Error('sample customer not added');

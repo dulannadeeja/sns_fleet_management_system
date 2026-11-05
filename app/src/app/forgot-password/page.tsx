@@ -4,7 +4,7 @@ import { Icon, PageHeader } from '../../ui';
 import '../start.css';
 import { ForgotForm } from './ForgotForm';
 
-// Screen 01.5 Forgot password (ST-01.1; DN-03; system design 3.1 "Email codes and email reset", Proposed).
+// Screen 01.5 Forgot password (ST-01.1; DN-03; system design 3.1 "Email codes and email reset", Confirmed 5 Nov 2026).
 export default async function ForgotPasswordPage() {
   const t = await getTranslations('forgot');
   const s = await getTranslations('signIn');

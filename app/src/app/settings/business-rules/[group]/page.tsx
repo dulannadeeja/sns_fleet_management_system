@@ -6,8 +6,8 @@ import { SettingsFrame } from '../../SettingsFrame';
 import { showNumber } from '../show';
 import { ChangeForm, type ChangeWords, type Field } from './ChangeForm';
 
-// Screen 15.7 Change a setting (ST-15.3): the owner only (system design 3.2 "Owner settings", Proposed: Dulan,
-// 1 Nov 2026). One group per page: rental day times, reminders or the fuel price.
+// Screen 15.7 Change a setting (ST-15.3): the owner only (system design 3.2 "Owner settings", Confirmed
+// 5 Nov 2026). One group per page: rental day times, reminders or the fuel price.
 export default async function ChangeSettingPage({ params }: { params: Promise<{ group: string }> }) {
   const person = await requireOwner();
   const { group } = await params;

@@ -7,7 +7,7 @@ import { setPermission } from '../src/modules/people/people';
 import { samplePerson, theOwner } from './helpers/people';
 import { samplePlate } from './helpers/cars';
 
-// ST-04.1 to ST-04.3 (system design 4.1, 4.2; decisions of 1 Nov 2026, Proposed). Each test adds its own sample cars,
+// ST-04.1 to ST-04.3 (system design 4.1, 4.2; decisions of 1 Nov 2026, Confirmed 5 Nov 2026). Each test adds its own sample cars,
 // with random sample plates; the car tables are never cleaned up.
 describe('ST-04.3: add or edit a car and its package', () => {
   it('starts a new car with its model\'s starting package and the agreed defaults', async () => {

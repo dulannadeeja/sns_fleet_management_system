@@ -11,7 +11,7 @@ import { samplePlate } from '../helpers/cars';
 
 // AT-29 (CR-001): "Vehicle with no catalogue photo; an admin then adds one: card and profile show the model's standard
 // image, then the photo; handover requirements are unchanged; staff without admin rights cannot add or replace it."
-// System design 4.2 (Confirmed; who and which files Proposed: Dulan, 3 Nov 2026). The card and page are checked in the
+// System design 4.2 (Confirmed; who and which files Confirmed 5 Nov 2026. The card and page are checked in the
 // browser (tests/e2e/car-papers.spec.ts); handovers come in Phase 2, and nothing here touches them.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 afterAll(() => pool.end());

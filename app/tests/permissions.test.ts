@@ -9,7 +9,7 @@ describe('permission catalogue', () => {
       'markCarUnavailable', 'proceedDespiteFlag', 'refundsAndExpenses', 'setOrWaiveDeposit',
     ]);
   });
-  it('the admin also starts with the admin rows, payroll and export (Proposed), not the authorised-person rows', () => {
+  it('the admin also starts with the admin rows, payroll and export (Confirmed 5 Nov 2026), not the authorised-person rows', () => {
     const admin = defaultPermissions('admin');
     expect(admin).toEqual(expect.arrayContaining(['correctPayment', 'payPartnerCashouts', 'seeActivityLog', 'managePayroll', 'exportReports']));
     for (const key of ['reconcilePayments', 'writeOffDebt', 'keepCancellationFee', 'overrideExpiredDocuments']) expect(admin).not.toContain(key);

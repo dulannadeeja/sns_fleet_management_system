@@ -9,7 +9,7 @@ import { todayColombo } from '../../lib/dates';
 // Confirmed: a flag (unpaid money, damaged a car, something else, with what happened) warns before every future rental;
 // employees may continue with a recorded reason; a flag is closed with a reason and stays in the history with who closed
 // it and when; nothing is deleted; no ratings or scores. An expired driving licence warns; only an authorised person
-// continues, with a reason; that does not make the licence valid. Proposed (Dulan, 4 Nov 2026): flags need "Customer
+// continues, with a reason; that does not make the licence valid. Confirmed 5 Nov 2026: flags need "Customer
 // access"; until New rental exists the check is on the customer's page; the licence needs "Override expired-document
 // warnings".
 

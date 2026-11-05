@@ -7,7 +7,7 @@ import { addCopy, addCustomer, correctCustomer, correctNic, getCustomer, listCus
 import { samplePerson, theOwner } from './helpers/people';
 import { JPEG, NOT_A_PHOTO, PDF, sampleCustomer } from './helpers/customers';
 
-// ST-08.1 to ST-08.3 (system design 6; decisions of 1 Nov 2026, Proposed). Each test adds its own sample customers.
+// ST-08.1 to ST-08.3 (system design 6; decisions of 1 Nov 2026, Confirmed 5 Nov 2026). Each test adds its own sample customers.
 describe('ST-08.2: add a customer', () => {
   it('needs name, NIC, phone and licence number and expiry; copies may come later; logged', async () => {
     const owner = await theOwner();
@@ -78,7 +78,7 @@ describe('ST-08.1: find a customer', () => {
   });
 });
 
-describe('ST-08.3: correct a mistyped NIC (Proposed, 1 Nov 2026)', () => {
+describe('ST-08.3: correct a mistyped NIC (Confirmed 5 Nov 2026)', () => {
   it('only the owner or the admin, with a reason, never to another customer\'s NIC; logged', async () => {
     const owner = await theOwner();
     const a = await addCustomer(owner, sampleCustomer());

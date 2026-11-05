@@ -10,7 +10,7 @@ import { statusChoices } from '../../status-choices';
 import { StatusForm } from './StatusForm';
 import '../../cars.css';
 
-// Screen 04.5 Change a car's status (ST-04.5; system design 11; Proposed: Dulan, 2 Nov 2026). Only the statuses this
+// Screen 04.5 Change a car's status (ST-04.5; system design 11; Confirmed 5 Nov 2026. Only the statuses this
 // person may set are offered; a person who may set none is refused (403).
 export default async function CarStatusPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ to?: string }> }) {
   const person = await requireEmployee();

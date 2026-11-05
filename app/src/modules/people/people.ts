@@ -39,7 +39,7 @@ export const hashPassword = hash;
 
 /**
  * A partner's sign-in account, inside the caller's transaction (ST-11.2; system design 3.2 "Partner accounts",
- * Proposed): a first password to change at the first sign-in, no permissions (a partner sees only their own earnings),
+ * Confirmed 5 Nov 2026): a first password to change at the first sign-in, no permissions (a partner sees only their own earnings),
  * no email. The caller checks who may add partners and writes the activity log.
  */
 export async function createPartnerAccount(tx: Tx, input: { name: string; phone: string; passwordHash: string; language?: Language }): Promise<{ id: string } | { error: 'phoneTaken' }> {
@@ -53,7 +53,7 @@ export async function createPartnerAccount(tx: Tx, input: { name: string; phone:
 
 export interface NewPerson { name: string; phone: string; password: string; role: Role; language?: Language; email?: string }
 
-// #28 (system design 3.1 "Email codes and email reset", Proposed): the owner and the admin each have an email for
+// #28 (system design 3.1 "Email codes and email reset", Confirmed 5 Nov 2026): the owner and the admin each have an email for
 // sign-in codes and their own reset; staff and partners have none.
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const needsEmail = (role: string) => role === 'owner' || role === 'admin';

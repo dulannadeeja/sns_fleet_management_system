@@ -10,7 +10,7 @@ export type SignInState = { problems?: SignInProblems; error?: 'wrong' | 'locked
 
 /**
  * Signs in with phone number and password (ST-01.1). What was typed is checked box by box first, the same check the
- * browser makes (system design 3.1, Proposed). A locked account says so (AT-60); a well-formed number and password that
+ * browser makes (system design 3.1, Confirmed 5 Nov 2026). A locked account says so (AT-60); a well-formed number and password that
  * do not match give one message that does not say which was wrong.
  */
 export async function signInAction(_: SignInState, form: FormData): Promise<SignInState> {

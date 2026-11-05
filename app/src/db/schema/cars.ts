@@ -14,7 +14,7 @@ export const vehicle = pgTable('vehicle', {
   partnerOwnerId: uuid('partner_owner_id').references(() => partnerOwner.id),
   // The starting package the car was added from (#21); its own terms are in vehicle_terms_version.
   startingPackageId: uuid('starting_package_id').references(() => startingPackage.id),
-  // Papers and service dates (system design 11; #23, Proposed: Dulan, 3 Nov 2026): empty until entered; everyone at SNS
+  // Papers and service dates (system design 11; #23, Confirmed 5 Nov 2026: empty until entered; everyone at SNS
   // enters them; old values are in the activity log. Reminders from them come in Phase 3.
   insuranceExpires: date('insurance_expires', { mode: 'string' }),
   licenceExpires: date('licence_expires', { mode: 'string' }),
@@ -44,7 +44,7 @@ export const vehicleTermsVersion = pgTable('vehicle_terms_version', {
   ownerPays: text('owner_pays').array().notNull().default([]),
 }, (t) => [index('vehicle_terms_newest').on(t.vehicleId, t.effectiveFrom.desc())]);
 
-/** A starting package (system design 4.1; #21, Proposed: Dulan, 2 Nov 2026): a name and its rates. A new car starts from
+/** A starting package (system design 4.1; #21, Confirmed 5 Nov 2026: a name and its rates. A new car starts from
  *  one; changing it changes only cars added afterwards. Old values are kept in the activity log. Money in whole rupees. */
 export const startingPackage = pgTable('starting_package', {
   id: uuid('id').primaryKey().defaultRandom(),

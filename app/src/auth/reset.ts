@@ -2,7 +2,7 @@ import { sql } from 'drizzle-orm';
 import { db } from '../db/client';
 import { auth } from './server';
 
-// "Forgot password?" (screen 01.5; system design 3.1 "Email codes and email reset", Proposed): the owner or the admin
+// "Forgot password?" (screen 01.5; system design 3.1 "Email codes and email reset", Confirmed 5 Nov 2026): the owner or the admin
 // types their phone number; if it is theirs and they have a confirmed email, a link (once, 1 hour) is emailed.
 // Nothing is returned: the page gives the same answer for any number, so it never shows which numbers have accounts.
 export async function requestResetByPhone(phone: string): Promise<void> {

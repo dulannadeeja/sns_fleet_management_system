@@ -29,7 +29,7 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
   const seeCustomers = await mayDo(viewer, 'customerAccess');
   const tCust = await getTranslations('customers');
   // A car's commission is a partner term: hidden from people who may not see partner terms (system design 4.2).
-  // Customers' details are for people with customer access (system design 3.2, Proposed; #19 review).
+  // Customers' details are for people with customer access (system design 3.2, Confirmed; #19 review).
   const entries = all.filter((e) => (seeTerms || !isPartnerTermEntry(e)) && (seeCustomers || !e.action.startsWith('customer.')));
   const tCars = tCarsRaw as unknown as (k: string, v?: Record<string, string>) => string;
   const t = await getTranslations('settings');
