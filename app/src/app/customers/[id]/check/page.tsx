@@ -12,7 +12,7 @@ import '../../../cars/cars.css';
 import '../../customers.css';
 
 // Screen 08.4 Flag and expired licence warning (ST-08.4). Until New rental exists (Phase 2), it opens from the
-// customer's page and records a decision to continue (Confirmed 5 Nov 2026. A flag needs "Go ahead despite a
+// customer's page and records a decision to continue (Confirmed 5 Nov 2026). A flag needs "Go ahead despite a
 // customer flag"; an expired licence needs "Override expired-document warnings"; the licence stays expired.
 export default async function CheckPage({ params }: { params: Promise<{ id: string }> }) {
   const person = await requirePermission('customerAccess');

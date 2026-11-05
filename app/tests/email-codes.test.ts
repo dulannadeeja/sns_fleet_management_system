@@ -10,7 +10,7 @@ import { confirmPendingEmail, sendEmailConfirmCode, setEmail } from '../src/modu
 import { call, person, samplePerson, signIn, theOwner, withCookies } from './helpers/people';
 import { lastCode, mailsTo } from './helpers/outbox';
 
-// System design 3.1 "Email codes and email reset" (Confirmed 5 Nov 2026.
+// System design 3.1 "Email codes and email reset" (Confirmed 5 Nov 2026).
 const sendCode = (h: Headers) => call((o) => auth.api.sendTwoFactorOTP(o), h, {});
 const checkCode = (h: Headers, code: string) => call((o) => auth.api.verifyTwoFactorOTP(o), h, { code, trustDevice: true });
 const wrong = (code: string) => (code === '000000' ? '111111' : '000000');
