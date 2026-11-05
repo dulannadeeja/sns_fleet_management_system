@@ -8,7 +8,7 @@ import { TickForm } from './TickForm';
 import './golive.css';
 
 // Screen 01.3 Ready to start · setup checklist (ST-01.3; system design, starting data; AT-43). The owner only. Go-live
-// waits until every item is done (Confirmed); how each is checked or ticked is Proposed (Dulan, 4 Nov 2026).
+// waits until every item is done (Confirmed); how each is checked or ticked is Confirmed 5 Nov 2026.
 const GO: Partial<Record<Item['key'], string>> = { carDates: '/cars', partnerCars: '/partners', authorisedPerson: '/settings/permissions',
   startingPackages: '/settings/packages', staffAccounts: '/settings/people', carsEntered: '/cars' };
 

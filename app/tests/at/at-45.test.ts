@@ -8,7 +8,7 @@ import { signedInSample, theOwner } from '../helpers/people';
 
 // AT-45, the settings part only (PARTIAL: the reminders themselves come in Phase 3): "A car's insurance expires in
 // 30 days, with the starting reminder settings: it appears in Upcoming work; the owner can change how early."
-// System design 11 (reminders, Confirmed) and 3.2 "Owner settings" (Proposed: Dulan, 1 Nov 2026).
+// System design 11 (reminders, Confirmed) and 3.2 "Owner settings" (Confirmed 5 Nov 2026.
 // Settings are shared by the whole test database: this file alone changes the insurance and licence reminder, and puts
 // back what it found. Only the value a form changes is saved, so the other reminders are never written here.
 describe('AT-45 (settings part, partial): the owner can change how early the insurance reminder starts', () => {

@@ -9,7 +9,7 @@ import { samplePerson, signedInSample, theOwner } from '../helpers/people';
 import { JPEG, sampleCustomer } from '../helpers/customers';
 
 // AT-59 "Staff open a customer's NIC copy: it opens for staff with customer access; the opening is logged with who and
-// when; there is no public link" (system design 6, Confirmed; "customer access" is a permission, Proposed 1 Nov 2026).
+// when; there is no public link" (system design 6, Confirmed; "customer access" is a permission, Confirmed 5 Nov 2026).
 describe('AT-59: opening a document copy', () => {
   it('opens for staff with customer access and logs who and when; others are refused and nothing is logged', async () => {
     const owner = await theOwner();

@@ -11,7 +11,7 @@ import { copyType, MAX_COPY_BYTES } from '../../storage/kinds';
 // Customers (ST-08.1 to ST-08.3; system design 6). One NIC is one customer (AT-51). Saved with name, NIC, phone and
 // licence number and expiry; the four copies may come later and the customer shows "copies missing" until they are in
 // (AT-49). Copies are private files, opened only with customer access, each opening recorded (AT-59). "Customer access"
-// is its own permission (Proposed: Dulan, 1 Nov 2026). Flags and debts come with #24 and Phase 2.
+// is its own permission (Confirmed 5 Nov 2026. Flags and debts come with #24 and Phase 2.
 
 export const COPY_KINDS = ['nicFront', 'nicBack', 'licenceFront', 'licenceBack'] as const;
 export type CopyKind = (typeof COPY_KINDS)[number];
@@ -174,7 +174,7 @@ const missing = (docs: { kind: string }[]) => COPY_KINDS.filter((k) => !docs.som
 
 /**
  * Customers found by name, NIC or phone (ST-08.1); without a search, the most recent first. People with an expired licence
- * come first (a Proposed check; owing money and flags join it in Phase 2 and #24). At most 100.
+ * come first (a check, Confirmed 5 Nov 2026; owing money and flags join it in Phase 2 and #24). At most 100.
  */
 export async function listCustomers(search?: string): Promise<CustomerRow[]> {
   const q = (search ?? '').trim();
@@ -216,14 +216,14 @@ export async function openCopy(actorId: string, documentId: string, customerId?:
   const [c] = await db.select({ name: customer.name }).from(customer).where(eq(customer.id, d.customerId));
   await db.transaction(async (tx) => {
     await tx.insert(documentAccess).values({ documentId, openedBy: actorId });
-    // Also in the activity log, so the owner and the admin can see who opened what (system design 6, Proposed).
+    // Also in the activity log, so the owner and the admin can see who opened what (system design 6, Confirmed 5 Nov 2026).
     await tx.insert(auditEvent).values({ createdBy: actorId, action: 'customer.copyOpened', targetType: 'customer', targetId: d.customerId, details: { name: c?.name ?? '', kind: d.kind } });
   });
   return { ok: true, bytes, contentType: d.contentType, kind: d.kind, customerId: d.customerId };
 }
 
 /**
- * Corrects a mistyped NIC (system design 6, Proposed: Dulan, 1 Nov 2026): only the primary owner or the admin, with a
+ * Corrects a mistyped NIC (system design 6, Confirmed 5 Nov 2026: only the primary owner or the admin, with a
  * reason, never to a NIC another customer has. The log keeps the old and new NIC and the reason (PR-05).
  */
 export async function correctNic(actorId: string, customerId: string, typed: string, reason: string): Promise<{ ok: true } | { error: CustomerError }> {

@@ -8,7 +8,7 @@ import { addCarsToPartner, addPartner, getPartner, listPartners, normalNic, reco
 import { samplePerson, samplePhone, signIn, theOwner } from './helpers/people';
 import { samplePlate } from './helpers/cars';
 
-// ST-11.1 to ST-11.3 (system design 3.2 "Partner accounts", 14; Proposed: Dulan, 1 Nov 2026). Each test adds its own
+// ST-11.1 to ST-11.3 (system design 3.2 "Partner accounts", 14; Confirmed 5 Nov 2026. Each test adds its own
 // sample partners (random NIC and phone) and sample partner cars.
 const sampleNic = () => `${String(Math.floor(Math.random() * 1e12)).padStart(12, '0')}`;
 async function partnerCar(model = 'Wagon R') {

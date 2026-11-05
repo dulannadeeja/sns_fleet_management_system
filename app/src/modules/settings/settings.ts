@@ -2,7 +2,7 @@ import { eq, inArray, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
 import { auditEvent, setting, user } from '../../db/schema';
 
-// The owner settings (system design 3.2 "Owner settings", Proposed: Dulan, 1 Nov 2026; ST-15.3, screens 15.2 and 15.7).
+// The owner settings (system design 3.2 "Owner settings", Confirmed 5 Nov 2026; ST-15.3, screens 15.2 and 15.7).
 // Business-wide values only the primary owner changes, in three groups. A setting with no saved row has its starting
 // value. Starting values: 5.1 (cutoff and deadline, "for now"), 11 (reminders, Confirmed), 16 (fuel price: no figure).
 // A changed cutoff or deadline applies to new rentals only (4.3, PR-08): rentals will keep their own copy.

@@ -7,7 +7,7 @@ import type { Permission } from '../../auth/permissions';
 // these are done: business details on printouts; every car entered; starting packages; insurance and licence dates for
 // every car; every partner car linked to its owner; staff accounts; the authorised person for checking payments,
 // write-offs, cancellation fees and expired papers; opening cash in the drawer; SNS's agreement wording; and every Open
-// decision. Proposed (Dulan, 4 Nov 2026): the owner only; the system checks what it can count; the owner ticks the rest
+// decision. Confirmed 5 Nov 2026: the owner only; the system checks what it can count; the owner ticks the rest
 // (untick with a reason); items whose part is not built yet show "Not ready" and block. Going live itself is Phase 4.
 
 export type ItemKind = 'auto' | 'tick' | 'later';

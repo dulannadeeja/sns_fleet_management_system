@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { phoneDigits, phoneProblem } from '../src/auth/phone';
 import { signInProblems } from '../src/auth/sign-in-check';
 
-// System design 3.1 "Sign-in phone numbers" (Proposed): Sri Lankan mobiles, 10 digits; the form names the wrong box.
+// System design 3.1 "Sign-in phone numbers" (Confirmed 5 Nov 2026): Sri Lankan mobiles, 10 digits; the form names the wrong box.
 describe('sign-in phone numbers', () => {
   it.each(['0701234567', '0711234567', '0721234567', '0741234567', '0751234567', '0761234567', '0771234567', '0781234567'])(
     'accepts the mobile number %s', (n) => expect(phoneProblem(n)).toBeNull());

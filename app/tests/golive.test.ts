@@ -8,7 +8,7 @@ import { samplePlate } from './helpers/cars';
 import { addCar } from '../src/modules/cars/cars';
 import { changeStatus } from '../src/modules/cars/status';
 
-// ST-01.3 go-live checklist (system design, starting data; Proposed: Dulan, 4 Nov 2026). Ticks are shared by the whole
+// ST-01.3 go-live checklist (system design, starting data; Confirmed 5 Nov 2026. Ticks are shared by the whole
 // test database: only this file ticks, and it puts back what it found.
 describe('ST-01.3: the go-live checklist', () => {
   it('counts only cars in the fleet: a retired car needs no dates and no owner; an unlinked partner car is named', async () => {

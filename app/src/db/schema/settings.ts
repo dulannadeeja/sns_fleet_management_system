@@ -12,7 +12,7 @@ export const setting = pgTable('setting', {
   updatedBy: uuid('updated_by').references(() => user.id),
 });
 
-/** The owner's ticks on the go-live checklist (ST-01.3; #25, Proposed: Dulan, 4 Nov 2026): insert-only; the newest row
+/** The owner's ticks on the go-live checklist (ST-01.3; #25, Confirmed 5 Nov 2026: insert-only; the newest row
  *  for an item counts. Unticking needs a reason. Items the system checks by itself have no ticks. */
 export const goliveTick = pgTable('golive_tick', {
   id: uuid('id').primaryKey().defaultRandom(),

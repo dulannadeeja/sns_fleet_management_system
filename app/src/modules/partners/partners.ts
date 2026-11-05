@@ -12,7 +12,7 @@ import { isCost, linkCarToPartner, listCars, LIMITS, type Car, type Cost } from 
 export { unlinkedPartnerCars } from '../cars/cars';
 export { normalNic } from '../../lib/nic';
 
-// Partner owners (ST-11.1 to ST-11.3; system design 3.2 "Partner accounts", 10, 14; Proposed: Dulan, 1 Nov 2026).
+// Partner owners (ST-11.1 to ST-11.3; system design 3.2 "Partner accounts", 10, 14; Confirmed 5 Nov 2026.
 // Whoever may add or edit partners (the admin by default) adds one, with their sign-in account and their cars; turning
 // the account off or on stays with the owner (people module). Earnings, cash-outs and the starting balance come later.
 

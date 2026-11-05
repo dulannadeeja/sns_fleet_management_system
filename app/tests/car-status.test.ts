@@ -7,7 +7,7 @@ import { todayColombo } from '../src/lib/dates';
 import { samplePerson, theOwner } from './helpers/people';
 import { samplePlate } from './helpers/cars';
 
-// ST-04.5 (system design 11; Proposed: Dulan, 2 Nov 2026): the decisions of #22. Each test adds its own sample car.
+// ST-04.5 (system design 11; Confirmed 5 Nov 2026: the decisions of #22. Each test adds its own sample car.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 afterAll(() => pool.end());
 const sampleCar = async () => {

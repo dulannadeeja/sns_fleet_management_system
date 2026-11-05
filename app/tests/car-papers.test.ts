@@ -8,7 +8,7 @@ import { changePapers, papersOf } from '../src/modules/cars/papers';
 import { samplePerson, theOwner } from './helpers/people';
 import { samplePlate } from './helpers/cars';
 
-// ST-04.6 papers and service dates (system design 11; Proposed: Dulan, 3 Nov 2026). Each test adds its own sample car.
+// ST-04.6 papers and service dates (system design 11; Confirmed 5 Nov 2026. Each test adds its own sample car.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 afterAll(() => pool.end());
 const empty = { insuranceExpires: null, licenceExpires: null, nextServiceOn: null, nextServiceKm: null };

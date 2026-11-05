@@ -1,5 +1,5 @@
-// Screen 04.6 Starting packages and its forms in the browser (ST-04.4, AT-50; system design 4.1, Proposed: Dulan,
-// 2 Nov 2026). The owner is the test database's one owner (global-setup.ts). Packages are shared by every test: each
+// Screen 04.6 Starting packages and its forms in the browser (ST-04.4, AT-50; system design 4.1, Confirmed
+// 5 Nov 2026). The owner is the test database's one owner (global-setup.ts). Packages are shared by every test: each
 // run adds its own sample packages for a sample model, and never changes the real ones or the defaults.
 import { randomUUID } from 'node:crypto';
 import { test, expect, type Page } from '@playwright/test';

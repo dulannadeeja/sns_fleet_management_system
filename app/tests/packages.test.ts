@@ -9,7 +9,7 @@ import { setPermission } from '../src/modules/people/people';
 import { samplePerson, theOwner } from './helpers/people';
 import { samplePlate } from './helpers/cars';
 
-// ST-04.4 starting packages (system design 4.1, 4.2; Proposed: Dulan, 2 Nov 2026). The test database is shared by every
+// ST-04.4 starting packages (system design 4.1, 4.2; Confirmed 5 Nov 2026. The test database is shared by every
 // test file at once: these tests add sample packages (names starting "Sample") for sample models only, and never change the real ones or the
 // defaults (the defaults test changes nothing: it checks refusals, and a change it saves is put back at once).
 const tag = () => randomUUID().slice(0, 8);

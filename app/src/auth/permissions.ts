@@ -1,6 +1,6 @@
 // The permission catalogue: one key per row of system design 3.2 "Default permissions" (Confirmed), with the role that
 // starts with it. "authorised" rows start with nobody: only the owner can do them until the owner gives them to someone
-// (Derived control, ST-15.1). Manage payroll and Export reports start with the admin (Proposed, Dulan 1 Nov 2026).
+// (Derived control, ST-15.1). Manage payroll and Export reports start with the admin (Confirmed 5 Nov 2026.
 // Adding people, changing permissions and turning accounts off or on are the primary owner's only and are not here:
 // they can never be given to anyone (system design 3.2, Delegation).
 export type Role = 'owner' | 'admin' | 'staff' | 'partner';
@@ -9,7 +9,7 @@ export type PermissionGroup = 'rentals' | 'money' | 'running';
 
 export const PERMISSIONS = {
   // Rentals
-  // Customer access (Proposed, Dulan 1 Nov 2026): find, add and correct customers, open their document copies.
+  // Customer access (Confirmed 5 Nov 2026: find, add and correct customers, open their document copies.
   customerAccess: { group: 'rentals', startsWith: 'staffAndAdmin' },
   approveFirstCustomer: { group: 'rentals', startsWith: 'staffAndAdmin' },
   proceedDespiteFlag: { group: 'rentals', startsWith: 'staffAndAdmin' },

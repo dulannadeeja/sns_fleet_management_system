@@ -1,4 +1,4 @@
-// Which files may be kept as document copies (system design 6, Proposed: Dulan, 1 Nov 2026): a photo (JPEG, PNG, WebP,
+// Which files may be kept as document copies (system design 6, Confirmed 5 Nov 2026: a photo (JPEG, PNG, WebP,
 // HEIC) or a PDF, up to 10 MB, kept as taken. The type is read from the file's first bytes, not from its name or what
 // the browser says, so a renamed file cannot pass as a photo.
 export const MAX_COPY_BYTES = 10 * 1024 * 1024;

@@ -4,7 +4,7 @@ import { auditEvent, packageDefault, startingPackage, startingPackageModel, vehi
 import type { Permission } from '../../auth/permissions';
 import { actorMay, LIMITS, type Tx } from './rules';
 
-// Starting packages (ST-04.4; system design 4.1, 4.2). Proposed: Dulan, 2 Nov 2026, for the owner to confirm: each
+// Starting packages (ST-04.4; system design 4.1, 4.2). Confirmed 5 Nov 2026: each
 // package has a name and its models, and a model can be in more than one package; a new car picks one of its model's
 // packages (a model with one gets it). People who may add or edit cars and packages change or add packages and the
 // defaults; the commission default is a partner term and also needs "Add or edit partners". The car limits apply.

@@ -7,7 +7,7 @@ import { AddCarForm } from '../CarForms';
 import { carWords } from '../words-server';
 import '../cars.css';
 
-// Screen 04.8 Add a car (ST-04.3; Proposed: Dulan, 1 Nov 2026): people who may add or edit cars (the admin by default).
+// Screen 04.8 Add a car (ST-04.3; Confirmed 5 Nov 2026: people who may add or edit cars (the admin by default).
 export default async function NewCarPage() {
   const person = await requirePermission('editCarsAndPackages');
   const [t, w, seeCommission, editCommission, packages, models, d] = await Promise.all([

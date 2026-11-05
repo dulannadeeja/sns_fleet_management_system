@@ -9,8 +9,8 @@ import { samplePerson } from '../helpers/people';
 import { samplePlate } from '../helpers/cars';
 
 // AT-50: "An admin changes the Alto starting package from 4,000 to 4,200 a day: Alto cars already in the system stay at
-// 4,000; an Alto added afterwards starts at 4,200." System design 4.1 (Confirmed; packages per name, Proposed: Dulan,
-// 2 Nov 2026). The test database is shared by every test file at once, so this test does not change the real Alto
+// 4,000; an Alto added afterwards starts at 4,200." System design 4.1 (Confirmed; packages per name, Confirmed
+// 5 Nov 2026). The test database is shared by every test file at once, so this test does not change the real Alto
 // package: a sample model with its own sample package at the Alto's 4,000 / 100 / 17 stands in for it.
 describe('AT-50: changing a starting package changes only cars added afterwards', () => {
   it('existing cars keep 4,000; a car added afterwards starts at 4,200; the log keeps old and new', async () => {

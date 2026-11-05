@@ -1,4 +1,4 @@
-// Sign-in phone numbers (system design 3.1 "Sign-in phone numbers", Proposed): a Sri Lankan mobile number, 10 digits,
+// Sign-in phone numbers (system design 3.1 "Sign-in phone numbers", Confirmed 5 Nov 2026): a Sri Lankan mobile number, 10 digits,
 // 070 or 071 (SLT-Mobitel), 072 or 078 (Hutch), 074, 076 or 077 (Dialog), 075 (Airtel, now Dialog). Digits only.
 export const PHONE_LENGTH = 10;
 export const SRI_LANKA_MOBILE = /^07[0124-8]\d{7}$/;

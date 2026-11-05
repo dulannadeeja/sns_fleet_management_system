@@ -60,7 +60,7 @@ export async function addCopyAction(customerId: string, kind: string, _: Custome
   redirect(`/customers/${customerId}?copy=1`);
 }
 
-/** 08.2: the owner or the admin corrects a mistyped NIC, with a reason (system design 6, Proposed). */
+/** 08.2: the owner or the admin corrects a mistyped NIC, with a reason (system design 6, Confirmed 5 Nov 2026). */
 export async function correctNicAction(customerId: string, _: CustomerFormState, form: FormData): Promise<CustomerFormState> {
   const person = await requirePermission('customerAccess');
   const result = await correctNic(person.id, customerId, text(form, 'nic'), text(form, 'reason'));

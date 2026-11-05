@@ -8,7 +8,7 @@ import { AppFrame } from '../../../AppFrame';
 import { PapersForm } from './PapersForm';
 import '../../cars.css';
 
-// Papers and service dates (ST-04.6; boards 04.2/04.3 "Papers and service"; Proposed: Dulan, 3 Nov 2026): everyone who
+// Papers and service dates (ST-04.6; boards 04.2/04.3 "Papers and service"; Confirmed 5 Nov 2026: everyone who
 // works at SNS enters and changes them. Each changed box is logged with its old and new value.
 export default async function CarPapersPage({ params }: { params: Promise<{ id: string }> }) {
   const person = await requireEmployee();

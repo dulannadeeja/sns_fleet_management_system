@@ -8,7 +8,7 @@ import { showNumber } from '../business-rules/show';
 import { SettingsFrame } from '../SettingsFrame';
 import '../../cars/cars.css';
 
-// Screen 04.6 Starting packages (ST-04.4; system design 4.1, 4.2; Proposed: Dulan, 2 Nov 2026): everyone who works at
+// Screen 04.6 Starting packages (ST-04.4; system design 4.1, 4.2; Confirmed 5 Nov 2026: everyone who works at
 // SNS reads it (partners are refused); the Change buttons only for people who may add or edit cars and packages (the
 // admin by default); the commission default only for those who see partner terms.
 export default async function PackagesPage({ searchParams }: { searchParams: Promise<{ saved?: string }> }) {

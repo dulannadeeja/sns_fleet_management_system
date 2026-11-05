@@ -9,7 +9,7 @@ import '../../../../cars/cars.css';
 import '../../../customers.css';
 
 // Screen 08.5 Add a customer flag (ST-08.5): why and what happened; shown to everyone before the customer's next
-// rental. Needs "Customer access" (Proposed: Dulan, 4 Nov 2026).
+// rental. Needs "Customer access" (Confirmed 5 Nov 2026.
 export default async function AddFlagPage({ params }: { params: Promise<{ id: string }> }) {
   const person = await requirePermission('customerAccess');
   const c = await getCustomer((await params).id);

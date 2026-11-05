@@ -6,8 +6,8 @@ import { defaultPermissions } from '../src/auth/permissions';
 import { addPerson, getPerson, setPermission } from '../src/modules/people/people';
 import { person, samplePhone, theOwner } from './helpers/people';
 
-// ST-15.2 People; Proposed check: "a new staff member starts with the agreed staff defaults and must change the first
-// password before anything else"; ST-15.1 Proposed check: "a permission change is logged with who and when".
+// ST-15.2 People; Check (Confirmed 5 Nov 2026): "a new staff member starts with the agreed staff defaults and must change the first
+// password before anything else"; ST-15.1 Check (Confirmed 5 Nov 2026): "a permission change is logged with who and when".
 describe('the owner adds a person', () => {
   it('starts them with their role defaults and a first password, and logs who added them', async () => {
     const owner = await theOwner();

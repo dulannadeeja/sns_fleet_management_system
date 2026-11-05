@@ -3,7 +3,7 @@ import { GROUPS, SETTINGS, asText, changeGroup, checkGroup, readSettings } from 
 import { theOwner } from './helpers/people';
 
 // ST-15.3 Business rules: the owner settings, their limits and the check before saving (system design 3.2 "Owner
-// settings", Proposed: Dulan, 1 Nov 2026). Settings are shared by the whole test database: this file saves only the
+// settings", Confirmed 5 Nov 2026. Settings are shared by the whole test database: this file saves only the
 // service reminder in days (AT-45 changes the insurance reminder, the browser test the payroll reminder and the
 // service km) and puts it back; the fuel price is never saved here, so it stays as the database has it.
 const reminders = { documentReminderDays: '30', serviceReminderDays: '7', serviceReminderKm: '500', payrollReminderDays: '3' };

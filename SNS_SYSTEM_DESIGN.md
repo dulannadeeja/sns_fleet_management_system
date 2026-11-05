@@ -215,7 +215,7 @@ These formulas do not resolve discretionary late returns, early-return allowance
 
 ## 6. Customer onboarding and mandatory documents
 
-Staff record customer identity and driving-licence details and retain document copies. A reference person is required only sometimes; staff decide. Staff with customer access see full NIC and phone numbers; there is no masking. A customer is saved with name, NIC, phone, and driving-licence number and expiry; the ID and licence copies may be added later. Until they are in, the customer shows "copies missing" and handover stays blocked (below). Confirmed: agreed by the owner, recorded by Dulan. A renter without a Sri Lankan NIC (for example a foreign visitor) is added with a passport instead: staff choose NIC or Passport; a passport is its number (5 to 20 letters and digits, kept in capitals) and the country that issued it. Their copies are the passport photo page and the driving licence front and back (three copies instead of four); an international driving permit counts as the licence. One passport number from one country belongs to one customer, the same way as a NIC, and a mistyped passport number is corrected the same way as a NIC. Confirmed: agreed by the owner, recorded by Dulan, 5 Nov 2026. One NIC belongs to one customer record: when staff enter a NIC already recorded, the system opens that customer instead of adding a second one, so debts, flags and rentals stay together. Confirmed: agreed by the owner, recorded by Dulan.
+Staff record customer identity and driving-licence details and retain document copies. A reference person is required only sometimes; staff decide. Staff with customer access see full NIC and phone numbers; there is no masking. A customer is saved with name, NIC, phone, and driving-licence number and expiry; the ID and licence copies may be added later. Until they are in, the customer shows "copies missing" and handover stays blocked (below). Confirmed: agreed by the owner, recorded by Dulan. A renter without a Sri Lankan NIC (for example a foreign visitor) is added with a passport instead: staff choose NIC or Passport; a passport is its number (5 to 20 letters and digits, kept in capitals) and the country that issued it. Their copies are the passport photo page and the driving licence front and back (three copies instead of four); an international driving permit counts as the licence. One passport number from one country belongs to one customer, the same way as a NIC, and a mistyped passport number is corrected the same way as a NIC. Confirmed: agreed by the owner, recorded by Dulan, 5 Nov 2026. Deferred: not built in Phase 1 (Dulan, 5 Nov 2026); until it is built, only people with a Sri Lankan NIC can be added as customers. One NIC belongs to one customer record: when staff enter a NIC already recorded, the system opens that customer instead of adding a second one, so debts, flags and rentals stay together. Confirmed: agreed by the owner, recorded by Dulan.
 
 ### Handover requirements
 
@@ -557,7 +557,7 @@ This section organises the confirmed behaviour for engineering. The stack and ho
 
 **Backups and recovery.** Backups run automatically every day (Confirmed by the client-approved proposal, Phase 4). At most one day of records may be lost; staff re-enter that day from the paper backup pack and receipts. The system is back within 4 working hours. Backups are kept for 30 days and a restore is tested once a month. Confirmed: agreed by the owner, recorded by Dulan.
 
-No Open decisions remain. The renter without a Sri Lankan NIC was settled on 5 Nov 2026 (§6: a passport instead).
+No Open decisions remain. The renter without a Sri Lankan NIC was settled on 5 Nov 2026 (§6: a passport instead; Deferred, not built in Phase 1).
 
 ## 19. Acceptance scenarios for implementation planning
 
@@ -649,7 +649,7 @@ These are requirement checks, not claims that software has been built or tested.
 | AT-82 | The monthly restore test is run | Last night's backup restores to a test copy and the day's records are present |
 | AT-83 | A partner is added and the agreement printed but not yet marked signed | Cash-outs are not held back; the partner page shows "agreement not yet signed" until staff record the date |
 | AT-84 | An approved correction takes back a whole 5,750 line on a partner car at 85% | Adjustment line −5,750: partner −4,887, SNS −863; with the original line the partner and SNS each net to 0 |
-| AT-85 | Staff add a foreign renter with passport N1234567 from Germany, then try to add the same passport again | The first is saved with three copies needed (passport photo page, licence front and back); the second opens the existing customer instead of adding one |
+| AT-85 | (Deferred) Staff add a foreign renter with passport N1234567 from Germany, then try to add the same passport again | The first is saved with three copies needed (passport photo page, licence front and back); the second opens the existing customer instead of adding one |
 
 ## 20. Readiness and next steps
 

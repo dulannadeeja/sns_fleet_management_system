@@ -10,7 +10,7 @@ import { actorMay, type Tx } from './rules';
 // Car papers, service dates and the catalogue photo (ST-04.6, ST-04.7; system design 11 and 4.2).
 // Confirmed: one optional catalogue photo per car (CR-001, ADD-003); until one is added the model's standard image shows;
 // it is not a condition photo, not a handover requirement and not a customer document.
-// Proposed (Dulan, 3 Nov 2026): everyone at SNS enters and changes the papers and service dates; the photo needs "Add or
+// Confirmed 5 Nov 2026: everyone at SNS enters and changes the papers and service dates; the photo needs "Add or
 // edit cars and packages"; JPEG, PNG or WebP up to 10 MB, stored privately; removing it brings back the standard image.
 
 export const PAPER_FIELDS = ['insuranceExpires', 'licenceExpires', 'nextServiceOn', 'nextServiceKm'] as const;

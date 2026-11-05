@@ -8,10 +8,10 @@ import { packagesFor, readDefaults } from './packages';
 export { LIMITS };
 
 // Cars (ST-04.1 to ST-04.3; system design 4.1, 4.2, 4.3). A car's package and terms are dated versions: a change adds a
-// new one and never alters the old (PR-08, AT-05). Decisions of 1 Nov 2026 (Proposed, Dulan): one car per registration
+// new one and never alters the old (PR-08, AT-05). Decisions of 1 Nov 2026 (Confirmed 5 Nov 2026): one car per registration
 // number, a partner car saved before its partner, the commission behind the partner permissions.
 
-/** The costs a partner may pay on their car (board 11.3; system design 3.2 "Partner accounts", Proposed). */
+/** The costs a partner may pay on their car (board 11.3; system design 3.2 "Partner accounts", Confirmed 5 Nov 2026). */
 export const COSTS = ['service', 'tyres', 'repairs', 'battery'] as const;
 export type Cost = (typeof COSTS)[number];
 export const isCost = (c: string): c is Cost => (COSTS as readonly string[]).includes(c);
@@ -72,7 +72,7 @@ export type AddResult =
 /**
  * Adds a car (ST-04.3): a starting package of its model and the 4.2 defaults, with any changes typed on the form, in one
  * transaction. A model in more than one package needs `packageId`, one of them; a model in one gets it (ST-04.4,
- * Proposed: Dulan, 2 Nov 2026). `shown` is the starting package and defaults the form showed: if one changed meanwhile,
+ * Confirmed 5 Nov 2026. `shown` is the starting package and defaults the form showed: if one changed meanwhile,
  * nothing is saved (`stale`), so a car never keeps an old rate logged as a person's change (#21 review). Needs "Add or edit cars and packages"; a commission other than the default also needs "Add or edit
  * partners". Logged: the car, then each typed change from the starting package with its old and new value (PR-05).
  */
@@ -126,7 +126,7 @@ export type EditResult = { ok: true; changed: TermKey[] } | { error: 'notAllowed
 /**
  * Changes a car's package and terms: a new dated version from now, for new rentals only (4.3, PR-08). `was` is what the
  * form showed; only fields the person changed are saved, and none if someone saved one of them meanwhile. The package
- * needs "Add or edit cars and packages"; the commission (partner cars) also "Add or edit partners" (Proposed, 1 Nov
+ * needs "Add or edit cars and packages"; the commission (partner cars) also "Add or edit partners" (Confirmed 5 Nov
  * 2026). Each changed field is logged with its old and new value (PR-05).
  */
 export async function editCar(actorId: string, carId: string, input: Terms, was: Terms): Promise<EditResult> {
