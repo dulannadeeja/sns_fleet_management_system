@@ -68,6 +68,10 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
         details: String(e.details?.details ?? ''), reason: String(e.details?.reason ?? ''),
         old: String(e.details?.old ?? ''), new: String(e.details?.new ?? ''),
       } : {}),
+      // rental.*: the customer's name, the car's plate and the days (#50).
+      ...(e.action.startsWith('rental.') ? {
+        target: String(e.details?.name ?? e.targetId ?? ''), plate: String(e.details?.registration ?? ''), days: String(e.details?.days ?? ''),
+      } : {}),
     };
     // Only a sentence (a string) counts: an action named like a group of sentences shows its raw name.
     const key = `log.actions.${e.action}`;

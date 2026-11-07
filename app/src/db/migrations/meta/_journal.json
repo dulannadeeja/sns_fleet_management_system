@@ -155,6 +155,13 @@
       "when": 1793766549459,
       "tag": "0021_golive_ticks",
       "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1794082365950,
+      "tag": "0022_rentals",
+      "breakpoints": true
     }
   ]
 }

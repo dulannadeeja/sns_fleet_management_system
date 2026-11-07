@@ -300,6 +300,9 @@
         "golive": {
           "tick": "marked “{item}” done on the go-live checklist",
           "untick": "marked “{item}” not done on the go-live checklist: {reason}"
+        },
+        "rental": {
+          "create": "saved a new rental for {target}: {plate}, {days} days"
         }
       },
       "reason": "reason: “{reason}”",

@@ -5,3 +5,4 @@ export * from './settings';
 export * from './cars';
 export * from './partners';
 export * from './customers';
+export * from './rentals';
