@@ -169,7 +169,7 @@ Admins can define each vehicle's package according to its condition and update p
 
 ### 4.3 Historical terms
 
-Existing rentals retain agreed prices, commission percentages, pickup cutoff, and return deadline. Extensions retain original rates. Changes apply to new rentals only. The fuel price per litre for a "same level" rental is kept the same way: the price when the rental was agreed (Proposed: Dulan, 1 Nov 2026; for the owner to confirm).
+Existing rentals retain agreed prices, commission percentages, pickup cutoff, and return deadline. Extensions retain original rates. Changes apply to new rentals only. The fuel price per litre for a "same level" rental is kept the same way: the price when the rental was agreed (Confirmed: agreed by the owner, recorded by Dulan, 7 Nov 2026).
 
 **Derived control:** Store a snapshot/version of applicable terms on each rental and vehicle-use segment rather than recalculating old rentals using current package settings. Capture a replacement vehicle's applicable terms when it joins a rental.
 
@@ -484,7 +484,7 @@ Keep collections, earnings, deposits held, and partner payables visually and mat
 | Fuel calculation | Estimated litres × price per litre; income allocated entirely to SNS. The price per litre is an owner setting; no figure is agreed |
 | Fuel at return | By default fuel is not counted: SNS takes fuel out of returned vehicles before the next customer, and the bill has no fuel line. For one rental, staff may choose "same level": if the vehicle comes back lower than at handover, staff estimate the missing litres and charge them at the owner's price per litre (100% SNS), or waive it with a reason; a higher level is not refunded. Confirmed: agreed by the owner, recorded by Dulan |
 | Fuel taken out | Staff may record the litres taken out of a returned vehicle, marked "estimate" (read from the fuel gauge), with who and when. Litres only: no money value, never income or earnings, never in the drawer. Confirmed: agreed by the owner, recorded by Dulan |
-| Garage-day charge | Confirmed in scope; default LKR 5,000/day per vehicle; trigger and partner split open |
+| Garage-day charge | Confirmed in scope; default LKR 5,000/day per vehicle; the trigger and the partner split are in §4.2 and §8.4 |
 | Vehicle catalogue photo (one optional photo per vehicle) | Confirmed; change request CR-001, addendum ADD-003, no charge |
 | Non-rental vehicle movement tracking | Future extension |
 | Advance reservations | Confirmed; CR-002, agreed by the owner, no charge, Phase 2 (§7.6) |
