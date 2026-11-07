@@ -29,7 +29,7 @@ export type Settings = {
   documentReminderDays: number; serviceReminderDays: number; serviceReminderKm: number; payrollReminderDays: number;
   fuelPricePerLitre: number | null;
 };
-export type FieldError = 'required' | 'number' | 'range' | 'time';
+export type FieldError = 'required' | 'number' | 'range' | 'time' | 'order';
 
 export const isGroup = (g: string): g is Group => (GROUPS as string[]).includes(g);
 export const isSettingKey = (k: string): k is SettingKey => Object.hasOwn(SETTINGS, k);
@@ -44,8 +44,8 @@ function parse(key: SettingKey, raw: string): number | string {
 }
 
 /** Every setting: the saved value, or its starting value. Read by everyone who works at SNS (15.2). */
-export async function readSettings(): Promise<Settings> {
-  const rows = await db.select({ key: setting.key, value: setting.value }).from(setting);
+export async function readSettings(q: Pick<typeof db, 'select'> = db): Promise<Settings> {
+  const rows = await q.select({ key: setting.key, value: setting.value }).from(setting);
   const values: Record<string, number | string | null> = Object.fromEntries(KEYS.map((k) => [k, SETTINGS[k].start]));
   for (const r of rows) if (isSettingKey(r.key)) values[r.key] = parse(r.key, r.value);
   return values as Settings;
@@ -69,6 +69,9 @@ export function checkGroup(group: Group, input: Record<string, string>):
     else if (Number(raw) < s.min || Number(raw) > s.max) errors[key] = 'range';
     if (!errors[key]) values[key] = s.kind === 'time' ? raw : String(Number(raw));
   }
+  // The return deadline is earlier in the day than the pickup cutoff (5.1, Confirmed 7 Nov 2026), so a rental day is
+  // always about one day long. Times as HH:MM compare as text.
+  if (group === 'dayTimes' && values.pickupCutoff && values.returnDeadline && values.returnDeadline >= values.pickupCutoff) errors.returnDeadline = 'order';
   return Object.keys(errors).length ? { ok: false, errors } : { ok: true, values };
 }
 

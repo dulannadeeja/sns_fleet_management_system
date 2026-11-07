@@ -24,8 +24,8 @@ export const rental = pgTable('rental', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
 }, (t) => [
   index('rental_by_customer').on(t.customerId, t.createdAt.desc()),
-  check('rental_status', sql`status in ('draft', 'out', 'returned', 'cancelled')`),
-  check('rental_days', sql`days >= 1`),
+  check('rental_status', sql`status in ('draft')`),
+  check('rental_days', sql`days >= 1 AND days <= 90`),
   check('rental_deadline_after_pickup', sql`deadline_at > pickup_at`),
 ]);
 

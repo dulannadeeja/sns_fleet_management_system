@@ -2366,11 +2366,11 @@
       "checkConstraints": {
         "rental_status": {
           "name": "rental_status",
-          "value": "status in ('draft', 'out', 'returned', 'cancelled')"
+          "value": "status in ('draft')"
         },
         "rental_days": {
           "name": "rental_days",
-          "value": "days >= 1"
+          "value": "days >= 1 AND days <= 90"
         },
         "rental_deadline_after_pickup": {
           "name": "rental_deadline_after_pickup",

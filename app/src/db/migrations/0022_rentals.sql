@@ -8,8 +8,8 @@ CREATE TABLE "rental" (
 	"created_at" timestamp with time zone DEFAULT clock_timestamp() NOT NULL,
 	"created_by" uuid,
 	"updated_at" timestamp with time zone DEFAULT clock_timestamp() NOT NULL,
-	CONSTRAINT "rental_status" CHECK (status in ('draft', 'out', 'returned', 'cancelled')),
-	CONSTRAINT "rental_days" CHECK (days >= 1),
+	CONSTRAINT "rental_status" CHECK (status in ('draft')),
+	CONSTRAINT "rental_days" CHECK (days >= 1 AND days <= 90),
 	CONSTRAINT "rental_deadline_after_pickup" CHECK (deadline_at > pickup_at)
 );
 --> statement-breakpoint

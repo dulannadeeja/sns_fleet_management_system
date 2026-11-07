@@ -186,7 +186,7 @@ Pickup cutoff and return deadline are business-wide settings. The provisional ex
 | Monday before 3:00 PM | Tuesday at 8:00 AM |
 | Monday at or after 3:00 PM | Wednesday at 8:00 AM |
 
-Pickup exactly at the cutoff belongs to the next rental day. The minimum charge is one full rental day; there are no shorter-hire packages.
+Pickup exactly at the cutoff belongs to the next rental day. The minimum charge is one full rental day; there are no shorter-hire packages. Every pickup before the cutoff ends day one at the next morning's deadline, also an early-morning pickup (a 6:00 AM pickup ends day one at 8:00 AM the next day). The return deadline is always earlier in the day than the pickup cutoff; the Business rules page refuses other times. Confirmed: agreed by the owner, recorded by Dulan, 7 Nov 2026.
 
 Business times are read in Asia/Colombo (Confirmed: agreed by the owner, recorded by Dulan). **Derived control:** store timestamps consistently and test the cutoff, deadline and day close with worked examples (AT-01, AT-02, AT-71).
 
@@ -244,6 +244,8 @@ A customer may rent multiple vehicles simultaneously. Each has its own agreement
 ### 7.1 Normal journey
 
 1. Customer arrives, or comes to collect a reservation (§7.6); staff locate or create the customer record and review warnings.
+
+   **Saving a new rental.** Anyone with Customer access (3.2) saves a new rental: customer, car, pickup time and days. From that moment the car is held for those days, and no other rental or reservation can have it; if the customer leaves without signing, staff cancel the rental with a reason and the car is free again (§7.3). The pickup is now or within the next day; a later pickup is a reservation (§7.6), and a past pickup is refused (a paper rental entered after an outage follows its own rule, AT-81). A new rental is 1 to 90 days, to stop typing mistakes; it can be extended later (§7.2). Confirmed: agreed by the owner, recorded by Dulan, 7 Nov 2026.
 2. Staff select an available vehicle and agree the rental dates, terms, payment timing, and deposit.
 3. System generates the agreement in the selected language.
 4. Customer signs the printed agreement; staff upload it and required identity documents.

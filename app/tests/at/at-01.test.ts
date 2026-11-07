@@ -11,6 +11,9 @@ describe('AT-01: a pickup before the cutoff ends day one at the next morning\'s 
     expect(deadlineFor(new Date('2026-11-02T14:00:00+05:30'), 3, '15:00', '08:00').toISOString()).toBe(new Date('2026-11-05T08:00:00+05:30').toISOString());
     expect(deadlineFor(new Date('2026-11-02T14:00:00+05:30'), 1, '13:00', '09:30').toISOString()).toBe(new Date('2026-11-04T09:30:00+05:30').toISOString());
   });
+  it('an early-morning pickup is before the cutoff too: 6 AM ends day one at 8 AM the next day (Confirmed 7 Nov 2026)', () => {
+    expect(deadlineFor(new Date('2026-11-03T06:00:00+05:30'), 1, '15:00', '08:00').toISOString()).toBe(new Date('2026-11-04T08:00:00+05:30').toISOString());
+  });
   it('the minimum is one full day', () => {
     expect(() => deadlineFor(new Date('2026-11-02T14:00:00+05:30'), 0, '15:00', '08:00')).toThrow();
     expect(() => deadlineFor(new Date('2026-11-02T14:00:00+05:30'), 1.5, '15:00', '08:00')).toThrow();

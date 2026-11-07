@@ -398,6 +398,7 @@
         "number": "Type a whole number, digits only.",
         "range": "Must be {min} to {max}.",
         "time": "Pick a time.",
+        "order": "The return deadline must be earlier in the day than the pickup cutoff.",
         "notAllowed": "Only the owner can change settings.",
         "failed": "Not saved. Try again.",
         "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change."

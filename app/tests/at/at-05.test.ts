@@ -34,22 +34,26 @@ describe('AT-05 (car half, partial): a package change applies to new rentals; th
 });
 
 describe('AT-05 (rental half): a rental keeps the terms it was agreed with', () => {
-  it('a rental saved before the package change keeps 4,500; one saved after gets 4,800', async () => {
+  it('a rental saved before the package change keeps 4,500; a rental saved after a change gets the new terms', async () => {
     const owner = await theOwner();
     const { carId, customerId } = await sampleCarAndCustomer(owner);
     const before = await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 2 });
     if (!('ok' in before)) throw new Error(JSON.stringify(before));
     const car = (await getCar(carId))!;
     expect(await editCar(owner, carId, { ...car.terms, dailyRate: 4800, kmPerDay: 120 }, car.terms)).toMatchObject({ ok: true });
-    const after = await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 2 });
-    if (!('ok' in after)) throw new Error(JSON.stringify(after));
-
     expect((await rentalTerms(before.id))!.segments[0]).toMatchObject({ dailyRate: 4500, kmPerDay: 100 });
     expect((await rentalEstimate(before.id))!.base).toBe(9000);
+
+    // The first car is held by that rental now, so the "after" rental is on a second sample car changed the same way.
+    const other = await sampleCarAndCustomer(owner);
+    const car2 = (await getCar(other.carId))!;
+    expect(await editCar(owner, other.carId, { ...car2.terms, dailyRate: 4800, kmPerDay: 120 }, car2.terms)).toMatchObject({ ok: true });
+    const after = await createRental(owner, { customerId: other.customerId, vehicleId: other.carId, pickupAt: samplePickup(), days: 2 });
+    if (!('ok' in after)) throw new Error(JSON.stringify(after));
     expect((await rentalTerms(after.id))!.segments[0]).toMatchObject({ dailyRate: 4800, kmPerDay: 120 });
     expect((await rentalEstimate(after.id))!.base).toBe(9600);
-    // The saved copy can never be changed afterwards.
+    // The saved copy can never be changed afterwards; only the km readings may be added.
     await expect(pool.query('update rental_vehicle_segment set daily_rate = 1 where rental_id = $1', [before.id])).rejects.toThrow(/insert-only/);
-    await pool.query('update rental_vehicle_segment set out_km = 12000 where rental_id = $1', [before.id]); // readings may be added
+    await pool.query('update rental_vehicle_segment set out_km = 12000 where rental_id = $1', [before.id]);
   });
 });

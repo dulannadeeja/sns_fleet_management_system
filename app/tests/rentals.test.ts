@@ -2,12 +2,12 @@ import { describe, it, expect, afterAll } from 'vitest';
 import { Pool } from 'pg';
 import { carIsFree, createRental, rentalEstimate, rentalTerms } from '../src/modules/rentals/rentals';
 import { changeStatus } from '../src/modules/cars/status';
-import { turnOff } from '../src/modules/people/people';
+import { setPermission, turnOff } from '../src/modules/people/people';
 import { theOwner, samplePerson } from './helpers/people';
 import { sampleCarAndCustomer, samplePickup } from './helpers/rentals';
 
 // #50 rental foundation (system design 4.3, 5.1, 7.1; TRD › Integrity rules). Each test adds its own sample car,
-// customer and a pickup far in the future.
+// customer and a pickup a few minutes ahead.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 afterAll(() => pool.end());
 const DAY = 86_400_000;
@@ -33,17 +33,17 @@ describe('a new rental keeps its own copy of the terms', () => {
 });
 
 describe('one rental or reservation per car at any time (AT-08, AT-30 groundwork)', () => {
-  it('refuses a second rental of the same car for overlapping days, but allows the days after', async () => {
+  it('refuses a second rental of the same car for overlapping days; the car is free after the deadline', async () => {
     const owner = await theOwner();
     const { carId, customerId } = await sampleCarAndCustomer(owner);
     const pickupAt = samplePickup();
     const first = await createRental(owner, { customerId, vehicleId: carId, pickupAt, days: 2 });
-    expect(first).toMatchObject({ ok: true });
-    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: new Date(pickupAt.getTime() + DAY), days: 1 })).toEqual({ error: 'carTaken' });
+    if (!('ok' in first)) throw new Error(JSON.stringify(first));
+    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(60), days: 1 })).toEqual({ error: 'carTaken' });
     expect(await carIsFree(carId, pickupAt, new Date(pickupAt.getTime() + DAY))).toBe(false);
-    const after = new Date(pickupAt.getTime() + 5 * DAY);
-    expect(await carIsFree(carId, after, new Date(after.getTime() + DAY))).toBe(true);
-    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: after, days: 1 })).toMatchObject({ ok: true });
+    const { deadlineAt } = (await rentalTerms(first.id))!;
+    expect(await carIsFree(carId, deadlineAt, new Date(deadlineAt.getTime() + DAY))).toBe(true);
+    expect(await carIsFree(carId, deadlineAt, deadlineAt)).toBe(false); // not a real time span
   });
 
   it('two people saving the same car at the same moment: only one wins', async () => {
@@ -57,19 +57,41 @@ describe('one rental or reservation per car at any time (AT-08, AT-30 groundwork
   });
 });
 
-describe('who may save a rental, and with what', () => {
-  it('staff may; a turned-off person may not; a car under repair cannot go out; bad input is refused', async () => {
+describe('who may save a rental, and with what (system design 7.1, Confirmed 7 Nov 2026)', () => {
+  it('needs Customer access; a turned-off person may not; a car under repair cannot go out', async () => {
     const owner = await theOwner();
     const staff = (await samplePerson()).id;
     const leaver = (await samplePerson()).id;
+    const noAccess = (await samplePerson()).id;
     expect(await turnOff(owner, leaver, 'Sample: left SNS')).toMatchObject({ ok: true });
+    expect(await setPermission(owner, noAccess, 'customerAccess', false)).toMatchObject({ ok: true });
     const { carId, customerId } = await sampleCarAndCustomer(owner);
-    expect(await createRental(staff, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toMatchObject({ ok: true });
     expect(await createRental(leaver, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'notAllowed' });
-    expect(await createRental(staff, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 0 })).toEqual({ error: 'daysInvalid' });
-    expect(await createRental(staff, { customerId: 'nope', vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'customerNotFound' });
-    expect(await createRental(staff, { customerId, vehicleId: carId, pickupAt: new Date('x'), days: 1 })).toEqual({ error: 'pickupInvalid' });
+    expect(await createRental(noAccess, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'notAllowed' });
     expect(await changeStatus(owner, carId, { status: 'repair', reason: 'Sample: brakes' }, 'available' as never)).toMatchObject({ ok: true });
     expect(await createRental(staff, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'carNotAvailable' });
   });
+
+  it('a pickup is now or within the next day, never in the past; 1 to 90 days', async () => {
+    const owner = await theOwner();
+    const { carId, customerId } = await sampleCarAndCustomer(owner);
+    const at = (pickupAt: Date, days = 1) => createRental(owner, { customerId, vehicleId: carId, pickupAt, days });
+    expect(await at(new Date(Date.now() - 10 * 60_000))).toEqual({ error: 'pickupPast' });
+    expect(await at(new Date(Date.now() + DAY + 10 * 60_000))).toEqual({ error: 'pickupTooFar' });
+    expect(await at(new Date('x'))).toEqual({ error: 'pickupInvalid' });
+    expect(await at(samplePickup(), 0)).toEqual({ error: 'daysInvalid' });
+    expect(await at(samplePickup(), 91)).toEqual({ error: 'daysInvalid' });
+    expect(await at(samplePickup(), 3e9)).toEqual({ error: 'daysInvalid' });
+    expect(await createRental(owner, { customerId: 'nope', vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'customerNotFound' });
+    expect(await at(samplePickup(), 90)).toMatchObject({ ok: true });
+  });
+});
+
+describe('many rentals at once', () => {
+  it('twelve saves for twelve cars at the same moment all finish (no waiting on a second connection)', async () => {
+    const owner = await theOwner();
+    const pairs = await Promise.all(Array.from({ length: 12 }, () => sampleCarAndCustomer(owner)));
+    const results = await Promise.all(pairs.map(({ carId, customerId }) => createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })));
+    expect(results.every((r) => 'ok' in r)).toBe(true);
+  }, 30_000);
 });
