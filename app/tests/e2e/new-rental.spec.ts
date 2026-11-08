@@ -81,7 +81,8 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   expect(await noSideScroll(page)).toBe(false);
 
   // 05.6: add a reference person with one copy; back on 05.4 they are chosen.
-  await page.getByRole('link', { name: 'Add a reference person' }).click();
+  await page.getByRole('button', { name: 'Add a reference person' }).click();
+  await expect(page).toHaveURL(/\/reference$/);
   await expect(page.getByRole('button', { name: 'Save reference' })).toBeEnabled();
   const refNic = String(Math.floor(Math.random() * 1e12)).padStart(12, '0');
   await page.locator('input[name="name"]').fill(`Sample Reference ${tag}`);
@@ -94,11 +95,10 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await page.getByRole('button', { name: 'Save reference' }).click();
   await expect(page).toHaveURL(/\/terms\?ref=[0-9a-f-]+$/);
   await expect(page.locator(`[data-reference="${refNic}"] input`)).toBeChecked();
-  await expect(async () => {
-    await page.getByRole('radio', { name: /^At return/ }).check();
-    await expect(page.getByRole('button', { name: 'Save and continue' })).toBeEnabled({ timeout: 1000 });
-  }).toPass();
-  await page.locator('input[name="deposit"]').fill('10000');
+  // What was typed before adding the reference was saved first: the deposit and choices are still there.
+  await expect(page.locator('input[name="deposit"]')).toHaveValue('10000');
+  await expect(page.getByRole('radio', { name: /^At return/ })).toBeChecked();
+  await expect(page.getByRole('button', { name: 'Save and continue' })).toBeEnabled();
   await page.getByRole('button', { name: 'Save and continue' }).click();
 
   // The rental shows the deposit and the reference copies still missing (AT-07: handover will wait for them).

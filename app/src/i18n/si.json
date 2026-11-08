@@ -1287,7 +1287,8 @@
       "depositWaived": "ඕන නැහැ: {reason}",
       "depositAmount": "රු. {amount}",
       "errors": {
-        "notAllowed": "ඔබට deposit දාන්න හෝ අයින් කරන්න බැහැ. Owner ගෙන් “Deposit දාන්න හෝ අයින් කරන්න” අවසරය ඉල්ලන්න.",
+        "notAllowed": "පාරිභෝගික access ඕන.",
+        "depositNotAllowed": "Deposit එක දාන්න හෝ වෙනස් කරන්න පුළුවන් “Deposit දාන්න හෝ අයින් කරන්න” අවසරය තියෙන කෙනෙකුට විතරයි. අනිත් දේවල් ඔබට වෙනස් කරන්න පුළුවන්.",
         "notFound": "මේ කුලිය system එකේ නැහැ.",
         "notDraft": "මේ කුලියේ වාහනය දැනටමත් ගිහින්; මෙතනින් වෙනස් කරන්න බැහැ.",
         "depositInvalid": "රු. 1 සිට 500,000 දක්වා deposit එකක් ලියන්න, නැත්නම් අයින් කරන්න.",

@@ -19,7 +19,7 @@ export default async function ReferencePage({ params }: { params: Promise<{ id: 
   const words = { ...(w.reference as unknown as Record<string, string>), cancel: w.cancel } as unknown as Record<string, string> & { errors: Record<string, string>; relationships: Record<string, string> };
   return (
     <AppFrame person={person} active="rentals" title={t('reference.title')} subtitle={c?.name} backHref={`/rentals/${r.id}/terms`}>
-      <ReferenceForm rentalId={r.id} customerId={r.customerId} kinds={tk.raw('refKinds') as Record<string, string>} w={words} />
+      <ReferenceForm rentalId={r.id} kinds={tk.raw('refKinds') as Record<string, string>} w={words} />
     </AppFrame>
   );
 }

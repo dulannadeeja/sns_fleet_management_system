@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { requirePermission } from '../../auth/require';
-import { createRental } from '../../modules/rentals/rentals';
+import { createRental, rentalTerms } from '../../modules/rentals/rentals';
 import { setRentalTerms, type Fuel, type RentPaid } from '../../modules/rentals/terms';
 import { addReference, addReferenceCopy, REF_COPY_KINDS } from '../../modules/customers/references';
 import { MAX_COPY_BYTES } from '../../storage/kinds';
@@ -39,13 +39,19 @@ export async function saveTermsAction(rentalId: string, _: TermsState, form: For
   });
   if ('error' in result) return { error: result.error, values };
   revalidatePath(`/rentals/${rentalId}`);
+  // "Save and add a reference person": what was typed is saved first, so nothing is lost (#54 review).
+  if (String(form.get('next') ?? '') === 'reference') redirect(`/rentals/${rentalId}/reference`);
   redirect(`/rentals/${rentalId}?terms=1`);
 }
 
 export type RefState = { error?: string; kind?: string; values?: Record<string, string> };
 
-export async function addReferenceAction(rentalId: string, customerId: string, _: RefState, form: FormData): Promise<RefState> {
+export async function addReferenceAction(rentalId: string, _: RefState, form: FormData): Promise<RefState> {
   const person = await requirePermission('customerAccess');
+  // The customer is the rental's own, read on the server (#54 review).
+  const rentalNow = await rentalTerms(rentalId);
+  if (!rentalNow) return { error: 'notFound' };
+  const customerId = rentalNow.customerId;
   const v = (k: string) => String(form.get(k) ?? '');
   const values = { name: v('name'), nic: v('nic'), phone: v('phone'), relationship: v('relationship') };
   const copies: { kind: string; bytes: Uint8Array }[] = [];
@@ -58,6 +64,13 @@ export async function addReferenceAction(rentalId: string, customerId: string, _
   const result = await addReference(person.id, customerId, { ...values, relationship: values.relationship || null }, copies);
   if ('error' in result) return { error: result.error, kind: result.kind, values };
   const id = 'ok' in result ? result.id : result.existing;
+  // A NIC already saved for this customer: the photos chosen now are added to that person (#54 review).
+  if ('existing' in result) {
+    for (const c of copies) {
+      const added = await addReferenceCopy(person.id, id, c.kind, c.bytes);
+      if ('error' in added) return { error: added.error, kind: c.kind, values };
+    }
+  }
   redirect(`/rentals/${rentalId}/terms?ref=${id}${'existing' in result ? '&existing=1' : ''}`);
 }
 

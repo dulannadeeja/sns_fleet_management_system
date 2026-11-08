@@ -553,7 +553,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Rules:**
   - Staff set or waive a deposit by car and customer; waiving needs a reason. System design → [Deposits](SNS_SYSTEM_DESIGN.md#82-deposits), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
   - A deposit is money held, never income (PR-09).
-  - Step 4 records: the deposit (LKR 1 to 500,000, none filled in) or its waiver with a reason; rent paid now or at return; fuel not counted or same level (same level needs the owner's fuel price); reference person needed or not. Changeable until handover, each change recorded (Confirmed: agreed by the owner, recorded by Dulan, 8 Nov 2026).
+  - Step 4 records: the deposit (LKR 1 to 500,000, none filled in) or its waiver with a reason, which needs "Set or waive a deposit"; rent paid now or at return, fuel not counted or same level, reference person needed or not, which need Customer access. Changeable until handover, each change recorded (Confirmed: agreed by the owner, recorded by Dulan, 8 Nov 2026). "Same level" needs the owner's fuel price (Derived control). "At return" is not "Allow payment after return" (that is decided at return, ST-07.1).
   - The rent may be paid now or at return; staff may allow an unpaid balance after return, with the decision recorded. System design → [Collection](SNS_SYSTEM_DESIGN.md#81-collection).
 - **Checks:** *Check:* waiving a deposit without a reason is refused; with one, the reason, name and time are recorded and appear in the owner's daily summary.
 - **Screens:** 05.4 Deposit and payment.

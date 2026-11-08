@@ -9,10 +9,10 @@ import { addReferenceAction, addRefCopyAction, type RefState } from '../../actio
 // copies may come later (system design 6, Confirmed 8 Nov 2026). The server checks every field and file again.
 type W = Record<string, string> & { errors: Record<string, string>; relationships: Record<string, string> };
 const ACCEPT = 'image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif,application/pdf';
-const FIELD: Record<string, string> = { nameMissing: 'name', nicInvalid: 'nic', phoneInvalid: 'phone', tooLong: 'name' };
+const FIELD: Record<string, string> = { nameMissing: 'name', nicInvalid: 'nic', phoneInvalid: 'phone' };
 
-export function ReferenceForm({ rentalId, customerId, kinds, w }: { rentalId: string; customerId: string; kinds: Record<string, string>; w: W }) {
-  const [state, action, pending] = useActionState<RefState, FormData>(addReferenceAction.bind(null, rentalId, customerId), {});
+export function ReferenceForm({ rentalId, kinds, w }: { rentalId: string; kinds: Record<string, string>; w: W }) {
+  const [state, action, pending] = useActionState<RefState, FormData>(addReferenceAction.bind(null, rentalId), {});
   const ready = useReady();
   const [rel, setRel] = useState(state.values?.relationship ?? '');
   const e = (f: string) => (state.error && FIELD[state.error] === f ? w.errors[state.error] : undefined);

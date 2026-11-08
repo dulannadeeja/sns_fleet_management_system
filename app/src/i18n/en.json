@@ -1287,7 +1287,8 @@
       "depositWaived": "Waived: {reason}",
       "depositAmount": "LKR {amount}",
       "errors": {
-        "notAllowed": "You cannot set or waive deposits. Ask the owner for “Set or waive a deposit”.",
+        "notAllowed": "You need Customer access.",
+        "depositNotAllowed": "Only someone with “Set or waive a deposit” can set or change the deposit. The other choices you may change.",
         "notFound": "This rental is not in the system.",
         "notDraft": "This rental has already gone out; it cannot be changed here.",
         "depositInvalid": "Type a deposit of LKR 1 to 500,000, or waive it.",

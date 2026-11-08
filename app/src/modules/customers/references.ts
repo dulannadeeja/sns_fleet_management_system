@@ -22,7 +22,6 @@ type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const PHONE = /^\+?\d{9,15}$/;
 const tidy = (raw: unknown) => String(raw ?? '').trim().replace(/\s+/g, ' ');
-export const NAME_MAX = 120;
 
 export type RefError = 'notAllowed' | 'notFound' | 'nameMissing' | 'nicInvalid' | 'phoneInvalid' | 'relationshipInvalid' | 'kindInvalid' | 'fileType' | 'fileTooBig' | 'tooLong';
 
@@ -61,7 +60,6 @@ export async function addReference(actorId: string, customerId: string, input: {
   if (known) return { existing: known.id };
   const name = tidy(input.name);
   if (!name) return { error: 'nameMissing' };
-  if (name.length > NAME_MAX) return { error: 'tooLong' };
   const phone = String(input.phone ?? '').replace(/[\s-]/g, '');
   if (!PHONE.test(phone)) return { error: 'phoneInvalid' };
   const relationship = tidy(input.relationship) || null;

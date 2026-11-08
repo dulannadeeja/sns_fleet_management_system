@@ -1,6 +1,5 @@
 'use client';
 import { useActionState, useState } from 'react';
-import Link from 'next/link';
 import { Button, Notice, TextField } from '../../../../ui';
 import { useReady } from '../../../useReady';
 import { saveTermsAction, type TermsState } from '../../actions';
@@ -73,7 +72,7 @@ export function TermsForm({ rentalId, saved, fuelPrice, references, preselect, w
             )) : <span className="set-muted">{w.refNone}</span>}
           </div>
         ) : null}
-        {refReq ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${rentalId}/reference`}>{w.refAdd}</Link></div> : null}
+        {refReq ? <div><Button type="submit" name="next" value="reference" variant="secondary" disabled={pending || !ready || !rentPaid}>{w.refAdd}</Button></div> : null}
       </fieldset>
       {other ? <Notice tone="danger">{other}</Notice> : null}
       <div className="set-actions">

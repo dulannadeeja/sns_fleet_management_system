@@ -83,6 +83,7 @@ export const referencePerson = pgTable('reference_person', {
   createdBy: uuid('created_by').references(() => user.id),
 }, (t) => [
   unique('reference_person_one_per_nic').on(t.customerId, t.nic),
+  unique('reference_person_of_customer').on(t.customerId, t.id),
   check('reference_person_relationship', sql`relationship is null or relationship in ('family', 'friend', 'employer', 'other')`),
 ]);
 

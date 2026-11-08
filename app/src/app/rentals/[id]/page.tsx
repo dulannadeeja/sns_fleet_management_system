@@ -79,7 +79,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
             {ref.documents.map((d) => <li key={d.id}><Link href={`/customers/${ref.customerId}/references/${ref.id}/copies/${d.id}`}>{tk(`refKinds.${d.kind}`)}</Link></li>)}
           </ul>
         ) : null}
-        <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/terms`}>{t('terms.edit')}</Link></div>
+        {r.status === 'draft' ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/terms`}>{t('terms.edit')}</Link></div> : null}
       </section>
       <p className="set-muted" style={{ margin: 0 }}>{t('nextSteps')}</p>
     </AppFrame>

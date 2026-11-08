@@ -1,4 +1,4 @@
-import { bigint, boolean, check, customType, index, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { bigint, boolean, check, customType, foreignKey, index, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
 import { customer, customerGoAhead, referencePerson } from './customers';
@@ -42,6 +42,9 @@ export const rental = pgTable('rental', {
   check('rental_deposit', sql`(deposit_amount is null or deposit_amount between 1 and 500000) and not (deposit_amount is not null and deposit_waived_reason is not null)`),
   check('rental_rent_paid', sql`rent_paid is null or rent_paid in ('now', 'return')`),
   check('rental_fuel', sql`fuel is null or fuel in ('notCounted', 'sameLevel')`),
+  check('rental_reference_only_if_required', sql`reference_person_id is null or reference_required = true`),
+  // The reference person is the rental's own customer's (#54 review).
+  foreignKey({ name: 'rental_reference_of_customer', columns: [t.customerId, t.referencePersonId], foreignColumns: [referencePerson.customerId, referencePerson.id] }),
   check('rental_terms_complete', sql`terms_set_at is null or ((deposit_amount is not null or deposit_waived_reason is not null) and rent_paid is not null and fuel is not null and reference_required is not null)`),
 ]);
 
