@@ -3,6 +3,7 @@ import { Pool } from 'pg';
 import { carIsFree, createRental, rentalEstimate, rentalTerms } from '../src/modules/rentals/rentals';
 import { changeStatus } from '../src/modules/cars/status';
 import { setPermission, turnOff } from '../src/modules/people/people';
+import { addFlag, goAhead } from '../src/modules/customers/flags';
 import { theOwner, samplePerson } from './helpers/people';
 import { sampleCarAndCustomer, samplePickup } from './helpers/rentals';
 
@@ -94,4 +95,47 @@ describe('many rentals at once', () => {
     const results = await Promise.all(pairs.map(({ carId, customerId }) => createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })));
     expect(results.every((r) => 'ok' in r)).toBe(true);
   }, 30_000);
+});
+
+describe('warnings and the first rental at New rental (system design 7.1, Confirmed 8 Nov 2026)', () => {
+  it('a customer with an open flag is rented only with a decision to continue for those warnings, used once', async () => {
+    const owner = await theOwner();
+    const { carId, customerId } = await sampleCarAndCustomer(owner);
+    const other = await sampleCarAndCustomer(owner);
+    const flag = await addFlag(owner, customerId, { kind: 'unpaid', details: 'Sample: unpaid bill from an earlier rental' });
+    if (!('ok' in flag)) throw new Error(JSON.stringify(flag));
+    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'warningsNotCleared' });
+    const ok = await goAhead(owner, customerId, { reason: 'Sample: regular customer, paying on Monday', shownFlagIds: [flag.id], shownLicenceExpired: false });
+    if (!('ok' in ok)) throw new Error(JSON.stringify(ok));
+    const r = await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id });
+    expect(r).toMatchObject({ ok: true });
+    // The same decision cannot start a second rental; nor can a decision for another customer.
+    expect(await createRental(owner, { customerId, vehicleId: other.carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })).toEqual({ error: 'warningsNotCleared' });
+    expect(await createRental(owner, { customerId: other.customerId, vehicleId: other.carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })).toMatchObject({ ok: true });
+  });
+
+  it('a decision made before a new flag was added does not cover it', async () => {
+    const owner = await theOwner();
+    const { carId, customerId } = await sampleCarAndCustomer(owner);
+    const f1 = await addFlag(owner, customerId, { kind: 'other', details: 'Sample: first' });
+    if (!('ok' in f1)) throw new Error(JSON.stringify(f1));
+    const ok = await goAhead(owner, customerId, { reason: 'Sample: fine', shownFlagIds: [f1.id], shownLicenceExpired: false });
+    if (!('ok' in ok)) throw new Error(JSON.stringify(ok));
+    expect(await addFlag(owner, customerId, { kind: 'damage', details: 'Sample: second' })).toMatchObject({ ok: true });
+    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })).toEqual({ error: 'warningsNotCleared' });
+  });
+
+  it('a first rental needs "Approve a first-time customer"; a later one does not', async () => {
+    const owner = await theOwner();
+    const staff = (await samplePerson()).id;
+    expect(await setPermission(owner, staff, 'approveFirstCustomer', false)).toMatchObject({ ok: true });
+    const a = await sampleCarAndCustomer(owner);
+    const b = await sampleCarAndCustomer(owner);
+    expect(await createRental(staff, { customerId: a.customerId, vehicleId: a.carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'firstRentalNotAllowed' });
+    const first = await createRental(owner, { customerId: a.customerId, vehicleId: a.carId, pickupAt: samplePickup(), days: 1 });
+    if (!('ok' in first)) throw new Error(JSON.stringify(first));
+    const ev = await pool.query("select details from rental_event where rental_id = $1", [first.id]);
+    expect(ev.rows[0].details).toMatchObject({ firstRental: true });
+    expect(await createRental(staff, { customerId: a.customerId, vehicleId: b.carId, pickupAt: samplePickup(), days: 1 })).toMatchObject({ ok: true });
+  });
 });

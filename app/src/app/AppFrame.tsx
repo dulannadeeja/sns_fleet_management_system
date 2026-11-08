@@ -9,7 +9,7 @@ import './settings/settings.css';
 // The frame of the module pages (cars first): on a computer the menu and the top bar, on a phone the page header with a
 // back link, as the boards show. Shares its layout classes with the Settings frame.
 export async function AppFrame({ person, active, title, subtitle, backHref, children }: {
-  person: SignedInPerson; active: 'cars' | 'customers' | 'partners'; title: string; subtitle?: string; backHref: string; children: ReactNode;
+  person: SignedInPerson; active: 'cars' | 'rentals' | 'customers' | 'partners'; title: string; subtitle?: string; backHref: string; children: ReactNode;
 }) {
   const t = await getTranslations();
   const lang = (await getLocale()) as Lang;

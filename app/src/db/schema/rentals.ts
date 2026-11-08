@@ -1,7 +1,7 @@
 import { bigint, check, customType, index, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
-import { customer } from './customers';
+import { customer, customerGoAhead } from './customers';
 import { vehicle, vehicleTermsVersion } from './cars';
 
 // Rentals (system design 4.3, 5, 7; TRD › Data model "Rentals", Integrity rules; #50). Money in whole rupees (bigint).
@@ -19,6 +19,9 @@ export const rental = pgTable('rental', {
   pickupAt: timestamp('pickup_at', { withTimezone: true }).notNull(),
   days: integer('days').notNull(),
   deadlineAt: timestamp('deadline_at', { withTimezone: true }).notNull(),
+  // The decision to continue despite the customer's warnings, when there were any (7.1, Confirmed 8 Nov 2026): one
+  // decision starts one rental.
+  goAheadId: uuid('go_ahead_id').references(() => customerGoAhead.id).unique('rental_one_per_go_ahead'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
   createdBy: uuid('created_by').references(() => user.id),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),

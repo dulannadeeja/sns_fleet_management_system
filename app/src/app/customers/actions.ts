@@ -108,5 +108,7 @@ export async function goAheadAction(customerId: string, _: FlagFormState, form: 
     return { error: result.error, values };
   }
   revalidatePath(`/customers/${customerId}`);
+  // From New rental (#51): the decision goes with the rental being started, to choosing its car.
+  if (text(form, 'next') === 'rental') redirect(`/rentals/new/car?customer=${customerId}&ok=${result.id}`);
   redirect(`/customers/${customerId}?flag=decided`);
 }

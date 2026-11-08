@@ -52,19 +52,21 @@ export function CloseFlagForm({ customerId, flagId, w }: { customerId: string; f
   );
 }
 
-export function GoAheadForm({ customerId, flagIds, licenceExpired, mayContinue, w }: { customerId: string; flagIds: string[]; licenceExpired: boolean; mayContinue: boolean; w: FlagWords }) {
+/** `forRental`: the decision is made in New rental (#51) and goes on to choosing the car; otherwise back to the customer. */
+export function GoAheadForm({ customerId, flagIds, licenceExpired, mayContinue, w, forRental = false }: { customerId: string; flagIds: string[]; licenceExpired: boolean; mayContinue: boolean; w: FlagWords; forRental?: boolean }) {
   const [state, action, pending] = useActionState<FlagFormState, FormData>(goAheadAction.bind(null, customerId), {});
   const ready = useReady();
   return (
     <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       {flagIds.map((id) => <input key={id} type="hidden" name="shownFlag" value={id} />)}
       <input type="hidden" name="shownLicenceExpired" value={licenceExpired ? '1' : '0'} />
+      {forRental ? <input type="hidden" name="next" value="rental" /> : null}
       <TextField name="reason" label={s(w, 'reason')} required requiredLabel={`(${s(w, 'required')})`} autoComplete="off" hint={s(w, 'reasonNote')}
         defaultValue={state.values?.reason} disabled={!mayContinue}
         error={state.error === 'reasonMissing' || state.error === 'tooLong' ? err(w, state) : undefined} />
       {state.error && !['reasonMissing', 'tooLong'].includes(state.error) ? <Notice tone="danger">{err(w, state)}</Notice> : null}
       <div className="set-actions">
-        <Link className="rt-btn rt-btn-quiet" href={`/customers/${customerId}`}>{s(w, 'dontRent')}</Link>
+        <Link className="rt-btn rt-btn-quiet" href={forRental ? '/rentals/new' : `/customers/${customerId}`}>{s(w, 'dontRent')}</Link>
         <Button type="submit" icon="check" disabled={pending || !ready || !mayContinue}>{s(w, 'continue')}</Button>
       </div>
     </form>
