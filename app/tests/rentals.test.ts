@@ -35,29 +35,20 @@ describe('a new rental keeps its own copy of the terms', () => {
   });
 });
 
-describe('one rental or reservation per car at any time (AT-08, AT-30 groundwork)', () => {
+describe('one rental or reservation per car at any time (AT-30 groundwork; AT-08 in at-08.test.ts)', () => {
   it('refuses a second rental of the same car for overlapping days; the car is free after the deadline', async () => {
     const owner = await theOwner();
     const { carId, customerId } = await sampleCarAndCustomer(owner);
     const pickupAt = samplePickup();
     const first = await createRental(owner, { customerId, vehicleId: carId, pickupAt, days: 2 });
     if (!('ok' in first)) throw new Error(JSON.stringify(first));
-    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(60), days: 1 })).toEqual({ error: 'carTaken' });
+    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'carTaken' });
     expect(await carIsFree(carId, pickupAt, new Date(pickupAt.getTime() + DAY))).toBe(false);
     const { deadlineAt } = (await rentalTerms(first.id))!;
     expect(await carIsFree(carId, deadlineAt, new Date(deadlineAt.getTime() + DAY))).toBe(true);
     expect(await carIsFree(carId, deadlineAt, deadlineAt)).toBe(false); // not a real time span
   });
 
-  it('two people saving the same car at the same moment: only one wins', async () => {
-    const owner = await theOwner();
-    const staff = (await samplePerson()).id;
-    const { carId, customerId } = await sampleCarAndCustomer(owner);
-    const pickupAt = samplePickup();
-    const results = await Promise.all([owner, staff, owner, staff].map((a) => createRental(a, { customerId, vehicleId: carId, pickupAt, days: 2 })));
-    expect(results.filter((x) => 'ok' in x)).toHaveLength(1);
-    expect(results.filter((x) => 'error' in x && x.error === 'carTaken')).toHaveLength(3);
-  });
 });
 
 describe('who may save a rental, and with what (system design 7.1, Confirmed 7 Nov 2026)', () => {
@@ -75,12 +66,12 @@ describe('who may save a rental, and with what (system design 7.1, Confirmed 7 N
     expect(await createRental(staff, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'carNotAvailable' });
   });
 
-  it('a pickup is now or within the next day, never in the past; 1 to 90 days', async () => {
+  it('the pickup is the moment of the save, never past or later; 1 to 90 days', async () => {
     const owner = await theOwner();
     const { carId, customerId } = await sampleCarAndCustomer(owner);
     const at = (pickupAt: Date, days = 1) => createRental(owner, { customerId, vehicleId: carId, pickupAt, days });
     expect(await at(new Date(Date.now() - 10 * 60_000))).toEqual({ error: 'pickupPast' });
-    expect(await at(new Date(Date.now() + DAY + 10 * 60_000))).toEqual({ error: 'pickupTooFar' });
+    expect(await at(new Date(Date.now() + 10 * 60_000))).toEqual({ error: 'pickupTooFar' }); // the pickup is now (8 Nov 2026)
     expect(await at(new Date('x'))).toEqual({ error: 'pickupInvalid' });
     expect(await at(samplePickup(), 0)).toEqual({ error: 'daysInvalid' });
     expect(await at(samplePickup(), 91)).toEqual({ error: 'daysInvalid' });
@@ -111,9 +102,14 @@ describe('warnings and the first rental at New rental (system design 7.1, Confir
     if (!('ok' in ok)) throw new Error(JSON.stringify(ok));
     const r = await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id });
     expect(r).toMatchObject({ ok: true });
-    // The same decision cannot start a second rental; nor can a decision for another customer.
+    // The same decision cannot start a second rental.
     expect(await createRental(owner, { customerId, vehicleId: other.carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })).toEqual({ error: 'warningsNotCleared' });
-    expect(await createRental(owner, { customerId: other.customerId, vehicleId: other.carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })).toMatchObject({ ok: true });
+    // A decision for one customer never clears another customer's warnings.
+    const f2 = await addFlag(owner, other.customerId, { kind: 'unpaid', details: 'Sample: unpaid bill too' });
+    if (!('ok' in f2)) throw new Error(JSON.stringify(f2));
+    const ok2 = await goAhead(owner, customerId, { reason: 'Sample: unused', shownFlagIds: [flag.id], shownLicenceExpired: false });
+    if (!('ok' in ok2)) throw new Error(JSON.stringify(ok2));
+    expect(await createRental(owner, { customerId: other.customerId, vehicleId: other.carId, pickupAt: samplePickup(), days: 1, goAheadId: ok2.id })).toEqual({ error: 'warningsNotCleared' });
   });
 
   it('a decision made before a new flag was added does not cover it', async () => {
@@ -127,7 +123,7 @@ describe('warnings and the first rental at New rental (system design 7.1, Confir
     expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })).toEqual({ error: 'warningsNotCleared' });
   });
 
-  it('a first rental needs "Approve a first-time customer"; a later one does not', async () => {
+  it('a first rental needs "Approve a first-time customer"; saved rentals that never went out do not count', async () => {
     const owner = await theOwner();
     const staff = (await samplePerson()).id;
     expect(await setPermission(owner, staff, 'approveFirstCustomer', false)).toMatchObject({ ok: true });
@@ -138,7 +134,15 @@ describe('warnings and the first rental at New rental (system design 7.1, Confir
     if (!('ok' in first)) throw new Error(JSON.stringify(first));
     const ev = await pool.query("select details from rental_event where rental_id = $1", [first.id]);
     expect(ev.rows[0].details).toMatchObject({ firstRental: true });
-    expect(await createRental(staff, { customerId: a.customerId, vehicleId: b.carId, pickupAt: samplePickup(), days: 1 })).toMatchObject({ ok: true });
+    // That rental has not gone out (handover comes with #57), so the next one is still a first rental.
+    expect(await createRental(staff, { customerId: a.customerId, vehicleId: b.carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'firstRentalNotAllowed' });
+  });
+
+  it('the deadline shown must be the one saved: if the cutoff passed meanwhile, nothing is saved', async () => {
+    const owner = await theOwner();
+    const { carId, customerId } = await sampleCarAndCustomer(owner);
+    const wrong = new Date(Date.now() + 3 * DAY);
+    expect(await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 1, shownDeadline: wrong })).toEqual({ error: 'deadlineChanged' });
   });
 
   it('two saves with the same decision at the same moment: only one rental starts', async () => {

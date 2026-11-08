@@ -12,6 +12,6 @@ export async function sampleCarAndCustomer(actorId: string) {
   return { carId: car.id, customerId: c.id };
 }
 
-/** A pickup time a little ahead of now (a pickup is now or within the next day, system design 7.1). Each test uses
- *  its own sample car, so sample rentals never meet. */
-export const samplePickup = (minutesAhead = 5) => new Date(Date.now() + minutesAhead * 60_000);
+/** A pickup time: now (the pickup is the moment of the save, system design 7.1). Each test uses its own sample car, so
+ *  sample rentals never meet. */
+export const samplePickup = () => new Date();

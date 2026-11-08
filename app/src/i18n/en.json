@@ -1182,7 +1182,7 @@
   },
   "rentals": {
     "title": "New rental",
-    "step": "Step {n} of 3",
+    "step": "Step {n} of 5",
     "steps": {
       "customer": "Customer",
       "car": "Car",
@@ -1240,7 +1240,8 @@
       "pickupTooFar": "A pickup more than a day ahead is a reservation.",
       "warningsNotCleared": "The customer's warnings changed. Go back to step 1 and decide again.",
       "firstRentalNotAllowed": "This is their first rental. Someone with “Approve a first-time customer” must save it.",
-      "failed": "Not saved. Try again."
+      "failed": "Not saved. Try again.",
+      "deadlineChanged": "The bring-back time changed (the cutoff passed). Check the new time with the customer, then save again."
     }
   }
 }

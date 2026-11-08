@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, notInArray, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
 import { auditEvent, customer, customerGoAhead, permissionGrant, rental, rentalEvent, rentalTermsSnapshot, rentalVehicleSegment, user, vehicle, vehicleHold, vehicleStatusEvent, vehicleTermsVersion } from '../../db/schema';
 import { allows } from '../../auth/permissions';
@@ -14,7 +14,7 @@ import { deadlineFor, estimate, type Estimate } from '../../lib/rental-days';
 // touch it (PR-08, AT-05). The car is held for the rental's time; the database refuses a second hold that overlaps
 // (AT-08, AT-30). Decided 7 Nov 2026 (system design 7.1 "Saving a new rental", Confirmed): anyone with Customer access
 // saves one; the car is held from the save; the pickup is now or within the next day (later is a reservation), never in
-// the past; 1 to 90 days. Decided 8 Nov 2026 (7.1, Confirmed): a first rental needs "Approve a first-time customer"
+// the past; 1 to 90 days. 8 Nov 2026: the pickup is the moment of the save; a first rental means no car ever went out. Decided 8 Nov 2026 (7.1, Confirmed): a first rental needs "Approve a first-time customer"
 // (saving it is the approval); with warnings, a decision to continue for exactly those warnings, used for one rental.
 // Cancelling (which frees the car) comes with #59.
 
@@ -23,13 +23,14 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** Only "draft" exists yet; handover (#57), return (#63) and cancelling (#59) add their states with their tickets. */
 export const RENTAL_STATES = ['draft'] as const;
 export const DAYS_MAX = 90;
-/** A pickup is now or within the next day (7.1). A minute of grace covers the time between the form and the save. */
+/** The pickup is the moment of the save (7.1, Confirmed 8 Nov 2026). A minute either way covers clocks and the save. */
 const PICKUP_GRACE_MS = 60_000;
-const PICKUP_AHEAD_MS = 86_400_000;
+/** Rentals that never went out: they do not make a later rental "not the first" (7.1, Confirmed 8 Nov 2026). */
+const NEVER_OUT = ['draft', 'cancelled'];
 export type RentalState = (typeof RENTAL_STATES)[number];
 
 export type CreateError = 'notAllowed' | 'customerNotFound' | 'carNotFound' | 'carNotAvailable' | 'carTaken' | 'daysInvalid' | 'pickupInvalid'
-  | 'pickupPast' | 'pickupTooFar' | 'warningsNotCleared' | 'firstRentalNotAllowed';
+  | 'pickupPast' | 'pickupTooFar' | 'warningsNotCleared' | 'firstRentalNotAllowed' | 'deadlineChanged';
 export type CreateResult = { ok: true; id: string } | { error: CreateError };
 
 /** What the person may do, read again inside the transaction: saving needs Customer access (7.1, Confirmed 7 Nov
@@ -47,7 +48,7 @@ const holdRange = (from: Date, to: Date) => `[${from.toISOString()},${to.toISOSt
  * Saves a new rental (status draft) for a customer and a car, from `pickupAt` for `days` days: copies the car's newest
  * terms and the owner settings onto it, holds the car until the deadline, and records it. Logged as rental.create.
  */
-export async function createRental(actorId: string, input: { customerId: string; vehicleId: string; pickupAt: Date; days: number; goAheadId?: string }): Promise<CreateResult> {
+export async function createRental(actorId: string, input: { customerId: string; vehicleId: string; pickupAt: Date; days: number; goAheadId?: string; shownDeadline?: Date }): Promise<CreateResult> {
   if (!UUID.test(input.customerId)) return { error: 'customerNotFound' };
   if (input.goAheadId !== undefined && !UUID.test(input.goAheadId)) return { error: 'warningsNotCleared' };
   if (!UUID.test(input.vehicleId)) return { error: 'carNotFound' };
@@ -55,7 +56,7 @@ export async function createRental(actorId: string, input: { customerId: string;
   if (!(input.pickupAt instanceof Date) || Number.isNaN(input.pickupAt.getTime())) return { error: 'pickupInvalid' };
   const now = Date.now();
   if (input.pickupAt.getTime() < now - PICKUP_GRACE_MS) return { error: 'pickupPast' };
-  if (input.pickupAt.getTime() > now + PICKUP_AHEAD_MS) return { error: 'pickupTooFar' };
+  if (input.pickupAt.getTime() > now + PICKUP_GRACE_MS) return { error: 'pickupTooFar' };
   try {
     return await db.transaction(async (tx) => {
       const may = await mayRent(tx, actorId);
@@ -77,7 +78,7 @@ export async function createRental(actorId: string, input: { customerId: string;
           return { error: 'warningsNotCleared' } as const;
         }
       }
-      const firstRental = (await tx.select({ id: rental.id }).from(rental).where(eq(rental.customerId, input.customerId)).limit(1)).length === 0;
+      const firstRental = (await tx.select({ id: rental.id }).from(rental).where(and(eq(rental.customerId, input.customerId), notInArray(rental.status, NEVER_OUT))).limit(1)).length === 0;
       if (firstRental && !may.first) return { error: 'firstRentalNotAllowed' } as const;
       const goAheadId = flagIds.length || warnings.licenceExpired ? input.goAheadId! : null;
       const [car] = await tx.select({ registration: vehicle.registration }).from(vehicle).where(eq(vehicle.id, input.vehicleId));
@@ -90,6 +91,8 @@ export async function createRental(actorId: string, input: { customerId: string;
       if (!terms) return { error: 'carNotFound' } as const;
       const settings = await readSettings(tx);
       const deadlineAt = deadlineFor(input.pickupAt, input.days, settings.pickupCutoff, settings.returnDeadline);
+      // What the customer was shown must be what is saved (ST-05.3): if the cutoff passed meanwhile, show the new one.
+      if (input.shownDeadline && input.shownDeadline.getTime() !== deadlineAt.getTime()) return { error: 'deadlineChanged' } as const;
       const [r] = await tx.insert(rental).values({ customerId: input.customerId, pickupAt: input.pickupAt, days: input.days, deadlineAt, goAheadId, createdBy: actorId })
         .returning({ id: rental.id });
       await tx.insert(rentalTermsSnapshot).values({ rentalId: r.id, pickupCutoff: settings.pickupCutoff, returnDeadline: settings.returnDeadline,
@@ -162,8 +165,8 @@ export async function freeCarsNow(): Promise<Car[]> {
   return (await listCars()).filter((c) => mayGoOut(c.status) && !held.has(c.id));
 }
 
-/** Whether the customer has never had a rental (their first one needs "Approve a first-time customer"). */
+/** Whether no car was ever handed over to the customer (their next rental is a first one, needing "Approve a first-time customer"). */
 export async function isFirstRental(customerId: string): Promise<boolean> {
   if (!UUID.test(customerId)) return false;
-  return (await db.select({ id: rental.id }).from(rental).where(eq(rental.customerId, customerId)).limit(1)).length === 0;
+  return (await db.select({ id: rental.id }).from(rental).where(and(eq(rental.customerId, customerId), notInArray(rental.status, NEVER_OUT))).limit(1)).length === 0;
 }

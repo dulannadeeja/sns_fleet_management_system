@@ -24,9 +24,11 @@ export function DatesForm({ customerId, vehicleId, goAheadId, plate, terms, cuto
   const when = (d: Date) => new Intl.DateTimeFormat(locale, { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Colombo' }).format(d);
   const money = (n: number) => new Intl.NumberFormat('en-US').format(n);
   const e = days ? estimate(terms, days) : null;
+  const due = days ? deadlineFor(now, days, cutoff, deadline) : null;
   const err = state.error ? (w.errors[state.error] ?? w.errors.failed) : null;
   return (
     <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {due ? <input type="hidden" name="shownDeadline" value={due.toISOString()} /> : null}
       <section className="car-card" aria-labelledby="days-h">
         <h2 id="days-h">{w.days}</h2>
         <div className="ren-days">
@@ -35,7 +37,7 @@ export function DatesForm({ customerId, vehicleId, goAheadId, plate, terms, cuto
         </div>
         <dl className="ren-lines">
           <dt>{w.pickup}</dt><dd>{fill(w.pickupNow, { time: when(now) })}</dd>
-          <dt>{w.backBy}</dt><dd data-deadline>{days ? when(deadlineFor(now, days, cutoff, deadline)) : '—'}</dd>
+          <dt>{w.backBy}</dt><dd data-deadline>{due ? when(due) : '—'}</dd>
         </dl>
         <span className="set-muted">{fill(w.dayRule, { cutoff, deadline })}</span>
       </section>

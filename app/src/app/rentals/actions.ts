@@ -12,7 +12,9 @@ export async function saveRentalAction(customerId: string, vehicleId: string, go
   const person = await requirePermission('customerAccess');
   const daysText = String(form.get('days') ?? '').trim();
   const days = /^\d{1,3}$/.test(daysText) ? Number(daysText) : NaN;
-  const result = await createRental(person.id, { customerId, vehicleId, pickupAt: new Date(), days, ...(goAheadId ? { goAheadId } : {}) });
+  const shown = new Date(String(form.get('shownDeadline') ?? ''));
+  const result = await createRental(person.id, { customerId, vehicleId, pickupAt: new Date(), days, ...(goAheadId ? { goAheadId } : {}),
+    shownDeadline: Number.isNaN(shown.getTime()) ? new Date(0) : shown });
   if ('error' in result) return { error: result.error, days: daysText };
   revalidatePath('/rentals/new/car');
   redirect(`/rentals/${result.id}?saved=1`);

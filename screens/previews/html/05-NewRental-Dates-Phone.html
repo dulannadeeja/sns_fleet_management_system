@@ -517,6 +517,16 @@ a.rt-li:hover, a.rt-vrow:hover { background: var(--paper); color: var(--ink); }
   .rt-li-meta { font-size: 14px; }
   .rt-vrow { padding: var(--space-2) 16px; }
 }
+/* TextField: label over a 52px input; required in words; hint and error below (boards 01.1, 01.2). */
+.rt-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.rt-field-label { font-size: 16px; line-height: 26px; font-weight: 600; }
+.rt-field-req { color: var(--overdue); }
+.rt-input { min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: var(--radius-md); background: var(--card); color: var(--ink); font: inherit; font-size: 17px; width: 100%; box-sizing: border-box; }
+.rt-input:focus { outline: none; border: 2px solid var(--sapphire); padding: 11.5px 13.5px; }
+.rt-input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.rt-input[aria-invalid="true"] { border-color: var(--overdue); }
+.rt-field-hint { font-size: 14px; line-height: 22px; color: var(--ink-muted); }
+.rt-field-error { font-size: 14px; line-height: 22px; font-weight: 600; color: var(--overdue); }
 </style>
 
 
@@ -533,7 +543,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
   <div style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--sapphire-strong)">පියවර <span class="rt-num">3</span> / <span class="rt-num">5</span> · කාලය <span class="rt-en">· Dates and estimate</span></div>
 </div><section style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 14px">
   <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 15px; font-weight: 600">TR</span>
-  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Tharindu R.</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">first rental · approved by Ruwan</span></span>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Tharindu R.</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">first rental</span></span>
 </section><div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px">
   <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">දවස් කීයද? <span class="rt-en">· How many days</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">at least 1 full day</span></span>
   <span style="display: flex; align-items: center; gap: 12px"><span role="button" aria-label="One day less" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line-strong); font-size: 22px">−</span><b class="rt-num" style="font-size: 24px; min-width: 24px; text-align: center">2</b><span role="button" aria-label="One day more" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line-strong); font-size: 22px">+</span></span>
@@ -542,6 +552,6 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
   <div style="display: grid; grid-template-columns: minmax(0, 1fr) fit-content(55%); gap: 6px 16px; font-size: 15px; line-height: 24px"><span style="">2 days × 4,500</span><span class="rt-num" style=" text-align: right; font-weight: 500">9,000</span><span style="">Included km</span><span class="rt-num" style=" text-align: right; font-weight: 500">200 km</span><span style="">Extra km</span><span class="rt-num" style=" text-align: right; font-weight: 500">25 a km, at return</span><span style="border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 4px; font-weight: 600;">Estimate</span><span class="rt-num" style="border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 4px; font-weight: 600; text-align: right; font-weight: 600">9,000 + extra km</span></div>
   <div style="display: flex; gap: 8px; padding: 10px 12px; background: var(--sapphire-tint); border-radius: 10px; color: var(--sapphire-strong); font-size: 14px; line-height: 22px"><span data-x-import="Plate.Icon" style="display: contents; flex: none; margin-top: 2px"><svg class="rt-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span><span>CBF 7720’s package is copied onto R‑0238 now. Later price changes don’t affect it.</span></div>
 </section></div>
-  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><a href="05-NewRental-Deposit-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><span>ඉදිරියට · Continue</span></a></div>
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; background: var(--card); border-top: 1px solid var(--line)"><a href="05-NewRental-Deposit-Phone.html" class="rt-btn rt-btn-primary rt-btn-full" style="box-sizing: border-box; text-decoration: none; color: var(--on-sapphire)"><span data-x-import="Plate.Icon" style="display: contents;"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><span>Save කරලා CBF 7720 තියාගන්න · Save and hold CBF 7720</span></a></div>
 </div>
 </body></html>
