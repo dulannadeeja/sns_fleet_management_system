@@ -169,6 +169,13 @@
       "when": 1794124297452,
       "tag": "0023_rental_go_ahead",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1794146857147,
+      "tag": "0024_rental_terms_references",
+      "breakpoints": true
     }
   ]
 }

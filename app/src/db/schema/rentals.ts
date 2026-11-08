@@ -1,7 +1,7 @@
-import { bigint, check, customType, index, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { bigint, boolean, check, customType, index, integer, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
-import { customer, customerGoAhead } from './customers';
+import { customer, customerGoAhead, referencePerson } from './customers';
 import { vehicle, vehicleTermsVersion } from './cars';
 
 // Rentals (system design 4.3, 5, 7; TRD › Data model "Rentals", Integrity rules; #50). Money in whole rupees (bigint).
@@ -22,6 +22,15 @@ export const rental = pgTable('rental', {
   // The decision to continue despite the customer's warnings, when there were any (7.1, Confirmed 8 Nov 2026): one
   // decision starts one rental.
   goAheadId: uuid('go_ahead_id').references(() => customerGoAhead.id).unique('rental_one_per_go_ahead'),
+  // Step 4 (05.4; system design 8.1, 8.2, 6; Confirmed 8 Nov 2026), null until set; changeable until handover, each
+  // change in rental_event and the activity log. A waived deposit has no amount and a reason.
+  depositAmount: bigint('deposit_amount', { mode: 'number' }),
+  depositWaivedReason: text('deposit_waived_reason'),
+  rentPaid: text('rent_paid'),
+  fuel: text('fuel'),
+  referenceRequired: boolean('reference_required'),
+  referencePersonId: uuid('reference_person_id').references(() => referencePerson.id),
+  termsSetAt: timestamp('terms_set_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
   createdBy: uuid('created_by').references(() => user.id),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
@@ -30,6 +39,10 @@ export const rental = pgTable('rental', {
   check('rental_status', sql`status in ('draft')`),
   check('rental_days', sql`days >= 1 AND days <= 90`),
   check('rental_deadline_after_pickup', sql`deadline_at > pickup_at`),
+  check('rental_deposit', sql`(deposit_amount is null or deposit_amount between 1 and 500000) and not (deposit_amount is not null and deposit_waived_reason is not null)`),
+  check('rental_rent_paid', sql`rent_paid is null or rent_paid in ('now', 'return')`),
+  check('rental_fuel', sql`fuel is null or fuel in ('notCounted', 'sameLevel')`),
+  check('rental_terms_complete', sql`terms_set_at is null or ((deposit_amount is not null or deposit_waived_reason is not null) and rent_paid is not null and fuel is not null and reference_required is not null)`),
 ]);
 
 /** The business-wide terms a rental keeps (4.3): cutoff, deadline and the fuel price per litre when it was agreed.

@@ -288,7 +288,10 @@
           "nicChange": "corrected the NIC of {target} from {old} to {new}",
           "flagAdd": "flagged {target}: {kind} · {details}",
           "flagClose": "closed a flag on {target} ({kind}): {reason}",
-          "goAhead": "went ahead with {target} despite the warnings: {reason}"
+          "goAhead": "went ahead with {target} despite the warnings: {reason}",
+          "referenceAdd": "added {reference} as a reference person for {target}",
+          "referenceCopyAdd": "added a copy of reference person {reference} ({target}): {copy}",
+          "referenceCopyOpened": "opened a copy of reference person {reference} ({target}): {copy}"
         },
         "package": {
           "add": "added the starting package {target} ({models})",
@@ -302,7 +305,8 @@
           "untick": "marked “{item}” not done on the go-live checklist: {reason}"
         },
         "rental": {
-          "create": "saved a new rental for {target}: {plate}, {days} days"
+          "create": "saved a new rental for {target}: {plate}, {days} days",
+          "terms": "set the deposit and payment for {target}'s rental"
         }
       },
       "reason": "reason: “{reason}”",
@@ -1178,6 +1182,11 @@
         "notFound": "Not found.",
         "failed": "Not saved. Try again."
       }
+    },
+    "refKinds": {
+      "nicFront": "NIC front",
+      "nicBack": "NIC back",
+      "licence": "Driving licence"
     }
   },
   "rentals": {
@@ -1186,7 +1195,8 @@
     "steps": {
       "customer": "Customer",
       "car": "Car",
-      "dates": "Dates and estimate"
+      "dates": "Dates and estimate",
+      "terms": "Deposit and payment"
     },
     "find": "Find the customer by name, NIC or phone",
     "search": "Search",
@@ -1222,7 +1232,7 @@
     "lockNote": "{plate}'s package is copied onto this rental when you save. Later price changes do not affect it.",
     "save": "Save and hold {plate}",
     "saved": "Saved. {plate} is held for this rental until {deadline}.",
-    "nextSteps": "The deposit, the agreement and the handover come next (being built).",
+    "nextSteps": "The agreement and the handover come next (being built).",
     "rental": "Rental",
     "customer": "Customer",
     "car": "Car",
@@ -1242,6 +1252,89 @@
       "firstRentalNotAllowed": "This is their first rental. Someone with “Approve a first-time customer” must save it.",
       "failed": "Not saved. Try again.",
       "deadlineChanged": "The bring-back time changed (the cutoff passed). Check the new time with the customer, then save again."
+    },
+    "terms": {
+      "deposit": "Deposit",
+      "depositLabel": "Deposit (LKR)",
+      "depositHint": "LKR 1 to 500,000, whole rupees",
+      "depositNote": "Held, not income. Used for the bill or damage; the rest is refunded.",
+      "waive": "Waive the deposit (reason needed)",
+      "waiveReason": "Why is the deposit waived?",
+      "rentPaid": "When will they pay the rent",
+      "rentReturn": "At return",
+      "rentReturnNote": "from the deposit and any balance",
+      "rentNow": "Now, in advance",
+      "fuel": "Fuel",
+      "fuelNotCounted": "Not counted",
+      "fuelNotCountedNote": "usual · no fuel on the bill",
+      "fuelSame": "Same level",
+      "fuelSameNote": "if it comes back lower, missing litres are charged at LKR {price} a litre",
+      "fuelNoPrice": "The owner has not set the fuel price yet, so “same level” cannot be chosen.",
+      "reference": "Reference person",
+      "refNo": "Not required",
+      "refYes": "Required",
+      "refYesNote": "their NIC and licence copies then block handover",
+      "refPick": "Choose the reference person",
+      "refNone": "No reference person saved for this customer yet.",
+      "refAdd": "Add a reference person",
+      "refMissing": "Reference person not chosen yet",
+      "refCopiesMissing": "Reference copies missing: {list}",
+      "save": "Save and continue",
+      "saved": "Saved. {plate} is held for this rental until {deadline}. Now set the deposit and payment.",
+      "termsSaved": "Deposit and payment saved.",
+      "edit": "Change deposit and payment",
+      "notSet": "Deposit and payment not set yet",
+      "depositWaived": "Waived: {reason}",
+      "depositAmount": "LKR {amount}",
+      "errors": {
+        "notAllowed": "You cannot set or waive deposits. Ask the owner for “Set or waive a deposit”.",
+        "notFound": "This rental is not in the system.",
+        "notDraft": "This rental has already gone out; it cannot be changed here.",
+        "depositInvalid": "Type a deposit of LKR 1 to 500,000, or waive it.",
+        "reasonMissing": "Write why the deposit is waived.",
+        "tooLong": "Too long: 500 letters at most.",
+        "rentPaidInvalid": "Choose when the rent is paid.",
+        "fuelInvalid": "Choose the fuel option.",
+        "fuelPriceNotSet": "The owner has not set the fuel price, so “same level” cannot be chosen.",
+        "referenceNotFound": "Choose one of this customer’s reference people.",
+        "failed": "Not saved. Try again."
+      }
+    },
+    "reference": {
+      "title": "Reference person",
+      "note": "Asked only when the rental needs a reference person. Name, NIC and phone are needed; the copies can come later, but handover waits for them.",
+      "name": "Name as on the NIC",
+      "nic": "NIC number",
+      "nicHint": "9 digits and V or X, or 12 digits. Shown in full to staff.",
+      "phone": "Phone",
+      "relationship": "How they know the customer",
+      "relationships": {
+        "family": "Family",
+        "friend": "Friend",
+        "employer": "Employer",
+        "other": "Other"
+      },
+      "copies": "Copies",
+      "copiesNote": "NIC both sides and the driving licence. Kept with the customer’s record.",
+      "save": "Save reference",
+      "existing": "This NIC is already a reference person for this customer. They are chosen.",
+      "addCopy": "Add copy",
+      "replace": "Replace",
+      "onFile": "on file",
+      "missing": "missing",
+      "errors": {
+        "notAllowed": "You need Customer access.",
+        "notFound": "Not found.",
+        "nameMissing": "Type the name.",
+        "nicInvalid": "A NIC is 9 digits and V or X, or 12 digits.",
+        "phoneInvalid": "A phone number has 9 to 15 digits.",
+        "relationshipInvalid": "Choose one of the options.",
+        "kindInvalid": "Choose which copy this is.",
+        "fileType": "Only a photo (JPEG, PNG, WebP, HEIC) or a PDF.",
+        "fileTooBig": "The file is over 10 MB.",
+        "tooLong": "Too long.",
+        "failed": "Not saved. Try again."
+      }
     }
   }
 }
