@@ -21,7 +21,7 @@ export default async function ChangeSettingPage({ params }: { params: Promise<{ 
       key, type: def.kind, saved: asText(s[key]), label: t(`fields.${key}.label`),
       hint: [unit, t(`fields.${key}.hint`)].filter(Boolean).join(' · '),
       errors: {
-        required: t('errors.required'), number: t('errors.number'), time: t('errors.time'),
+        required: t('errors.required'), number: t('errors.number'), time: t('errors.time'), order: t('errors.order'),
         range: limits ? t('errors.range', limits) : t('errors.time'),
       },
     };

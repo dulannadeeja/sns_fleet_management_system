@@ -22,6 +22,12 @@ describe('ST-15.3: owner settings', () => {
     expect(GROUPS).toEqual(['dayTimes', 'reminders', 'fuel']);
   });
 
+  it('the return deadline is earlier in the day than the pickup cutoff (5.1, Confirmed 7 Nov 2026)', () => {
+    expect(checkGroup('dayTimes', { pickupCutoff: '15:00', returnDeadline: '08:00' }).ok).toBe(true);
+    expect(checkGroup('dayTimes', { pickupCutoff: '15:00', returnDeadline: '18:00' }).errors).toEqual({ returnDeadline: 'order' });
+    expect(checkGroup('dayTimes', { pickupCutoff: '15:00', returnDeadline: '15:00' }).errors).toEqual({ returnDeadline: 'order' });
+  });
+
   it('keeps every value inside its limits', () => {
     expect(checkGroup('reminders', reminders)).toEqual({ ok: true, values: reminders });
     expect(checkGroup('reminders', { ...reminders, documentReminderDays: '0' }).errors).toEqual({ documentReminderDays: 'range' });

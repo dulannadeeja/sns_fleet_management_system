@@ -3,8 +3,10 @@ import { Pool } from 'pg';
 import { addCar, editCar, getCar, termsAt } from '../../src/modules/cars/cars';
 import { theOwner } from '../helpers/people';
 import { samplePlate } from '../helpers/cars';
+import { createRental, rentalEstimate, rentalTerms } from '../../src/modules/rentals/rentals';
+import { sampleCarAndCustomer, samplePickup } from '../helpers/rentals';
 
-// AT-05, the car half only (PARTIAL: the "active rental keeps its old terms" half needs rentals, Phase 2):
+// AT-05 (PARTIAL: an extension keeping the original rates is checked with #61, Extend by phone):
 // "Admin changes package while rental active: old rental/extension retains old snapshot; new rental uses new version".
 // System design 4.3 (Confirmed), PR-08. A package change is a new dated version; the old one is never changed.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -28,5 +30,30 @@ describe('AT-05 (car half, partial): a package change applies to new rentals; th
     // The old version can never be changed or removed.
     await expect(pool.query('update vehicle_terms_version set daily_rate = 1 where vehicle_id = $1', [added.id])).rejects.toThrow(/insert-only/);
     await expect(pool.query('delete from vehicle_terms_version where vehicle_id = $1', [added.id])).rejects.toThrow(/insert-only/);
+  });
+});
+
+describe('AT-05 (rental half): a rental keeps the terms it was agreed with', () => {
+  it('a rental saved before the package change keeps 4,500; a rental saved after a change gets the new terms', async () => {
+    const owner = await theOwner();
+    const { carId, customerId } = await sampleCarAndCustomer(owner);
+    const before = await createRental(owner, { customerId, vehicleId: carId, pickupAt: samplePickup(), days: 2 });
+    if (!('ok' in before)) throw new Error(JSON.stringify(before));
+    const car = (await getCar(carId))!;
+    expect(await editCar(owner, carId, { ...car.terms, dailyRate: 4800, kmPerDay: 120 }, car.terms)).toMatchObject({ ok: true });
+    expect((await rentalTerms(before.id))!.segments[0]).toMatchObject({ dailyRate: 4500, kmPerDay: 100 });
+    expect((await rentalEstimate(before.id))!.base).toBe(9000);
+
+    // The first car is held by that rental now, so the "after" rental is on a second sample car changed the same way.
+    const other = await sampleCarAndCustomer(owner);
+    const car2 = (await getCar(other.carId))!;
+    expect(await editCar(owner, other.carId, { ...car2.terms, dailyRate: 4800, kmPerDay: 120 }, car2.terms)).toMatchObject({ ok: true });
+    const after = await createRental(owner, { customerId: other.customerId, vehicleId: other.carId, pickupAt: samplePickup(), days: 2 });
+    if (!('ok' in after)) throw new Error(JSON.stringify(after));
+    expect((await rentalTerms(after.id))!.segments[0]).toMatchObject({ dailyRate: 4800, kmPerDay: 120 });
+    expect((await rentalEstimate(after.id))!.base).toBe(9600);
+    // The saved copy can never be changed afterwards; only the km readings may be added.
+    await expect(pool.query('update rental_vehicle_segment set daily_rate = 1 where rental_id = $1', [before.id])).rejects.toThrow(/insert-only/);
+    await pool.query('update rental_vehicle_segment set out_km = 12000 where rental_id = $1', [before.id]);
   });
 });

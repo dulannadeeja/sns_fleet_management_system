@@ -300,6 +300,9 @@
         "golive": {
           "tick": "marked “{item}” done on the go-live checklist",
           "untick": "marked “{item}” not done on the go-live checklist: {reason}"
+        },
+        "rental": {
+          "create": "saved a new rental for {target}: {plate}, {days} days"
         }
       },
       "reason": "reason: “{reason}”",
@@ -395,6 +398,7 @@
         "number": "Type a whole number, digits only.",
         "range": "Must be {min} to {max}.",
         "time": "Pick a time.",
+        "order": "The return deadline must be earlier in the day than the pickup cutoff.",
         "notAllowed": "Only the owner can change settings.",
         "failed": "Not saved. Try again.",
         "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change."
