@@ -1,4 +1,4 @@
-import { bigint, boolean, check, date, index, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { bigint, boolean, check, date, index, pgTable, text, timestamp, unique, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
 
@@ -68,3 +68,37 @@ export const customerGoAhead = pgTable('customer_go_ahead', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   createdBy: uuid('created_by').notNull().references(() => user.id),
 }, (t) => [index('customer_go_ahead_by_customer').on(t.customerId, t.createdAt.desc())]);
+
+/** A reference person, kept with the customer (ST-05.5; system design 6, Confirmed 8 Nov 2026): name, NIC, phone and,
+ *  if noted, how they know the customer. One NIC is one reference person for that customer; a later rental can pick
+ *  them again. */
+export const referencePerson = pgTable('reference_person', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  customerId: uuid('customer_id').notNull().references(() => customer.id),
+  name: text('name').notNull(),
+  nic: text('nic').notNull(),
+  phone: text('phone').notNull(),
+  relationship: text('relationship'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: uuid('created_by').references(() => user.id),
+}, (t) => [
+  unique('reference_person_one_per_nic').on(t.customerId, t.nic),
+  unique('reference_person_of_customer').on(t.customerId, t.id),
+  check('reference_person_relationship', sql`relationship is null or relationship in ('family', 'friend', 'employer', 'other')`),
+]);
+
+/** A reference person's copy (NIC front and back, driving licence): a private file, kept as taken; the newest of a kind
+ *  counts. Insert-only. */
+export const referenceDocument = pgTable('reference_document', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  referencePersonId: uuid('reference_person_id').notNull().references(() => referencePerson.id),
+  kind: text('kind').notNull(),
+  storageKey: text('storage_key').notNull().unique('reference_document_one_key'),
+  contentType: text('content_type').notNull(),
+  size: bigint('size', { mode: 'number' }).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  createdBy: uuid('created_by').references(() => user.id),
+}, (t) => [
+  index('reference_document_newest').on(t.referencePersonId, t.kind, t.createdAt.desc()),
+  check('reference_document_kind', sql`kind in ('nicFront', 'nicBack', 'licence')`),
+]);

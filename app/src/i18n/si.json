@@ -288,7 +288,10 @@
           "nicChange": "{target} ගේ NIC එක {old} සිට {new} දක්වා නිවැරදි කළා",
           "flagAdd": "{target} ට flag එකක් දැම්මා: {kind} · {details}",
           "flagClose": "{target} ගේ flag එකක් වැහුවා ({kind}): {reason}",
-          "goAhead": "අවවාද තිබුණත් {target} එක්ක ඉස්සරහට ගියා: {reason}"
+          "goAhead": "අවවාද තිබුණත් {target} එක්ක ඉස්සරහට ගියා: {reason}",
+          "referenceAdd": "{target} ට ඇපකරු ලෙස {reference} එකතු කළා",
+          "referenceCopyAdd": "ඇපකරු {reference} ගේ ({target}) පිටපතක් දැම්මා: {copy}",
+          "referenceCopyOpened": "ඇපකරු {reference} ගේ ({target}) පිටපතක් ඇරියා: {copy}"
         },
         "package": {
           "add": "{target} මුල් පැකේජය එකතු කළා ({models})",
@@ -302,7 +305,8 @@
           "untick": "පටන් ගැනීමේ ලැයිස්තුවේ “{item}” ඉවර නැහැ කියලා දැම්මා: {reason}"
         },
         "rental": {
-          "create": "{target} ට අලුත් කුලියක් සටහන් කළා: {plate}, දින {days}"
+          "create": "{target} ට අලුත් කුලියක් සටහන් කළා: {plate}, දින {days}",
+          "terms": "{target} ගේ කුලියට deposit එක සහ ගෙවීම සකස් කළා"
         }
       },
       "reason": "හේතුව: “{reason}”",
@@ -1178,6 +1182,11 @@
         "notFound": "හම්බ වුණේ නැහැ.",
         "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
       }
+    },
+    "refKinds": {
+      "nicFront": "NIC ඉදිරිපස",
+      "nicBack": "NIC පිටුපස",
+      "licence": "රියදුරු බලපත්‍රය"
     }
   },
   "rentals": {
@@ -1186,7 +1195,8 @@
     "steps": {
       "customer": "පාරිභෝගිකයා",
       "car": "වාහනය",
-      "dates": "කාලය සහ ඇස්තමේන්තුව"
+      "dates": "කාලය සහ ඇස්තමේන්තුව",
+      "terms": "Deposit සහ ගෙවීම"
     },
     "find": "නම, NIC එක හෝ phone අංකයෙන් පාරිභෝගිකයා හොයන්න",
     "search": "හොයන්න",
@@ -1222,7 +1232,7 @@
     "lockNote": "Save කරද්දී {plate} ගේ package එක මේ කුලියට copy වෙනවා. පස්සේ මිල වෙනස් වුණත් මේකට බලපාන්නේ නැහැ.",
     "save": "Save කරලා {plate} තියාගන්න",
     "saved": "Save වුණා. {deadline} වෙනකම් {plate} මේ කුලියට තියාගෙන තියෙනවා.",
-    "nextSteps": "ඊළඟට deposit, ගිවිසුම සහ වාහනය භාර දීම (හදමින් පවතිනවා).",
+    "nextSteps": "ඊළඟට ගිවිසුම සහ වාහනය භාර දීම (හදමින් පවතිනවා).",
     "rental": "කුලිය",
     "customer": "පාරිභෝගිකයා",
     "car": "වාහනය",
@@ -1242,6 +1252,90 @@
       "firstRentalNotAllowed": "මේ එයාගේ පළමු කුලිය. “අලුත් පාරිභෝගිකයෙක් අනුමත කරන්න” අවසරය තියෙන කෙනෙක් save කරන්න ඕන.",
       "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න.",
       "deadlineChanged": "ආපසු දෙන වෙලාව වෙනස් වුණා (cutoff වෙලාව පහු වුණා). අලුත් වෙලාව පාරිභෝගිකයාට කියලා ආයෙත් save කරන්න."
+    },
+    "terms": {
+      "deposit": "Deposit",
+      "depositLabel": "Deposit එක (රු.)",
+      "depositHint": "රු. 1 සිට 500,000 දක්වා, සම්පූර්ණ රුපියල්",
+      "depositNote": "ආදායමක් නෙවෙයි, තියාගන්න මුදලක්. බිලට හෝ හානියට පාවිච්චි කරලා ඉතිරිය ආපසු දෙනවා.",
+      "waive": "Deposit එක ඕන නැහැ (හේතුව ඕන)",
+      "waiveReason": "Deposit එක නැත්තේ ඇයි?",
+      "rentPaid": "බිල ගෙවන්නේ කවද්ද?",
+      "rentReturn": "ආපසු දෙනකොට",
+      "rentReturnNote": "deposit එකෙන් සහ ඉතිරිය",
+      "rentNow": "දැන්, කලින්ම",
+      "fuel": "ඉන්ධන",
+      "fuelNotCounted": "ගණන් කරන්නේ නැහැ",
+      "fuelNotCountedNote": "සාමාන්‍යයෙන් · බිලේ ඉන්ධන නැහැ",
+      "fuelSame": "එකම මට්ටමට",
+      "fuelSameNote": "අඩුවෙන් ආවොත්, අඩු ලීටර් ලීටරයට රු. {price} ගානේ අය කරනවා",
+      "fuelNoPrice": "Owner තාම ඉන්ධන මිල දාලා නැහැ, ඒ නිසා “එකම මට්ටමට” තෝරන්න බැහැ.",
+      "reference": "ඇපකරු",
+      "refNo": "ඕන නැහැ",
+      "refYes": "ඕන",
+      "refYesNote": "එයාගේ NIC සහ බලපත්‍ර පිටපත් නැත්නම් වාහනය භාර දෙන්න බැහැ",
+      "refPick": "ඇපකරු තෝරන්න",
+      "refNone": "මේ පාරිභෝගිකයාට තාම ඇපකරුවෙක් save කරලා නැහැ.",
+      "refAdd": "ඇපකරුවෙක් එකතු කරන්න",
+      "refMissing": "ඇපකරු තාම තෝරලා නැහැ",
+      "refCopiesMissing": "ඇපකරුගේ පිටපත් නැහැ: {list}",
+      "save": "Save කරලා ඉදිරියට",
+      "saved": "Save වුණා. {deadline} වෙනකම් {plate} මේ කුලියට තියාගෙන තියෙනවා. දැන් deposit එක සහ ගෙවීම දාන්න.",
+      "termsSaved": "Deposit එක සහ ගෙවීම save වුණා.",
+      "edit": "Deposit එක සහ ගෙවීම වෙනස් කරන්න",
+      "notSet": "Deposit එක සහ ගෙවීම තාම දාලා නැහැ",
+      "depositWaived": "ඕන නැහැ: {reason}",
+      "depositAmount": "රු. {amount}",
+      "errors": {
+        "notAllowed": "පාරිභෝගික access ඕන.",
+        "depositNotAllowed": "Deposit එක දාන්න හෝ වෙනස් කරන්න පුළුවන් “Deposit දාන්න හෝ අයින් කරන්න” අවසරය තියෙන කෙනෙකුට විතරයි. අනිත් දේවල් ඔබට වෙනස් කරන්න පුළුවන්.",
+        "notFound": "මේ කුලිය system එකේ නැහැ.",
+        "notDraft": "මේ කුලියේ වාහනය දැනටමත් ගිහින්; මෙතනින් වෙනස් කරන්න බැහැ.",
+        "depositInvalid": "රු. 1 සිට 500,000 දක්වා deposit එකක් ලියන්න, නැත්නම් අයින් කරන්න.",
+        "reasonMissing": "Deposit එක නැත්තේ ඇයි කියලා ලියන්න.",
+        "tooLong": "දිග වැඩියි: අකුරු 500 ක් උපරිම.",
+        "rentPaidInvalid": "බිල ගෙවන්නේ කවද්ද කියලා තෝරන්න.",
+        "fuelInvalid": "ඉන්ධන විදිහ තෝරන්න.",
+        "fuelPriceNotSet": "Owner තාම ඉන්ධන මිල දාලා නැහැ, ඒ නිසා “එකම මට්ටමට” තෝරන්න බැහැ.",
+        "referenceNotFound": "මේ පාරිභෝගිකයාගේ ඇපකරුවෙක් තෝරන්න.",
+        "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+      }
+    },
+    "reference": {
+      "title": "ඇපකරු",
+      "note": "කුලියට ඇපකරුවෙක් ඕන නම් විතරයි. නම, NIC එක සහ phone එක ඕන; පිටපත් පස්සේ දාන්න පුළුවන්, ඒත් ඒවා නැතුව වාහනය භාර දෙන්න බැහැ.",
+      "name": "NIC එකේ තියෙන නම",
+      "nic": "NIC අංකය",
+      "nicHint": "ඉලක්කම් 9 යි V හෝ X, නැත්නම් ඉලක්කම් 12. කාර්ය මණ්ඩලයට සම්පූර්ණයෙන් පෙන්වනවා.",
+      "phone": "දුරකථන",
+      "relationship": "පාරිභෝගිකයාව දන්නේ කොහොමද",
+      "relationships": {
+        "family": "පවුලේ",
+        "friend": "යාළුවෙක්",
+        "employer": "සේවා යෝජකයා",
+        "other": "වෙනත්"
+      },
+      "copies": "පිටපත්",
+      "copiesNote": "NIC එකේ දෙපැත්ත සහ රියදුරු බලපත්‍රය. පාරිභෝගිකයාගේ record එකේ තියාගන්නවා.",
+      "save": "ඇපකරු save කරන්න",
+      "existing": "මේ NIC එක දැනටමත් මේ පාරිභෝගිකයාගේ ඇපකරුවෙක්. එයාව තෝරලා තියෙනවා.",
+      "addCopy": "පිටපත දාන්න",
+      "replace": "වෙනස් කරන්න",
+      "onFile": "තියෙනවා",
+      "missing": "නැහැ",
+      "errors": {
+        "notAllowed": "පාරිභෝගික access ඕන.",
+        "notFound": "හම්බුනේ නැහැ.",
+        "nameMissing": "නම ලියන්න.",
+        "nicInvalid": "NIC එක ඉලක්කම් 9 යි V හෝ X, නැත්නම් ඉලක්කම් 12.",
+        "phoneInvalid": "Phone අංකයේ ඉලක්කම් 9 සිට 15 දක්වා.",
+        "relationshipInvalid": "එකක් තෝරන්න.",
+        "kindInvalid": "මේ මොන පිටපතද කියලා තෝරන්න.",
+        "fileType": "ඡායාරූපයක් (JPEG, PNG, WebP, HEIC) හෝ PDF එකක් විතරයි.",
+        "fileTooBig": "File එක 10 MB ට වැඩියි.",
+        "tooLong": "දිග වැඩියි.",
+        "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
+      }
     }
   }
 }

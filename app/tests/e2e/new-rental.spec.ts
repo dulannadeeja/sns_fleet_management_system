@@ -62,8 +62,49 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page.locator('[data-estimate]')).toHaveAttribute('data-estimate', '9000');
   expect(await noSideScroll(page)).toBe(false);
   await page.getByRole('button', { name: `Save and hold ${plate}` }).click();
-  await expect(page).toHaveURL(/\/rentals\/[0-9a-f-]+\?saved=1$/);
+  await expect(page).toHaveURL(/\/rentals\/[0-9a-f-]+\/terms\?saved=1$/);
   await expect(page.getByText(`${plate} is held for this rental`)).toBeVisible();
+  const rentalUrl = page.url().replace(/\/terms\?.*$/, '');
+
+  // 05.4: a deposit of 0 is refused; 10,000 at return, fuel not counted, a reference person needed.
+  // The save button turns on once the page is ready and the choices are made.
+  await expect(async () => {
+    await page.getByRole('radio', { name: /^At return/ }).check();
+    await page.getByRole('radio', { name: /^Not required/ }).check();
+    await expect(page.getByRole('button', { name: 'Save and continue' })).toBeEnabled({ timeout: 1000 });
+  }).toPass();
+  await page.locator('input[name="deposit"]').fill('0');
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+  await expect(page.locator('.rt-field-error', { hasText: '500,000' })).toBeVisible();
+  await page.locator('input[name="deposit"]').fill('10000');
+  await page.getByRole('radio', { name: /^Required/ }).check();
+  expect(await noSideScroll(page)).toBe(false);
+
+  // 05.6: add a reference person with one copy; back on 05.4 they are chosen.
+  await page.getByRole('button', { name: 'Add a reference person' }).click();
+  await expect(page).toHaveURL(/\/reference$/);
+  await expect(page.getByRole('button', { name: 'Save reference' })).toBeEnabled();
+  const refNic = String(Math.floor(Math.random() * 1e12)).padStart(12, '0');
+  await page.locator('input[name="name"]').fill(`Sample Reference ${tag}`);
+  await page.locator('input[name="nic"]').fill(refNic);
+  await page.locator('input[name="phone"]').fill('0712345678');
+  await page.getByRole('radio', { name: 'Friend' }).check();
+  const jpeg = Buffer.alloc(64); jpeg.set([0xff, 0xd8, 0xff, 0xe0]);
+  await page.locator('input[name="nicFront"]').setInputFiles({ name: 'nic-front.jpg', mimeType: 'image/jpeg', buffer: jpeg });
+  expect(await noSideScroll(page)).toBe(false);
+  await page.getByRole('button', { name: 'Save reference' }).click();
+  await expect(page).toHaveURL(/\/terms\?ref=[0-9a-f-]+$/);
+  await expect(page.locator(`[data-reference="${refNic}"] input`)).toBeChecked();
+  // What was typed before adding the reference was saved first: the deposit and choices are still there.
+  await expect(page.locator('input[name="deposit"]')).toHaveValue('10000');
+  await expect(page.getByRole('radio', { name: /^At return/ })).toBeChecked();
+  await expect(page.getByRole('button', { name: 'Save and continue' })).toBeEnabled();
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+
+  // The rental shows the deposit and the reference copies still missing (AT-07: handover will wait for them).
+  await expect(page).toHaveURL(new RegExp(`${rentalUrl.replace(/[/.]/g, '\\$&')}\\?terms=1$`));
+  await expect(page.locator('[data-deposit]')).toHaveText('LKR 10,000');
+  await expect(page.locator('[data-ref-missing]')).toHaveAttribute('data-ref-missing', 'nicBack licence');
   await expect(page.locator('[data-estimate]')).toHaveAttribute('data-estimate', '9000');
 
   // The car is now held: it is no longer offered on 05.2.

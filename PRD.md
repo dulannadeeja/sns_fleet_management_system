@@ -553,6 +553,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Rules:**
   - Staff set or waive a deposit by car and customer; waiving needs a reason. System design → [Deposits](SNS_SYSTEM_DESIGN.md#82-deposits), [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
   - A deposit is money held, never income (PR-09).
+  - Step 4 records: the deposit (LKR 1 to 500,000, none filled in) or its waiver with a reason, which needs "Set or waive a deposit"; rent paid now or at return, fuel not counted or same level, reference person needed or not, which need Customer access. Changeable until handover, each change recorded (Confirmed: agreed by the owner, recorded by Dulan, 8 Nov 2026). "Same level" needs the owner's fuel price (Derived control). "At return" is not "Allow payment after return" (that is decided at return, ST-07.1).
   - The rent may be paid now or at return; staff may allow an unpaid balance after return, with the decision recorded. System design → [Collection](SNS_SYSTEM_DESIGN.md#81-collection).
 - **Checks:** *Check:* waiving a deposit without a reason is refused; with one, the reason, name and time are recorded and appear in the owner's daily summary.
 - **Screens:** 05.4 Deposit and payment.
@@ -563,7 +564,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Phase:** 2.
 - **Roles:** Staff, Admin decide whether one is needed.
 - **Story:** As staff, when I decide a rental needs a reference person, I record them with their documents, so that SNS has someone to contact.
-- **Rules:** needed only when staff decide; their name, NIC, phone, and ID and licence copies are then required, and handover waits for the copies. System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents), [Handover requirements](SNS_SYSTEM_DESIGN.md#handover-requirements).
+- **Rules:** needed only when staff decide; their name, NIC, phone, and ID and licence copies are then required, and handover waits for the copies. A reference person is kept with the customer and can be picked again on a later rental (one NIC, one reference person per customer); name, NIC and phone are needed to save; the three copies (NIC front and back, licence) may come later, the rental shows them missing (Confirmed: agreed by the owner, recorded by Dulan, 8 Nov 2026). System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents), [Handover requirements](SNS_SYSTEM_DESIGN.md#handover-requirements).
 - **Checks:** AT-07 "Reference person required but their licence copy missing: handover blocked".
 - **Screens:** 05.6 Reference person.
 
