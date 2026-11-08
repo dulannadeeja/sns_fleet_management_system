@@ -513,6 +513,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - Flags and unpaid debts warn; staff go ahead only with a reason. An expired licence needs the authorised person (ST-08.4). System design → [Customer onboarding and mandatory documents](SNS_SYSTEM_DESIGN.md#6-customer-onboarding-and-mandatory-documents).
   - Staff decide whether a reference person is needed (ST-05.5).
   - A customer may rent several cars at once; each is its own rental, agreement and bill.
+  - A first rental needs "Approve a first-time customer": saving it is the approval, with who saved it recorded; no separate step. With warnings, the rental is saved only with a decision to continue for exactly those warnings, used for this one rental (Confirmed: agreed by the owner, recorded by Dulan, 8 Nov 2026). System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
 - **Checks:** AT-55 "A customer with an unpaid bill and no flag starts a new rental: a debt warning shows; staff continue only with a reason". AT-09 "Customer rents two vehicles: separate rentals, agreements and bills; one payment may be allocated across both".
 - **Screens:** 05.1 Customer and warnings.
 
@@ -524,9 +525,9 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Story:** As staff, I choose a free car, so that the rental gets a car nobody else holds.
 - **Rules:**
   - Only free cars can be chosen. A car under repair, unavailable, retired, rented or reserved on any of the rental's days is not offered. System design → [Asset records, maintenance, and availability](SNS_SYSTEM_DESIGN.md#11-asset-records-maintenance-and-availability), [Advance reservations](SNS_SYSTEM_DESIGN.md#76-advance-reservations).
-  - The car is held only at handover; until then it stays free. If two people hand over the same car, only one succeeds. System design → [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
+  - Saving the rental holds the car for its days; nobody else can rent or reserve it then. Cancelling the rental frees it. If two people save the same car at once, only one succeeds (Confirmed: agreed by the owner, recorded by Dulan, 7 Nov 2026). System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey), [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
   - A car not found at this morning's check is shown as such.
-- **Checks:** AT-08 "Two employees submit handovers for the same car: only one succeeds". AT-20 "Car under repair: handover blocked". AT-30 "A car is reserved Fri to Sun; staff try to rent it for Sat: refused".
+- **Checks:** AT-08 "Two employees submit handovers for the same car: only one succeeds" (the same car can be saved on only one rental at a time). AT-20 "Car under repair: handover blocked". AT-30 "A car is reserved Fri to Sun; staff try to rent it for Sat: refused".
 - **Screens:** 05.2 Choose a car.
 
 #### ST-05.3 · Dates and estimate
