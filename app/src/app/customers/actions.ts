@@ -104,9 +104,11 @@ export async function goAheadAction(customerId: string, _: FlagFormState, form: 
   });
   if ('error' in result) {
     // "Changed meanwhile": the page is drawn again with the warnings as they are now, so the next try can go through.
-    if (result.error === 'stale') revalidatePath(`/customers/${customerId}/check`);
+    if (result.error === 'stale') revalidatePath(text(form, 'next') === 'rental' ? '/rentals/new' : `/customers/${customerId}/check`);
     return { error: result.error, values };
   }
   revalidatePath(`/customers/${customerId}`);
+  // From New rental (#51): the decision goes with the rental being started, to choosing its car.
+  if (text(form, 'next') === 'rental') redirect(`/rentals/new/car?customer=${customerId}&ok=${result.id}`);
   redirect(`/customers/${customerId}?flag=decided`);
 }

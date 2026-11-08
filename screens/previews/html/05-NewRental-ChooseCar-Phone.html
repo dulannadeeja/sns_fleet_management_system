@@ -517,6 +517,16 @@ a.rt-li:hover, a.rt-vrow:hover { background: var(--paper); color: var(--ink); }
   .rt-li-meta { font-size: 14px; }
   .rt-vrow { padding: var(--space-2) 16px; }
 }
+/* TextField: label over a 52px input; required in words; hint and error below (boards 01.1, 01.2). */
+.rt-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.rt-field-label { font-size: 16px; line-height: 26px; font-weight: 600; }
+.rt-field-req { color: var(--overdue); }
+.rt-input { min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: var(--radius-md); background: var(--card); color: var(--ink); font: inherit; font-size: 17px; width: 100%; box-sizing: border-box; }
+.rt-input:focus { outline: none; border: 2px solid var(--sapphire); padding: 11.5px 13.5px; }
+.rt-input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.rt-input[aria-invalid="true"] { border-color: var(--overdue); }
+.rt-field-hint { font-size: 14px; line-height: 22px; color: var(--ink-muted); }
+.rt-field-error { font-size: 14px; line-height: 22px; font-weight: 600; color: var(--overdue); }
 </style>
 
 
@@ -533,7 +543,7 @@ a{color:#1756a9}a:hover{color:#0f3e7e}
   <div style="font-size: 15px; line-height: 24px; font-weight: 600; color: var(--sapphire-strong)">පියවර <span class="rt-num">2</span> / <span class="rt-num">5</span> · වාහනය <span class="rt-en">· Car</span></div>
 </div><section style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 14px">
   <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--card); font-size: 15px; font-weight: 600">TR</span>
-  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Tharindu R.</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">first rental · approved by Ruwan</span></span>
+  <span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 24px; font-weight: 600">Tharindu R.</span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">first rental</span></span>
 </section><label style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--card); color: var(--ink); font: inherit; font-size: 17px; box-sizing: border-box; width: 100%"><span data-x-import="Plate.Icon" style="display: contents; color: var(--ink-muted)"><svg class="rt-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span><input value="Wagon R" style="flex: 1 1 0%; min-width: 0px; border: 0px; outline: none; background: transparent; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 17px; color: var(--ink);"></label><span style="font-size: 15px; line-height: 24px; color: var(--ink-muted)">Free Wagon R cars right now · 6</span><label style="display: grid; grid-template-columns: 72px minmax(0, 1fr) fit-content(45%); gap: 12px; align-items: center; padding: 10px 14px; border: 2px solid var(--sapphire); background: var(--sapphire-tint); border-radius: 14px">
   <span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; flex: none; width: 72px; height: 54px; border-radius: 10px; background: var(--sunken)"><span data-x-import="Plate.VehicleImage" style="display: contents; width: 100%; height: 100%"><img class="rt-vimg" src="../../../brand/vehicles/256/sns-vehicle-wagon-r.png" alt="" loading="eager" decoding="async" draggable="false"></span></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><span data-x-import="Plate.PlateBadge" style="display: contents;"><span class="rt-plate rt-plate-sm" aria-label="අංකය CBF 7720">CBF 7720</span></span><span style="font-size: 14px; line-height: 22px; color: var(--ink-muted)">Wagon R · 4,500 a day</span></span>
   <input type="radio" name="car" checked="" style="width: 22px; height: 22px; margin: 0px;">

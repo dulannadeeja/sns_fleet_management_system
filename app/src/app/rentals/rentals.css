@@ -1,0 +1,15 @@
+/* New rental (#51, boards 05.1 to 05.3): the step line, the chosen customer, the car rows and the estimate. */
+.ren-step { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; font-size: 14px; color: var(--ink-muted); margin: 0; }
+.ren-step b { color: var(--ink); font-weight: 600; }
+.ren-who { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.ren-who .rt-btn { margin-left: auto; text-decoration: none; }
+.ren-car { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 14px 20px; border-top: 1px solid var(--line); color: inherit; text-decoration: none; }
+.ren-car:first-of-type { border-top: 0; }
+a.ren-car:hover { background: var(--sunken); }
+.ren-lines { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; margin: 0; }
+.ren-lines dt { color: var(--ink-muted); }
+.ren-lines dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.ren-lines .ren-total { font-weight: 600; color: var(--ink); }
+.ren-days { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; }
+.ren-days .rt-field { width: 160px; }
+@media (max-width: 720px) { .ren-car { padding: 12px 16px; } }
