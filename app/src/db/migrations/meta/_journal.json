@@ -173,8 +173,15 @@
     {
       "idx": 24,
       "version": "7",
-      "when": 1794147669604,
+      "when": 1794146857147,
       "tag": "0024_rental_terms_references",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1794151973278,
+      "tag": "0025_rental_reference_rules",
       "breakpoints": true
     }
   ]

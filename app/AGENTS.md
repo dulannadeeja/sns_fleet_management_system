@@ -16,7 +16,7 @@ Built exactly as `TRD.md` says: one Next.js app (TypeScript), PostgreSQL with Dr
 | One test | `npx vitest run tests/at/at-03.test.ts` |
 | Which AT-nn have a test | `npm run test:at-coverage` (lists; `test:at-coverage:strict` fails on any gap: the release gate) |
 | Browser journeys (Chromium, desktop and phone sizes; needs `.env.local`; first run `npx playwright install chromium`) | `npm run test:e2e` |
-| Migrations | change `src/db/schema/`, then `npm run db:generate` and review the SQL; a rule SQL alone (a trigger) is `npx drizzle-kit generate --custom --name <what>`; apply with `npm run db:migrate`. Tests apply them by themselves |
+| Migrations | never change a migration once it is pushed (a Vercel preview build may already have run it on the shared test-site database): add a new one. Change `src/db/schema/`, then `npm run db:generate` and review the SQL; a rule SQL alone (a trigger) is `npx drizzle-kit generate --custom --name <what>`; apply with `npm run db:migrate`. Tests apply them by themselves |
 | Build (checks Sinhala and English have the same words first) | `npm run build` |
 | Dev server (needs `.env.local`, below) | `npm run dev` |
 | Add the primary owner once (then the owner adds people on screen 15.4) | `npm run people:add -- --name "Full name" --phone 07XXXXXXXX --role owner --email name@example.com` (asks for the password; it shows while typed, and is never printed or logged) |

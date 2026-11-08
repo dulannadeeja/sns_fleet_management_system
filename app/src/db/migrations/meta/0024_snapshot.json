@@ -1,5 +1,5 @@
 {
-  "id": "500a70c4-b3c9-412b-82be-c0a83e16ded1",
+  "id": "0ef11af7-a375-424c-92d5-acdcea58243a",
   "prevId": "d8452ec3-bb05-4735-ad5a-3b4dcd34f153",
   "version": "7",
   "dialect": "postgresql",
@@ -2470,14 +2470,6 @@
             "customer_id",
             "nic"
           ]
-        },
-        "reference_person_of_customer": {
-          "name": "reference_person_of_customer",
-          "nullsNotDistinct": false,
-          "columns": [
-            "customer_id",
-            "id"
-          ]
         }
       },
       "policies": {},
@@ -2675,21 +2667,6 @@
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
-        },
-        "rental_reference_of_customer": {
-          "name": "rental_reference_of_customer",
-          "tableFrom": "rental",
-          "tableTo": "reference_person",
-          "columnsFrom": [
-            "customer_id",
-            "reference_person_id"
-          ],
-          "columnsTo": [
-            "customer_id",
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -2727,10 +2704,6 @@
         "rental_fuel": {
           "name": "rental_fuel",
           "value": "fuel is null or fuel in ('notCounted', 'sameLevel')"
-        },
-        "rental_reference_only_if_required": {
-          "name": "rental_reference_only_if_required",
-          "value": "reference_person_id is null or reference_required = true"
         },
         "rental_terms_complete": {
           "name": "rental_terms_complete",
