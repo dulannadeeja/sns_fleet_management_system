@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { requirePermission } from '../../auth/require';
 import { createRental, rentalTerms } from '../../modules/rentals/rentals';
 import { setRentalTerms, type Fuel, type RentPaid } from '../../modules/rentals/terms';
+import { printAgreement, uploadSigned } from '../../modules/rentals/agreements';
 import { addReference, addReferenceCopy, REF_COPY_KINDS } from '../../modules/customers/references';
 import { MAX_COPY_BYTES } from '../../storage/kinds';
 
@@ -41,7 +42,7 @@ export async function saveTermsAction(rentalId: string, _: TermsState, form: For
   revalidatePath(`/rentals/${rentalId}`);
   // "Save and add a reference person": what was typed is saved first, so nothing is lost (#54 review).
   if (String(form.get('next') ?? '') === 'reference') redirect(`/rentals/${rentalId}/reference`);
-  redirect(`/rentals/${rentalId}?terms=1`);
+  redirect(`/rentals/${rentalId}/review?terms=1`);
 }
 
 export type RefState = { error?: string; kind?: string; values?: Record<string, string> };
@@ -83,4 +84,27 @@ export async function addRefCopyAction(rentalId: string, referenceId: string, ki
   if ('error' in result) return { error: result.error, kind };
   revalidatePath(`/rentals/${rentalId}`);
   redirect(`/rentals/${rentalId}?copy=1`);
+}
+
+// 05.5 Review and print, and the signed copy (#55). The module checks again and writes the activity log.
+export type PrintState = { error?: string; language?: string };
+
+export async function printAgreementAction(rentalId: string, _: PrintState, form: FormData): Promise<PrintState> {
+  const person = await requirePermission('customerAccess');
+  const language = String(form.get('language') ?? '');
+  const result = await printAgreement(person.id, rentalId, language);
+  if ('error' in result) return { error: result.error, language };
+  revalidatePath(`/rentals/${rentalId}`);
+  redirect(`/rentals/${rentalId}/agreement/${result.id}`);
+}
+
+export async function uploadSignedAction(rentalId: string, _: PrintState, form: FormData): Promise<PrintState> {
+  const person = await requirePermission('customerAccess');
+  const f = form.get('file');
+  if (!(f instanceof File) || f.size === 0) return { error: 'fileType' };
+  if (f.size > MAX_COPY_BYTES) return { error: 'fileTooBig' };
+  const result = await uploadSigned(person.id, rentalId, new Uint8Array(await f.arrayBuffer()));
+  if ('error' in result) return { error: result.error };
+  revalidatePath(`/rentals/${rentalId}`);
+  redirect(`/rentals/${rentalId}?signed=1`);
 }

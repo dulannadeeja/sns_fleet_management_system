@@ -1,6 +1,7 @@
 import { and, desc, eq, inArray, isNull, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { auditEvent, goliveTick, permissionGrant, startingPackage, user, vehicle, vehicleStatusEvent } from '../../db/schema';
+import { agreementWording, auditEvent, goliveTick, permissionGrant, startingPackage, user, vehicle, vehicleStatusEvent } from '../../db/schema';
+import { readSettings } from '../settings/settings';
 import type { Permission } from '../../auth/permissions';
 
 // The go-live checklist (ST-01.3; system design, starting data). Confirmed: the system goes live only when all of
@@ -9,12 +10,14 @@ import type { Permission } from '../../auth/permissions';
 // write-offs, cancellation fees and expired papers; opening cash in the drawer; SNS's agreement wording; and every Open
 // decision. Confirmed 5 Nov 2026: the owner only; the system checks what it can count; the owner ticks the rest
 // (untick with a reason); items whose part is not built yet show "Not ready" and block. Going live itself is Phase 4.
+// 8 Nov 2026 (#55, system design 14, Confirmed): the business details and the agreement wording are checked by the
+// system: done once the owner has filled the details in and approved a wording version.
 
 export type ItemKind = 'auto' | 'tick' | 'later';
 /** The three groups of board 01.3. */
 export const GROUPS = { business: ['businessDetails', 'carsEntered', 'startingPackages', 'carDates', 'partnerCars'], people: ['staffAccounts', 'authorisedPerson'], firstDay: ['openingCash', 'agreementWording', 'openDecisions'] } as const;
 export const ITEMS = [
-  { key: 'businessDetails', kind: 'later', part: 'printouts' },
+  { key: 'businessDetails', kind: 'auto' },
   { key: 'carsEntered', kind: 'tick' },
   { key: 'startingPackages', kind: 'tick' },
   { key: 'carDates', kind: 'auto' },
@@ -22,7 +25,7 @@ export const ITEMS = [
   { key: 'staffAccounts', kind: 'tick' },
   { key: 'authorisedPerson', kind: 'auto' },
   { key: 'openingCash', kind: 'later', part: 'money' },
-  { key: 'agreementWording', kind: 'later', part: 'printouts' },
+  { key: 'agreementWording', kind: 'auto' },
   { key: 'openDecisions', kind: 'tick' },
 ] as const satisfies readonly { key: string; kind: ItemKind; part?: string }[];
 export type ItemKey = (typeof ITEMS)[number]['key'];
@@ -45,7 +48,7 @@ export async function readChecklist(): Promise<Checklist> {
   // One light read of the cars (the owner's home runs this too): only what the checks need, with each car's newest status.
   const state = db.selectDistinctOn([vehicleStatusEvent.vehicleId], { vehicleId: vehicleStatusEvent.vehicleId, status: vehicleStatusEvent.status })
     .from(vehicleStatusEvent).orderBy(vehicleStatusEvent.vehicleId, desc(vehicleStatusEvent.createdAt), desc(vehicleStatusEvent.id)).as('state');
-  const [cars, named, [{ people }], [{ packages }], ticks] = await Promise.all([
+  const [cars, named, [{ people }], [{ packages }], ticks, settings, [{ approved }]] = await Promise.all([
     db.select({ plate: vehicle.registration, ownership: vehicle.ownership, partnerId: vehicle.partnerOwnerId, insurance: vehicle.insuranceExpires,
       licence: vehicle.licenceExpires, status: state.status }).from(vehicle).leftJoin(state, eq(state.vehicleId, vehicle.id)).orderBy(vehicle.registration),
     // Someone active, other than the owner, holds each authorised task.
@@ -55,7 +58,10 @@ export async function readChecklist(): Promise<Checklist> {
     db.select({ packages: sql<number>`count(*)::int` }).from(startingPackage),
     db.selectDistinctOn([goliveTick.item], { item: goliveTick.item, done: goliveTick.done, reason: goliveTick.reason, at: goliveTick.createdAt, byName: user.name })
       .from(goliveTick).leftJoin(user, eq(user.id, goliveTick.createdBy)).orderBy(goliveTick.item, desc(goliveTick.createdAt), desc(goliveTick.id)),
+    readSettings(),
+    db.select({ approved: sql<number>`count(*)::int` }).from(agreementWording).where(sql`${agreementWording.approvedAt} is not null`),
   ]);
+  const businessSet = !!(settings.businessName && settings.businessAddress && settings.businessPhones);
   const fleet = cars.filter((c) => c.status !== 'retired');
   const noInsurance = fleet.filter((c) => !c.insurance).map((c) => c.plate);
   const noLicence = fleet.filter((c) => !c.licence).map((c) => c.plate);
@@ -73,12 +79,15 @@ export async function readChecklist(): Promise<Checklist> {
           : i.key === 'carDates' ? { cars: fleet.length, noInsurance, noLicence }
             : i.key === 'partnerCars' ? { partnerCars, unlinked }
               : i.key === 'staffAccounts' ? { people }
-                : i.key === 'authorisedPerson' ? { notNamed: notNamed as string[] } : {};
+                : i.key === 'authorisedPerson' ? { notNamed: notNamed as string[] }
+                  : i.key === 'agreementWording' ? { approved } : {};
     const done = i.kind === 'later' ? false
       : i.kind === 'tick' ? !!tick?.done
         : i.key === 'carDates' ? fleet.length > 0 && !noInsurance.length && !noLicence.length
           : i.key === 'partnerCars' ? !unlinked.length
-            : !notNamed.length;
+            : i.key === 'businessDetails' ? businessSet
+              : i.key === 'agreementWording' ? approved > 0
+                : !notNamed.length;
     return { key: i.key, kind: i.kind, ...('part' in i ? { part: i.part } : {}), done, facts, tick };
   });
   const blockers = items.filter((i) => !i.done).map((i) => i.key);

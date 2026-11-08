@@ -14,6 +14,8 @@ const tstzrange = customType<{ data: string }>({ dataType: () => 'tstzrange' });
  *  each segment), never the car's live package (PR-08, AT-05). */
 export const rental = pgTable('rental', {
   id: uuid('id').primaryKey().defaultRandom(),
+  // The rental's number on paper (R-0001, R-0002 …; system design 14, 8 Nov 2026).
+  number: integer('number').generatedByDefaultAsIdentity().notNull().unique('rental_one_per_number'),
   customerId: uuid('customer_id').notNull().references(() => customer.id),
   status: text('status').notNull().default('draft'),
   pickupAt: timestamp('pickup_at', { withTimezone: true }).notNull(),

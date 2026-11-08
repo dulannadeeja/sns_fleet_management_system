@@ -10,7 +10,7 @@ function files(dir: string): string[] {
   return readdirSync(dir).flatMap((f) => (statSync(join(dir, f)).isDirectory() ? files(join(dir, f)) : [join(dir, f)]));
 }
 const WRITTEN = [...new Set([...files('src/modules'), ...files('src/auth')].filter((f) => /\.tsx?$/.test(f))
-  .flatMap((f) => [...readFileSync(f, 'utf8').matchAll(/'((?:person|permission|payment|customer|vehicle|car|package|setting|golive|rental)\.[a-zA-Z]+)'/g)].map((m) => m[1])))];
+  .flatMap((f) => [...readFileSync(f, 'utf8').matchAll(/'((?:person|permission|payment|customer|vehicle|car|package|setting|golive|rental|document)\.[a-zA-Z]+)'/g)].map((m) => m[1])))];
 const get = (o: unknown, path: string) => path.split('.').reduce<unknown>((x, k) => (x as Record<string, unknown>)?.[k], o);
 
 describe('activity log words', () => {

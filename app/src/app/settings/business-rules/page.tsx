@@ -25,6 +25,7 @@ export default async function BusinessRulesPage({ searchParams }: { searchParams
       documents: s.documentReminderDays, serviceDays: s.serviceReminderDays, serviceKm: showNumber(s.serviceReminderKm), payroll: s.payrollReminderDays,
     }) },
     { group: 'fuel', value: s.fuelPricePerLitre === null ? t('rules.notSet') : t('rules.groups.fuel.value', { price: showNumber(s.fuelPricePerLitre) }) },
+    { group: 'business', value: s.businessName && s.businessAddress && s.businessPhones ? [s.businessName, s.businessRegistration, s.businessAddress, s.businessPhones].filter(Boolean).join(' · ') : t('rules.notSet') },
   ];
   return (
     <SettingsFrame person={person} active="rules" subtitle={t('businessRules')} backHref="/">

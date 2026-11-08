@@ -14,7 +14,7 @@ import './settings.css';
 // with a back link; then the Settings list and the page. The menu holds only what is built so far (each feature adds
 // its own item); the Settings list shows only the Settings pages that exist.
 export async function SettingsFrame({ person, active, subtitle, backHref, children }: {
-  person: SignedInPerson; active: 'people' | 'permissions' | 'activity' | 'rules' | 'packages' | 'golive'; subtitle: string; backHref: string; children: ReactNode;
+  person: SignedInPerson; active: 'people' | 'permissions' | 'activity' | 'rules' | 'packages' | 'golive' | 'agreement'; subtitle: string; backHref: string; children: ReactNode;
 }) {
   const t = await getTranslations();
   const seeLog = await mayDo(person, 'seeActivityLog');
@@ -36,6 +36,8 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
                 <Link href="/settings/people" aria-current={active === 'people' ? 'page' : undefined}><Icon name="idcard" size={20} />{t('settings.people')}</Link>
                 {/* Ready to start (01.3, #25): the go-live checklist, the owner only. */}
                 <Link href="/settings/golive" aria-current={active === 'golive' ? 'page' : undefined}><Icon name="clipboard" size={20} />{t('settings.golive.nav')}</Link>
+                {/* Agreement wording (#55): the owner adds and approves each version. */}
+                <Link href="/settings/agreement" aria-current={active === 'agreement' ? 'page' : undefined}><Icon name="pen" size={20} />{t('settings.agreement.nav')}</Link>
               </>
             ) : null}
             {/* Everyone who works at SNS reads the business rules (15.2); the log only for whoever may see it (15.5). */}

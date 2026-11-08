@@ -13,13 +13,18 @@ const remindersNow = async () => {
 };
 
 describe('ST-15.3: owner settings', () => {
-  it('has the agreed starting values and three groups', () => {
+  it('has the agreed starting values and four groups (business details since 8 Nov 2026)', () => {
     expect(Object.fromEntries(Object.entries(SETTINGS).map(([k, s]) => [k, s.start]))).toEqual({
       pickupCutoff: '15:00', returnDeadline: '08:00',
       documentReminderDays: 30, serviceReminderDays: 7, serviceReminderKm: 500, payrollReminderDays: 3,
-      fuelPricePerLitre: null,
+      fuelPricePerLitre: null, businessName: null, businessRegistration: null, businessAddress: null, businessPhones: null,
     });
-    expect(GROUPS).toEqual(['dayTimes', 'reminders', 'fuel']);
+    // Business details: name, address and phones needed; the registration number may stay empty.
+    const ok = { businessName: 'Sample Rent a Car', businessRegistration: '', businessAddress: 'Sample road, Elpitiya', businessPhones: '0770000000' };
+    expect(checkGroup('business', ok).ok).toBe(true);
+    expect(checkGroup('business', { ...ok, businessName: '' }).errors).toEqual({ businessName: 'required' });
+    expect(checkGroup('business', { ...ok, businessAddress: 'x'.repeat(161) }).errors).toEqual({ businessAddress: 'tooLong' });
+    expect(GROUPS).toEqual(['dayTimes', 'reminders', 'fuel', 'business']);
   });
 
   it('the return deadline is earlier in the day than the pickup cutoff (5.1, Confirmed 7 Nov 2026)', () => {

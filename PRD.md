@@ -577,6 +577,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Rules:**
   - The agreement is filled with the customer, car, dates and agreed prices, in the chosen language (PR-10). It is printed, signed, and the signed copy uploaded before handover. System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
   - The conditions are SNS's own wording, approved by SNS; nothing is taken from the unverified reference images.
+  - The wording is versioned in Settings › Agreement wording: only the owner adds and approves a version; the newest approved one is printed and recorded on each printout; none approved means no printing for signing. Business details on printouts are owner settings. The rental has a number (R-0001 …). The signed copy (photo or PDF up to 10 MB) is uploaded to the rental; a change of terms afterwards makes it out of date until a newly signed copy is uploaded (Confirmed: agreed by the owner, recorded by Dulan, 8 Nov 2026). System design → [Documents, languages, and exports](SNS_SYSTEM_DESIGN.md#14-documents-languages-and-exports).
 - **Checks:** AT-06 "Missing signed agreement: handover blocked".
 - **Screens:** 05.5 Review and print; prints 16.1 or 16.2 (ST-16.1).
 - **Decided:** DN-20.
