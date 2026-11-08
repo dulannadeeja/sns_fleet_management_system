@@ -4,6 +4,8 @@ import { carIsFree, createRental, rentalEstimate, rentalTerms } from '../src/mod
 import { changeStatus } from '../src/modules/cars/status';
 import { setPermission, turnOff } from '../src/modules/people/people';
 import { addFlag, goAhead } from '../src/modules/customers/flags';
+import { addCustomer } from '../src/modules/customers/customers';
+import { sampleCustomer } from './helpers/customers';
 import { theOwner, samplePerson } from './helpers/people';
 import { sampleCarAndCustomer, samplePickup } from './helpers/rentals';
 
@@ -137,5 +139,29 @@ describe('warnings and the first rental at New rental (system design 7.1, Confir
     const ev = await pool.query("select details from rental_event where rental_id = $1", [first.id]);
     expect(ev.rows[0].details).toMatchObject({ firstRental: true });
     expect(await createRental(staff, { customerId: a.customerId, vehicleId: b.carId, pickupAt: samplePickup(), days: 1 })).toMatchObject({ ok: true });
+  });
+
+  it('two saves with the same decision at the same moment: only one rental starts', async () => {
+    const owner = await theOwner();
+    const { customerId } = await sampleCarAndCustomer(owner);
+    const cars = await Promise.all([sampleCarAndCustomer(owner), sampleCarAndCustomer(owner)]);
+    const f = await addFlag(owner, customerId, { kind: 'other', details: 'Sample: check' });
+    if (!('ok' in f)) throw new Error(JSON.stringify(f));
+    const ok = await goAhead(owner, customerId, { reason: 'Sample: fine', shownFlagIds: [f.id], shownLicenceExpired: false });
+    if (!('ok' in ok)) throw new Error(JSON.stringify(ok));
+    const results = await Promise.all(cars.map((c) => createRental(owner, { customerId, vehicleId: c.carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })));
+    expect(results.filter((r) => 'ok' in r)).toHaveLength(1);
+    expect(results.filter((r) => 'error' in r && r.error === 'warningsNotCleared')).toHaveLength(1);
+  });
+
+  it('an expired licence alone also needs the decision', async () => {
+    const owner = await theOwner();
+    const { carId } = await sampleCarAndCustomer(owner);
+    const c = await addCustomer(owner, { ...sampleCustomer(), licenceExpires: '2020-01-31' });
+    if (!('ok' in c)) throw new Error(JSON.stringify(c));
+    expect(await createRental(owner, { customerId: c.id, vehicleId: carId, pickupAt: samplePickup(), days: 1 })).toEqual({ error: 'warningsNotCleared' });
+    const ok = await goAhead(owner, c.id, { reason: 'Sample: renewal shown at the counter', shownFlagIds: [], shownLicenceExpired: true });
+    if (!('ok' in ok)) throw new Error(JSON.stringify(ok));
+    expect(await createRental(owner, { customerId: c.id, vehicleId: carId, pickupAt: samplePickup(), days: 1, goAheadId: ok.id })).toMatchObject({ ok: true });
   });
 });

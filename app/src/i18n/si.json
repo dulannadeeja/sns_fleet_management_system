@@ -1217,7 +1217,7 @@
     "extraKmValue": "km එකට රු. {rate}, ආපසු දෙද්දී",
     "longRental": "දිගු කුලී අමතරය",
     "longRentalValue": "දවස් {n} × රු. {rate}",
-    "total": "ඇස්තමේන්තුව",
+    "total": "ඇස්තමේන්තු මුළු මුදල",
     "totalValue": "රු. {total} + අමතර km",
     "lockNote": "Save කරද්දී {plate} ගේ package එක මේ කුලියට copy වෙනවා. පස්සේ මිල වෙනස් වුණත් මේකට බලපාන්නේ නැහැ.",
     "save": "Save කරලා {plate} තියාගන්න",

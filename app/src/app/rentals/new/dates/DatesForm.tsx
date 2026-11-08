@@ -42,7 +42,7 @@ export function DatesForm({ customerId, vehicleId, goAheadId, plate, terms, cuto
       <section className="car-card" aria-labelledby="est-h">
         <h2 id="est-h">{w.estimate}</h2>
         {e ? (
-          <dl className="ren-lines" data-estimate={e.total}>
+          <dl className="ren-lines" data-estimate={e.total} aria-live="polite">
             <dt>{fill(w.base, { days: e.days, rate: money(terms.dailyRate) })}</dt><dd>{money(e.base)}</dd>
             {e.longRental ? <><dt>{w.longRental}</dt><dd>{`${fill(w.longRentalValue, { n: e.longRentalDays, rate: money(terms.longRentalExtra) })} = ${money(e.longRental)}`}</dd></> : null}
             <dt>{w.includedKm}</dt><dd>{fill(w.kmValue, { km: money(e.includedKm) })}</dd>
@@ -53,6 +53,8 @@ export function DatesForm({ customerId, vehicleId, goAheadId, plate, terms, cuto
         <span className="set-muted">{fill(w.lockNote, { plate })}</span>
       </section>
       {err && state.error !== 'daysInvalid' ? <Notice tone="danger">{err}</Notice> : null}
+      {state.error === 'warningsNotCleared' || state.error === 'firstRentalNotAllowed'
+        ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/new?customer=${customerId}`}>{w.steps.customer}</Link></div> : null}
       <div className="set-actions">
         <Link className="rt-btn rt-btn-quiet" href={back}>{w.steps.car}</Link>
         <Button type="submit" icon="arrowRight" disabled={pending || !ready || !days}>{fill(w.save, { plate })}</Button>

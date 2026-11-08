@@ -1217,7 +1217,7 @@
     "extraKmValue": "LKR {rate} a km, at return",
     "longRental": "Long-rental extra",
     "longRentalValue": "{n} days × LKR {rate}",
-    "total": "Estimate",
+    "total": "Estimated total",
     "totalValue": "LKR {total} + extra km",
     "lockNote": "{plate}'s package is copied onto this rental when you save. Later price changes do not affect it.",
     "save": "Save and hold {plate}",
