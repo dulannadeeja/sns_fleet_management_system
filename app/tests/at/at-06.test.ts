@@ -35,8 +35,15 @@ describe('AT-06 (partial: the handover block is #57): the signed agreement', () 
     expect(await uploadSigned(owner, id, NOT_A_PHOTO)).toEqual({ error: 'fileType' });
     expect(await uploadSigned(owner, id, JPEG)).toEqual({ ok: true });
     expect(await agreementState(id)).toMatchObject({ printed: true, outOfDate: false });
+    // Choosing a reference person does not change the printout: the signed copy stays current.
+    expect(await setRentalTerms(owner, id, { ...terms, referenceRequired: true })).toEqual({ ok: true });
+    expect(await agreementState(id)).toMatchObject({ outOfDate: false });
+    // A change of what is printed makes it out of date; the old scan cannot be uploaded again without a new printout.
     expect(await setRentalTerms(owner, id, { ...terms, deposit: 12_000 })).toEqual({ ok: true });
-    expect(await agreementState(id)).toMatchObject({ outOfDate: true });
+    expect(await agreementState(id)).toMatchObject({ outOfDate: true, printCurrent: false });
+    expect(await uploadSigned(owner, id, JPEG)).toEqual({ error: 'reprintFirst' });
+    expect(await printAgreement(owner, id, 'si')).toMatchObject({ ok: true });
+    expect(await agreementState(id)).toMatchObject({ outOfDate: true, printCurrent: true });
     expect(await uploadSigned(owner, id, JPEG)).toEqual({ ok: true });
     expect(await agreementState(id)).toMatchObject({ outOfDate: false });
   });

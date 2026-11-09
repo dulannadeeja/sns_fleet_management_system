@@ -43,7 +43,7 @@ export async function setRentalTerms(actorId: string, rentalId: string, input: T
     if (!a || !allows(a, granted, 'customerAccess')) return { error: 'notAllowed' } as const;
     await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId}`}))`);
     const [r] = await tx.select({ status: rental.status, customerId: rental.customerId, fuelPrice: rentalTermsSnapshot.fuelPricePerLitre, name: customer.name,
-      deposit: rental.depositAmount, waived: rental.depositWaivedReason, termsSetAt: rental.termsSetAt })
+      deposit: rental.depositAmount, waived: rental.depositWaivedReason, termsSetAt: rental.termsSetAt, rentPaid: rental.rentPaid, fuel: rental.fuel })
       .from(rental).innerJoin(rentalTermsSnapshot, eq(rentalTermsSnapshot.rentalId, rental.id)).innerJoin(customer, eq(customer.id, rental.customerId))
       .where(eq(rental.id, rentalId));
     if (!r) return { error: 'notFound' } as const;
@@ -58,7 +58,10 @@ export async function setRentalTerms(actorId: string, rentalId: string, input: T
     }
     const values = { depositAmount: waived ? null : input.deposit, depositWaivedReason: waived ? reason : null, rentPaid: input.rentPaid, fuel: input.fuel,
       referenceRequired: input.referenceRequired, referencePersonId: refId };
-    await tx.update(rental).set({ ...values, termsSetAt: sql`now()`, updatedAt: sql`now()` }).where(eq(rental.id, rentalId));
+    // termsSetAt marks the last change of what the agreement prints (deposit, rent timing, fuel; 9 Nov 2026): a signed
+    // copy must sign a printout made after it. Choosing the reference person does not change the printout.
+    const printedChanged = depositChanged || r.rentPaid !== input.rentPaid || r.fuel !== input.fuel;
+    await tx.update(rental).set({ ...values, ...(printedChanged ? { termsSetAt: sql`now()` } : {}), updatedAt: sql`now()` }).where(eq(rental.id, rentalId));
     const details = { deposit: values.depositAmount, ...(waived ? { waivedReason: reason } : {}), rentPaid: values.rentPaid, fuel: values.fuel,
       referenceRequired: values.referenceRequired, ...(refId ? { referencePersonId: refId } : {}) };
     await tx.insert(rentalEvent).values({ rentalId, kind: 'terms', details, createdBy: actorId });

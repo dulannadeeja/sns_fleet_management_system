@@ -190,6 +190,13 @@
       "when": 1794175564052,
       "tag": "0026_agreements",
       "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1794176334740,
+      "tag": "0027_agreement_signed_print",
+      "breakpoints": true
     }
   ]
 }

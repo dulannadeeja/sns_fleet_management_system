@@ -19,10 +19,11 @@ describe('ST-15.3: owner settings', () => {
       documentReminderDays: 30, serviceReminderDays: 7, serviceReminderKm: 500, payrollReminderDays: 3,
       fuelPricePerLitre: null, businessName: null, businessRegistration: null, businessAddress: null, businessPhones: null,
     });
-    // Business details: name, address and phones needed; the registration number may stay empty.
-    const ok = { businessName: 'Sample Rent a Car', businessRegistration: '', businessAddress: 'Sample road, Elpitiya', businessPhones: '0770000000' };
+    // Business details: all four needed (the registration number too, Confirmed 9 Nov 2026).
+    const ok = { businessName: 'Sample Rent a Car', businessRegistration: 'Sample PV 00000', businessAddress: 'Sample road, Elpitiya', businessPhones: '0770000000' };
     expect(checkGroup('business', ok).ok).toBe(true);
     expect(checkGroup('business', { ...ok, businessName: '' }).errors).toEqual({ businessName: 'required' });
+    expect(checkGroup('business', { ...ok, businessRegistration: '' }).errors).toEqual({ businessRegistration: 'required' });
     expect(checkGroup('business', { ...ok, businessAddress: 'x'.repeat(161) }).errors).toEqual({ businessAddress: 'tooLong' });
     expect(GROUPS).toEqual(['dayTimes', 'reminders', 'fuel', 'business']);
   });

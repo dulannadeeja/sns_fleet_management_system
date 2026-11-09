@@ -405,7 +405,7 @@
         "businessRegistration": {
           "label": "Registration number",
           "unit": "",
-          "hint": "Can stay empty. Up to 40 letters."
+          "hint": "As on the business registration. Up to 40 letters."
         },
         "businessAddress": {
           "label": "Address",
@@ -570,7 +570,7 @@
           ],
           "before": [
             "Check the spelling: customers sign the agreement under this name.",
-            "The registration number may stay empty."
+            "All four details are needed before an agreement can be printed."
           ]
         }
       }
@@ -676,7 +676,8 @@
         "textMissing": "Type the conditions in both languages.",
         "tooLong": "Too long: 20,000 letters at most.",
         "alreadyApproved": "Already approved.",
-        "failed": "Not saved. Try again."
+        "failed": "Not saved. Try again.",
+        "olderThanCurrent": "A newer version is already printed. Add a new version instead."
       }
     }
   },
@@ -1442,7 +1443,8 @@
         "noBusinessDetails": "The business details are not filled in yet.",
         "languageInvalid": "Choose Sinhala or English.",
         "failed": "Not printed. Try again."
-      }
+      },
+      "held": "{plate} is held for this rental; nobody else can rent it for these days."
     },
     "signed": {
       "title": "Signed agreement",
@@ -1462,7 +1464,8 @@
         "notPrinted": "Print the agreement first.",
         "fileType": "Only a photo (JPEG, PNG, WebP, HEIC) or a PDF.",
         "fileTooBig": "The file is over 10 MB.",
-        "failed": "Not saved. Try again."
+        "failed": "Not saved. Try again.",
+        "reprintFirst": "The printed terms changed after the last printout: print again, have the new one signed, then upload it."
       }
     }
   },
@@ -1496,13 +1499,15 @@
     "rentReturn": "at return",
     "fuel": "Fuel",
     "fuelNotCounted": "not counted",
-    "fuelSame": "same level: missing litres charged at the price on the agreed date",
+    "fuelSame": "same level",
     "conditions": "Conditions",
     "signature": "Customer’s signature",
     "forSns": "For SNS: {name}",
     "footer": "Printed {date} by {name}. Conditions version {version}.",
     "reg": "Reg. {reg}",
     "print": "Print",
-    "back": "Back to the rental"
+    "back": "Back to the rental",
+    "longRentalValue": "LKR {amount}",
+    "licenceOnFile": "recorded · copy on file"
   }
 }

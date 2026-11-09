@@ -7,7 +7,7 @@ const BUSINESS = ['businessName', 'businessRegistration', 'businessAddress', 'bu
  *  (like approved agreement wording, they stay); filled-in details are never changed. Not real data. */
 export async function ensureBusinessDetails(): Promise<void> {
   const s = await readSettings();
-  if (s.businessName && s.businessAddress && s.businessPhones) return;
+  if (s.businessName && s.businessRegistration && s.businessAddress && s.businessPhones) return;
   const was = Object.fromEntries(BUSINESS.map((k) => [k, asText(s[k])]));
   const set = { businessName: 'Sample Rent a Car', businessRegistration: 'Sample 1/2/3', businessAddress: 'Sample road, Elpitiya', businessPhones: '0770000000' };
   const r = await changeGroup(await theOwner(), 'business', set, was);

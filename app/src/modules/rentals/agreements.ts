@@ -52,7 +52,7 @@ export async function currentWording(q: Tx | typeof db = db): Promise<Wording | 
   return w ?? null;
 }
 
-export type WordingError = 'notAllowed' | 'notFound' | 'textMissing' | 'tooLong' | 'alreadyApproved';
+export type WordingError = 'notAllowed' | 'notFound' | 'textMissing' | 'tooLong' | 'alreadyApproved' | 'olderThanCurrent';
 
 /** The owner adds a new version (Sinhala and English together); it is not used until approved. Logged. */
 export async function addWording(actorId: string, input: { textSi: string; textEn: string }): Promise<{ ok: true; id: string; version: number } | { error: WordingError }> {
@@ -76,6 +76,11 @@ export async function approveWording(actorId: string, id: string): Promise<{ ok:
   if (!UUID.test(id)) return { error: 'notFound' };
   return db.transaction(async (tx) => {
     if (!(await isOwner(tx, actorId))) return { error: 'notAllowed' } as const;
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext('sns.agreement-wording'))`);
+    // A draft older than the version printed now would never be printed: refused (#55 review).
+    const [me] = await tx.select({ version: agreementWording.version }).from(agreementWording).where(eq(agreementWording.id, id));
+    const now = await currentWording(tx);
+    if (me && now && me.version < now.version) return { error: 'olderThanCurrent' } as const;
     const done = await tx.update(agreementWording).set({ approvedAt: sql`now()`, approvedBy: actorId })
       .where(and(eq(agreementWording.id, id), sql`${agreementWording.approvedAt} is null`)).returning({ version: agreementWording.version });
     if (!done.length) {
@@ -118,7 +123,7 @@ export async function printAgreement(actorId: string, rentalId: string, language
     const wording = await currentWording(tx);
     if (!wording) return { error: 'noWording' } as const;
     const st = await readSettings(tx);
-    if (!st.businessName || !st.businessAddress || !st.businessPhones) return { error: 'noBusinessDetails' } as const;
+    if (!st.businessName || !st.businessRegistration || !st.businessAddress || !st.businessPhones) return { error: 'noBusinessDetails' } as const;
     const [seg] = await tx.select({ s: rentalVehicleSegment, plate: vehicle.registration, model: vehicle.model }).from(rentalVehicleSegment)
       .innerJoin(vehicle, eq(vehicle.id, rentalVehicleSegment.vehicleId)).where(eq(rentalVehicleSegment.rentalId, rentalId)).orderBy(rentalVehicleSegment.position).limit(1);
     const [me] = await tx.select({ name: user.name }).from(user).where(eq(user.id, actorId));
@@ -150,46 +155,64 @@ export async function getPrint(rentalId: string, printId: string): Promise<Agree
 
 // --- The signed copy ---
 
-export type SignedError = 'notAllowed' | 'notFound' | 'notDraft' | 'notPrinted' | 'fileType' | 'fileTooBig';
+export type SignedError = 'notAllowed' | 'notFound' | 'notDraft' | 'notPrinted' | 'reprintFirst' | 'fileType' | 'fileTooBig';
 
-/** Uploads a photo or scan of the signed agreement (after it was printed). The newest counts. Logged. */
+/** The newest printout of a rental, and whether it is newer than the last change of what is printed. */
+async function newestPrint(q: Tx | typeof db, rentalId: string) {
+  const [r] = await q.select({ status: rental.status, termsSetAt: rental.termsSetAt }).from(rental).where(eq(rental.id, rentalId));
+  if (!r) return null;
+  const [p] = await q.select({ id: agreementPrint.id, at: agreementPrint.createdAt }).from(agreementPrint).where(eq(agreementPrint.rentalId, rentalId))
+    .orderBy(desc(agreementPrint.createdAt), desc(agreementPrint.id)).limit(1);
+  return { status: r.status, termsSetAt: r.termsSetAt, print: p ?? null, printCurrent: !!p && (!r.termsSetAt || p.at >= r.termsSetAt) };
+}
+
+/** Uploads a photo or scan of the signed agreement. It signs the newest printout, which must be newer than the last
+ *  change of what is printed (9 Nov 2026); otherwise "print again first". The newest copy counts. Logged. */
 export async function uploadSigned(actorId: string, rentalId: string, bytes: Uint8Array): Promise<{ ok: true } | { error: SignedError }> {
   if (!UUID.test(rentalId)) return { error: 'notFound' };
   if (bytes.length > MAX_COPY_BYTES) return { error: 'fileTooBig' };
   const contentType = copyType(bytes);
   if (!contentType) return { error: 'fileType' };
   if (!(await hasCustomerAccess(db, actorId))) return { error: 'notAllowed' };
+  // Checked before the file is stored, so a refused upload leaves no file (#55 review); checked again under the lock.
+  const pre = await newestPrint(db, rentalId);
+  if (!pre) return { error: 'notFound' };
+  if (pre.status !== 'draft') return { error: 'notDraft' };
+  if (!pre.print) return { error: 'notPrinted' };
+  if (!pre.printCurrent) return { error: 'reprintFirst' };
   const storageKey = `agreements/${rentalId}/${randomUUID()}`;
-  const [r0] = await db.select({ id: rental.id }).from(rental).where(eq(rental.id, rentalId));
-  if (!r0) return { error: 'notFound' };
   await putFile(storageKey, bytes, contentType);
   return db.transaction(async (tx) => {
     if (!(await hasCustomerAccess(tx, actorId))) return { error: 'notAllowed' } as const;
     await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId}`}))`);
-    const [r] = await tx.select({ status: rental.status, number: rental.number, name: customer.name }).from(rental).innerJoin(customer, eq(customer.id, rental.customerId)).where(eq(rental.id, rentalId));
-    if (!r) return { error: 'notFound' } as const;
-    if (r.status !== 'draft') return { error: 'notDraft' } as const;
-    const [printed] = await tx.select({ id: agreementPrint.id }).from(agreementPrint).where(eq(agreementPrint.rentalId, rentalId)).limit(1);
-    if (!printed) return { error: 'notPrinted' } as const;
-    await tx.insert(agreementSigned).values({ rentalId, storageKey, contentType, size: bytes.length, createdBy: actorId });
+    const now = await newestPrint(tx, rentalId);
+    if (!now) return { error: 'notFound' } as const;
+    if (now.status !== 'draft') return { error: 'notDraft' } as const;
+    if (!now.print) return { error: 'notPrinted' } as const;
+    if (!now.printCurrent) return { error: 'reprintFirst' } as const;
+    const [r] = await tx.select({ number: rental.number, name: customer.name }).from(rental).innerJoin(customer, eq(customer.id, rental.customerId)).where(eq(rental.id, rentalId));
+    await tx.insert(agreementSigned).values({ rentalId, printId: now.print.id, storageKey, contentType, size: bytes.length, createdBy: actorId });
     await tx.insert(auditEvent).values({ createdBy: actorId, action: 'rental.agreementSigned', targetType: 'rental', targetId: rentalId,
       details: { name: r.name, number: rentalNumber(r.number) } });
     return { ok: true } as const;
   });
 }
 
-export interface AgreementState { printed: boolean; lastPrintId: string | null; signedId: string | null; signedAt: Date | null; outOfDate: boolean }
+export interface AgreementState {
+  printed: boolean; lastPrintId: string | null; printCurrent: boolean; signedId: string | null; signedAt: Date | null; outOfDate: boolean;
+}
 
-/** Where the agreement stands: printed, the newest signed copy, and whether a later change of terms made it out of date. */
+/** Where the agreement stands: the newest printout (and whether it is still current), the newest signed copy, and
+ *  whether that copy is out of date (it does not sign the newest printout, or that printout is older than the last
+ *  change of what is printed; 9 Nov 2026). */
 export async function agreementState(rentalId: string): Promise<AgreementState | null> {
   if (!UUID.test(rentalId)) return null;
-  const [r] = await db.select({ termsSetAt: rental.termsSetAt }).from(rental).where(eq(rental.id, rentalId));
-  if (!r) return null;
-  const [p] = await db.select({ id: agreementPrint.id }).from(agreementPrint).where(eq(agreementPrint.rentalId, rentalId)).orderBy(desc(agreementPrint.createdAt)).limit(1);
-  const [s] = await db.select({ id: agreementSigned.id, at: agreementSigned.createdAt }).from(agreementSigned).where(eq(agreementSigned.rentalId, rentalId))
-    .orderBy(desc(agreementSigned.createdAt)).limit(1);
-  return { printed: !!p, lastPrintId: p?.id ?? null, signedId: s?.id ?? null, signedAt: s?.at ?? null,
-    outOfDate: !!s && !!r.termsSetAt && r.termsSetAt > s.at };
+  const n = await newestPrint(db, rentalId);
+  if (!n) return null;
+  const [s] = await db.select({ id: agreementSigned.id, at: agreementSigned.createdAt, printId: agreementSigned.printId }).from(agreementSigned)
+    .where(eq(agreementSigned.rentalId, rentalId)).orderBy(desc(agreementSigned.createdAt), desc(agreementSigned.id)).limit(1);
+  return { printed: !!n.print, lastPrintId: n.print?.id ?? null, printCurrent: n.printCurrent, signedId: s?.id ?? null, signedAt: s?.at ?? null,
+    outOfDate: !!s && (s.printId !== n.print?.id || !n.printCurrent) };
 }
 
 /** Opens the signed copy for someone with Customer access; the opening is in the activity log. No public link. */

@@ -115,9 +115,16 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await page.goto('/settings/business-rules');
   if (await page.locator('[data-group="business"]', { hasText: 'Not set' }).count()) {
     await page.goto('/settings/business-rules/business');
-    await page.locator('input[name="businessName"]').fill('Sample Rent a Car');
-    await page.locator('input[name="businessAddress"]').fill('Sample road, Elpitiya');
-    await page.locator('input[name="businessPhones"]').fill('0770000000');
+    // Fill only the empty boxes: the registration number is needed too (Confirmed 9 Nov 2026).
+    for (const [name, value] of [
+      ['businessName', 'Sample Rent a Car'],
+      ['businessRegistration', 'Sample PV 00000'],
+      ['businessAddress', 'Sample road, Elpitiya'],
+      ['businessPhones', '0770000000'],
+    ]) {
+      const box = page.locator(`input[name="${name}"]`);
+      if (!(await box.inputValue())) await box.fill(value);
+    }
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page).toHaveURL(/\/settings\/business-rules(\?.*)?$/);
   }

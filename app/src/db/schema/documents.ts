@@ -34,6 +34,9 @@ export const agreementPrint = pgTable('agreement_print', {
 export const agreementSigned = pgTable('agreement_signed', {
   id: uuid('id').primaryKey().defaultRandom(),
   rentalId: uuid('rental_id').notNull().references(() => rental.id),
+  // The printout this copy signs (#55 review): a copy is current only while its printout is the newest one and newer
+  // than the rental's terms.
+  printId: uuid('print_id').references(() => agreementPrint.id),
   storageKey: text('storage_key').notNull().unique('agreement_signed_one_key'),
   contentType: text('content_type').notNull(),
   size: bigint('size', { mode: 'number' }).notNull(),

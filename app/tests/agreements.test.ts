@@ -4,6 +4,10 @@ import { createRental } from '../src/modules/rentals/rentals';
 import { setRentalTerms } from '../src/modules/rentals/terms';
 import { addWording, approveWording, currentWording, getPrint, printAgreement } from '../src/modules/rentals/agreements';
 import { ensureBusinessDetails } from './helpers/business';
+import { readSettings } from '../src/modules/settings/settings';
+import { setPermission } from '../src/modules/people/people';
+import { agreementState, openSigned, uploadSigned } from '../src/modules/rentals/agreements';
+import { JPEG } from './helpers/customers';
 import { theOwner, samplePerson } from './helpers/people';
 import { sampleCarAndCustomer, samplePickup } from './helpers/rentals';
 
@@ -56,12 +60,48 @@ describe('printing the agreement (ST-05.6, ST-16.1)', () => {
     if (!('ok' in p)) throw new Error(JSON.stringify(p));
     const c = (await getPrint(id, p.id))!;
     expect(c).toMatchObject({ language: 'en', wordingVersion: w.version, conditions: `Sample conditions ${tag}`, days: 2, dailyRate: 4500, base: 9000,
-      includedKm: 200, extraKmRate: 25, deposit: 10_000, rentPaid: 'return', business: { name: 'Sample Rent a Car', phones: '0770000000' } });
+      includedKm: 200, extraKmRate: 25, deposit: 10_000, rentPaid: 'return' });
+    const st = await readSettings();
+    expect(c.business).toEqual({ name: st.businessName, registration: st.businessRegistration, address: st.businessAddress, phones: st.businessPhones });
     expect(c.number).toMatch(/^R-\d{4,}$/);
     const si = await printAgreement(owner, id, 'si');
     if (!('ok' in si)) throw new Error(JSON.stringify(si));
     expect((await getPrint(id, si.id))!.conditions).toBe(`Sample කොන්දේසි ${tag}`);
     await expect(pool.query('update agreement_print set language = $2 where id = $1', [p.id, 'si'])).rejects.toThrow(/insert-only/);
     expect(await getPrint(id, '00000000-0000-0000-0000-000000000000')).toBeNull();
+  });
+});
+
+describe('#55 review: older drafts, ids, permissions and the log', () => {
+  it('a draft older than the version printed now cannot be approved', async () => {
+    const owner = await theOwner();
+    const older = await addWording(owner, { textSi: 'Sample old', textEn: 'Sample old' });
+    const newer = await addWording(owner, { textSi: 'Sample new', textEn: 'Sample new' });
+    if (!('ok' in older) || !('ok' in newer)) throw new Error('wording');
+    expect(await approveWording(owner, newer.id)).toEqual({ ok: true });
+    expect(await approveWording(owner, older.id)).toEqual({ error: 'olderThanCurrent' });
+  });
+
+  it('a printout or signed copy opens only with its own rental; Customer access is needed; opening is logged', async () => {
+    const owner = await theOwner();
+    if (!(await currentWording())) { const w = await addWording(owner, { textSi: 'Sample', textEn: 'Sample' }); if ('ok' in w) await approveWording(owner, w.id); }
+    const a = await readyRental(owner);
+    const b = await readyRental(owner);
+    expect(await setRentalTerms(owner, a, terms)).toEqual({ ok: true });
+    const p = await printAgreement(owner, a, 'en');
+    if (!('ok' in p)) throw new Error(JSON.stringify(p));
+    expect(await getPrint(b, p.id)).toBeNull();
+    expect(await uploadSigned(owner, a, JPEG)).toEqual({ ok: true });
+    const signedId = (await agreementState(a))!.signedId!;
+    expect(await openSigned(owner, b, signedId)).toEqual({ error: 'notFound' });
+    const staff = (await samplePerson()).id;
+    expect(await setPermission(owner, staff, 'customerAccess', false)).toMatchObject({ ok: true });
+    expect(await printAgreement(staff, a, 'en')).toEqual({ error: 'notAllowed' });
+    expect(await uploadSigned(staff, a, JPEG)).toEqual({ error: 'notAllowed' });
+    expect(await openSigned(staff, a, signedId)).toEqual({ error: 'notAllowed' });
+    expect(await openSigned(owner, a, signedId)).toMatchObject({ ok: true, contentType: 'image/jpeg' });
+    const log = await pool.query("select action from audit_event where target_id = $1 and action like 'rental.agreement%' order by created_at", [a]);
+    expect(log.rows.map((x) => x.action)).toEqual(['rental.agreementPrint', 'rental.agreementSigned', 'rental.agreementOpened']);
+    await expect(pool.query('delete from agreement_signed where rental_id = $1', [a])).rejects.toThrow(/insert-only/);
   });
 });

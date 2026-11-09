@@ -61,7 +61,7 @@ export async function readChecklist(): Promise<Checklist> {
     readSettings(),
     db.select({ approved: sql<number>`count(*)::int` }).from(agreementWording).where(sql`${agreementWording.approvedAt} is not null`),
   ]);
-  const businessSet = !!(settings.businessName && settings.businessAddress && settings.businessPhones);
+  const businessSet = !!(settings.businessName && settings.businessRegistration && settings.businessAddress && settings.businessPhones);
   const fleet = cars.filter((c) => c.status !== 'retired');
   const noInsurance = fleet.filter((c) => !c.insurance).map((c) => c.plate);
   const noLicence = fleet.filter((c) => !c.licence).map((c) => c.plate);

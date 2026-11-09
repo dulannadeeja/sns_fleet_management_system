@@ -29,8 +29,8 @@ export default async function ReviewPage({ params, searchParams }: { params: Pro
   const when = (d: Date) => format.dateTime(d, { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Colombo' });
   const money = (n: number) => format.number(n);
   const seg = r.segments[0];
-  const businessSet = !!(settings.businessName && settings.businessAddress && settings.businessPhones);
-  const blocked = !ready?.termsSet ? t('review.termsFirst') : !wording ? t('review.noWording') : !businessSet ? t('review.noBusiness') : null;
+  const businessSet = !!(settings.businessName && settings.businessRegistration && settings.businessAddress && settings.businessPhones);
+  const blocked = r.status !== 'draft' ? t('review.errors.notDraft') : !ready?.termsSet ? t('review.termsFirst') : !wording ? t('review.noWording') : !businessSet ? t('review.noBusiness') : null;
   return (
     <AppFrame person={person} active="rentals" title={t('title')} subtitle={`${c?.name ?? ''} · ${car?.registration ?? ''}`} backHref={`/rentals/${r.id}/terms`}>
       <Step n={5} name="review" />
@@ -58,6 +58,7 @@ export default async function ReviewPage({ params, searchParams }: { params: Pro
       <section className="car-card" aria-labelledby="next-h">
         <h2 id="next-h">{t('review.next')}</h2>
         <span className="set-muted">{t('review.steps')}</span>
+        {car ? <span className="set-muted">{t('review.held', { plate: car.registration })}</span> : null}
         {blocked ? <Notice tone="warning">{blocked}</Notice> : null}
         <PrintForm rentalId={r.id} defaultLanguage={lang} disabled={!!blocked} w={w.review as unknown as Record<string, string> & { errors: Record<string, string> }} />
       </section>

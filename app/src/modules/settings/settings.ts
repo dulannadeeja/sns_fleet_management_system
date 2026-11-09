@@ -21,7 +21,7 @@ export const SETTINGS = {
   payrollReminderDays: { group: 'reminders', kind: 'number', min: 1, max: 90, start: 3 },
   fuelPricePerLitre: { group: 'fuel', kind: 'number', min: 1, max: 2000, start: null },
   businessName: { group: 'business', kind: 'text', max: 80, start: null },
-  businessRegistration: { group: 'business', kind: 'text', max: 40, optional: true, start: null },
+  businessRegistration: { group: 'business', kind: 'text', max: 40, start: null },
   businessAddress: { group: 'business', kind: 'text', max: 160, start: null },
   businessPhones: { group: 'business', kind: 'text', max: 80, start: null },
 } as const satisfies Record<string, TimeSetting | NumberSetting | TextSetting>;

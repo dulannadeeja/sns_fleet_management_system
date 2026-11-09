@@ -9,6 +9,7 @@
 .agr-grid dt { color: #444; }
 .agr-grid dd { margin: 0; font-variant-numeric: tabular-nums; }
 .agr-conditions { white-space: pre-wrap; border: 1px solid #999; padding: 10px; }
+.agr-head, .agr-sign { break-inside: avoid; }
 .agr-sign { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
 .agr-sign div { border-top: 1px solid #111; padding-top: 4px; }
 .agr-foot { font-size: 12px; color: #444; }

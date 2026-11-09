@@ -34,7 +34,7 @@ export default async function AgreementPrintPage({ params }: { params: Promise<{
         </header>
         <section className="agr-section"><h2>{t('customer')}</h2>
           <dl className="agr-grid"><dt>{t('name')}</dt><dd>{c.customer.name}</dd><dt>{t('nic')}</dt><dd>{c.customer.nic}</dd>
-            <dt>{t('phone')}</dt><dd>{c.customer.phone}</dd><dt>{t('licence')}</dt><dd>{c.customer.licenceNumber}</dd></dl></section>
+            <dt>{t('phone')}</dt><dd>{c.customer.phone}</dd><dt>{t('licence')}</dt><dd>{t('licenceOnFile')}</dd></dl></section>
         <section className="agr-section"><h2>{t('car')}</h2>
           <dl className="agr-grid"><dt>{t('plate')}</dt><dd>{c.car.registration}</dd><dt>{t('model')}</dt><dd>{c.car.model}</dd>
             <dt>{t('odoOut')}</dt><dd>{t('atHandover')}</dd><dt>{t('fuelOut')}</dt><dd>{t('atHandover')}</dd></dl></section>
@@ -42,7 +42,7 @@ export default async function AgreementPrintPage({ params }: { params: Promise<{
           <dl className="agr-grid">
             <dt>{t('pickup')}</dt><dd>{when(c.pickupAt)}</dd><dt>{t('backBy')}</dt><dd>{when(c.deadlineAt)}</dd>
             <dt>{t('perDay')}</dt><dd>{t('perDayValue', { rate: money(c.dailyRate), days: c.days, base: money(c.base) })}</dd>
-            {c.longRental ? <><dt>{t('longRental')}</dt><dd>{`LKR ${money(c.longRental)}`}</dd></> : null}
+            {c.longRental ? <><dt>{t('longRental')}</dt><dd>{t('longRentalValue', { amount: money(c.longRental) })}</dd></> : null}
             <dt>{t('km')}</dt><dd>{t('kmValue', { km: money(c.includedKm), rate: money(c.extraKmRate) })}</dd>
             <dt>{t('deposit')}</dt><dd>{c.depositWaived ? t('depositWaived') : t('depositValue', { amount: money(c.deposit ?? 0) })}</dd>
             <dt>{t('rentPaid')}</dt><dd>{c.rentPaid === 'now' ? t('rentNow') : t('rentReturn')}</dd>
