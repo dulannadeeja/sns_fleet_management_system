@@ -70,9 +70,12 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
         details: String(e.details?.details ?? ''), reason: String(e.details?.reason ?? ''),
         old: String(e.details?.old ?? ''), new: String(e.details?.new ?? ''),
       } : {}),
-      // rental.*: the customer's name, the car's plate and the days (#50).
+      // document.*: the agreement wording version (#55).
+      ...(e.action.startsWith('document.') ? { version: String(e.details?.version ?? '') } : {}),
+      // rental.*: the customer's name, the car's plate and the days (#50); the rental's number and language (#55).
       ...(e.action.startsWith('rental.') ? {
         target: String(e.details?.name ?? e.targetId ?? ''), plate: String(e.details?.registration ?? ''), days: String(e.details?.days ?? ''),
+        number: String(e.details?.number ?? ''), language: e.details?.language === 'si' ? 'සිංහල' : e.details?.language === 'en' ? 'English' : '',
       } : {}),
     };
     // Only a sentence (a string) counts: an action named like a group of sentences shows its raw name.

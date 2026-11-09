@@ -116,7 +116,7 @@ export async function createRental(actorId: string, input: { customerId: string;
 }
 
 export interface RentalTerms {
-  id: string; customerId: string; status: RentalState; pickupAt: Date; days: number; deadlineAt: Date;
+  id: string; number: number; customerId: string; status: RentalState; pickupAt: Date; days: number; deadlineAt: Date;
   pickupCutoff: string; returnDeadline: string; fuelPricePerLitre: number | null;
   segments: { position: number; vehicleId: string; dailyRate: number; kmPerDay: number; extraKmRate: number; commissionPercent: number | null;
     longRentalExtra: number; longRentalFromDay: number; garageDayCharge: number; ownerPays: string[] }[];
@@ -131,7 +131,7 @@ export async function rentalTerms(id: string, q: Tx | typeof db = db): Promise<R
   if (!r) return null;
   const segs = await q.select().from(rentalVehicleSegment).where(eq(rentalVehicleSegment.rentalId, id)).orderBy(asc(rentalVehicleSegment.position));
   return {
-    id: r.r.id, customerId: r.r.customerId, status: r.r.status as RentalState, pickupAt: r.r.pickupAt, days: r.r.days, deadlineAt: r.r.deadlineAt,
+    id: r.r.id, number: r.r.number, customerId: r.r.customerId, status: r.r.status as RentalState, pickupAt: r.r.pickupAt, days: r.r.days, deadlineAt: r.r.deadlineAt,
     pickupCutoff: r.s.pickupCutoff, returnDeadline: r.s.returnDeadline, fuelPricePerLitre: r.s.fuelPricePerLitre,
     segments: segs.map((s) => ({ position: s.position, vehicleId: s.vehicleId, dailyRate: s.dailyRate, kmPerDay: s.kmPerDay, extraKmRate: s.extraKmRate,
       commissionPercent: s.commissionPercent, longRentalExtra: s.longRentalExtra, longRentalFromDay: s.longRentalFromDay, garageDayCharge: s.garageDayCharge,

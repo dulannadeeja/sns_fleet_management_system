@@ -3,12 +3,14 @@ import { db } from '../../db/client';
 import { auditEvent, setting, user } from '../../db/schema';
 
 // The owner settings (system design 3.2 "Owner settings", Confirmed 5 Nov 2026; ST-15.3, screens 15.2 and 15.7).
-// Business-wide values only the primary owner changes, in three groups. A setting with no saved row has its starting
+// Business-wide values only the primary owner changes, in four groups (the business details since 8 Nov 2026). A setting with no saved row has its starting
 // value. Starting values: 5.1 (cutoff and deadline, "for now"), 11 (reminders, Confirmed), 16 (fuel price: no figure).
 // A changed cutoff or deadline applies to new rentals only (4.3, PR-08): rentals will keep their own copy.
 
 type TimeSetting = { group: 'dayTimes'; kind: 'time'; start: string };
 type NumberSetting = { group: 'reminders' | 'fuel'; kind: 'number'; min: number; max: number; start: number | null };
+/** SNS's business details on every printout (system design 14, Confirmed 8 Nov 2026): text, empty until set. */
+type TextSetting = { group: 'business'; kind: 'text'; max: number; optional?: boolean; start: string | null };
 
 export const SETTINGS = {
   pickupCutoff: { group: 'dayTimes', kind: 'time', start: '15:00' },
@@ -18,18 +20,23 @@ export const SETTINGS = {
   serviceReminderKm: { group: 'reminders', kind: 'number', min: 100, max: 5000, start: 500 },
   payrollReminderDays: { group: 'reminders', kind: 'number', min: 1, max: 90, start: 3 },
   fuelPricePerLitre: { group: 'fuel', kind: 'number', min: 1, max: 2000, start: null },
-} as const satisfies Record<string, TimeSetting | NumberSetting>;
+  businessName: { group: 'business', kind: 'text', max: 80, start: null },
+  businessRegistration: { group: 'business', kind: 'text', max: 40, start: null },
+  businessAddress: { group: 'business', kind: 'text', max: 160, start: null },
+  businessPhones: { group: 'business', kind: 'text', max: 80, start: null },
+} as const satisfies Record<string, TimeSetting | NumberSetting | TextSetting>;
 
 export type SettingKey = keyof typeof SETTINGS;
-export type Group = 'dayTimes' | 'reminders' | 'fuel';
-export const GROUPS: Group[] = ['dayTimes', 'reminders', 'fuel'];
+export type Group = 'dayTimes' | 'reminders' | 'fuel' | 'business';
+export const GROUPS: Group[] = ['dayTimes', 'reminders', 'fuel', 'business'];
 export const KEYS = Object.keys(SETTINGS) as SettingKey[];
 export type Settings = {
   pickupCutoff: string; returnDeadline: string;
   documentReminderDays: number; serviceReminderDays: number; serviceReminderKm: number; payrollReminderDays: number;
   fuelPricePerLitre: number | null;
+  businessName: string | null; businessRegistration: string | null; businessAddress: string | null; businessPhones: string | null;
 };
-export type FieldError = 'required' | 'number' | 'range' | 'time' | 'order';
+export type FieldError = 'required' | 'number' | 'range' | 'time' | 'order' | 'tooLong';
 
 export const isGroup = (g: string): g is Group => (GROUPS as string[]).includes(g);
 export const isSettingKey = (k: string): k is SettingKey => Object.hasOwn(SETTINGS, k);
@@ -38,8 +45,9 @@ export const keysOf = (group: Group): SettingKey[] => KEYS.filter((k) => SETTING
 const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
 const WHOLE = /^\d{1,6}$/;
 
-function parse(key: SettingKey, raw: string): number | string {
-  const s = SETTINGS[key] as TimeSetting | NumberSetting;
+function parse(key: SettingKey, raw: string): number | string | null {
+  const s = SETTINGS[key] as TimeSetting | NumberSetting | TextSetting;
+  if (s.kind === 'text') return raw === '' ? null : raw;
   return s.kind === 'time' ? raw : Number(raw);
 }
 
@@ -61,8 +69,14 @@ export function checkGroup(group: Group, input: Record<string, string>):
   const values: Record<string, string> = {};
   const errors: Record<string, FieldError> = {};
   for (const key of keysOf(group)) {
-    const s = SETTINGS[key] as TimeSetting | NumberSetting;
-    const raw = String(input[key] ?? '').trim();
+    const s = SETTINGS[key] as TimeSetting | NumberSetting | TextSetting;
+    const raw = String(input[key] ?? '').trim().replace(/\s+/g, ' ');
+    if (s.kind === 'text') {
+      if (!raw && !s.optional) errors[key] = 'required';
+      else if (raw.length > s.max) errors[key] = 'tooLong';
+      else values[key] = raw;
+      continue;
+    }
     if (!raw) errors[key] = 'required';
     else if (s.kind === 'time') { if (!TIME.test(raw)) errors[key] = 'time'; }
     else if (!WHOLE.test(raw)) errors[key] = 'number';

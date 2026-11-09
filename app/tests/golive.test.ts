@@ -34,11 +34,14 @@ describe('ST-01.3: the go-live checklist', () => {
     expect(ITEMS.map((i) => i.key)).toEqual(['businessDetails', 'carsEntered', 'startingPackages', 'carDates', 'partnerCars', 'staffAccounts',
       'authorisedPerson', 'openingCash', 'agreementWording', 'openDecisions']);
     const list = await readChecklist();
-    for (const k of ['businessDetails', 'openingCash', 'agreementWording'] as const) {
+    for (const k of ['openingCash'] as const) {
       expect(list.items.find((i) => i.key === k)).toMatchObject({ kind: 'later', done: false });
       expect(list.blockers).toContain(k);
     }
     expect(list.total).toBe(10);
+    // 8 Nov 2026 (#55): the business details and the agreement wording are checked by the system.
+    expect(list.items.find((i) => i.key === 'businessDetails')).toMatchObject({ kind: 'auto' });
+    expect(list.items.find((i) => i.key === 'agreementWording')).toMatchObject({ kind: 'auto' });
   });
 
   it('only the owner ticks an item; unticking needs a reason; a stale page is refused; each is logged', async () => {

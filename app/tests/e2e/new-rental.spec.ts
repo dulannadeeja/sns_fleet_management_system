@@ -102,10 +102,60 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await page.getByRole('button', { name: 'Save and continue' }).click();
 
   // The rental shows the deposit and the reference copies still missing (AT-07: handover will wait for them).
-  await expect(page).toHaveURL(new RegExp(`${rentalUrl.replace(/[/.]/g, '\\$&')}\\?terms=1$`));
+  await expect(page).toHaveURL(/\/review\?terms=1$/);
+
+  // The rental shows the deposit and the reference copies still missing (AT-07: handover will wait for them).
+  await page.goto(rentalUrl);
   await expect(page.locator('[data-deposit]')).toHaveText('LKR 10,000');
   await expect(page.locator('[data-ref-missing]')).toHaveAttribute('data-ref-missing', 'nicBack licence');
   await expect(page.locator('[data-estimate]')).toHaveAttribute('data-estimate', '9000');
+  await expect(page.locator('[data-agreement]')).toHaveAttribute('data-agreement', 'none');
+
+  // Printing needs the business details and an approved wording (Settings, owner only): sample ones when none.
+  await page.goto('/settings/business-rules');
+  if (await page.locator('[data-group="business"]', { hasText: 'Not set' }).count()) {
+    await page.goto('/settings/business-rules/business');
+    // Fill only the empty boxes: the registration number is needed too (Confirmed 9 Nov 2026).
+    for (const [name, value] of [
+      ['businessName', 'Sample Rent a Car'],
+      ['businessRegistration', 'Sample PV 00000'],
+      ['businessAddress', 'Sample road, Elpitiya'],
+      ['businessPhones', '0770000000'],
+    ]) {
+      const box = page.locator(`input[name="${name}"]`);
+      if (!(await box.inputValue())) await box.fill(value);
+    }
+    await page.getByRole('button', { name: 'Save' }).click();
+    await expect(page).toHaveURL(/\/settings\/business-rules(\?.*)?$/);
+  }
+  await page.goto('/settings/agreement');
+  if (await page.getByText('No version approved yet').count()) {
+    await page.locator('textarea[name="textSi"]').fill('Sample කොන්දේසි');
+    await page.locator('textarea[name="textEn"]').fill('Sample conditions');
+    await page.getByRole('button', { name: 'Save as a draft' }).click();
+    await expect(page).toHaveURL(/\?saved=1$/);
+    await page.getByRole('button', { name: /^Approve version/ }).first().click();
+    await expect(page).toHaveURL(/\?approved=1$/);
+  }
+
+  // 05.5: review, choose English, print; the printout carries the rental's number and the conditions.
+  await page.goto(`${rentalUrl}/review`);
+  await expect(page.getByRole('button', { name: 'Save and print agreement' })).toBeEnabled();
+  await page.getByRole('radio', { name: 'English' }).check();
+  expect(await noSideScroll(page)).toBe(false);
+  await page.getByRole('button', { name: 'Save and print agreement' }).click();
+  await expect(page).toHaveURL(/\/agreement\/[0-9a-f-]+$/);
+  await expect(page.locator('[data-agreement]')).toHaveAttribute('data-agreement', /^R-\d{4,}$/);
+  await expect(page.getByText('Rental agreement')).toBeVisible();
+  await expect(page.locator('[data-conditions]')).not.toBeEmpty();
+
+  // The signed copy is uploaded on the rental (AT-06: handover will wait for it).
+  await page.goto(rentalUrl);
+  await expect(page.locator('[data-agreement]')).toHaveAttribute('data-agreement', 'printed');
+  await page.locator('[data-signed-form] input[type="file"]').setInputFiles({ name: 'signed.jpg', mimeType: 'image/jpeg', buffer: jpeg });
+  await page.locator('[data-signed-form] button').click();
+  await expect(page).toHaveURL(/\?signed=1$/);
+  await expect(page.locator('[data-agreement]')).toHaveAttribute('data-agreement', 'signed');
 
   // The car is now held: it is no longer offered on 05.2.
   await page.goto(`/rentals/new/car?customer=${customerId}`);

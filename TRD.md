@@ -81,6 +81,7 @@ Tables follow the system design's core records (Logical structure, Core records 
 | Expenses | `expense` (category, car, who bears it, paid by) |
 | Maintenance and checks | `maintenance_record`, `reminder`, `vehicle_check`, `vehicle_check_item` |
 | Payroll | `payroll_period`, `payroll_entry`, `payroll_adjustment`, `employee_loan`, `salary_payment` |
+| Documents | `agreement_wording` (version, Sinhala and English text, approved by the owner; a trigger allows only approving once), `agreement_print` (insert-only: rental, wording version, language, the whole printout as printed, who, when), `agreement_signed` (insert-only: the printout it signs, the signed copy's private file, newest counts); `rental.number` (identity, shown R-0001) |
 | Decisions | `approval` (kind, requester, approver, self-approved, reason, note), `setting` (owner settings: cutoff, deadline, reminder lead times, fuel price; one row per key with its value, who changed it and when; built-in starting values until the owner changes one) |
 | Starting data | `import_batch` (approved_by, approved_at); every imported row carries `import_batch_id` and shows "Imported" |
 

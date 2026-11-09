@@ -306,7 +306,14 @@
         },
         "rental": {
           "create": "saved a new rental for {target}: {plate}, {days} days",
-          "terms": "set the deposit and payment for {target}'s rental"
+          "terms": "set the deposit and payment for {target}'s rental",
+          "agreementPrint": "printed the agreement for {target}, {number} ({language})",
+          "agreementSigned": "uploaded the signed agreement for {target}, {number}",
+          "agreementOpened": "opened the signed agreement of {target}, {number}"
+        },
+        "document": {
+          "wordingAdd": "added agreement wording version {version}",
+          "wordingApprove": "approved agreement wording version {version}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -334,6 +341,11 @@
           "title": "Fuel price",
           "note": "per litre, for a “same level” rental",
           "value": "LKR {price} a litre"
+        },
+        "business": {
+          "title": "Business details",
+          "note": "on every printout: agreements, bills, receipts",
+          "value": ""
         }
       },
       "names": {
@@ -343,7 +355,11 @@
         "serviceReminderDays": "service reminder (days)",
         "serviceReminderKm": "service reminder (km)",
         "payrollReminderDays": "payroll reminder",
-        "fuelPricePerLitre": "fuel price per litre"
+        "fuelPricePerLitre": "fuel price per litre",
+        "businessName": "business name",
+        "businessRegistration": "registration number",
+        "businessAddress": "business address",
+        "businessPhones": "business phone numbers"
       },
       "fields": {
         "pickupCutoff": {
@@ -380,12 +396,33 @@
           "label": "Price per litre",
           "unit": "rupees",
           "hint": "Whole rupees, 1 to 2,000."
+        },
+        "businessName": {
+          "label": "Business name",
+          "unit": "",
+          "hint": "As on the business registration. Up to 80 letters."
+        },
+        "businessRegistration": {
+          "label": "Registration number",
+          "unit": "",
+          "hint": "As on the business registration. Up to 40 letters."
+        },
+        "businessAddress": {
+          "label": "Address",
+          "unit": "",
+          "hint": "The branch address. Up to 160 letters."
+        },
+        "businessPhones": {
+          "label": "Phone numbers",
+          "unit": "",
+          "hint": "One or more, separated by commas. Up to 80 letters."
         }
       },
       "intro": {
         "dayTimes": "Times are in Sri Lanka time. A change applies to new rentals only; rentals already agreed keep their times.",
         "reminders": "How early each reminder starts. Only the owner can change this.",
-        "fuel": "Charged only on a “same level” rental, for the litres missing at return. 100% SNS."
+        "fuel": "Charged only on a “same level” rental, for the litres missing at return. 100% SNS.",
+        "business": "SNS’s name, registration number, address and phone numbers, printed at the top of agreements, bills and receipts."
       },
       "check": "Check before saving",
       "noChange": "Nothing changed yet.",
@@ -405,7 +442,8 @@
         "order": "The return deadline must be earlier in the day than the pickup cutoff.",
         "notAllowed": "Only the owner can change settings.",
         "failed": "Not saved. Try again.",
-        "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change."
+        "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change.",
+        "tooLong": "Too long: {max} letters at most."
       },
       "rows": {
         "extraKm": {
@@ -524,6 +562,16 @@
             "Check today’s pump price. Whole rupees only.",
             "Tell staff the new price: they explain the fuel charge to the customer at return."
           ]
+        },
+        "business": {
+          "affects": [
+            "Every agreement, bill and receipt printed from now on shows these details.",
+            "Printouts made before keep the details they were printed with."
+          ],
+          "before": [
+            "Check the spelling: customers sign the agreement under this name.",
+            "All four details are needed before an agreement can be printed."
+          ]
         }
       }
     },
@@ -586,7 +634,9 @@
         "authorisedPerson": "Permissions",
         "startingPackages": "Packages",
         "staffAccounts": "People",
-        "carsEntered": "Cars"
+        "carsEntered": "Cars",
+        "businessDetails": "Business details",
+        "agreementWording": "Agreement wording"
       },
       "errors": {
         "notAllowed": "Only the owner can do this.",
@@ -602,6 +652,33 @@
         "firstDay": "For the first day"
       },
       "groupCount": "{ready} of {total} ready"
+    },
+    "agreement": {
+      "nav": "Agreement wording",
+      "title": "Agreement wording",
+      "intro": "The conditions printed on every rental agreement, in Sinhala and English. Only you add a version and approve it; an approved version never changes. The newest approved version is printed from then on.",
+      "current": "Printed now: version {version}, approved {date}",
+      "none": "No version approved yet: agreements cannot be printed for signing.",
+      "add": "Add a new version",
+      "si": "Conditions in Sinhala",
+      "en": "Conditions in English",
+      "hint": "Type SNS’s own wording. Up to 20,000 letters each.",
+      "save": "Save as a draft",
+      "approve": "Approve version {version}",
+      "draft": "Draft, not used yet",
+      "approved": "Approved {date}",
+      "version": "Version {version}",
+      "saved": "Saved as a draft. Read it again, then approve it.",
+      "approvedNow": "Approved. It is printed from now on.",
+      "errors": {
+        "notAllowed": "Only the owner can do this.",
+        "notFound": "Not found.",
+        "textMissing": "Type the conditions in both languages.",
+        "tooLong": "Too long: 20,000 letters at most.",
+        "alreadyApproved": "Already approved.",
+        "failed": "Not saved. Try again.",
+        "olderThanCurrent": "A newer version is already printed. Add a new version instead."
+      }
     }
   },
   "code": {
@@ -1196,7 +1273,8 @@
       "customer": "Customer",
       "car": "Car",
       "dates": "Dates and estimate",
-      "terms": "Deposit and payment"
+      "terms": "Deposit and payment",
+      "review": "Review and print"
     },
     "find": "Find the customer by name, NIC or phone",
     "search": "Search",
@@ -1336,6 +1414,100 @@
         "tooLong": "Too long.",
         "failed": "Not saved. Try again."
       }
+    },
+    "review": {
+      "title": "Review and print",
+      "language": "Agreement language",
+      "si": "සිංහල · Sinhala",
+      "en": "English",
+      "next": "Next",
+      "steps": "1. Print and get it signed · 2. Photo of the signed agreement · 3. Outgoing odometer · then hand over.",
+      "print": "Save and print agreement",
+      "number": "Rental",
+      "rent": "Rent",
+      "rentValue": "{days} × {rate} = {base}",
+      "included": "Included",
+      "includedValue": "{km} km · then {rate} a km",
+      "deposit": "Deposit",
+      "depositValue": "{amount} · held",
+      "waived": "waived",
+      "termsFirst": "Set the deposit and payment first (step 4).",
+      "noWording": "The owner has not approved the agreement wording yet (Settings › Agreement wording). The agreement cannot be printed for signing.",
+      "noBusiness": "The owner has not filled in the business details yet (Settings › Business rules). The agreement cannot be printed.",
+      "errors": {
+        "notAllowed": "You need Customer access.",
+        "notFound": "This rental is not in the system.",
+        "notDraft": "This rental has already gone out.",
+        "termsNotSet": "Set the deposit and payment first (step 4).",
+        "noWording": "The agreement wording is not approved yet.",
+        "noBusinessDetails": "The business details are not filled in yet.",
+        "languageInvalid": "Choose Sinhala or English.",
+        "failed": "Not printed. Try again."
+      },
+      "held": "{plate} is held for this rental; nobody else can rent it for these days."
+    },
+    "signed": {
+      "title": "Signed agreement",
+      "none": "Not printed yet.",
+      "printed": "Printed. Upload a photo of the signed agreement before handover.",
+      "uploaded": "Signed copy uploaded {date}.",
+      "outOfDate": "The terms changed after it was signed: print again, have it signed, and upload the new copy.",
+      "upload": "Upload signed copy",
+      "open": "Open the signed copy",
+      "reprint": "Print again",
+      "review": "Review and print",
+      "saved": "Signed copy saved.",
+      "errors": {
+        "notAllowed": "You need Customer access.",
+        "notFound": "Not found.",
+        "notDraft": "This rental has already gone out.",
+        "notPrinted": "Print the agreement first.",
+        "fileType": "Only a photo (JPEG, PNG, WebP, HEIC) or a PDF.",
+        "fileTooBig": "The file is over 10 MB.",
+        "failed": "Not saved. Try again.",
+        "reprintFirst": "The printed terms changed after the last printout: print again, have the new one signed, then upload it."
+      }
     }
+  },
+  "agreementDoc": {
+    "title": "Rental agreement",
+    "printedIn": "Printed in English",
+    "customer": "Customer",
+    "name": "Name",
+    "nic": "NIC",
+    "phone": "Phone",
+    "licence": "Licence",
+    "car": "Car",
+    "plate": "Plate",
+    "model": "Model",
+    "odoOut": "Odometer out",
+    "fuelOut": "Fuel out",
+    "atHandover": "written at handover",
+    "dates": "Dates and price",
+    "pickup": "Pickup",
+    "backBy": "Back by",
+    "perDay": "Per day",
+    "perDayValue": "LKR {rate} × {days} days = LKR {base}",
+    "longRental": "Long-rental extra",
+    "km": "Km",
+    "kmValue": "{km} km included · LKR {rate} for each extra km",
+    "deposit": "Deposit",
+    "depositValue": "LKR {amount} · refundable",
+    "depositWaived": "Waived",
+    "rentPaid": "Rent paid",
+    "rentNow": "now, in advance",
+    "rentReturn": "at return",
+    "fuel": "Fuel",
+    "fuelNotCounted": "not counted",
+    "fuelSame": "same level",
+    "conditions": "Conditions",
+    "signature": "Customer’s signature",
+    "forSns": "For SNS: {name}",
+    "footer": "Printed {date} by {name}. Conditions version {version}.",
+    "reg": "Reg. {reg}",
+    "print": "Print",
+    "back": "Back to the rental",
+    "longRentalValue": "LKR {amount}",
+    "licenceOnFile": "recorded · copy on file"
   }
 }

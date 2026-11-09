@@ -5,7 +5,7 @@ import { Button, Notice, TextField } from '../../../../ui';
 import { changeSettingsAction, type ChangeState } from '../actions';
 import { showSetting, type SettingWords } from '../show';
 
-export interface Field { key: string; label: string; hint: string; type: 'time' | 'number'; saved: string; errors: Record<string, string> }
+export interface Field { key: string; label: string; hint: string; type: 'time' | 'number' | 'text'; saved: string; errors: Record<string, string> }
 export interface ChangeWords extends SettingWords {
   check: string; noChange: string; changeLine: string; logNote: string; save: string; cancel: string; formErrors: Record<string, string>;
 }
