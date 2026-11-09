@@ -314,10 +314,20 @@
         "document": {
           "wordingAdd": "ගිවිසුමේ වචන {version} වෙනි version එක එකතු කළා",
           "wordingApprove": "ගිවිසුමේ වචන {version} වෙනි version එක අනුමත කළා"
+        },
+        "payment": {
+          "record": "{target} ගෙන් ගෙවීම {number} සටහන් කළා: රු. {amount}, {method}, {for} ({rentals})"
         }
       },
       "reason": "හේතුව: “{reason}”",
-      "left": "{name} (අයින් වුණා)"
+      "left": "{name} (අයින් වුණා)",
+      "methods": {
+        "cash": "මුදලින්",
+        "bank": "bank transfer",
+        "card": "card"
+      },
+      "forBill": "බිලට",
+      "forDeposit": "Deposit එකට"
     },
     "rules": {
       "ownerTitle": "අයිතිකරුගේ සැකසුම්",
@@ -1467,6 +1477,77 @@
         "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න.",
         "reprintFirst": "අන්තිම printout එකෙන් පස්සේ print වෙන කොන්දේසි වෙනස් වුණා: ආයෙත් print කරලා, අලුත් එක අත්සන් කරගෙන, ඊට පස්සේ දාන්න."
       }
+    },
+    "pay": {
+      "title": "ගෙවීමක් සටහන් කරන්න",
+      "notPayable": "දැන් මේ කුලියට ගෙවීමක් සටහන් කරන්න බැහැ.",
+      "for": "මොකටද?",
+      "forBill": "බිල",
+      "forBillNote": "මේ කුලියේ කුලිය, නැත්නම් පාරිභෝගිකයාගේ අනිත් කුලීත් එක්ක බෙදලා.",
+      "forDeposit": "Deposit (තියාගන්න මුදල්, ආදායමක් නෙවෙයි)",
+      "depositNone": "මේ කුලියට deposit එකක් දාලා නැහැ (4 වෙනි පියවර).",
+      "depositNote": "දාපු deposit රු. {set} · ලැබුණු රු. {received}",
+      "bills": "දාන්නේ මොකටද",
+      "billAmount": "කුලිය {rental} · මුදල (රු.)",
+      "billHint": "ඇස්තමේන්තුව රු. {estimate} · ගෙවපු රු. {paid} · ඉතුරු රු. {unpaid}. නැත්නම් හිස්ව තියන්න.",
+      "amount": "මුදල (රු.)",
+      "depositLeft": "තව ලැබෙන්න තියෙන්නේ: රු. {left}",
+      "depositHeld": "Deposit එක පාරිභෝගිකයාට තියාගන්න මුදල්. ඒක ආදායමක් නෙවෙයි. ආපහු දෙනකොට පාවිච්චි කරනවා, නැත්නම් ආපහු දෙනවා.",
+      "part": "කොටස {n}",
+      "method": "ක්‍රමය",
+      "methods": {
+        "cash": "Cash (ලාච්චුවට)",
+        "bank": "Bank transfer",
+        "card": "Card (machine)"
+      },
+      "bankRef": "Bank reference",
+      "cardRef": "Card receipt අංකය",
+      "bankRefHint": "Reference නැතුව bank ගෙවීමක් save කරන්න බැහැ.",
+      "cardRefHint": "Machine එකේ receipt අංකය නැතුව card ගෙවීමක් save කරන්න බැහැ.",
+      "cashNote": "ඔයාගේ නමින් ලාච්චුවට යනවා.",
+      "removePart": "ඉවත් කරන්න",
+      "addPart": "තවත් කොටසක් (cash සහ bank)",
+      "total": "මුළු මුදල",
+      "lkr": "රු. {amount}",
+      "leftToSplit": "බෙදන්න ඉතුරු",
+      "afterSave": "Save කළාම ගෙවලා කියලා ගණන් වෙනවා. Bank සහ card ගෙවීම් පස්සේ statement එකත් එක්ක check කරනවා. සටහන් කරපු එක check කරපු එක නෙවෙයි.",
+      "sameReference": "මේ reference එක වෙන ගෙවීමක තියෙනවා. එකම මුදල් දෙපාරක් වෙන්න පුළුවන්. බලලා, save කරන්න හේතුව ලියන්න.",
+      "sameLine": "{number} · රු. {amount} · {method} · {date}",
+      "sameReason": "ආයෙත් save කරන්නේ ඇයි",
+      "save": "Save කරන්න",
+      "saveMany": "ගෙවීම් {n} save කරන්න",
+      "errors": {
+        "notAllowed": "ගෙවීම් සටහන් කරන්න ඔයාට අවසර නැහැ.",
+        "notFound": "මේ පාරිභෝගිකයාට ඒ කුලිය හම්බ වුණේ නැහැ.",
+        "keyInvalid": "පිටුව ආයෙත් open කරලා ආයෙත් try කරන්න.",
+        "forInvalid": "බිල හරි deposit හරි තෝරන්න.",
+        "amountInvalid": "රුපියල් සම්පූර්ණ ගණනක් ලියන්න, 1 හෝ වැඩි.",
+        "methodInvalid": "Cash, bank හරි card හරි තෝරන්න.",
+        "referenceMissing": "Bank reference එක හරි card receipt අංකය හරි ලියන්න.",
+        "tooLong": "ඒක දිග වැඩියි.",
+        "tooMany": "එක ගෙවීමක කොටස් හරි කුලී හරි වැඩියි.",
+        "totalsDiffer": "කොටස් එකතුව මුළු මුදලට සමාන වෙන්න ඕනේ.",
+        "notPayable": "දැන් {rental} ට ගෙවීමක් සටහන් කරන්න බැහැ.",
+        "overEstimate": "ඒක {rental} ඇස්තමේන්තුවේ ඉතුරු මුදලට වඩා වැඩියි.",
+        "noDeposit": "මේ කුලියට deposit එකක් දාලා නැහැ. මුලින් 4 වෙනි පියවරේ දාන්න.",
+        "overDeposit": "ඒක තව ලැබෙන්න තියෙන deposit එකට වඩා වැඩියි.",
+        "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න."
+      },
+      "money": "මුදල්",
+      "paidSoFar": "මේ වෙනකන් ගෙවපු",
+      "unpaid": "ඇස්තමේන්තුවේ ඉතුරු",
+      "depositReceived": "ලැබුණු deposit",
+      "none": "තාම ගෙවීම් නැහැ.",
+      "line": "{number} · {for} · {method} · රු. {amount}",
+      "lineRef": "Ref {reference}",
+      "by": "{name}, {date}",
+      "checkWaiting": "Bank check: බලාගෙන ඉන්නවා",
+      "checkMatched": "Bank check: ගැළපුණා",
+      "checkFlagged": "Bank check: සලකුණු කළා",
+      "lineBill": "බිල",
+      "lineDeposit": "deposit",
+      "record": "ගෙවීමක් සටහන් කරන්න",
+      "saved": "Save කළා: {numbers}."
     }
   },
   "agreementDoc": {

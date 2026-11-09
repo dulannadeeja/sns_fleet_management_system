@@ -62,7 +62,7 @@ export async function createRental(actorId: string, input: { customerId: string;
       const may = await mayRent(tx, actorId);
       if (!may.rent) return { error: 'notAllowed' } as const;
       // The customer's lock (the one flags and decisions take), so the warnings read here are the ones really there.
-      await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.customer:${input.customerId}`}))`);
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.customer:${input.customerId.toLowerCase()}`}))`);
       // The same per-car lock as status and term changes, so the car's status and terms read here stay true.
       await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.vehicle:${input.vehicleId}`}))`);
       const [c] = await tx.select({ name: customer.name }).from(customer).where(eq(customer.id, input.customerId));
@@ -140,8 +140,8 @@ export async function rentalTerms(id: string, q: Tx | typeof db = db): Promise<R
 }
 
 /** The estimate for a one-car rental from its saved terms (5.3); swaps split by segment come with #62. */
-export async function rentalEstimate(id: string, km?: number): Promise<Estimate | null> {
-  const t = await rentalTerms(id);
+export async function rentalEstimate(id: string, km?: number, q: Tx | typeof db = db): Promise<Estimate | null> {
+  const t = await rentalTerms(id, q);
   if (!t || t.segments.length !== 1) return null;
   const { dailyRate, kmPerDay, extraKmRate, longRentalExtra, longRentalFromDay } = t.segments[0];
   return estimate({ dailyRate, kmPerDay, extraKmRate, longRentalExtra, longRentalFromDay }, t.days, km);

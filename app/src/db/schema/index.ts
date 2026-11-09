@@ -7,3 +7,4 @@ export * from './partners';
 export * from './customers';
 export * from './rentals';
 export * from './documents';
+export * from './money';

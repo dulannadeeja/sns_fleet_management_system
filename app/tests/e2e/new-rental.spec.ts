@@ -157,6 +157,28 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page).toHaveURL(/\?signed=1$/);
   await expect(page.locator('[data-agreement]')).toHaveAttribute('data-agreement', 'signed');
 
+  // ST-09.1 (#53): a payment in two parts, cash and bank, on the bill; then part of the deposit in cash.
+  await page.getByRole('link', { name: 'Record a payment' }).click();
+  await expect(page).toHaveURL(/\/pay$/);
+  await page.locator('[data-pay-rental] input').first().fill('9000');
+  await page.getByRole('button', { name: 'Add another part (cash and bank)' }).click();
+  await page.locator('[data-part="1"] input[inputmode="numeric"]').fill('4000');
+  await page.locator('[data-part="2"] input[inputmode="numeric"]').fill('5000');
+  const save2 = page.getByRole('button', { name: 'Save 2 payments' });
+  await expect(save2).toBeDisabled();
+  await page.locator('[data-part="2"] input[name="ref-1"]').fill(`Sample-${tag}`);
+  await expect(save2).toBeEnabled();
+  await save2.click();
+  await expect(page).toHaveURL(/\?paid=P-\d{4,},P-\d{4,}$/);
+  await expect(page.locator('[data-paid]')).toHaveAttribute('data-paid', '9000');
+  await expect(page.getByText('Bank check: waiting')).toBeVisible();
+  await page.getByRole('link', { name: 'Record a payment' }).click();
+  await page.getByRole('radio', { name: 'Deposit (held money, not income)' }).check();
+  await page.locator('input[name="depositAmount"]').fill('1000');
+  await page.getByRole('button', { name: 'Save payment' }).click();
+  await expect(page).toHaveURL(/\?paid=P-\d{4,}$/);
+  await expect(page.locator('[data-deposit-received]')).toHaveAttribute('data-deposit-received', '1000');
+
   // The car is now held: it is no longer offered on 05.2.
   await page.goto(`/rentals/new/car?customer=${customerId}`);
   await expect(page.locator(`[data-car="${plate}"]`)).toHaveCount(0);

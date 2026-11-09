@@ -29,7 +29,7 @@ async function actorMay(q: Tx, actorId: string, permission: Permission): Promise
   return allows(actor, granted, permission);
 }
 /** One change to a customer's flags at a time, so a check sees the flags really there. */
-const lockCustomer = (tx: Tx, customerId: string) => tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.customer:${customerId}`}))`);
+const lockCustomer = (tx: Tx, customerId: string) => tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.customer:${customerId.toLowerCase()}`}))`);
 
 export interface Flag {
   id: string; kind: FlagKind; details: string; createdAt: Date; createdByName: string | null;

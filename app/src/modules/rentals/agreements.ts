@@ -114,7 +114,7 @@ export async function printAgreement(actorId: string, rentalId: string, language
   if (language !== 'si' && language !== 'en') return { error: 'languageInvalid' };
   return db.transaction(async (tx) => {
     if (!(await hasCustomerAccess(tx, actorId))) return { error: 'notAllowed' } as const;
-    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId}`}))`);
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId.toLowerCase()}`}))`);
     const [r] = await tx.select({ r: rental, c: customer, s: rentalTermsSnapshot }).from(rental).innerJoin(customer, eq(customer.id, rental.customerId))
       .innerJoin(rentalTermsSnapshot, eq(rentalTermsSnapshot.rentalId, rental.id)).where(eq(rental.id, rentalId));
     if (!r) return { error: 'notFound' } as const;
@@ -184,7 +184,7 @@ export async function uploadSigned(actorId: string, rentalId: string, bytes: Uin
   await putFile(storageKey, bytes, contentType);
   return db.transaction(async (tx) => {
     if (!(await hasCustomerAccess(tx, actorId))) return { error: 'notAllowed' } as const;
-    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId}`}))`);
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId.toLowerCase()}`}))`);
     const now = await newestPrint(tx, rentalId);
     if (!now) return { error: 'notFound' } as const;
     if (now.status !== 'draft') return { error: 'notDraft' } as const;

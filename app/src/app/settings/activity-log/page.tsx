@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { paymentNumber } from '../../../modules/money/payments';
+import { rentalNumber } from '../../../modules/rentals/agreements';
 import { getFormatter, getLocale, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../auth/require';
 import { isPermission } from '../../../auth/permissions';
@@ -29,8 +31,9 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
   const seeCustomers = await mayDo(viewer, 'customerAccess');
   const tCust = await getTranslations('customers');
   // A car's commission is a partner term: hidden from people who may not see partner terms (system design 4.2).
-  // Customers' details are for people with customer access (system design 3.2, Confirmed; #19 review).
-  const entries = all.filter((e) => (seeTerms || !isPartnerTermEntry(e)) && (seeCustomers || !e.action.startsWith('customer.')));
+  // Customers' details are for people with customer access (system design 3.2, Confirmed; #19 review); rentals and
+  // payments name the customer too (#53).
+  const entries = all.filter((e) => (seeTerms || !isPartnerTermEntry(e)) && (seeCustomers || !/^(customer|rental|payment)\./.test(e.action)));
   const tCars = tCarsRaw as unknown as (k: string, v?: Record<string, string>) => string;
   const t = await getTranslations('settings');
   const format = await getFormatter();
@@ -76,6 +79,13 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       ...(e.action.startsWith('rental.') ? {
         target: String(e.details?.name ?? e.targetId ?? ''), plate: String(e.details?.registration ?? ''), days: String(e.details?.days ?? ''),
         number: String(e.details?.number ?? ''), language: e.details?.language === 'si' ? 'සිංහල' : e.details?.language === 'en' ? 'English' : '',
+      } : {}),
+      // payment.*: the payment's number, the customer, the amount and how it was paid (#53).
+      ...(e.action.startsWith('payment.') ? {
+        target: String(e.details?.name ?? e.targetId ?? ''), number: paymentNumber(Number(e.details?.number ?? 0)),
+        amount: format.number(Number(e.details?.amount ?? 0)), method: t.has(`log.methods.${String(e.details?.method)}` as 'log.methods.cash') ? t(`log.methods.${String(e.details?.method)}` as 'log.methods.cash') : '',
+        for: e.details?.for === 'deposit' ? t('log.forDeposit') : t('log.forBill'),
+        rentals: Array.isArray(e.details?.rentals) ? (e.details.rentals as unknown[]).map((n) => rentalNumber(Number(n))).join(', ') : '',
       } : {}),
     };
     // Only a sentence (a string) counts: an action named like a group of sentences shows its raw name.

@@ -11,6 +11,7 @@ import { RefCopyForm } from './reference/ReferenceForm';
 import { SignedForm } from './review/PrintForm';
 import { agreementState, rentalNumber } from '../../../modules/rentals/agreements';
 import { rentalWords } from '../words';
+import { paymentNumber, rentalMoney } from '../../../modules/money/payments';
 import { Notice, PlateBadge, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
 import '../../cars/cars.css';
@@ -18,7 +19,7 @@ import '../rentals.css';
 
 // A saved rental (#51), until Rental details (06.2) comes with #58: who, which car, from when to when, the estimate from
 // its own saved terms. The deposit, agreement and handover come with #54, #55 and #57. Needs Customer access.
-export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string }> }) {
+export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string }> }) {
   const person = await requirePermission('customerAccess');
   const r = await rentalTerms((await params).id);
   if (!r) notFound();
@@ -27,7 +28,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
   const when = (d: Date) => format.dateTime(d, { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Colombo' });
   const money = (n: number) => format.number(n);
   const seg = r.segments[0];
-  const [ready, w, tk, agr] = await Promise.all([rentalReadiness(r.id), rentalWords(), getTranslations('customers'), agreementState(r.id)]);
+  const [ready, w, tk, agr, cash] = await Promise.all([rentalReadiness(r.id), rentalWords(), getTranslations('customers'), agreementState(r.id), rentalMoney(r.id)]);
   const ref = ready?.referencePersonId ? await getReference(ready.referencePersonId) : null;
   const sp = await searchParams;
   const refW = { ...(w.reference as unknown as Record<string, string>) } as unknown as Record<string, string> & { errors: Record<string, string>; relationships: Record<string, string> };
@@ -35,6 +36,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
     <AppFrame person={person} active="rentals" title={t('rental')} subtitle={c?.name} backHref="/rentals/new">
       {sp.terms === '1' ? <Notice>{t('terms.termsSaved')}</Notice> : null}
       {sp.signed === '1' ? <Notice>{t('signed.saved')}</Notice> : null}
+      {typeof sp.paid === 'string' && /^P-\d{4,}(,P-\d{4,})*$/.test(sp.paid) ? <Notice>{t('pay.saved', { numbers: sp.paid.replace(/,/g, ', ') })}</Notice> : null}
       {sp.saved === '1' ? <Notice>{t('saved', { plate: car?.registration ?? '', deadline: when(r.deadlineAt) })}</Notice> : null}
       <section className="car-card" aria-labelledby="r-h" data-rental={r.id}>
         <h2 id="r-h">{`${t('rental')} ${rentalNumber(r.number)}`}</h2>
@@ -94,6 +96,29 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
         {agr?.printed && r.status === 'draft' ? <SignedForm rentalId={r.id} w={w.signed as unknown as Record<string, string> & { errors: Record<string, string> }} /> : null}
         {r.status === 'draft' ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/review`}>{agr?.printed ? t('signed.reprint') : t('signed.review')}</Link></div> : null}
       </section>
+      {cash ? (
+        <section className="car-card" aria-labelledby="m-h" data-paid={cash.paid} data-deposit-received={cash.depositReceived}>
+          <h2 id="m-h">{t('pay.money')}</h2>
+          <dl className="ren-lines">
+            <dt>{t('pay.paidSoFar')}</dt><dd>{t('pay.lkr', { amount: money(cash.paid) })}</dd>
+            <dt>{t('pay.unpaid')}</dt><dd>{t('pay.lkr', { amount: money(cash.unpaid) })}</dd>
+            {cash.depositSet !== null ? <><dt>{t('pay.depositReceived')}</dt><dd>{`${t('pay.lkr', { amount: money(cash.depositReceived) })} / ${money(cash.depositSet)}`}</dd></> : null}
+          </dl>
+          {cash.payments.length ? (
+            <ul className="set-muted" style={{ margin: 0, paddingLeft: 18 }}>
+              {cash.payments.map((p) => (
+                <li key={`${p.id}-${p.for}`} data-payment={paymentNumber(p.number)}>
+                  {t('pay.line', { number: paymentNumber(p.number), for: p.for === 'deposit' ? t('pay.lineDeposit') : t('pay.lineBill'), method: t(`pay.methods.${p.method}`), amount: money(p.amount) })}
+                  {p.reference ? ` · ${t('pay.lineRef', { reference: p.reference })}` : ''}
+                  {` · ${t('pay.by', { name: p.createdByName, date: when(p.createdAt) })}`}
+                  {p.check ? ` · ${t(p.check === 'waiting' ? 'pay.checkWaiting' : p.check === 'matched' ? 'pay.checkMatched' : 'pay.checkFlagged')}` : ''}
+                </li>
+              ))}
+            </ul>
+          ) : <span className="set-muted">{t('pay.none')}</span>}
+          {r.status === 'draft' ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/pay`}>{t('pay.record')}</Link></div> : null}
+        </section>
+      ) : null}
       <p className="set-muted" style={{ margin: 0 }}>{t('nextSteps')}</p>
     </AppFrame>
   );

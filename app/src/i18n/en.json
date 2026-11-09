@@ -314,10 +314,20 @@
         "document": {
           "wordingAdd": "added agreement wording version {version}",
           "wordingApprove": "approved agreement wording version {version}"
+        },
+        "payment": {
+          "record": "recorded payment {number} from {target}: LKR {amount}, {method}, {for} ({rentals})"
         }
       },
       "reason": "reason: “{reason}”",
-      "left": "{name} (left)"
+      "left": "{name} (left)",
+      "methods": {
+        "cash": "cash",
+        "bank": "bank transfer",
+        "card": "card"
+      },
+      "forBill": "for the bill",
+      "forDeposit": "for the deposit"
     },
     "rules": {
       "ownerTitle": "Owner settings",
@@ -1467,6 +1477,77 @@
         "failed": "Not saved. Try again.",
         "reprintFirst": "The printed terms changed after the last printout: print again, have the new one signed, then upload it."
       }
+    },
+    "pay": {
+      "title": "Record a payment",
+      "notPayable": "A payment can't be recorded on this rental now.",
+      "for": "For",
+      "forBill": "Bill",
+      "forBillNote": "Rent for this rental, or shared with the customer's other rentals.",
+      "forDeposit": "Deposit (held money, not income)",
+      "depositNone": "No deposit set for this rental (step 4).",
+      "depositNote": "Deposit set LKR {set} · received LKR {received}",
+      "bills": "Put it on",
+      "billAmount": "Rental {rental} · amount (LKR)",
+      "billHint": "Estimate LKR {estimate} · paid LKR {paid} · unpaid LKR {unpaid}. Leave empty for none.",
+      "amount": "Amount (LKR)",
+      "depositLeft": "Still to receive: LKR {left}",
+      "depositHeld": "A deposit is money held for the customer. It is not income. It is used or refunded at return.",
+      "part": "Part {n}",
+      "method": "Method",
+      "methods": {
+        "cash": "Cash (into the drawer)",
+        "bank": "Bank transfer",
+        "card": "Card (machine)"
+      },
+      "bankRef": "Bank reference",
+      "cardRef": "Card receipt number",
+      "bankRefHint": "A bank payment can't be saved without its reference.",
+      "cardRefHint": "A card payment can't be saved without the machine's receipt number.",
+      "cashNote": "Goes into the drawer under your name.",
+      "removePart": "Remove",
+      "addPart": "Add another part (cash and bank)",
+      "total": "Total",
+      "lkr": "LKR {amount}",
+      "leftToSplit": "Left to split",
+      "afterSave": "Counts as paid at once. Bank and card payments are checked against the statement later. Recorded is not the same as checked.",
+      "sameReference": "This reference is already on another payment. It may be the same money twice. Check, then write why to save it.",
+      "sameLine": "{number} · LKR {amount} · {method} · {date}",
+      "sameReason": "Why save it again",
+      "save": "Save payment",
+      "saveMany": "Save {n} payments",
+      "errors": {
+        "notAllowed": "You don't have permission to record payments.",
+        "notFound": "The rental was not found for this customer.",
+        "keyInvalid": "Open the page again and try once more.",
+        "forInvalid": "Choose bill or deposit.",
+        "amountInvalid": "Type whole rupees, 1 or more.",
+        "methodInvalid": "Choose cash, bank or card.",
+        "referenceMissing": "Type the bank reference or the card receipt number.",
+        "tooLong": "That is too long.",
+        "tooMany": "Too many parts or rentals in one payment.",
+        "totalsDiffer": "The parts must add up to the total.",
+        "notPayable": "A payment can't be recorded on {rental} now.",
+        "overEstimate": "That is more than is unpaid on {rental}'s estimate.",
+        "noDeposit": "No deposit is set for this rental. Set it in step 4 first.",
+        "overDeposit": "That is more than the deposit still to receive.",
+        "failed": "Something went wrong. Nothing was saved. Try again."
+      },
+      "money": "Money",
+      "paidSoFar": "Paid so far",
+      "unpaid": "Unpaid on the estimate",
+      "depositReceived": "Deposit received",
+      "none": "No payments yet.",
+      "line": "{number} · {for} · {method} · LKR {amount}",
+      "lineRef": "Ref {reference}",
+      "by": "by {name}, {date}",
+      "checkWaiting": "Bank check: waiting",
+      "checkMatched": "Bank check: matched",
+      "checkFlagged": "Bank check: flagged",
+      "lineBill": "bill",
+      "lineDeposit": "deposit",
+      "record": "Record a payment",
+      "saved": "Saved: {numbers}."
     }
   },
   "agreementDoc": {
