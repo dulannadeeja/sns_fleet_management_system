@@ -3,6 +3,7 @@ import { db } from '../../db/client';
 import { auditEvent, customer, permissionGrant, referencePerson, rental, rentalEvent, rentalTermsSnapshot, user } from '../../db/schema';
 import { allows } from '../../auth/permissions';
 import { getReference, type RefCopyKind } from '../customers/references';
+import { depositReceivedOn } from '../money/payments';
 
 // Step 4 of New rental (05.4; ST-05.4, ST-05.5; system design 8.1, 8.2, 6; Confirmed 8 Nov 2026): the deposit (LKR 1
 // to 500,000, typed each time) or its waiver with a reason; the rent paid now or at return; the fuel option (not
@@ -23,7 +24,7 @@ export interface TermsInput {
   deposit: number | null; waiveReason?: string; rentPaid: RentPaid; fuel: Fuel; referenceRequired: boolean; referencePersonId?: string | null;
 }
 export type TermsError = 'notAllowed' | 'depositNotAllowed' | 'notFound' | 'notDraft' | 'depositInvalid' | 'reasonMissing' | 'tooLong' | 'rentPaidInvalid' | 'fuelInvalid'
-  | 'fuelPriceNotSet' | 'referenceNotFound';
+  | 'fuelPriceNotSet' | 'referenceNotFound' | 'depositBelowReceived';
 
 /** Saves step 4 on a saved rental that has not gone out yet. Logged as rental.terms with what was chosen. */
 export async function setRentalTerms(actorId: string, rentalId: string, input: TermsInput): Promise<{ ok: true } | { error: TermsError }> {
@@ -41,7 +42,7 @@ export async function setRentalTerms(actorId: string, rentalId: string, input: T
     const [a] = await tx.select({ role: user.role, disabledAt: user.disabledAt }).from(user).where(eq(user.id, actorId));
     const granted = new Set((await tx.select({ p: permissionGrant.permission }).from(permissionGrant).where(eq(permissionGrant.userId, actorId))).map((g) => g.p));
     if (!a || !allows(a, granted, 'customerAccess')) return { error: 'notAllowed' } as const;
-    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId}`}))`);
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.rental:${rentalId.toLowerCase()}`}))`);
     const [r] = await tx.select({ status: rental.status, customerId: rental.customerId, fuelPrice: rentalTermsSnapshot.fuelPricePerLitre, name: customer.name,
       deposit: rental.depositAmount, waived: rental.depositWaivedReason, termsSetAt: rental.termsSetAt, rentPaid: rental.rentPaid, fuel: rental.fuel })
       .from(rental).innerJoin(rentalTermsSnapshot, eq(rentalTermsSnapshot.rentalId, rental.id)).innerJoin(customer, eq(customer.id, rental.customerId))
@@ -51,6 +52,11 @@ export async function setRentalTerms(actorId: string, rentalId: string, input: T
     // Only a new or changed deposit (or waiver) needs "Set or waive a deposit"; keeping it as saved does not.
     const depositChanged = r.termsSetAt === null || r.deposit !== (waived ? null : input.deposit) || (r.waived ?? '') !== (waived ? reason : '');
     if (depositChanged && !allows(a, granted, 'setOrWaiveDeposit')) return { error: 'depositNotAllowed' } as const;
+    // Derived control (8.1, 8.2, 9 Nov 2026): the deposit cannot go below what was already received for it, or be waived after.
+    if (depositChanged) {
+      const received = await depositReceivedOn(tx, rentalId);
+      if (received > 0 && (waived || input.deposit! < received)) return { error: 'depositBelowReceived' } as const;
+    }
     if (input.fuel === 'sameLevel' && r.fuelPrice === null) return { error: 'fuelPriceNotSet' } as const;
     if (refId) {
       const [ref] = await tx.select({ id: referencePerson.id }).from(referencePerson).where(and(eq(referencePerson.id, refId), eq(referencePerson.customerId, r.customerId)));

@@ -7,6 +7,7 @@ import { setRentalTerms, type Fuel, type RentPaid } from '../../modules/rentals/
 import { printAgreement, uploadSigned } from '../../modules/rentals/agreements';
 import { addReference, addReferenceCopy, REF_COPY_KINDS } from '../../modules/customers/references';
 import { MAX_COPY_BYTES } from '../../storage/kinds';
+import { paymentNumber, recordPayment, type Method, type PaymentFor } from '../../modules/money/payments';
 
 // New rental (#51): requirePermission("Customer access"), then the rentals module, which checks everything again in one
 // transaction and writes the activity log. The pickup is the moment of the save (05.3 shows "now").
@@ -107,4 +108,30 @@ export async function uploadSignedAction(rentalId: string, _: PrintState, form: 
   if ('error' in result) return { error: result.error };
   revalidatePath(`/rentals/${rentalId}`);
   redirect(`/rentals/${rentalId}?signed=1`);
+}
+
+// Record a payment (09.3, 09.4; #53). The form sends its choices as one JSON field (kept in React state); the money
+// module checks everything again in one transaction and writes the activity log.
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+export type PayState = { error?: string; rentalId?: string; same?: { number: string; method: string; amount: number; at: string }[]; payload?: string };
+
+export async function recordPaymentAction(customerId: string, rentalId: string, key: string, _: PayState, form: FormData): Promise<PayState> {
+  const person = await requirePermission('customerAccess');
+  const payload = String(form.get('payload') ?? '');
+  if (!UUID.test(rentalId) || payload.length > 10_000) return { error: 'failed' };
+  let input: { for?: unknown; rentals?: unknown; parts?: unknown; reason?: unknown };
+  try { input = JSON.parse(payload); } catch { return { error: 'failed', payload }; }
+  if (!input || typeof input !== 'object') return { error: 'failed', payload };
+  const num = (v: unknown) => { const s = String(v ?? '').replace(/,/g, '').trim(); return /^\d{1,9}$/.test(s) ? Number(s) : NaN; };
+  const rentals = (Array.isArray(input.rentals) ? input.rentals : []).map((x: { rentalId?: unknown; amount?: unknown }) => ({ rentalId: String(x?.rentalId ?? ''), amount: num(x?.amount) }))
+    .filter((x) => String(x.amount) !== '0');
+  const parts = (Array.isArray(input.parts) ? input.parts : []).map((x: { method?: unknown; amount?: unknown; reference?: unknown }) =>
+    ({ method: String(x?.method ?? '') as Method, amount: num(x?.amount), reference: String(x?.reference ?? '') }));
+  const result = await recordPayment(person.id, { key, customerId, for: String(input.for ?? '') as PaymentFor, rentals, parts, sameReferenceReason: String(input.reason ?? '') });
+  if ('error' in result) {
+    return { error: result.error, rentalId: result.rentalId, payload,
+      same: result.same?.map((s) => ({ number: paymentNumber(s.number), method: s.method, amount: s.amount, at: s.createdAt.toISOString() })) };
+  }
+  for (const r of rentals) revalidatePath(`/rentals/${r.rentalId}`);
+  redirect(`/rentals/${rentalId}?paid=${result.numbers.map(paymentNumber).join(',')}`);
 }
