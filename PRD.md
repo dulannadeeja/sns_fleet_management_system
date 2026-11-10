@@ -613,7 +613,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Phase:** 2.
 - **Roles:** Staff, Admin, Owner.
 - **Story:** As staff, I see open rentals grouped by what needs doing (overdue, due back, handover in progress, returned today, the rest), so that nothing is missed.
-- **Rules:** a filter opened from the navigation or the attention summary is shown and can be removed; reservations are reached from here (ST-18.1); older and cancelled rentals are kept. System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
+- **Rules:** a filter opened from the navigation or the attention summary is shown and can be removed; reservations are reached from here (ST-18.1); older and cancelled rentals are kept. Groups: overdue (out past its return deadline), due back by the next return deadline, handover in progress (saved, not handed over; "Not collected" after 2 hours), returned today (with return, ST-07.1), the rest. System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
 - **Checks:** AT-28 "Staff open Overdue 1 from the navigation: only the overdue rental shows, with a visible filter that can be removed".
 - **Screens:** 06.1 Rentals.
 
@@ -628,7 +628,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - Return status is kept apart from what the customer and SNS still owe. System design → [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
   - A rental marked "Started before go-live" earns for the partner only from go-live; an imported rental is read-only. System design → [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
   - A payment is corrected only by request (ST-09.3).
-- **Checks:** AT-14 "A rental runs several days: each day final once, at its close; excess km final at return; nothing counted twice". AT-37. AT-42.
+- **Checks:** AT-14 "A rental runs several days: each day final once, at its close; excess km final at return; nothing counted twice" (the rental days are shown with #58; final with the day close, Phase 3). AT-37 and AT-42 with the import of starting data, where those rentals are made (decided 10 Nov 2026, Dulan).
 - **Screens:** 06.2 Rental details.
 - **Decided:** DN-01 (the admin sees the split by default), DN-11 (staff close the day, or 11:59 PM).
 

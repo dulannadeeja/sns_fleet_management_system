@@ -1328,7 +1328,6 @@
     "freeCars": "Free cars right now · {n}",
     "noCars": "No car is free right now.",
     "perDay": "LKR {rate} a day",
-    "days": "How many days",
     "daysHint": "1 to 90 days",
     "pickup": "Pickup",
     "pickupNow": "Now, {time}",
@@ -1686,7 +1685,56 @@
       "statusNotCollected": "Not collected · car freed"
     },
     "statusActive": "Out (handed over)",
-    "statusNotCollected": "Not collected · car freed"
+    "statusNotCollected": "Not collected · car freed",
+    "list": {
+      "title": "Rentals",
+      "open": "Open: {n}",
+      "new": "New rental",
+      "filterLabel": "Filter",
+      "removeFilter": "Remove filter · show all",
+      "filters": {
+        "overdue": "Overdue only"
+      },
+      "groups": {
+        "overdue": "Overdue",
+        "dueBack": "Due back by {when}",
+        "handover": "Handover in progress",
+        "other": "Other open rentals"
+      },
+      "late": "+{h}h {m}m",
+      "deadline": "deadline {when}",
+      "backBy": "back by {when}",
+      "savedAt": "saved {when}",
+      "notCollected": "Not collected · saved {when}",
+      "none": "No open rentals.",
+      "noneFiltered": "No rentals match this filter.",
+      "checklistMissing": "{done} / {total} · {first}",
+      "checklistReady": "ready to hand over"
+    },
+    "overdue": {
+      "title": "Overdue · +{h}h {m}m",
+      "deadline": "Return deadline: {when}",
+      "call": "Call {name} · {phone}",
+      "noFee": "No late fee is running. Whether to charge for the late return is decided by staff when the car comes back, with a reason."
+    },
+    "history": {
+      "title": "What happened",
+      "forBill": "bill",
+      "forDeposit": "deposit",
+      "kinds": {
+        "created": "Saved · {days} days",
+        "terms": "Deposit and payment set",
+        "payment": "Payment recorded · LKR {amount} · {for}",
+        "handover": "Handed over · {km} km",
+        "carFreed": "Not collected · car freed: {reason}"
+      }
+    },
+    "rentalDays": {
+      "title": "Rental days",
+      "line": "Day {n} · ends {when}",
+      "note": "Each day's rent becomes final at that day's close (the day close comes in Phase 3). Extra km and any late charge are final at return."
+    },
+    "days": "How many days"
   },
   "agreementDoc": {
     "title": "Rental agreement",

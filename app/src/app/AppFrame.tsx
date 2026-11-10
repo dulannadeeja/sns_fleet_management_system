@@ -4,6 +4,7 @@ import { AppHeader, NavRail, PageHeader, type Lang } from '../ui';
 import type { SignedInPerson } from '../auth/first-sign-in';
 import { railItems } from './rail';
 import { mayDo } from '../auth/access';
+import { overdueCount } from '../modules/rentals/list';
 import './settings/settings.css';
 
 // The frame of the module pages (cars first): on a computer the menu and the top bar, on a phone the page header with a
@@ -14,9 +15,10 @@ export async function AppFrame({ person, active, title, subtitle, backHref, chil
   const t = await getTranslations();
   const lang = (await getLocale()) as Lang;
   const [partners, customers] = await Promise.all([mayDo(person, 'seePartnerEarnings'), mayDo(person, 'customerAccess')]);
+  const overdue = customers ? await overdueCount() : 0;
   return (
     <div className="set-desktop">
-      <NavRail labels={{ menu: t('frame.menu') }} items={railItems(person, active, t, lang, { partners, customers })} />
+      <NavRail labels={{ menu: t('frame.menu'), overdue: t('frame.overdue'), waiting: t('frame.waiting'), show: t('frame.show') }} items={railItems(person, active, t, lang, { partners, customers, overdue })} />
       <div className="set-body">
         <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
         <div className="set-phone-head">

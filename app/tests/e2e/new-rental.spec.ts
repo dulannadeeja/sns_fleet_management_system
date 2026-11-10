@@ -2,6 +2,7 @@
 // #51). The owner is the test database's one owner (global-setup.ts). Sample car and customers only.
 import { randomUUID } from 'node:crypto';
 import { test, expect, type Page } from '@playwright/test';
+import { Pool } from 'pg';
 import { E2E_OWNER_PASSWORD } from './global-setup';
 
 async function signIn(page: Page, phone: string, password: string) {
@@ -227,6 +228,30 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page).toHaveURL(/\?handedOver=1$/);
   await expect(page.locator('dd[data-status]')).toHaveAttribute('data-status', 'active');
   await expect(page.locator('[data-handed-over]')).toContainText('31,206');
+
+  // ST-06.1 to ST-06.3, AT-28 (#58): a sample overdue rental (its deadline moved an hour back, test-only, as the
+  // database owner). The menu's Overdue count opens the list filtered; the filter shows and can be removed.
+  const rentalId = rentalUrl.split('/').pop()!;
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5433/sns_test' });
+  await pool.query("update rental set pickup_at = now() - interval '2 days', deadline_at = now() - interval '1 hour' where id = $1", [rentalId]);
+  await pool.end();
+  await page.goto(rentalUrl);
+  await expect(page.locator('[data-overdue-banner]')).toContainText('+1h');
+  await expect(page.locator('[data-history]')).toContainText('Handed over');
+  if ((page.viewportSize()?.width ?? 0) >= 1024) {
+    await page.locator('.rt-side-badge-overdue').click();
+  } else {
+    await page.goto('/rentals?filter=overdue');
+  }
+  // The test database keeps every sample rental from earlier runs, so the full list is slow there: more time.
+  await expect(page).toHaveURL(/\/rentals\?filter=overdue$/, { timeout: 30_000 });
+  await expect(page.locator('[data-filter="overdue"]')).toBeVisible();
+  await expect(page.locator('[data-rental] [data-overdue="0"], li[data-overdue="0"]')).toHaveCount(0);
+  await expect(page.locator(`li[data-overdue="1"] a[href="/rentals/${rentalId}"]`)).toBeVisible();
+  await page.getByRole('link', { name: 'Remove filter · show all' }).click();
+  await expect(page).toHaveURL(/\/rentals$/, { timeout: 30_000 });
+  await expect(page.locator('[data-filter]')).toHaveCount(0);
+  expect(await noSideScroll(page)).toBe(false);
 
   // The car is now held: it is no longer offered on 05.2.
   await page.goto(`/rentals/new/car?customer=${customerId}`);
