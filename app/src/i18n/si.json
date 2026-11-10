@@ -1328,7 +1328,6 @@
     "freeCars": "දැන් නිදහස් වාහන · {n}",
     "noCars": "දැන් නිදහස් වාහනයක් නැහැ.",
     "perDay": "දවසට රු. {rate}",
-    "days": "දවස් කීයද",
     "daysHint": "දවස් 1 සිට 90 දක්වා",
     "pickup": "ගන්න වෙලාව",
     "pickupNow": "දැන්, {time}",
@@ -1686,7 +1685,56 @@
       "statusNotCollected": "අරගෙන ගියේ නැහැ · car එක නිදහස්"
     },
     "statusActive": "එළියේ (භාර දීලා)",
-    "statusNotCollected": "අරගෙන ගියේ නැහැ · car එක නිදහස්"
+    "statusNotCollected": "අරගෙන ගියේ නැහැ · car එක නිදහස්",
+    "list": {
+      "title": "කුලී",
+      "open": "විවෘත: {n}",
+      "new": "අලුත් කුලියක්",
+      "filterLabel": "පෙරහන",
+      "removeFilter": "පෙරහන අයින් කරන්න · ඔක්කොම පෙන්නන්න",
+      "filters": {
+        "overdue": "පරක්කු ඒවා විතරයි"
+      },
+      "groups": {
+        "overdue": "පරක්කුයි",
+        "dueBack": "{when} ට කලින් ආපසු එනවා",
+        "handover": "භාර දෙමින්",
+        "other": "අනිත් දුවන කුලී"
+      },
+      "late": "+{h}h {m}m",
+      "deadline": "නියමිත වේලාව {when}",
+      "backBy": "ආපසු {when}",
+      "savedAt": "save කළේ {when}",
+      "notCollected": "අරගෙන ගියේ නැහැ · save කළේ {when}",
+      "none": "විවෘත කුලී නැහැ.",
+      "noneFiltered": "මේ පෙරහනට ගැළපෙන කුලී නැහැ.",
+      "checklistMissing": "{done} / {total} · {first}",
+      "checklistReady": "භාර දෙන්න සූදානම්"
+    },
+    "overdue": {
+      "title": "පරක්කුයි · +{h}h {m}m",
+      "deadline": "ආපසු ගේන්න තිබ්බ වෙලාව: {when}",
+      "call": "{name} ට කතා කරන්න · {phone}",
+      "noFee": "පරක්කු ගාස්තුවක් ඉබේ වැටෙන්නේ නැහැ. Car එක ආවාම, පරක්කුවට අය කරනවද කියලා staff හේතුවක් එක්ක තීරණය කරනවා."
+    },
+    "history": {
+      "title": "සිදු වූ දේ",
+      "forBill": "බිල",
+      "forDeposit": "deposit",
+      "kinds": {
+        "created": "Save කළා · දින {days}",
+        "terms": "Deposit සහ ගෙවීම දැම්මා",
+        "payment": "ගෙවීම සටහන් කළා · රු. {amount} · {for}",
+        "handover": "භාර දුන්නා · km {km}",
+        "carFreed": "අරගෙන ගියේ නැහැ · car එක නිදහස් කළා: {reason}"
+      }
+    },
+    "rentalDays": {
+      "title": "කුලී දින",
+      "line": "දිනය {n} · ඉවර වෙන්නේ {when}",
+      "note": "හැම දවසකම කුලිය ඒ දවසේ close එකේදී අවසාන වෙනවා (day close එක Phase 3 වල). වැඩි km සහ පරක්කු ගාස්තුව ආපසු දෙනකොට අවසාන වෙනවා."
+    },
+    "days": "දවස් කීයද"
   },
   "agreementDoc": {
     "title": "කුලී ගිවිසුම",

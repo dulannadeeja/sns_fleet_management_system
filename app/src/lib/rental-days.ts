@@ -31,6 +31,22 @@ export function deadlineFor(pickup: Date, days: number, cutoff: string, deadline
   return new Date(firstEndDay + (days - 1) * DAY_MS + (end - COLOMBO_MINUTES) * 60_000);
 }
 
+/** The first return deadline (the saved time of day, Asia/Colombo) after a moment: "due back by" on the rentals list. */
+export function nextDeadlineAfter(now: Date, deadline: string): Date {
+  const end = minutesOf(deadline);
+  const local = now.getTime() + COLOMBO_MINUTES * 60_000;
+  const localDayStart = Math.floor(local / DAY_MS) * DAY_MS;
+  const today = localDayStart + end * 60_000 - COLOMBO_MINUTES * 60_000;
+  return new Date(today > now.getTime() ? today : today + DAY_MS);
+}
+
+/** Each rental day of a rental and when it ends (5.1): day n ends at the deadline of an n-day rental from the pickup.
+ *  Each day's rent becomes final at that day's close (Phase 3, AT-14). */
+export function rentalDays(pickup: Date, days: number, cutoff: string, deadline: string): { n: number; endsAt: Date }[] {
+  wholeDays(days);
+  return Array.from({ length: days }, (_, i) => ({ n: i + 1, endsAt: deadlineFor(pickup, i + 1, cutoff, deadline) }));
+}
+
 export interface RateTerms { dailyRate: number; kmPerDay: number; extraKmRate: number; longRentalExtra: number; longRentalFromDay: number }
 export interface Estimate {
   days: number; base: number; longRentalDays: number; longRental: number;

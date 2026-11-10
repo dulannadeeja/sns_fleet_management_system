@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { overdueCount } from '../../modules/rentals/list';
 import type { ReactNode } from 'react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { mayDo } from '../../auth/access';
@@ -18,11 +19,12 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
 }) {
   const t = await getTranslations();
   const seeLog = await mayDo(person, 'seeActivityLog');
+  const customers = await mayDo(person, 'customerAccess');
   const lang = (await getLocale()) as Lang;
   const title = lang === 'si' ? `${t('settings.title')} · ${en.settings.title}` : t('settings.title');
   return (
     <div className="set-desktop">
-      <NavRail labels={{ menu: t('frame.menu') }} items={railItems(person, 'settings', t, lang, { partners: await mayDo(person, 'seePartnerEarnings'), customers: await mayDo(person, 'customerAccess') })} />
+      <NavRail labels={{ menu: t('frame.menu'), overdue: t('frame.overdue'), waiting: t('frame.waiting'), show: t('frame.show') }} items={railItems(person, 'settings', t, lang, { partners: await mayDo(person, 'seePartnerEarnings'), customers, overdue: customers ? await overdueCount() : 0 })} />
       <div className="set-body">
         <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
         <div className="set-phone-head">

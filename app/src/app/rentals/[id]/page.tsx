@@ -13,6 +13,8 @@ import { agreementState, rentalNumber } from '../../../modules/rentals/agreement
 import { rentalWords } from '../words';
 import { paymentNumber, rentalMoney } from '../../../modules/money/payments';
 import { handoverChecklist, handoverOf } from '../../../modules/rentals/handover';
+import { minutesLate, rentalHistory } from '../../../modules/rentals/list';
+import { rentalDays } from '../../../lib/rental-days';
 import { Notice, PlateBadge, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
 import '../../cars/cars.css';
@@ -33,17 +35,29 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
   const handed = r.status === 'active' ? await handoverOf(r.id) : null;
   const photos = (await handoverChecklist(r.id))?.photos ?? [];
   const th = await getTranslations('rentals.handover');
+  const history = await rentalHistory(r.id);
+  // 06.3 Overdue rental (ST-06.3): out past its return deadline. No late fee runs on its own; staff call (7.4, 12).
+  const lateMinutes = minutesLate(r);
+  const days = rentalDays(r.pickupAt, r.days, r.pickupCutoff, r.returnDeadline);
   const ref = ready?.referencePersonId ? await getReference(ready.referencePersonId) : null;
   const sp = await searchParams;
   const refW = { ...(w.reference as unknown as Record<string, string>) } as unknown as Record<string, string> & { errors: Record<string, string>; relationships: Record<string, string> };
   return (
-    <AppFrame person={person} active="rentals" title={t('rental')} subtitle={c?.name} backHref="/rentals/new">
+    <AppFrame person={person} active="rentals" title={t('rental')} subtitle={c?.name} backHref="/rentals">
       {sp.terms === '1' ? <Notice>{t('terms.termsSaved')}</Notice> : null}
       {sp.signed === '1' ? <Notice>{t('signed.saved')}</Notice> : null}
       {sp.handedOver === '1' && handed ? <Notice>{th('done')}</Notice> : null}
       {sp.freed === '1' && r.status === 'notCollected' ? <Notice>{th('freed')}</Notice> : null}
       {typeof sp.paid === 'string' && /^P-\d{4,}(,P-\d{4,})*$/.test(sp.paid) ? <Notice>{t('pay.saved', { numbers: sp.paid.replace(/,/g, ', ') })}</Notice> : null}
       {sp.saved === '1' ? <Notice>{t('saved', { plate: car?.registration ?? '', deadline: when(r.deadlineAt) })}</Notice> : null}
+      {lateMinutes > 0 ? (
+        <section className="car-card" aria-labelledby="o-h" data-overdue-banner>
+          <h2 id="o-h" className="ren-overdue">{t('overdue.title', { h: Math.floor(lateMinutes / 60), m: String(lateMinutes % 60).padStart(2, '0') })}</h2>
+          <span>{t('overdue.deadline', { when: when(r.deadlineAt) })}</span>
+          {c ? <div><a className="rt-btn rt-btn-secondary" href={`tel:${c.phone}`}>{t('overdue.call', { name: c.name, phone: c.phone })}</a></div> : null}
+          <span className="set-muted">{t('overdue.noFee')}</span>
+        </section>
+      ) : null}
       <section className="car-card" aria-labelledby="r-h" data-rental={r.id}>
         <h2 id="r-h">{`${t('rental')} ${rentalNumber(r.number)}`}</h2>
         <dl className="ren-lines">
@@ -141,6 +155,27 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
       ) : r.status === 'draft' ? (
         <div><Link className="rt-btn rt-btn-primary" href={`/rentals/${r.id}/handover`}>{th('start')}</Link></div>
       ) : null}
+      <section className="car-card" aria-labelledby="d-h" data-days={days.length}>
+        <h2 id="d-h">{t('rentalDays.title')}</h2>
+        <ul className="set-muted" style={{ margin: 0, paddingLeft: 18 }}>
+          {days.map((d) => <li key={d.n}>{t('rentalDays.line', { n: d.n, when: when(d.endsAt) })}</li>)}
+        </ul>
+        <span className="set-muted">{t('rentalDays.note')}</span>
+      </section>
+      <section className="car-card" aria-labelledby="w-h" data-history={history.length}>
+        <h2 id="w-h">{t('history.title')}</h2>
+        <ul className="ren-history">
+          {history.map((e) => (
+            <li key={e.id} data-event={e.kind}>
+              <span className="set-muted">{`${when(e.createdAt)} · ${e.byName ?? ''}`}</span>
+              <span>{t.has(`history.kinds.${e.kind}` as 'history.kinds.created') ? t(`history.kinds.${e.kind}` as 'history.kinds.created', {
+                amount: money(Number(e.details.amount ?? 0)), km: money(Number(e.details.outKm ?? 0)), days: String(e.details.days ?? ''),
+                reason: String(e.details.reason ?? ''), for: e.details.for === 'deposit' ? t('history.forDeposit') : t('history.forBill'),
+              }) : e.kind}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
       {r.status === 'draft' ? <p className="set-muted" style={{ margin: 0 }}>{t('nextSteps')}</p> : null}
     </AppFrame>
   );
