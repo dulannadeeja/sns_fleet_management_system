@@ -38,7 +38,7 @@ export const rental = pgTable('rental', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
 }, (t) => [
   index('rental_by_customer').on(t.customerId, t.createdAt.desc()),
-  check('rental_status', sql`status in ('draft')`),
+  check('rental_status', sql`status in ('draft', 'active', 'notCollected')`),
   check('rental_days', sql`days >= 1 AND days <= 90`),
   check('rental_deadline_after_pickup', sql`deadline_at > pickup_at`),
   check('rental_deposit', sql`(deposit_amount is null or deposit_amount between 1 and 500000) and not (deposit_amount is not null and deposit_waived_reason is not null)`),
@@ -104,3 +104,34 @@ export const rentalEvent = pgTable('rental_event', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
   createdBy: uuid('created_by').references(() => user.id),
 }, (t) => [index('rental_event_by_rental').on(t.rentalId, t.createdAt)]);
+
+/** The handover (06.4; ST-06.4; system design 6, Confirmed 10 Nov 2026): one per rental, kept as recorded. The
+ *  odometer, the fuel level (five steps), the accessories list as it was ticked (each item, there or missing) and,
+ *  for a car whose papers were past or missing, who decided and why. Insert-only. */
+export const rentalHandover = pgTable('rental_handover', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  rentalId: uuid('rental_id').notNull().references(() => rental.id).unique('rental_handover_one_per_rental'),
+  vehicleId: uuid('vehicle_id').notNull().references(() => vehicle.id),
+  outKm: integer('out_km').notNull(),
+  fuel: text('fuel').notNull(),
+  accessories: jsonb('accessories').notNull(),
+  papersReason: text('papers_reason'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
+  createdBy: uuid('created_by').notNull().references(() => user.id),
+}, (t) => [
+  index('rental_handover_by_vehicle').on(t.vehicleId, t.createdAt.desc()),
+  check('rental_handover_km', sql`out_km between 0 and 999999`),
+  check('rental_handover_fuel', sql`fuel in ('empty', 'quarter', 'half', 'threeQuarters', 'full')`),
+]);
+
+/** An optional photo of the car's condition at handover, private like ID copies, kept with the rental (up to 10;
+ *  10 Nov 2026). Insert-only. */
+export const handoverPhoto = pgTable('handover_photo', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  rentalId: uuid('rental_id').notNull().references(() => rental.id),
+  storageKey: text('storage_key').notNull().unique('handover_photo_one_key'),
+  contentType: text('content_type').notNull(),
+  size: bigint('size', { mode: 'number' }).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
+  createdBy: uuid('created_by').notNull().references(() => user.id),
+}, (t) => [index('handover_photo_by_rental').on(t.rentalId, t.createdAt)]);

@@ -309,7 +309,11 @@
           "terms": "set the deposit and payment for {target}'s rental",
           "agreementPrint": "printed the agreement for {target}, {number} ({language})",
           "agreementSigned": "uploaded the signed agreement for {target}, {number}",
-          "agreementOpened": "opened the signed agreement of {target}, {number}"
+          "agreementOpened": "opened the signed agreement of {target}, {number}",
+          "handover": "handed over {plate} to {target}, {number}",
+          "photoAdd": "added a condition photo for {target}, {number}",
+          "photoOpened": "opened a condition photo of {target}, {number}",
+          "carFreed": "freed {plate} from {target}'s rental {number}, not collected: {reason}"
         },
         "document": {
           "wordingAdd": "added agreement wording version {version}",
@@ -356,6 +360,11 @@
           "title": "Business details",
           "note": "on every printout: agreements, bills, receipts",
           "value": ""
+        },
+        "handover": {
+          "title": "Handover accessories",
+          "note": "the checklist at handover and return",
+          "value": "{count} items: {list}"
         }
       },
       "names": {
@@ -369,7 +378,8 @@
         "businessName": "business name",
         "businessRegistration": "registration number",
         "businessAddress": "business address",
-        "businessPhones": "business phone numbers"
+        "businessPhones": "business phone numbers",
+        "accessories": "Handover accessories"
       },
       "fields": {
         "pickupCutoff": {
@@ -426,13 +436,19 @@
           "label": "Phone numbers",
           "unit": "",
           "hint": "One or more, separated by commas. Up to 80 letters."
+        },
+        "accessories": {
+          "label": "Accessories (one a line)",
+          "unit": "",
+          "hint": "Up to 20 items, each up to 40 letters. For example: spare wheel."
         }
       },
       "intro": {
         "dayTimes": "Times are in Sri Lanka time. A change applies to new rentals only; rentals already agreed keep their times.",
         "reminders": "How early each reminder starts. Only the owner can change this.",
         "fuel": "Charged only on a “same level” rental, for the litres missing at return. 100% SNS.",
-        "business": "SNS’s name, registration number, address and phone numbers, printed at the top of agreements, bills and receipts."
+        "business": "SNS’s name, registration number, address and phone numbers, printed at the top of agreements, bills and receipts.",
+        "handover": "The things staff check are in the car when it goes out and when it comes back. One list for every car."
       },
       "check": "Check before saving",
       "noChange": "Nothing changed yet.",
@@ -453,7 +469,8 @@
         "notAllowed": "Only the owner can change settings.",
         "failed": "Not saved. Try again.",
         "stale": "Someone saved a change here meanwhile. Open the page again to see it, then make your change.",
-        "tooLong": "Too long: {max} letters at most."
+        "tooLong": "Too long: {max} letters at most.",
+        "tooMany": "Too many: {max} at most."
       },
       "rows": {
         "extraKm": {
@@ -581,6 +598,16 @@
           "before": [
             "Check the spelling: customers sign the agreement under this name.",
             "All four details are needed before an agreement can be printed."
+          ]
+        },
+        "handover": {
+          "affects": [
+            "Handovers from now on show this list.",
+            "Handovers already done keep the list they were ticked with."
+          ],
+          "before": [
+            "Write one item a line, as staff see it in the car.",
+            "Handover needs at least one item on the list."
           ]
         }
       }
@@ -1548,7 +1575,118 @@
       "lineDeposit": "deposit",
       "record": "Record a payment",
       "saved": "Saved: {numbers}."
-    }
+    },
+    "handover": {
+      "title": "Handover",
+      "checklist": "Handover checklist · {done} / {total}",
+      "backBy": "Back by {when}",
+      "items": {
+        "customerCopies": "Customer's NIC and licence copies",
+        "signedAgreement": "Signed agreement photo",
+        "reference": "Reference person",
+        "car": "Car is available",
+        "accessoriesList": "Accessories list (Settings)",
+        "carOut": "This car is out on another rental",
+        "deadlinePassed": "The return time has passed: save a new rental"
+      },
+      "inPlace": "In place",
+      "missingList": "Missing: {list}",
+      "notUploaded": "Not uploaded yet",
+      "outOfDate": "Terms changed after signing: print and sign again",
+      "refNotRequired": "Not required",
+      "refNotChosen": "Required, not chosen yet",
+      "carAvailable": "Available",
+      "carNotAvailable": "Under repair or unavailable: an authorised person must mark it available first",
+      "listCount": "{n} items",
+      "listNone": "No list yet: the owner adds it in Settings",
+      "notEntered": "not entered",
+      "fixCustomer": "Add copies",
+      "fixAgreement": "Print or upload",
+      "fixReference": "Add",
+      "fixCar": "Car status",
+      "fixList": "Settings",
+      "papersExpired": "The car's papers are past or missing (insurance {insurance} · revenue licence {licence}). Only an authorised person can hand it over, with a reason.",
+      "money": "Money",
+      "deposit": "Deposit (held, not income)",
+      "depositWaived": "Waived",
+      "depositLine": "LKR {received} of {set} received",
+      "rent": "Rent",
+      "rentNowUnpaid": "Agreed paid now · LKR {unpaid} still unpaid",
+      "rentNowPaid": "Agreed paid now · paid",
+      "rentAtReturn": "Paid at return",
+      "moneyNote": "Shown for you to check. Money does not block the handover.",
+      "recordPayment": "Record a payment",
+      "photos": "Condition photos (optional)",
+      "photosNote": "{n} of 10. Photos of scratches or dents. Private, like ID copies. They never block the handover.",
+      "photoN": "Photo {n}",
+      "addPhoto": "Add a photo",
+      "photoSaved": "Photo saved.",
+      "odometer": "Odometer",
+      "odometerLabel": "Outgoing odometer (km)",
+      "odometerHint": "The car's last reading: {km} km. It cannot be lower.",
+      "odometerHintNone": "No earlier reading for this car.",
+      "fuel": "Fuel level",
+      "fuelNote": "As on the gauge. Low fuel never blocks the handover.",
+      "fuels": {
+        "empty": "Empty",
+        "quarter": "1/4",
+        "half": "1/2",
+        "threeQuarters": "3/4",
+        "full": "Full"
+      },
+      "accessories": "Accessories · {there} / {total} in the car",
+      "accessoriesNote": "Untick what is not in the car. A missing item never blocks the handover; it is written on the record, so this customer is not charged for it at return.",
+      "accessoriesMissing": "Missing, written on the record: {list}. This customer is not charged for it at return.",
+      "papers": "Car papers",
+      "papersReason": "Why hand it over now",
+      "papersHint": "Up to 500 letters. Saved with your name.",
+      "papersNotAllowed": "Only a person with \"Override expired-document warnings\" can hand over this car. Ask them, or enter the new dates on the car's page.",
+      "handOver": "Hand over car",
+      "blockedNote": "Hand over unlocks when every item above is in. Nobody can skip a required item.",
+      "readyNote": "Everything required is in. Check the readings, then hand over.",
+      "done": "Handed over",
+      "doneLine": "Handed over by {name}, {when}",
+      "outKm": "Odometer out",
+      "fuelOut": "Fuel out",
+      "missingOut": "Missing at handover",
+      "none": "None",
+      "papersOverride": "Papers decision",
+      "start": "Hand over the car",
+      "errors": {
+        "notAllowed": "You don't have permission to hand over cars.",
+        "notFound": "This rental was not found.",
+        "notDraft": "This car was already handed over.",
+        "blocked": "Something required is missing. The list above shows what.",
+        "kmInvalid": "Type the odometer in whole km, 0 to 999,999.",
+        "kmLower": "Lower than the car's last reading ({km} km). If the meter was replaced, ask an admin.",
+        "fuelInvalid": "Choose the fuel level.",
+        "listChanged": "The accessories list changed in Settings. Open the page again.",
+        "papersNotAllowed": "Only a person with \"Override expired-document warnings\" can hand over this car.",
+        "reasonMissing": "Write why.",
+        "tooLong": "That is too long.",
+        "fileMissing": "Choose a photo first.",
+        "fileTooBig": "The photo is bigger than 10 MB.",
+        "fileType": "Only JPEG, PNG or WebP photos.",
+        "tooMany": "10 photos at most.",
+        "failed": "Something went wrong. Nothing was saved. Try again.",
+        "notChecked": "Tick the box to confirm you checked the car.",
+        "tooSoon": "Wait until 2 hours after the rental was saved.",
+        "paid": "Something was paid on this rental. Cancel it instead (refund then)."
+      },
+      "checkedBox": "I checked the car; unticked items are missing.",
+      "notCollected": "Not collected: saved {when} and not handed over yet.",
+      "freeTitle": "Free the car",
+      "freeNote": "Nothing was paid on this rental. You may give the car to another customer. This rental can then no longer be handed over.",
+      "freePaidNote": "Something was paid on this rental, so the car stays held until the rental is cancelled (refund then).",
+      "freeReason": "Why the car is freed",
+      "freeHint": "Up to 500 letters. Saved with your name.",
+      "freeCar": "Free the car",
+      "freed": "The car is free for another customer.",
+      "photosAfter": "Condition photos at handover",
+      "statusNotCollected": "Not collected · car freed"
+    },
+    "statusActive": "Out (handed over)",
+    "statusNotCollected": "Not collected · car freed"
   },
   "agreementDoc": {
     "title": "Rental agreement",

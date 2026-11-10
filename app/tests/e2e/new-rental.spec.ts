@@ -179,6 +179,55 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page).toHaveURL(/\?paid=P-\d{4,}$/);
   await expect(page.locator('[data-deposit-received]')).toHaveAttribute('data-deposit-received', '1000');
 
+  // ST-06.4 (#57): the handover waits for the customer's copies; then it goes out with one accessory missing, a quarter
+  // tank, and (the sample car has no papers dates) the owner's reason.
+  await page.getByRole('link', { name: 'Hand over the car' }).click();
+  await expect(page).toHaveURL(/\/handover$/);
+  await expect(page.locator('[data-item="customerCopies"]')).toHaveAttribute('data-done', '0');
+  await expect(page.getByRole('button', { name: 'Hand over car' })).toBeDisabled();
+  await page.goto(`/customers/${customerId}`);
+  for (const kind of ['nicFront', 'nicBack', 'licenceFront', 'licenceBack']) {
+    await page.locator(`[data-copy="${kind}"] input[type="file"]`).setInputFiles({ name: `${kind}.jpg`, mimeType: 'image/jpeg', buffer: jpeg });
+    await page.locator(`[data-copy="${kind}"] button`).click();
+    await expect(page.locator(`[data-copy="${kind}"]`)).toContainText('on file');
+  }
+  await page.goto('/settings/business-rules');
+  if (await page.locator('[data-group="handover"]', { hasText: 'Not set' }).count()) {
+    await page.goto('/settings/business-rules/handover');
+    await page.locator('textarea[name="accessories"]').fill('Sample spare wheel\nSample jack\nSample air pump');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await expect(page).toHaveURL(/\/settings\/business-rules(\?.*)?$/);
+  }
+  // The reference person's missing copies (NIC back, licence), added on the rental page.
+  await page.goto(rentalUrl);
+  await expect(page.locator('[data-ref-missing]')).toHaveAttribute('data-ref-missing', 'nicBack licence');
+  for (const left of ['licence', '']) {
+    await page.locator('[data-ref-missing] input[type="file"]').first().setInputFiles({ name: 'ref.jpg', mimeType: 'image/jpeg', buffer: jpeg });
+    await page.locator('[data-ref-missing] button').first().click();
+    if (left) await expect(page.locator('[data-ref-missing]')).toHaveAttribute('data-ref-missing', left);
+    else await expect(page.locator('[data-ref-missing]')).toHaveCount(0);
+  }
+  await page.goto(rentalUrl + '/handover');
+  await expect(page.locator('[data-checklist]')).toHaveAttribute('data-checklist', 'ready');
+  await page.locator('[data-photo-form] input[type="file"]').setInputFiles({ name: 'car.jpg', mimeType: 'image/jpeg', buffer: jpeg });
+  await page.locator('[data-photo-form] button').click();
+  await expect(page).toHaveURL(/\/handover\?photo=1$/);
+  await page.locator('input[name="outKm"]').fill('31206');
+  await page.getByRole('radio', { name: '1/4', exact: true }).check();
+  // Every item starts unticked: tick all but the first, then confirm the car was checked.
+  const boxes = page.locator('[data-accessories] .set-choices input[type="checkbox"]');
+  for (let i = 1; i < await boxes.count(); i++) await boxes.nth(i).check();
+  await page.locator('[data-checked-box] input').check();
+  await expect(page.locator('[data-accessories]')).toContainText('Missing, written on the record');
+  const handOverButton = page.getByRole('button', { name: 'Hand over car' });
+  await expect(handOverButton).toBeDisabled();
+  await page.locator('input[name="papersReason"]').fill('Sample: papers being renewed');
+  await expect(handOverButton).toBeEnabled();
+  await handOverButton.click();
+  await expect(page).toHaveURL(/\?handedOver=1$/);
+  await expect(page.locator('dd[data-status]')).toHaveAttribute('data-status', 'active');
+  await expect(page.locator('[data-handed-over]')).toContainText('31,206');
+
   // The car is now held: it is no longer offered on 05.2.
   await page.goto(`/rentals/new/car?customer=${customerId}`);
   await expect(page.locator(`[data-car="${plate}"]`)).toHaveCount(0);

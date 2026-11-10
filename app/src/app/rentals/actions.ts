@@ -8,6 +8,7 @@ import { printAgreement, uploadSigned } from '../../modules/rentals/agreements';
 import { addReference, addReferenceCopy, REF_COPY_KINDS } from '../../modules/customers/references';
 import { MAX_COPY_BYTES } from '../../storage/kinds';
 import { paymentNumber, recordPayment, type Method, type PaymentFor } from '../../modules/money/payments';
+import { addHandoverPhoto, freeCar, handOver, type FuelLevel } from '../../modules/rentals/handover';
 
 // New rental (#51): requirePermission("Customer access"), then the rentals module, which checks everything again in one
 // transaction and writes the activity log. The pickup is the moment of the save (05.3 shows "now").
@@ -134,4 +135,51 @@ export async function recordPaymentAction(customerId: string, rentalId: string, 
   }
   for (const r of rentals) revalidatePath(`/rentals/${r.rentalId}`);
   redirect(`/rentals/${rentalId}?paid=${result.numbers.map(paymentNumber).join(',')}`);
+}
+
+// Hand over the car (06.4; #57). The form sends its choices as one JSON field (kept in React state); the handover
+// module checks everything again under the car's and the rental's locks and writes the activity log.
+export type HandoverState = { error?: string; lastKm?: number; missing?: string[]; payload?: string };
+
+export async function handOverAction(rentalId: string, _: HandoverState, form: FormData): Promise<HandoverState> {
+  const person = await requirePermission('customerAccess');
+  const payload = String(form.get('payload') ?? '');
+  if (!UUID.test(rentalId) || payload.length > 10_000) return { error: 'failed' };
+  let input: { outKm?: unknown; fuel?: unknown; accessories?: unknown; checked?: unknown; papersReason?: unknown };
+  try { input = JSON.parse(payload); } catch { return { error: 'failed', payload }; }
+  if (!input || typeof input !== 'object') return { error: 'failed', payload };
+  const km = String(input.outKm ?? '').replace(/,/g, '').trim();
+  const result = await handOver(person.id, rentalId, {
+    outKm: /^\d{1,7}$/.test(km) ? Number(km) : NaN, fuel: String(input.fuel ?? '') as FuelLevel,
+    accessories: Array.isArray(input.accessories) ? input.accessories : [], checked: input.checked === true, papersReason: String(input.papersReason ?? ''),
+  });
+  if ('error' in result) return { error: result.error, lastKm: result.lastKm, missing: result.missing, payload };
+  revalidatePath(`/rentals/${rentalId}`);
+  revalidatePath('/rentals/new/car');
+  redirect(`/rentals/${rentalId}?handedOver=1`);
+}
+
+export async function addHandoverPhotoAction(rentalId: string, _: PrintState, form: FormData): Promise<PrintState> {
+  const person = await requirePermission('customerAccess');
+  const f = form.get('file');
+  if (!(f instanceof File) || f.size === 0) return { error: 'fileMissing' };
+  if (f.size > MAX_COPY_BYTES) return { error: 'fileTooBig' };
+  const result = await addHandoverPhoto(person.id, rentalId, new Uint8Array(await f.arrayBuffer()));
+  if ('error' in result) return { error: result.error };
+  revalidatePath(`/rentals/${rentalId}/handover`);
+  redirect(`/rentals/${rentalId}/handover?photo=1`);
+}
+
+// Free the car of a rental not collected (#57; 10 Nov 2026): the module checks the 2 hours, that nothing was paid and
+// the reason, under the car's and the rental's locks.
+export type FreeState = { error?: string; reason?: string };
+
+export async function freeCarAction(rentalId: string, _: FreeState, form: FormData): Promise<FreeState> {
+  const person = await requirePermission('customerAccess');
+  const reason = String(form.get('reason') ?? '');
+  const result = await freeCar(person.id, rentalId, reason);
+  if ('error' in result) return { error: result.error, reason };
+  revalidatePath(`/rentals/${rentalId}`);
+  revalidatePath('/rentals/new/car');
+  redirect(`/rentals/${rentalId}?freed=1`);
 }

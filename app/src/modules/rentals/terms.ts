@@ -12,6 +12,7 @@ import { depositReceivedOn } from '../money/payments';
 // access; setting or changing the deposit or its waiver also "Set or waive a deposit" (8 Nov 2026). A deposit is money
 // held, never income (PR-09): the money comes with #53/#64.
 
+type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const DEPOSIT_RANGE = [1, 500_000] as const;
 export const REASON_MAX = 500;
@@ -82,11 +83,11 @@ export interface Readiness {
 }
 
 /** What step 4 holds for a rental, and what is still missing for the reference person (AT-07; the handover check uses it, #57). */
-export async function rentalReadiness(rentalId: string): Promise<Readiness | null> {
+export async function rentalReadiness(rentalId: string, q: Tx | typeof db = db): Promise<Readiness | null> {
   if (!UUID.test(rentalId)) return null;
-  const [r] = await db.select().from(rental).where(eq(rental.id, rentalId));
+  const [r] = await q.select().from(rental).where(eq(rental.id, rentalId));
   if (!r) return null;
-  const ref = r.referenceRequired && r.referencePersonId ? await getReference(r.referencePersonId) : null;
+  const ref = r.referenceRequired && r.referencePersonId ? await getReference(r.referencePersonId, q) : null;
   return {
     termsSet: r.termsSetAt !== null, deposit: r.depositAmount, waivedReason: r.depositWaivedReason, rentPaid: r.rentPaid as RentPaid | null, fuel: r.fuel as Fuel | null,
     referenceRequired: r.referenceRequired, referencePersonId: r.referencePersonId,

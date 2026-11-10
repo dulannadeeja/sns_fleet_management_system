@@ -165,7 +165,7 @@ export interface CustomerRow {
 export interface CustomerDoc { id: string; kind: CopyKind; contentType: string; size: number; createdAt: Date }
 export interface Customer extends CustomerRow { address: string | null; licenceNumber: string; documents: CustomerDoc[]; createdAt: Date }
 
-const newestCopies = () => db.selectDistinctOn([customerDocument.customerId, customerDocument.kind], {
+const newestCopies = (q: Tx | typeof db = db) => q.selectDistinctOn([customerDocument.customerId, customerDocument.kind], {
   id: customerDocument.id, customerId: customerDocument.customerId, kind: customerDocument.kind, contentType: customerDocument.contentType,
   size: customerDocument.size, createdAt: customerDocument.createdAt,
 }).from(customerDocument).orderBy(customerDocument.customerId, customerDocument.kind, desc(customerDocument.createdAt), desc(customerDocument.id));
@@ -193,11 +193,11 @@ export async function listCustomers(search?: string): Promise<CustomerRow[]> {
   return rows.map((r) => ({ ...r, licenceExpired: r.licenceExpires < today, copiesMissing: missing(docs.filter((d) => d.customerId === r.id)) }));
 }
 
-export async function getCustomer(id: string): Promise<Customer | null> {
+export async function getCustomer(id: string, q: Tx | typeof db = db): Promise<Customer | null> {
   if (!UUID.test(id)) return null;
-  const [r] = await db.select().from(customer).where(eq(customer.id, id));
+  const [r] = await q.select().from(customer).where(eq(customer.id, id));
   if (!r) return null;
-  const docs = (await newestCopies().where(eq(customerDocument.customerId, id))).filter((d) => isCopyKind(d.kind)) as (CustomerDoc & { customerId: string })[];
+  const docs = (await newestCopies(q).where(eq(customerDocument.customerId, id))).filter((d) => isCopyKind(d.kind)) as (CustomerDoc & { customerId: string })[];
   const today = todayColombo();
   return { id: r.id, name: r.name, nic: r.nic, phone: r.phone, address: r.address, licenceNumber: r.licenceNumber, licenceExpires: r.licenceExpires,
     licenceExpired: r.licenceExpires < today, createdAt: r.createdAt, copiesMissing: missing(docs),

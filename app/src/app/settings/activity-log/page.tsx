@@ -78,7 +78,7 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
       // rental.*: the customer's name, the car's plate and the days (#50); the rental's number and language (#55).
       ...(e.action.startsWith('rental.') ? {
         target: String(e.details?.name ?? e.targetId ?? ''), plate: String(e.details?.registration ?? ''), days: String(e.details?.days ?? ''),
-        number: String(e.details?.number ?? ''), language: e.details?.language === 'si' ? 'සිංහල' : e.details?.language === 'en' ? 'English' : '',
+        number: String(e.details?.number ?? ''), reason: String(e.details?.reason ?? ''), language: e.details?.language === 'si' ? 'සිංහල' : e.details?.language === 'en' ? 'English' : '',
       } : {}),
       // payment.*: the payment's number, the customer, the amount and how it was paid (#53).
       ...(e.action.startsWith('payment.') ? {
