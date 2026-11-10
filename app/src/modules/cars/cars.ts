@@ -33,6 +33,8 @@ export const sameTerm = (a: unknown, b: unknown) => norm(a) === norm(b);
 export type CarStatus = CarState;
 export interface Car {
   id: string; registration: string; model: string; ownership: Ownership; status: CarStatus; terms: Terms; createdAt: Date;
+  /** Out on a rental that is not back yet (system design 6, Derived control 10 Nov 2026): shown as Rented. */
+  rented: boolean;
   /** A partner car's owner once linked (#20): the partner and their name. */
   partnerId: string | null; partnerName: string | null;
   /** The catalogue photo's id, or null: the model's standard image shows (#23, CR-001). */
@@ -188,7 +190,7 @@ function carsQuery() {
   const photo = db.selectDistinctOn([vehiclePhoto.vehicleId], { vehicleId: vehiclePhoto.vehicleId, photoId: vehiclePhoto.id, photoKey: vehiclePhoto.storageKey })
     .from(vehiclePhoto).orderBy(vehiclePhoto.vehicleId, desc(vehiclePhoto.createdAt), desc(vehiclePhoto.id)).as('photo');
   return db.select({
-    id: vehicle.id, status: state.status, photoId: photo.photoId, photoKey: photo.photoKey, registration: vehicle.registration, model: vehicle.model, ownership: vehicle.ownership, createdAt: vehicle.createdAt,
+    id: vehicle.id, status: state.status, rented: sql<boolean>`exists (select 1 from rental_vehicle_segment s join rental r on r.id = s.rental_id where s.vehicle_id = ${vehicle.id} and r.status = 'active' and s.in_km is null)`, photoId: photo.photoId, photoKey: photo.photoKey, registration: vehicle.registration, model: vehicle.model, ownership: vehicle.ownership, createdAt: vehicle.createdAt,
     dailyRate: newest.dailyRate, kmPerDay: newest.kmPerDay, extraKmRate: newest.extraKmRate, commissionPercent: newest.commissionPercent,
     longRentalExtra: newest.longRentalExtra, longRentalFromDay: newest.longRentalFromDay, garageDayCharge: newest.garageDayCharge,
     ownerPays: newest.ownerPays, partnerId: vehicle.partnerOwnerId, partnerName: user.name,
@@ -200,6 +202,7 @@ type Row = Awaited<ReturnType<ReturnType<typeof carsQuery>['execute']>>[number];
 const toCar = (r: Row): Car => ({
   id: r.id, registration: r.registration, model: r.model, ownership: r.ownership as Ownership, createdAt: r.createdAt,
   status: r.status && isCarState(r.status) ? r.status : 'available',
+  rented: r.rented === true,
   terms: { dailyRate: r.dailyRate, kmPerDay: r.kmPerDay, extraKmRate: r.extraKmRate, commissionPercent: r.commissionPercent,
     longRentalExtra: r.longRentalExtra, longRentalFromDay: r.longRentalFromDay, garageDayCharge: r.garageDayCharge, ownerPays: (r.ownerPays ?? []).filter(isCost) },
   partnerId: r.partnerId, partnerName: r.partnerName,

@@ -18,8 +18,8 @@ export const REFERENCE_MAX = 80;
 export const REASON_MAX = 500;
 export const PARTS_MAX = 5;
 export const RENTALS_MAX = 10;
-/** The rental states a payment can go on. Only draft exists until handover (#57) and return (#63) add theirs. */
-export const PAYABLE_STATES = ['draft'] as const;
+/** The rental states a payment can go on: saved and handed over (return adds its own, #63). */
+export const PAYABLE_STATES = ['draft', 'active'] as const;
 export type Method = (typeof METHODS)[number];
 export type PaymentFor = (typeof PAYMENT_FOR)[number];
 export type Check = 'waiting' | 'matched' | 'flagged';

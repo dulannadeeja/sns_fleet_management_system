@@ -205,11 +205,11 @@ export interface AgreementState {
 /** Where the agreement stands: the newest printout (and whether it is still current), the newest signed copy, and
  *  whether that copy is out of date (it does not sign the newest printout, or that printout is older than the last
  *  change of what is printed; 9 Nov 2026). */
-export async function agreementState(rentalId: string): Promise<AgreementState | null> {
+export async function agreementState(rentalId: string, q: Tx | typeof db = db): Promise<AgreementState | null> {
   if (!UUID.test(rentalId)) return null;
-  const n = await newestPrint(db, rentalId);
+  const n = await newestPrint(q, rentalId);
   if (!n) return null;
-  const [s] = await db.select({ id: agreementSigned.id, at: agreementSigned.createdAt, printId: agreementSigned.printId }).from(agreementSigned)
+  const [s] = await q.select({ id: agreementSigned.id, at: agreementSigned.createdAt, printId: agreementSigned.printId }).from(agreementSigned)
     .where(eq(agreementSigned.rentalId, rentalId)).orderBy(desc(agreementSigned.createdAt), desc(agreementSigned.id)).limit(1);
   return { printed: !!n.print, lastPrintId: n.print?.id ?? null, printCurrent: n.printCurrent, signedId: s?.id ?? null, signedAt: s?.at ?? null,
     outOfDate: !!s && (s.printId !== n.print?.id || !n.printCurrent) };

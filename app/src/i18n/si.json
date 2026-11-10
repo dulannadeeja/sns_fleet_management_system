@@ -309,7 +309,11 @@
           "terms": "{target} ගේ කුලියට deposit එක සහ ගෙවීම සකස් කළා",
           "agreementPrint": "{target} ගේ ගිවිසුම print කළා, {number} ({language})",
           "agreementSigned": "{target} ගේ අත්සන් කළ ගිවිසුම දැම්මා, {number}",
-          "agreementOpened": "{target} ගේ අත්සන් කළ ගිවිසුම ඇරියා, {number}"
+          "agreementOpened": "{target} ගේ අත්සන් කළ ගිවිසුම ඇරියා, {number}",
+          "handover": "{plate} {target} ට භාර දුන්නා, {number}",
+          "photoAdd": "{target} ගේ {number} ට car photo එකක් දැම්මා",
+          "photoOpened": "{target} ගේ {number} car photo එකක් open කළා",
+          "carFreed": "{target} ගේ {number} කුලියෙන් {plate} නිදහස් කළා, අරගෙන ගියේ නැහැ: {reason}"
         },
         "document": {
           "wordingAdd": "ගිවිසුමේ වචන {version} වෙනි version එක එකතු කළා",
@@ -356,6 +360,11 @@
           "title": "ව්‍යාපාරයේ විස්තර",
           "note": "හැම printout එකකම: ගිවිසුම්, බිල්, රිසිට්",
           "value": ""
+        },
+        "handover": {
+          "title": "භාර දීමේ උපාංග",
+          "note": "භාර දෙනකොටයි ආපහු ගන්නකොටයි බලන ලැයිස්තුව",
+          "value": "අයිතම {count}: {list}"
         }
       },
       "names": {
@@ -369,7 +378,8 @@
         "businessName": "ව්‍යාපාරයේ නම",
         "businessRegistration": "ලියාපදිංචි අංකය",
         "businessAddress": "ව්‍යාපාරයේ ලිපිනය",
-        "businessPhones": "ව්‍යාපාරයේ දුරකථන අංක"
+        "businessPhones": "ව්‍යාපාරයේ දුරකථන අංක",
+        "accessories": "භාර දීමේ උපාංග"
       },
       "fields": {
         "pickupCutoff": {
@@ -426,13 +436,19 @@
           "label": "දුරකථන අංක",
           "unit": "",
           "hint": "එකක් හෝ කිහිපයක්, කොමා වලින් වෙන් කරලා. අකුරු 80 ක් දක්වා."
+        },
+        "accessories": {
+          "label": "උපාංග (පේළියකට එකක්)",
+          "unit": "",
+          "hint": "අයිතම 20 ක් දක්වා, එකක් අකුරු 40 ක් දක්වා. උදාහරණයක්: spare wheel."
         }
       },
       "intro": {
         "dayTimes": "වේලාවන් ශ්‍රී ලංකා වේලාවෙන්. වෙනසක් අදාළ වෙන්නේ අලුත් කුලී වලට විතරයි; දැනටමත් එකඟ වුණ කුලී වලට ඒවගේම වේලාවන්.",
         "reminders": "එක එක සිහිකැඳවීම කොච්චර කලින් පටන් ගන්නවද. වෙනස් කරන්න පුළුවන් අයිතිකරුට විතරයි.",
         "fuel": "අය කරන්නේ “same level” කුලියක, ආපහු දෙද්දී අඩු ලීටර් වලට විතරයි. 100% SNS.",
-        "business": "SNS ගේ නම, ලියාපදිංචි අංකය, ලිපිනය සහ දුරකථන අංක: ගිවිසුම්, බිල් සහ රිසිට් වල උඩින් print වෙනවා."
+        "business": "SNS ගේ නම, ලියාපදිංචි අංකය, ලිපිනය සහ දුරකථන අංක: ගිවිසුම්, බිල් සහ රිසිට් වල උඩින් print වෙනවා.",
+        "handover": "Car එක යනකොටයි එනකොටයි ඇතුළේ තියෙනවද කියලා staff බලන දේවල්. හැම car එකටම එක ලැයිස්තුවක්."
       },
       "check": "Save කරන්න කලින් බලන්න",
       "noChange": "තවම මොකුත් වෙනස් කළේ නැහැ.",
@@ -453,7 +469,8 @@
         "notAllowed": "සැකසුම් වෙනස් කරන්න පුළුවන් අයිතිකරුට විතරයි.",
         "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න.",
         "stale": "මේ අතරේ කවුරු හරි මෙතන වෙනසක් save කළා. ඒක බලන්න පිටුව ආයෙත් අරින්න, ඊට පස්සේ ඔයාගේ වෙනස කරන්න.",
-        "tooLong": "දිග වැඩියි: අකුරු {max} ක් උපරිම."
+        "tooLong": "දිග වැඩියි: අකුරු {max} ක් උපරිම.",
+        "tooMany": "වැඩියි: උපරිම {max} යි."
       },
       "rows": {
         "extraKm": {
@@ -581,6 +598,16 @@
           "before": [
             "අකුරු හරිද බලන්න: පාරිභෝගිකයෝ මේ නමට යටින් ගිවිසුම අත්සන් කරනවා.",
             "ගිවිසුමක් print කරන්න කලින් විස්තර හතරම ඕන."
+          ]
+        },
+        "handover": {
+          "affects": [
+            "මෙතැන් සිට භාර දීම් වලට මේ ලැයිස්තුව පෙන්නනවා.",
+            "දැනටමත් කරපු භාර දීම් ඒවා tick කරපු ලැයිස්තුව තියාගන්නවා."
+          ],
+          "before": [
+            "Car එකේ staff දකින විදියට, එක පේළියකට එක අයිතමයක් ලියන්න.",
+            "භාර දෙන්න ලැයිස්තුවේ අඩුම තරමේ එක අයිතමයක් ඕනේ."
           ]
         }
       }
@@ -1548,7 +1575,118 @@
       "lineDeposit": "deposit",
       "record": "ගෙවීමක් සටහන් කරන්න",
       "saved": "Save කළා: {numbers}."
-    }
+    },
+    "handover": {
+      "title": "භාර දීම",
+      "checklist": "භාර දීමේ ලැයිස්තුව · {done} / {total}",
+      "backBy": "ආපහු ගේන්න: {when}",
+      "items": {
+        "customerCopies": "පාරිභෝගිකයාගේ NIC සහ license පිටපත්",
+        "signedAgreement": "අත්සන් කළ agreement එකේ photo එක",
+        "reference": "Reference person",
+        "car": "Car එක තියෙනවා",
+        "accessoriesList": "උපාංග ලැයිස්තුව (Settings)",
+        "carOut": "මේ car එක වෙන කුලියක එළියේ",
+        "deadlinePassed": "ආපහු ගේන වෙලාව පහු වුණා: අලුත් කුලියක් save කරන්න"
+      },
+      "inPlace": "තියෙනවා",
+      "missingList": "අඩුයි: {list}",
+      "notUploaded": "තාම upload කරලා නැහැ",
+      "outOfDate": "අත්සන් කළාට පස්සේ කොන්දේසි වෙනස් වුණා: ආයෙත් print කරලා අත්සන් ගන්න",
+      "refNotRequired": "ඕනේ නැහැ",
+      "refNotChosen": "ඕනේ, තාම තෝරලා නැහැ",
+      "carAvailable": "තියෙනවා",
+      "carNotAvailable": "Repair එකේ හරි නැති හරි: මුලින් අවසර තියෙන කෙනෙක් available කරන්න ඕනේ",
+      "listCount": "අයිතම {n}",
+      "listNone": "තාම ලැයිස්තුවක් නැහැ: owner Settings වල දාන්න ඕනේ",
+      "notEntered": "දාලා නැහැ",
+      "fixCustomer": "පිටපත් දාන්න",
+      "fixAgreement": "Print හරි upload හරි",
+      "fixReference": "දාන්න",
+      "fixCar": "Car status",
+      "fixList": "Settings",
+      "papersExpired": "Car එකේ කඩදාසි කල් ඉකුත් වෙලා හරි දාලා නැහැ (insurance {insurance} · revenue license {licence}). අවසර තියෙන කෙනෙකුට විතරයි හේතුවක් එක්ක භාර දෙන්න පුළුවන්.",
+      "money": "මුදල්",
+      "deposit": "Deposit (තියාගන්නවා, ආදායමක් නෙවෙයි)",
+      "depositWaived": "අත්හැරියා",
+      "depositLine": "රු. {set} න් රු. {received} ලැබුණා",
+      "rent": "කුලිය",
+      "rentNowUnpaid": "දැන් ගෙවන්න එකඟ වුණා · තව රු. {unpaid} ගෙවන්න තියෙනවා",
+      "rentNowPaid": "දැන් ගෙවන්න එකඟ වුණා · ගෙව්වා",
+      "rentAtReturn": "ආපහු දෙනකොට ගෙවනවා",
+      "moneyNote": "බලාගන්න පෙන්නනවා විතරයි. මුදල් නිසා භාර දීම නවතින්නේ නැහැ.",
+      "recordPayment": "ගෙවීමක් සටහන් කරන්න",
+      "photos": "Car එකේ තත්ත්වයේ photo (ඕනේ නම්)",
+      "photosNote": "10 න් {n}. සීරීම් හරි තැලීම් හරි photo. ID පිටපත් වගේ රහසිගතයි. භාර දීම නවත්තන්නේ නැහැ.",
+      "photoN": "Photo {n}",
+      "addPhoto": "Photo එකක් දාන්න",
+      "photoSaved": "Photo එක save කළා.",
+      "odometer": "Odometer",
+      "odometerLabel": "යන odometer එක (km)",
+      "odometerHint": "Car එකේ අන්තිම කියවීම: km {km}. ඊට අඩු වෙන්න බැහැ.",
+      "odometerHintNone": "මේ car එකට කලින් කියවීමක් නැහැ.",
+      "fuel": "Fuel මට්ටම",
+      "fuelNote": "Gauge එකේ තියෙන විදියට. Fuel අඩු වුණාට භාර දීම නවතින්නේ නැහැ.",
+      "fuels": {
+        "empty": "හිස්",
+        "quarter": "1/4",
+        "half": "1/2",
+        "threeQuarters": "3/4",
+        "full": "පිරිලා"
+      },
+      "accessories": "උපාංග · {total} න් {there} ක් car එකේ",
+      "accessoriesNote": "Car එකේ නැති දේවල් untick කරන්න. අඩු අයිතමයක් නිසා භාර දීම නවතින්නේ නැහැ; ඒක සටහනේ ලියවෙනවා, ඒ නිසා ආපහු දෙනකොට මේ පාරිභෝගිකයාගෙන් ඒකට අය කරන්නේ නැහැ.",
+      "accessoriesMissing": "අඩුයි, සටහනේ ලියවෙනවා: {list}. ආපහු දෙනකොට මේ පාරිභෝගිකයාගෙන් ඒකට අය කරන්නේ නැහැ.",
+      "papers": "Car එකේ කඩදාසි",
+      "papersReason": "දැන් භාර දෙන්නේ ඇයි",
+      "papersHint": "අකුරු 500 ක් දක්වා. ඔයාගේ නමින් save වෙනවා.",
+      "papersNotAllowed": "\"Override expired-document warnings\" අවසරය තියෙන කෙනෙකුට විතරයි මේ car එක භාර දෙන්න පුළුවන්. එයාගෙන් අහන්න, නැත්නම් car එකේ පිටුවේ අලුත් දින දාන්න.",
+      "handOver": "Car එක භාර දෙන්න",
+      "blockedNote": "උඩ තියෙන හැම දෙයක්ම ආවාම භාර දෙන්න පුළුවන්. ඕනේ කරන දෙයක් කාටවත් මඟහරින්න බැහැ.",
+      "readyNote": "ඕනේ හැම දෙයක්ම තියෙනවා. කියවීම් බලලා භාර දෙන්න.",
+      "done": "භාර දුන්නා",
+      "doneLine": "{name} භාර දුන්නා, {when}",
+      "outKm": "යන odometer",
+      "fuelOut": "යන fuel",
+      "missingOut": "භාර දෙනකොට අඩු",
+      "none": "නැහැ",
+      "papersOverride": "කඩදාසි තීරණය",
+      "start": "Car එක භාර දෙන්න",
+      "errors": {
+        "notAllowed": "Car භාර දෙන්න ඔයාට අවසර නැහැ.",
+        "notFound": "මේ කුලිය හම්බ වුණේ නැහැ.",
+        "notDraft": "මේ car එක දැනටමත් භාර දීලා.",
+        "blocked": "ඕනේ කරන දෙයක් අඩුයි. උඩ ලැයිස්තුවේ මොකක්ද කියලා තියෙනවා.",
+        "kmInvalid": "Odometer එක සම්පූර්ණ km වලින් ලියන්න, 0 සිට 999,999.",
+        "kmLower": "Car එකේ අන්තිම කියවීමට (km {km}) වඩා අඩුයි. Meter එක මාරු කළා නම් admin කෙනෙකුගෙන් අහන්න.",
+        "fuelInvalid": "Fuel මට්ටම තෝරන්න.",
+        "listChanged": "Settings වල උපාංග ලැයිස්තුව වෙනස් වුණා. පිටුව ආයෙත් open කරන්න.",
+        "papersNotAllowed": "\"Override expired-document warnings\" අවසරය තියෙන කෙනෙකුට විතරයි මේ car එක භාර දෙන්න පුළුවන්.",
+        "reasonMissing": "ඇයි කියලා ලියන්න.",
+        "tooLong": "ඒක දිග වැඩියි.",
+        "fileMissing": "මුලින් photo එකක් තෝරන්න.",
+        "fileTooBig": "Photo එක MB 10 ට වඩා ලොකුයි.",
+        "fileType": "JPEG, PNG හරි WebP photo විතරයි.",
+        "tooMany": "උපරිම photo 10 යි.",
+        "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න.",
+        "notChecked": "Car එක බැලුවා කියලා box එක tick කරන්න.",
+        "tooSoon": "කුලිය save කරලා පැය 2 ක් යනකන් ඉන්න.",
+        "paid": "මේ කුලියට මොනවා හරි ගෙවලා. ඒ වෙනුවට cancel කරන්න (එතකොට ආපහු ගෙවීම)."
+      },
+      "checkedBox": "මම car එක බැලුවා; tick නොකළ දේවල් අඩුයි.",
+      "notCollected": "අරගෙන ගියේ නැහැ: {when} save කළා, තාම භාර දීලා නැහැ.",
+      "freeTitle": "Car එක නිදහස් කරන්න",
+      "freeNote": "මේ කුලියට මුකුත් ගෙවලා නැහැ. Car එක වෙන පාරිභෝගිකයෙකුට දෙන්න පුළුවන්. එතකොට මේ කුලිය භාර දෙන්න බැහැ.",
+      "freePaidNote": "මේ කුලියට මොනවා හරි ගෙවලා තියෙනවා, ඒ නිසා කුලිය cancel කරනකන් car එක තියාගන්නවා (එතකොට ආපහු ගෙවීම).",
+      "freeReason": "Car එක නිදහස් කරන්නේ ඇයි",
+      "freeHint": "අකුරු 500 ක් දක්වා. ඔයාගේ නමින් save වෙනවා.",
+      "freeCar": "Car එක නිදහස් කරන්න",
+      "freed": "Car එක වෙන පාරිභෝගිකයෙකුට දෙන්න පුළුවන්.",
+      "photosAfter": "භාර දෙනකොට car එකේ photo",
+      "statusNotCollected": "අරගෙන ගියේ නැහැ · car එක නිදහස්"
+    },
+    "statusActive": "එළියේ (භාර දීලා)",
+    "statusNotCollected": "අරගෙන ගියේ නැහැ · car එක නිදහස්"
   },
   "agreementDoc": {
     "title": "කුලී ගිවිසුම",

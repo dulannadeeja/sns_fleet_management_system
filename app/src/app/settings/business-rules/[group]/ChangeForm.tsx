@@ -5,7 +5,7 @@ import { Button, Notice, TextField } from '../../../../ui';
 import { changeSettingsAction, type ChangeState } from '../actions';
 import { showSetting, type SettingWords } from '../show';
 
-export interface Field { key: string; label: string; hint: string; type: 'time' | 'number' | 'text'; saved: string; errors: Record<string, string> }
+export interface Field { key: string; label: string; hint: string; type: 'time' | 'number' | 'text' | 'lines'; saved: string; errors: Record<string, string> }
 export interface ChangeWords extends SettingWords {
   check: string; noChange: string; changeLine: string; logNote: string; save: string; cancel: string; formErrors: Record<string, string>;
 }
@@ -23,6 +23,15 @@ export function ChangeForm({ group, fields, w, lang }: { group: string; fields: 
       <div className="set-fields">
         {fields.map((f) => {
           const code = state.errors?.[f.key];
+          if (f.type === 'lines') return (
+            <div key={f.key} className="rt-field">
+              <label className="rt-field-label" htmlFor={f.key}>{f.label}</label>
+              <textarea id={f.key} name={f.key} className="rt-input" rows={8} value={typed[f.key]} onChange={(e) => setTyped((t) => ({ ...t, [f.key]: e.target.value }))}
+                aria-invalid={code ? true : undefined} aria-describedby={`${f.key}-hint`} style={{ minHeight: 160, resize: 'vertical' }} />
+              {code ? <span className="rt-field-error" role="alert">{f.errors[code]}</span> : null}
+              <span className="rt-field-hint" id={`${f.key}-hint`}>{f.hint}</span>
+            </div>
+          );
           return (
             <TextField key={f.key} label={f.label} name={f.key} type={f.type === 'time' ? 'time' : 'text'} hint={f.hint}
               inputMode={f.type === 'number' ? 'numeric' : undefined} autoComplete="off" step={f.type === 'time' ? 60 : undefined}

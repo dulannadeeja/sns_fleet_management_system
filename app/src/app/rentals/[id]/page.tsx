@@ -12,6 +12,7 @@ import { SignedForm } from './review/PrintForm';
 import { agreementState, rentalNumber } from '../../../modules/rentals/agreements';
 import { rentalWords } from '../words';
 import { paymentNumber, rentalMoney } from '../../../modules/money/payments';
+import { handoverChecklist, handoverOf } from '../../../modules/rentals/handover';
 import { Notice, PlateBadge, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
 import '../../cars/cars.css';
@@ -19,7 +20,7 @@ import '../rentals.css';
 
 // A saved rental (#51), until Rental details (06.2) comes with #58: who, which car, from when to when, the estimate from
 // its own saved terms. The deposit, agreement and handover come with #54, #55 and #57. Needs Customer access.
-export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string }> }) {
+export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string; handedOver?: string; freed?: string }> }) {
   const person = await requirePermission('customerAccess');
   const r = await rentalTerms((await params).id);
   if (!r) notFound();
@@ -29,6 +30,9 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
   const money = (n: number) => format.number(n);
   const seg = r.segments[0];
   const [ready, w, tk, agr, cash] = await Promise.all([rentalReadiness(r.id), rentalWords(), getTranslations('customers'), agreementState(r.id), rentalMoney(r.id)]);
+  const handed = r.status === 'active' ? await handoverOf(r.id) : null;
+  const photos = (await handoverChecklist(r.id))?.photos ?? [];
+  const th = await getTranslations('rentals.handover');
   const ref = ready?.referencePersonId ? await getReference(ready.referencePersonId) : null;
   const sp = await searchParams;
   const refW = { ...(w.reference as unknown as Record<string, string>) } as unknown as Record<string, string> & { errors: Record<string, string>; relationships: Record<string, string> };
@@ -36,6 +40,8 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
     <AppFrame person={person} active="rentals" title={t('rental')} subtitle={c?.name} backHref="/rentals/new">
       {sp.terms === '1' ? <Notice>{t('terms.termsSaved')}</Notice> : null}
       {sp.signed === '1' ? <Notice>{t('signed.saved')}</Notice> : null}
+      {sp.handedOver === '1' && handed ? <Notice>{th('done')}</Notice> : null}
+      {sp.freed === '1' && r.status === 'notCollected' ? <Notice>{th('freed')}</Notice> : null}
       {typeof sp.paid === 'string' && /^P-\d{4,}(,P-\d{4,})*$/.test(sp.paid) ? <Notice>{t('pay.saved', { numbers: sp.paid.replace(/,/g, ', ') })}</Notice> : null}
       {sp.saved === '1' ? <Notice>{t('saved', { plate: car?.registration ?? '', deadline: when(r.deadlineAt) })}</Notice> : null}
       <section className="car-card" aria-labelledby="r-h" data-rental={r.id}>
@@ -45,7 +51,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
           <dt>{t('car')}</dt><dd>{car ? <PlateBadge plate={car.registration} size="sm" lang={lang as Lang} /> : null}</dd>
           <dt>{t('pickup')}</dt><dd>{when(r.pickupAt)}</dd>
           <dt>{t('backBy')}</dt><dd>{when(r.deadlineAt)}</dd>
-          <dt>{t('status')}</dt><dd>{t('statusDraft')}</dd>
+          <dt>{t('status')}</dt><dd data-status={r.status}>{r.status === 'active' ? t('statusActive') : r.status === 'notCollected' ? t('statusNotCollected') : t('statusDraft')}</dd>
         </dl>
       </section>
       {est ? (
@@ -116,10 +122,26 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
               ))}
             </ul>
           ) : <span className="set-muted">{t('pay.none')}</span>}
-          {r.status === 'draft' ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/pay`}>{t('pay.record')}</Link></div> : null}
+          {r.status === 'draft' || r.status === 'active' ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/pay`}>{t('pay.record')}</Link></div> : null}
         </section>
       ) : null}
-      <p className="set-muted" style={{ margin: 0 }}>{t('nextSteps')}</p>
+      {handed ? (
+        <section className="car-card" aria-labelledby="h-done" data-handed-over>
+          <h2 id="h-done">{th('done')}</h2>
+          <span className="set-muted">{th('doneLine', { name: handed.byName, when: when(handed.createdAt) })}</span>
+          <dl className="ren-lines">
+            <dt>{th('outKm')}</dt><dd>{t('kmValue', { km: money(handed.outKm) })}</dd>
+            <dt>{th('fuelOut')}</dt><dd>{th(`fuels.${handed.fuel}`)}</dd>
+            <dt>{th('missingOut')}</dt><dd>{handed.accessories.filter((a) => !a.present).map((a) => a.item).join(', ') || th('none')}</dd>
+            {handed.papersReason ? <><dt>{th('papersOverride')}</dt><dd>{handed.papersReason}</dd></> : null}
+          </dl>
+          {photos.length ? <><span style={{ fontWeight: 600 }}>{th('photosAfter')}</span>
+            <ul className="set-muted" style={{ margin: 0, paddingLeft: 18 }}>{photos.map((p, i) => <li key={p.id}><Link href={`/rentals/${r.id}/photos/${p.id}`}>{th('photoN', { n: i + 1 })}</Link></li>)}</ul></> : null}
+        </section>
+      ) : r.status === 'draft' ? (
+        <div><Link className="rt-btn rt-btn-primary" href={`/rentals/${r.id}/handover`}>{th('start')}</Link></div>
+      ) : null}
+      {r.status === 'draft' ? <p className="set-muted" style={{ margin: 0 }}>{t('nextSteps')}</p> : null}
     </AppFrame>
   );
 }

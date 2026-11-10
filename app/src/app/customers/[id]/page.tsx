@@ -34,6 +34,8 @@ export default async function CustomerPage({ params, searchParams }: { params: P
       target: String(e.details?.name ?? c.name), field: tc.has(`fieldNames.${field}`) ? tc(`fieldNames.${field}`) : field,
       copy: tc.has(`kinds.${kind}`) ? tc(`kinds.${kind}`) : kind, old: String(e.details?.old ?? ''), new: String(e.details?.new ?? ''),
       kind: tc.has(`flags.kinds.${kind}`) ? tc(`flags.kinds.${kind}`) : kind, details: String(e.details?.details ?? ''), reason: String(e.details?.reason ?? ''),
+      // customer.reference*: the reference person's name (#54; missing until #57 review).
+      reference: String(e.details?.reference ?? ''),
     });
   };
   return (

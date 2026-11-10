@@ -7,7 +7,7 @@ import { showNumber } from '../show';
 import { ChangeForm, type ChangeWords, type Field } from './ChangeForm';
 
 // Screen 15.7 Change a setting (ST-15.3): the owner only (system design 3.2 "Owner settings", Confirmed
-// 5 Nov 2026). One group per page: rental day times, reminders, the fuel price or the business details (8 Nov 2026).
+// 5 Nov 2026). One group per page: rental day times, reminders, the fuel price the business details (8 Nov 2026) or the handover accessories (10 Nov 2026).
 export default async function ChangeSettingPage({ params }: { params: Promise<{ group: string }> }) {
   const person = await requireOwner();
   const { group } = await params;
@@ -22,7 +22,8 @@ export default async function ChangeSettingPage({ params }: { params: Promise<{ 
       hint: [unit, t(`fields.${key}.hint`)].filter(Boolean).join(' · '),
       errors: {
         required: t('errors.required'), number: t('errors.number'), time: t('errors.time'), order: t('errors.order'),
-        tooLong: t('errors.tooLong', { max: def.kind === 'text' ? def.max : 0 }),
+        tooLong: t('errors.tooLong', { max: def.kind === 'text' || def.kind === 'lines' ? def.max : 0 }),
+        tooMany: t('errors.tooMany', { max: def.kind === 'lines' ? def.maxItems : 0 }),
         range: limits ? t('errors.range', limits) : t('errors.time'),
       },
     };

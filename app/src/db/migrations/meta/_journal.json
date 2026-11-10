@@ -204,6 +204,20 @@
       "when": 1794202283122,
       "tag": "0028_payments",
       "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1794289486142,
+      "tag": "0029_handover",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1794345910199,
+      "tag": "0030_rental_not_collected",
+      "breakpoints": true
     }
   ]
 }

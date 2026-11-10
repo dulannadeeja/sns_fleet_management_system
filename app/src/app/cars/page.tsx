@@ -45,7 +45,7 @@ export default async function CarsPage({ searchParams }: { searchParams: Promise
             <span className="car-num">{showNumber(c.terms.kmPerDay)}</span>
             <span className="car-num">{showNumber(c.terms.extraKmRate)}</span>
             <span className="car-price">{`${t('cols.perDay')} ${showNumber(c.terms.dailyRate)} · ${t('cols.kmDay')} ${showNumber(c.terms.kmPerDay)} · ${t('cols.extraKm')} ${showNumber(c.terms.extraKmRate)}`}</span>
-            <span><StatusChip status={c.status} size="sm" lang={lang as Lang} /></span>
+            <span><StatusChip status={c.rented ? 'rented' : c.status} size="sm" lang={lang as Lang} /></span>
           </Link>
         )) : <p className="set-muted" style={{ margin: 0, padding: '16px 20px' }}>{t('empty')}</p>}
       </section>

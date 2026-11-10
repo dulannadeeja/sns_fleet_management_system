@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { requireEmployee } from '../../../auth/require';
 import { mayDo } from '../../../auth/access';
-import { readSettings, type Group } from '../../../modules/settings/settings';
+import { linesOf, readSettings, type Group } from '../../../modules/settings/settings';
 import { Notice } from '../../../ui';
 import { SettingsFrame } from '../SettingsFrame';
 import { showNumber, showTime } from './show';
@@ -26,6 +26,7 @@ export default async function BusinessRulesPage({ searchParams }: { searchParams
     }) },
     { group: 'fuel', value: s.fuelPricePerLitre === null ? t('rules.notSet') : t('rules.groups.fuel.value', { price: showNumber(s.fuelPricePerLitre) }) },
     { group: 'business', value: s.businessName && s.businessRegistration && s.businessAddress && s.businessPhones ? [s.businessName, s.businessRegistration, s.businessAddress, s.businessPhones].filter(Boolean).join(' · ') : t('rules.notSet') },
+    { group: 'handover', value: linesOf(s.accessories).length ? t('rules.groups.handover.value', { count: linesOf(s.accessories).length, list: linesOf(s.accessories).join(', ') }) : t('rules.notSet') },
   ];
   return (
     <SettingsFrame person={person} active="rules" subtitle={t('businessRules')} backHref="/">

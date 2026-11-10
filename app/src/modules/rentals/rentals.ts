@@ -21,12 +21,12 @@ import { deadlineFor, estimate, type Estimate } from '../../lib/rental-days';
 type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** Only "draft" exists yet; handover (#57), return (#63) and cancelling (#59) add their states with their tickets. */
-export const RENTAL_STATES = ['draft'] as const;
+export const RENTAL_STATES = ['draft', 'active', 'notCollected'] as const;
 export const DAYS_MAX = 90;
 /** The pickup is the moment of the save (7.1, Confirmed 8 Nov 2026). A minute either way covers clocks and the save. */
 const PICKUP_GRACE_MS = 60_000;
 /** Rentals that never went out: they do not make a later rental "not the first" (7.1, Confirmed 8 Nov 2026). */
-const NEVER_OUT = ['draft', 'cancelled'];
+const NEVER_OUT = ['draft', 'cancelled', 'notCollected'];
 export type RentalState = (typeof RENTAL_STATES)[number];
 
 export type CreateError = 'notAllowed' | 'customerNotFound' | 'carNotFound' | 'carNotAvailable' | 'carTaken' | 'daysInvalid' | 'pickupInvalid'
@@ -64,7 +64,7 @@ export async function createRental(actorId: string, input: { customerId: string;
       // The customer's lock (the one flags and decisions take), so the warnings read here are the ones really there.
       await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.customer:${input.customerId.toLowerCase()}`}))`);
       // The same per-car lock as status and term changes, so the car's status and terms read here stay true.
-      await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.vehicle:${input.vehicleId}`}))`);
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`sns.vehicle:${input.vehicleId.toLowerCase()}`}))`);
       const [c] = await tx.select({ name: customer.name }).from(customer).where(eq(customer.id, input.customerId));
       if (!c) return { error: 'customerNotFound' } as const;
       const warnings = (await warningsFor(input.customerId, tx))!;
@@ -86,6 +86,8 @@ export async function createRental(actorId: string, input: { customerId: string;
       const [state] = await tx.select({ status: vehicleStatusEvent.status }).from(vehicleStatusEvent).where(eq(vehicleStatusEvent.vehicleId, input.vehicleId))
         .orderBy(desc(vehicleStatusEvent.createdAt), desc(vehicleStatusEvent.id)).limit(1);
       if (state && isCarState(state.status) && !mayGoOut(state.status)) return { error: 'carNotAvailable' } as const;
+      // A car out stays with its rental until it is back, also past its deadline (Derived control, 10 Nov 2026).
+      if (await carIsOut(input.vehicleId, tx)) return { error: 'carTaken' } as const;
       const [terms] = await tx.select().from(vehicleTermsVersion).where(eq(vehicleTermsVersion.vehicleId, input.vehicleId))
         .orderBy(desc(vehicleTermsVersion.effectiveFrom), desc(vehicleTermsVersion.id)).limit(1);
       if (!terms) return { error: 'carNotFound' } as const;
@@ -147,6 +149,13 @@ export async function rentalEstimate(id: string, km?: number, q: Tx | typeof db 
   return estimate({ dailyRate, kmPerDay, extraKmRate, longRentalExtra, longRentalFromDay }, t.days, km);
 }
 
+/** Whether the car is out on a rental and not back yet (a car out stays with it until it is back, Derived control). */
+export async function carIsOut(vehicleId: string, q: Tx | typeof db = db): Promise<boolean> {
+  const rows = await q.select({ id: rental.id }).from(rentalVehicleSegment).innerJoin(rental, eq(rental.id, rentalVehicleSegment.rentalId))
+    .where(and(eq(rentalVehicleSegment.vehicleId, vehicleId), eq(rental.status, 'active'), sql`${rentalVehicleSegment.inKm} is null`)).limit(1);
+  return rows.length > 0;
+}
+
 /** Whether a car is free for the whole time from `from` to `to` (nothing holds it then). */
 export async function carIsFree(vehicleId: string, from: Date, to: Date): Promise<boolean> {
   if (!UUID.test(vehicleId) || Number.isNaN(from.getTime()) || Number.isNaN(to.getTime()) || from >= to) return false;
@@ -162,7 +171,7 @@ export async function freeCarsNow(): Promise<Car[]> {
   const settings = await readSettings();
   const until = deadlineFor(now, 1, settings.pickupCutoff, settings.returnDeadline);
   const held = new Set((await db.select({ v: vehicleHold.vehicleId }).from(vehicleHold).where(sql`${vehicleHold.held} && ${holdRange(now, until)}::tstzrange`)).map((r) => r.v));
-  return (await listCars()).filter((c) => mayGoOut(c.status) && !held.has(c.id));
+  return (await listCars()).filter((c) => mayGoOut(c.status) && !c.rented && !held.has(c.id));
 }
 
 /** Whether no car was ever handed over to the customer (their next rental is a first one, needing "Approve a first-time customer"). */

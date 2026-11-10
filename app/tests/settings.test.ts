@@ -13,11 +13,11 @@ const remindersNow = async () => {
 };
 
 describe('ST-15.3: owner settings', () => {
-  it('has the agreed starting values and four groups (business details since 8 Nov 2026)', () => {
+  it('has the agreed starting values and five groups (business details since 8 Nov 2026, accessories since 10 Nov 2026)', () => {
     expect(Object.fromEntries(Object.entries(SETTINGS).map(([k, s]) => [k, s.start]))).toEqual({
       pickupCutoff: '15:00', returnDeadline: '08:00',
       documentReminderDays: 30, serviceReminderDays: 7, serviceReminderKm: 500, payrollReminderDays: 3,
-      fuelPricePerLitre: null, businessName: null, businessRegistration: null, businessAddress: null, businessPhones: null,
+      fuelPricePerLitre: null, businessName: null, businessRegistration: null, businessAddress: null, businessPhones: null, accessories: null,
     });
     // Business details: all four needed (the registration number too, Confirmed 9 Nov 2026).
     const ok = { businessName: 'Sample Rent a Car', businessRegistration: 'Sample PV 00000', businessAddress: 'Sample road, Elpitiya', businessPhones: '0770000000' };
@@ -25,7 +25,12 @@ describe('ST-15.3: owner settings', () => {
     expect(checkGroup('business', { ...ok, businessName: '' }).errors).toEqual({ businessName: 'required' });
     expect(checkGroup('business', { ...ok, businessRegistration: '' }).errors).toEqual({ businessRegistration: 'required' });
     expect(checkGroup('business', { ...ok, businessAddress: 'x'.repeat(161) }).errors).toEqual({ businessAddress: 'tooLong' });
-    expect(GROUPS).toEqual(['dayTimes', 'reminders', 'fuel', 'business']);
+    expect(GROUPS).toEqual(['dayTimes', 'reminders', 'fuel', 'business', 'handover']);
+    // The accessories list (10 Nov 2026): one item a line, 1 to 20 items, each up to 40 letters.
+    expect(checkGroup('handover', { accessories: ' Spare  wheel \n\nJack ' })).toEqual({ ok: true, values: { accessories: 'Spare wheel\nJack' } });
+    expect(checkGroup('handover', { accessories: '  ' }).errors).toEqual({ accessories: 'required' });
+    expect(checkGroup('handover', { accessories: Array.from({ length: 21 }, (_, i) => `Item ${i}`).join('\n') }).errors).toEqual({ accessories: 'tooMany' });
+    expect(checkGroup('handover', { accessories: 'x'.repeat(41) }).errors).toEqual({ accessories: 'tooLong' });
   });
 
   it('the return deadline is earlier in the day than the pickup cutoff (5.1, Confirmed 7 Nov 2026)', () => {
