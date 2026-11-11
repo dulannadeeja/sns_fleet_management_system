@@ -734,7 +734,7 @@
   },
   "07-Return-DepositRefund-Desktop.dc.html": {
    "expand": "fill",
-   "h": 800,
+   "h": 1092,
    "is_interactive": true,
    "page": "plate",
    "title": "07.3 Use deposit and refund · Desktop",
@@ -743,7 +743,7 @@
    "y": 31852
   },
   "07-Return-DepositRefund-Phone.dc.html": {
-   "h": 844,
+   "h": 1188,
    "is_interactive": true,
    "page": "plate",
    "title": "07.3 Use deposit and refund · Phone",
