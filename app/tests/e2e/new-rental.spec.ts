@@ -253,6 +253,30 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page.locator('[data-filter]')).toHaveCount(0);
   expect(await noSideScroll(page)).toBe(false);
 
+  // ST-05.7, ST-10.1, ST-10.2 (#56): ask for a discount on this rental; it waits; the owner approves it on Approvals
+  // (the primary owner's own request: self-approved) after the confirm step; the estimate shows the discount.
+  await page.goto(rentalUrl);
+  const before = Number(await page.locator('[data-estimate]').getAttribute('data-estimate'));
+  await page.locator('[data-price-form]').getByRole('radio', { name: 'A discount off the bill' }).check();
+  await page.locator('input[name="amountBox"]').fill('500');
+  await expect(page.locator('[data-effect]')).toHaveAttribute('data-effect', '-500');
+  await page.locator('input[name="reasonBox"]').fill(`Sample: regular customer ${tag}`);
+  await page.getByRole('button', { name: 'Send request' }).click();
+  await expect(page).toHaveURL(/\?asked=1$/, { timeout: 30_000 });
+  await expect(page.locator('[data-waiting]')).toBeVisible();
+  await page.goto('/approvals');
+  const card = page.locator('[data-approval]', { hasText: `Sample: regular customer ${tag}` });
+  await expect(card).toBeVisible({ timeout: 30_000 });
+  await card.getByRole('link', { name: 'Approve' }).click();
+  await expect(page.locator('[data-confirm="approve"]')).toBeVisible();
+  await page.getByRole('button', { name: 'Approve' }).click();
+  await expect(page).toHaveURL(/\/approvals\?done=approved$/, { timeout: 30_000 });
+  await page.goto('/approvals?status=approved');
+  await expect(page.locator('[data-approval]', { hasText: `Sample: regular customer ${tag}` })).toContainText('self-approved');
+  await page.goto(rentalUrl);
+  await expect(page.locator('[data-estimate]')).toHaveAttribute('data-estimate', String(before - 500));
+  await expect(page.locator('[data-history]')).toContainText('Price request decided: approved');
+
   // The car is now held: it is no longer offered on 05.2.
   await page.goto(`/rentals/new/car?customer=${customerId}`);
   await expect(page.locator(`[data-car="${plate}"]`)).toHaveCount(0);

@@ -43,6 +43,7 @@ export default async function AgreementPrintPage({ params }: { params: Promise<{
             <dt>{t('pickup')}</dt><dd>{when(c.pickupAt)}</dd><dt>{t('backBy')}</dt><dd>{when(c.deadlineAt)}</dd>
             <dt>{t('perDay')}</dt><dd>{t('perDayValue', { rate: money(c.dailyRate), days: c.days, base: money(c.base) })}</dd>
             {c.longRental ? <><dt>{t('longRental')}</dt><dd>{t('longRentalValue', { amount: money(c.longRental) })}</dd></> : null}
+            {c.discount ? <><dt>{t('discount')}</dt><dd>{t('discountValue', { amount: money(c.discount) })}</dd></> : null}
             <dt>{t('km')}</dt><dd>{t('kmValue', { km: money(c.includedKm), rate: money(c.extraKmRate) })}</dd>
             <dt>{t('deposit')}</dt><dd>{c.depositWaived ? t('depositWaived') : t('depositValue', { amount: money(c.deposit ?? 0) })}</dd>
             <dt>{t('rentPaid')}</dt><dd>{c.rentPaid === 'now' ? t('rentNow') : t('rentReturn')}</dd>

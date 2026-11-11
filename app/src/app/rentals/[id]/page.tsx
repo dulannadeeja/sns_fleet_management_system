@@ -14,6 +14,8 @@ import { rentalWords } from '../words';
 import { paymentNumber, rentalMoney } from '../../../modules/money/payments';
 import { handoverChecklist, handoverOf } from '../../../modules/rentals/handover';
 import { minutesLate, rentalHistory } from '../../../modules/rentals/list';
+import { waitingFor } from '../../../modules/approvals/approvals';
+import { PriceForm, WithdrawForm } from './PriceForm';
 import { rentalDays } from '../../../lib/rental-days';
 import { Notice, PlateBadge, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
@@ -22,7 +24,7 @@ import '../rentals.css';
 
 // A saved rental (#51), until Rental details (06.2) comes with #58: who, which car, from when to when, the estimate from
 // its own saved terms. The deposit, agreement and handover come with #54, #55 and #57. Needs Customer access.
-export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string; handedOver?: string; freed?: string }> }) {
+export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string; handedOver?: string; freed?: string; asked?: string; withdrawn?: string }> }) {
   const person = await requirePermission('customerAccess');
   const r = await rentalTerms((await params).id);
   if (!r) notFound();
@@ -36,6 +38,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
   const photos = (await handoverChecklist(r.id))?.photos ?? [];
   const th = await getTranslations('rentals.handover');
   const history = await rentalHistory(r.id);
+  const waiting = r.status === 'draft' || r.status === 'active' ? await waitingFor(r.id) : null;
   // 06.3 Overdue rental (ST-06.3): out past its return deadline. No late fee runs on its own; staff call (7.4, 12).
   const lateMinutes = minutesLate(r);
   const days = rentalDays(r.pickupAt, r.days, r.pickupCutoff, r.returnDeadline);
@@ -48,6 +51,8 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
       {sp.signed === '1' ? <Notice>{t('signed.saved')}</Notice> : null}
       {sp.handedOver === '1' && handed ? <Notice>{th('done')}</Notice> : null}
       {sp.freed === '1' && r.status === 'notCollected' ? <Notice>{th('freed')}</Notice> : null}
+      {sp.asked === '1' && waiting ? <Notice>{t('approvals.sent')}</Notice> : null}
+      {sp.withdrawn === '1' ? <Notice>{t('approvals.withdrawnNotice')}</Notice> : null}
       {typeof sp.paid === 'string' && /^P-\d{4,}(,P-\d{4,})*$/.test(sp.paid) ? <Notice>{t('pay.saved', { numbers: sp.paid.replace(/,/g, ', ') })}</Notice> : null}
       {sp.saved === '1' ? <Notice>{t('saved', { plate: car?.registration ?? '', deadline: when(r.deadlineAt) })}</Notice> : null}
       {lateMinutes > 0 ? (
@@ -72,8 +77,9 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
         <section className="car-card" aria-labelledby="e-h">
           <h2 id="e-h">{t('estimate')}</h2>
           <dl className="ren-lines" data-estimate={est.total}>
-            <dt>{t('base', { days: est.days, rate: money(seg.dailyRate) })}</dt><dd>{money(est.base)}</dd>
+            <dt>{t('base', { days: est.days, rate: money(est.dailyRate) })}</dt><dd>{money(est.base)}</dd>
             {est.longRental ? <><dt>{t('longRental')}</dt><dd>{money(est.longRental)}</dd></> : null}
+            {est.discount ? <><dt>{t('approvals.discountLine')}</dt><dd>{`− ${money(est.discount)}`}</dd></> : null}
             <dt>{t('includedKm')}</dt><dd>{t('kmValue', { km: money(est.includedKm) })}</dd>
             <dt>{t('extraKm')}</dt><dd>{t('extraKmValue', { rate: money(seg.extraKmRate) })}</dd>
             <dt className="ren-total">{t('total')}</dt><dd className="ren-total">{t('totalValue', { total: money(est.total) })}</dd>
@@ -155,6 +161,27 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
       ) : r.status === 'draft' ? (
         <div><Link className="rt-btn rt-btn-primary" href={`/rentals/${r.id}/handover`}>{th('start')}</Link></div>
       ) : null}
+      {est && (r.status === 'draft' || r.status === 'active') ? (
+        <section className="car-card" aria-labelledby="p-h" data-price>
+          <h2 id="p-h">{t('approvals.title')}</h2>
+          {waiting ? (
+            <div data-waiting={waiting.id}>
+              <Notice tone="warning">{waiting.kind === 'rate'
+                ? t('approvals.waitingRate', { was: money(waiting.rateWas), now: money(waiting.newDailyRate!), effect: money(Math.abs(waiting.effect)), sign: waiting.effect < 0 ? '−' : '+' })
+                : t('approvals.waitingDiscount', { amount: money(waiting.discount!) })}</Notice>
+              <span className="set-muted">{t('approvals.waitingBy', { name: waiting.byName, when: when(waiting.createdAt), reason: waiting.reason })}</span>
+              {waiting.createdBy === person.id ? <WithdrawForm rentalId={r.id} requestId={waiting.id} label={t('approvals.withdraw')} /> : null}
+            </div>
+          ) : (
+            <>
+              <span className="set-muted">{t('approvals.intro')}</span>
+              <PriceForm rentalId={r.id} rate={est.dailyRate} days={est.days} estimate={est.total} partner={seg.commissionPercent !== null}
+                w={w.approvals as unknown as Record<string, string> & { errors: Record<string, string> }} />
+            </>
+          )}
+          {cash && cash.unpaid < 0 ? <span className="set-muted" data-paid-above>{t('approvals.paidAbove', { amount: money(-cash.unpaid) })}</span> : null}
+        </section>
+      ) : null}
       <section className="car-card" aria-labelledby="d-h" data-days={days.length}>
         <h2 id="d-h">{t('rentalDays.title')}</h2>
         <ul className="set-muted" style={{ margin: 0, paddingLeft: 18 }}>
@@ -171,6 +198,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
               <span>{t.has(`history.kinds.${e.kind}` as 'history.kinds.created') ? t(`history.kinds.${e.kind}` as 'history.kinds.created', {
                 amount: money(Number(e.details.amount ?? 0)), km: money(Number(e.details.outKm ?? 0)), days: String(e.details.days ?? ''),
                 reason: String(e.details.reason ?? ''), for: e.details.for === 'deposit' ? t('history.forDeposit') : t('history.forBill'),
+                outcome: e.details.outcome === 'approved' ? t('history.approved') : t('history.rejected'), note: e.details.note ? ` · ${String(e.details.note)}` : '',
               }) : e.kind}</span>
             </li>
           ))}

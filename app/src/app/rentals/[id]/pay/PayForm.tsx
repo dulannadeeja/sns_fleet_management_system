@@ -54,7 +54,7 @@ export function PayForm({ customerId, rentalId, formKey, rentals, w }: { custome
             <div key={r.id} data-pay-rental={r.label}>
               <TextField name={`amount-${r.id}`} label={fill(w.billAmount, { rental: r.label })} inputMode="numeric" autoComplete="off" value={amounts[r.id] ?? ''}
                 onChange={(e) => setAmounts({ ...amounts, [r.id]: e.currentTarget.value })}
-                hint={fill(w.billHint, { estimate: money(r.estimate), paid: money(r.paid), unpaid: money(r.unpaid) })} />
+                hint={fill(w.billHint, { estimate: money(r.estimate), paid: money(r.paid), unpaid: money(Math.max(0, r.unpaid)) })} />
             </div>
           ))}
         </section>

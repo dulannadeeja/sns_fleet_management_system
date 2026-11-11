@@ -33,7 +33,7 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
   // A car's commission is a partner term: hidden from people who may not see partner terms (system design 4.2).
   // Customers' details are for people with customer access (system design 3.2, Confirmed; #19 review); rentals and
   // payments name the customer too (#53).
-  const entries = all.filter((e) => (seeTerms || !isPartnerTermEntry(e)) && (seeCustomers || !/^(customer|rental|payment)\./.test(e.action)));
+  const entries = all.filter((e) => (seeTerms || !isPartnerTermEntry(e)) && (seeCustomers || !/^(customer|rental|payment|approval)\./.test(e.action)));
   const tCars = tCarsRaw as unknown as (k: string, v?: Record<string, string>) => string;
   const t = await getTranslations('settings');
   const format = await getFormatter();
@@ -80,6 +80,8 @@ export default async function ActivityLogPage({ searchParams }: { searchParams: 
         target: String(e.details?.name ?? e.targetId ?? ''), plate: String(e.details?.registration ?? ''), days: String(e.details?.days ?? ''),
         number: String(e.details?.number ?? ''), reason: String(e.details?.reason ?? ''), language: e.details?.language === 'si' ? 'සිංහල' : e.details?.language === 'en' ? 'English' : '',
       } : {}),
+      // approval.*: the customer and the rental's number (#56).
+      ...(e.action.startsWith('approval.') ? { target: String(e.details?.name ?? ''), number: String(e.details?.number ?? '') } : {}),
       // payment.*: the payment's number, the customer, the amount and how it was paid (#53).
       ...(e.action.startsWith('payment.') ? {
         target: String(e.details?.name ?? e.targetId ?? ''), number: paymentNumber(Number(e.details?.number ?? 0)),

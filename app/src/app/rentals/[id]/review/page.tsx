@@ -42,8 +42,9 @@ export default async function ReviewPage({ params, searchParams }: { params: Pro
           <dt>{t('customer')}</dt><dd>{c?.name}</dd>
           <dt>{t('pickup')}</dt><dd>{when(r.pickupAt)}</dd>
           <dt>{t('backBy')}</dt><dd>{when(r.deadlineAt)}</dd>
-          {est ? <><dt>{t('review.rent')}</dt><dd>{t('review.rentValue', { days: est.days, rate: money(seg.dailyRate), base: money(est.base) })}</dd></> : null}
+          {est ? <><dt>{t('review.rent')}</dt><dd>{t('review.rentValue', { days: est.days, rate: money(est.dailyRate), base: money(est.base) })}</dd></> : null}
           {est?.longRental ? <><dt>{t('longRental')}</dt><dd>{money(est.longRental)}</dd></> : null}
+          {est?.discount ? <><dt>{t('approvals.discountLine')}</dt><dd>{`− ${money(est.discount)}`}</dd></> : null}
           {est ? <><dt>{t('review.included')}</dt><dd>{t('review.includedValue', { km: money(est.includedKm), rate: money(seg.extraKmRate) })}</dd></> : null}
           {ready?.termsSet ? (
             <>
