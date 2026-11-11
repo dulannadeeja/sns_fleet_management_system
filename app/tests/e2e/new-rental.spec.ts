@@ -297,6 +297,20 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page.locator('[data-bill]')).toHaveAttribute('data-bill', '8500');
   await expect(page.locator('[data-line="late"]')).toContainText('Sample: regular customer');
 
+  // ST-07.3 (#64): settle the deposit. The bill was already paid (9,000 for 8,500), so the 1,000 held goes back in cash.
+  await page.getByRole('link', { name: 'Use the deposit and refund' }).click();
+  await expect(page).toHaveURL(/\/deposit$/, { timeout: 30_000 });
+  await expect(page.locator('[data-plan-refund]')).toHaveAttribute('data-plan-refund', '1000');
+  const settle = page.getByRole('button', { name: 'Record and refund LKR 1,000' });
+  await expect(settle).toBeDisabled();
+  await page.getByRole('radio', { name: 'Cash' }).check();
+  await expect(settle).toBeEnabled();
+  expect(await noSideScroll(page)).toBe(false);
+  await settle.click();
+  await expect(page).toHaveURL(/\?deposit=1$/, { timeout: 30_000 });
+  await expect(page.locator('[data-deposit-settled]')).toHaveAttribute('data-deposit-settled', '1000');
+  await expect(page.locator('[data-history]')).toContainText('Deposit settled');
+
   // Back and Available: the car is offered again on 05.2 (it was held while out).
   await page.goto(`/rentals/new/car?customer=${customerId}`);
   await expect(page.locator(`[data-car="${plate}"]`)).toHaveCount(1);

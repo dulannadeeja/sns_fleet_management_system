@@ -713,8 +713,8 @@
  {
   "name": "07-Return-DepositRefund-Desktop",
   "w": 1280,
-  "canvasH": 800,
-  "contentH": 800,
+  "canvasH": 1092,
+  "contentH": 1092,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false
@@ -722,8 +722,8 @@
  {
   "name": "07-Return-DepositRefund-Phone",
   "w": 390,
-  "canvasH": 844,
-  "contentH": 844,
+  "canvasH": 1188,
+  "contentH": 1188,
   "missing": [],
   "broken": [],
   "unresolvedBlob": false

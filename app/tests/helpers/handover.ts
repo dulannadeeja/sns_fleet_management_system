@@ -24,9 +24,9 @@ export async function ensureAccessories(): Promise<string[]> {
 
 const future = () => `${new Date().getFullYear() + 1}-12-31`;
 
-/** A sample car (papers in date unless `papers: false`) and customer with all four copies, a rental with step 4 saved,
+/** A sample car (papers in date unless `papers: false`) and customer with all four copies (or `customerId`, one that has them), a rental with step 4 saved,
  *  printed and signed: everything handover needs. Not real data. */
-export async function readyRental(opts: { carId?: string; days?: number; papers?: boolean; copies?: boolean; signed?: boolean; terms?: Partial<Parameters<typeof setRentalTerms>[2]> } = {}) {
+export async function readyRental(opts: { carId?: string; customerId?: string; days?: number; papers?: boolean; copies?: boolean; signed?: boolean; terms?: Partial<Parameters<typeof setRentalTerms>[2]> } = {}) {
   const owner = await theOwner();
   await ensureBusinessDetails();
   await ensureAccessories();
@@ -36,13 +36,13 @@ export async function readyRental(opts: { carId?: string; days?: number; papers?
   }
   const sample = await sampleCarAndCustomer(owner);
   const carId = opts.carId ?? sample.carId;
-  const customerId = sample.customerId;
+  const customerId = opts.customerId ?? sample.customerId;
   if (opts.papers !== false) {
     const p = await changePapers(owner, carId, { insuranceExpires: future(), licenceExpires: future(), nextServiceOn: null, nextServiceKm: null },
       { insuranceExpires: null, licenceExpires: null, nextServiceOn: null, nextServiceKm: null });
     if (!('ok' in p)) throw new Error(`papers: ${JSON.stringify(p)}`);
   }
-  if (opts.copies !== false) for (const kind of ['nicFront', 'nicBack', 'licenceFront', 'licenceBack']) {
+  if (opts.copies !== false && !opts.customerId) for (const kind of ['nicFront', 'nicBack', 'licenceFront', 'licenceBack']) {
     const c = await addCopy(owner, customerId, kind, JPEG);
     if (!('ok' in c)) throw new Error(`copy: ${JSON.stringify(c)}`);
   }
@@ -62,14 +62,14 @@ export async function readyRental(opts: { carId?: string; days?: number; papers?
 /** A sample car (SNS-owned or a partner car at 15% to SNS), Wagon R terms of the starting package (4,500 a day, 100 km a
  *  day, 25 a km, garage day 5,000), handed over at 1,000 km with a full tank and every accessory: out, ready to come
  *  back. Not real data. */
-export async function outRental(opts: { ownership?: 'sns' | 'partner'; days?: number; fuel?: 'notCounted' | 'sameLevel'; deposit?: number | null } = {}) {
+export async function outRental(opts: { ownership?: 'sns' | 'partner'; customerId?: string; days?: number; fuel?: 'notCounted' | 'sameLevel'; deposit?: number | null } = {}) {
   const owner = await theOwner();
   const ownership = opts.ownership ?? 'partner';
   const car = await addCar(owner, { registration: samplePlate(), model: 'Wagon R', ownership },
     { dailyRate: 4500, kmPerDay: 100, extraKmRate: 25, garageDayCharge: 5000, ...(ownership === 'partner' ? { commissionPercent: 15 } : {}) });
   if (!('ok' in car)) throw new Error(`car: ${JSON.stringify(car)}`);
   if (opts.fuel === 'sameLevel') await ensureFuelPrice();
-  const r = await readyRental({ carId: car.id, days: opts.days, terms: { fuel: opts.fuel ?? 'notCounted', ...(opts.deposit === null ? { deposit: null, waiveReason: 'Sample' } : opts.deposit ? { deposit: opts.deposit } : {}) } });
+  const r = await readyRental({ carId: car.id, customerId: opts.customerId, days: opts.days, terms: { fuel: opts.fuel ?? 'notCounted', ...(opts.deposit === null ? { deposit: null, waiveReason: 'Sample' } : opts.deposit ? { deposit: opts.deposit } : {}) } });
   const accessories = (await ensureAccessories()).map((item) => ({ item, present: true }));
   const h = await handOver(owner, r.rentalId, { outKm: 1000, fuel: 'full', accessories, checked: true });
   if (!('ok' in h)) throw new Error(`handover: ${JSON.stringify(h)}`);

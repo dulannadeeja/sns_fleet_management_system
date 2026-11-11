@@ -48,7 +48,12 @@ async function paidOn(q: Q, rentalIds: string[]) {
   if (!rentalIds.length) return new Map<string, number>();
   const rows = await q.select({ id: paymentAllocation.rentalId, sum: sql<string>`sum(${paymentAllocation.amount})` }).from(paymentAllocation)
     .where(inArray(paymentAllocation.rentalId, rentalIds)).groupBy(paymentAllocation.rentalId);
-  return new Map(rows.map((r) => [r.id, Number(r.sum)]));
+  const out = new Map(rows.map((r) => [r.id, Number(r.sum)]));
+  // A deposit used for a bill (#64) counts as paid on it, so it is never paid twice.
+  const used = await q.select({ id: depositMovement.toRentalId, sum: sql<string>`sum(${depositMovement.amount})` }).from(depositMovement)
+    .where(and(inArray(depositMovement.toRentalId, rentalIds), eq(depositMovement.kind, 'applied'))).groupBy(depositMovement.toRentalId);
+  for (const u of used) out.set(u.id!, (out.get(u.id!) ?? 0) + Number(u.sum));
+  return out;
 }
 async function depositReceived(q: Q, rentalIds: string[]) {
   if (!rentalIds.length) return new Map<string, number>();

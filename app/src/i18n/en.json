@@ -205,7 +205,7 @@
       "changePriceOrDiscount": "Change an agreed price or give a discount",
       "reduceEarlyReturnCharges": "Reduce charges for an early return",
       "decideSwapPricing": "Swap pricing and swap-day split",
-      "refundsAndExpenses": "Issue refunds and pay expenses",
+      "refundsAndExpenses": "Issue refunds or pay expenses",
       "correctPayment": "Correct a recorded payment",
       "reconcilePayments": "Check payments and resolve differences",
       "writeOffDebt": "Write off a customer debt",
@@ -315,7 +315,8 @@
           "photoOpened": "opened a condition photo of {target}, {number}",
           "carFreed": "freed {plate} from {target}'s rental {number}, not collected: {reason}",
           "return": "received {plate} back from {target}, {number}",
-          "garageCorrected": "corrected the garage days on {target}'s rental {number}"
+          "garageCorrected": "corrected the garage days on {target}'s rental {number}",
+          "depositSettle": "settled the deposit of {target}'s rental {number}"
         },
         "document": {
           "wordingAdd": "added agreement wording version {version}",
@@ -1742,7 +1743,9 @@
         "approvalWithdrawn": "Price request withdrawn",
         "approvalClosed": "Price request closed: the rental ended",
         "return": "Received · {km} km",
-        "garageCorrected": "Garage days corrected: {reason}"
+        "garageCorrected": "Garage days corrected: {reason}",
+        "depositSettled": "Deposit settled · LKR {here} on this bill, LKR {refund} refunded",
+        "depositFromOther": "LKR {amount} paid from the deposit of {from}"
       },
       "approved": "approved",
       "rejected": "rejected"
@@ -1905,9 +1908,62 @@
       "depositHeld": "Deposit held",
       "unpaid": "Unpaid",
       "toRefund": "Over the bill",
-      "refundNote": "The deposit pays the bill and the rest is refunded in the next step (ticket #64)."
+      "refundNote": "Over the bill: refund the rest with \"Use the deposit and refund\"."
     },
-    "statusReturned": "Returned"
+    "statusReturned": "Returned",
+    "deposit": {
+      "title": "Use the deposit and refund",
+      "open": "Use the deposit and refund",
+      "bill": "Bill",
+      "paid": "Paid",
+      "held": "Deposit held",
+      "whatHappens": "What happens to the deposit",
+      "usedHere": "Used for this bill",
+      "usedOlder": "Used for older bill {number}",
+      "back": "Back to the customer",
+      "left": "Deposit left",
+      "note": "The deposit pays the bill; no new money comes in. Nothing can be used beyond what is held.",
+      "olderTitle": "Older unpaid bills",
+      "olderLine": "{number} · LKR {amount} unpaid",
+      "agreed": "The customer agrees to use the deposit for these bills, oldest first",
+      "agreementNote": "How the customer agreed",
+      "agreementHint": "For example: agreed at the counter. At most 500 letters.",
+      "refundHow": "Refund LKR {amount} by",
+      "required": "required",
+      "cash": "Cash",
+      "cashHint": "from the drawer",
+      "bank": "Bank",
+      "bankHint": "transfer",
+      "reference": "Transfer reference",
+      "refundNote": "A refund is not an expense. A cash refund shows in the drawer as its own line.",
+      "save": "Record and refund LKR {amount}",
+      "saveNoRefund": "Record",
+      "noRefundRight": "Refunding money needs the permission \"Issue refunds or pay expenses\". Ask an admin.",
+      "settled": "Deposit settled",
+      "settledLine": "{when} · {by}",
+      "refundedBy": "Refunded by {method}",
+      "refundedRef": "Refunded by bank · {reference}",
+      "agreedNote": "The customer agreed: {note}",
+      "garageWaiting": "Garage days are waiting for an admin. Settle the deposit after they are decided.",
+      "nothingHeld": "No deposit is held on this rental.",
+      "done": "The deposit is settled.",
+      "errors": {
+        "notAllowed": "You don't have permission to do this.",
+        "refundNotAllowed": "Refunding money needs the permission \"Issue refunds or pay expenses\".",
+        "notFound": "This rental was not found.",
+        "notReturned": "The car is not back yet.",
+        "alreadySettled": "The deposit of this rental is already settled.",
+        "garageWaiting": "Garage days are waiting for an admin. Settle the deposit after they are decided.",
+        "nothingHeld": "No deposit is held on this rental.",
+        "noOlderBills": "This customer has no older unpaid bills.",
+        "noteMissing": "Write how the customer agreed.",
+        "methodMissing": "Choose how the money is refunded.",
+        "referenceMissing": "Type the bank transfer reference.",
+        "tooLong": "Too long: a note at most 500 letters, a reference at most 80.",
+        "stale": "Something changed since this page opened (a payment or the bill). Open the page again.",
+        "failed": "It could not be saved. Try again."
+      }
+    }
   },
   "agreementDoc": {
     "title": "Rental agreement",

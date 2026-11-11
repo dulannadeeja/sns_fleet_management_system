@@ -205,7 +205,7 @@
       "changePriceOrDiscount": "එකඟ වූ මිල වෙනස් කරන්න හෝ discount දෙන්න",
       "reduceEarlyReturnCharges": "කලින් ආපසු දුන්නොත් ගාස්තු අඩු කරන්න",
       "decideSwapPricing": "වාහන මාරුවේ මිල සහ දවස් බෙදීම",
-      "refundsAndExpenses": "ආපසු ගෙවීම් සහ වියදම් ගෙවන්න",
+      "refundsAndExpenses": "ආපසු ගෙවීම් හෝ වියදම් ගෙවන්න",
       "correctPayment": "සටහන් කළ ගෙවීමක් නිවැරදි කරන්න",
       "reconcilePayments": "ගෙවීම් check කරලා වෙනස්කම් විසඳන්න",
       "writeOffDebt": "පාරිභෝගික ණයක් කපා හරින්න",
@@ -315,7 +315,8 @@
           "photoOpened": "{target} ගේ {number} car photo එකක් open කළා",
           "carFreed": "{target} ගේ {number} කුලියෙන් {plate} නිදහස් කළා, අරගෙන ගියේ නැහැ: {reason}",
           "return": "{target} ගෙන් {plate} ආපහු ගත්තා, {number}",
-          "garageCorrected": "{target} ගේ {number} කුලියේ garage දින නිවැරදි කළා"
+          "garageCorrected": "{target} ගේ {number} කුලියේ garage දින නිවැරදි කළා",
+          "depositSettle": "{target} ගේ කුලිය {number} ගේ deposit එක පියවූවා"
         },
         "document": {
           "wordingAdd": "ගිවිසුමේ වචන {version} වෙනි version එක එකතු කළා",
@@ -1742,7 +1743,9 @@
         "approvalWithdrawn": "මිල ඉල්ලීම අයින් කළා",
         "approvalClosed": "මිල ඉල්ලීම වැසුණා: කුලිය ඉවර වුණා",
         "return": "ආපහු ගත්තා · km {km}",
-        "garageCorrected": "Garage දින නිවැරදි කළා: {reason}"
+        "garageCorrected": "Garage දින නිවැරදි කළා: {reason}",
+        "depositSettled": "Deposit එක පියවූවා · මේ බිලට LKR {here}, LKR {refund} ආපසු දුන්නා",
+        "depositFromOther": "{from} ගේ deposit එකෙන් LKR {amount} ගෙව්වා"
       },
       "approved": "අනුමතයි",
       "rejected": "ප්‍රතික්ෂේපයි"
@@ -1905,9 +1908,62 @@
       "depositHeld": "තියාගත් deposit",
       "unpaid": "ගෙවන්න තියෙනවා",
       "toRefund": "බිලට වඩා වැඩි",
-      "refundNote": "Deposit එකෙන් බිල ගෙවලා ඉතුරු එක ඊළඟ පියවරේදී ආපහු දෙනවා (ticket #64)."
+      "refundNote": "බිලට වඩා වැඩියි: \"Deposit එක පාවිච්චි කරලා ඉතුරු ආපසු දෙන්න\" එකෙන් ඉතුරු ආපසු දෙන්න."
     },
-    "statusReturned": "ආපහු දුන්නා"
+    "statusReturned": "ආපහු දුන්නා",
+    "deposit": {
+      "title": "Deposit එක පාවිච්චි කරලා ඉතුරු ආපසු දෙන්න",
+      "open": "Deposit එක පාවිච්චි කරලා ඉතුරු ආපසු දෙන්න",
+      "bill": "බිල",
+      "paid": "ගෙව්වා",
+      "held": "තියාගත් deposit",
+      "whatHappens": "Deposit එක බෙදන්නේ මෙහෙමයි",
+      "usedHere": "මේ බිලට",
+      "usedOlder": "පරණ බිල {number} ට",
+      "back": "පාරිභෝගිකයාට ආපසු",
+      "left": "ඉතුරු deposit",
+      "note": "Deposit එකෙන් බිල ගෙවනවා; අලුත් සල්ලි එන්නේ නැහැ. තියාගත් ගාණට වඩා පාවිච්චි කරන්න බැහැ.",
+      "olderTitle": "ගෙවලා නැති පරණ බිල්",
+      "olderLine": "{number} · LKR {amount} ගෙවන්න තියෙනවා",
+      "agreed": "මේ බිල් වලට deposit එක පාවිච්චි කරන්න පාරිභෝගිකයා කැමතියි, පරණ එකේ ඉඳන්",
+      "agreementNote": "පාරිභෝගිකයා කැමති වුණේ කොහොමද",
+      "agreementHint": "උදා: counter එකේදී කැමති වුණා. අකුරු 500ක් වෙනකන්.",
+      "refundHow": "LKR {amount} ආපසු දෙන්නේ කොහොමද?",
+      "required": "අනිවාර්යයි",
+      "cash": "Cash",
+      "cashHint": "ලාච්චුවෙන්",
+      "bank": "Bank",
+      "bankHint": "transfer",
+      "reference": "Transfer reference",
+      "refundNote": "ආපසු දෙන එක වියදමක් නෙවෙයි. Cash ආපසු දුන්නොත් ලාච්චුවේ වෙනම පේළියක් එනවා.",
+      "save": "සටහන් කරන්න · LKR {amount} ආපසු දෙන්න",
+      "saveNoRefund": "සටහන් කරන්න",
+      "noRefundRight": "සල්ලි ආපසු දෙන්න \"ආපසු ගෙවීම් හෝ වියදම් ගෙවන්න\" අවසරය ඕනේ. Admin ගෙන් අහන්න.",
+      "settled": "Deposit එක පියවූවා",
+      "settledLine": "{when} · {by}",
+      "refundedBy": "{method} වලින් ආපසු දුන්නා",
+      "refundedRef": "Bank වලින් ආපසු දුන්නා · {reference}",
+      "agreedNote": "පාරිභෝගිකයා කැමති වුණා: {note}",
+      "garageWaiting": "Garage දින admin එනකන් බලාගෙන ඉන්නවා. ඒවා තීරණය කළාට පස්සේ deposit එක පියවන්න.",
+      "nothingHeld": "මේ කුලියේ deposit එකක් තියාගෙන නැහැ.",
+      "done": "Deposit එක පියවූවා.",
+      "errors": {
+        "notAllowed": "මේක කරන්න ඔයාට අවසර නැහැ.",
+        "refundNotAllowed": "සල්ලි ආපසු දෙන්න \"ආපසු ගෙවීම් හෝ වියදම් ගෙවන්න\" අවසරය ඕනේ.",
+        "notFound": "මේ කුලිය හම්බ වුණේ නැහැ.",
+        "notReturned": "වාහනය තාම ආපසු ඇවිත් නැහැ.",
+        "alreadySettled": "මේ කුලියේ deposit එක දැනටමත් පියවලා.",
+        "garageWaiting": "Garage දින admin එනකන් බලාගෙන ඉන්නවා. ඒවා තීරණය කළාට පස්සේ deposit එක පියවන්න.",
+        "nothingHeld": "මේ කුලියේ deposit එකක් තියාගෙන නැහැ.",
+        "noOlderBills": "මේ පාරිභෝගිකයාට ගෙවලා නැති පරණ බිල් නැහැ.",
+        "noteMissing": "පාරිභෝගිකයා කැමති වුණේ කොහොමද කියලා ලියන්න.",
+        "methodMissing": "සල්ලි ආපසු දෙන්නේ කොහොමද කියලා තෝරන්න.",
+        "referenceMissing": "Bank transfer reference එක ගහන්න.",
+        "tooLong": "දිග වැඩියි: සටහනට අකුරු 500ක්, reference එකට 80ක් වෙනකන්.",
+        "stale": "මේ පිටුව ඇරියට පස්සේ දෙයක් වෙනස් වුණා (ගෙවීමක් හෝ බිල). ආයෙත් පිටුව අරින්න.",
+        "failed": "සේව් කරන්න බැරි වුණා. ආයෙත් උත්සාහ කරන්න."
+      }
+    }
   },
   "agreementDoc": {
     "title": "කුලී ගිවිසුම",

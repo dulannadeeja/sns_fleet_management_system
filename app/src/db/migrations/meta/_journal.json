@@ -246,6 +246,13 @@
       "when": 1794395214420,
       "tag": "0034_go_ahead_debt",
       "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1794398613790,
+      "tag": "0035_deposit_settlement",
+      "breakpoints": true
     }
   ]
 }

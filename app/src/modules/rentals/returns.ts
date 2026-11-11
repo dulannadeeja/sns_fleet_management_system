@@ -52,10 +52,14 @@ async function actor(q: Q, id: string) {
 
 /** What is paid on a rental's bill and the deposit held now (received; applied and refunded with #64). */
 export async function paidAndHeld(q: Q, rentalId: string) {
+  // Paid: payments put on this bill and any deposit used for it (#64, this rental's or another's). Held: the deposit
+  // received on this rental less what its settlement used or refunded. debtOf (customers/flags.ts) counts the same way.
   const [p] = await q.select({ n: sql<string>`coalesce(sum(${paymentAllocation.amount}), 0)` }).from(paymentAllocation).where(eq(paymentAllocation.rentalId, rentalId));
-  const [d] = await q.select({ n: sql<string>`coalesce(sum(${depositMovement.amount}), 0)` }).from(depositMovement)
-    .where(and(eq(depositMovement.rentalId, rentalId), eq(depositMovement.kind, 'received')));
-  return { paid: Number(p.n), depositHeld: Number(d.n) };
+  const [a] = await q.select({ n: sql<string>`coalesce(sum(${depositMovement.amount}), 0)` }).from(depositMovement)
+    .where(and(eq(depositMovement.toRentalId, rentalId), eq(depositMovement.kind, 'applied')));
+  const [d] = await q.select({ n: sql<string>`coalesce(sum(case when ${depositMovement.kind} = 'received' then ${depositMovement.amount} else -${depositMovement.amount} end), 0)` })
+    .from(depositMovement).where(eq(depositMovement.rentalId, rentalId));
+  return { paid: Number(p.n) + Number(a.n), depositHeld: Number(d.n) };
 }
 
 /** Receives the car: checks everything again under the car's and the rental's locks, saves the return and the bill. */
