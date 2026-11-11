@@ -8,6 +8,9 @@ import { AppFrame } from '../AppFrame';
 import '../cars/cars.css';
 import './rentals.css';
 
+// Some missing checklist items share a word with the item they belong to (handover.items).
+const ITEM_WORD: Record<string, string> = { agreementOutOfDate: 'signedAgreement', referencePerson: 'reference', referenceCopies: 'reference', carNotAvailable: 'car' };
+
 // Screen 06.1 Rentals (ST-06.1): open rentals grouped by what needs doing. A filter opened from the menu's Overdue count
 // (or, with #67, the attention summary) is shown and can be removed (AT-28). Needs Customer access.
 const ORDER: Group[] = ['overdue', 'dueBack', 'handover', 'other'];
@@ -22,7 +25,7 @@ export default async function RentalsPage({ searchParams }: { searchParams: Prom
   const total = ORDER.reduce((n, g) => n + list.groups[g].length, 0);
   const note = (r: ListRow) => r.overdue ? `${late(r.lateMinutes)} · ${t('deadline', { when: when(r.deadlineAt) })}`
     : r.status === 'draft' ? [r.notCollected ? t('notCollected', { when: when(r.createdAt) }) : t('savedAt', { when: when(r.createdAt) }),
-      r.checklist ? (r.checklist.missing.length ? t('checklistMissing', { done: r.checklist.done, total: r.checklist.total, first: th(`items.${r.checklist.missing[0]}`) }) : t('checklistReady')) : ''].filter(Boolean).join(' · ')
+      r.checklist ? (r.checklist.missing.length ? t('checklistMissing', { done: r.checklist.done, total: r.checklist.total, first: th(`items.${ITEM_WORD[r.checklist.missing[0]] ?? r.checklist.missing[0]}`) }) : t('checklistReady')) : ''].filter(Boolean).join(' · ')
       : t('backBy', { when: when(r.deadlineAt) });
   return (
     <AppFrame person={person} active="rentals" title={t('title')} subtitle={t('open', { n: total })} backHref="/">

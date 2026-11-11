@@ -10,6 +10,7 @@ import { MAX_COPY_BYTES } from '../../storage/kinds';
 import { paymentNumber, recordPayment, type Method, type PaymentFor } from '../../modules/money/payments';
 import { addHandoverPhoto, freeCar, handOver, type FuelLevel } from '../../modules/rentals/handover';
 import { correctGarageDays, receiveCar, type NextState } from '../../modules/rentals/returns';
+import { settleDeposit, type RefundMethod } from '../../modules/money/deposits';
 
 // New rental (#51): requirePermission("Customer access"), then the rentals module, which checks everything again in one
 // transaction and writes the activity log. The pickup is the moment of the save (05.3 shows "now").
@@ -225,4 +226,28 @@ export async function correctGarageAction(rentalId: string, _: GarageState, form
   if ('error' in r) return { error: r.error, values };
   revalidatePath(`/rentals/${rentalId}`);
   redirect(`/rentals/${rentalId}?garage=1`);
+}
+
+// Use the deposit and refund (07.3; #64). The form sends its choices and the amounts it showed as one JSON field; the
+// deposits module works the plan out again under the customer's and the rental's locks and writes the activity log.
+export type DepositState = { error?: string; payload?: string };
+
+export async function settleDepositAction(rentalId: string, _: DepositState, form: FormData): Promise<DepositState> {
+  const person = await requirePermission('customerAccess');
+  const payload = String(form.get('payload') ?? '');
+  if (!UUID.test(rentalId) || payload.length > 5_000) return { error: 'failed' };
+  let input: Record<string, unknown>;
+  try { input = JSON.parse(payload); } catch { return { error: 'failed', payload }; }
+  if (!input || typeof input !== 'object') return { error: 'failed', payload };
+  const shown = (input.shown && typeof input.shown === 'object' ? input.shown : {}) as Record<string, unknown>;
+  const n = (v: unknown) => (Number.isSafeInteger(v) ? (v as number) : NaN);
+  const method = String(input.method ?? '');
+  const result = await settleDeposit(person.id, rentalId, {
+    olderAgreed: input.agreed === true, agreementNote: String(input.note ?? ''),
+    ...(method ? { refund: { method: method as RefundMethod, reference: String(input.reference ?? '') } } : {}),
+    shown: { held: n(shown.held), here: n(shown.here), older: n(shown.older), refund: n(shown.refund) },
+  });
+  if ('error' in result) return { error: result.error, payload };
+  revalidatePath(`/rentals/${rentalId}`);
+  redirect(`/rentals/${rentalId}?deposit=1`);
 }

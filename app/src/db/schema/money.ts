@@ -1,4 +1,4 @@
-import { bigint, check, index, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { bigint, boolean, check, index, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
 import { customer } from './customers';
@@ -45,35 +45,61 @@ export const paymentAllocation = pgTable('payment_allocation', {
   check('payment_allocation_amount', sql`amount > 0`),
 ]);
 
-/** Deposit money: received from a payment now; applied to a bill and refunded with #64. Held money, never income (8.2). */
+/** Settling a rental's deposit after return (8.2, #64): one per rental, in one save; whether the customer agreed that
+ *  what is left pays their older bills, and how they agreed. */
+export const depositSettlement = pgTable('deposit_settlement', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  rentalId: uuid('rental_id').notNull().references(() => rental.id).unique('deposit_settlement_one_per_rental'),
+  olderAgreed: boolean('older_agreed').notNull(),
+  agreementNote: text('agreement_note'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
+  createdBy: uuid('created_by').notNull().references(() => user.id),
+}, () => [
+  check('deposit_settlement_note', sql`older_agreed = (agreement_note is not null)`),
+]);
+
+/** Deposit money (8.2): `received` from a payment; at settlement (#64) `applied` to a bill (this rental's or an older one
+ *  of the customer's, `to_rental_id`) and `refunded` (cash, or bank with its reference). Held money, never income. */
 export const depositMovement = pgTable('deposit_movement', {
   id: uuid('id').primaryKey().defaultRandom(),
   rentalId: uuid('rental_id').notNull().references(() => rental.id),
   kind: text('kind').notNull(),
   paymentId: uuid('payment_id').references(() => payment.id),
+  settlementId: uuid('settlement_id').references(() => depositSettlement.id),
+  toRentalId: uuid('to_rental_id').references(() => rental.id),
+  method: text('method'),
+  reference: text('reference'),
   amount: bigint('amount', { mode: 'number' }).notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
   createdBy: uuid('created_by').notNull().references(() => user.id),
 }, (t) => [
   index('deposit_movement_by_rental').on(t.rentalId),
-  check('deposit_movement_kind', sql`kind in ('received')`),
+  index('deposit_movement_by_to_rental').on(t.toRentalId),
+  check('deposit_movement_kind', sql`kind in ('received', 'applied', 'refunded')`),
   check('deposit_movement_amount', sql`amount > 0`),
   check('deposit_movement_received_has_payment', sql`kind <> 'received' or payment_id is not null`),
+  check('deposit_movement_settled', sql`(kind = 'received') = (settlement_id is null)`),
+  check('deposit_movement_applied_to', sql`(kind = 'applied') = (to_rental_id is not null)`),
+  check('deposit_movement_refund_method', sql`case when kind = 'refunded' then method in ('cash', 'bank') and (method = 'cash') = (reference is null) else method is null and reference is null end`),
 ]);
 
-/** Money into or out of the shared drawer, with who (9). A cash payment part adds one now; the count reads them (Phase 3). */
+/** Money into or out of the shared drawer, with who (9). A cash payment part adds one (`paymentIn`), a cash deposit refund
+ *  one (`refundOut`, #64); the count reads them (Phase 3). */
 export const cashMovement = pgTable('cash_movement', {
   id: uuid('id').primaryKey().defaultRandom(),
   kind: text('kind').notNull(),
   amount: bigint('amount', { mode: 'number' }).notNull(),
   paymentId: uuid('payment_id').references(() => payment.id),
+  // A cash deposit refund (#64): the movement it pays out.
+  depositMovementId: uuid('deposit_movement_id').references(() => depositMovement.id),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
   createdBy: uuid('created_by').notNull().references(() => user.id),
 }, (t) => [
   index('cash_movement_by_time').on(t.createdAt),
-  check('cash_movement_kind', sql`kind in ('paymentIn')`),
+  check('cash_movement_kind', sql`kind in ('paymentIn', 'refundOut')`),
   check('cash_movement_amount', sql`amount > 0`),
   check('cash_movement_payment_in', sql`kind <> 'paymentIn' or payment_id is not null`),
+  check('cash_movement_refund_out', sql`kind <> 'refundOut' or deposit_movement_id is not null`),
 ]);
 
 /** The bank or card check of a payment, kept apart from it being paid (9): the newest row is its state. A bank or card

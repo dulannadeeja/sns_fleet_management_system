@@ -96,14 +96,15 @@ export async function closeFlag(actorId: string, flagId: string, reasonRaw: stri
 export interface Debt { total: number; rentals: { rentalId: string; number: number; unpaid: number }[] }
 export interface Warnings { openFlags: Flag[]; licenceExpired: boolean; licenceExpires: string | null; debt: Debt }
 
-/** The customer's unpaid debt (system design 6, 7.4; #77): for each returned rental, its bill less what was paid on it and
- *  the deposit held, when that is more than 0. It warns before every new rental until paid (or written off, #65). */
+/** The customer's unpaid debt (system design 6, 7.4; #77): for each returned rental, its bill less what was paid on it (with
+ *  any deposit used for it, #64) and the deposit still held, when that is more than 0. It warns before every new rental until paid (or written off, #65). */
 export async function debtOf(customerId: string, q: Tx | typeof db = db): Promise<Debt> {
   const rows = await q.execute<{ id: string; number: number; unpaid: string }>(sql`
     select r.id, r.number,
       coalesce((select sum(amount) from charge where rental_id = r.id), 0)
       - coalesce((select sum(amount) from payment_allocation where rental_id = r.id), 0)
-      - coalesce((select sum(amount) from deposit_movement where rental_id = r.id and kind = 'received'), 0) as unpaid
+      - coalesce((select sum(amount) from deposit_movement where to_rental_id = r.id and kind = 'applied'), 0)
+      - coalesce((select sum(case when kind = 'received' then amount else -amount end) from deposit_movement where rental_id = r.id), 0) as unpaid
     from rental r where r.customer_id = ${customerId} and r.status = 'returned' order by r.number`);
   const rentals = rows.rows.map((r) => ({ rentalId: r.id, number: Number(r.number), unpaid: Number(r.unpaid) })).filter((r) => r.unpaid > 0);
   return { total: rentals.reduce((n, r) => n + r.unpaid, 0), rentals };

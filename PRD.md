@@ -724,6 +724,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Rules:**
   - The deposit pays this rental's bill and damage first; then, with the customer's agreement noted, the same customer's older unpaid bills; the rest is refunded. Nothing is applied beyond what is held. System design → [Deposits](SNS_SYSTEM_DESIGN.md#82-deposits).
   - Every application and refund is recorded. A refund is not an expense; a cash refund shows in the drawer as its own line. A deposit applied to a bill is not counted again as new money (PR-09).
+  - Settled once, as its own step after return, in one save: this bill first, then, with the customer's agreement ticked and noted (at most 500 letters), their older unpaid bills (other returned rentals) oldest first, then the rest refunded (cash, a drawer line; or bank, with its reference, at most 80 letters). Refused while garage days wait for an admin. Using the deposit needs Customer access; a refund above 0 also "Issue refunds or pay expenses". A bill bigger than the deposit keeps the rest as debt. System design → [Deposits](SNS_SYSTEM_DESIGN.md#82-deposits) (Confirmed 11 Nov 2026).
 - **Checks:** AT-12 "LKR 10,000 deposit, LKR 7,000 bill: apply 7,000, refund 3,000; no double-counted earnings". AT-56 "10,000 deposit, 7,000 bill, 2,000 older bill, the customer agrees: 7,000, then 2,000, then 1,000 refunded".
 - **Screens:** 07.3 Use deposit and refund.
 
