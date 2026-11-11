@@ -1303,7 +1303,9 @@
         "nothingToCheck": "There is nothing to warn about.",
         "notFound": "Not found.",
         "failed": "Not saved. Try again."
-      }
+      },
+      "debtWarn": "Unpaid bills: LKR {amount}",
+      "debtList": "From {list}. Continuing needs a reason, as for a flag."
     },
     "refKinds": {
       "nicFront": "NIC front",

@@ -53,13 +53,14 @@ export function CloseFlagForm({ customerId, flagId, w }: { customerId: string; f
 }
 
 /** `forRental`: the decision is made in New rental (#51) and goes on to choosing the car; otherwise back to the customer. */
-export function GoAheadForm({ customerId, flagIds, licenceExpired, mayContinue, w, forRental = false }: { customerId: string; flagIds: string[]; licenceExpired: boolean; mayContinue: boolean; w: FlagWords; forRental?: boolean }) {
+export function GoAheadForm({ customerId, flagIds, licenceExpired, debt = 0, mayContinue, w, forRental = false }: { customerId: string; flagIds: string[]; licenceExpired: boolean; debt?: number; mayContinue: boolean; w: FlagWords; forRental?: boolean }) {
   const [state, action, pending] = useActionState<FlagFormState, FormData>(goAheadAction.bind(null, customerId), {});
   const ready = useReady();
   return (
     <form action={action} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       {flagIds.map((id) => <input key={id} type="hidden" name="shownFlag" value={id} />)}
       <input type="hidden" name="shownLicenceExpired" value={licenceExpired ? '1' : '0'} />
+      <input type="hidden" name="shownDebt" value={String(debt)} />
       {forRental ? <input type="hidden" name="next" value="rental" /> : null}
       <TextField name="reason" label={s(w, 'reason')} required requiredLabel={`(${s(w, 'required')})`} autoComplete="off" hint={s(w, 'reasonNote')}
         defaultValue={state.values?.reason} disabled={!mayContinue}

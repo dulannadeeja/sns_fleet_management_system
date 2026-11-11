@@ -4,7 +4,7 @@ import { getFormatter, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../auth/require';
 import { COPY_KINDS, getCustomer } from '../../../modules/customers/customers';
 import { listActivity } from '../../../modules/activity/activity';
-import { flagsOf, goAheadsOf } from '../../../modules/customers/flags';
+import { flagsOf, goAheadsOf, debtOf } from '../../../modules/customers/flags';
 import { CloseFlagForm } from '../FlagForms';
 import { Notice } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
@@ -20,7 +20,7 @@ export default async function CustomerPage({ params, searchParams }: { params: P
   const c = await getCustomer((await params).id);
   if (!c) notFound();
   const [t, tLog, w, format, q, { entries }] = await Promise.all([getTranslations('customers'), getTranslations('settings.log'), customerWords(), getFormatter(), searchParams, listActivity({ targetId: c.id, limit: 50 })]);
-  const [flags, decisions, fw] = await Promise.all([flagsOf(c.id), goAheadsOf(c.id), flagWords()]);
+  const [flags, decisions, fw, debt] = await Promise.all([flagsOf(c.id), goAheadsOf(c.id), flagWords(), debtOf(c.id)]);
   const open = flags.filter((f) => !f.closedAt);
   const when = (d: Date) => format.dateTime(d, { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Colombo' });
   const day = (d: string) => format.dateTime(new Date(`${d}T00:00:00Z`), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -63,7 +63,8 @@ export default async function CustomerPage({ params, searchParams }: { params: P
       <section className="car-card" aria-labelledby="warnings"><h2 id="warnings">{t('warnings')}</h2>
         {open.map((f) => <Notice key={f.id} tone="warning">{`${t('flags.flagWarn', { kind: t(`flags.kinds.${f.kind}`) })} · ${f.details}`}</Notice>)}
         {c.licenceExpired ? <Notice tone="warning">{t('licenceWarning', { date: day(c.licenceExpires) })}</Notice> : null}
-        {!open.length && !c.licenceExpired ? <span>{t('noWarnings')}</span> : null}
+        {debt.total ? <Notice tone="warning">{t('flags.debtWarn', { amount: format.number(debt.total) })}</Notice> : null}
+        {!open.length && !c.licenceExpired && !debt.total ? <span>{t('noWarnings')}</span> : null}
         <span className="set-muted">{t('flagsLater')}</span>
         <div className="set-actions" style={{ justifyContent: 'flex-start' }}>
           <Link className="rt-btn rt-btn-secondary" style={{ textDecoration: 'none' }} href={`/customers/${c.id}/flags/new`}>{t('flags.add')}</Link>

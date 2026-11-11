@@ -93,15 +93,29 @@ export async function closeFlag(actorId: string, flagId: string, reasonRaw: stri
   });
 }
 
-export interface Warnings { openFlags: Flag[]; licenceExpired: boolean; licenceExpires: string | null }
+export interface Debt { total: number; rentals: { rentalId: string; number: number; unpaid: number }[] }
+export interface Warnings { openFlags: Flag[]; licenceExpired: boolean; licenceExpires: string | null; debt: Debt }
 
-/** What warns before a rental now (ST-08.4): the open flags and an expired driving licence. */
+/** The customer's unpaid debt (system design 6, 7.4; #77): for each returned rental, its bill less what was paid on it and
+ *  the deposit held, when that is more than 0. It warns before every new rental until paid (or written off, #65). */
+export async function debtOf(customerId: string, q: Tx | typeof db = db): Promise<Debt> {
+  const rows = await q.execute<{ id: string; number: number; unpaid: string }>(sql`
+    select r.id, r.number,
+      coalesce((select sum(amount) from charge where rental_id = r.id), 0)
+      - coalesce((select sum(amount) from payment_allocation where rental_id = r.id), 0)
+      - coalesce((select sum(amount) from deposit_movement where rental_id = r.id and kind = 'received'), 0) as unpaid
+    from rental r where r.customer_id = ${customerId} and r.status = 'returned' order by r.number`);
+  const rentals = rows.rows.map((r) => ({ rentalId: r.id, number: Number(r.number), unpaid: Number(r.unpaid) })).filter((r) => r.unpaid > 0);
+  return { total: rentals.reduce((n, r) => n + r.unpaid, 0), rentals };
+}
+
+/** What warns before a rental now (ST-08.4): the open flags, an expired driving licence and an unpaid debt (#77). */
 export async function warningsFor(customerId: string, q: Tx | typeof db = db): Promise<Warnings | null> {
   if (!UUID.test(customerId)) return null;
   const [c] = await q.select({ licenceExpires: customer.licenceExpires }).from(customer).where(eq(customer.id, customerId));
   if (!c) return null;
   const openFlags = (await flagsOf(customerId, q)).filter((f) => !f.closedAt);
-  return { openFlags, licenceExpired: c.licenceExpires < todayColombo(), licenceExpires: c.licenceExpires };
+  return { openFlags, licenceExpired: c.licenceExpires < todayColombo(), licenceExpires: c.licenceExpires, debt: await debtOf(customerId, q) };
 }
 
 export type GoAheadResult = { ok: true; id: string }
@@ -112,7 +126,7 @@ export type GoAheadResult = { ok: true; id: string }
  * added or closed meanwhile, or the licence changed, nothing is saved. A flag needs "Go ahead despite a customer flag";
  * an expired licence needs "Override expired-document warnings" (it stays expired). Logged as customer.goAhead.
  */
-export async function goAhead(actorId: string, customerId: string, input: { reason: string; shownFlagIds: string[]; shownLicenceExpired: boolean }): Promise<GoAheadResult> {
+export async function goAhead(actorId: string, customerId: string, input: { reason: string; shownFlagIds: string[]; shownLicenceExpired: boolean; shownDebt?: number }): Promise<GoAheadResult> {
   if (!UUID.test(customerId)) return { error: 'notFound' };
   const reason = tidy(input.reason);
   if (!reason) return { error: 'reasonMissing' };
@@ -125,14 +139,15 @@ export async function goAhead(actorId: string, customerId: string, input: { reas
     const now = (await warningsFor(customerId, tx))!;
     const ids = now.openFlags.map((f) => f.id).sort();
     const shown = [...new Set(input.shownFlagIds)].sort();
-    if (ids.join() !== shown.join() || now.licenceExpired !== input.shownLicenceExpired) return { error: 'stale' } as const;
-    if (!ids.length && !now.licenceExpired) return { error: 'nothingToCheck' } as const;
-    if (ids.length && !(await actorMay(tx, actorId, 'proceedDespiteFlag'))) return { error: 'notAllowed' } as const;
+    if (ids.join() !== shown.join() || now.licenceExpired !== input.shownLicenceExpired || now.debt.total !== (input.shownDebt ?? 0)) return { error: 'stale' } as const;
+    if (!ids.length && !now.licenceExpired && !now.debt.total) return { error: 'nothingToCheck' } as const;
+    // An unpaid debt is decided as a flag is: "Proceed despite a customer flag" (Derived control, 11 Nov 2026).
+    if ((ids.length || now.debt.total) && !(await actorMay(tx, actorId, 'proceedDespiteFlag'))) return { error: 'notAllowed' } as const;
     if (now.licenceExpired && !(await actorMay(tx, actorId, 'overrideExpiredDocuments'))) return { error: 'licenceNotAllowed' } as const;
-    const [g] = await tx.insert(customerGoAhead).values({ customerId, flagIds: ids, licenceExpired: now.licenceExpired, reason, createdBy: actorId })
+    const [g] = await tx.insert(customerGoAhead).values({ customerId, flagIds: ids, licenceExpired: now.licenceExpired, debt: now.debt.total, reason, createdBy: actorId })
       .returning({ id: customerGoAhead.id });
     await tx.insert(auditEvent).values({ createdBy: actorId, action: 'customer.goAhead', targetType: 'customer', targetId: customerId,
-      details: { name: c.name, flags: ids.length, licenceExpired: now.licenceExpired, reason } });
+      details: { name: c.name, flags: ids.length, licenceExpired: now.licenceExpired, debt: now.debt.total, reason } });
     return { ok: true, id: g.id } as const;
   });
 }
@@ -140,7 +155,7 @@ export async function goAhead(actorId: string, customerId: string, input: { reas
 /** A customer's recorded decisions to continue, newest first, with who made them. */
 export async function goAheadsOf(customerId: string) {
   if (!UUID.test(customerId)) return [];
-  return db.select({ id: customerGoAhead.id, reason: customerGoAhead.reason, licenceExpired: customerGoAhead.licenceExpired, flagIds: customerGoAhead.flagIds,
+  return db.select({ id: customerGoAhead.id, reason: customerGoAhead.reason, licenceExpired: customerGoAhead.licenceExpired, flagIds: customerGoAhead.flagIds, debt: customerGoAhead.debt,
     createdAt: customerGoAhead.createdAt, byName: user.name }).from(customerGoAhead).leftJoin(user, eq(user.id, customerGoAhead.createdBy))
     .where(eq(customerGoAhead.customerId, customerId)).orderBy(desc(customerGoAhead.createdAt));
 }

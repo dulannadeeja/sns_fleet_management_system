@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import { getFormatter, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../auth/require';
 import { mayDo } from '../../../auth/access';
 import { getCustomer, listCustomers } from '../../../modules/customers/customers';
 import { warningsFor } from '../../../modules/customers/flags';
 import { isFirstRental } from '../../../modules/rentals/rentals';
+import { rentalNumber } from '../../../modules/rentals/agreements';
 import { Notice, TextField } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
 import { GoAheadForm } from '../../customers/FlagForms';
@@ -58,12 +59,13 @@ export default async function NewRentalCustomer({ searchParams }: { searchParams
     );
   }
 
+  const format = await getFormatter();
   const [warnings, w, first, mayFirst, mayFlag, mayLicence] = await Promise.all([warningsFor(c.id), flagWords(), isFirstRental(c.id),
     mayDo(person, 'approveFirstCustomer'), mayDo(person, 'proceedDespiteFlag'), mayDo(person, 'overrideExpiredDocuments')]);
-  const { openFlags, licenceExpired } = warnings!;
-  const hasWarnings = openFlags.length > 0 || licenceExpired;
+  const { openFlags, licenceExpired, debt } = warnings!;
+  const hasWarnings = openFlags.length > 0 || licenceExpired || debt.total > 0;
   const blockedFirst = first && !mayFirst;
-  const mayContinue = !blockedFirst && (!openFlags.length || mayFlag) && (!licenceExpired || mayLicence);
+  const mayContinue = !blockedFirst && (!openFlags.length || mayFlag) && (!debt.total || mayFlag) && (!licenceExpired || mayLicence);
   return (
     <AppFrame person={person} active="rentals" title={t('title')} subtitle={c.name} backHref="/rentals/new">
       <Step n={1} name="customer" />
@@ -80,8 +82,14 @@ export default async function NewRentalCustomer({ searchParams }: { searchParams
           </div>
         ))}
         {licenceExpired ? <div className="cus-warning" data-licence="expired"><Notice tone="warning">{tc('flags.licenceWarn', { date: c.licenceExpires })}</Notice></div> : null}
+        {debt.total ? (
+          <div className="cus-warning" data-debt={debt.total}>
+            <Notice tone="warning">{tc('flags.debtWarn', { amount: format.number(debt.total) })}</Notice>
+            <span className="set-muted">{tc('flags.debtList', { list: debt.rentals.map((d) => `${rentalNumber(d.number)} · ${format.number(d.unpaid)}`).join(', ') })}</span>
+          </div>
+        ) : null}
         {hasWarnings ? (
-          <GoAheadForm customerId={c.id} flagIds={openFlags.map((f) => f.id)} licenceExpired={licenceExpired} mayContinue={mayContinue} w={w} forRental />
+          <GoAheadForm customerId={c.id} flagIds={openFlags.map((f) => f.id)} licenceExpired={licenceExpired} debt={debt.total} mayContinue={mayContinue} w={w} forRental />
         ) : (
           <div className="set-actions">
             <Link className="rt-btn rt-btn-quiet" href="/rentals/new">{t('cancel')}</Link>

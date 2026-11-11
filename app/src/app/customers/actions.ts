@@ -101,6 +101,7 @@ export async function goAheadAction(customerId: string, _: FlagFormState, form: 
   const values = { reason: text(form, 'reason') };
   const result = await goAhead(person.id, customerId, {
     reason: values.reason, shownFlagIds: form.getAll('shownFlag').map(String), shownLicenceExpired: text(form, 'shownLicenceExpired') === '1',
+    shownDebt: /^\d{1,12}$/.test(text(form, 'shownDebt')) ? Number(text(form, 'shownDebt')) : 0,
   });
   if ('error' in result) {
     // "Changed meanwhile": the page is drawn again with the warnings as they are now, so the next try can go through.

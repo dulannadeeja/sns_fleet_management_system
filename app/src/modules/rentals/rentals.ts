@@ -69,18 +69,18 @@ export async function createRental(actorId: string, input: { customerId: string;
       if (!c) return { error: 'customerNotFound' } as const;
       const warnings = (await warningsFor(input.customerId, tx))!;
       const flagIds = warnings.openFlags.map((f) => f.id).sort();
-      if (flagIds.length || warnings.licenceExpired) {
-        // A decision for exactly these warnings, for this customer, not yet used by another rental.
-        const [g] = input.goAheadId ? await tx.select({ customerId: customerGoAhead.customerId, flagIds: customerGoAhead.flagIds, licenceExpired: customerGoAhead.licenceExpired })
+      if (flagIds.length || warnings.licenceExpired || warnings.debt.total) {
+        // A decision for exactly these warnings (and this debt, #77), for this customer, not yet used by another rental.
+        const [g] = input.goAheadId ? await tx.select({ customerId: customerGoAhead.customerId, flagIds: customerGoAhead.flagIds, licenceExpired: customerGoAhead.licenceExpired, debt: customerGoAhead.debt })
           .from(customerGoAhead).where(eq(customerGoAhead.id, input.goAheadId)) : [];
         const used = input.goAheadId ? (await tx.select({ id: rental.id }).from(rental).where(eq(rental.goAheadId, input.goAheadId)).limit(1)).length > 0 : true;
-        if (!g || used || g.customerId !== input.customerId || [...g.flagIds].sort().join() !== flagIds.join() || g.licenceExpired !== warnings.licenceExpired) {
+        if (!g || used || g.customerId !== input.customerId || [...g.flagIds].sort().join() !== flagIds.join() || g.licenceExpired !== warnings.licenceExpired || Number(g.debt) !== warnings.debt.total) {
           return { error: 'warningsNotCleared' } as const;
         }
       }
       const firstRental = (await tx.select({ id: rental.id }).from(rental).where(and(eq(rental.customerId, input.customerId), notInArray(rental.status, NEVER_OUT))).limit(1)).length === 0;
       if (firstRental && !may.first) return { error: 'firstRentalNotAllowed' } as const;
-      const goAheadId = flagIds.length || warnings.licenceExpired ? input.goAheadId! : null;
+      const goAheadId = flagIds.length || warnings.licenceExpired || warnings.debt.total ? input.goAheadId! : null;
       const [car] = await tx.select({ registration: vehicle.registration }).from(vehicle).where(eq(vehicle.id, input.vehicleId));
       if (!car) return { error: 'carNotFound' } as const;
       const [state] = await tx.select({ status: vehicleStatusEvent.status }).from(vehicleStatusEvent).where(eq(vehicleStatusEvent.vehicleId, input.vehicleId))

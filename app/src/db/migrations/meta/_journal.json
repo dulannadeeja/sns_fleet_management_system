@@ -239,6 +239,13 @@
       "when": 1794385274186,
       "tag": "0033_returns",
       "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1794395214420,
+      "tag": "0034_go_ahead_debt",
+      "breakpoints": true
     }
   ]
 }

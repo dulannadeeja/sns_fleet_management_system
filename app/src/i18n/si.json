@@ -1303,7 +1303,9 @@
         "nothingToCheck": "අවවාද කරන්න දෙයක් නැහැ.",
         "notFound": "හම්බ වුණේ නැහැ.",
         "failed": "Save වුණේ නැහැ. ආයෙත් උත්සාහ කරන්න."
-      }
+      },
+      "debtWarn": "ගෙවා නැති බිල්: රු. {amount}",
+      "debtList": "{list} වලින්. ඉදිරියට යන්න flag එකකට වගේ හේතුවක් ඕනේ."
     },
     "refKinds": {
       "nicFront": "NIC ඉදිරිපස",

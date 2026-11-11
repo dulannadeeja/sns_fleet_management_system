@@ -64,6 +64,8 @@ export const customerGoAhead = pgTable('customer_go_ahead', {
   customerId: uuid('customer_id').notNull().references(() => customer.id),
   flagIds: uuid('flag_ids').array().notNull().default([]),
   licenceExpired: boolean('licence_expired').notNull(),
+  // The customer's unpaid debt when the decision was made (#77): it covers exactly that amount (0: no debt then).
+  debt: bigint('debt', { mode: 'number' }).notNull().default(0),
   reason: text('reason').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   createdBy: uuid('created_by').notNull().references(() => user.id),
