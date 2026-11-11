@@ -1,6 +1,6 @@
 import { and, asc, desc, eq, notInArray, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { auditEvent, customer, customerGoAhead, permissionGrant, rental, rentalEvent, rentalTermsSnapshot, rentalVehicleSegment, user, vehicle, vehicleHold, vehicleStatusEvent, vehicleTermsVersion } from '../../db/schema';
+import { approvalDecision, approvalRequest, auditEvent, customer, customerGoAhead, permissionGrant, rental, rentalEvent, rentalTermsSnapshot, rentalVehicleSegment, user, vehicle, vehicleHold, vehicleStatusEvent, vehicleTermsVersion } from '../../db/schema';
 import { allows } from '../../auth/permissions';
 import { readSettings } from '../settings/settings';
 import { listCars, type Car } from '../cars/cars';
@@ -141,12 +141,31 @@ export async function rentalTerms(id: string, q: Tx | typeof db = db): Promise<R
   };
 }
 
-/** The estimate for a one-car rental from its saved terms (5.3); swaps split by segment come with #62. */
-export async function rentalEstimate(id: string, km?: number, q: Tx | typeof db = db): Promise<Estimate | null> {
+/** What approvals changed on a rental (3.2 "Asking for a different price", Confirmed 11 Nov 2026): the newest approved
+ *  daily rate (none: the saved one) and the approved discounts. The saved terms themselves never change. */
+export async function approvedChanges(id: string, q: Tx | typeof db = db): Promise<{ rate: { dailyRate: number; partnerExtra: number | null; splitReason: string | null } | null; discount: number }> {
+  const rows = await q.select({ kind: approvalRequest.kind, rate: approvalRequest.newDailyRate, discount: approvalRequest.discount, partnerExtra: approvalDecision.partnerExtra,
+    splitReason: approvalDecision.splitReason, at: approvalDecision.createdAt })
+    .from(approvalRequest).innerJoin(approvalDecision, eq(approvalDecision.requestId, approvalRequest.id))
+    .where(and(eq(approvalRequest.rentalId, id), eq(approvalDecision.outcome, 'approved'))).orderBy(desc(approvalDecision.createdAt), desc(approvalDecision.id));
+  const rate = rows.find((r) => r.kind === 'rate');
+  return {
+    rate: rate ? { dailyRate: Number(rate.rate), partnerExtra: rate.partnerExtra === null ? null : Number(rate.partnerExtra), splitReason: rate.splitReason } : null,
+    discount: rows.filter((r) => r.kind === 'discount').reduce((n, r) => n + Number(r.discount), 0),
+  };
+}
+
+/** The estimate for a one-car rental from its saved terms (5.3), with any approved daily rate and discounts (#56);
+ *  swaps split by segment come with #62. The discount never takes the total below 0. */
+export async function rentalEstimate(id: string, km?: number, q: Tx | typeof db = db): Promise<(Estimate & { discount: number; packageRate: number; dailyRate: number }) | null> {
   const t = await rentalTerms(id, q);
   if (!t || t.segments.length !== 1) return null;
   const { dailyRate, kmPerDay, extraKmRate, longRentalExtra, longRentalFromDay } = t.segments[0];
-  return estimate({ dailyRate, kmPerDay, extraKmRate, longRentalExtra, longRentalFromDay }, t.days, km);
+  const changes = await approvedChanges(id, q);
+  const rate = changes.rate?.dailyRate ?? dailyRate;
+  const e = estimate({ dailyRate: rate, kmPerDay, extraKmRate, longRentalExtra, longRentalFromDay }, t.days, km);
+  const discount = Math.min(changes.discount, e.total);
+  return { ...e, discount, total: e.total - discount, packageRate: dailyRate, dailyRate: rate };
 }
 
 /** Whether the car is out on a rental and not back yet (a car out stays with it until it is back, Derived control). */

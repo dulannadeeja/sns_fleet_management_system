@@ -218,6 +218,20 @@
       "when": 1794345910199,
       "tag": "0030_rental_not_collected",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1794372232612,
+      "tag": "0031_approvals",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1794380774155,
+      "tag": "0032_approval_closed",
+      "breakpoints": true
     }
   ]
 }

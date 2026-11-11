@@ -4,7 +4,7 @@ import { db } from '../../db/client';
 import { agreementPrint, agreementSigned, agreementWording, auditEvent, customer, permissionGrant, rental, rentalTermsSnapshot, rentalVehicleSegment, user, vehicle } from '../../db/schema';
 import { allows } from '../../auth/permissions';
 import { readSettings } from '../settings/settings';
-import { estimate } from '../../lib/rental-days';
+import { rentalEstimate } from './rentals';
 import { getFile, putFile } from '../../storage/files';
 import { copyType, MAX_COPY_BYTES } from '../../storage/kinds';
 
@@ -101,6 +101,8 @@ export interface AgreementContent {
   car: { registration: string; model: string };
   pickupAt: string; deadlineAt: string; days: number;
   dailyRate: number; base: number; longRental: number; includedKm: number; extraKmRate: number;
+  /** An approved discount off the bill (#56); printouts made before it have none. */
+  discount?: number;
   deposit: number | null; depositWaived: boolean; rentPaid: string; fuel: string;
   printedAt: string; printedByName: string;
 }
@@ -127,15 +129,15 @@ export async function printAgreement(actorId: string, rentalId: string, language
     const [seg] = await tx.select({ s: rentalVehicleSegment, plate: vehicle.registration, model: vehicle.model }).from(rentalVehicleSegment)
       .innerJoin(vehicle, eq(vehicle.id, rentalVehicleSegment.vehicleId)).where(eq(rentalVehicleSegment.rentalId, rentalId)).orderBy(rentalVehicleSegment.position).limit(1);
     const [me] = await tx.select({ name: user.name }).from(user).where(eq(user.id, actorId));
-    const est = estimate({ dailyRate: seg.s.dailyRate, kmPerDay: seg.s.kmPerDay, extraKmRate: seg.s.extraKmRate, longRentalExtra: seg.s.longRentalExtra,
-      longRentalFromDay: seg.s.longRentalFromDay }, r.r.days);
+    // The approved daily rate and discounts (#56) are what is agreed now; the saved terms stay as they were.
+    const est = (await rentalEstimate(rentalId, undefined, tx))!;
     const content: AgreementContent = {
       number: rentalNumber(r.r.number), language, wordingVersion: wording.version, conditions: language === 'si' ? wording.textSi : wording.textEn,
       business: { name: st.businessName, registration: st.businessRegistration, address: st.businessAddress, phones: st.businessPhones },
       customer: { name: r.c.name, nic: r.c.nic, phone: r.c.phone, licenceNumber: r.c.licenceNumber },
       car: { registration: seg.plate, model: seg.model },
       pickupAt: r.r.pickupAt.toISOString(), deadlineAt: r.r.deadlineAt.toISOString(), days: r.r.days,
-      dailyRate: seg.s.dailyRate, base: est.base, longRental: est.longRental, includedKm: est.includedKm, extraKmRate: seg.s.extraKmRate,
+      dailyRate: est.dailyRate, base: est.base, longRental: est.longRental, discount: est.discount, includedKm: est.includedKm, extraKmRate: seg.s.extraKmRate,
       deposit: r.r.depositAmount, depositWaived: r.r.depositWaivedReason !== null, rentPaid: r.r.rentPaid!, fuel: r.r.fuel!,
       printedAt: new Date().toISOString(), printedByName: me?.name ?? '',
     };

@@ -5,20 +5,23 @@ import type { SignedInPerson } from '../auth/first-sign-in';
 import { railItems } from './rail';
 import { mayDo } from '../auth/access';
 import { overdueCount } from '../modules/rentals/list';
+import { waitingCount } from '../modules/approvals/approvals';
 import './settings/settings.css';
 
 // The frame of the module pages (cars first): on a computer the menu and the top bar, on a phone the page header with a
 // back link, as the boards show. Shares its layout classes with the Settings frame.
 export async function AppFrame({ person, active, title, subtitle, backHref, children }: {
-  person: SignedInPerson; active: 'cars' | 'rentals' | 'customers' | 'partners'; title: string; subtitle?: string; backHref: string; children: ReactNode;
+  person: SignedInPerson; active: 'cars' | 'rentals' | 'customers' | 'partners' | 'approvals'; title: string; subtitle?: string; backHref: string; children: ReactNode;
 }) {
   const t = await getTranslations();
   const lang = (await getLocale()) as Lang;
   const [partners, customers] = await Promise.all([mayDo(person, 'seePartnerEarnings'), mayDo(person, 'customerAccess')]);
   const overdue = customers ? await overdueCount() : 0;
+  const approvals = await mayDo(person, 'changePriceOrDiscount');
+  const waiting = approvals ? await waitingCount(person.id) : 0;
   return (
     <div className="set-desktop">
-      <NavRail labels={{ menu: t('frame.menu'), overdue: t('frame.overdue'), waiting: t('frame.waiting'), show: t('frame.show') }} items={railItems(person, active, t, lang, { partners, customers, overdue })} />
+      <NavRail labels={{ menu: t('frame.menu'), overdue: t('frame.overdue'), waiting: t('frame.waiting'), show: t('frame.show') }} items={railItems(person, active, t, lang, { partners, customers, overdue, approvals, waiting })} />
       <div className="set-body">
         <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
         <div className="set-phone-head">

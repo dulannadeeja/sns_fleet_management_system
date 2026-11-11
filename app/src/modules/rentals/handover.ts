@@ -12,6 +12,7 @@ import { linesOf, readSettings } from '../settings/settings';
 import { rentalMoney } from '../money/payments';
 import { agreementState, rentalNumber } from './agreements';
 import { rentalReadiness } from './terms';
+import { closeWaiting } from '../approvals/approvals';
 import type { RefCopyKind } from '../customers/references';
 
 // Hand over the car (06.4, 06.5; ST-06.4; system design 6 "Handover requirements" and "Handing over the car", 7.1, 11;
@@ -152,6 +153,7 @@ export async function freeCar(actorId: string, rentalId: string, reasonRaw: stri
     if ((await paidSoFar(rentalId, tx)) > 0) return { error: 'paid' } as const;
     await tx.update(rental).set({ status: 'notCollected', updatedAt: sql`now()` }).where(and(eq(rental.id, rentalId), eq(rental.status, 'draft')));
     await tx.delete(vehicleHold).where(eq(vehicleHold.rentalId, rentalId));
+    await closeWaiting(tx, rentalId, actorId);
     await tx.insert(rentalEvent).values({ rentalId, kind: 'carFreed', details: { reason }, createdBy: actorId });
     await tx.insert(auditEvent).values({ createdBy: actorId, action: 'rental.carFreed', targetType: 'rental', targetId: rentalId,
       details: { name: r.name, number: rentalNumber(r.number), registration: r.registration, reason } });

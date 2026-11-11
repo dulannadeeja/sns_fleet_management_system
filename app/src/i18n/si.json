@@ -321,6 +321,12 @@
         },
         "payment": {
           "record": "{target} ගෙන් ගෙවීම {number} සටහන් කළා: රු. {amount}, {method}, {for} ({rentals})"
+        },
+        "approval": {
+          "request": "{target} ගේ {number} කුලියට වෙනත් මිලක් ඉල්ලුවා",
+          "approve": "{target} ගේ {number} කුලියේ මිල වෙනස අනුමත කළා",
+          "reject": "{target} ගේ {number} කුලියේ මිල වෙනස ප්‍රතික්ෂේප කළා",
+          "withdraw": "{target} ගේ {number} කුලියේ මිල ඉල්ලීම අයින් කළා"
         }
       },
       "reason": "හේතුව: “{reason}”",
@@ -1726,15 +1732,58 @@
         "terms": "Deposit සහ ගෙවීම දැම්මා",
         "payment": "ගෙවීම සටහන් කළා · රු. {amount} · {for}",
         "handover": "භාර දුන්නා · km {km}",
-        "carFreed": "අරගෙන ගියේ නැහැ · car එක නිදහස් කළා: {reason}"
-      }
+        "carFreed": "අරගෙන ගියේ නැහැ · car එක නිදහස් කළා: {reason}",
+        "priceRequest": "වෙනත් මිලක් ඉල්ලුවා: {reason}",
+        "approval": "මිල ඉල්ලීම තීරණය කළා: {outcome}{note}",
+        "approvalWithdrawn": "මිල ඉල්ලීම අයින් කළා",
+        "approvalClosed": "මිල ඉල්ලීම වැසුණා: කුලිය ඉවර වුණා"
+      },
+      "approved": "අනුමතයි",
+      "rejected": "ප්‍රතික්ෂේපයි"
     },
     "rentalDays": {
       "title": "කුලී දින",
       "line": "දිනය {n} · ඉවර වෙන්නේ {when}",
       "note": "හැම දවසකම කුලිය ඒ දවසේ close එකේදී අවසාන වෙනවා (day close එක Phase 3 වල). වැඩි km සහ පරක්කු ගාස්තුව ආපසු දෙනකොට අවසාන වෙනවා."
     },
-    "days": "දවස් කීයද"
+    "days": "දවස් කීයද",
+    "approvals": {
+      "title": "වෙනත් මිලක් ඉල්ලන්න",
+      "intro": "එකඟ වුණ මිල වෙනස් කරන්න හරි වට්ටමක් දෙන්න හරි admin ගේ අනුමැතිය ඕනේ. අනුමත කරනකන් මුකුත් වෙනස් වෙන්නේ නැහැ.",
+      "kind": "ඉල්ලන්නේ මොකක්ද",
+      "kindRate": "අලුත් දවසේ මිලක් (මුළු කුලියටම)",
+      "kindDiscount": "බිලෙන් වට්ටමක්",
+      "newRate": "අලුත් දවසේ මිල (රු.)",
+      "discountAmount": "වට්ටම (රු.)",
+      "rateHint": "දැන් දවසට {rate} · දින {days}. රු. 1 සිට 100,000.",
+      "discountHint": "රු. 1 සිට ඇස්තමේන්තුව දක්වා ({estimate}).",
+      "effect": "බිලට බලපෑම: {effect}",
+      "bearsSns": "SNS ට බර (SNS ගේ car)",
+      "bearsPartner": "Partner car: commission එකට අනුව බෙදෙනවා; package එකට උඩින් මිල admin බෙදනවා",
+      "reason": "හේතුව",
+      "nothingChanges": "Admin ට ඔයාගේ හේතුව වචනයෙන් වචනයට පේනවා. භාර දෙන්න කලින් අනුමත කළොත් agreement එක ආයෙත් print කරලා අත්සන් ගන්න ඕනේ.",
+      "send": "ඉල්ලීම යවන්න",
+      "sent": "ඉල්ලීම යැව්වා. Admin කෙනෙක් එනකන් ඉන්නවා.",
+      "withdrawnNotice": "ඉල්ලීම අයින් කළා.",
+      "withdraw": "මගේ ඉල්ලීම අයින් කරන්න",
+      "waitingRate": "Admin එනකන් ඉන්නවා: දවසට {was} → {now} ({sign} {effect})",
+      "waitingDiscount": "Admin එනකන් ඉන්නවා: වට්ටම {amount}",
+      "waitingBy": "{name} ඉල්ලුවා, {when}: \"{reason}\"",
+      "paidAbove": "ඇස්තමේන්තුවට වඩා රු. {amount} ගෙවලා: ආපහු දෙනකොට බේරනවා.",
+      "discountLine": "වට්ටම (අනුමත)",
+      "errors": {
+        "notAllowed": "ඉල්ලන්න ඔයාට අවසර නැහැ.",
+        "notFound": "මේ කුලිය හම්බ වුණේ නැහැ.",
+        "notOpen": "මේ කුලිය තව විවෘත නැහැ.",
+        "kindInvalid": "මිලක් හරි වට්ටමක් හරි තෝරන්න.",
+        "amountInvalid": "පෙන්නන සීමාව ඇතුළේ සම්පූර්ණ රුපියල් ලියන්න.",
+        "reasonMissing": "හේතුව ලියන්න.",
+        "tooLong": "ඒක දිග වැඩියි (උපරිම අකුරු 500).",
+        "sameRate": "ඒ දැනටමත් එකඟ වුණ මිලමයි.",
+        "alreadyWaiting": "මේ කුලියට දැනටමත් ඉල්ලීමක් බලාපොරොත්තුවෙන් තියෙනවා.",
+        "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න."
+      }
+    }
   },
   "agreementDoc": {
     "title": "කුලී ගිවිසුම",
@@ -1775,6 +1824,95 @@
     "print": "Print කරන්න",
     "back": "කුලියට ආපසු",
     "longRentalValue": "රු. {amount}",
-    "licenceOnFile": "සටහන් කළා · පිටපත තියෙනවා"
+    "licenceOnFile": "සටහන් කළා · පිටපත තියෙනවා",
+    "discount": "වට්ටම",
+    "discountValue": "රු. {amount} අඩු කරලා"
+  },
+  "approvals": {
+    "title": "අනුමැති",
+    "tabs": {
+      "waiting": "බලාපොරොත්තුවෙන්",
+      "approved": "අනුමත",
+      "rejected": "ප්‍රතික්ෂේප"
+    },
+    "none": {
+      "waiting": "ඔයා බලන්න මුකුත් නැහැ.",
+      "approved": "තාම අනුමත ඉල්ලීම් නැහැ.",
+      "rejected": "තාම ප්‍රතික්ෂේප ඉල්ලීම් නැහැ."
+    },
+    "done": {
+      "approved": "අනුමත කළා. කුලියේ ඉතිහාසයේ තියෙනවා.",
+      "rejected": "ප්‍රතික්ෂේප කළා. කුලියේ ඉතිහාසයේ තියෙනවා."
+    },
+    "kinds": {
+      "rate": "මිල වෙනස",
+      "discount": "වට්ටම"
+    },
+    "partnerCar": "partner car",
+    "snsCar": "SNS ගේ",
+    "requestedBy": "ඉල්ලුවේ",
+    "rate": "මිල",
+    "rateValue": "දවසට {was} → {now} · දින {days}",
+    "discount": "වට්ටම",
+    "effect": "බිලට බලපෑම",
+    "whoBears": "කාටද බර",
+    "bearer": {
+      "sns": "SNS · සම්පූර්ණයෙන්ම (SNS ගේ car)",
+      "shared": "Commission එකට අනුව: SNS {sns}%, partner {partner}%",
+      "split": "Package එක commission එකට අනුව; අමතර එක ඔයා පහළින් දාන විදියට",
+      "proportional": "SNS සහ partner, අනුපාතයට",
+      "sharedPlain": "Car එකේ commission එකට අනුව බෙදෙනවා"
+    },
+    "extra": "Package එකට උඩින් අමතර",
+    "extraValue": "{extra} (package එක දවසට {package})",
+    "decidedBy": "තීරණය කළේ",
+    "selfApproved": "තමන්ම අනුමත කළා",
+    "partnerGets": "අමතරයෙන් partner ට",
+    "reason": "{name} ගේ හේතුව:",
+    "note": "සටහන:",
+    "approve": "අනුමත කරන්න",
+    "reject": "ප්‍රතික්ෂේප",
+    "confirmNote": "බොත්තම් දෙකම බලපෑම සහ කාටද බර කියලා ආයෙත් පෙන්නන confirm පියවරක් open කරනවා. ප්‍රතික්ෂේප කරන්න සටහනක් ඕනේ. ඔයාගේ නම, වෙලාව සහ සටහන කුලියේ ඉතිහාසයට යනවා; ඉල්ලුව කෙනාගේ හේතුව තියාගන්නවා.",
+    "confirm": {
+      "approve": "මිල වෙනස අනුමත කරනවද?",
+      "reject": "ඉල්ලීම ප්‍රතික්ෂේප කරනවද?",
+      "higher": "වැඩි මිල අනුමත කරනවද?"
+    },
+    "rental": "කුලිය",
+    "billStays": "බිල තියෙන්නේ",
+    "billStaysValue": "{amount}",
+    "estimateAfter": "පස්සේ ඇස්තමේන්තුව",
+    "paidAbove": "පාරිභෝගිකයා අලුත් ඇස්තමේන්තුවට වඩා රු. {amount} දැනටමත් ගෙවලා. ඒක ආපහු දෙනකොට බේරනවා.",
+    "history": "ඔයාගේ නම, වෙලාව සහ සටහන {number} ඉතිහාසයට යනවා. {name} ට කුලියේ ප්‍රතිඵලය පේනවා.",
+    "form": {
+      "splitTitle": "අමතර {extra} බෙදන්නේ කොහොමද",
+      "partnerExtra": "අමතරයෙන් partner ට රුපියල්",
+      "partnerExtraHint": "0 සිට {extra}. 0 නම් අමතර ඔක්කොම SNS ට. Package මුදල හැමවිටම {commission}% commission එකට අනුවයි.",
+      "splitShown": "SNS {sns} · partner {partner}",
+      "splitReason": "බෙදීමට හේතුව",
+      "partnerSees": "Partner ට පේන්නේ දවසකට එක ආදායමක් විතරයි: පාරිභෝගිකයාගේ මිල, අමතර එක හරි SNS ගේ කොටස හරි කවදාවත් නැහැ. ඔයා තීරණය කරන්න කලින් දවසක් close වුණොත් package කොටස අවසාන වෙනවා, අමතර එක ඉන්නවා.",
+      "noteOptional": "සටහන (ඕනේ නම්)",
+      "noteRequired": "ඉල්ලුව කෙනාට සටහන",
+      "back": "ආපසු",
+      "approve": "අනුමත කරන්න",
+      "approveSplit": "මේ බෙදීමත් එක්ක අනුමත කරන්න",
+      "reject": "ඉල්ලීම ප්‍රතික්ෂේප කරන්න",
+      "errors": {
+        "notAllowed": "මිල වෙනස් තීරණය කරන්න ඔයාට අවසර නැහැ.",
+        "notFound": "මේ ඉල්ලීම හම්බ වුණේ නැහැ.",
+        "decided": "මේ ඉල්ලීම දැනටමත් තීරණය කරලා හරි අයින් කරලා.",
+        "notOpen": "මේ කුලිය තව විවෘත නැහැ.",
+        "ownRequest": "ඔයාගේම ඉල්ලීම ඔයාට තීරණය කරන්න බැහැ. වෙන අනුමත කරන කෙනෙක් ඕනේ.",
+        "noteMissing": "ඉල්ලුව කෙනාට සටහනක් ලියන්න.",
+        "tooLong": "ඒක දිග වැඩියි (උපරිම අකුරු 500).",
+        "splitMissing": "අමතරයෙන් partner ට රුපියල් ලියන්න.",
+        "splitInvalid": "0 සිට අමතර මුළු මුදල දක්වා සම්පූර්ණ රුපියල් ලියන්න.",
+        "splitReasonMissing": "අමතර එක මෙහෙම බෙදන්නේ ඇයි කියලා ලියන්න.",
+        "splitNotAllowed": "Package එකට උඩින් මිල බෙදන්න \"Share an above-package price on a partner car\" අවසරය ඕනේ.",
+        "amountInvalid": "වට්ටම දැන් ඇස්තමේන්තුවට වඩා වැඩියි. ප්‍රතික්ෂේප කරලා ආයෙත් ඉල්ලන්න.",
+        "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න."
+      },
+      "partnerExtraHintPlain": "0 සිට {extra}. 0 නම් අමතර ඔක්කොම SNS ට. Package මුදල හැමවිටම car එකේ commission එකට අනුවයි."
+    }
   }
 }

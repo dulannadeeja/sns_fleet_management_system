@@ -321,6 +321,12 @@
         },
         "payment": {
           "record": "recorded payment {number} from {target}: LKR {amount}, {method}, {for} ({rentals})"
+        },
+        "approval": {
+          "request": "asked for a different price on {target}'s rental {number}",
+          "approve": "approved a price change on {target}'s rental {number}",
+          "reject": "rejected a price change on {target}'s rental {number}",
+          "withdraw": "withdrew a price request on {target}'s rental {number}"
         }
       },
       "reason": "reason: “{reason}”",
@@ -1726,15 +1732,58 @@
         "terms": "Deposit and payment set",
         "payment": "Payment recorded · LKR {amount} · {for}",
         "handover": "Handed over · {km} km",
-        "carFreed": "Not collected · car freed: {reason}"
-      }
+        "carFreed": "Not collected · car freed: {reason}",
+        "priceRequest": "Different price asked: {reason}",
+        "approval": "Price request decided: {outcome}{note}",
+        "approvalWithdrawn": "Price request withdrawn",
+        "approvalClosed": "Price request closed: the rental ended"
+      },
+      "approved": "approved",
+      "rejected": "rejected"
     },
     "rentalDays": {
       "title": "Rental days",
       "line": "Day {n} · ends {when}",
       "note": "Each day's rent becomes final at that day's close (the day close comes in Phase 3). Extra km and any late charge are final at return."
     },
-    "days": "How many days"
+    "days": "How many days",
+    "approvals": {
+      "title": "Ask for a different price",
+      "intro": "Changing the agreed price or giving a discount needs an admin's approval. Nothing changes until it is approved.",
+      "kind": "What to ask for",
+      "kindRate": "A new daily rate (whole rental)",
+      "kindDiscount": "A discount off the bill",
+      "newRate": "New daily rate (LKR)",
+      "discountAmount": "Discount (LKR)",
+      "rateHint": "Now {rate} a day · {days} days. LKR 1 to 100,000.",
+      "discountHint": "LKR 1 up to the estimate ({estimate}).",
+      "effect": "Effect on the bill: {effect}",
+      "bearsSns": "SNS bears it (SNS-owned car)",
+      "bearsPartner": "Partner car: shared by the commission; a price above the package is split by the admin",
+      "reason": "Reason",
+      "nothingChanges": "The admin sees your reason word for word. Before handover, an approval means printing and signing the agreement again.",
+      "send": "Send request",
+      "sent": "Request sent. Waiting for an admin.",
+      "withdrawnNotice": "Request withdrawn.",
+      "withdraw": "Withdraw my request",
+      "waitingRate": "Waiting for an admin: {was} → {now} a day ({sign} {effect})",
+      "waitingDiscount": "Waiting for an admin: discount of {amount}",
+      "waitingBy": "Asked by {name}, {when}: \"{reason}\"",
+      "paidAbove": "Paid LKR {amount} above the estimate: settled at return.",
+      "discountLine": "Discount (approved)",
+      "errors": {
+        "notAllowed": "You don't have permission to ask.",
+        "notFound": "This rental was not found.",
+        "notOpen": "This rental is no longer open.",
+        "kindInvalid": "Choose a rate or a discount.",
+        "amountInvalid": "Type whole rupees within the limit shown.",
+        "reasonMissing": "Write the reason.",
+        "tooLong": "That is too long (500 letters at most).",
+        "sameRate": "That is the rate already agreed.",
+        "alreadyWaiting": "A request is already waiting for this rental.",
+        "failed": "Something went wrong. Nothing was saved. Try again."
+      }
+    }
   },
   "agreementDoc": {
     "title": "Rental agreement",
@@ -1775,6 +1824,95 @@
     "print": "Print",
     "back": "Back to the rental",
     "longRentalValue": "LKR {amount}",
-    "licenceOnFile": "recorded · copy on file"
+    "licenceOnFile": "recorded · copy on file",
+    "discount": "Discount",
+    "discountValue": "LKR {amount} off"
+  },
+  "approvals": {
+    "title": "Approvals",
+    "tabs": {
+      "waiting": "Waiting",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "none": {
+      "waiting": "Nothing is waiting for you.",
+      "approved": "No approved requests yet.",
+      "rejected": "No rejected requests yet."
+    },
+    "done": {
+      "approved": "Approved. It is in the rental's history.",
+      "rejected": "Rejected. It is in the rental's history."
+    },
+    "kinds": {
+      "rate": "Price change",
+      "discount": "Discount"
+    },
+    "partnerCar": "partner car",
+    "snsCar": "SNS-owned",
+    "requestedBy": "Requested by",
+    "rate": "Rate",
+    "rateValue": "{was} → {now} a day · {days} days",
+    "discount": "Discount",
+    "effect": "Effect on the bill",
+    "whoBears": "Who bears it",
+    "bearer": {
+      "sns": "SNS · all of it (SNS-owned car)",
+      "shared": "Shared by the commission: SNS {sns}%, partner {partner}%",
+      "split": "Package by the commission; the extra as you set below",
+      "proportional": "SNS and the partner, in proportion",
+      "sharedPlain": "Shared by the car's commission"
+    },
+    "extra": "Extra above the package",
+    "extraValue": "{extra} (package {package} a day)",
+    "decidedBy": "Decided by",
+    "selfApproved": "self-approved",
+    "partnerGets": "Partner's part of the extra",
+    "reason": "{name}'s reason:",
+    "note": "Note:",
+    "approve": "Approve",
+    "reject": "Reject",
+    "confirmNote": "Both buttons open a confirm step that repeats the effect and who bears it. Rejecting needs a note. Your name, the time and the note go into the rental's history; the requester's reason is kept.",
+    "confirm": {
+      "approve": "Approve the price change?",
+      "reject": "Reject the request?",
+      "higher": "Approve a higher price?"
+    },
+    "rental": "Rental",
+    "billStays": "Bill stays at",
+    "billStaysValue": "{amount}",
+    "estimateAfter": "Estimate after",
+    "paidAbove": "The customer already paid LKR {amount} above the new estimate. It is settled at return.",
+    "history": "Your name, the time and the note go into {number}'s history. {name} sees the result on the rental.",
+    "form": {
+      "splitTitle": "How the extra {extra} is split",
+      "partnerExtra": "Rupees of the extra to the partner",
+      "partnerExtraHint": "0 to {extra}. 0 keeps all of the extra for SNS. The package amount always follows the {commission}% commission.",
+      "splitShown": "SNS {sns} · partner {partner}",
+      "splitReason": "Reason for the split",
+      "partnerSees": "The partner sees only one earning a day: never the customer's price, the extra or SNS's share. If a day closes before you decide, the package share is final and the extra waits.",
+      "noteOptional": "Note (optional)",
+      "noteRequired": "Note to the requester",
+      "back": "Back",
+      "approve": "Approve",
+      "approveSplit": "Approve with this split",
+      "reject": "Reject request",
+      "errors": {
+        "notAllowed": "You don't have permission to decide price changes.",
+        "notFound": "This request was not found.",
+        "decided": "This request was already decided or withdrawn.",
+        "notOpen": "This rental is no longer open.",
+        "ownRequest": "You can't decide your own request. Another approver must.",
+        "noteMissing": "Write a note for the requester.",
+        "tooLong": "That is too long (500 letters at most).",
+        "splitMissing": "Type the partner's rupees of the extra.",
+        "splitInvalid": "Type whole rupees from 0 to the whole extra.",
+        "splitReasonMissing": "Write why the extra is split this way.",
+        "splitNotAllowed": "Splitting an above-package price needs \"Share an above-package price on a partner car\".",
+        "amountInvalid": "The discount is now more than the estimate. Reject it and ask again.",
+        "failed": "Something went wrong. Nothing was saved. Try again."
+      },
+      "partnerExtraHintPlain": "0 to {extra}. 0 keeps all of the extra for SNS. The package amount always follows the car's commission."
+    }
   }
 }

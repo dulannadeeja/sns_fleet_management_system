@@ -591,6 +591,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Rules:**
   - Changing the agreed price or giving a discount needs an admin's approval. System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions).
   - A discount reduces SNS's and the partner's earnings in proportion. On a partner car, a price above the package goes to the admin, who sets how the extra is split (ST-10.3). System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
+  - A request is a new daily rate for the whole rental (LKR 1 to 100,000) or a discount off the bill (LKR 1 up to the estimate), with a reason, while the rental is saved or out. One request waits at a time; the sender may withdraw it. Before handover an approval needs the agreement printed and signed again. An approval below what was paid goes ahead, settled at return. A request still waiting when the rental ends closes by itself; a rate equal to the agreed one is refused (Derived control). System design → [Default permissions](SNS_SYSTEM_DESIGN.md#32-default-permissions) (Confirmed 11 Nov 2026).
 - **Checks:** AT-39, AT-40 (ST-10.3).
 - **Screens:** 05.7 Price change needs admin.
 - **Decided:** DN-01 (nobody approves their own request), DN-10 (whole rupees).
@@ -794,7 +795,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Roles:** Admin, Owner.
 - **Story:** As an admin, when a partner car is rented above its package, I set how the extra is split between SNS and the partner, with a reason, so that the partner's share is fair and decided.
 - **Rules:**
-  - The package amount follows the car's commission. The extra above it is split as the admin sets for that rental, with a reason; it may be all SNS's. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
+  - The package amount follows the car's commission. The extra above it is split as the admin sets for that rental, with a reason: the rupees of the extra that go to the partner (0 to all of it; 11 Nov 2026); it may be all SNS's. System design → [Revenue allocation](SNS_SYSTEM_DESIGN.md#84-revenue-allocation).
   - Until decided, the extra stays out of the partner's earnings; the package share becomes final at each day's close. The partner sees one earning a day, never the price, the extra or SNS's share. System design → [Accounts](SNS_SYSTEM_DESIGN.md#31-accounts), [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out).
 - **Checks:** AT-39 "The admin keeps the whole extra for SNS: the partner's earning is on the package only". AT-40 "A 50/50 split with a reason: the partner's day earning is the package share plus half the extra, shown as one amount". AT-41 "The day closes before the split is decided: the package share is final; the extra waits".
 - **Screens:** 10.4 Approve a higher price on a partner car.
