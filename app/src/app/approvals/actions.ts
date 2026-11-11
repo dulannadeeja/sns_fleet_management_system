@@ -2,6 +2,7 @@
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { requirePermission } from '../../auth/require';
+import { requireDecider } from './decider';
 import { askForPrice, decide, withdraw, type Kind } from '../../modules/approvals/approvals';
 
 // Asking for a different price (05.7) and deciding it (10.2 to 10.4), #56. Each action checks the page's permission
@@ -29,7 +30,7 @@ export async function withdrawAction(rentalId: string, requestId: string): Promi
 }
 
 export async function decideAction(requestId: string, approve: boolean, _: FormState, form: FormData): Promise<FormState> {
-  const person = await requirePermission('changePriceOrDiscount');
+  const person = await requireDecider();
   const values = { note: String(form.get('note') ?? ''), partnerExtra: String(form.get('partnerExtra') ?? ''), splitReason: String(form.get('splitReason') ?? '') };
   const split = values.partnerExtra.trim() ? whole(values.partnerExtra) : undefined;
   const r = await decide(person.id, requestId, { approve, note: values.note, ...(split !== undefined ? { partnerExtra: split } : {}), splitReason: values.splitReason });

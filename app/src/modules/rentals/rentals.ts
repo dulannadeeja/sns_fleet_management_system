@@ -21,7 +21,7 @@ import { deadlineFor, estimate, type Estimate } from '../../lib/rental-days';
 type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** Only "draft" exists yet; handover (#57), return (#63) and cancelling (#59) add their states with their tickets. */
-export const RENTAL_STATES = ['draft', 'active', 'notCollected'] as const;
+export const RENTAL_STATES = ['draft', 'active', 'notCollected', 'returned'] as const;
 export const DAYS_MAX = 90;
 /** The pickup is the moment of the save (7.1, Confirmed 8 Nov 2026). A minute either way covers clocks and the save. */
 const PICKUP_GRACE_MS = 60_000;

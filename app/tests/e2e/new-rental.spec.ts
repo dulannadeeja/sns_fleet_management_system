@@ -277,9 +277,29 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page.locator('[data-estimate]')).toHaveAttribute('data-estimate', String(before - 500));
   await expect(page.locator('[data-history]')).toContainText('Price request decided: approved');
 
-  // The car is now held: it is no longer offered on 05.2.
+  // ST-07.1 (#63): receive the car. It is late (the sample deadline was moved back), so the late charge is waived with a
+  // reason; the item missing at handover is never charged; the bill shows and the car is free again.
+  await page.getByRole('link', { name: 'Receive the car' }).click();
+  await expect(page).toHaveURL(/\/return$/, { timeout: 30_000 });
+  await page.locator('input[name="inKm"]').fill('31300');
+  await expect(page.locator('[data-driven]')).toHaveAttribute('data-driven', '94');
+  await page.getByRole('radio', { name: 'Full', exact: true }).check();
+  const backBoxes = page.locator('[data-accessories] .set-choices input[type="checkbox"]');
+  for (let i = 1; i < await backBoxes.count(); i++) await backBoxes.nth(i).check();
+  await expect(page.locator('[data-accessories]')).toContainText('already missing at handover');
+  await page.locator('[data-checked-box] input').check();
+  await page.locator('[data-late]').getByText('Waive the late charge').click();
+  await page.locator('input[name="lateReason"]').fill('Sample: regular customer');
+  await page.getByRole('radio', { name: 'Available', exact: true }).check();
+  await page.getByRole('button', { name: 'Save the return' }).click();
+  await expect(page).toHaveURL(/\?returned=1$/, { timeout: 30_000 });
+  await expect(page.locator('dd[data-status]')).toHaveAttribute('data-status', 'returned');
+  await expect(page.locator('[data-bill]')).toHaveAttribute('data-bill', '8500');
+  await expect(page.locator('[data-line="late"]')).toContainText('Sample: regular customer');
+
+  // Back and Available: the car is offered again on 05.2 (it was held while out).
   await page.goto(`/rentals/new/car?customer=${customerId}`);
-  await expect(page.locator(`[data-car="${plate}"]`)).toHaveCount(0);
+  await expect(page.locator(`[data-car="${plate}"]`)).toHaveCount(1);
 
   // A second customer with an open flag: a reason is needed before choosing a car.
   const nic2 = String(Math.floor(Math.random() * 1e12)).padStart(12, '0');

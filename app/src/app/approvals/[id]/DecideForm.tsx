@@ -12,7 +12,7 @@ const fill = (s: string, v: Record<string, string | number>) => s.replace(/\{(\w
 const toNum = (s: string) => { const t = s.replace(/,/g, '').trim(); return /^\d{1,9}$/.test(t) ? Number(t) : NaN; };
 
 export function DecideForm({ requestId, approve, split, w, history }: {
-  requestId: string; approve: boolean; split: { extra: number; packageRate: number; days: number; commission: number | null; may: boolean } | null; w: W; history: string;
+  requestId: string; approve: boolean; split: { extra: number; packageRate: number; days: number; commission: number | null; may: boolean; line?: boolean } | null; w: W; history: string;
 }) {
   const [state, action, pending] = useActionState<FormState, FormData>(decideAction.bind(null, requestId, approve), {});
   const ready = useReady();
@@ -30,14 +30,14 @@ export function DecideForm({ requestId, approve, split, w, history }: {
       <input type="hidden" name="splitReason" value={splitReason} />
       {split ? (
         <section className="car-card" aria-labelledby="s-h" data-split>
-          <h2 id="s-h">{fill(w.splitTitle, { extra: money(split.extra) })}</h2>
+          <h2 id="s-h">{fill(split.line ? w.lineSplitTitle : w.splitTitle, { extra: money(split.extra) })}</h2>
           {!split.may ? <Notice tone="warning">{w.errors.splitNotAllowed}</Notice> : null}
           <TextField name="partnerExtraBox" label={w.partnerExtra} inputMode="numeric" autoComplete="off" required value={partnerExtra} onChange={(e) => setPartnerExtra(e.currentTarget.value)}
-            hint={split.commission === null ? fill(w.partnerExtraHintPlain, { extra: money(split.extra) }) : fill(w.partnerExtraHint, { extra: money(split.extra), commission: split.commission })} error={err === 'splitInvalid' ? w.errors.splitInvalid : undefined} />
+            hint={split.line ? fill(w.lineHint, { extra: money(split.extra) }) : split.commission === null ? fill(w.partnerExtraHintPlain, { extra: money(split.extra) }) : fill(w.partnerExtraHint, { extra: money(split.extra), commission: split.commission })} error={err === 'splitInvalid' ? w.errors.splitInvalid : undefined} />
           {Number.isFinite(pe) && pe <= split.extra ? <span className="set-muted" data-split-shown>{fill(w.splitShown, { sns: money(split.extra - pe), partner: money(pe) })}</span> : null}
           <TextField name="splitReasonBox" label={w.splitReason} autoComplete="off" required value={splitReason} onChange={(e) => setSplitReason(e.currentTarget.value)}
             error={err === 'splitReasonMissing' ? w.errors.splitReasonMissing : undefined} />
-          <span className="set-muted">{w.partnerSees}</span>
+          {!split.line ? <span className="set-muted">{w.partnerSees}</span> : null}
         </section>
       ) : null}
       <section className="car-card">

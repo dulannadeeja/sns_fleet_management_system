@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { receiveCar, rentalBill } from '../../src/modules/rentals/returns';
+import { outRental } from '../helpers/handover';
 import { estimate } from '../../src/lib/rental-days';
 import { splitShare } from '../../src/lib/money';
 
@@ -19,5 +21,13 @@ describe('AT-04: six days, at most 600 km', () => {
   });
   it('uses the car\'s own surcharge amount and starting day', () => {
     expect(estimate({ ...wagonR, longRentalExtra: 300, longRentalFromDay: 3 }, 4).longRental).toBe(600);
+  });
+
+  it('at return within 600 km: 27,000 + 500 = 27,500; SNS 4,125 and the partner 23,375 (#63)', { timeout: 60_000 }, async () => {
+    const r = await outRental({ days: 6 });
+    expect(await receiveCar(r.owner, r.rentalId, { inKm: 1600, fuel: 'full', accessories: r.accessories, checked: true, nextState: 'available', payLaterNote: 'Sample' })).toEqual({ ok: true });
+    const bill = (await rentalBill(r.rentalId))!;
+    expect(bill.lines.map((l) => [l.kind, l.amount])).toEqual([['rent', 27000], ['longRental', 500]]);
+    expect({ total: bill.total, partner: bill.partnerTotal, sns: bill.total - bill.partnerTotal }).toEqual({ total: 27500, partner: 23375, sns: 4125 });
   });
 });

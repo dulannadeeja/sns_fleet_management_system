@@ -16,6 +16,8 @@ import { handoverChecklist, handoverOf } from '../../../modules/rentals/handover
 import { minutesLate, rentalHistory } from '../../../modules/rentals/list';
 import { waitingFor } from '../../../modules/approvals/approvals';
 import { PriceForm, WithdrawForm } from './PriceForm';
+import { BillSection } from './BillSection';
+import { mayDo } from '../../../auth/access';
 import { rentalDays } from '../../../lib/rental-days';
 import { Notice, PlateBadge, type Lang } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
@@ -24,7 +26,7 @@ import '../rentals.css';
 
 // A saved rental (#51), until Rental details (06.2) comes with #58: who, which car, from when to when, the estimate from
 // its own saved terms. The deposit, agreement and handover come with #54, #55 and #57. Needs Customer access.
-export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string; handedOver?: string; freed?: string; asked?: string; withdrawn?: string }> }) {
+export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string; handedOver?: string; freed?: string; asked?: string; withdrawn?: string; returned?: string; garage?: string }> }) {
   const person = await requirePermission('customerAccess');
   const r = await rentalTerms((await params).id);
   if (!r) notFound();
@@ -53,6 +55,8 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
       {sp.freed === '1' && r.status === 'notCollected' ? <Notice>{th('freed')}</Notice> : null}
       {sp.asked === '1' && waiting ? <Notice>{t('approvals.sent')}</Notice> : null}
       {sp.withdrawn === '1' ? <Notice>{t('approvals.withdrawnNotice')}</Notice> : null}
+      {sp.returned === '1' && r.status === 'returned' ? <Notice>{t('return.done')}</Notice> : null}
+      {sp.garage === '1' ? <Notice>{t('return.garageSaved')}</Notice> : null}
       {typeof sp.paid === 'string' && /^P-\d{4,}(,P-\d{4,})*$/.test(sp.paid) ? <Notice>{t('pay.saved', { numbers: sp.paid.replace(/,/g, ', ') })}</Notice> : null}
       {sp.saved === '1' ? <Notice>{t('saved', { plate: car?.registration ?? '', deadline: when(r.deadlineAt) })}</Notice> : null}
       {lateMinutes > 0 ? (
@@ -70,7 +74,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
           <dt>{t('car')}</dt><dd>{car ? <PlateBadge plate={car.registration} size="sm" lang={lang as Lang} /> : null}</dd>
           <dt>{t('pickup')}</dt><dd>{when(r.pickupAt)}</dd>
           <dt>{t('backBy')}</dt><dd>{when(r.deadlineAt)}</dd>
-          <dt>{t('status')}</dt><dd data-status={r.status}>{r.status === 'active' ? t('statusActive') : r.status === 'notCollected' ? t('statusNotCollected') : t('statusDraft')}</dd>
+          <dt>{t('status')}</dt><dd data-status={r.status}>{r.status === 'active' ? t('statusActive') : r.status === 'notCollected' ? t('statusNotCollected') : r.status === 'returned' ? t('statusReturned') : t('statusDraft')}</dd>
         </dl>
       </section>
       {est ? (
@@ -142,7 +146,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
               ))}
             </ul>
           ) : <span className="set-muted">{t('pay.none')}</span>}
-          {r.status === 'draft' || r.status === 'active' ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/pay`}>{t('pay.record')}</Link></div> : null}
+          {r.status === 'draft' || r.status === 'active' || (r.status === 'returned' && cash.unpaid > 0) ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/pay`}>{t('pay.record')}</Link></div> : null}
         </section>
       ) : null}
       {handed ? (
@@ -161,6 +165,9 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
       ) : r.status === 'draft' ? (
         <div><Link className="rt-btn rt-btn-primary" href={`/rentals/${r.id}/handover`}>{th('start')}</Link></div>
       ) : null}
+      {r.status === 'active' ? <div><Link className="rt-btn rt-btn-primary" href={`/rentals/${r.id}/return`}>{t('return.start')}</Link></div> : null}
+      {r.status === 'returned' ? <BillSection rentalId={r.id} seeTerms={await mayDo(person, 'seePartnerEarnings')} mayCorrect={await mayDo(person, 'allocateDamageProceeds')}
+        partner={seg.commissionPercent !== null} w={w.return as unknown as Record<string, string> & { errors: Record<string, string> }} /> : null}
       {est && (r.status === 'draft' || r.status === 'active') ? (
         <section className="car-card" aria-labelledby="p-h" data-price>
           <h2 id="p-h">{t('approvals.title')}</h2>
@@ -196,7 +203,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
             <li key={e.id} data-event={e.kind}>
               <span className="set-muted">{`${when(e.createdAt)} · ${e.byName ?? ''}`}</span>
               <span>{t.has(`history.kinds.${e.kind}` as 'history.kinds.created') ? t(`history.kinds.${e.kind}` as 'history.kinds.created', {
-                amount: money(Number(e.details.amount ?? 0)), km: money(Number(e.details.outKm ?? 0)), days: String(e.details.days ?? ''),
+                amount: money(Number(e.details.amount ?? 0)), km: money(Number(e.details.outKm ?? e.details.inKm ?? 0)), days: String(e.details.days ?? ''),
                 reason: String(e.details.reason ?? ''), for: e.details.for === 'deposit' ? t('history.forDeposit') : t('history.forBill'),
                 outcome: e.details.outcome === 'approved' ? t('history.approved') : t('history.rejected'), note: e.details.note ? ` · ${String(e.details.note)}` : '',
               }) : e.kind}</span>

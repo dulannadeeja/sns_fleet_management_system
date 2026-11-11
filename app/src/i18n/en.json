@@ -313,7 +313,9 @@
           "handover": "handed over {plate} to {target}, {number}",
           "photoAdd": "added a condition photo for {target}, {number}",
           "photoOpened": "opened a condition photo of {target}, {number}",
-          "carFreed": "freed {plate} from {target}'s rental {number}, not collected: {reason}"
+          "carFreed": "freed {plate} from {target}'s rental {number}, not collected: {reason}",
+          "return": "received {plate} back from {target}, {number}",
+          "garageCorrected": "corrected the garage days on {target}'s rental {number}"
         },
         "document": {
           "wordingAdd": "added agreement wording version {version}",
@@ -1736,7 +1738,9 @@
         "priceRequest": "Different price asked: {reason}",
         "approval": "Price request decided: {outcome}{note}",
         "approvalWithdrawn": "Price request withdrawn",
-        "approvalClosed": "Price request closed: the rental ended"
+        "approvalClosed": "Price request closed: the rental ended",
+        "return": "Received · {km} km",
+        "garageCorrected": "Garage days corrected: {reason}"
       },
       "approved": "approved",
       "rejected": "rejected"
@@ -1783,7 +1787,125 @@
         "alreadyWaiting": "A request is already waiting for this rental.",
         "failed": "Something went wrong. Nothing was saved. Try again."
       }
-    }
+    },
+    "return": {
+      "title": "Receive the car",
+      "start": "Receive the car",
+      "done": "Car received. The bill is below.",
+      "garageSaved": "Garage days corrected.",
+      "odometer": "Odometer",
+      "inKm": "Incoming odometer (km)",
+      "inKmHint": "Out reading: {km} km. It cannot be lower.",
+      "driven": "Driven {driven} km · included {included} · extra {extra} × {rate}",
+      "fuel": "Fuel level now (out: {out})",
+      "litres": "Litres short (whole litres)",
+      "litresHint": "× LKR {price} a litre, 100% SNS.",
+      "fuelWaive": "Waive the fuel charge",
+      "fuelSameNote": "Same level or higher: no fuel line. A higher level is not refunded.",
+      "fuelNotCounted": "Fuel is not counted on this rental: no fuel line.",
+      "takenOut": "Fuel taken out (litres, estimate · optional)",
+      "takenOutHint": "Read from the gauge, so always an estimate. Litres only: no money value.",
+      "accessories": "Accessories",
+      "missingAtHandover": "already missing at handover, never charged",
+      "checkedBox": "I checked the car; unticked items are missing.",
+      "itemAmount": "Charge for {item} (LKR)",
+      "itemHint": "LKR 1 to 500,000, or 0 with a reason (not charged).",
+      "itemHintPartner": "LKR 1 to 500,000, or 0 with a reason. Partner car: an admin decides who gets it.",
+      "itemReason": "Why it is not charged",
+      "late": "Late +{h}h {m}m · deadline {deadline}",
+      "lateAmount": "Late charge (LKR)",
+      "lateHint": "LKR 1 to 100,000. It follows the car's commission. Nothing is charged on its own.",
+      "lateWaive": "Waive the late charge",
+      "reason": "Reason",
+      "damage": "Damage",
+      "damageFound": "Damage found on this car",
+      "damageWhat": "What happened",
+      "damageAmount": "Damage charge (LKR)",
+      "garageDays": "Garage days (optional)",
+      "garageHint": "Only for this damage, never a planned service: the car must go Under repair. 1 to 30 days × LKR {rate}. An admin approves them.",
+      "next": "Car's next state",
+      "nextNote": "Nothing is chosen for you.",
+      "states": {
+        "available": "Available",
+        "repair": "Under repair",
+        "unavailable": "Temporarily unavailable"
+      },
+      "billPreview": "Bill (preview)",
+      "previewLine": "About LKR {total} · paid {paid} · deposit held {deposit}",
+      "payLater": "Unpaid LKR {unpaid}: note for payment after return",
+      "payLaterHint": "For example \"pays Friday\". It becomes the customer's debt.",
+      "payLaterNotAllowed": "LKR {unpaid} is unpaid and you can't allow payment after return. Record a payment first, or ask someone who can.",
+      "billNote": "The bill is worked out again from the rental's saved terms when you save. The deposit is used and the rest refunded in the next step.",
+      "save": "Save the return",
+      "garageTitle": "Garage days on the bill: {days}",
+      "garageDaysNow": "Garage days now (when the car is back)",
+      "garagePartner": "Partner's rupees of the difference",
+      "garagePartnerHint": "Same sign as the difference, at most all of it.",
+      "garageReason": "Reason",
+      "garageSave": "Correct garage days",
+      "errors": {
+        "notAllowed": "You don't have permission to receive cars.",
+        "notFound": "This rental was not found.",
+        "notOut": "This car is not out on this rental.",
+        "kmInvalid": "Type the odometer in whole km, 0 to 999,999.",
+        "kmLower": "Lower than the out reading ({km} km).",
+        "fuelInvalid": "Choose the fuel level.",
+        "notChecked": "Tick the box to confirm you checked the car.",
+        "listChanged": "The accessories list is not the one ticked at handover. Open the page again.",
+        "nextInvalid": "Choose the car's next state.",
+        "nextReasonMissing": "Write why the car goes Under repair or unavailable.",
+        "notLate": "The car is not late: no late charge.",
+        "lateMissing": "The car is late: type a late charge, or waive it with a reason.",
+        "lateInvalid": "A late charge is LKR 1 to 100,000.",
+        "fuelMissing": "Fuel is lower than at handover: type the litres short, or waive it with a reason.",
+        "fuelNotLower": "Fuel is not lower than at handover: no fuel charge.",
+        "litresInvalid": "Type whole litres, 1 to 100.",
+        "accessoryMissing": "{item} is missing: type a charge, or 0 with a reason.",
+        "accessoryNotMissing": "{item} is not missing.",
+        "amountInvalid": "Type whole rupees, 0 to 500,000.",
+        "reasonMissing": "Write why {item} is not charged.",
+        "damageInvalid": "Write what happened and a damage charge of LKR 1 to 500,000.",
+        "garageInvalid": "Garage days are 1 to 30.",
+        "garageNeedsDamage": "Garage days need damage recorded on this return (never a planned service).",
+        "garageNeedsRepair": "With garage days the car's next state must be Under repair.",
+        "tooLong": "That is too long (500 letters at most).",
+        "payLaterNotAllowed": "LKR {unpaid} is unpaid. Only someone with \"Allow payment after return\" can save this return.",
+        "payLaterNoteMissing": "LKR {unpaid} is unpaid: write a note for payment after return.",
+        "notReturned": "This rental is not returned.",
+        "daysInvalid": "Garage days are 0 to 30.",
+        "noGarageDays": "There are no garage days on this bill.",
+        "sameDays": "That is the number already on the bill.",
+        "splitMissing": "Type the partner's rupees of the difference.",
+        "splitInvalid": "The partner's rupees must have the same sign as the difference, at most all of it.",
+        "failed": "Something went wrong. Nothing was saved. Try again.",
+        "noFuelPrice": "There is no fuel price saved with this rental: waive the fuel charge with a reason."
+      }
+    },
+    "bill": {
+      "title": "Bill",
+      "kinds": {
+        "rent": "Rent · {days} days",
+        "rentExtra": "Above the package · {days} days",
+        "longRental": "Long-rental extra · {days} days",
+        "discount": "Discount (approved)",
+        "extraKm": "Extra km · {km}",
+        "late": "Late return",
+        "fuel": "Fuel · {litres} L",
+        "accessory": "Missing: {item}",
+        "damage": "Damage: {what}",
+        "garageDays": "Garage days · {days}"
+      },
+      "waiting": "waiting for admin",
+      "sns": "SNS",
+      "split": "partner {partner} · SNS {sns}",
+      "total": "Total",
+      "paid": "Paid",
+      "depositHeld": "Deposit held",
+      "unpaid": "Unpaid",
+      "toRefund": "Over the bill",
+      "refundNote": "The deposit pays the bill and the rest is refunded in the next step (ticket #64)."
+    },
+    "statusReturned": "Returned"
   },
   "agreementDoc": {
     "title": "Rental agreement",
@@ -1846,7 +1968,9 @@
     },
     "kinds": {
       "rate": "Price change",
-      "discount": "Discount"
+      "discount": "Discount",
+      "garageDays": "Garage days",
+      "split": "Who gets the {amount}"
     },
     "partnerCar": "partner car",
     "snsCar": "SNS-owned",
@@ -1910,9 +2034,18 @@
         "splitReasonMissing": "Write why the extra is split this way.",
         "splitNotAllowed": "Splitting an above-package price needs \"Share an above-package price on a partner car\".",
         "amountInvalid": "The discount is now more than the estimate. Reject it and ask again.",
-        "failed": "Something went wrong. Nothing was saved. Try again."
+        "failed": "Something went wrong. Nothing was saved. Try again.",
+        "notRejectable": "A split is decided, not rejected: type the partner's rupees."
       },
-      "partnerExtraHintPlain": "0 to {extra}. 0 keeps all of the extra for SNS. The package amount always follows the car's commission."
+      "partnerExtraHintPlain": "0 to {extra}. 0 keeps all of the extra for SNS. The package amount always follows the car's commission.",
+      "lineSplitTitle": "Who gets the {extra}",
+      "lineHint": "Partner's rupees, 0 to {extra}. 0 keeps it all for SNS. Until you decide it stays out of the partner's earnings."
+    },
+    "garageDays": "Garage days",
+    "garageValue": "{days} days · {amount}",
+    "lines": {
+      "damage": "Damage",
+      "accessory": "Missing accessory"
     }
   }
 }
