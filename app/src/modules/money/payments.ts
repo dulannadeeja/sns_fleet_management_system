@@ -1,6 +1,6 @@
 import { and, desc, eq, inArray, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { auditEvent, cashMovement, customer, depositMovement, payment, paymentAllocation, permissionGrant, reconciliation, rental, rentalEvent, user } from '../../db/schema';
+import { auditEvent, cashMovement, customer, depositMovement, payment, paymentAdjustment, paymentAllocation, permissionGrant, reconciliation, rental, rentalEvent, user } from '../../db/schema';
 import { allows } from '../../auth/permissions';
 import { rentalEstimate } from '../rentals/rentals';
 import { billTotal } from '../rentals/returns';
@@ -198,7 +198,12 @@ export async function rentalMoney(rentalId: string): Promise<RentalMoney | null>
     .innerJoin(user, eq(user.id, payment.createdBy)).where(eq(paymentAllocation.rentalId, r.id));
   const deps = await db.select({ ...cols, amount: depositMovement.amount }).from(depositMovement).innerJoin(payment, eq(payment.id, depositMovement.paymentId))
     .innerJoin(user, eq(user.id, payment.createdBy)).where(and(eq(depositMovement.rentalId, r.id), eq(depositMovement.kind, 'received')));
-  const payments = [...bills.map((b) => ({ ...b, for: 'bill' as const })), ...deps.map((d) => ({ ...d, for: 'deposit' as const }))]
+  // A payment moved here by an approved correction (#65) has no allocation on this rental: listed with what was moved.
+  const moved = await db.select({ ...cols, amount: sql<string>`sum(${paymentAdjustment.amount})` }).from(paymentAdjustment).innerJoin(payment, eq(payment.id, paymentAdjustment.paymentId))
+    .innerJoin(user, eq(user.id, payment.createdBy)).where(eq(paymentAdjustment.rentalId, r.id))
+    .groupBy(payment.id, payment.number, payment.method, payment.reference, payment.createdAt, user.name);
+  const extra = moved.filter((m) => !bills.some((b) => b.id === m.id) && Number(m.amount) > 0);
+  const payments = [...bills.map((b) => ({ ...b, for: 'bill' as const })), ...extra.map((m) => ({ ...m, for: 'bill' as const })), ...deps.map((d) => ({ ...d, for: 'deposit' as const }))]
     .map((p) => ({ ...p, method: p.method as Method, amount: Number(p.amount) }))
     .sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime() || x.number - y.number);
   return { estimate: est.total, paid, unpaid: est.total - m.covered, depositSet: r.deposit, depositReceived: received, payments };

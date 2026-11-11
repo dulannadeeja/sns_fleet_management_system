@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { notFound, redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../../auth/require';
@@ -20,7 +21,7 @@ export default async function PayBackPage({ params }: { params: Promise<{ id: st
   if (!above) redirect(`/rentals/${r.id}`);
   return (
     <AppFrame person={person} active="rentals" title={t('title')} subtitle={rentalNumber(r.number)} backHref={`/rentals/${r.id}`}>
-      <PayBackForm rentalId={r.id} above={above} w={w.payBack as unknown as Record<string, string> & { errors: Record<string, string> }} />
+      <PayBackForm rentalId={r.id} formKey={randomUUID()} above={above} w={w.payBack as unknown as Record<string, string> & { errors: Record<string, string> }} />
     </AppFrame>
   );
 }

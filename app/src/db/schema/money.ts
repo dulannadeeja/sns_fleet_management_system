@@ -150,6 +150,8 @@ export const refund = pgTable('refund', {
   method: text('method').notNull(),
   reference: text('reference'),
   amount: bigint('amount', { mode: 'number' }).notNull(),
+  // The form's key: the same form sent twice pays back once (#65 review).
+  idempotencyKey: text('idempotency_key').unique('refund_one_per_key'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
   createdBy: uuid('created_by').notNull().references(() => user.id),
 }, (t) => [

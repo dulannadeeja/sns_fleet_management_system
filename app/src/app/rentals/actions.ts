@@ -282,11 +282,11 @@ export async function askCorrectionAction(rentalId: string, paymentId: string, _
 // Pay back money above a lowered bill (#65): cash or bank with its reference; checked again under the locks.
 export type PayBackState = { error?: string; values?: Record<string, string> };
 
-export async function payBackAction(rentalId: string, _: PayBackState, form: FormData): Promise<PayBackState> {
+export async function payBackAction(rentalId: string, key: string, _: PayBackState, form: FormData): Promise<PayBackState> {
   const person = await requirePermission('refundsAndExpenses');
   const values = { amount: String(form.get('amount') ?? ''), method: String(form.get('method') ?? ''), reference: String(form.get('reference') ?? '') };
   const raw = values.amount.replace(/,/g, '').trim();
-  const r = await payBack(person.id, rentalId, { amount: /^\d{1,9}$/.test(raw) ? Number(raw) : NaN, method: values.method as 'cash' | 'bank', reference: values.reference });
+  const r = await payBack(person.id, rentalId, { key, amount: /^\d{1,9}$/.test(raw) ? Number(raw) : NaN, method: values.method as 'cash' | 'bank', reference: values.reference });
   if ('error' in r) return { error: r.error, values };
   revalidatePath(`/rentals/${rentalId}`);
   redirect(`/rentals/${rentalId}?paidBack=1`);

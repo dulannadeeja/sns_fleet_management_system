@@ -2035,7 +2035,7 @@
       "otherLine": "{number} · LKR {unpaid} unpaid",
       "reason": "Reason",
       "reasonHint": "What you found, for example on the bank statement. At most 500 letters.",
-      "note": "The original payment is never changed or deleted. An admin approves or rejects this request; if approved, the correction is added as a new dated line and both stay in the rental's history.",
+      "note": "The original payment is never changed or deleted. An admin approves or rejects this request; if approved, the correction is recorded with the date, and both stay in the rental's history.",
       "send": "Send to admin",
       "link": "Ask for a correction",
       "waiting": "Correction waiting: {what}",

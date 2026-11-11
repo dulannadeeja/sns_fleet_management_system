@@ -83,11 +83,13 @@ export async function paidAbove(rentalId: string, q: Q = db): Promise<number> {
   return Math.max(0, (await moneyOne(q, rentalId)).paid - bill);
 }
 
-export type PayBackError = 'notAllowed' | 'notFound' | 'notReturned' | 'amountInvalid' | 'nothingAbove' | 'overAbove' | 'methodMissing' | 'referenceMissing' | 'tooLong';
+export type PayBackError = 'notAllowed' | 'notFound' | 'notReturned' | 'amountInvalid' | 'nothingAbove' | 'overAbove' | 'methodMissing' | 'referenceMissing' | 'tooLong' | 'keyInvalid';
 
-/** Pays back money above a returned rental's bill. Logged rental.payBack and a rental_event. */
-export async function payBack(actorId: string, rentalId: string, input: { amount: number; method: 'cash' | 'bank'; reference?: string }): Promise<{ ok: true } | { error: PayBackError }> {
+/** Pays back money above a returned rental's bill; `key` is the form's own key, so the same form sent twice pays back
+ *  once. Logged rental.payBack and a rental_event. */
+export async function payBack(actorId: string, rentalId: string, input: { key: string; amount: number; method: 'cash' | 'bank'; reference?: string }): Promise<{ ok: true } | { error: PayBackError }> {
   if (!UUID.test(rentalId)) return { error: 'notFound' };
+  if (!UUID.test(String(input.key ?? ''))) return { error: 'keyInvalid' };
   const reference = String(input.reference ?? '').trim();
   if (reference.length > REFERENCE_MAX) return { error: 'tooLong' };
   if (!Number.isSafeInteger(input.amount) || input.amount < 1) return { error: 'amountInvalid' };
@@ -102,10 +104,12 @@ export async function payBack(actorId: string, rentalId: string, input: { amount
     await lock(tx, `sns.customer:${r.customerId}`);
     await lock(tx, `sns.rental:${rentalId}`);
     if (r.status !== 'returned') return { error: 'notReturned' } as const;
+    const [before] = await tx.select({ rentalId: refund.rentalId, amount: refund.amount }).from(refund).where(eq(refund.idempotencyKey, input.key.toLowerCase()));
+    if (before) return Number(before.amount) === input.amount && before.rentalId === rentalId.toLowerCase() ? { ok: true } as const : { error: 'keyInvalid' } as const;
     const above = await paidAbove(rentalId, tx);
     if (!above) return { error: 'nothingAbove' } as const;
     if (input.amount > above) return { error: 'overAbove' } as const;
-    const [f] = await tx.insert(refund).values({ rentalId, kind: 'overpaid', method: input.method, reference: input.method === 'bank' ? reference : null, amount: input.amount, createdBy: actorId })
+    const [f] = await tx.insert(refund).values({ rentalId, kind: 'overpaid', method: input.method, reference: input.method === 'bank' ? reference : null, amount: input.amount, idempotencyKey: input.key.toLowerCase(), createdBy: actorId })
       .returning({ id: refund.id });
     if (input.method === 'cash') await tx.insert(cashMovement).values({ kind: 'refundOut', amount: input.amount, refundId: f.id, createdBy: actorId });
     const details = { amount: input.amount, method: input.method, ...(input.method === 'bank' ? { reference } : {}), above };

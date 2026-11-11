@@ -93,6 +93,8 @@ describe('payment corrections', { timeout: 90_000 }, () => {
     expect(await decide(admin, mv.id, { approve: true })).toEqual({ ok: true });
     expect((await rentalMoney(a.rentalId))!.paid).toBe(0);
     expect((await rentalMoney(b.rentalId))!.paid).toBe(3000);
+    // The moved payment is listed on the rental it moved to, so it can be corrected there too.
+    expect((await rentalMoney(b.rentalId))!.payments.find((p) => p.id === pid)).toMatchObject({ for: 'bill', amount: 3000 });
     expect((await correctionsOn(b.rentalId))[0]).toMatchObject({ fix: 'rental', outcome: 'approved' });
   });
 

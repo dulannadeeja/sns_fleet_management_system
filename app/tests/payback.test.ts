@@ -28,19 +28,23 @@ describe('paying back money above a bill', { timeout: 90_000 }, () => {
     const plan = planDeposit(s.held, s.billUnpaid, s.older, false);
     expect(await settleDeposit(r.owner, r.rentalId, { olderAgreed: false, shown: { held: s.held, here: plan.here, older: 0, refund: plan.refund } })).toMatchObject({ ok: true, refund: 0 });
     expect(await paidAbove(r.rentalId)).toBe(0);
-    expect(await payBack(r.owner, r.rentalId, { amount: 1, method: 'cash' })).toEqual({ error: 'nothingAbove' });
+    expect(await payBack(r.owner, r.rentalId, { key: randomUUID(), amount: 1, method: 'cash' })).toEqual({ error: 'nothingAbove' });
     // The admin corrects 3 days to 1: the bill is 10,000; 10,000 was paid above it.
     expect(await correctGarageDays(r.owner, r.rentalId, { days: 1, reason: 'Sample: back sooner' })).toEqual({ ok: true });
     expect((await rentalBill(r.rentalId))!).toMatchObject({ total: 10_000, paid: 20_000, unpaid: -10_000 });
     expect(await paidAbove(r.rentalId)).toBe(10_000);
     const staff = (await samplePerson()).id;
     expect(await setPermission(r.owner, staff, 'refundsAndExpenses', false)).toMatchObject({ ok: true });
-    expect(await payBack(staff, r.rentalId, { amount: 1000, method: 'cash' })).toEqual({ error: 'notAllowed' });
-    expect(await payBack(r.owner, r.rentalId, { amount: 10_001, method: 'cash' })).toEqual({ error: 'overAbove' });
-    expect(await payBack(r.owner, r.rentalId, { amount: 6000, method: 'bank', reference: ' ' })).toEqual({ error: 'referenceMissing' });
-    expect(await payBack(r.owner, r.rentalId, { amount: 4000, method: 'cash' })).toEqual({ ok: true });
-    expect(await payBack(r.owner, r.rentalId, { amount: 6000, method: 'bank', reference: 'Sample BOC 9' })).toEqual({ ok: true });
+    expect(await payBack(staff, r.rentalId, { key: randomUUID(), amount: 1000, method: 'cash' })).toEqual({ error: 'notAllowed' });
+    expect(await payBack(r.owner, r.rentalId, { key: randomUUID(), amount: 10_001, method: 'cash' })).toEqual({ error: 'overAbove' });
+    expect(await payBack(r.owner, r.rentalId, { key: randomUUID(), amount: 6000, method: 'bank', reference: ' ' })).toEqual({ error: 'referenceMissing' });
+    const key = randomUUID();
+    expect(await payBack(r.owner, r.rentalId, { key, amount: 4000, method: 'cash' })).toEqual({ ok: true });
+    expect(await payBack(r.owner, r.rentalId, { key, amount: 4000, method: 'cash' })).toEqual({ ok: true });
+    expect(await payBack(r.owner, r.rentalId, { key, amount: 3000, method: 'cash' })).toEqual({ error: 'keyInvalid' });
+    expect(await payBack(r.owner, r.rentalId, { key: randomUUID(), amount: 6000, method: 'bank', reference: 'Sample BOC 9' })).toEqual({ ok: true });
     expect((await rentalBill(r.rentalId))!).toMatchObject({ total: 10_000, paid: 10_000, unpaid: 0, refunded: 10_000 });
+    // The same form sent twice paid back once (its key), so only 4,000 + 6,000 went back.
     expect((await paidBackOn(r.rentalId)).map((x) => [x.method, x.amount])).toEqual([['cash', 4000], ['bank', 6000]]);
     // The cash one is its own drawer line; the bank one is not in the drawer.
     const [cash] = await db.select({ id: refund.id }).from(refund).where(and(eq(refund.rentalId, r.rentalId), eq(refund.method, 'cash')));

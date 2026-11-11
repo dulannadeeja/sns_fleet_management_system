@@ -10,7 +10,8 @@ import { outRental } from '../helpers/handover';
 
 // AT-17: "Customer debt written off: SNS absorbs the loss; partner earnings not reduced" (ST-08.6; system design 8.3,
 // Confirmed 11 Nov 2026). The bill lines and their partner shares stay as they were; the written-off part stops counting
-// as debt and can no longer be paid. AT-38 (an imported opening debt) comes with the import of starting data.
+// as debt and can no longer be paid. Partner earning lines are made from these bill lines with the day close (Phase 3),
+// so "SNS absorbs the loss" is shown here as: the shares stay, and nothing is taken from them. AT-38 (an imported opening debt) comes with the import of starting data.
 describe('AT-17: a debt written off is SNS\'s loss', { timeout: 90_000 }, () => {
   it('writes off part then the rest, oldest rental first; bills and partner shares unchanged', async () => {
     // Two partner-car rentals of one customer, no deposit, each 4,500 unpaid at return.
@@ -20,6 +21,8 @@ describe('AT-17: a debt written off is SNS\'s loss', { timeout: 90_000 }, () => 
       expect(await receiveCar(r.owner, r.rentalId, { inKm: 1100, fuel: 'full', accessories: r.accessories, checked: true, nextState: 'available', payLaterNote: 'Sample' })).toEqual({ ok: true });
     }
     const before = (await rentalBill(a.rentalId))!.lines.map((l) => [l.kind, l.amount, l.partnerShare]);
+    // The partner's share of the rent (15% to SNS on the sample partner car): 3,825 of 4,500.
+    expect(before).toEqual([['rent', 4500, 3825]]);
     expect((await debtOf(a.customerId)).total).toBe(9000);
     // Only the authorised person (the owner until someone is given it) writes off; a reason is needed.
     const admin = (await samplePerson('first-pass-1', 'admin')).id;

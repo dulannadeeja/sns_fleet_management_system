@@ -9,8 +9,8 @@ type W = Record<string, string> & { errors: Record<string, string> };
 const fill = (s: string, v: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ''));
 const toNum = (s: string) => { const t = s.replace(/,/g, '').trim(); return /^\d{1,9}$/.test(t) ? Number(t) : 0; };
 
-export function PayBackForm({ rentalId, above, w }: { rentalId: string; above: number; w: W }) {
-  const [state, action, pending] = useActionState<PayBackState, FormData>(payBackAction.bind(null, rentalId), {});
+export function PayBackForm({ rentalId, formKey, above, w }: { rentalId: string; formKey: string; above: number; w: W }) {
+  const [state, action, pending] = useActionState<PayBackState, FormData>(payBackAction.bind(null, rentalId, formKey), {});
   const ready = useReady();
   const [amount, setAmount] = useState(state.values?.amount ?? String(above));
   const [method, setMethod] = useState(state.values?.method ?? '');

@@ -41,6 +41,7 @@ export function WriteOffForm({ customerId, debt, rentals, w }: { customerId: str
         <h2 id="wo-what" className="set-rules-title">{w.whatTitle}</h2>
         <ul style={{ margin: 0, paddingLeft: 18 }}><li>{w.what1}</li><li>{w.what2}</li><li>{w.what3}</li><li>{w.what4}</li></ul>
       </section>
+      <Notice>{w.only}</Notice>
       {state.error ? <Notice tone="danger">{w.errors[state.error] ?? w.errors.failed}</Notice> : null}
       <div className="set-actions">
         <Button type="submit" variant="danger" disabled={pending || !ready || !reason.trim() || total < 1 || total > debt}>{fill(w.save, { amount: money(total) })}</Button>
