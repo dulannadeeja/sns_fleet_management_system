@@ -35,7 +35,8 @@ export function DepositForm({ rentalId, mayRefund, facts, w }: { rentalId: strin
           <dt>{w.held}</dt><dd data-held={facts.held}>{money(facts.held)}</dd>
         </dl>
       </section>
-      {facts.older.length ? (
+      {/* Older bills only matter when something is left after this bill. */}
+      {facts.older.length && facts.held > facts.billUnpaid ? (
         <section className="car-card" aria-labelledby="dep-older">
           <h2 id="dep-older" className="set-rules-title">{w.olderTitle}</h2>
           <ul className="set-muted" style={{ margin: 0, paddingLeft: 18 }}>

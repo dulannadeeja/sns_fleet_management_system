@@ -111,7 +111,9 @@ export async function settleDeposit(actorId: string, rentalId: string, input: Se
       if (!may('refundsAndExpenses')) return { error: 'refundNotAllowed' } as const;
     }
     const [c] = await tx.select({ name: customer.name }).from(customer).where(eq(customer.id, s.customerId));
-    const [set] = await tx.insert(depositSettlement).values({ rentalId, olderAgreed: input.olderAgreed, agreementNote: input.olderAgreed ? note : null, createdBy: actorId })
+    // The agreement is kept only when the deposit really paid an older bill (#64 review).
+    const agreedUsed = input.olderAgreed && plan.older.length > 0;
+    const [set] = await tx.insert(depositSettlement).values({ rentalId, olderAgreed: agreedUsed, agreementNote: agreedUsed ? note : null, createdBy: actorId })
       .returning({ id: depositSettlement.id });
     const base = { rentalId, settlementId: set.id, createdBy: actorId };
     if (plan.here) await tx.insert(depositMovement).values({ ...base, kind: 'applied', toRentalId: rentalId, amount: plan.here });
@@ -125,7 +127,7 @@ export async function settleDeposit(actorId: string, rentalId: string, input: Se
       if (method === 'cash') await tx.insert(cashMovement).values({ kind: 'refundOut', amount: plan.refund, depositMovementId: m.id, createdBy: actorId });
     }
     const details = { held: s.held, here: plan.here, older: plan.older.map((o) => ({ number: o.number, amount: o.amount })), refund: plan.refund,
-      ...(plan.refund ? { method, ...(method === 'bank' ? { reference } : {}) } : {}), ...(input.olderAgreed ? { agreementNote: note } : {}) };
+      ...(plan.refund ? { method, ...(method === 'bank' ? { reference } : {}) } : {}), ...(agreedUsed ? { agreementNote: note } : {}) };
     await tx.insert(rentalEvent).values({ rentalId, kind: 'depositSettled', details, createdBy: actorId });
     await tx.insert(auditEvent).values({ createdBy: actorId, action: 'rental.depositSettle', targetType: 'rental', targetId: rentalId,
       details: { name: c?.name ?? '', number: rentalNumber(s.number), ...details, older: plan.older.map((o) => `${rentalNumber(o.number)}: ${o.amount}`).join(', ') } });
