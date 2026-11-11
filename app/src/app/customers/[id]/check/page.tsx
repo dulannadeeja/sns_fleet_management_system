@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { rentalNumber } from '../../../../modules/rentals/agreements';
 import { getFormatter, getTranslations } from 'next-intl/server';
 import { requirePermission } from '../../../../auth/require';
 import { mayDo } from '../../../../auth/access';
@@ -21,14 +22,15 @@ export default async function CheckPage({ params }: { params: Promise<{ id: stri
   const [t, w, format, warnings, mayFlag, mayLicence] = await Promise.all([getTranslations('customers'), flagWords(), getFormatter(), warningsFor(c.id),
     mayDo(person, 'proceedDespiteFlag'), mayDo(person, 'overrideExpiredDocuments')]);
   const day = (d: string) => format.dateTime(new Date(`${d}T00:00:00Z`), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
-  const { openFlags, licenceExpired } = warnings!;
-  const mayContinue = (!openFlags.length || mayFlag) && (!licenceExpired || mayLicence);
+  const { openFlags, licenceExpired, debt } = warnings!;
+  const mayContinue = (!openFlags.length || mayFlag) && (!debt.total || mayFlag) && (!licenceExpired || mayLicence);
+  const any = openFlags.length > 0 || licenceExpired || debt.total > 0;
   return (
     <AppFrame person={person} active="customers" title={t('title')} subtitle={c.name} backHref={`/customers/${c.id}`}>
       <section className="car-card" aria-labelledby="check">
         <h2 id="check">{t('flags.checkTitle')}</h2>
         <b>{c.name}</b>
-        {!openFlags.length && !licenceExpired ? <Notice>{t('flags.checkNone')}</Notice> : null}
+        {!any ? <Notice>{t('flags.checkNone')}</Notice> : null}
         {openFlags.map((f) => (
           <div key={f.id} className="cus-warning" data-flag={f.kind}>
             <Notice tone="warning">{`${t('flags.flagWarn', { kind: t(`flags.kinds.${f.kind}`) })} · ${f.details}`}</Notice>
@@ -41,10 +43,16 @@ export default async function CheckPage({ params }: { params: Promise<{ id: stri
             <span className="set-muted">{t('flags.licenceNote')}</span>
           </div>
         ) : null}
-        {openFlags.length || licenceExpired ? (
-          <GoAheadForm customerId={c.id} flagIds={openFlags.map((f) => f.id)} licenceExpired={licenceExpired} mayContinue={mayContinue} w={w} />
+        {debt.total ? (
+          <div className="cus-warning" data-debt={debt.total}>
+            <Notice tone="warning">{t('flags.debtWarn', { amount: format.number(debt.total) })}</Notice>
+            <span className="set-muted">{t('flags.debtList', { list: debt.rentals.map((d) => `${rentalNumber(d.number)} · ${format.number(d.unpaid)}`).join(', ') })}</span>
+          </div>
         ) : null}
-        {(openFlags.length || licenceExpired) && !mayContinue ? <span className="set-muted" role="note">{t('flags.errors.' + (licenceExpired && !mayLicence ? 'licenceNotAllowed' : 'notAllowed') as 'flags.errors.notAllowed')}</span> : null}
+        {any ? (
+          <GoAheadForm customerId={c.id} flagIds={openFlags.map((f) => f.id)} licenceExpired={licenceExpired} debt={debt.total} mayContinue={mayContinue} w={w} />
+        ) : null}
+        {any && !mayContinue ? <span className="set-muted" role="note">{t('flags.errors.' + (licenceExpired && !mayLicence ? 'licenceNotAllowed' : 'notAllowed') as 'flags.errors.notAllowed')}</span> : null}
       </section>
     </AppFrame>
   );

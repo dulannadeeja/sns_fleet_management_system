@@ -1,0 +1,1 @@
+ALTER TABLE "customer_go_ahead" ADD COLUMN "debt" bigint DEFAULT 0 NOT NULL;

@@ -514,7 +514,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
   - Staff decide whether a reference person is needed (ST-05.5).
   - A customer may rent several cars at once; each is its own rental, agreement and bill.
   - A first rental (no car ever handed over to the customer) needs "Approve a first-time customer": saving it is the approval, with who saved it recorded; no separate step. With warnings, the rental is saved only with a decision to continue for exactly those warnings, used for this one rental (Confirmed: agreed by the owner, recorded by Dulan, 8 Nov 2026). System design → [Normal journey](SNS_SYSTEM_DESIGN.md#71-normal-journey).
-- **Checks:** AT-55 "A customer with an unpaid bill and no flag starts a new rental: a debt warning shows; staff continue only with a reason". AT-09 "Customer rents two vehicles: separate rentals, agreements and bills; one payment may be allocated across both".
+- **Checks:** AT-55 "A customer with an unpaid bill and no flag starts a new rental: a debt warning shows; staff continue only with a reason" (#77; the owner's daily summary is Phase 4). AT-09 "Customer rents two vehicles: separate rentals, agreements and bills; one payment may be allocated across both".
 - **Screens:** 05.1 Customer and warnings.
 
 #### ST-05.2 · Choose a car
