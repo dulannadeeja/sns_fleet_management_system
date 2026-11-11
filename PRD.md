@@ -751,7 +751,8 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Roles:** Staff request; an admin approves or rejects (ST-10.2).
 - **Story:** As staff, I ask for a wrong payment to be corrected, saying what is wrong, what it should be and why, so that the fix is approved and both records stay.
 - **Rules:** a correction needs an admin's approval; the original is never changed or deleted; an approved correction is a new dated line, and earnings already final change only by an adjustment line. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs); PR-07.
-- **Checks:** AT-16 "An approved correction affects earnings already final or cashed out: the original lines stay; a dated adjustment line changes the balance". AT-84 "An approved correction takes back a whole 5,750 line at 85%: partner −4,887, SNS −863; both net to 0".
+  - Asked for one payment's part on one rental: the amount (to 0 if the money never came; never above the bill or estimate), the way (cash, bank, card; drawer lines and the bank or card check follow), the reference, or the wrong rental (bill payments, same customer, up to what is unpaid there). A deposit payment only before the deposit is settled. One request waits per part; reason at most 500 letters, reference 80; rejecting needs a note; the primary owner may decide their own (self-approved). A way fix changes the whole payment (one way per payment); a new bank or card reference starts its check again; a new amount at most LKR 10,000,000. Money paid above a lowered bill is paid back by staff with "Issue refunds or pay expenses" (and Customer access), cash or bank with its reference, no approval; the same form sent twice pays back once. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs) (Confirmed 11 Nov 2026).
+- **Checks:** AT-16 "An approved correction affects earnings already final or cashed out: the original lines stay; a dated adjustment line changes the balance". AT-84 "An approved correction takes back a whole 5,750 line at 85%: partner −4,887, SNS −863; both net to 0". Both with the day close (Phase 3, ST-11.5), where earnings lines are made (decided 11 Nov 2026, Dulan); the mirror split itself (DN-21) is tested now.
 - **Screens:** 09.5 Payment correction request.
 - **Decided:** DN-01 (nobody approves their own request), DN-21 (a negative line splits as the mirror of a positive one).
 
@@ -763,8 +764,9 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Phase:** 2.
 - **Roles:** The authorised person; until one is named, only the owner.
 - **Story:** As the authorised person, I write off all or part of a debt that cannot be collected, with a reason, so that the books show the loss honestly.
-- **Rules:** a reason is required; the loss is entirely SNS's and no partner's earnings change; the bills stay as they were and the customer's record notes the write-off; it shows in the owner's exceptions. An imported opening debt is written off the same way. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs), [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
-- **Checks:** AT-17 "Customer debt written off: SNS absorbs the loss; partner earnings not reduced". AT-38 "An imported opening debt is written off: same".
+- **Rules:** a reason is required; the loss is entirely SNS's and no partner's earnings change; the bills stay as they were and the customer's record notes the write-off; it shows in the owner's exceptions report when that is built (Phase 4). An imported opening debt is written off the same way. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs), [Starting data](SNS_SYSTEM_DESIGN.md#starting-data).
+  - All or part of the customer's debt, oldest rentals first; reason at most 500 letters; the written-off amount can no longer be paid; it shows on the customer's page and in the activity log; the exceptions report is Phase 4. System design → [Corrections and write-offs](SNS_SYSTEM_DESIGN.md#83-corrections-and-write-offs) (Confirmed 11 Nov 2026).
+- **Checks:** AT-17 "Customer debt written off: SNS absorbs the loss; partner earnings not reduced". AT-38 "An imported opening debt is written off: same" (with the import of starting data, decided 11 Nov 2026, Dulan).
 - **Screens:** 08.6 Write off a debt.
 
 ### 10 Approvals
@@ -787,7 +789,7 @@ Months 2 and 3: a rental from the first step to the paid bill, with extensions, 
 - **Roles:** Admin, Owner.
 - **Story:** As an admin, I approve or reject a request after a confirm step that repeats its effect, so that nothing is decided by a slip.
 - **Rules:** rejecting needs a note; the approver, time and note go into the rental's history, and the requester's reason is kept (PR-05). A decision affecting earnings already final adds a dated adjustment line (PR-07). The requester sees the result.
-- **Checks:** AT-16.
+- **Checks:** AT-16 (with the day close, Phase 3, ST-11.5; decided 11 Nov 2026, Dulan).
 - **Screens:** 10.2 Approve · confirm, 10.3 Reject · confirm.
 
 #### ST-10.3 · Split a price above the package on a partner car
@@ -1021,7 +1023,7 @@ Months 4 and 5: the cash drawer and the day's close, the bank and card check, ex
   - Each line is worked out from the rental's saved commission terms; a partner's share is rounded down to the rupee and SNS takes the difference (DN-10). System design → [Vehicle-owner earnings and daily cash-out](SNS_SYSTEM_DESIGN.md#10-vehicle-owner-earnings-and-daily-cash-out), [Derived integrity controls](SNS_SYSTEM_DESIGN.md#173-derived-integrity-controls).
   - Final lines are never edited; a correction or approved reduction is a new dated adjustment line; an overpayment is recovered from later earnings (PR-07).
   - Opening balances and imported rentals are marked "Imported" and add no earnings (PR-04).
-- **Checks:** AT-14, AT-16, AT-36, AT-70.
+- **Checks:** AT-14, AT-16, AT-36, AT-70, AT-84.
 - **Screens:** 11.5 Car earnings by day.
 - **Decided:** DN-10.
 

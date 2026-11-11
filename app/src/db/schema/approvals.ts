@@ -16,6 +16,14 @@ export const approvalRequest = pgTable('approval_request', {
   // Garage days proposed at return (#63), and the bill line whose split the admin decides (#63).
   days: integer('days'),
   chargeId: uuid('charge_id'),
+  // A payment correction (#65): which payment's part on this rental, what is wrong ('amount', 'method', 'reference',
+  // 'rental'), and what it should be. rate_was is 0 and estimate_was is the part's amount when asked.
+  paymentId: uuid('payment_id'),
+  fix: text('fix'),
+  newAmount: bigint('new_amount', { mode: 'number' }),
+  newMethod: text('new_method'),
+  newReference: text('new_reference'),
+  toRentalId: uuid('to_rental_id').references(() => rental.id),
   // The daily rate and the estimate when it was asked, so the effect shown is the effect asked for.
   rateWas: bigint('rate_was', { mode: 'number' }).notNull(),
   estimateWas: bigint('estimate_was', { mode: 'number' }).notNull(),
@@ -24,7 +32,8 @@ export const approvalRequest = pgTable('approval_request', {
   createdBy: uuid('created_by').notNull().references(() => user.id),
 }, (t) => [
   index('approval_request_by_rental').on(t.rentalId, t.createdAt.desc()),
-  check('approval_request_kind', sql`(kind = 'rate' and new_daily_rate between 1 and 100000 and discount is null) or (kind = 'discount' and discount >= 1 and new_daily_rate is null) or (kind = 'garageDays' and days between 1 and 30) or (kind = 'split' and charge_id is not null)`),
+  check('approval_request_kind', sql`(kind = 'rate' and new_daily_rate between 1 and 100000 and discount is null) or (kind = 'discount' and discount >= 1 and new_daily_rate is null) or (kind = 'garageDays' and days between 1 and 30) or (kind = 'split' and charge_id is not null) or (kind = 'correction' and payment_id is not null and ((fix = 'amount' and new_amount >= 0) or (fix = 'method' and new_method in ('cash', 'bank', 'card') and (new_method = 'cash') = (new_reference is null)) or (fix = 'reference' and new_reference is not null) or (fix = 'rental' and to_rental_id is not null)))`),
+  index('approval_request_by_payment').on(t.paymentId),
 ]);
 
 /** The decision on a request: approved, rejected, withdrawn (by its sender) or closed (the rental ended first, 11 Nov

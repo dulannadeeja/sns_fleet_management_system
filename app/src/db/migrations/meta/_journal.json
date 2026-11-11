@@ -253,6 +253,20 @@
       "when": 1794398613790,
       "tag": "0035_deposit_settlement",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1794400025331,
+      "tag": "0036_corrections_writeoff",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1794401236573,
+      "tag": "0037_refund_key",
+      "breakpoints": true
     }
   ]
 }

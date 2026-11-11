@@ -19,10 +19,11 @@ export const TEXT_MAX = 500;
 export const KINDS = ['rate', 'discount'] as const;
 export type Kind = (typeof KINDS)[number];
 /** Requests made at return (#63): garage days to approve, and a bill line on a partner car whose split the admin decides. */
-export type AnyKind = Kind | 'garageDays' | 'split';
+export type AnyKind = Kind | 'garageDays' | 'split' | 'correction';
 const PRICE_KINDS = ['rate', 'discount'];
 /** Who may decide each kind (3.2): a price change, or damage, accessory and garage-day money ("Allocate damage proceeds"). */
-export const decidesWith = (kind: string): Permission => (PRICE_KINDS.includes(kind) ? 'changePriceOrDiscount' : 'allocateDamageProceeds');
+export const decidesWith = (kind: string): Permission => (PRICE_KINDS.includes(kind) ? 'changePriceOrDiscount' : kind === 'correction' ? 'correctPayment' : 'allocateDamageProceeds');
+const ALL_KINDS = ['rate', 'discount', 'garageDays', 'split', 'correction'] as const;
 const OPEN = ['draft', 'active'];
 const tidy = (v: unknown) => String(v ?? '').trim().replace(/\s+/g, ' ');
 type Q = Parameters<Parameters<typeof db.transaction>[0]>[0] | typeof db;
@@ -78,12 +79,15 @@ export async function askForPrice(actorId: string, rentalId: string, input: { ki
 
 export interface Waiting {
   id: string; rentalId: string; kind: AnyKind; newDailyRate: number | null; discount: number | null; garageDays: number | null; chargeId: string | null; chargeKind: string | null; chargeAmount: number | null; rateWas: number; estimateWas: number; reason: string;
+  /** A payment correction (#65): the payment's number, what is wrong and what it should be. */
+  paymentNumber: number | null; fix: string | null; newAmount: number | null; newMethod: string | null; newReference: string | null; toRentalNumber: number | null;
   createdAt: Date; createdBy: string; byName: string; days: number; packageRate: number; partner: boolean; commissionPercent: number | null;
   effect: number; aboveTheirPackage: boolean; extra: number;
 }
 
 function shape(r: { id: string; rentalId: string; kind: string; newDailyRate: number | null; discount: number | null; rateWas: number; estimateWas: number; reason: string; createdAt: Date; createdBy: string; byName: string;
-  garageDays: number | null; chargeId: string | null; chargeKind: string | null; chargeAmount: number | null },
+  garageDays: number | null; chargeId: string | null; chargeKind: string | null; chargeAmount: number | null;
+  paymentNumber: number | null; fix: string | null; newAmount: number | null; newMethod: string | null; newReference: string | null; toRentalNumber: number | null },
   p: { days: number; packageRate: number; partner: boolean; commissionPercent: number | null; garageRate?: number }): Waiting {
   const kind = r.kind as AnyKind;
   const rate = r.newDailyRate === null ? null : Number(r.newDailyRate);
@@ -91,13 +95,15 @@ function shape(r: { id: string; rentalId: string; kind: string; newDailyRate: nu
   const chargeAmount = r.chargeAmount === null ? null : Number(r.chargeAmount);
   const effect = kind === 'rate' ? (rate! - Number(r.rateWas)) * p.days : kind === 'discount' ? -discount! : kind === 'garageDays' ? (r.garageDays ?? 0) * (p.garageRate ?? 0) : 0;
   const aboveTheirPackage = kind === 'rate' && p.partner && rate! > p.packageRate;
-  return { ...r, kind, newDailyRate: rate, discount, chargeAmount, rateWas: Number(r.rateWas), estimateWas: Number(r.estimateWas), ...p, effect, aboveTheirPackage,
+  return { ...r, kind, newDailyRate: rate, discount, chargeAmount, newAmount: r.newAmount === null ? null : Number(r.newAmount), toRentalNumber: r.toRentalNumber === null ? null : Number(r.toRentalNumber), rateWas: Number(r.rateWas), estimateWas: Number(r.estimateWas), ...p, effect, aboveTheirPackage,
     extra: aboveTheirPackage ? (rate! - p.packageRate) * p.days : 0 };
 }
 
 const requestCols = { id: approvalRequest.id, rentalId: approvalRequest.rentalId, kind: approvalRequest.kind, newDailyRate: approvalRequest.newDailyRate, discount: approvalRequest.discount,
   garageDays: approvalRequest.days, chargeId: approvalRequest.chargeId, chargeKind: sql<string | null>`(select kind from charge where id = ${approvalRequest.chargeId})`,
   chargeAmount: sql<number | null>`(select amount from charge where id = ${approvalRequest.chargeId})`,
+  paymentNumber: sql<number | null>`(select number from payment where id = ${approvalRequest.paymentId})`, fix: approvalRequest.fix, newAmount: approvalRequest.newAmount,
+  newMethod: approvalRequest.newMethod, newReference: approvalRequest.newReference, toRentalNumber: sql<number | null>`(select number from rental where id = ${approvalRequest.toRentalId})`,
   rateWas: approvalRequest.rateWas, estimateWas: approvalRequest.estimateWas, reason: approvalRequest.reason, createdAt: approvalRequest.createdAt, createdBy: approvalRequest.createdBy, byName: user.name };
 
 /** The price request waiting on a rental, if any (at most one; garage-day and split requests are listed apart). */
@@ -122,7 +128,7 @@ export async function approvedTerms(rentalId: string) {
 }
 
 export type DecideError = 'notAllowed' | 'notFound' | 'decided' | 'notOpen' | 'ownRequest' | 'noteMissing' | 'tooLong' | 'splitMissing' | 'splitInvalid'
-  | 'splitReasonMissing' | 'splitNotAllowed' | 'amountInvalid' | 'notRejectable';
+  | 'splitReasonMissing' | 'splitNotAllowed' | 'amountInvalid' | 'notRejectable' | import('../money/corrections').CorrectionError;
 
 /** Approves or rejects a waiting request, under the rental's lock. Logged approval.approve or approval.reject and a
  *  rental_event with the requester's reason, the note and any split. */
@@ -132,6 +138,12 @@ export async function decide(actorId: string, requestId: string, input: { approv
   const splitReason = tidy(input.splitReason);
   if (!input.approve && !note) return { error: 'noteMissing' };
   if (note.length > TEXT_MAX || splitReason.length > TEXT_MAX) return { error: 'tooLong' };
+  // A payment correction (#65) is decided by the money module, under the customer's lock first.
+  const [kind] = await db.select({ kind: approvalRequest.kind }).from(approvalRequest).where(eq(approvalRequest.id, requestId));
+  if (kind?.kind === 'correction') {
+    const { decideCorrection } = await import('../money/corrections');
+    return decideCorrection(actorId, requestId, { approve: input.approve, note: input.note });
+  }
   return db.transaction(async (tx) => {
     const me = await actor(tx, actorId);
     const [req] = await tx.select({ rentalId: approvalRequest.rentalId, kind: approvalRequest.kind }).from(approvalRequest).where(eq(approvalRequest.id, requestId));
@@ -239,7 +251,7 @@ export interface ApprovalRow extends Waiting {
  *  request as one to decide; the primary owner sees theirs (self-approved). Withdrawn requests are not listed. */
 export async function approvalsList(actorId: string, status: ListStatus): Promise<ApprovalRow[]> {
   const me = await actor(db, actorId);
-  const mayKinds = (['rate', 'discount', 'garageDays', 'split'] as const).filter((k) => me.may(decidesWith(k)));
+  const mayKinds = ALL_KINDS.filter((k) => me.may(decidesWith(k)));
   if (!mayKinds.length) return [];
   const decider = sql`(select name from "user" where id = ${approvalDecision.createdBy})`;
   const rows = await db.select({ ...requestCols, number: rental.number, customerName: customer.name, outcome: approvalDecision.outcome, note: approvalDecision.note,
@@ -248,7 +260,7 @@ export async function approvalsList(actorId: string, status: ListStatus): Promis
     .from(approvalRequest).innerJoin(user, eq(user.id, approvalRequest.createdBy)).innerJoin(rental, eq(rental.id, approvalRequest.rentalId))
     .innerJoin(customer, eq(customer.id, rental.customerId)).leftJoin(approvalDecision, eq(approvalDecision.requestId, approvalRequest.id))
     .where(status === 'waiting'
-      ? and(isNull(approvalDecision.id), sql`((${approvalRequest.kind} in ('rate', 'discount') and ${rental.status} in ('draft', 'active')) or (${approvalRequest.kind} in ('garageDays', 'split') and ${rental.status} = 'returned'))`,
+      ? and(isNull(approvalDecision.id), sql`((${approvalRequest.kind} in ('rate', 'discount') and ${rental.status} in ('draft', 'active')) or (${approvalRequest.kind} in ('garageDays', 'split') and ${rental.status} = 'returned') or ${approvalRequest.kind} = 'correction')`,
         inArray(approvalRequest.kind, mayKinds), me.a?.role === 'owner' ? sql`true` : sql`${approvalRequest.createdBy} <> ${actorId}`)
       : and(eq(approvalDecision.outcome, status), inArray(approvalRequest.kind, mayKinds))).orderBy(desc(approvalRequest.createdAt)).limit(100);
   const visible = rows;
@@ -270,12 +282,12 @@ export async function approvalsList(actorId: string, status: ListStatus): Promis
 /** How many requests wait for this person to decide (the menu's Approvals count). */
 export async function waitingCount(actorId: string): Promise<number> {
   const me = await actor(db, actorId);
-  const mayKinds = (['rate', 'discount', 'garageDays', 'split'] as const).filter((k) => me.may(decidesWith(k)));
+  const mayKinds = ALL_KINDS.filter((k) => me.may(decidesWith(k)));
   if (!mayKinds.length) return 0;
   const [r] = await db.select({ n: sql<number>`count(*)::int` }).from(approvalRequest).leftJoin(approvalDecision, eq(approvalDecision.requestId, approvalRequest.id))
     .innerJoin(rental, eq(rental.id, approvalRequest.rentalId))
     .where(and(isNull(approvalDecision.id), inArray(approvalRequest.kind, mayKinds),
-      sql`((${approvalRequest.kind} in ('rate', 'discount') and ${rental.status} in ('draft', 'active')) or (${approvalRequest.kind} in ('garageDays', 'split') and ${rental.status} = 'returned'))`,
+      sql`((${approvalRequest.kind} in ('rate', 'discount') and ${rental.status} in ('draft', 'active')) or (${approvalRequest.kind} in ('garageDays', 'split') and ${rental.status} = 'returned') or ${approvalRequest.kind} = 'correction')`,
       me.a?.role === 'owner' ? sql`true` : sql`${approvalRequest.createdBy} <> ${actorId}`));
   return r?.n ?? 0;
 }

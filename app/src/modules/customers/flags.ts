@@ -1,7 +1,8 @@
-import { and, desc, eq, isNull, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, isNull, sql } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/pg-core';
 import { db } from '../../db/client';
-import { auditEvent, customer, customerFlag, customerGoAhead, permissionGrant, user } from '../../db/schema';
+import { auditEvent, customer, customerFlag, customerGoAhead, permissionGrant, rental, user } from '../../db/schema';
+import { moneyOf } from '../money/figures';
 import { allows, type Permission } from '../../auth/permissions';
 import { todayColombo } from '../../lib/dates';
 
@@ -97,16 +98,16 @@ export interface Debt { total: number; rentals: { rentalId: string; number: numb
 export interface Warnings { openFlags: Flag[]; licenceExpired: boolean; licenceExpires: string | null; debt: Debt }
 
 /** The customer's unpaid debt (system design 6, 7.4; #77): for each returned rental, its bill less what was paid on it (with
- *  any deposit used for it, #64) and the deposit still held, when that is more than 0. It warns before every new rental until paid (or written off, #65). */
+ *  any deposit used for it, #64), the deposit still held and what was written off (#65), when that is more than 0. It warns before every new rental until paid (or written off, #65). */
 export async function debtOf(customerId: string, q: Tx | typeof db = db): Promise<Debt> {
-  const rows = await q.execute<{ id: string; number: number; unpaid: string }>(sql`
-    select r.id, r.number,
-      coalesce((select sum(amount) from charge where rental_id = r.id), 0)
-      - coalesce((select sum(amount) from payment_allocation where rental_id = r.id), 0)
-      - coalesce((select sum(amount) from deposit_movement where to_rental_id = r.id and kind = 'applied'), 0)
-      - coalesce((select sum(case when kind = 'received' then amount else -amount end) from deposit_movement where rental_id = r.id), 0) as unpaid
-    from rental r where r.customer_id = ${customerId} and r.status = 'returned' order by r.number`);
-  const rentals = rows.rows.map((r) => ({ rentalId: r.id, number: Number(r.number), unpaid: Number(r.unpaid) })).filter((r) => r.unpaid > 0);
+  const rows = await q.select({ id: rental.id, number: rental.number, bill: sql<string>`coalesce((select sum(amount) from charge c where c.rental_id = "rental"."id"), 0)` })
+    .from(rental).where(and(eq(rental.customerId, customerId), eq(rental.status, 'returned'))).orderBy(asc(rental.number));
+  // Paid, held and written off are added up in one place (money/figures.ts), as the bill and the payment cap read them.
+  const m = await moneyOf(q, rows.map((r) => r.id));
+  const rentals = rows.map((r) => {
+    const f = m.get(r.id);
+    return { rentalId: r.id, number: Number(r.number), unpaid: Number(r.bill) - (f?.paid ?? 0) - (f?.held ?? 0) - (f?.writtenOff ?? 0) };
+  }).filter((r) => r.unpaid > 0);
   return { total: rentals.reduce((n, r) => n + r.unpaid, 0), rentals };
 }
 

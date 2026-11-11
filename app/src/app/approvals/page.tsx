@@ -7,12 +7,14 @@ import { rentalNumber } from '../../modules/rentals/agreements';
 import { Notice } from '../../ui';
 import { AppFrame } from '../AppFrame';
 import { bearer } from './bearer';
+import { correctionText } from './correction-text';
 import '../cars/cars.css';
 import '../rentals/rentals.css';
 
 // Screen 10.1 Approvals (ST-10.1): the requests waiting for this person, with their effect on the bill and who bears it,
 // and the requester's reason word for word; approved and rejected ones too. A person never sees their own request as one
-// to decide; the primary owner's own is marked self-approved (DN-01). Needs "Change agreed rental price or grant discount".
+// to decide; the primary owner's own is marked self-approved (DN-01). Each person sees the kinds they may decide: price
+// changes, return money (#63) and payment corrections (#65).
 const TABS: ListStatus[] = ['waiting', 'approved', 'rejected'];
 
 
@@ -34,15 +36,16 @@ export default async function ApprovalsPage({ searchParams }: { searchParams: Pr
       {rows.length === 0 ? <p className="set-muted">{t(`none.${status}`)}</p> : null}
       {rows.map((a) => (
         <section key={a.id} className="car-card" aria-labelledby={`a-${a.id}`} data-approval={a.id} data-kind={a.kind}>
-          <h2 id={`a-${a.id}`}>{a.kind === 'split' ? t('kinds.split', { amount: money(a.chargeAmount ?? 0) }) : `${t(`kinds.${a.kind}`)} · ${signed(a.effect)}`}</h2>
+          <h2 id={`a-${a.id}`}>{a.kind === 'split' ? t('kinds.split', { amount: money(a.chargeAmount ?? 0) }) : a.kind === 'correction' ? t('kinds.correction') : `${t(`kinds.${a.kind}`)} · ${signed(a.effect)}`}</h2>
           <span className="set-muted">{`${rentalNumber(a.number)} · ${a.registration} · ${a.customerName} · ${a.partner ? t('partnerCar') : t('snsCar')}`}</span>
           <dl className="ren-lines">
             <dt>{t('requestedBy')}</dt><dd>{`${a.byName} · ${when(a.createdAt)}`}</dd>
             {a.kind === 'rate' ? <><dt>{t('rate')}</dt><dd>{t('rateValue', { was: money(a.rateWas), now: money(a.newDailyRate!), days: a.days })}</dd></>
               : a.kind === 'discount' ? <><dt>{t('discount')}</dt><dd>{money(a.discount!)}</dd></>
                 : a.kind === 'garageDays' ? <><dt>{t('garageDays')}</dt><dd>{t('garageValue', { days: a.garageDays ?? 0, amount: money(a.effect) })}</dd></>
+                  : a.kind === 'correction' ? <><dt>{t('correctionWhat')}</dt><dd data-correction={a.fix ?? ''}>{correctionText({ ...a, was: a.estimateWas }, tt, money)}</dd></>
                   : <><dt>{t(`lines.${a.chargeKind ?? 'damage'}`)}</dt><dd>{money(a.chargeAmount ?? 0)}</dd></>}
-            {a.kind !== 'split' ? <><dt>{t('effect')}</dt><dd>{signed(a.effect)}</dd></> : null}
+            {a.kind !== 'split' && a.kind !== 'correction' ? <><dt>{t('effect')}</dt><dd>{signed(a.effect)}</dd></> : null}
             {a.kind === 'rate' || a.kind === 'discount' ? <><dt>{t('whoBears')}</dt><dd>{bearer(a, tt, seeTerms)}</dd></> : null}
             {a.aboveTheirPackage ? <><dt>{t('extra')}</dt><dd>{t('extraValue', { extra: money(a.extra), package: money(a.packageRate) })}</dd></> : null}
             {a.outcome ? <><dt>{t('decidedBy')}</dt><dd>{`${a.decidedByName ?? ''} · ${a.decidedAt ? when(a.decidedAt) : ''}${a.selfApproved ? ` · ${t('selfApproved')}` : ''}`}</dd></> : null}

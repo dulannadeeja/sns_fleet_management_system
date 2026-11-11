@@ -7,6 +7,7 @@ import { rentalMoney } from '../../../modules/money/payments';
 import { rentalNumber } from '../../../modules/rentals/agreements';
 import { AppFrame } from '../../AppFrame';
 import { bearer } from '../bearer';
+import { correctionText } from '../correction-text';
 import { DecideForm } from './DecideForm';
 import '../../cars/cars.css';
 import '../../rentals/rentals.css';
@@ -22,13 +23,13 @@ export default async function DecidePage({ params, searchParams }: { params: Pro
   if (!a) notFound();
   // A line's split is decided, never rejected (#63).
   const approve = a.kind === 'split' ? true : a0;
-  const ret = a.kind === 'split' || a.kind === 'garageDays';
+  const ret = a.kind === 'split' || a.kind === 'garageDays' || a.kind === 'correction';
   const [t, format, money, mayShare, seeTerms] = await Promise.all([getTranslations('approvals'), getFormatter(), rentalMoney(a.rentalId), mayDo(person, 'sharePartnerCarSurcharge'), mayDo(person, 'seePartnerEarnings')]);
   const tt = t as unknown as (k: string, v?: Record<string, string | number>) => string;
   const m = (n: number) => format.number(n);
   const signed = (n: number) => (n < 0 ? `− ${m(-n)}` : `+ ${m(n)}`);
   const estimateAfter = Math.max(0, a.estimateWas + a.effect);
-  const paidAbove = money && approve && money.paid > (money.estimate + a.effect) ? money.paid - (money.estimate + a.effect) : 0;
+  const paidAbove = a.kind !== 'correction' && money && approve && money.paid > (money.estimate + a.effect) ? money.paid - (money.estimate + a.effect) : 0;
   const w = t.raw('form') as Record<string, string> & { errors: Record<string, string> };
   return (
     <AppFrame person={person} active="approvals" title={approve ? (a.aboveTheirPackage ? t('confirm.higher') : t('confirm.approve')) : t('confirm.reject')} subtitle={rentalNumber(a.number)} backHref="/approvals">
@@ -39,6 +40,7 @@ export default async function DecidePage({ params, searchParams }: { params: Pro
           {a.kind === 'rate' ? <><dt>{t('rate')}</dt><dd>{t('rateValue', { was: m(a.rateWas), now: m(a.newDailyRate!), days: a.days })}</dd></>
             : a.kind === 'discount' ? <><dt>{t('discount')}</dt><dd>{m(a.discount!)}</dd></>
               : a.kind === 'garageDays' ? <><dt>{t('garageDays')}</dt><dd>{t('garageValue', { days: a.garageDays ?? 0, amount: m(a.effect) })}</dd></>
+                : a.kind === 'correction' ? <><dt>{t('correctionWhat')}</dt><dd>{correctionText({ ...a, was: a.estimateWas }, tt, m)}</dd><dt>{t('correctionKept')}</dt><dd>{t('correctionKeptValue')}</dd></>
                 : <><dt>{t(`lines.${a.chargeKind ?? 'damage'}`)}</dt><dd>{m(a.chargeAmount ?? 0)}</dd></>}
           {!ret ? <><dt>{approve ? t('effect') : t('billStays')}</dt><dd>{approve ? signed(a.effect) : t('billStaysValue', { amount: m(a.estimateWas) })}</dd></> : null}
           {approve && !ret ? <><dt>{t('whoBears')}</dt><dd>{bearer(a, tt, seeTerms)}</dd><dt>{t('estimateAfter')}</dt><dd>{m(estimateAfter)}</dd></> : null}
@@ -47,7 +49,7 @@ export default async function DecidePage({ params, searchParams }: { params: Pro
         {paidAbove ? <span className="set-muted" data-paid-above>{t('paidAbove', { amount: m(paidAbove) })}</span> : null}
       </section>
       <DecideForm requestId={a.id} approve={approve} split={approve && a.aboveTheirPackage ? { extra: a.extra, packageRate: a.packageRate, days: a.days, commission: seeTerms ? a.commissionPercent : null, may: mayShare }
-          : approve && ret && (a.kind === 'split' || a.partner) ? { extra: a.kind === 'split' ? a.chargeAmount ?? 0 : a.effect, packageRate: 0, days: a.days, commission: null, may: true, line: true } : null}
+          : approve && ret && a.kind !== 'correction' && (a.kind === 'split' || a.partner) ? { extra: a.kind === 'split' ? a.chargeAmount ?? 0 : a.effect, packageRate: 0, days: a.days, commission: null, may: true, line: true } : null}
         w={w} history={t('history', { number: rentalNumber(a.number), name: a.byName })} />
     </AppFrame>
   );
