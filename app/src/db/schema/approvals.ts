@@ -1,4 +1,4 @@
-import { bigint, boolean, check, index, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { bigint, boolean, check, index, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { user } from './auth';
 import { rental } from './rentals';
@@ -13,6 +13,9 @@ export const approvalRequest = pgTable('approval_request', {
   kind: text('kind').notNull(),
   newDailyRate: bigint('new_daily_rate', { mode: 'number' }),
   discount: bigint('discount', { mode: 'number' }),
+  // Garage days proposed at return (#63), and the bill line whose split the admin decides (#63).
+  days: integer('days'),
+  chargeId: uuid('charge_id'),
   // The daily rate and the estimate when it was asked, so the effect shown is the effect asked for.
   rateWas: bigint('rate_was', { mode: 'number' }).notNull(),
   estimateWas: bigint('estimate_was', { mode: 'number' }).notNull(),
@@ -21,7 +24,7 @@ export const approvalRequest = pgTable('approval_request', {
   createdBy: uuid('created_by').notNull().references(() => user.id),
 }, (t) => [
   index('approval_request_by_rental').on(t.rentalId, t.createdAt.desc()),
-  check('approval_request_kind', sql`(kind = 'rate' and new_daily_rate between 1 and 100000 and discount is null) or (kind = 'discount' and discount >= 1 and new_daily_rate is null)`),
+  check('approval_request_kind', sql`(kind = 'rate' and new_daily_rate between 1 and 100000 and discount is null) or (kind = 'discount' and discount >= 1 and new_daily_rate is null) or (kind = 'garageDays' and days between 1 and 30) or (kind = 'split' and charge_id is not null)`),
 ]);
 
 /** The decision on a request: approved, rejected, withdrawn (by its sender) or closed (the rental ended first, 11 Nov

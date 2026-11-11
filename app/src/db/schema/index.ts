@@ -9,3 +9,4 @@ export * from './rentals';
 export * from './documents';
 export * from './money';
 export * from './approvals';
+export * from './returns';

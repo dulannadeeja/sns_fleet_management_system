@@ -17,7 +17,7 @@ export async function AppFrame({ person, active, title, subtitle, backHref, chil
   const lang = (await getLocale()) as Lang;
   const [partners, customers] = await Promise.all([mayDo(person, 'seePartnerEarnings'), mayDo(person, 'customerAccess')]);
   const overdue = customers ? await overdueCount() : 0;
-  const approvals = await mayDo(person, 'changePriceOrDiscount');
+  const approvals = (await mayDo(person, 'changePriceOrDiscount')) || (await mayDo(person, 'allocateDamageProceeds'));
   const waiting = approvals ? await waitingCount(person.id) : 0;
   return (
     <div className="set-desktop">

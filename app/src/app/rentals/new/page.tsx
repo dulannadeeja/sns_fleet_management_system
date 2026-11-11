@@ -18,7 +18,7 @@ import '../rentals.css';
 // Open flags and an expired licence warn; staff go on only with a decision to continue for exactly those warnings
 // (ST-08.4), which then belongs to this rental (system design 7.1, Confirmed 8 Nov 2026). A first rental needs
 // "Approve a first-time customer": saving it is the approval. Needs Customer access. Unpaid debts warn here too once
-// bills exist (#63; AT-55).
+// bills exist (#77; AT-55).
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export default async function NewRentalCustomer({ searchParams }: { searchParams: Promise<{ q?: string; customer?: string }> }) {

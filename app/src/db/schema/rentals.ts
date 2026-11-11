@@ -38,7 +38,7 @@ export const rental = pgTable('rental', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().default(sql`clock_timestamp()`),
 }, (t) => [
   index('rental_by_customer').on(t.customerId, t.createdAt.desc()),
-  check('rental_status', sql`status in ('draft', 'active', 'notCollected')`),
+  check('rental_status', sql`status in ('draft', 'active', 'notCollected', 'returned')`),
   check('rental_days', sql`days >= 1 AND days <= 90`),
   check('rental_deadline_after_pickup', sql`deadline_at > pickup_at`),
   check('rental_deposit', sql`(deposit_amount is null or deposit_amount between 1 and 500000) and not (deposit_amount is not null and deposit_waived_reason is not null)`),

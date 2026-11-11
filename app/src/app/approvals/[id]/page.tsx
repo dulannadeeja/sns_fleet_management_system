@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getFormatter, getTranslations } from 'next-intl/server';
-import { requirePermission } from '../../../auth/require';
+import { requireDecider } from '../decider';
 import { mayDo } from '../../../auth/access';
 import { approvalsList } from '../../../modules/approvals/approvals';
 import { rentalMoney } from '../../../modules/money/payments';
@@ -15,11 +15,14 @@ import '../../rentals/rentals.css';
 // ST-10.3): the confirm step repeats the effect and who bears it. Rejecting needs a note; a rate above a partner car's
 // package needs the partner's rupees of the extra, with a reason. The module checks everything again.
 export default async function DecidePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ do?: string }> }) {
-  const person = await requirePermission('changePriceOrDiscount');
+  const person = await requireDecider();
   const { id } = await params;
-  const approve = (await searchParams).do !== 'reject';
+  const a0 = (await searchParams).do !== 'reject';
   const a = (await approvalsList(person.id, 'waiting')).find((x) => x.id === id);
   if (!a) notFound();
+  // A line's split is decided, never rejected (#63).
+  const approve = a.kind === 'split' ? true : a0;
+  const ret = a.kind === 'split' || a.kind === 'garageDays';
   const [t, format, money, mayShare, seeTerms] = await Promise.all([getTranslations('approvals'), getFormatter(), rentalMoney(a.rentalId), mayDo(person, 'sharePartnerCarSurcharge'), mayDo(person, 'seePartnerEarnings')]);
   const tt = t as unknown as (k: string, v?: Record<string, string | number>) => string;
   const m = (n: number) => format.number(n);
@@ -34,14 +37,17 @@ export default async function DecidePage({ params, searchParams }: { params: Pro
         <dl className="ren-lines">
           <dt>{t('rental')}</dt><dd>{`${rentalNumber(a.number)} · ${a.registration} · ${a.model}`}</dd>
           {a.kind === 'rate' ? <><dt>{t('rate')}</dt><dd>{t('rateValue', { was: m(a.rateWas), now: m(a.newDailyRate!), days: a.days })}</dd></>
-            : <><dt>{t('discount')}</dt><dd>{m(a.discount!)}</dd></>}
-          <dt>{approve ? t('effect') : t('billStays')}</dt><dd>{approve ? signed(a.effect) : t('billStaysValue', { amount: m(a.estimateWas) })}</dd>
-          {approve ? <><dt>{t('whoBears')}</dt><dd>{bearer(a, tt, seeTerms)}</dd><dt>{t('estimateAfter')}</dt><dd>{m(estimateAfter)}</dd></> : null}
+            : a.kind === 'discount' ? <><dt>{t('discount')}</dt><dd>{m(a.discount!)}</dd></>
+              : a.kind === 'garageDays' ? <><dt>{t('garageDays')}</dt><dd>{t('garageValue', { days: a.garageDays ?? 0, amount: m(a.effect) })}</dd></>
+                : <><dt>{t(`lines.${a.chargeKind ?? 'damage'}`)}</dt><dd>{m(a.chargeAmount ?? 0)}</dd></>}
+          {!ret ? <><dt>{approve ? t('effect') : t('billStays')}</dt><dd>{approve ? signed(a.effect) : t('billStaysValue', { amount: m(a.estimateWas) })}</dd></> : null}
+          {approve && !ret ? <><dt>{t('whoBears')}</dt><dd>{bearer(a, tt, seeTerms)}</dd><dt>{t('estimateAfter')}</dt><dd>{m(estimateAfter)}</dd></> : null}
         </dl>
         <span><span style={{ fontWeight: 600 }}>{t('reason', { name: a.byName })}</span> <q>{a.reason}</q></span>
         {paidAbove ? <span className="set-muted" data-paid-above>{t('paidAbove', { amount: m(paidAbove) })}</span> : null}
       </section>
-      <DecideForm requestId={a.id} approve={approve} split={approve && a.aboveTheirPackage ? { extra: a.extra, packageRate: a.packageRate, days: a.days, commission: seeTerms ? a.commissionPercent : null, may: mayShare } : null}
+      <DecideForm requestId={a.id} approve={approve} split={approve && a.aboveTheirPackage ? { extra: a.extra, packageRate: a.packageRate, days: a.days, commission: seeTerms ? a.commissionPercent : null, may: mayShare }
+          : approve && ret && (a.kind === 'split' || a.partner) ? { extra: a.kind === 'split' ? a.chargeAmount ?? 0 : a.effect, packageRate: 0, days: a.days, commission: null, may: true, line: true } : null}
         w={w} history={t('history', { number: rentalNumber(a.number), name: a.byName })} />
     </AppFrame>
   );

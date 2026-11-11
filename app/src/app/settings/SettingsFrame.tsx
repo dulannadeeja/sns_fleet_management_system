@@ -26,7 +26,7 @@ export async function SettingsFrame({ person, active, subtitle, backHref, childr
   return (
     <div className="set-desktop">
       <NavRail labels={{ menu: t('frame.menu'), overdue: t('frame.overdue'), waiting: t('frame.waiting'), show: t('frame.show') }} items={railItems(person, 'settings', t, lang, { partners: await mayDo(person, 'seePartnerEarnings'), customers, overdue: customers ? await overdueCount() : 0,
-        approvals: await mayDo(person, 'changePriceOrDiscount'), waiting: await waitingCount(person.id) })} />
+        approvals: (await mayDo(person, 'changePriceOrDiscount')) || (await mayDo(person, 'allocateDamageProceeds')), waiting: await waitingCount(person.id) })} />
       <div className="set-body">
         <AppHeader title={title} subtitle={subtitle} user={person.name} role={t(`settings.roles.${person.role as 'owner'}`)} lang={lang} langLabel={t('frame.language')} />
         <div className="set-phone-head">

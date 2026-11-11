@@ -313,7 +313,9 @@
           "handover": "{plate} {target} ට භාර දුන්නා, {number}",
           "photoAdd": "{target} ගේ {number} ට car photo එකක් දැම්මා",
           "photoOpened": "{target} ගේ {number} car photo එකක් open කළා",
-          "carFreed": "{target} ගේ {number} කුලියෙන් {plate} නිදහස් කළා, අරගෙන ගියේ නැහැ: {reason}"
+          "carFreed": "{target} ගේ {number} කුලියෙන් {plate} නිදහස් කළා, අරගෙන ගියේ නැහැ: {reason}",
+          "return": "{target} ගෙන් {plate} ආපහු ගත්තා, {number}",
+          "garageCorrected": "{target} ගේ {number} කුලියේ garage දින නිවැරදි කළා"
         },
         "document": {
           "wordingAdd": "ගිවිසුමේ වචන {version} වෙනි version එක එකතු කළා",
@@ -1736,7 +1738,9 @@
         "priceRequest": "වෙනත් මිලක් ඉල්ලුවා: {reason}",
         "approval": "මිල ඉල්ලීම තීරණය කළා: {outcome}{note}",
         "approvalWithdrawn": "මිල ඉල්ලීම අයින් කළා",
-        "approvalClosed": "මිල ඉල්ලීම වැසුණා: කුලිය ඉවර වුණා"
+        "approvalClosed": "මිල ඉල්ලීම වැසුණා: කුලිය ඉවර වුණා",
+        "return": "ආපහු ගත්තා · km {km}",
+        "garageCorrected": "Garage දින නිවැරදි කළා: {reason}"
       },
       "approved": "අනුමතයි",
       "rejected": "ප්‍රතික්ෂේපයි"
@@ -1783,7 +1787,125 @@
         "alreadyWaiting": "මේ කුලියට දැනටමත් ඉල්ලීමක් බලාපොරොත්තුවෙන් තියෙනවා.",
         "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න."
       }
-    }
+    },
+    "return": {
+      "title": "Car එක ආපහු ගන්න",
+      "start": "Car එක ආපහු ගන්න",
+      "done": "Car එක ආපහු ගත්තා. බිල පහළින්.",
+      "garageSaved": "Garage දින නිවැරදි කළා.",
+      "odometer": "Odometer",
+      "inKm": "එන odometer එක (km)",
+      "inKmHint": "ගිය කියවීම: km {km}. ඊට අඩු වෙන්න බැහැ.",
+      "driven": "ගිය km {driven} · ඇතුළත් {included} · වැඩි {extra} × {rate}",
+      "fuel": "දැන් fuel මට්ටම (ගියේ: {out})",
+      "litres": "අඩු ලීටර් (සම්පූර්ණ ලීටර්)",
+      "litresHint": "ලීටරයට රු. {price} යි, 100% SNS.",
+      "fuelWaive": "Fuel ගාස්තුව අත්හරින්න",
+      "fuelSameNote": "එකම මට්ටම හරි වැඩි හරි: fuel පේළියක් නැහැ. වැඩි මට්ටමට ආපහු ගෙවන්නේ නැහැ.",
+      "fuelNotCounted": "මේ කුලියේ fuel ගණන් කරන්නේ නැහැ: fuel පේළියක් නැහැ.",
+      "takenOut": "අරගත්ත fuel (ලීටර්, ඇස්තමේන්තුව · ඕනේ නම්)",
+      "takenOutHint": "Gauge එකෙන් කියවන නිසා හැමවිටම ඇස්තමේන්තුවක්. ලීටර් විතරයි: මුදල් වටිනාකමක් නැහැ.",
+      "accessories": "උපාංග",
+      "missingAtHandover": "භාර දෙනකොටත් අඩුයි, කවදාවත් අය කරන්නේ නැහැ",
+      "checkedBox": "මම car එක බැලුවා; tick නොකළ දේවල් අඩුයි.",
+      "itemAmount": "{item} ට ගාස්තුව (රු.)",
+      "itemHint": "රු. 1 සිට 500,000, නැත්නම් හේතුවක් එක්ක 0 (අය කරන්නේ නැහැ).",
+      "itemHintPartner": "රු. 1 සිට 500,000, නැත්නම් හේතුවක් එක්ක 0. Partner car: කාටද කියලා admin තීරණය කරනවා.",
+      "itemReason": "අය නොකරන්නේ ඇයි",
+      "late": "පරක්කුයි +{h}h {m}m · නියමිත වේලාව {deadline}",
+      "lateAmount": "පරක්කු ගාස්තුව (රු.)",
+      "lateHint": "රු. 1 සිට 100,000. Car එකේ commission එකට අනුවයි. ඉබේ අය කරන්නේ නැහැ.",
+      "lateWaive": "පරක්කු ගාස්තුව අත්හරින්න",
+      "reason": "හේතුව",
+      "damage": "හානිය",
+      "damageFound": "මේ car එකේ හානියක් තියෙනවා",
+      "damageWhat": "මොකක්ද වුණේ",
+      "damageAmount": "හානි ගාස්තුව (රු.)",
+      "garageDays": "Garage දින (ඕනේ නම්)",
+      "garageHint": "මේ හානියට විතරයි, සැලසුම් කළ service එකකට කවදාවත් නැහැ: car එක repair එකට යන්න ඕනේ. දින 1 සිට 30 × රු. {rate}. Admin අනුමත කරනවා.",
+      "next": "Car එකේ ඊළඟ තත්ත්වය",
+      "nextNote": "ඔයා වෙනුවෙන් මුකුත් තෝරලා නැහැ.",
+      "states": {
+        "available": "නිදහස්",
+        "repair": "අලුත්වැඩියාවට",
+        "unavailable": "තාවකාලිකව කුලියට නැහැ"
+      },
+      "billPreview": "බිල (පෙරදසුන)",
+      "previewLine": "රු. {total} පමණ · ගෙවපු {paid} · තියාගත් deposit {deposit}",
+      "payLater": "ගෙවන්න තියෙන රු. {unpaid}: පස්සේ ගෙවීමට සටහන",
+      "payLaterHint": "උදාහරණයක්: \"සිකුරාදා ගෙවනවා\". ඒක පාරිභෝගිකයාගේ ණය වෙනවා.",
+      "payLaterNotAllowed": "රු. {unpaid} ගෙවලා නැහැ, ආපහු දුන්නාට පස්සේ ගෙවන්න ඔයාට අවසර දෙන්න බැහැ. මුලින් ගෙවීමක් සටහන් කරන්න, නැත්නම් පුළුවන් කෙනෙකුගෙන් අහන්න.",
+      "billNote": "Save කරනකොට කුලියේ save කළ කොන්දේසි වලින් බිල ආයෙත් හදනවා. Deposit එක පාවිච්චි කරලා ඉතුරු එක ඊළඟ පියවරේදී ආපහු දෙනවා.",
+      "save": "ආපහු ගැනීම save කරන්න",
+      "garageTitle": "බිලේ garage දින: {days}",
+      "garageDaysNow": "දැන් garage දින (car එක ආවාම)",
+      "garagePartner": "වෙනසෙන් partner ට රුපියල්",
+      "garagePartnerHint": "වෙනසේ ලකුණමයි, උපරිම ඔක්කොම.",
+      "garageReason": "හේතුව",
+      "garageSave": "Garage දින නිවැරදි කරන්න",
+      "errors": {
+        "notAllowed": "Car ආපහු ගන්න ඔයාට අවසර නැහැ.",
+        "notFound": "මේ කුලිය හම්බ වුණේ නැහැ.",
+        "notOut": "මේ car එක මේ කුලියේ එළියේ නැහැ.",
+        "kmInvalid": "Odometer එක සම්පූර්ණ km වලින් ලියන්න, 0 සිට 999,999.",
+        "kmLower": "ගිය කියවීමට (km {km}) වඩා අඩුයි.",
+        "fuelInvalid": "Fuel මට්ටම තෝරන්න.",
+        "notChecked": "Car එක බැලුවා කියලා box එක tick කරන්න.",
+        "listChanged": "උපාංග ලැයිස්තුව භාර දෙනකොට tick කරපු එක නෙවෙයි. පිටුව ආයෙත් open කරන්න.",
+        "nextInvalid": "Car එකේ ඊළඟ තත්ත්වය තෝරන්න.",
+        "nextReasonMissing": "Car එක repair එකට හරි නැති තත්ත්වයට හරි යන්නේ ඇයි කියලා ලියන්න.",
+        "notLate": "Car එක පරක්කු නැහැ: පරක්කු ගාස්තුවක් නැහැ.",
+        "lateMissing": "Car එක පරක්කුයි: පරක්කු ගාස්තුවක් ලියන්න, නැත්නම් හේතුවක් එක්ක අත්හරින්න.",
+        "lateInvalid": "පරක්කු ගාස්තුව රු. 1 සිට 100,000.",
+        "fuelMissing": "Fuel භාර දුන්නාට වඩා අඩුයි: අඩු ලීටර් ලියන්න, නැත්නම් හේතුවක් එක්ක අත්හරින්න.",
+        "fuelNotLower": "Fuel භාර දුන්නාට වඩා අඩු නැහැ: fuel ගාස්තුවක් නැහැ.",
+        "litresInvalid": "සම්පූර්ණ ලීටර් ලියන්න, 1 සිට 100.",
+        "accessoryMissing": "{item} අඩුයි: ගාස්තුවක් ලියන්න, නැත්නම් හේතුවක් එක්ක 0.",
+        "accessoryNotMissing": "{item} අඩු නැහැ.",
+        "amountInvalid": "සම්පූර්ණ රුපියල් ලියන්න, 0 සිට 500,000.",
+        "reasonMissing": "{item} අය නොකරන්නේ ඇයි කියලා ලියන්න.",
+        "damageInvalid": "වුණේ මොකක්ද කියලා සහ රු. 1 සිට 500,000 හානි ගාස්තුවක් ලියන්න.",
+        "garageInvalid": "Garage දින 1 සිට 30.",
+        "garageNeedsDamage": "Garage දින වලට මේ ආපහු ගැනීමේ හානියක් සටහන් කරන්න ඕනේ (සැලසුම් කළ service එකකට කවදාවත් නැහැ).",
+        "garageNeedsRepair": "Garage දින එක්ක car එකේ ඊළඟ තත්ත්වය අලුත්වැඩියාවට වෙන්න ඕනේ.",
+        "tooLong": "ඒක දිග වැඩියි (උපරිම අකුරු 500).",
+        "payLaterNotAllowed": "රු. {unpaid} ගෙවලා නැහැ. \"Allow payment after return\" අවසරය තියෙන කෙනෙකුට විතරයි මේක save කරන්න පුළුවන්.",
+        "payLaterNoteMissing": "රු. {unpaid} ගෙවලා නැහැ: පස්සේ ගෙවීමට සටහනක් ලියන්න.",
+        "notReturned": "මේ කුලිය ආපහු දීලා නැහැ.",
+        "daysInvalid": "Garage දින 0 සිට 30.",
+        "noGarageDays": "මේ බිලේ garage දින නැහැ.",
+        "sameDays": "ඒ දැනටමත් බිලේ තියෙන ගණනමයි.",
+        "splitMissing": "වෙනසෙන් partner ට රුපියල් ලියන්න.",
+        "splitInvalid": "Partner ගේ රුපියල් වෙනසේ ලකුණමයි, උපරිම ඔක්කොම.",
+        "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න.",
+        "noFuelPrice": "මේ කුලියට save කළ fuel මිලක් නැහැ: හේතුවක් එක්ක fuel ගාස්තුව අත්හරින්න."
+      }
+    },
+    "bill": {
+      "title": "බිල",
+      "kinds": {
+        "rent": "කුලිය · දින {days}",
+        "rentExtra": "Package එකට උඩින් · දින {days}",
+        "longRental": "දිගු කුලී අමතර · දින {days}",
+        "discount": "වට්ටම (අනුමත)",
+        "extraKm": "වැඩි km · {km}",
+        "late": "පරක්කුවෙන් ආපසු",
+        "fuel": "ඉන්ධන · L {litres}",
+        "accessory": "අඩුයි: {item}",
+        "damage": "හානිය: {what}",
+        "garageDays": "Garage දින · {days}"
+      },
+      "waiting": "admin එනකන්",
+      "sns": "SNS",
+      "split": "partner {partner} · SNS {sns}",
+      "total": "මුළු එකතුව",
+      "paid": "ගෙව්වා",
+      "depositHeld": "තියාගත් deposit",
+      "unpaid": "ගෙවන්න තියෙනවා",
+      "toRefund": "බිලට වඩා වැඩි",
+      "refundNote": "Deposit එකෙන් බිල ගෙවලා ඉතුරු එක ඊළඟ පියවරේදී ආපහු දෙනවා (ticket #64)."
+    },
+    "statusReturned": "ආපහු දුන්නා"
   },
   "agreementDoc": {
     "title": "කුලී ගිවිසුම",
@@ -1846,7 +1968,9 @@
     },
     "kinds": {
       "rate": "මිල වෙනස",
-      "discount": "වට්ටම"
+      "discount": "වට්ටම",
+      "garageDays": "Garage දින",
+      "split": "{amount} කාටද"
     },
     "partnerCar": "partner car",
     "snsCar": "SNS ගේ",
@@ -1910,9 +2034,18 @@
         "splitReasonMissing": "අමතර එක මෙහෙම බෙදන්නේ ඇයි කියලා ලියන්න.",
         "splitNotAllowed": "Package එකට උඩින් මිල බෙදන්න \"Share an above-package price on a partner car\" අවසරය ඕනේ.",
         "amountInvalid": "වට්ටම දැන් ඇස්තමේන්තුවට වඩා වැඩියි. ප්‍රතික්ෂේප කරලා ආයෙත් ඉල්ලන්න.",
-        "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න."
+        "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න.",
+        "notRejectable": "බෙදීමක් තීරණය කරනවා, ප්‍රතික්ෂේප කරන්නේ නැහැ: partner ගේ රුපියල් ලියන්න."
       },
-      "partnerExtraHintPlain": "0 සිට {extra}. 0 නම් අමතර ඔක්කොම SNS ට. Package මුදල හැමවිටම car එකේ commission එකට අනුවයි."
+      "partnerExtraHintPlain": "0 සිට {extra}. 0 නම් අමතර ඔක්කොම SNS ට. Package මුදල හැමවිටම car එකේ commission එකට අනුවයි.",
+      "lineSplitTitle": "{extra} කාටද",
+      "lineHint": "Partner ට රුපියල්, 0 සිට {extra}. 0 නම් ඔක්කොම SNS ට. ඔයා තීරණය කරනකන් partner ගේ ආදායමට එකතු වෙන්නේ නැහැ."
+    },
+    "garageDays": "Garage දින",
+    "garageValue": "දින {days} · {amount}",
+    "lines": {
+      "damage": "හානිය",
+      "accessory": "අඩු උපාංගය"
     }
   }
 }

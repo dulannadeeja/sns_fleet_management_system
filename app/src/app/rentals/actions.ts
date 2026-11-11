@@ -9,6 +9,7 @@ import { addReference, addReferenceCopy, REF_COPY_KINDS } from '../../modules/cu
 import { MAX_COPY_BYTES } from '../../storage/kinds';
 import { paymentNumber, recordPayment, type Method, type PaymentFor } from '../../modules/money/payments';
 import { addHandoverPhoto, freeCar, handOver, type FuelLevel } from '../../modules/rentals/handover';
+import { correctGarageDays, receiveCar, type NextState } from '../../modules/rentals/returns';
 
 // New rental (#51): requirePermission("Customer access"), then the rentals module, which checks everything again in one
 // transaction and writes the activity log. The pickup is the moment of the save (05.3 shows "now").
@@ -182,4 +183,46 @@ export async function freeCarAction(rentalId: string, _: FreeState, form: FormDa
   revalidatePath(`/rentals/${rentalId}`);
   revalidatePath('/rentals/new/car');
   redirect(`/rentals/${rentalId}?freed=1`);
+}
+
+// Receive the car (07.1, 07.2; #63). The form sends its choices as one JSON field (kept in React state); the returns
+// module checks everything again under the car's and the rental's locks and writes the activity log.
+export type ReturnState = { error?: string; payload?: string; outKm?: number; lateMinutes?: number; item?: string; unpaid?: number };
+
+export async function receiveCarAction(rentalId: string, _: ReturnState, form: FormData): Promise<ReturnState> {
+  const person = await requirePermission('customerAccess');
+  const payload = String(form.get('payload') ?? '');
+  if (!UUID.test(rentalId) || payload.length > 20_000) return { error: 'failed' };
+  let input: Record<string, unknown>;
+  try { input = JSON.parse(payload); } catch { return { error: 'failed', payload }; }
+  if (!input || typeof input !== 'object') return { error: 'failed', payload };
+  const n = (v: unknown) => { const s = String(v ?? '').replace(/,/g, '').trim(); return s === '' ? undefined : /^\d{1,9}$/.test(s) ? Number(s) : NaN; };
+  const o = (v: unknown) => (v && typeof v === 'object' ? (v as Record<string, unknown>) : {});
+  const late = o(input.late); const fuelCharge = o(input.fuelCharge); const damage = o(input.damage);
+  const result = await receiveCar(person.id, rentalId, {
+    inKm: n(input.inKm) ?? NaN, fuel: String(input.fuel ?? '') as FuelLevel, checked: input.checked === true,
+    accessories: Array.isArray(input.accessories) ? input.accessories : [], fuelTakenOut: n(input.fuelTakenOut) ?? null,
+    ...(input.late ? { late: late.waive === true ? { waiveReason: String(late.reason ?? '') } : { amount: n(late.amount) } } : {}),
+    ...(input.fuelCharge ? { fuelCharge: fuelCharge.waive === true ? { waiveReason: String(fuelCharge.reason ?? '') } : { litres: n(fuelCharge.litres) } } : {}),
+    accessoryCharges: Array.isArray(input.accessoryCharges) ? (input.accessoryCharges as Record<string, unknown>[]).map((c) => ({ item: String(c?.item ?? ''), amount: n(c?.amount) ?? NaN, reason: String(c?.reason ?? '') })) : [],
+    ...(input.damage ? { damage: { what: String(damage.what ?? ''), amount: n(damage.amount) ?? NaN } } : {}),
+    ...(n(input.garageDays) !== undefined ? { garageDays: n(input.garageDays) } : {}),
+    nextState: String(input.nextState ?? '') as NextState, nextReason: String(input.nextReason ?? ''), payLaterNote: String(input.payLaterNote ?? ''),
+  });
+  if ('error' in result) return { ...result, payload };
+  revalidatePath(`/rentals/${rentalId}`);
+  revalidatePath('/rentals');
+  redirect(`/rentals/${rentalId}?returned=1`);
+}
+
+export type GarageState = { error?: string; values?: Record<string, string> };
+
+export async function correctGarageAction(rentalId: string, _: GarageState, form: FormData): Promise<GarageState> {
+  const person = await requirePermission('allocateDamageProceeds');
+  const values = { days: String(form.get('days') ?? ''), reason: String(form.get('reason') ?? ''), partnerRupees: String(form.get('partnerRupees') ?? '') };
+  const num = (s: string) => (/^-?\d{1,9}$/.test(s.replace(/,/g, '').trim()) ? Number(s.replace(/,/g, '').trim()) : NaN);
+  const r = await correctGarageDays(person.id, rentalId, { days: num(values.days), reason: values.reason, ...(values.partnerRupees.trim() ? { partnerRupees: num(values.partnerRupees) } : {}) });
+  if ('error' in r) return { error: r.error, values };
+  revalidatePath(`/rentals/${rentalId}`);
+  redirect(`/rentals/${rentalId}?garage=1`);
 }

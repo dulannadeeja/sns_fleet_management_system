@@ -3,6 +3,7 @@ import { db } from '../../db/client';
 import { auditEvent, cashMovement, customer, depositMovement, payment, paymentAllocation, permissionGrant, reconciliation, rental, rentalEvent, user } from '../../db/schema';
 import { allows } from '../../auth/permissions';
 import { rentalEstimate } from '../rentals/rentals';
+import { billTotal } from '../rentals/returns';
 
 // Record a payment (09.3, 09.4; ST-09.1; system design 8.1, 8.2, 9; Confirmed 9 Nov 2026). Anyone with Customer access.
 // A payment is for a bill (shared across the customer's rentals, each at most what is unpaid on its estimate before
@@ -18,8 +19,8 @@ export const REFERENCE_MAX = 80;
 export const REASON_MAX = 500;
 export const PARTS_MAX = 5;
 export const RENTALS_MAX = 10;
-/** The rental states a payment can go on: saved and handed over (return adds its own, #63). */
-export const PAYABLE_STATES = ['draft', 'active'] as const;
+/** The rental states a payment can go on: saved, out, and returned with part of its bill unpaid (#63). */
+export const PAYABLE_STATES = ['draft', 'active', 'returned'] as const;
 export type Method = (typeof METHODS)[number];
 export type PaymentFor = (typeof PAYMENT_FOR)[number];
 export type Check = 'waiting' | 'matched' | 'flagged';
@@ -54,6 +55,13 @@ async function depositReceived(q: Q, rentalIds: string[]) {
   const rows = await q.select({ id: depositMovement.rentalId, sum: sql<string>`sum(${depositMovement.amount})` }).from(depositMovement)
     .where(and(inArray(depositMovement.rentalId, rentalIds), eq(depositMovement.kind, 'received'))).groupBy(depositMovement.rentalId);
   return new Map(rows.map((r) => [r.id, Number(r.sum)]));
+}
+
+/** What a rental is expected to cost: its bill once returned (#63), else its estimate (with any approved price). */
+async function amountDue(q: Q, rentalId: string): Promise<number | null> {
+  const bill = await billTotal(q, rentalId);
+  if (bill !== null) return bill;
+  return (await rentalEstimate(rentalId, undefined, q))?.total ?? null;
 }
 
 /** The deposit received so far on a rental (setRentalTerms refuses a deposit below it). */
@@ -107,13 +115,16 @@ export async function recordPayment(actorId: string, input: PaymentInput): Promi
       const r = rentals.find((x) => x.id === t.rentalId.toLowerCase());
       if (!r || r.customerId !== input.customerId.toLowerCase()) return { error: 'notFound', rentalId: t.rentalId } as const;
       if (!(PAYABLE_STATES as readonly string[]).includes(r.status)) return { error: 'notPayable', rentalId: t.rentalId } as const;
+      // After return the deposit is used or refunded (#64), never taken: only bill payments then (#63 review).
+      if (input.for === 'deposit' && r.status === 'returned') return { error: 'notPayable', rentalId: t.rentalId } as const;
     }
     if (input.for === 'bill') {
       const paid = await paidOn(tx, ids);
       for (const t of targets) {
-        const est = await rentalEstimate(t.rentalId, undefined, tx);
-        if (!est) return { error: 'notFound', rentalId: t.rentalId } as const;
-        if (t.amount > est.total - (paid.get(t.rentalId.toLowerCase()) ?? 0)) return { error: 'overEstimate', rentalId: t.rentalId } as const;
+        // Before return the estimate; after return the bill (#63).
+        const total = await amountDue(tx, t.rentalId);
+        if (total === null) return { error: 'notFound', rentalId: t.rentalId } as const;
+        if (t.amount > total - (paid.get(t.rentalId.toLowerCase()) ?? 0)) return { error: 'overEstimate', rentalId: t.rentalId } as const;
       }
     } else {
       const r = rentals[0];
@@ -175,8 +186,9 @@ export interface RentalMoney { estimate: number; paid: number; unpaid: number; d
 export async function rentalMoney(rentalId: string): Promise<RentalMoney | null> {
   if (!UUID.test(rentalId)) return null;
   const [r] = await db.select({ id: rental.id, deposit: rental.depositAmount }).from(rental).where(eq(rental.id, rentalId));
-  const est = r && await rentalEstimate(r.id);
-  if (!r || !est) return null;
+  const due = r ? await amountDue(db, r.id) : null;
+  if (!r || due === null) return null;
+  const est = { total: due };
   const paid = (await paidOn(db, [r.id])).get(r.id) ?? 0;
   const received = (await depositReceived(db, [r.id])).get(r.id) ?? 0;
   const check = sql<Check | null>`(select status from reconciliation where payment_id = ${payment.id} order by created_at desc limit 1)`;
@@ -202,8 +214,9 @@ export async function payableRentals(customerId: string): Promise<PayableRental[
   const [paid, received] = await Promise.all([paidOn(db, ids), depositReceived(db, ids)]);
   const out: PayableRental[] = [];
   for (const r of rows) {
-    const est = await rentalEstimate(r.id);
-    if (!est) continue;
+    const due = await amountDue(db, r.id);
+    if (due === null) continue;
+    const est = { total: due };
     const p = paid.get(r.id) ?? 0;
     out.push({ id: r.id, number: r.number, estimate: est.total, paid: p, unpaid: est.total - p, depositSet: r.deposit, depositReceived: received.get(r.id) ?? 0 });
   }

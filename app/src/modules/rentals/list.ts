@@ -44,7 +44,8 @@ export async function listRentals(opts: { filter?: Filter; now?: Date } = {}): P
   const groups: Record<Group, ListRow[]> = { overdue: [], dueBack: [], handover: [], other: [] };
   // The checklist only for saved rentals still in time (past their return time they cannot go out: shown as such),
   // all at once rather than one after another.
-  const inTime = rows.filter((r) => r.status === 'draft' && r.deadlineAt.getTime() > now.getTime());
+  // At most the 50 newest: an office has a few saved rentals at a time; the rest show without their progress.
+  const inTime = rows.filter((r) => r.status === 'draft' && r.deadlineAt.getTime() > now.getTime()).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()).slice(0, 50);
   const checks = new Map((await Promise.all(inTime.map(async (r) => [r.id, await handoverChecklist(r.id)] as const))));
   for (const r of rows) {
     const lateMinutes = minutesLate(r, now);
