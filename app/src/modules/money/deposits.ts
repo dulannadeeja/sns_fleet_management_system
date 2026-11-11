@@ -65,7 +65,7 @@ export async function depositState(rentalId: string, q: Q = db): Promise<Deposit
     .where(and(eq(approvalRequest.rentalId, r.id), eq(approvalRequest.kind, 'garageDays'), isNull(approvalDecision.id))).limit(1);
   return {
     rentalId: r.id, number: r.number, customerId: r.customerId, returned: r.status === 'returned', held: money.depositHeld, billTotal: total ?? 0,
-    billUnpaid: Math.max(0, (total ?? 0) - money.paid), older: debt.rentals.filter((d) => d.rentalId !== r.id), garageWaiting: !!waiting, settlement,
+    billUnpaid: Math.max(0, (total ?? 0) - money.paid - money.writtenOff), older: debt.rentals.filter((d) => d.rentalId !== r.id), garageWaiting: !!waiting, settlement,
   };
 }
 

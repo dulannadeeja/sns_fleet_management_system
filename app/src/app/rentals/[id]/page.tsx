@@ -17,6 +17,8 @@ import { minutesLate, rentalHistory } from '../../../modules/rentals/list';
 import { waitingFor } from '../../../modules/approvals/approvals';
 import { PriceForm, WithdrawForm } from './PriceForm';
 import { BillSection } from './BillSection';
+import { correctionsOn } from '../../../modules/money/corrections';
+import { correctionText } from '../../approvals/correction-text';
 import { mayDo } from '../../../auth/access';
 import { rentalDays } from '../../../lib/rental-days';
 import { Notice, PlateBadge, type Lang } from '../../../ui';
@@ -26,7 +28,7 @@ import '../rentals.css';
 
 // A saved rental (#51), until Rental details (06.2) comes with #58: who, which car, from when to when, the estimate from
 // its own saved terms. The deposit, agreement and handover come with #54, #55 and #57. Needs Customer access.
-export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string; handedOver?: string; freed?: string; asked?: string; withdrawn?: string; returned?: string; garage?: string; deposit?: string }> }) {
+export default async function RentalPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; terms?: string; copy?: string; signed?: string; paid?: string; handedOver?: string; freed?: string; asked?: string; withdrawn?: string; returned?: string; garage?: string; deposit?: string; correction?: string; paidBack?: string }> }) {
   const person = await requirePermission('customerAccess');
   const r = await rentalTerms((await params).id);
   if (!r) notFound();
@@ -36,6 +38,10 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
   const money = (n: number) => format.number(n);
   const seg = r.segments[0];
   const [ready, w, tk, agr, cash] = await Promise.all([rentalReadiness(r.id), rentalWords(), getTranslations('customers'), agreementState(r.id), rentalMoney(r.id)]);
+  const [corrections, ta] = await Promise.all([correctionsOn(r.id), getTranslations('approvals')]);
+  const tc = ta as unknown as (k: string, v?: Record<string, string | number>) => string;
+  // A decided payment correction (#65) reads as its own sentence, not as a price request.
+  const hk = (e: { kind: string; details: Record<string, unknown> }) => (e.kind === 'approval' && e.details.kind === 'correction' ? 'correctionDecided' : e.kind);
   const handed = r.status === 'active' ? await handoverOf(r.id) : null;
   const photos = (await handoverChecklist(r.id))?.photos ?? [];
   const th = await getTranslations('rentals.handover');
@@ -58,6 +64,8 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
       {sp.returned === '1' && r.status === 'returned' ? <Notice>{t('return.done')}</Notice> : null}
       {sp.garage === '1' ? <Notice>{t('return.garageSaved')}</Notice> : null}
       {sp.deposit === '1' ? <Notice>{t('deposit.done')}</Notice> : null}
+      {sp.correction === '1' ? <Notice>{t('correct.sent')}</Notice> : null}
+      {sp.paidBack === '1' ? <Notice>{t('payBack.done')}</Notice> : null}
       {typeof sp.paid === 'string' && /^P-\d{4,}(,P-\d{4,})*$/.test(sp.paid) ? <Notice>{t('pay.saved', { numbers: sp.paid.replace(/,/g, ', ') })}</Notice> : null}
       {sp.saved === '1' ? <Notice>{t('saved', { plate: car?.registration ?? '', deadline: when(r.deadlineAt) })}</Notice> : null}
       {lateMinutes > 0 ? (
@@ -143,10 +151,20 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
                   {p.reference ? ` · ${t('pay.lineRef', { reference: p.reference })}` : ''}
                   {` · ${t('pay.by', { name: p.createdByName, date: when(p.createdAt) })}`}
                   {p.check ? ` · ${t(p.check === 'waiting' ? 'pay.checkWaiting' : p.check === 'matched' ? 'pay.checkMatched' : 'pay.checkFlagged')}` : ''}
+                  {' · '}<Link href={`/rentals/${r.id}/payments/${p.id}/correct`} data-correct-link>{t('correct.link')}</Link>
                 </li>
               ))}
             </ul>
           ) : <span className="set-muted">{t('pay.none')}</span>}
+          {corrections.length ? (
+            <ul className="set-muted" style={{ margin: 0, paddingLeft: 18 }} data-corrections={corrections.length}>
+              {corrections.map((c) => {
+                const what = correctionText({ ...c }, tc, money);
+                return <li key={c.id} data-correction-state={c.outcome ?? 'waiting'}>{!c.outcome ? t('correct.waiting', { what }) : c.outcome === 'approved' ? t('correct.approved', { what })
+                  : t('correct.rejected', { what, note: c.note ? ` · ${c.note}` : '' })}</li>;
+              })}
+            </ul>
+          ) : null}
           {r.status === 'draft' || r.status === 'active' || (r.status === 'returned' && cash.unpaid > 0) ? <div><Link className="rt-btn rt-btn-secondary" href={`/rentals/${r.id}/pay`}>{t('pay.record')}</Link></div> : null}
         </section>
       ) : null}
@@ -167,7 +185,7 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
         <div><Link className="rt-btn rt-btn-primary" href={`/rentals/${r.id}/handover`}>{th('start')}</Link></div>
       ) : null}
       {r.status === 'active' ? <div><Link className="rt-btn rt-btn-primary" href={`/rentals/${r.id}/return`}>{t('return.start')}</Link></div> : null}
-      {r.status === 'returned' ? <BillSection rentalId={r.id} seeTerms={await mayDo(person, 'seePartnerEarnings')} mayCorrect={await mayDo(person, 'allocateDamageProceeds')}
+      {r.status === 'returned' ? <BillSection rentalId={r.id} seeTerms={await mayDo(person, 'seePartnerEarnings')} mayCorrect={await mayDo(person, 'allocateDamageProceeds')} mayPayBack={await mayDo(person, 'refundsAndExpenses')}
         partner={seg.commissionPercent !== null} w={w.return as unknown as Record<string, string> & { errors: Record<string, string> }} /> : null}
       {est && (r.status === 'draft' || r.status === 'active') ? (
         <section className="car-card" aria-labelledby="p-h" data-price>
@@ -203,7 +221,8 @@ export default async function RentalPage({ params, searchParams }: { params: Pro
           {history.map((e) => (
             <li key={e.id} data-event={e.kind}>
               <span className="set-muted">{`${when(e.createdAt)} · ${e.byName ?? ''}`}</span>
-              <span>{t.has(`history.kinds.${e.kind}` as 'history.kinds.created') ? t(`history.kinds.${e.kind}` as 'history.kinds.created', {
+              <span>{t.has(`history.kinds.${hk(e)}` as 'history.kinds.created') ? t(`history.kinds.${hk(e)}` as 'history.kinds.created', {
+                payment: e.details.payment ? paymentNumber(Number(e.details.payment)) : '',
                 amount: money(Number(e.details.amount ?? 0)), km: money(Number(e.details.outKm ?? e.details.inKm ?? 0)), days: String(e.details.days ?? ''),
                 here: money(Number(e.details.here ?? 0)), refund: money(Number(e.details.refund ?? 0)), from: e.details.from ? rentalNumber(Number(e.details.from)) : '',
                 reason: String(e.details.reason ?? ''), for: e.details.for === 'deposit' ? t('history.forDeposit') : t('history.forBill'),

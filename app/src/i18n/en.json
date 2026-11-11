@@ -291,7 +291,8 @@
           "goAhead": "went ahead with {target} despite the warnings: {reason}",
           "referenceAdd": "added {reference} as a reference person for {target}",
           "referenceCopyAdd": "added a copy of reference person {reference} ({target}): {copy}",
-          "referenceCopyOpened": "opened a copy of reference person {reference} ({target}): {copy}"
+          "referenceCopyOpened": "opened a copy of reference person {reference} ({target}): {copy}",
+          "writeOff": "wrote off LKR {amount} of {target}'s debt: {reason}"
         },
         "package": {
           "add": "added the starting package {target} ({models})",
@@ -316,14 +317,16 @@
           "carFreed": "freed {plate} from {target}'s rental {number}, not collected: {reason}",
           "return": "received {plate} back from {target}, {number}",
           "garageCorrected": "corrected the garage days on {target}'s rental {number}",
-          "depositSettle": "settled the deposit of {target}'s rental {number}"
+          "depositSettle": "settled the deposit of {target}'s rental {number}",
+          "payBack": "paid back LKR {amount} above the bill of {target}'s rental {number}"
         },
         "document": {
           "wordingAdd": "added agreement wording version {version}",
           "wordingApprove": "approved agreement wording version {version}"
         },
         "payment": {
-          "record": "recorded payment {number} from {target}: LKR {amount}, {method}, {for} ({rentals})"
+          "record": "recorded payment {number} from {target}: LKR {amount}, {method}, {for} ({rentals})",
+          "correctionAsk": "asked to correct payment {paymentNumber} on {target}'s rental {number}: {fix}"
         },
         "approval": {
           "request": "asked for a different price on {target}'s rental {number}",
@@ -1312,6 +1315,41 @@
       "nicFront": "NIC front",
       "nicBack": "NIC back",
       "licence": "Driving licence"
+    },
+    "writeOff": {
+      "title": "Write off a debt",
+      "debt": "Customer debt",
+      "reason": "Reason",
+      "reasonHint": "Why SNS will stop collecting this. At most 500 letters.",
+      "howMuch": "How much",
+      "all": "All of it",
+      "part": "Part of it",
+      "partHint": "the rest stays as debt",
+      "amount": "Amount to write off (LKR)",
+      "whatTitle": "What happens",
+      "what1": "SNS bears the loss. No partner's earnings change.",
+      "what2": "The debt drops by this amount, oldest rentals first; the bills stay as they were.",
+      "what3": "The activity log keeps your name, the reason and the time.",
+      "what4": "The customer's page keeps a note that a debt was written off.",
+      "only": "Only the authorised person can write off. Until someone is given \"Write off a customer debt\" in Settings, only the owner can.",
+      "save": "Write off LKR {amount}",
+      "link": "Write off a debt",
+      "list": "Written off",
+      "line": "{when} · {by} · LKR {amount}",
+      "rentals": "From {rentals}",
+      "done": "The debt was written off.",
+      "none": "No debt to write off.",
+      "errors": {
+        "notAllowed": "Only the authorised person can write off a debt.",
+        "notFound": "This customer was not found.",
+        "reasonMissing": "Write the reason.",
+        "tooLong": "The reason is at most 500 letters.",
+        "amountInvalid": "Type the amount in whole rupees.",
+        "noDebt": "This customer has no debt.",
+        "overDebt": "That is more than the debt.",
+        "stale": "The debt changed since this page opened. Open the page again.",
+        "failed": "It could not be saved. Try again."
+      }
     }
   },
   "rentals": {
@@ -1745,7 +1783,12 @@
         "return": "Received · {km} km",
         "garageCorrected": "Garage days corrected: {reason}",
         "depositSettled": "Deposit settled · LKR {here} on this bill, LKR {refund} refunded",
-        "depositFromOther": "LKR {amount} paid from the deposit of {from}"
+        "depositFromOther": "LKR {amount} paid from the deposit of {from}",
+        "correctionRequest": "Payment correction asked for {payment}: {reason}",
+        "correctionDecided": "Payment correction for {payment} decided: {outcome}{note}",
+        "correctionMovedIn": "LKR {amount} of {payment} moved here from {from}",
+        "writtenOff": "LKR {amount} written off: {reason}",
+        "paidBack": "LKR {amount} paid back above the bill"
       },
       "approved": "approved",
       "rejected": "rejected"
@@ -1908,7 +1951,9 @@
       "depositHeld": "Deposit held",
       "unpaid": "Unpaid",
       "toRefund": "Over the bill",
-      "refundNote": "Over the bill: refund the rest with \"Use the deposit and refund\"."
+      "refundNote": "Over the bill: refund the rest with \"Use the deposit and refund\".",
+      "writtenOff": "Written off",
+      "paidBack": "Paid back"
     },
     "statusReturned": "Returned",
     "deposit": {
@@ -1961,6 +2006,93 @@
         "referenceMissing": "Type the bank transfer reference.",
         "tooLong": "Too long: a note at most 500 letters, a reference at most 80.",
         "stale": "Something changed since this page opened (a payment or the bill). Open the page again.",
+        "failed": "It could not be saved. Try again."
+      }
+    },
+    "correct": {
+      "title": "Correct a payment",
+      "recordedNow": "Recorded now",
+      "kept": "kept",
+      "rental": "Rental",
+      "how": "How",
+      "amount": "Amount",
+      "recordedBy": "Recorded by",
+      "what": "What is wrong",
+      "required": "required",
+      "fixes": {
+        "amount": "Amount",
+        "method": "Cash / bank / card",
+        "reference": "Reference",
+        "rental": "Wrong rental"
+      },
+      "should": "What it should be",
+      "newAmount": "Correct amount (LKR)",
+      "newAmountHint": "0 if the money never came.",
+      "newReference": "Correct reference",
+      "referenceHint": "At most 80 letters.",
+      "toRental": "The right rental",
+      "noOther": "This customer has no other rental it can move to.",
+      "otherLine": "{number} · LKR {unpaid} unpaid",
+      "reason": "Reason",
+      "reasonHint": "What you found, for example on the bank statement. At most 500 letters.",
+      "note": "The original payment is never changed or deleted. An admin approves or rejects this request; if approved, the correction is added as a new dated line and both stay in the rental's history.",
+      "send": "Send to admin",
+      "link": "Ask for a correction",
+      "waiting": "Correction waiting: {what}",
+      "approved": "Corrected: {what}",
+      "rejected": "Correction rejected: {what}{note}",
+      "sent": "The correction was sent to an admin.",
+      "deposit": "Deposit",
+      "bill": "Bill",
+      "errors": {
+        "notAllowed": "You don't have permission to do this.",
+        "notFound": "This payment was not found on this rental.",
+        "fixInvalid": "Choose what is wrong.",
+        "reasonMissing": "Write the reason.",
+        "tooLong": "Too long: a reason at most 500 letters, a reference at most 80.",
+        "alreadyWaiting": "A correction for this payment is already waiting for an admin.",
+        "failed": "It could not be sent. Try again.",
+        "newAmountInvalid": "Type the correct amount in whole rupees.",
+        "sameAmount": "That is the amount already recorded.",
+        "overBill": "That would put more on the rental than its bill (or estimate).",
+        "overDeposit": "That would be more than the deposit set.",
+        "depositSettled": "This deposit is already settled: it can no longer be corrected.",
+        "methodInvalid": "Choose cash, bank or card.",
+        "sameMethod": "That is how it was already recorded.",
+        "referenceMissing": "Type the reference.",
+        "cashNoReference": "A cash payment has no reference.",
+        "sameReference": "That is the reference already recorded.",
+        "depositNotMovable": "A deposit payment cannot be moved to another rental.",
+        "rentalInvalid": "Choose another rental of this customer that can still be paid.",
+        "nothingToMove": "Nothing is left of this payment on this rental."
+      }
+    },
+    "payBack": {
+      "title": "Pay back money above the bill",
+      "above": "Paid above the bill",
+      "amount": "Amount to pay back (LKR)",
+      "how": "Pay back by",
+      "cash": "Cash",
+      "cashHint": "from the drawer",
+      "bank": "Bank",
+      "bankHint": "transfer",
+      "reference": "Transfer reference",
+      "note": "The bill was lowered after it was paid. Paying back is not an expense; cash shows in the drawer as its own line.",
+      "save": "Pay back LKR {amount}",
+      "done": "The money was paid back.",
+      "link": "Pay back the money above the bill",
+      "line": "Paid back LKR {amount} · {method} · {when} · {by}",
+      "noRight": "Paying back money needs \"Issue refunds or pay expenses\". Ask an admin.",
+      "errors": {
+        "notAllowed": "Paying back money needs \"Issue refunds or pay expenses\".",
+        "notFound": "This rental was not found.",
+        "notReturned": "The car is not back yet.",
+        "amountInvalid": "Type the amount in whole rupees.",
+        "nothingAbove": "Nothing was paid above this bill.",
+        "overAbove": "That is more than was paid above the bill.",
+        "methodMissing": "Choose cash or bank.",
+        "referenceMissing": "Type the bank transfer reference.",
+        "tooLong": "The reference is at most 80 letters.",
         "failed": "It could not be saved. Try again."
       }
     }
@@ -2028,7 +2160,8 @@
       "rate": "Price change",
       "discount": "Discount",
       "garageDays": "Garage days",
-      "split": "Who gets the {amount}"
+      "split": "Who gets the {amount}",
+      "correction": "Payment correction"
     },
     "partnerCar": "partner car",
     "snsCar": "SNS-owned",
@@ -2093,7 +2226,20 @@
         "splitNotAllowed": "Splitting an above-package price needs \"Share an above-package price on a partner car\".",
         "amountInvalid": "The discount is now more than the estimate. Reject it and ask again.",
         "failed": "Something went wrong. Nothing was saved. Try again.",
-        "notRejectable": "A split is decided, not rejected: type the partner's rupees."
+        "notRejectable": "A split is decided, not rejected: type the partner's rupees.",
+        "newAmountInvalid": "Type the correct amount in whole rupees.",
+        "sameAmount": "That is the amount already recorded.",
+        "overBill": "That would put more on the rental than its bill (or estimate).",
+        "overDeposit": "That would be more than the deposit set.",
+        "depositSettled": "This deposit is already settled: it can no longer be corrected.",
+        "methodInvalid": "Choose cash, bank or card.",
+        "sameMethod": "That is how it was already recorded.",
+        "referenceMissing": "Type the reference.",
+        "cashNoReference": "A cash payment has no reference.",
+        "sameReference": "That is the reference already recorded.",
+        "depositNotMovable": "A deposit payment cannot be moved to another rental.",
+        "rentalInvalid": "Choose another rental of this customer that can still be paid.",
+        "nothingToMove": "Nothing is left of this payment on this rental."
       },
       "partnerExtraHintPlain": "0 to {extra}. 0 keeps all of the extra for SNS. The package amount always follows the car's commission.",
       "lineSplitTitle": "Who gets the {extra}",
@@ -2104,6 +2250,20 @@
     "lines": {
       "damage": "Damage",
       "accessory": "Missing accessory"
+    },
+    "correctionWhat": "What should change",
+    "correctionKept": "The payment",
+    "correctionKeptValue": "stays as it was taken; the fix is a new dated line",
+    "fixes": {
+      "amount": "Amount: {was} → {now}",
+      "method": "Way: {method}{reference}",
+      "reference": "Reference: {reference}",
+      "rental": "Move {amount} to {rental}"
+    },
+    "methods": {
+      "cash": "Cash",
+      "bank": "Bank transfer",
+      "card": "Card"
     }
   }
 }

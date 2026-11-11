@@ -1,6 +1,6 @@
 import { and, asc, eq, inArray, sql } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { approvalDecision, approvalRequest, auditEvent, charge, customer, depositMovement, paymentAllocation, permissionGrant, rental, rentalEvent, rentalHandover,
+import { approvalDecision, approvalRequest, auditEvent, charge, customer, permissionGrant, rental, rentalEvent, rentalHandover,
   rentalReturn, rentalVehicleSegment, user, vehicle, vehicleHold, vehicleStatusEvent } from '../../db/schema';
 import { allows, type Permission } from '../../auth/permissions';
 import { splitShare } from '../../lib/money';
@@ -9,6 +9,7 @@ import { FUEL_LEVELS, KM_MAX, type FuelLevel } from './handover';
 import { minutesLate } from './list';
 import { rentalNumber } from './agreements';
 import { closeWaiting } from '../approvals/approvals';
+import { moneyOne } from '../money/figures';
 
 // Receive the car and settle the bill (07.1, 07.2; ST-07.1, ST-07.2; system design 7.4 "Receiving the car", 8.4, 6, 11;
 // Confirmed 11 Nov 2026). Anyone with Customer access receives a car that is out: the incoming odometer (not below the
@@ -52,14 +53,10 @@ async function actor(q: Q, id: string) {
 
 /** What is paid on a rental's bill and the deposit held now (received; applied and refunded with #64). */
 export async function paidAndHeld(q: Q, rentalId: string) {
-  // Paid: payments put on this bill and any deposit used for it (#64, this rental's or another's). Held: the deposit
-  // received on this rental less what its settlement used or refunded. debtOf (customers/flags.ts) counts the same way.
-  const [p] = await q.select({ n: sql<string>`coalesce(sum(${paymentAllocation.amount}), 0)` }).from(paymentAllocation).where(eq(paymentAllocation.rentalId, rentalId));
-  const [a] = await q.select({ n: sql<string>`coalesce(sum(${depositMovement.amount}), 0)` }).from(depositMovement)
-    .where(and(eq(depositMovement.toRentalId, rentalId), eq(depositMovement.kind, 'applied')));
-  const [d] = await q.select({ n: sql<string>`coalesce(sum(case when ${depositMovement.kind} = 'received' then ${depositMovement.amount} else -${depositMovement.amount} end), 0)` })
-    .from(depositMovement).where(eq(depositMovement.rentalId, rentalId));
-  return { paid: Number(p.n) + Number(a.n), depositHeld: Number(d.n) };
+  // One place adds it up (money/figures.ts): payments and their corrections, any deposit used for this bill, less money
+  // paid back above it; the deposit still held; what was written off (#64, #65).
+  const f = await moneyOne(q, rentalId);
+  return { paid: f.paid, depositHeld: f.held, writtenOff: f.writtenOff, refunded: f.refunded };
 }
 
 /** Receives the car: checks everything again under the car's and the rental's locks, saves the return and the bill. */
@@ -198,7 +195,7 @@ export async function receiveCar(actorId: string, rentalId: string, input: Retur
 }
 
 export interface BillLine { id: string; kind: string; amount: number; details: Record<string, unknown>; reason: string | null; allocation: string; partnerShare: number | null; waiting: boolean; createdAt: Date }
-export interface Bill { lines: BillLine[]; total: number; partnerTotal: number; paid: number; depositHeld: number; unpaid: number; returnedAt: Date | null }
+export interface Bill { lines: BillLine[]; total: number; partnerTotal: number; paid: number; depositHeld: number; writtenOff: number; refunded: number; unpaid: number; returnedAt: Date | null }
 
 /** A returned rental's bill: each line with who gets it (a line the admin splits shows the admin's decision, or waits). */
 export async function rentalBill(rentalId: string, q: Q = db): Promise<Bill | null> {
@@ -219,7 +216,7 @@ export async function rentalBill(rentalId: string, q: Q = db): Promise<Bill | nu
   const total = lines.reduce((n, l) => n + l.amount, 0);
   const m = await paidAndHeld(q, rentalId);
   return { lines, total, partnerTotal: lines.reduce((n, l) => n + (l.partnerShare ?? 0), 0), paid: m.paid, depositHeld: m.depositHeld,
-    unpaid: total - m.paid - m.depositHeld, returnedAt: ret.at };
+    writtenOff: m.writtenOff, refunded: m.refunded, unpaid: total - m.paid - m.depositHeld - m.writtenOff, returnedAt: ret.at };
 }
 
 /** The sum of a rental's bill lines (payments on a returned rental are capped by it). */

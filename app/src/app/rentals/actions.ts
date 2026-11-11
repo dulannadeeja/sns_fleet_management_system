@@ -11,6 +11,8 @@ import { paymentNumber, recordPayment, type Method, type PaymentFor } from '../.
 import { addHandoverPhoto, freeCar, handOver, type FuelLevel } from '../../modules/rentals/handover';
 import { correctGarageDays, receiveCar, type NextState } from '../../modules/rentals/returns';
 import { settleDeposit, type RefundMethod } from '../../modules/money/deposits';
+import { askCorrection, type Fix } from '../../modules/money/corrections';
+import { payBack } from '../../modules/money/writeoffs';
 
 // New rental (#51): requirePermission("Customer access"), then the rentals module, which checks everything again in one
 // transaction and writes the activity log. The pickup is the moment of the save (05.3 shows "now").
@@ -250,4 +252,42 @@ export async function settleDepositAction(rentalId: string, _: DepositState, for
   if ('error' in result) return { error: result.error, payload };
   revalidatePath(`/rentals/${rentalId}`);
   redirect(`/rentals/${rentalId}?deposit=1`);
+}
+
+// Ask for a payment correction (09.5; #65). The form sends its choices as one JSON field; the corrections module checks
+// everything under the customer's and the rental's locks and writes the activity log.
+export type CorrectState = { error?: string };
+
+export async function askCorrectionAction(rentalId: string, paymentId: string, _: CorrectState, form: FormData): Promise<CorrectState> {
+  const person = await requirePermission('customerAccess');
+  const payload = String(form.get('payload') ?? '');
+  if (!UUID.test(rentalId) || !UUID.test(paymentId) || payload.length > 5_000) return { error: 'failed' };
+  let input: Record<string, unknown>;
+  try { input = JSON.parse(payload); } catch { return { error: 'failed' }; }
+  if (!input || typeof input !== 'object') return { error: 'failed' };
+  const raw = String(input.amount ?? '').replace(/,/g, '').trim();
+  const fix = String(input.fix ?? '') as Fix;
+  const r = await askCorrection(person.id, rentalId, paymentId, {
+    fix, reason: String(input.reason ?? ''),
+    ...(fix === 'amount' ? { newAmount: /^\d{1,9}$/.test(raw) ? Number(raw) : NaN } : {}),
+    ...(fix === 'method' ? { newMethod: String(input.method ?? '') as Method } : {}),
+    ...(fix === 'method' || fix === 'reference' ? { newReference: String(input.reference ?? '') } : {}),
+    ...(fix === 'rental' ? { toRentalId: String(input.toRental ?? '') } : {}),
+  });
+  if ('error' in r) return { error: r.error };
+  revalidatePath(`/rentals/${rentalId}`);
+  redirect(`/rentals/${rentalId}?correction=1`);
+}
+
+// Pay back money above a lowered bill (#65): cash or bank with its reference; checked again under the locks.
+export type PayBackState = { error?: string; values?: Record<string, string> };
+
+export async function payBackAction(rentalId: string, _: PayBackState, form: FormData): Promise<PayBackState> {
+  const person = await requirePermission('refundsAndExpenses');
+  const values = { amount: String(form.get('amount') ?? ''), method: String(form.get('method') ?? ''), reference: String(form.get('reference') ?? '') };
+  const raw = values.amount.replace(/,/g, '').trim();
+  const r = await payBack(person.id, rentalId, { amount: /^\d{1,9}$/.test(raw) ? Number(raw) : NaN, method: values.method as 'cash' | 'bank', reference: values.reference });
+  if ('error' in r) return { error: r.error, values };
+  revalidatePath(`/rentals/${rentalId}`);
+  redirect(`/rentals/${rentalId}?paidBack=1`);
 }

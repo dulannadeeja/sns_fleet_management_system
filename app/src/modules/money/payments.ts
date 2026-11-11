@@ -4,6 +4,7 @@ import { auditEvent, cashMovement, customer, depositMovement, payment, paymentAl
 import { allows } from '../../auth/permissions';
 import { rentalEstimate } from '../rentals/rentals';
 import { billTotal } from '../rentals/returns';
+import { moneyOf } from './figures';
 
 // Record a payment (09.3, 09.4; ST-09.1; system design 8.1, 8.2, 9; Confirmed 9 Nov 2026). Anyone with Customer access.
 // A payment is for a bill (shared across the customer's rentals, each at most what is unpaid on its estimate before
@@ -44,26 +45,20 @@ const whole = (n: unknown): n is number => Number.isSafeInteger(n) && (n as numb
 
 type Q = Parameters<Parameters<typeof db.transaction>[0]>[0] | typeof db;
 
+/** Paid on each rental, and what is covered: paid plus written off, which can no longer be paid (figures.ts, #65). */
 async function paidOn(q: Q, rentalIds: string[]) {
-  if (!rentalIds.length) return new Map<string, number>();
-  const rows = await q.select({ id: paymentAllocation.rentalId, sum: sql<string>`sum(${paymentAllocation.amount})` }).from(paymentAllocation)
-    .where(inArray(paymentAllocation.rentalId, rentalIds)).groupBy(paymentAllocation.rentalId);
-  const out = new Map(rows.map((r) => [r.id, Number(r.sum)]));
-  // A deposit used for a bill (#64) counts as paid on it, so it is never paid twice.
-  const used = await q.select({ id: depositMovement.toRentalId, sum: sql<string>`sum(${depositMovement.amount})` }).from(depositMovement)
-    .where(and(inArray(depositMovement.toRentalId, rentalIds), eq(depositMovement.kind, 'applied'))).groupBy(depositMovement.toRentalId);
-  for (const u of used) out.set(u.id!, (out.get(u.id!) ?? 0) + Number(u.sum));
-  return out;
+  const m = await moneyOf(q, rentalIds);
+  return new Map([...m].map(([id, f]) => [id, { paid: f.paid, covered: f.paid + f.writtenOff }]));
 }
 async function depositReceived(q: Q, rentalIds: string[]) {
   if (!rentalIds.length) return new Map<string, number>();
   const rows = await q.select({ id: depositMovement.rentalId, sum: sql<string>`sum(${depositMovement.amount})` }).from(depositMovement)
-    .where(and(inArray(depositMovement.rentalId, rentalIds), eq(depositMovement.kind, 'received'))).groupBy(depositMovement.rentalId);
+    .where(and(inArray(depositMovement.rentalId, rentalIds), inArray(depositMovement.kind, ['received', 'adjusted']))).groupBy(depositMovement.rentalId);
   return new Map(rows.map((r) => [r.id, Number(r.sum)]));
 }
 
 /** What a rental is expected to cost: its bill once returned (#63), else its estimate (with any approved price). */
-async function amountDue(q: Q, rentalId: string): Promise<number | null> {
+export async function amountDue(q: Q, rentalId: string): Promise<number | null> {
   const bill = await billTotal(q, rentalId);
   if (bill !== null) return bill;
   return (await rentalEstimate(rentalId, undefined, q))?.total ?? null;
@@ -129,7 +124,7 @@ export async function recordPayment(actorId: string, input: PaymentInput): Promi
         // Before return the estimate; after return the bill (#63).
         const total = await amountDue(tx, t.rentalId);
         if (total === null) return { error: 'notFound', rentalId: t.rentalId } as const;
-        if (t.amount > total - (paid.get(t.rentalId.toLowerCase()) ?? 0)) return { error: 'overEstimate', rentalId: t.rentalId } as const;
+        if (t.amount > total - (paid.get(t.rentalId.toLowerCase())?.covered ?? 0)) return { error: 'overEstimate', rentalId: t.rentalId } as const;
       }
     } else {
       const r = rentals[0];
@@ -194,7 +189,8 @@ export async function rentalMoney(rentalId: string): Promise<RentalMoney | null>
   const due = r ? await amountDue(db, r.id) : null;
   if (!r || due === null) return null;
   const est = { total: due };
-  const paid = (await paidOn(db, [r.id])).get(r.id) ?? 0;
+  const m = (await paidOn(db, [r.id])).get(r.id) ?? { paid: 0, covered: 0 };
+  const paid = m.paid;
   const received = (await depositReceived(db, [r.id])).get(r.id) ?? 0;
   const check = sql<Check | null>`(select status from reconciliation where payment_id = ${payment.id} order by created_at desc limit 1)`;
   const cols = { id: payment.id, number: payment.number, method: payment.method, reference: payment.reference, createdAt: payment.createdAt, createdByName: user.name, check };
@@ -205,7 +201,7 @@ export async function rentalMoney(rentalId: string): Promise<RentalMoney | null>
   const payments = [...bills.map((b) => ({ ...b, for: 'bill' as const })), ...deps.map((d) => ({ ...d, for: 'deposit' as const }))]
     .map((p) => ({ ...p, method: p.method as Method, amount: Number(p.amount) }))
     .sort((x, y) => x.createdAt.getTime() - y.createdAt.getTime() || x.number - y.number);
-  return { estimate: est.total, paid, unpaid: est.total - paid, depositSet: r.deposit, depositReceived: received, payments };
+  return { estimate: est.total, paid, unpaid: est.total - m.covered, depositSet: r.deposit, depositReceived: received, payments };
 }
 
 export interface PayableRental { id: string; number: number; estimate: number; paid: number; unpaid: number; depositSet: number | null; depositReceived: number }
@@ -222,8 +218,8 @@ export async function payableRentals(customerId: string): Promise<PayableRental[
     const due = await amountDue(db, r.id);
     if (due === null) continue;
     const est = { total: due };
-    const p = paid.get(r.id) ?? 0;
-    out.push({ id: r.id, number: r.number, estimate: est.total, paid: p, unpaid: est.total - p, depositSet: r.deposit, depositReceived: received.get(r.id) ?? 0 });
+    const p = paid.get(r.id) ?? { paid: 0, covered: 0 };
+    out.push({ id: r.id, number: r.number, estimate: est.total, paid: p.paid, unpaid: est.total - p.covered, depositSet: r.deposit, depositReceived: received.get(r.id) ?? 0 });
   }
   return out;
 }

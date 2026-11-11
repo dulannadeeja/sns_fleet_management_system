@@ -5,6 +5,9 @@ import { requirePermission } from '../../../auth/require';
 import { COPY_KINDS, getCustomer } from '../../../modules/customers/customers';
 import { listActivity } from '../../../modules/activity/activity';
 import { flagsOf, goAheadsOf, debtOf } from '../../../modules/customers/flags';
+import { writeOffsOf } from '../../../modules/money/writeoffs';
+import { rentalNumber } from '../../../modules/rentals/agreements';
+import { mayDo } from '../../../auth/access';
 import { CloseFlagForm } from '../FlagForms';
 import { Notice } from '../../../ui';
 import { AppFrame } from '../../AppFrame';
@@ -15,12 +18,12 @@ import '../customers.css';
 
 // Screen 08.2 Customer details (ST-08.3): details, warnings, document copies and what happened. Full NIC and phone, no
 // masking (PR-13). Flags and the check before a rental (#24); debts and rentals (Phase 2) fill in later. Needs customer access.
-export default async function CustomerPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; existing?: string; copy?: string; nic?: string; flag?: string }> }) {
+export default async function CustomerPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string; existing?: string; copy?: string; nic?: string; flag?: string; writtenOff?: string }> }) {
   const person = await requirePermission('customerAccess');
   const c = await getCustomer((await params).id);
   if (!c) notFound();
   const [t, tLog, w, format, q, { entries }] = await Promise.all([getTranslations('customers'), getTranslations('settings.log'), customerWords(), getFormatter(), searchParams, listActivity({ targetId: c.id, limit: 50 })]);
-  const [flags, decisions, fw, debt] = await Promise.all([flagsOf(c.id), goAheadsOf(c.id), flagWords(), debtOf(c.id)]);
+  const [flags, decisions, fw, debt, writeOffs, mayWriteOff] = await Promise.all([flagsOf(c.id), goAheadsOf(c.id), flagWords(), debtOf(c.id), writeOffsOf(c.id), mayDo(person, 'writeOffDebt')]);
   const open = flags.filter((f) => !f.closedAt);
   const when = (d: Date) => format.dateTime(d, { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Colombo' });
   const day = (d: string) => format.dateTime(new Date(`${d}T00:00:00Z`), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -36,6 +39,8 @@ export default async function CustomerPage({ params, searchParams }: { params: P
       kind: tc.has(`flags.kinds.${kind}`) ? tc(`flags.kinds.${kind}`) : kind, details: String(e.details?.details ?? ''), reason: String(e.details?.reason ?? ''),
       // customer.reference*: the reference person's name (#54; missing until #57 review).
       reference: String(e.details?.reference ?? ''),
+      // customer.writeOff (#65): the amount written off.
+      amount: format.number(Number(e.details?.amount ?? 0)),
     });
   };
   return (
@@ -44,6 +49,7 @@ export default async function CustomerPage({ params, searchParams }: { params: P
       {q.saved === '1' ? <Notice>{t('saved')}</Notice> : null}
       {q.copy === '1' ? <Notice>{t('copyAdded')}</Notice> : null}
       {q.nic === '1' ? <Notice>{t('nicFixed')}</Notice> : null}
+      {q.writtenOff === '1' ? <Notice>{t('writeOff.done')}</Notice> : null}
       {q.flag === 'added' ? <Notice>{t('flags.added')}</Notice> : q.flag === 'closed' ? <Notice>{t('flags.closedDone')}</Notice> : q.flag === 'decided' ? <Notice>{t('flags.decided')}</Notice> : null}
       <section className="car-card">
         <div className="car-top">
@@ -64,6 +70,7 @@ export default async function CustomerPage({ params, searchParams }: { params: P
         {open.map((f) => <Notice key={f.id} tone="warning">{`${t('flags.flagWarn', { kind: t(`flags.kinds.${f.kind}`) })} · ${f.details}`}</Notice>)}
         {c.licenceExpired ? <Notice tone="warning">{t('licenceWarning', { date: day(c.licenceExpires) })}</Notice> : null}
         {debt.total ? <Notice tone="warning">{t('flags.debtWarn', { amount: format.number(debt.total) })}</Notice> : null}
+        {debt.total && mayWriteOff ? <div><Link className="rt-btn rt-btn-quiet" style={{ textDecoration: 'none' }} href={`/customers/${c.id}/write-off`}>{t('writeOff.link')}</Link></div> : null}
         {!open.length && !c.licenceExpired && !debt.total ? <span>{t('noWarnings')}</span> : null}
         <span className="set-muted">{t('flagsLater')}</span>
         <div className="set-actions" style={{ justifyContent: 'flex-start' }}>
@@ -71,6 +78,13 @@ export default async function CustomerPage({ params, searchParams }: { params: P
           <Link className="rt-btn rt-btn-quiet" style={{ textDecoration: 'none' }} href={`/customers/${c.id}/check`}>{t('flags.check')}</Link>
         </div>
       </section>
+      {writeOffs.length ? (
+        <section className="car-card" aria-labelledby="w-off" data-write-offs={writeOffs.length}><h2 id="w-off">{t('writeOff.list')}</h2>
+          <ul className="set-muted" style={{ margin: 0, paddingLeft: 18 }}>
+            {writeOffs.map((w) => <li key={w.id}>{`${t('writeOff.line', { when: when(w.createdAt), by: w.byName ?? '', amount: format.number(w.amount) })} · ${w.reason} · ${t('writeOff.rentals', { rentals: w.lines.map((l) => rentalNumber(l.number)).join(', ') })}`}</li>)}
+          </ul>
+        </section>
+      ) : null}
       {/* Flags (ST-08.5, AT-48): open ones can be closed with a reason; closed ones stay, with who closed them and why. */}
       <section className="car-card" aria-labelledby="flags"><h2 id="flags">{t('flags.title')}</h2>
         {flags.length ? (

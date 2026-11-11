@@ -291,7 +291,8 @@
           "goAhead": "අවවාද තිබුණත් {target} එක්ක ඉස්සරහට ගියා: {reason}",
           "referenceAdd": "{target} ට ඇපකරු ලෙස {reference} එකතු කළා",
           "referenceCopyAdd": "ඇපකරු {reference} ගේ ({target}) පිටපතක් දැම්මා: {copy}",
-          "referenceCopyOpened": "ඇපකරු {reference} ගේ ({target}) පිටපතක් ඇරියා: {copy}"
+          "referenceCopyOpened": "ඇපකරු {reference} ගේ ({target}) පිටපතක් ඇරියා: {copy}",
+          "writeOff": "{target} ගේ ණයෙන් LKR {amount} කපා හැරියා: {reason}"
         },
         "package": {
           "add": "{target} මුල් පැකේජය එකතු කළා ({models})",
@@ -316,14 +317,16 @@
           "carFreed": "{target} ගේ {number} කුලියෙන් {plate} නිදහස් කළා, අරගෙන ගියේ නැහැ: {reason}",
           "return": "{target} ගෙන් {plate} ආපහු ගත්තා, {number}",
           "garageCorrected": "{target} ගේ {number} කුලියේ garage දින නිවැරදි කළා",
-          "depositSettle": "{target} ගේ කුලිය {number} ගේ deposit එක පියවූවා"
+          "depositSettle": "{target} ගේ කුලිය {number} ගේ deposit එක පියවූවා",
+          "payBack": "{target} ගේ කුලිය {number} ගේ බිලට වඩා ගෙවපු LKR {amount} ආපසු දුන්නා"
         },
         "document": {
           "wordingAdd": "ගිවිසුමේ වචන {version} වෙනි version එක එකතු කළා",
           "wordingApprove": "ගිවිසුමේ වචන {version} වෙනි version එක අනුමත කළා"
         },
         "payment": {
-          "record": "{target} ගෙන් ගෙවීම {number} සටහන් කළා: රු. {amount}, {method}, {for} ({rentals})"
+          "record": "{target} ගෙන් ගෙවීම {number} සටහන් කළා: රු. {amount}, {method}, {for} ({rentals})",
+          "correctionAsk": "{target} ගේ කුලිය {number} ගේ ගෙවීම {paymentNumber} නිවැරදි කරන්න ඉල්ලුවා: {fix}"
         },
         "approval": {
           "request": "{target} ගේ {number} කුලියට වෙනත් මිලක් ඉල්ලුවා",
@@ -1312,6 +1315,41 @@
       "nicFront": "NIC ඉදිරිපස",
       "nicBack": "NIC පිටුපස",
       "licence": "රියදුරු බලපත්‍රය"
+    },
+    "writeOff": {
+      "title": "ණයක් කපා හරින්න",
+      "debt": "පාරිභෝගික ණය",
+      "reason": "ඇයි?",
+      "reasonHint": "SNS මේක එකතු කරන එක නවත්තන්නේ ඇයි. අකුරු 500ක් වෙනකන්.",
+      "howMuch": "කොච්චරද?",
+      "all": "සම්පූර්ණයෙන්",
+      "part": "කොටසක්",
+      "partHint": "ඉතුරු එක ණය විදිහටම තියෙනවා",
+      "amount": "කපා හරින ගාණ (LKR)",
+      "whatTitle": "වෙන්නේ මොකක්ද",
+      "what1": "පාඩුව SNS දරනවා. කිසිම partner කෙනෙක්ගේ ආදායම වෙනස් වෙන්නේ නැහැ.",
+      "what2": "ණය මේ ගාණෙන් අඩු වෙනවා, පරණ කුලියේ ඉඳන්; බිල් තිබ්බ විදිහටම තියෙනවා.",
+      "what3": "ඔයාගේ නම, හේතුව සහ වෙලාව activity log එකේ තියෙනවා.",
+      "what4": "ණයක් කපා හැරියා කියලා පාරිභෝගිකයාගේ පිටුවේ සටහනක් තියෙනවා.",
+      "only": "ණය කපා හරින්න පුළුවන් බලය දුන්න කෙනාට විතරයි. Settings වල කාටහරි \"පාරිභෝගික ණයක් කපා හරින්න\" දෙනකන් owner ට විතරයි.",
+      "save": "LKR {amount} කපා හරින්න",
+      "link": "ණයක් කපා හරින්න",
+      "list": "කපා හැරිය ණය",
+      "line": "{when} · {by} · LKR {amount}",
+      "rentals": "{rentals} වලින්",
+      "done": "ණය කපා හැරියා.",
+      "none": "කපා හරින්න ණයක් නැහැ.",
+      "errors": {
+        "notAllowed": "ණයක් කපා හරින්න පුළුවන් බලය දුන්න කෙනාට විතරයි.",
+        "notFound": "මේ පාරිභෝගිකයා හම්බ වුණේ නැහැ.",
+        "reasonMissing": "හේතුව ලියන්න.",
+        "tooLong": "හේතුවට අකුරු 500ක් වෙනකන්.",
+        "amountInvalid": "ගාණ මුළු රුපියල් වලින් ගහන්න.",
+        "noDebt": "මේ පාරිභෝගිකයාට ණයක් නැහැ.",
+        "overDebt": "ඒක ණයට වඩා වැඩියි.",
+        "stale": "මේ පිටුව ඇරියට පස්සේ ණය වෙනස් වුණා. ආයෙත් පිටුව අරින්න.",
+        "failed": "සේව් කරන්න බැරි වුණා. ආයෙත් උත්සාහ කරන්න."
+      }
     }
   },
   "rentals": {
@@ -1745,7 +1783,12 @@
         "return": "ආපහු ගත්තා · km {km}",
         "garageCorrected": "Garage දින නිවැරදි කළා: {reason}",
         "depositSettled": "Deposit එක පියවූවා · මේ බිලට LKR {here}, LKR {refund} ආපසු දුන්නා",
-        "depositFromOther": "{from} ගේ deposit එකෙන් LKR {amount} ගෙව්වා"
+        "depositFromOther": "{from} ගේ deposit එකෙන් LKR {amount} ගෙව්වා",
+        "correctionRequest": "{payment} නිවැරදි කරන්න ඉල්ලුවා: {reason}",
+        "correctionDecided": "{payment} නිවැරදි කිරීම තීරණය කළා: {outcome}{note}",
+        "correctionMovedIn": "{payment} ගෙන් LKR {amount} {from} ඉඳන් මෙතනට මාරු කළා",
+        "writtenOff": "LKR {amount} කපා හැරියා: {reason}",
+        "paidBack": "බිලට වඩා ගෙවපු LKR {amount} ආපසු දුන්නා"
       },
       "approved": "අනුමතයි",
       "rejected": "ප්‍රතික්ෂේපයි"
@@ -1908,7 +1951,9 @@
       "depositHeld": "තියාගත් deposit",
       "unpaid": "ගෙවන්න තියෙනවා",
       "toRefund": "බිලට වඩා වැඩි",
-      "refundNote": "බිලට වඩා වැඩියි: \"Deposit එක පාවිච්චි කරලා ඉතුරු ආපසු දෙන්න\" එකෙන් ඉතුරු ආපසු දෙන්න."
+      "refundNote": "බිලට වඩා වැඩියි: \"Deposit එක පාවිච්චි කරලා ඉතුරු ආපසු දෙන්න\" එකෙන් ඉතුරු ආපසු දෙන්න.",
+      "writtenOff": "කපා හැරියා",
+      "paidBack": "ආපසු දුන්නා"
     },
     "statusReturned": "ආපහු දුන්නා",
     "deposit": {
@@ -1961,6 +2006,93 @@
         "referenceMissing": "Bank transfer reference එක ගහන්න.",
         "tooLong": "දිග වැඩියි: සටහනට අකුරු 500ක්, reference එකට 80ක් වෙනකන්.",
         "stale": "මේ පිටුව ඇරියට පස්සේ දෙයක් වෙනස් වුණා (ගෙවීමක් හෝ බිල). ආයෙත් පිටුව අරින්න.",
+        "failed": "සේව් කරන්න බැරි වුණා. ආයෙත් උත්සාහ කරන්න."
+      }
+    },
+    "correct": {
+      "title": "ගෙවීම නිවැරදි කරන්න",
+      "recordedNow": "දැනට තියෙන්නේ",
+      "kept": "තියාගන්නවා",
+      "rental": "කුලිය",
+      "how": "කොහොමද",
+      "amount": "ගාණ",
+      "recordedBy": "සටහන් කළේ",
+      "what": "මොකක්ද වැරදි?",
+      "required": "අනිවාර්යයි",
+      "fixes": {
+        "amount": "ගාණ",
+        "method": "Cash / bank / card",
+        "reference": "Reference",
+        "rental": "වැරදි කුලිය"
+      },
+      "should": "හරි විදිහ",
+      "newAmount": "හරි ගාණ (LKR)",
+      "newAmountHint": "සල්ලි ආවේම නැත්නම් 0.",
+      "newReference": "හරි reference එක",
+      "referenceHint": "අකුරු 80ක් වෙනකන්.",
+      "toRental": "හරි කුලිය",
+      "noOther": "මේ පාරිභෝගිකයාට මාරු කරන්න පුළුවන් වෙන කුලියක් නැහැ.",
+      "otherLine": "{number} · LKR {unpaid} ගෙවන්න තියෙනවා",
+      "reason": "ඇයි?",
+      "reasonHint": "ඔයා දැක්ක දේ, උදා: bank statement එකේ. අකුරු 500ක් වෙනකන්.",
+      "note": "මුල් ගෙවීම කවදාවත් වෙනස් කරන්නේ හෝ මකන්නේ නැහැ. Admin මේ ඉල්ලීම අනුමත කරනවා හෝ ප්‍රතික්ෂේප කරනවා; අනුමත කළොත් නිවැරදි කිරීම අලුත් දින දාපු පේළියක් විදිහට එකතු වෙනවා, දෙකම කුලියේ ඉතිහාසයේ තියෙනවා.",
+      "send": "Admin ට යවන්න",
+      "link": "නිවැරදි කරන්න ඉල්ලන්න",
+      "waiting": "නිවැරදි කිරීම බලාගෙන: {what}",
+      "approved": "නිවැරදි කළා: {what}",
+      "rejected": "නිවැරදි කිරීම ප්‍රතික්ෂේප කළා: {what}{note}",
+      "sent": "නිවැරදි කිරීම admin ට යැව්වා.",
+      "deposit": "Deposit",
+      "bill": "බිල",
+      "errors": {
+        "notAllowed": "මේක කරන්න ඔයාට අවසර නැහැ.",
+        "notFound": "මේ කුලියේ මේ ගෙවීම හම්බ වුණේ නැහැ.",
+        "fixInvalid": "මොකක්ද වැරදි කියලා තෝරන්න.",
+        "reasonMissing": "හේතුව ලියන්න.",
+        "tooLong": "දිග වැඩියි: හේතුවට අකුරු 500ක්, reference එකට 80ක් වෙනකන්.",
+        "alreadyWaiting": "මේ ගෙවීමට නිවැරදි කිරීමක් දැනටමත් admin එනකන් බලාගෙන ඉන්නවා.",
+        "failed": "යවන්න බැරි වුණා. ආයෙත් උත්සාහ කරන්න.",
+        "newAmountInvalid": "හරි ගාණ මුළු රුපියල් වලින් ගහන්න.",
+        "sameAmount": "දැනටමත් සටහන් කරලා තියෙන්නේ ඒ ගාණමයි.",
+        "overBill": "එහෙම කළොත් කුලියේ බිලට (හෝ ඇස්තමේන්තුවට) වඩා ගෙවලා වෙනවා.",
+        "overDeposit": "එහෙම කළොත් දාපු deposit එකට වඩා වැඩියි.",
+        "depositSettled": "මේ deposit එක දැනටමත් පියවලා: තවත් නිවැරදි කරන්න බැහැ.",
+        "methodInvalid": "Cash, bank හෝ card තෝරන්න.",
+        "sameMethod": "දැනටමත් සටහන් කරලා තියෙන්නේ ඒ විදිහටමයි.",
+        "referenceMissing": "Reference එක ගහන්න.",
+        "cashNoReference": "Cash ගෙවීමකට reference එකක් නැහැ.",
+        "sameReference": "දැනටමත් සටහන් කරලා තියෙන්නේ ඒ reference එකමයි.",
+        "depositNotMovable": "Deposit ගෙවීමක් වෙන කුලියකට මාරු කරන්න බැහැ.",
+        "rentalInvalid": "තාම ගෙවන්න පුළුවන් මේ පාරිභෝගිකයාගේ වෙන කුලියක් තෝරන්න.",
+        "nothingToMove": "මේ කුලියේ මේ ගෙවීමෙන් කිසිම දෙයක් ඉතුරු නැහැ."
+      }
+    },
+    "payBack": {
+      "title": "බිලට වඩා ගෙවපු සල්ලි ආපසු දෙන්න",
+      "above": "බිලට වඩා ගෙවලා",
+      "amount": "ආපසු දෙන ගාණ (LKR)",
+      "how": "ආපසු දෙන්නේ කොහොමද?",
+      "cash": "Cash",
+      "cashHint": "ලාච්චුවෙන්",
+      "bank": "Bank",
+      "bankHint": "transfer",
+      "reference": "Transfer reference",
+      "note": "ගෙවලා ඉවර වුණාට පස්සේ බිල අඩු කළා. ආපසු දෙන එක වියදමක් නෙවෙයි; cash දුන්නොත් ලාච්චුවේ වෙනම පේළියක් එනවා.",
+      "save": "LKR {amount} ආපසු දෙන්න",
+      "done": "සල්ලි ආපසු දුන්නා.",
+      "link": "බිලට වඩා ගෙවපු සල්ලි ආපසු දෙන්න",
+      "line": "LKR {amount} ආපසු දුන්නා · {method} · {when} · {by}",
+      "noRight": "සල්ලි ආපසු දෙන්න \"ආපසු ගෙවීම් හෝ වියදම් ගෙවන්න\" අවසරය ඕනේ. Admin ගෙන් අහන්න.",
+      "errors": {
+        "notAllowed": "සල්ලි ආපසු දෙන්න \"ආපසු ගෙවීම් හෝ වියදම් ගෙවන්න\" අවසරය ඕනේ.",
+        "notFound": "මේ කුලිය හම්බ වුණේ නැහැ.",
+        "notReturned": "වාහනය තාම ආපසු ඇවිත් නැහැ.",
+        "amountInvalid": "ගාණ මුළු රුපියල් වලින් ගහන්න.",
+        "nothingAbove": "මේ බිලට වඩා කිසිම දෙයක් ගෙවලා නැහැ.",
+        "overAbove": "ඒක බිලට වඩා ගෙවපු ගාණට වඩා වැඩියි.",
+        "methodMissing": "Cash හෝ bank තෝරන්න.",
+        "referenceMissing": "Bank transfer reference එක ගහන්න.",
+        "tooLong": "Reference එකට අකුරු 80ක් වෙනකන්.",
         "failed": "සේව් කරන්න බැරි වුණා. ආයෙත් උත්සාහ කරන්න."
       }
     }
@@ -2028,7 +2160,8 @@
       "rate": "මිල වෙනස",
       "discount": "වට්ටම",
       "garageDays": "Garage දින",
-      "split": "{amount} කාටද"
+      "split": "{amount} කාටද",
+      "correction": "ගෙවීම නිවැරදි කිරීම"
     },
     "partnerCar": "partner car",
     "snsCar": "SNS ගේ",
@@ -2093,7 +2226,20 @@
         "splitNotAllowed": "Package එකට උඩින් මිල බෙදන්න \"Share an above-package price on a partner car\" අවසරය ඕනේ.",
         "amountInvalid": "වට්ටම දැන් ඇස්තමේන්තුවට වඩා වැඩියි. ප්‍රතික්ෂේප කරලා ආයෙත් ඉල්ලන්න.",
         "failed": "මොකක් හරි වැරදුණා. මුකුත් save වුණේ නැහැ. ආයෙත් try කරන්න.",
-        "notRejectable": "බෙදීමක් තීරණය කරනවා, ප්‍රතික්ෂේප කරන්නේ නැහැ: partner ගේ රුපියල් ලියන්න."
+        "notRejectable": "බෙදීමක් තීරණය කරනවා, ප්‍රතික්ෂේප කරන්නේ නැහැ: partner ගේ රුපියල් ලියන්න.",
+        "newAmountInvalid": "හරි ගාණ මුළු රුපියල් වලින් ගහන්න.",
+        "sameAmount": "දැනටමත් සටහන් කරලා තියෙන්නේ ඒ ගාණමයි.",
+        "overBill": "එහෙම කළොත් කුලියේ බිලට (හෝ ඇස්තමේන්තුවට) වඩා ගෙවලා වෙනවා.",
+        "overDeposit": "එහෙම කළොත් දාපු deposit එකට වඩා වැඩියි.",
+        "depositSettled": "මේ deposit එක දැනටමත් පියවලා: තවත් නිවැරදි කරන්න බැහැ.",
+        "methodInvalid": "Cash, bank හෝ card තෝරන්න.",
+        "sameMethod": "දැනටමත් සටහන් කරලා තියෙන්නේ ඒ විදිහටමයි.",
+        "referenceMissing": "Reference එක ගහන්න.",
+        "cashNoReference": "Cash ගෙවීමකට reference එකක් නැහැ.",
+        "sameReference": "දැනටමත් සටහන් කරලා තියෙන්නේ ඒ reference එකමයි.",
+        "depositNotMovable": "Deposit ගෙවීමක් වෙන කුලියකට මාරු කරන්න බැහැ.",
+        "rentalInvalid": "තාම ගෙවන්න පුළුවන් මේ පාරිභෝගිකයාගේ වෙන කුලියක් තෝරන්න.",
+        "nothingToMove": "මේ කුලියේ මේ ගෙවීමෙන් කිසිම දෙයක් ඉතුරු නැහැ."
       },
       "partnerExtraHintPlain": "0 සිට {extra}. 0 නම් අමතර ඔක්කොම SNS ට. Package මුදල හැමවිටම car එකේ commission එකට අනුවයි.",
       "lineSplitTitle": "{extra} කාටද",
@@ -2104,6 +2250,20 @@
     "lines": {
       "damage": "හානිය",
       "accessory": "අඩු උපාංගය"
+    },
+    "correctionWhat": "වෙනස් වෙන්න ඕනේ මොකක්ද",
+    "correctionKept": "ගෙවීම",
+    "correctionKeptValue": "ගත්ත විදිහටම තියෙනවා; නිවැරදි කිරීම අලුත් දින දාපු පේළියක්",
+    "fixes": {
+      "amount": "ගාණ: {was} → {now}",
+      "method": "ගෙවපු විදිහ: {method}{reference}",
+      "reference": "Reference: {reference}",
+      "rental": "{amount} {rental} ට මාරු කරන්න"
+    },
+    "methods": {
+      "cash": "Cash",
+      "bank": "Bank transfer",
+      "card": "Card"
     }
   }
 }

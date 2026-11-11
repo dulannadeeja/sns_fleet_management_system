@@ -5,6 +5,7 @@ import { requirePermission } from '../../auth/require';
 import { addCopy, addCustomer, COPY_KINDS, correctCustomer, correctNic, type Copy } from '../../modules/customers/customers';
 import { MAX_COPY_BYTES } from '../../storage/kinds';
 import { addFlag, closeFlag, goAhead } from '../../modules/customers/flags';
+import { writeOffDebt } from '../../modules/money/writeoffs';
 
 // Screens 08.2 and 08.3: requirePermission("Customer access"), then the customers module, which checks again and writes
 // the activity log. Files are checked by the module from their own bytes (type and size) before anything is saved.
@@ -112,4 +113,19 @@ export async function goAheadAction(customerId: string, _: FlagFormState, form: 
   // From New rental (#51): the decision goes with the rental being started, to choosing its car.
   if (text(form, 'next') === 'rental') redirect(`/rentals/new/car?customer=${customerId}&ok=${result.id}`);
   redirect(`/customers/${customerId}?flag=decided`);
+}
+
+// Write off a debt (08.6; #65). The debt shown goes with the form; the money module checks the permission, the amount
+// and that the debt still holds, under the customer's lock, and writes the activity log.
+export type WriteOffState = { error?: string; values?: Record<string, string> };
+
+export async function writeOffAction(customerId: string, shownDebt: number, _: WriteOffState, form: FormData): Promise<WriteOffState> {
+  const person = await requirePermission('writeOffDebt');
+  const values = { reason: text(form, 'reason'), part: text(form, 'part'), amount: text(form, 'amount') };
+  const raw = values.amount.replace(/,/g, '').trim();
+  const amount = /^\d{1,9}$/.test(raw) ? Number(raw) : NaN;
+  const r = await writeOffDebt(person.id, customerId, { amount, reason: values.reason, shownDebt });
+  if ('error' in r) return { error: r.error, values };
+  revalidatePath(`/customers/${customerId}`);
+  redirect(`/customers/${customerId}?writtenOff=1`);
 }

@@ -311,6 +311,36 @@ test('ST-05.1 to 05.3: a new rental is saved for a free car; the car is then hel
   await expect(page.locator('[data-deposit-settled]')).toHaveAttribute('data-deposit-settled', '1000');
   await expect(page.locator('[data-history]')).toContainText('Deposit settled');
 
+  // #65: 500 was paid above the 8,500 bill (9,000 paid before the discount): it is paid back in cash.
+  await page.getByRole('link', { name: 'Pay back the money above the bill' }).click();
+  await expect(page).toHaveURL(/\/pay-back$/, { timeout: 30_000 });
+  await expect(page.locator('[data-above]')).toHaveAttribute('data-above', '500');
+  await page.getByRole('radio', { name: 'Cash' }).check();
+  await page.getByRole('button', { name: 'Pay back LKR 500' }).click();
+  await expect(page).toHaveURL(/\?paidBack=1$/, { timeout: 30_000 });
+  await expect(page.locator('[data-paid-back]')).toHaveAttribute('data-paid-back', '500');
+
+  // ST-09.2 (#65): ask to correct the bank payment's reference; the owner approves it on Approvals (self-approved).
+  await page.locator('li[data-payment]', { hasText: 'Bank transfer' }).getByRole('link', { name: 'Ask for a correction' }).click();
+  await expect(page).toHaveURL(/\/correct$/, { timeout: 30_000 });
+  const send = page.getByRole('button', { name: 'Send to admin' });
+  await page.getByRole('radio', { name: 'Reference' }).check();
+  await page.locator('input[name="referenceBox"]').fill(`Sample-fixed-${tag}`);
+  await expect(send).toBeDisabled();
+  await page.locator('input[name="reasonBox"]').fill(`Sample: typo in the reference ${tag}`);
+  expect(await noSideScroll(page)).toBe(false);
+  await send.click();
+  await expect(page).toHaveURL(/\?correction=1$/, { timeout: 30_000 });
+  await expect(page.locator('[data-correction-state="waiting"]')).toHaveCount(1);
+  await page.goto('/approvals');
+  const fixCard = page.locator('[data-approval]', { hasText: `Sample: typo in the reference ${tag}` });
+  await expect(fixCard).toBeVisible({ timeout: 30_000 });
+  await fixCard.getByRole('link', { name: 'Approve' }).click();
+  await page.getByRole('button', { name: 'Approve' }).click();
+  await expect(page).toHaveURL(/\/approvals\?done=approved$/, { timeout: 30_000 });
+  await page.goto(rentalUrl);
+  await expect(page.locator('[data-correction-state="approved"]')).toContainText(`Sample-fixed-${tag}`);
+
   // Back and Available: the car is offered again on 05.2 (it was held while out).
   await page.goto(`/rentals/new/car?customer=${customerId}`);
   await expect(page.locator(`[data-car="${plate}"]`)).toHaveCount(1);
