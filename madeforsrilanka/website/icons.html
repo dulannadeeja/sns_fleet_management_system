@@ -1,0 +1,166 @@
+<title>MadeForSriLanka Icons</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: icon set reference. Chrome follows the viewer's theme; icons draw in currentColor so they follow too; brand examples sit on fixed light stages. */
+:root{
+  --page:#F5F5EB; --card:#FFFFFF; --line:rgba(25,25,15,.1); --fg:#14140F; --mute:#6E6E64; --chip:#ECECE2; --lime:#BEFF50; --clay:#A4472A;
+  --f:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--fg);font:400 16px/1.5 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:52px 0}
+header h1{font-size:clamp(42px,5.6vw,80px);line-height:.95}
+.lead{font-size:18px;color:var(--mute);max-width:62ch;margin-top:14px}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.jump a{background:var(--card);border-radius:999px;padding:8px 14px;text-decoration:none;color:inherit;font-size:14.5px}
+.jump a:hover{box-shadow:inset 0 0 0 1px var(--fg)}
+section{padding-block:64px 0}
+h2{font-size:clamp(28px,3.4vw,40px)}
+.sub{color:var(--mute);margin-top:8px;max-width:64ch}
+.two{display:grid;gap:12px;margin-top:22px}
+@media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
+.panel{background:var(--card);border-radius:24px;padding:22px;min-width:0}
+.grid{display:grid;gap:10px;margin-top:22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr))}
+.ic{background:var(--card);border-radius:20px;padding:18px 12px 14px;display:grid;justify-items:center;gap:8px;text-align:center;position:relative;min-width:0}
+.ic:hover{box-shadow:inset 0 0 0 1px var(--fg)}
+.ic svg{width:32px;height:32px}
+.ic b{font-weight:500;font-size:14.5px}
+.ic small{color:var(--mute);font-size:12.5px;line-height:1.35}
+.ic .new{position:absolute;right:10px;top:10px;background:var(--lime);color:#14140F;border-radius:999px;padding:2px 8px;font-size:11.5px;font-weight:500}
+.ic button.cp{font-size:12px;color:var(--mute);background:var(--chip);border-radius:999px;padding:5px 10px}
+.ic button.cp:hover{color:var(--fg)}
+/* construction */
+.cons{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.cons svg.g{width:180px;height:180px;background:#fff;border-radius:16px}
+.cons ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px}
+/* sizes */
+.sizes{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end}
+.sizes figure{margin:0;display:grid;justify-items:center;gap:6px;font-size:12.5px;color:var(--mute)}
+/* context, fixed light like the website */
+.stage{background:#F5F5EB;color:#14140F;border-radius:18px;padding:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 18px 0 22px;border-radius:999px;font:500 16px/1 var(--f);white-space:nowrap}
+.b-lime{background:#BEFF50;color:#14140F}.b-ink{background:#14140F;color:#fff}.b-help{box-shadow:inset 0 0 0 1.5px #A4472A;color:#A4472A}
+.facts{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:#6E6E64}
+.facts span{display:inline-flex;gap:6px;align-items:center}
+.tile{width:44px;height:44px;border-radius:14px;background:#BEFF50;display:grid;place-items:center;color:#14140F}
+.rnd{width:46px;height:46px;border-radius:50%;background:#14140F;color:#fff;display:grid;place-items:center}
+.cap{font-size:13.5px;color:var(--mute);margin-top:10px}
+.rules ol{margin:0;padding-left:20px;display:grid;gap:8px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--page);padding:10px 16px;border-radius:12px;font-size:14px;z-index:9}
+footer{padding-block:64px 48px;color:var(--mute);font-size:14px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+</style>
+
+<header class="wrap">
+  <p style="color:var(--mute)">MadeForSriLanka design system · Fresh · icons</p>
+  <h1>Icons</h1>
+  <p class="lead">One simple line style for every icon: drawn on a 24 by 24 grid, rounded ends, no fills. They take the colour of the text around them. Tap "Copy SVG" to copy an icon's code.</p>
+  <nav class="jump" aria-label="Sections"><a href="#style">Style</a><a href="#now">Used now</a><a href="#planned">Planned</a><a href="#sizes">Sizes</a><a href="#inuse">In use</a><a href="#rules">Rules</a></nav>
+</header>
+
+<section class="wrap" id="style">
+  <h2>Style</h2>
+  <div class="two">
+    <div class="panel"><div class="cons"><svg class="g" viewBox="-2 -2 28 28" aria-label="The pin icon on its 24 by 24 grid" role="img" id="gridsvg"></svg>
+      <ul><li>24 × 24 grid, 2 px safe edge</li><li>Line 2.2 px at 24 px (2.4–2.6 px for small arrows and ticks)</li><li>Round ends and round corners</li><li>Outline only. Filled only for play and pause.</li><li>Colour: <code style="font-size:12.5px">currentColor</code></li></ul></div></div>
+    <div class="panel"><p style="font-size:15.5px">The line weight is close to the strokes of Onest Medium text, so icons and words look like one family. Round ends match our pill buttons and round cards. No emoji, no clip-art, no brand logos inside the website.</p>
+      <p class="cap">The logo and Kotiya are drawings, not icons. They have their own pages.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="now"><h2>Used now</h2><p class="sub">Every icon in the website mockup today, with where it appears.</p><div class="grid" id="now-grid"></div></section>
+<section class="wrap" id="planned"><h2>Planned</h2><p class="sub">Drawn in the same style for pages the real website will need: trip details, booking, safety and the guest trip page. Not used in the mockup yet.</p><div class="grid" id="plan-grid"></div></section>
+
+<section class="wrap" id="sizes"><h2>Sizes</h2><p class="sub">Three sizes only. Smaller icons get a slightly thicker line so they stay clear.</p>
+  <div class="panel" style="margin-top:22px"><div class="sizes" id="sizes-row"></div>
+  <table style="width:100%;border-collapse:collapse;font-size:14.5px;margin-top:18px"><tbody>
+    <tr><td style="padding:8px 0;border-bottom:1px solid var(--line)"><b style="font-weight:500">16 px</b></td><td style="padding:8px 0;border-bottom:1px solid var(--line)">Inside buttons (arrows), next to 14–15 px facts</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid var(--line)"><b style="font-weight:500">20 px</b></td><td style="padding:8px 0;border-bottom:1px solid var(--line)">Tick lists, round buttons, back button</td></tr>
+    <tr><td style="padding:8px 0"><b style="font-weight:500">24 px</b></td><td style="padding:8px 0">Lime icon tiles on promise cards, WhatsApp button</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="wrap" id="inuse"><h2>In use</h2><p class="sub">How icons sit inside real parts of the website.</p>
+  <div class="two">
+    <div class="panel"><div class="stage" id="ctx1"></div><p class="cap">Buttons: arrow after the words, 16 px. The Help button never gets an icon of its own.</p></div>
+    <div class="panel"><div class="stage" id="ctx2"></div><p class="cap">Facts on cards: 15 px grey icon before 14 px grey text.</p></div>
+    <div class="panel"><div class="stage" id="ctx3"></div><p class="cap">Promise cards: 22–24 px ink icon on a 44 px lime tile.</p></div>
+    <div class="panel"><div class="stage" id="ctx4"></div><p class="cap">Icon-only buttons always carry a spoken name for screen readers ("Open trip", "Back", "Pause video").</p></div>
+  </div>
+</section>
+
+<section class="wrap rules" id="rules"><h2>Rules</h2><div class="panel" style="margin-top:22px"><ol>
+  <li>Only icons from this page. A new icon is drawn in the same style and added here first.</li>
+  <li>An icon sits next to words. Icon-only buttons (arrow, back, pause, close) must have a spoken name.</li>
+  <li>Icons take the text colour: ink, grey, or white on dark. Never lime or ochre on light grounds.</li>
+  <li>One icon per meaning: "pin" is always a place, "clock" always a duration, "undo" always a change you can take back.</li>
+  <li>No emoji and no text symbols (✓, ✕, ★) as icons. Draw them.</li>
+  <li>WhatsApp uses our chat bubble, not the WhatsApp logo, so the button matches the site. If the official logo is used later, follow WhatsApp's brand rules.</li>
+  <li>No star ratings drawn by us. Reviews show the source's own score (Google, TripAdvisor) as text.</li>
+</ol></div></section>
+
+<footer class="wrap">Source: the website mockup and DESIGN.md (Fresh), 23 November 2026.</footer>
+
+<script>
+(()=>{
+const svg=(d,size=32,sw=2.2,fill=false)=>`<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="${fill?"currentColor":"none"}" stroke="${fill?"none":"currentColor"}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const NOW=[
+ ["chevron-right",'<path d="M9 6l6 6-6 6"/>',"Inside buttons: Plan my trip, Book",2.4],
+ ["chevron-down",'<path d="M6 9l6 6 6-6"/>',"See trips, closed accordion rows",2.4],
+ ["arrow-right",'<path d="M5 12h14M13 6l6 6-6 6"/>',"Round button on trip cards",2.4],
+ ["back",'<path d="M15 5l-7 7 7 7"/>',"Quiz back button",2.4],
+ ["tick",'<path d="M4 12l5 5L20 6"/>',"Hero tick list, Always list, visited stops",2.6],
+ ["cross",'<path d="M6 6l12 12M18 6L6 18"/>',"Never list",2.6],
+ ["clock",'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',"Duration on moments and day trips"],
+ ["pin",'<path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',"Places, hotel pickup"],
+ ["car",'<path d="M4 16V11l2-5h12l2 5v5M4 16h16M4 16v2M20 16v2"/><circle cx="8" cy="13" r=".8"/><circle cx="16" cy="13" r=".8"/>',"Airport pickup on trip cards"],
+ ["undo",'<path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 010 10h-3"/>',"Move dates once, free"],
+ ["chat",'<path d="M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1121 12z"/>',"WhatsApp button"],
+ ["tag",'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="7.5" r="1.5"/>',"Honest price promise"],
+ ["swap",'<path d="M7 7h12l-3-3M17 17H5l3 3"/>',"Change it any time promise"],
+ ["person",'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',"One driver promise"],
+ ["home",'<path d="M3 11l9-7 9 7v9H3z"/><path d="M10 20v-6h4v6"/>',"Places we grew up with promise"],
+ ["play",'<path d="M8 5v14l11-7z"/>',"Video cards, play the hero video",0,true],
+ ["pause",'<path d="M9 5v14M15 5v14"/>',"Pause the hero video",2.6]];
+const PLAN=[
+ ["calendar",'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',"Dates, move your trip"],
+ ["people",'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.8"/><path d="M16.5 14.6c2.6.2 4.4 1.9 5 5.4"/>',"Who's coming, group size"],
+ ["bed",'<path d="M3 18V7M3 14h18v4M21 14v-1a3 3 0 00-3-3h-7v4"/><circle cx="7" cy="11" r="1.8"/>',"Hotel tonight"],
+ ["train",'<rect x="6" y="3" width="12" height="14" rx="3"/><path d="M6 11h12M9 21l1.5-4M15 21l-1.5-4"/><circle cx="9.5" cy="14" r=".8"/><circle cx="14.5" cy="14" r=".8"/>',"Train days (Kandy to Ella)"],
+ ["beach",'<path d="M2 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2M2 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><circle cx="17" cy="7" r="3"/>',"Beach days, coast"],
+ ["tea-leaf",'<path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15zM5 19l8-8"/>',"Tea hills, hill country"],
+ ["map",'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/>',"Route map, see the whole trip"],
+ ["help",'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/>',"Help page steps (not on the Help button)"],
+ ["safety",'<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',"Safety and insurance"],
+ ["phone",'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>',"Call us, 24/7 number"],
+ ["camera",'<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/>',"Trip photos, guest videos"],
+ ["rain",'<path d="M7 16a4 4 0 01-.5-8 5.5 5.5 0 0110.6-1.4A4 4 0 0117 16z"/><path d="M9 19l-1 2M13 19l-1 2M17 19l-1 2"/>',"Rain plan on each day"],
+ ["info",'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>',"Good to know notes"],
+ ["plus",'<path d="M12 5v14M5 12h14"/>',"Stepper, add a stop"],
+ ["minus",'<path d="M5 12h14"/>',"Stepper"],
+ ["close",'<path d="M6 6l12 12M18 6L6 18"/>',"Close a sheet (same drawing as cross)"]];
+const card=(r,isNew)=>`<div class="ic">${isNew?'<span class="new">New</span>':""}${svg(r[1],32,r[3]||2.2,r[4])}<b>${r[0]}</b><small>${r[2]}</small><button class="cp" data-name="${r[0]}" aria-label="Copy ${r[0]} SVG">Copy SVG</button></div>`;
+const ALL={};NOW.concat(PLAN).forEach(r=>ALL[r[0]]=r);
+document.getElementById("now-grid").innerHTML=NOW.map(r=>card(r,0)).join("");
+document.getElementById("plan-grid").innerHTML=PLAN.map(r=>card(r,1)).join("");
+// grid illustration
+let g="";for(let i=0;i<=24;i+=2)g+=`<path d="M${i} 0V24M0 ${i}H24" stroke="#14140F" stroke-opacity="${i%12?0.06:0.14}" stroke-width=".08"/>`;
+document.getElementById("gridsvg").innerHTML=`${g}<rect x="2" y="2" width="20" height="20" fill="none" stroke="#A4472A" stroke-width=".12" stroke-dasharray=".5 .4"/><g fill="none" stroke="#14140F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ALL.pin[1]}</g>`;
+document.getElementById("sizes-row").innerHTML=[[16,2.6],[20,2.4],[24,2.2]].map(([s,w])=>`<figure>${["pin","clock","tick","chat"].map(n=>svg(ALL[n][1],s,n==="tick"?2.6:w)).join(" ")}<span>${s} px · line ${w}</span></figure>`).join("");
+document.getElementById("ctx1").innerHTML=`<span class="btn b-lime">Plan my trip ${svg(ALL["chevron-right"][1],16,2.4)}</span><span class="btn b-ink">Book ${svg(ALL["chevron-right"][1],16,2.4)}</span><span class="btn b-help">Help</span>`;
+document.getElementById("ctx2").innerHTML=`<div class="facts"><span>${svg(ALL.clock[1],15)}12 h</span><span>${svg(ALL.pin[1],15)}Hotel pickup</span><span>${svg(ALL.car[1],15)}Airport pickup</span><span>${svg(ALL.undo[1],15)}Move dates once, free</span></div>`;
+document.getElementById("ctx3").innerHTML=["tag","swap","person","home"].map(n=>`<span class="tile">${svg(ALL[n][1],22,2)}</span>`).join("");
+document.getElementById("ctx4").innerHTML=`<span class="rnd" role="img" aria-label="Open trip">${svg(ALL["arrow-right"][1],18,2.4)}</span><span class="rnd" style="background:#fff;color:#14140F" role="img" aria-label="Back">${svg(ALL.back[1],20,2.4)}</span><span class="rnd" style="background:rgba(255,255,255,.9);color:#14140F;box-shadow:inset 0 0 0 1px rgba(25,25,15,.1)" role="img" aria-label="Pause video">${svg(ALL.pause[1],18,2.6)}</span>`;
+document.addEventListener("click",e=>{const b=e.target.closest("button.cp");if(!b)return;const r=ALL[b.dataset.name];
+ const code=`<svg viewBox="0 0 24 24" width="24" height="24" fill="${r[4]?"currentColor":"none"}" stroke="${r[4]?"none":"currentColor"}" stroke-width="${r[3]||2.2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${r[1]}</svg>`;
+ const done=()=>{const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent="Copied "+r[0];document.body.appendChild(t);setTimeout(()=>t.remove(),1600)};
+ try{navigator.clipboard.writeText(code).then(done,()=>{})}catch(_){}});
+})();
+</script>

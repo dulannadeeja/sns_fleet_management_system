@@ -1,0 +1,131 @@
+<meta charset="utf-8">
+<title>Real Route Maps</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>__MLCSS__</style>
+<style>
+/* Layout: a real, zoomable map of Sri Lanka (OpenStreetMap data) drawing any route from the places list, with the day list beside it; then how it works, cost and notes. */
+:root{
+  --page:#F5F5EB; --card:#FFFFFF; --line:rgba(25,25,15,.1); --fg:#14140F; --mute:#6E6E64; --chip:#ECECE2; --lime:#BEFF50; --clay:#A4472A;
+  --f:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--fg);font:400 16px/1.55 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.04;margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:52px 0}
+header h1{font-size:clamp(40px,5.2vw,72px);line-height:.98;max-width:16ch}
+.lead{font-size:18px;color:var(--mute);max-width:64ch;margin-top:14px}
+section{padding-block:56px 0}
+h2{font-size:clamp(28px,3.4vw,40px)}
+.sub{color:var(--mute);margin-top:8px;max-width:64ch}
+.panel{background:var(--card);border-radius:24px;padding:22px;min-width:0}
+.mt{margin-top:22px}
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.pick button{min-height:44px;padding:0 16px;border-radius:999px;background:var(--card);font-size:15px}
+.pick button[aria-pressed="true"]{background:var(--fg);color:var(--page)}
+.demo{display:grid;gap:12px;margin-top:14px}
+@media(min-width:960px){.demo{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}}
+.mapcard{background:var(--card);border-radius:24px;padding:8px;position:relative}
+.map{height:min(70vh,620px);min-height:420px;border-radius:18px;overflow:hidden;background:#EEF1E6}
+.loading{position:absolute;inset:8px;border-radius:18px;display:grid;place-items:center;background:#EEF1E6;color:#6E6E64;font-size:15px;pointer-events:none;transition:opacity .25s}
+.loading.off{opacity:0}
+.list{background:var(--card);border-radius:24px;padding:8px 20px 18px}
+.list h3{font-size:24px;padding-top:14px}
+.list .meta{color:var(--mute);font-size:14px;margin-top:4px;padding-bottom:10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.stop{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding-block:10px;border-bottom:1px solid var(--line);font-size:15.5px;width:100%;text-align:left}
+.stop:hover{background:var(--page)}
+.stop .d{width:28px;height:28px;border-radius:50%;background:var(--lime);color:#14140F;display:grid;place-items:center;font-size:12.5px;font-weight:600}
+.stop small{color:var(--mute);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.btnx{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 18px;border-radius:999px;font:500 15.5px/1 var(--f);background:var(--fg);color:var(--page);text-decoration:none;margin-top:14px}
+.note{font-size:13.5px;color:var(--mute);margin-top:10px}
+.grid3{display:grid;gap:12px;margin-top:22px}
+@media(min-width:900px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.grid3 .panel h3{font-size:21px;letter-spacing:-.02em;margin-bottom:8px}
+.grid3 .panel p{color:var(--mute);font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--mute);font-size:13px}
+tr:last-child td{border-bottom:0}
+.tw{overflow-x:auto}
+.maplibregl-ctrl-attrib{font-family:var(--f)}
+footer{padding-block:64px 48px;color:var(--mute);font-size:14px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+</style>
+
+<header class="wrap">
+  <p style="color:var(--mute)">MadeForSriLanka · real route maps</p>
+  <h1>A real map that draws any trip</h1>
+  <p class="lead">Real OpenStreetMap roads, towns and coastline, in our colours. Zoom in, drag, tap a stop. The route follows real roads and every leg shows road kilometres and drive time. Nothing is drawn by hand: each trip is just a list of places.</p>
+</header>
+
+<section class="wrap" style="padding-top:28px">
+  <div class="pick" id="pick" role="group" aria-label="Choose a trip"></div>
+  <div class="demo">
+    <div class="mapcard"><div class="map" id="map" role="region" aria-label="Route map of Sri Lanka"></div><div class="loading" id="loading">Loading the map…</div></div>
+    <div class="list" id="list"></div>
+  </div>
+  <p class="note">Drive times are routing estimates for a car. Real Sri Lankan drives are often slower (bends, towns, tuk-tuks), so the real site should add a safety margin. Place positions are approximate for this mockup.</p>
+</section>
+
+<section class="wrap">
+  <h2>How it works</h2>
+  <div class="grid3">
+    <div class="panel"><h3>Map data, hosted by us</h3><p>Sri Lanka's OpenStreetMap data (zoom 0–11) is one 7.4 MB file we host ourselves. No Google or Mapbox account, no fee per map view. Shown with MapLibre, a free open-source map library.</p></div>
+    <div class="panel"><h3>Places once, routes as lists</h3><p>Each place has a name and position. A trip is a list of place ids and nights. The admin trip builder makes the list; the map draws it.</p></div>
+    <div class="panel"><h3>Road legs saved once</h3><p>Road km, drive time and the road line for each pair of places come from a routing service (OSRM, open source) once, and are saved. Pages never wait for it.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Where it appears</h2>
+  <div class="panel mt tw"><table><thead><tr><th>Page</th><th>Map</th></tr></thead><tbody>
+    <tr><td>Trip pages (The Classic and others)</td><td>Full route on real roads; tap a stop to zoom to that day</td></tr>
+    <tr><td>Quiz result and "Make it yours"</td><td>The suggested route, updated when a day changes</td></tr>
+    <tr><td>Guest trip page</td><td>Visited legs in lime, today's stop highlighted; drivers get "Open in Google Maps"</td></tr>
+    <tr><td>Trip cards, PDFs, share cards</td><td>Still image of the same map, made once per trip by the server</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="wrap">
+  <h2>Cost and upkeep</h2>
+  <div class="panel mt tw"><table><thead><tr><th></th><th>Our own map (this page)</th><th>Google Maps or Mapbox</th></tr></thead><tbody>
+    <tr><td>Map views</td><td>Free, unlimited</td><td>Free up to a monthly limit, then paid per view (check current prices)</td></tr>
+    <tr><td>Looks</td><td>Fully in our colours</td><td>Styling possible, more limited on Google</td></tr>
+    <tr><td>Upkeep</td><td>Refresh the Sri Lanka file a few times a year (one script)</td><td>None, always current</td></tr>
+    <tr><td>Extras</td><td>Roads, towns, parks, beaches, zoom</td><td>Plus search, live traffic, Street View</td></tr>
+  </tbody></table>
+  <p style="margin-top:14px;font-size:15.5px"><b style="font-weight:500">My recommendation:</b> our own map for guests (this page), because it's free at any size, on brand and fast. Use Google Maps only where its extras matter: the driver's directions link, opened in the Google Maps app.</p></div>
+</section>
+
+<footer class="wrap">Map data © OpenStreetMap contributors (Open Database License), packaged by Protomaps. Road routes: OSRM with OpenStreetMap data. Map library: MapLibre GL JS (BSD licence).</footer>
+
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@4.5.0/dist/pmtiles.js"></script>
+<script src="https://unpkg.com/@protomaps/basemaps@5.7.2/dist/basemaps.js"></script>
+<script>__ROUTEMAP__</script>
+<script>
+(async()=>{
+const T=[["classic","The Classic","7 nights",[1,1,1,2,1,1]],["quick","Quick Taste","5 nights",[1,1,1,2]],["deep","Deep Dive","10 nights",[1,1,1,1,1,2,1,1,1]],["full","The Full Island","14 nights",[1,1,1,1,1,1,2,1,1,3,1]],["yaladay","Day trip: Yala from Mirissa","1 day",[]],["falls","Day trip: hidden waterfalls","1 day",[]]];
+const $=id=>document.getElementById(id);let cur="classic",rm=null;
+const hm=m=>m>=60?`${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")}`:`${m} min`;
+function list(){const D=RouteMap.data(),t=T.find(x=>x[0]===cur),ids=D.routes[cur],loop=ids[0]===ids[ids.length-1];let km=0,mn=0;
+ const rows=ids.map((id,i)=>{const leg=i?RouteMap.legInfo(ids[i-1],id):null;if(leg){km+=leg.km;mn+=leg.min}const last=loop&&i===ids.length-1;
+  return `<button class="stop" data-i="${last?0:i}" aria-label="Show ${D.names[id]} on the map"><span class="d">${last?'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 010 10h-3"/></svg>':i+1}</span><span>${D.names[id]}${t[3][i]?` <small style="text-align:left">· ${t[3][i]} night${t[3][i]>1?"s":""}</small>`:""}</span><small>${leg?`${leg.km} km · ${hm(leg.min)}`:"start"}</small></button>`}).join("");
+ $("list").innerHTML=`<h3>${t[1]}</h3><p class="meta">${t[2]} · ${loop?ids.length-1:ids.length} stops · ${km} km by road · about ${hm(mn)} driving in total</p>${rows}<a class="btnx" href="${RouteMap.gmaps(ids)}" target="_blank" rel="noopener">Open in Google Maps</a><p class="note">The Google Maps link is what a driver would use for turn-by-turn directions.</p>`}
+function pick(){$("pick").innerHTML=T.map(t=>`<button data-r="${t[0]}" aria-pressed="${t[0]===cur}">${t[1]}</button>`).join("")}
+pick();
+try{
+ await RouteMap.init();list();
+ rm=await RouteMap.mount($("map"),RouteMap.data().routes[cur],{onStop:i=>rm.focus(i)});
+ rm.map.once("idle",()=>$("loading").classList.add("off"));
+}catch(e){$("loading").textContent="The map could not load here. "+e.message}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.r){cur=b.dataset.r;pick();list();rm&&rm.set(RouteMap.data().routes[cur])}
+ if(b.dataset.i!==undefined&&rm)rm.focus(+b.dataset.i)});
+})();
+</script>

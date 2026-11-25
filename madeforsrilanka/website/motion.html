@@ -1,0 +1,200 @@
+<title>MadeForSriLanka Motion</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: motion reference. Tokens first, then live demos with Play buttons on fixed light stages (the website is light), then rules. A "Less motion" switch previews what people with reduced-motion settings see. */
+:root{
+  --page:#F5F5EB; --card:#FFFFFF; --line:rgba(25,25,15,.1); --fg:#14140F; --mute:#6E6E64; --chip:#ECECE2; --lime:#BEFF50; --clay:#A4472A;
+  --f:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --d-fast:150ms; --d-base:250ms; --d-slow:450ms; --d-party:1300ms;
+  --e-out:cubic-bezier(.2,.7,.1,1); --e-inout:cubic-bezier(.45,0,.2,1);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--fg);font:400 16px/1.5 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:52px 0}
+header h1{font-size:clamp(42px,5.6vw,80px);line-height:.95}
+.lead{font-size:18px;color:var(--mute);max-width:62ch;margin-top:14px}
+.bar-top{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;align-items:center}
+.bar-top a{background:var(--card);border-radius:999px;padding:8px 14px;text-decoration:none;color:inherit;font-size:14.5px}
+.bar-top a:hover{box-shadow:inset 0 0 0 1px var(--fg)}
+.rmsw{display:inline-flex;align-items:center;gap:10px;background:var(--card);border-radius:999px;padding:6px 8px 6px 14px;font-size:14.5px}
+.rmsw button{width:44px;height:26px;border-radius:999px;background:var(--chip);position:relative}
+.rmsw button::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--fg);transition:transform var(--d-base) var(--e-out)}
+.rmsw button[aria-pressed="true"]{background:var(--lime)}
+.rmsw button[aria-pressed="true"]::after{transform:translateX(18px);background:#14140F}
+section{padding-block:64px 0}
+h2{font-size:clamp(28px,3.4vw,40px)}
+.sub{color:var(--mute);margin-top:8px;max-width:64ch}
+.panel{background:var(--card);border-radius:24px;padding:22px;margin-top:22px;min-width:0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td,th{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--mute);font-size:13px}
+tr:last-child td{border-bottom:0}
+code{font-size:12.5px;background:var(--chip);padding:2px 6px;border-radius:6px;white-space:nowrap}
+.curve{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px;margin-top:22px}
+.curve .c{background:var(--card);border-radius:22px;padding:18px;display:grid;gap:10px}
+.curve svg{width:100%;height:auto;max-width:180px;background:var(--page);border-radius:14px}
+.curve b{font-weight:500}
+.curve small{color:var(--mute);font-size:13.5px}
+
+.demos{display:grid;gap:12px;margin-top:22px}
+@media(min-width:900px){.demos{grid-template-columns:1fr 1fr}}
+.dm{background:var(--card);border-radius:24px;padding:8px 8px 16px;display:grid;gap:12px;align-content:start;min-width:0}
+.stage{background:#F5F5EB;color:#14140F;border-radius:18px;min-height:190px;padding:20px;display:grid;place-items:center;position:relative;overflow:hidden}
+.dm .in{padding:0 12px;display:grid;gap:6px}
+.dm .hd{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.dm h3{font-size:22px;letter-spacing:-.02em}
+.dm .play{display:inline-flex;align-items:center;gap:6px;background:var(--chip);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:500;min-height:36px}
+.dm .play:hover{box-shadow:inset 0 0 0 1px var(--fg)}
+.dm .spec{font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.dm .when{font-size:14.5px;color:var(--mute)}
+
+/* demo parts (website styles, fixed light) */
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 18px 0 22px;border-radius:999px;font:500 16px/1 var(--f);background:#BEFF50;color:#14140F;transition:background var(--d-fast) var(--e-out),transform var(--d-fast) var(--e-out)}
+.btn:hover,.btn.hov{background:#D6FF8F}
+.btn:active,.btn.press{transform:scale(.97)}
+.opts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.opt{min-height:44px;padding:0 18px;border-radius:999px;box-shadow:inset 0 0 0 1px #D2D2C8;font-size:15px;color:#14140F;background:transparent;transition:background var(--d-base) var(--e-out),color var(--d-base) var(--e-out)}
+.opt[aria-pressed="true"]{background:#14140F;color:#fff;box-shadow:none}
+.leo{width:120px;transform-origin:50% 90%}
+.leo.go{animation:pop var(--d-slow) var(--e-out)}
+@keyframes pop{0%{transform:scale(.88) rotate(-5deg)}60%{transform:scale(1.06) rotate(2deg)}100%{transform:none}}
+.prog{width:100%;max-width:320px;height:8px;border-radius:9px;background:#D2D2C8}
+.prog i{display:block;height:100%;border-radius:9px;background:#14140F;width:20%;transition:width 500ms var(--e-out)}
+.sheetbox{position:absolute;inset:0;display:grid;align-items:end}
+.scrimx{position:absolute;inset:0;background:rgba(20,20,15,.45);opacity:0;transition:opacity var(--d-base) var(--e-out)}
+.sheetx{position:relative;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px 18px;transform:translateY(110%);transition:transform 350ms var(--e-out);box-shadow:0 -10px 30px rgba(20,20,15,.1)}
+.sheetbox.open .scrimx{opacity:1}.sheetbox.open .sheetx{transform:none}
+.grip{width:44px;height:5px;border-radius:9px;background:#D2D2C8;margin:2px auto 10px}
+.days{display:grid;gap:8px;width:100%;max-width:340px}
+.days div{background:#fff;border-radius:14px;padding:10px 14px;font-size:14.5px;transition:opacity 400ms var(--e-out)}
+.days.focus div:not(:nth-child(2)){opacity:.3}
+.conf-wrap{position:relative;width:120px;height:120px;border-radius:22px;background:#fff;display:grid;place-items:center;overflow:hidden}
+.conf{position:absolute;width:8px;height:12px;border-radius:2px;top:-14px;opacity:0}
+.conf-wrap.go .conf{animation:fall var(--d-party) cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes fall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(130px) rotate(260deg)}}
+.marq{width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;gap:20px;animation:slide 30s linear infinite}
+.track b{font:500 40px/1.1 var(--f);letter-spacing:-.04em;white-space:nowrap}
+.marq:hover .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.toastx{background:#14140F;color:#fff;padding:12px 18px;border-radius:16px;font-size:15px;opacity:0;transform:translateY(12px);transition:opacity var(--d-base) var(--e-out),transform var(--d-base) var(--e-out)}
+.toastx.show{opacity:1;transform:none}
+.route svg{width:100%;max-width:240px;height:auto}
+.route .line{stroke-dasharray:420;stroke-dashoffset:0}
+.route.go .line{animation:draw 1.2s var(--e-inout) forwards}
+@keyframes draw{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+.card{background:#fff;border-radius:22px;width:200px;height:120px;display:grid;place-items:center;font-weight:500;transition:transform var(--d-base) var(--e-out),box-shadow var(--d-base) var(--e-out)}
+.card:hover,.card.hov{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,20,15,.12)}
+.new{display:inline-block;background:var(--lime);color:#14140F;border-radius:999px;padding:2px 8px;font-size:11.5px;font-weight:500;vertical-align:3px;margin-left:6px}
+
+/* less motion: on the device setting, or the switch on this page */
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important;scroll-behavior:auto!important}.track{animation:none!important}.conf{display:none}}
+html.rm *,html.rm *::before,html.rm *::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important}
+html.rm .track{animation:none!important}
+html.rm .conf{display:none}
+.rules ol{margin:0;padding-left:20px;display:grid;gap:8px}
+footer{padding-block:64px 48px;color:var(--mute);font-size:14px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+</style>
+
+<header class="wrap">
+  <p style="color:var(--mute)">MadeForSriLanka design system · Fresh · motion</p>
+  <h1>Motion and animation</h1>
+  <p class="lead">Motion is quiet and quick. It shows that something happened, never makes people wait, and Kotiya gets the only playful moments. Press Play on any example. Turn on "Less motion" to see what people with that phone setting get.</p>
+  <div class="bar-top"><a href="#timing">Timing</a><a href="#demos">Examples</a><a href="#less">Less motion</a><a href="#rules">Rules</a>
+    <span class="rmsw">Less motion <button id="rm" aria-pressed="false" aria-label="Preview less motion"></button></span></div>
+</header>
+
+<section class="wrap" id="timing">
+  <h2>Timing</h2>
+  <p class="sub">Four speeds and two curves cover everything.</p>
+  <div class="panel"><table><thead><tr><th>Token</th><th>Time</th><th>Used for</th></tr></thead><tbody>
+    <tr><td><code>--d-fast</code></td><td>150 ms</td><td>Hover and press on buttons and cards</td></tr>
+    <tr><td><code>--d-base</code></td><td>250 ms</td><td>Chips turning on, toasts, fades, menu bar turning into a floating bar, phone menu opening (card drops 8 px and fades in, background blurs)</td></tr>
+    <tr><td><code>--d-slow</code></td><td>350–500 ms</td><td>Bottom sheets (350), Kotiya's bounce (450), quiz progress (500), dimming other days (400)</td></tr>
+    <tr><td><code>--d-party</code></td><td>1300 ms</td><td>Confetti after a booking, once</td></tr>
+    <tr><td><code>marquee</code></td><td>60 s loop</td><td>Moving line of places; pauses on hover</td></tr>
+    <tr><td><code>hero video</code></td><td>21 s loop</td><td>Plays muted; pause button always shown</td></tr>
+  </tbody></table></div>
+  <div class="curve">
+    <div class="c"><svg viewBox="0 0 100 100" aria-label="Ease-out curve: fast start, gentle stop" role="img"><path d="M10 90 C30 20 20 10 90 10" fill="none" stroke="#14140F" stroke-width="3" stroke-linecap="round"/><path d="M10 90H90M10 90V10" stroke="#D2D2C8" stroke-width="1.5"/></svg><b>Ease out</b><small><code>cubic-bezier(.2,.7,.1,1)</code> · almost everything. Starts fast, lands softly, so the screen feels quick.</small></div>
+    <div class="c"><svg viewBox="0 0 100 100" aria-label="Ease in-out curve: gentle start and stop" role="img"><path d="M10 90 C55 90 45 10 90 10" fill="none" stroke="#14140F" stroke-width="3" stroke-linecap="round"/><path d="M10 90H90M10 90V10" stroke="#D2D2C8" stroke-width="1.5"/></svg><b>Ease in-out</b><small><code>cubic-bezier(.45,0,.2,1)</code> · things that travel a path, like the route line drawing itself.</small></div>
+    <div class="c"><svg viewBox="0 0 100 100" aria-label="Linear: steady speed" role="img"><path d="M10 90L90 10" fill="none" stroke="#14140F" stroke-width="3" stroke-linecap="round"/><path d="M10 90H90M10 90V10" stroke="#D2D2C8" stroke-width="1.5"/></svg><b>Linear</b><small>Only for endless loops: the place marquee.</small></div>
+  </div>
+</section>
+
+<section class="wrap" id="demos">
+  <h2>Examples</h2>
+  <p class="sub">Every motion on the website today, plus two planned ones (marked New).</p>
+  <div class="demos" id="demos-grid"></div>
+</section>
+
+<section class="wrap" id="less">
+  <h2>Less motion</h2>
+  <p class="sub">Some people feel sick or distracted by movement and turn on "Reduce motion" on their phone or computer. The website respects it.</p>
+  <div class="panel"><table><thead><tr><th>Motion</th><th>With "Reduce motion" on</th></tr></thead><tbody>
+    <tr><td>Hero video</td><td>Does not start by itself; shows the first frame and a Play button</td></tr>
+    <tr><td>Place marquee</td><td>Stops; the names can be scrolled by hand</td></tr>
+    <tr><td>Kotiya's bounce, confetti</td><td>Off; Kotiya just changes face</td></tr>
+    <tr><td>Sheets, toasts, chips, progress</td><td>Change at once, no sliding</td></tr>
+    <tr><td>Smooth scrolling to a section</td><td>Jumps straight there</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="wrap rules" id="rules"><h2>Rules</h2><div class="panel"><ol>
+  <li>Motion shows that something happened. It never decorates and never blocks.</li>
+  <li>Nothing waits for an animation: buttons work at once, and text is readable before any motion ends.</li>
+  <li>Use the four speeds and two curves above. No bounce or spring outside Kotiya.</li>
+  <li>Only Kotiya plays: a small bounce when its face changes, confetti once after booking. Never near prices, payment or Help.</li>
+  <li>Move only position, size and fade (transform and opacity), so phones stay smooth.</li>
+  <li>Anything that moves for more than 5 seconds can be paused (video) or stops on hover (marquee).</li>
+  <li>Always respect "Reduce motion".</li>
+  <li>No pop-ups that slide in by themselves, no auto-scrolling carousels, no flashing.</li>
+</ol></div></section>
+
+<footer class="wrap">Source: the website mockup and DESIGN.md (Fresh), 23 November 2026. The first DESIGN brief said 150–250 ms with a card lift, Kotiya reacting, the route drawing itself and small confetti on booking; this page makes that exact.</footer>
+
+<script>
+(()=>{
+const kot=(face)=>`<svg class="leo" id="leo" viewBox="0 0 200 200" aria-label="Kotiya" role="img"><path d="M58 196C54 150 70 128 100 128s46 22 42 68z" fill="#E3A13B"/><path d="M80 196c0-32 8-48 20-48s20 16 20 48z" fill="#F8E7C6"/><path d="M70 132q30 14 60 0l-10 24q-20-6-40 0z" fill="#BEFF50"/><circle cx="58" cy="50" r="17" fill="#E3A13B"/><circle cx="142" cy="50" r="17" fill="#E3A13B"/><circle cx="58" cy="52" r="8" fill="#14140F"/><circle cx="142" cy="52" r="8" fill="#14140F"/><path d="M100 34c40 0 60 24 60 54s-26 50-60 50-60-20-60-50 20-54 60-54z" fill="#E3A13B"/><ellipse cx="100" cy="112" rx="30" ry="21" fill="#F8E7C6"/>${face?'<ellipse cx="78" cy="86" rx="12.5" ry="15" fill="#fff" stroke="#14140F" stroke-width="3"/><ellipse cx="122" cy="86" rx="12.5" ry="15" fill="#fff" stroke="#14140F" stroke-width="3"/><circle cx="78" cy="88" r="7.5" fill="#14140F"/><circle cx="122" cy="88" r="7.5" fill="#14140F"/><path d="M90 113q10 16 20 0z" fill="#14140F"/>':'<ellipse cx="78" cy="86" rx="10" ry="12" fill="#fff" stroke="#14140F" stroke-width="3"/><ellipse cx="122" cy="86" rx="10" ry="12" fill="#fff" stroke="#14140F" stroke-width="3"/><circle cx="78" cy="88" r="6" fill="#14140F"/><circle cx="122" cy="88" r="6" fill="#14140F"/><path d="M88 112q6 7 12 0q6 7 12 0" fill="none" stroke="#14140F" stroke-width="4" stroke-linecap="round"/>'}<path d="M93 101h14l-7 9z" fill="#14140F"/></svg>`;
+const conf=[...Array(14)].map((_,i)=>`<i class="conf" style="left:${6+i*6.5}%;background:${["#BEFF50","#E3A13B","#14140F"][i%3]};animation-delay:${(i%5)*70}ms"></i>`).join("");
+const D=[
+ ["btn","Button hover and press","Every button.","150 ms ease out · lime lightens on hover, shrinks to 97% when pressed",`<button class="btn" id="d-btn">Plan my trip ›</button>`],
+ ["opt","Chip turns on","Option chips, number chips, quiz tiles.","250 ms ease out · colour only, no movement",`<div class="opts"><button class="opt" aria-pressed="true">Couple</button><button class="opt" id="d-opt">Family</button><button class="opt">Honeymoon</button></div>`],
+ ["leo","Kotiya reacts","Quiz: Kotiya's face changes after an answer. WhatsApp button: on hover.","450 ms ease out · scale 88% → 106% → 100% with a small tilt · only Kotiya bounces",kot(0)],
+ ["prog","Quiz progress","Progress bar at the top of the quiz.","500 ms ease out · bar width grows to the next step",`<div class="prog"><i id="d-prog"></i></div>`],
+ ["sheet","Bottom sheet","Booking, Make it yours, share card, confirmation.","Sheet slides up 350 ms ease out; dark background fades in 250 ms",`<div class="sheetbox" id="d-sheet"><div class="scrimx"></div><div class="sheetx"><div class="grip"></div><b style="font-weight:500;font-size:20px">Make it yours</b><p style="font-size:14px;color:#6E6E64">Who's coming, hotels, total.</p></div></div>`],
+ ["days","Focus a day","Trip page: tap a stop on the map, other days dim.","400 ms ease out · opacity 100% → 30%; the page scrolls to the day (jumps if Reduce motion is on)",`<div class="days" id="d-days"><div>Day 1 · Airport</div><div>Day 2 · Sigiriya</div><div>Day 3 · Kandy</div></div>`],
+ ["conf","Booking confetti","Booking confirmation only, once.","1300 ms · 14 pieces in lime, ochre and ink fall and fade · off with Reduce motion",`<div class="conf-wrap" id="d-conf">${conf}<b style="font-weight:500">Booked!</b></div>`],
+ ["toast","Toast","Short note after an action.","250 ms fade and rise in; stays about 3 seconds",`<div class="toastx show" id="d-toast" role="status">Your plan is on its way to WhatsApp</div>`],
+ ["marq","Place marquee","Home page line of places.","Linear 60 s loop on the site (30 s here) · pauses on hover · stops with Reduce motion",`<div class="marq"><div class="track"><b>Ella</b><b>Galle</b><b>Sigiriya</b><b>Yala</b><b>Mirissa</b><b>Ella</b><b>Galle</b><b>Sigiriya</b><b>Yala</b><b>Mirissa</b></div></div>`,1],
+ ["route","Route draws itself","Trip page map, when it first appears.","1.2 s ease in-out · the route line draws from the airport to the last stop, once",`<div class="route" id="d-route"><svg viewBox="0 0 280 200" aria-label="Route line drawing on an island" role="img"><path d="M120 10c30 6 70 40 92 80s30 80 10 96-80 14-120 0S40 140 40 100 70 2 120 10z" fill="#2F4A2A"/><polyline class="line" points="70,140 140,50 135,90 170,115 200,150 125,175" fill="none" stroke="#BEFF50" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,0,1],
+ ["card","Card lift","Trip cards and day-trip cards on laptops.","150 ms ease out · rises 4 px with a soft shadow on hover · not on phones",`<div class="card" id="d-card">The Classic</div>`,0,1]];
+document.getElementById("demos-grid").innerHTML=D.map(d=>`<article class="dm" ${d[5]?'style="grid-column:1/-1"':""}><div class="stage">${d[4]}</div><div class="in"><div class="hd"><h3>${d[1]}${d[6]?'<span class="new">New</span>':""}</h3>${d[0]==="marq"?"":`<button class="play" data-play="${d[0]}" aria-label="Play ${d[1]}">Play</button>`}</div><p class="when">${d[2]}</p><p class="spec">${d[3]}</p></div></article>`).join("");
+const $=id=>document.getElementById(id);
+const restart=(el,cls)=>{el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls)};
+let prog=20,sheet=false,focus=false,face=0;
+const P={
+ btn:()=>{const b=$("d-btn");b.classList.add("hov");setTimeout(()=>b.classList.add("press"),400);setTimeout(()=>b.classList.remove("press"),600);setTimeout(()=>b.classList.remove("hov"),1100)},
+ opt:()=>{const o=$("d-opt");o.setAttribute("aria-pressed",o.getAttribute("aria-pressed")==="true"?"false":"true")},
+ leo:()=>{face=1-face;const s=$("leo").parentNode;s.innerHTML=kot(face);restart($("leo"),"go")},
+ prog:()=>{prog=prog>=100?20:prog+20;$("d-prog").style.width=prog+"%"},
+ sheet:()=>{sheet=!sheet;$("d-sheet").classList.toggle("open",sheet)},
+ days:()=>{focus=!focus;$("d-days").classList.toggle("focus",focus)},
+ conf:()=>restart($("d-conf"),"go"),
+ toast:()=>{const t=$("d-toast");t.classList.remove("show");setTimeout(()=>t.classList.add("show"),350)},
+ route:()=>restart($("d-route"),"go"),
+ card:()=>{const c=$("d-card");c.classList.add("hov");setTimeout(()=>c.classList.remove("hov"),1000)}};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-play]");if(b)P[b.dataset.play]();
+ if(e.target.id==="rm"){const on=e.target.getAttribute("aria-pressed")!=="true";e.target.setAttribute("aria-pressed",on);document.documentElement.classList.toggle("rm",on)}});
+// show the route and Kotiya once on load so the page is not static
+$("d-prog").style.width="40%";prog=40;
+})();
+</script>

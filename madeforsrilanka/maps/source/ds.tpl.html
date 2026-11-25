@@ -1,0 +1,169 @@
+<meta charset="utf-8">
+<title>MadeForSriLanka Maps</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>__MLCSS__</style>
+<style>
+/* Layout: design-system page for the RouteMap component: two live states, anatomy with sizes, map colours, behaviour, rules, and the Google Maps plan. */
+:root{
+  --page:#F5F5EB; --card:#FFFFFF; --line:rgba(25,25,15,.1); --fg:#14140F; --mute:#6E6E64; --chip:#ECECE2; --lime:#BEFF50; --clay:#A4472A;
+  --f:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;--clay:#E0805F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--fg);font:400 16px/1.55 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.04;margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:52px 0}
+header h1{font-size:clamp(42px,5.6vw,80px);line-height:.95}
+.lead{font-size:18px;color:var(--mute);max-width:64ch;margin-top:14px}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.jump a{background:var(--card);border-radius:999px;padding:8px 14px;text-decoration:none;color:inherit;font-size:14.5px}
+.jump a:hover{box-shadow:inset 0 0 0 1px var(--fg)}
+section{padding-block:64px 0}
+h2{font-size:clamp(28px,3.4vw,40px)}
+.sub{color:var(--mute);margin-top:8px;max-width:64ch}
+.panel{background:var(--card);border-radius:24px;padding:22px;min-width:0}
+.mt{margin-top:22px}
+.two{display:grid;gap:12px;margin-top:22px}
+@media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
+.mapcard{background:var(--card);border-radius:24px;padding:8px 8px 16px;display:grid;gap:10px;min-width:0}
+.rm{height:420px;border-radius:18px;overflow:hidden;background:#EEF1E6;position:relative}
+.mapcard .cap{padding:0 10px;font-size:14.5px;color:var(--mute)}
+.mapcard .cap b{display:block;color:var(--fg);font-weight:500;font-size:17px}
+.fail{position:absolute;inset:0;display:grid;place-items:center;color:#6E6E64;font-size:14.5px;padding:20px;text-align:center}
+.anat{display:grid;gap:12px;margin-top:22px}
+@media(min-width:900px){.anat{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:start}}
+.anat svg{width:100%;height:auto;background:#F5F5EB;border-radius:18px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--mute);font-size:13px}
+tr:last-child td{border-bottom:0}
+.tw{overflow-x:auto}
+.n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--lime);color:#14140F;font-size:12px;font-weight:600;margin-right:6px}
+.sw{display:grid;gap:10px;margin-top:22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr))}
+.s{background:var(--card);border-radius:20px;padding:6px 6px 12px;display:grid;gap:8px}
+.s i{display:block;height:64px;border-radius:15px;box-shadow:inset 0 0 0 1px rgba(25,25,15,.08)}
+.s b{font-weight:500;font-size:14.5px;padding:0 6px}
+.s small{color:var(--mute);font-size:12.5px;padding:0 6px;font-variant-numeric:tabular-nums}
+.rules ol{margin:0;padding-left:20px;display:grid;gap:8px}
+.maplibregl-ctrl-attrib{font-family:var(--f)}
+footer{padding-block:64px 48px;color:var(--mute);font-size:14px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+</style>
+
+<header class="wrap">
+  <p style="color:var(--mute)">MadeForSriLanka design system · Fresh · maps</p>
+  <h1>Maps</h1>
+  <p class="lead">One map part, RouteMap, draws every trip on a real map from a list of places. It is never drawn by hand. The live website will use Google Maps; mockups use OpenStreetMap because claude.ai blocks Google map images. Everything on this page applies to both.</p>
+  <nav class="jump" aria-label="Sections"><a href="#live">Live</a><a href="#parts">Parts</a><a href="#colours">Colours</a><a href="#behave">Behaviour</a><a href="#data">Data</a><a href="#google">Google Maps</a><a href="#rules">Rules</a></nav>
+</header>
+
+<section class="wrap" id="live">
+  <h2>Two states</h2>
+  <p class="sub">Plan mode on trip pages and the quiz result. Trip mode on the guest trip page. Drag, zoom (Ctrl or two fingers), or tap a stop.</p>
+  <div class="two">
+    <div class="mapcard"><div class="rm" id="m1" role="region" aria-label="Plan mode example: The Classic"></div><p class="cap"><b>Plan: The Classic</b>Whole route lime, every stop white. Used where guests choose a trip.</p></div>
+    <div class="mapcard"><div class="rm" id="m2" role="region" aria-label="Trip mode example: day 4 of The Classic"></div><p class="cap"><b>Trip: day 4 of The Classic</b>Driven legs and visited stops lime; the rest white. Used on the guest trip page.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="parts">
+  <h2>Parts and sizes</h2>
+  <div class="anat">
+    <div class="panel"><svg viewBox="0 0 360 260" role="img" aria-label="Diagram of the map parts with numbered callouts">
+      <path d="M40 220 C80 150 120 160 170 120 S250 60 320 40" fill="none" stroke="#14140F" stroke-width="9" stroke-linecap="round" opacity=".85"/>
+      <path d="M40 220 C80 150 120 160 170 120 S250 60 320 40" fill="none" stroke="#BEFF50" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="170" cy="120" r="14" fill="#fff" stroke="#14140F" stroke-width="2.5"/><text x="170" y="125" text-anchor="middle" font-family="Onest,sans-serif" font-weight="600" font-size="14" fill="#14140F">2</text>
+      <text x="192" y="126" font-family="Onest,sans-serif" font-weight="500" font-size="17" fill="#14140F" stroke="#fff" stroke-width="4" paint-order="stroke">Sigiriya</text>
+      <circle cx="40" cy="220" r="14" fill="#BEFF50" stroke="#14140F" stroke-width="2.5"/><text x="40" y="225" text-anchor="middle" font-family="Onest,sans-serif" font-weight="600" font-size="14" fill="#14140F">1</text>
+      <rect x="296" y="200" width="54" height="22" rx="11" fill="#fff"/><text x="323" y="215" text-anchor="middle" font-family="Onest,sans-serif" font-size="10" fill="#6E6E64">© OSM</text>
+      <g font-family="Onest,sans-serif" font-size="12" font-weight="600" fill="#14140F"><circle cx="110" cy="128" r="10" fill="#14140F"/><text x="110" y="132" text-anchor="middle" fill="#BEFF50">a</text><circle cx="170" cy="86" r="10" fill="#14140F"/><text x="170" y="90" text-anchor="middle" fill="#BEFF50">b</text><circle cx="262" cy="98" r="10" fill="#14140F"/><text x="262" y="102" text-anchor="middle" fill="#BEFF50">c</text><circle cx="70" cy="244" r="10" fill="#14140F"/><text x="70" y="248" text-anchor="middle" fill="#BEFF50">d</text><circle cx="323" cy="184" r="10" fill="#14140F"/><text x="323" y="188" text-anchor="middle" fill="#BEFF50">e</text></g>
+    </svg></div>
+    <div class="panel tw"><table><thead><tr><th>Part</th><th>Look</th></tr></thead><tbody>
+      <tr><td><b style="font-weight:500">a</b> Route line</td><td>Lime #BEFF50, 3.8 px, on an ink edge 7 px at 85%. Follows real roads. Round ends and joins.</td></tr>
+      <tr><td><b style="font-weight:500">b</b> Stop</td><td>White circle, radius 11 px, ink outline 2 px, number 11.5 px Medium. Visited: lime.</td></tr>
+      <tr><td><b style="font-weight:500">c</b> Stop name</td><td>13.5 px Medium ink with a 2 px white halo. Sits left, right, above or below; it moves away from other names on its own.</td></tr>
+      <tr><td><b style="font-weight:500">d</b> Visited (trip mode)</td><td>Driven legs lime; upcoming legs white on a 50% ink edge.</td></tr>
+      <tr><td><b style="font-weight:500">e</b> Credit</td><td>Always shown, small, bottom right: © OpenStreetMap (mockups) or Google's logo (live).</td></tr>
+      <tr><td>Frame</td><td>White card, radius 28 px, map inside radius 20 px. Height 360–500 px (64% of the screen on phones).</td></tr>
+      <tr><td>Zoom buttons</td><td>Top right, + and − only. No compass, no tilting, no rotating.</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="wrap" id="colours">
+  <h2>Map colours</h2>
+  <p class="sub">The base map is quiet so the lime route stands out. These colours are only for the map; they are also on the colour palette page.</p>
+  <div class="sw" id="sw"></div>
+</section>
+
+<section class="wrap" id="behave">
+  <h2>Behaviour</h2>
+  <div class="panel mt tw"><table><tbody>
+    <tr><td>First view</td><td>Fits the whole route with 48 px space around it. Never shows more than Sri Lanka.</td></tr>
+    <tr><td>Scrolling the page</td><td>The page scrolls; the map needs Ctrl + scroll or two fingers, so guests never get trapped in it.</td></tr>
+    <tr><td>Tap a stop or a day</td><td>Flies to that stop (0.9 s). Tap again to see the whole route.</td></tr>
+    <tr><td>Change the trip</td><td>Route and stops redraw, the map refits (0.8 s).</td></tr>
+    <tr><td>Reduce motion</td><td>Jumps instead of flying.</td></tr>
+    <tr><td>Map can't load</td><td>A plain drawn island with the same numbered route appears instead; the day list always works.</td></tr>
+    <tr><td>Phones</td><td>Day list comes first; the map supports it. "Open in Google Maps" for directions.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="wrap" id="data">
+  <h2>Data</h2>
+  <div class="two">
+    <div class="panel"><p style="font-size:15.5px">A place is saved once. A trip is a list. The map only reads.</p>
+<pre style="background:var(--page);border-radius:14px;padding:14px;font-size:13px;line-height:1.5;overflow-x:auto;margin:12px 0 0">place:  id, name (EN/DE), lat, lng, google_place_id
+route:  stops: [ {place, nights}, … ]
+leg:    from, to, road_km, drive_min, line
+RouteMap(stops, { mode: "plan" | "trip", visited })</pre></div>
+    <div class="panel"><table><tbody>
+      <tr><td>Day cards</td><td>"154 km · about 2 h 58 by road" from the saved leg</td></tr>
+      <tr><td>Drive times</td><td>Routing estimates plus a safety margin (amount still open)</td></tr>
+      <tr><td>Trip cards, PDFs, share cards</td><td>A still image of the same map</td></tr>
+      <tr><td>Driver directions</td><td>"Open in Google Maps" link with every stop</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="wrap" id="google">
+  <h2>Moving to Google Maps</h2>
+  <div class="panel mt"><ol style="margin:0;padding-left:20px;display:grid;gap:8px;font-size:15.5px">
+    <li>Same parts, same colours: route, stops and names stay as on this page; Google's map is styled with cloud map styling to match the colours above.</li>
+    <li>Road legs from Google's Routes API. Check Google's terms first: Google routes must be shown on a Google map, and saving Google results long term is limited.</li>
+    <li>Still images for cards and PDFs from Google's Static Maps.</li>
+    <li>Cost: free allowance of about 10,000 map loads a month for the standard map, then paid; check current prices before launch.</li>
+    <li>Keep Google's logo and terms link visible on every map.</li>
+  </ol></div>
+</section>
+
+<section class="wrap rules" id="rules"><h2>Rules</h2><div class="panel mt"><ol>
+  <li>Never draw a map for one route. Fix a place in the library and every map updates.</li>
+  <li>The route is the only bright thing on the map: lime with an ink edge. No other coloured markers.</li>
+  <li>Stops are numbered in visiting order and match the day list.</li>
+  <li>Kotiya never sits on a map, and prices never appear on it.</li>
+  <li>Always show the map credit.</li>
+  <li>Drive times always say "about" and include the safety margin.</li>
+</ol></div></section>
+
+<footer class="wrap">Map data © OpenStreetMap contributors (ODbL), packaged by Protomaps; road legs from OSRM; shown with MapLibre GL JS. Live site: Google Maps (planned).</footer>
+
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@4.5.0/dist/pmtiles.js"></script>
+<script src="https://unpkg.com/@protomaps/basemaps@5.7.2/dist/basemaps.js"></script>
+<script>__ROUTEMAP__</script>
+<script>
+(async()=>{
+const C=[["Land","#F5F5EB","earth (same as stone)"],["Background","#EEF1E6","outside the land"],["Water","#BFD8DC","sea, lakes, rivers"],["Park","#DCE8CC","national parks"],["Park, deep","#D3E2C2","second park tone"],["Wood","#D6E4C8","forest"],["Wood, deep","#CCDDBB","second forest tone"],["Scrub","#E3EBD5","scrubland"],["Scrub, deep","#DCE6CB","second scrub tone"],["Beach and sand","#F2E8CC","beaches"],["Roads","#FFFFFF","main roads"],["Sea names","#5E8C92","ocean labels"],["Town names","#3A3A32","city labels"],["Small places","#6E6E64","suburb labels"],["Region names","#9A9A8C","province labels"],["Route","#BEFF50","route line, visited stops"],["Route edge","#14140F","line edge, stop outline"]];
+document.getElementById("sw").innerHTML=C.map(c=>`<div class="s"><i style="background:${c[1]}"></i><b>${c[0]}</b><small>${c[1]} · ${c[2]}</small></div>`).join("");
+const ids=["airport","sigiriya","kandy","ella","yala","galle"];
+async function put(id,o){const el=document.getElementById(id);try{const m=await RouteMap.mount(el,ids,o);return m}catch(e){el.innerHTML='<p class="fail">The live map could not load here. The website shows a drawn island instead.</p>'}}
+const a=await put("m1",{});if(a)a.map.on("click","stop",e=>a.focus(+e.features[0].properties.n-1));
+await put("m2",{mode:"trip",visited:3});
+})();
+</script>

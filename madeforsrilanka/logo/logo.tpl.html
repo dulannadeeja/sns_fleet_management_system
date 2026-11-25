@@ -1,0 +1,187 @@
+<title>Kotiya Logo Studies</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: a logo presentation board in the Fresh language. Marks sit on fixed brand grounds (stone, ink, lime) so they read the same in both themes. */
+:root{
+  --page:#F5F5EB; --card:#FFFFFF; --line:rgba(25,25,15,.1); --fg:#14140F; --mute:#6E6E64; --clay:#A4472A;
+  --stone:#F5F5EB; --ink:#14140F; --lime:#BEFF50; --och:#E3A13B;
+  --f:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--clay:#E0805F;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--clay:#E0805F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--fg);font:400 17px/1.55 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sec{padding-block:72px 0}
+.mute{color:var(--mute)}
+.lead{font-size:18px;color:var(--mute);max-width:64ch;margin-top:14px}
+h2{font-size:clamp(32px,4.6vw,52px)}
+header{padding-block:56px 0}
+header h1{font-size:clamp(42px,7vw,84px);max-width:16ch}
+.why{display:grid;gap:12px;margin-top:28px}
+@media(min-width:860px){.why{grid-template-columns:repeat(4,1fr)}}
+.why div{background:var(--card);border-radius:22px;padding:18px 20px;font-size:15.5px}
+.why b{display:block;font-weight:500;font-size:17px;margin-bottom:4px}
+
+.cons{display:grid;gap:14px;margin-top:32px}
+@media(min-width:900px){.cons{grid-template-columns:1fr 1fr}}
+.con{background:var(--card);border-radius:28px;padding:10px 10px 22px;display:grid;gap:16px;position:relative}
+.con.pick{box-shadow:inset 0 0 0 2px var(--fg)}
+.rec{position:absolute;right:20px;top:20px;background:var(--lime);color:#14140F;border-radius:999px;padding:5px 11px;font-size:13px;font-weight:500;z-index:1}
+.stage{background:var(--stone);border-radius:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+.stage .big{grid-column:1/-1;background:#fff;border-radius:14px;display:grid;place-items:center;padding:34px 10px}
+.stage .big svg{width:124px;height:124px}
+.stage .lock{border-radius:14px;display:grid;place-items:center;padding:18px 14px;min-height:84px}
+.stage .lock svg{width:100%;max-width:230px;height:auto}
+.on-ink{background:var(--ink)} .on-lime{background:var(--lime)}
+.fav{display:flex;align-items:flex-end;gap:14px;padding:0 12px;flex-wrap:wrap}
+.fav figure{margin:0;display:grid;justify-items:center;gap:4px;font-size:12px;color:var(--mute)}
+.fav img,.fav .px{image-rendering:auto;display:block}
+.tab{display:flex;align-items:center;gap:8px;background:#DEDED3;border-radius:10px 10px 0 0;padding:8px 12px;font-size:12.5px;color:#14140F;min-width:0;max-width:220px}
+.tab span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.con .in{padding:0 12px;display:grid;gap:8px}
+.con h3{font-size:26px}
+.con ul{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:15px}
+.con li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.con li i{font-style:normal;font-weight:600}
+
+.board{display:grid;gap:14px;margin-top:32px}
+@media(min-width:900px){.board{grid-template-columns:1.2fr 1fr}}
+.panel{background:var(--card);border-radius:28px;padding:22px;display:grid;gap:14px;align-content:start}
+.panel h3{font-size:24px}
+.grid-art{background:#fff;border-radius:18px;display:grid;place-items:center;padding:16px}
+.grid-art svg{width:100%;max-width:360px;height:auto}
+.vars{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.vars div{border-radius:16px;display:grid;place-items:center;padding:20px 12px;min-height:96px}
+.vars svg{width:100%;max-width:200px;height:auto}
+.vars .cap{font-size:12px;margin-top:8px}
+.sizes{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;background:#fff;border-radius:18px;padding:18px;color:#6E6E64;font-size:12px}
+.sizes figure{margin:0;display:grid;justify-items:center;gap:6px}
+.phone{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
+.home{width:240px;max-width:100%;aspect-ratio:9/12;border-radius:26px;background:linear-gradient(#2F4A2A,#1d2e1a);padding:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-content:start}
+.home div{display:grid;justify-items:center;gap:4px;color:#fff;font-size:9.5px}
+.home i{display:block;width:44px;height:44px;border-radius:11px;background:rgba(255,255,255,.18)}
+.home img{width:44px;height:44px;border-radius:11px;display:block}
+.rules{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15.5px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{text-align:left;padding:10px 10px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--mute);font-size:13.5px}
+code{font-size:13.5px;background:var(--page);padding:2px 6px;border-radius:6px}
+footer{padding-block:64px 48px;color:var(--mute);font-size:14px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+</style>
+
+<header class="wrap">
+  <p class="mute">MadeForSriLanka · logo and favicon design</p>
+  <h1>A logo grown from Kotiya</h1>
+  <p class="lead">The logo is not the mascot. It sits on every page, including price, payment and Help, where Kotiya must stay away. So each mark keeps one piece of Kotiya and drops the cartoon. That piece must still read at 16 pixels in a browser tab.</p>
+  <div class="why">
+    <div><b>16 px test</b>Recognisable as a browser tab icon.</div>
+    <div><b>One colour</b>Works as a stamp, van sticker or shirt print.</div>
+    <div><b>Every page</b>Calm enough to sit next to prices and Help.</div>
+    <div><b>Ours</b>Not another island outline or elephant.</div>
+  </div>
+</header>
+
+<section class="wrap sec">
+  <h2>Four directions</h2>
+  <p class="lead">Each shows the mark, the logo with the name on light, dark and lime, and the favicon at its real sizes.</p>
+  <div class="cons" id="cons"></div>
+</section>
+
+<section class="wrap sec" id="final">
+  <h2>Recommended: Kotiya Tile</h2>
+  <p class="lead">Our lime square becomes Kotiya's face: two leopard ears with dark backs, eyes, a nose, and one rosette on the forehead so it reads as a leopard, not a cat. It keeps the lime you already own and stays calm on every page.</p>
+  <div class="board">
+    <div class="panel"><h3>How it is built</h3><div class="grid-art" id="grid"></div>
+      <ol class="rules">
+        <li>Grid of 64 units. Tile 52 × 48, corner radius 16, the same curve as our cards.</li>
+        <li>Ears are circles of radius 9, half hidden behind the tile.</li>
+        <li>Eyes, nose and the forehead rosette sit on the centre line, so the face never looks crooked. Two cheek rosettes make it a leopard, not a bear or cat.</li>
+        <li>Below 48 px (favicon, website header) the rosettes are left out: only ears, eyes and nose. Small sizes stay clean.</li>
+        <li>Clear space around the logo: at least the height of one ear on every side.</li>
+      </ol></div>
+    <div class="panel"><h3>Colour versions</h3><div class="vars" id="vars"></div></div>
+  </div>
+  <div class="board">
+    <div class="panel"><h3>Favicon and app icon</h3>
+      <div class="sizes" id="sizes"></div>
+      <div class="phone"><div class="home" id="home"></div><p class="mute" style="font-size:14px;max-width:30ch">On a phone home screen (saved website). The icon uses a lime background with the face filling it, because phones cut icons into their own rounded shape.</p></div>
+    </div>
+    <div class="panel"><h3>Files ready</h3>
+      <table><thead><tr><th>File</th><th>Use</th></tr></thead><tbody>
+        <tr><td><code>logo.svg</code></td><td>Website header, ink text</td></tr>
+        <tr><td><code>logo-white.svg</code></td><td>On dark or photos</td></tr>
+        <tr><td><code>logo-mark.svg</code></td><td>Mark alone, social avatar</td></tr>
+        <tr><td><code>logo-mono.svg</code></td><td>One colour: stamp, sticker, shirt</td></tr>
+        <tr><td><code>favicon.svg</code></td><td>Modern browsers</td></tr>
+        <tr><td><code>favicon.ico</code></td><td>Old browsers (16, 32, 48 px)</td></tr>
+        <tr><td><code>apple-touch-icon.png</code></td><td>iPhone home screen, 180 px</td></tr>
+        <tr><td><code>icon-192.png</code>, <code>icon-512.png</code></td><td>Android and the web app manifest</td></tr>
+        <tr><td><code>og-avatar.png</code></td><td>Instagram, WhatsApp and Google profile, 1024 px</td></tr>
+      </tbody></table>
+      <p class="mute" style="font-size:14px">The name is drawn as shapes from the Onest font, so the logo looks the same on every computer, with or without the font.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">Logo studies by Claude for MadeForSriLanka. Final artwork can be refined by the Kotiya illustrator so mascot and logo share one hand.</footer>
+
+<script>
+(()=>{
+const WM=__WM__;
+const INK="#14140F",OCH="#E3A13B",LIME="#BEFF50",CRE="#F8E7C6",STONE="#F5F5EB",FOR="#2F4A2A";
+const ros=(x,y,r,c)=>{const a0=((x*37+y*13)%90),B=[[0,.56],[92,.44],[178,.52],[268,.38]];return B.map(([d,s])=>{const a=(a0+d)*Math.PI/180,cx=(x+Math.cos(a)*r).toFixed(2),cy=(y+Math.sin(a)*r).toFixed(2);return `<ellipse cx="${cx}" cy="${cy}" rx="${(r*s).toFixed(2)}" ry="${(r*.3).toFixed(2)}" fill="${c}" transform="rotate(${(a0+d+90).toFixed(1)} ${cx} ${cy})"/>`}).join("")};
+// ---- marks on a 64 x 64 grid; c = colours ----
+const MARKS={
+ face:(c={})=>{const o=c.mono||OCH,i=c.mono?(c.bg||"#fff"):INK,m=c.mono?o:CRE;return `<circle cx="15" cy="17" r="8" fill="${o}"/><circle cx="49" cy="17" r="8" fill="${o}"/><circle cx="15" cy="18" r="3.6" fill="${i}"/><circle cx="49" cy="18" r="3.6" fill="${i}"/>
+  <circle cx="32" cy="36" r="23" fill="${o}"/>${c.mono?"":`<ellipse cx="32" cy="45" rx="10.5" ry="7.5" fill="${m}"/>`}
+  <circle cx="24" cy="33" r="3.2" fill="${i}"/><circle cx="40" cy="33" r="3.2" fill="${i}"/><path d="M28.6 40.2h6.8l-3.4 4.4z" fill="${i}" stroke="${i}" stroke-width="1.6" stroke-linejoin="round"/>${ros(30,21,2.6,i)}${ros(17,38,2.2,i)}${ros(47,38,2.2,i)}`},
+ island:(c={})=>{const o=c.mono||OCH,i=c.mono?(c.bg||"#fff"):INK;return `<path d="M24.5 3.5c3.6-.6 6.4 4.3 9.8 9.6 4.2 6.5 9.6 12.4 12.6 19.2 3.4 7.6 4.6 15.6.2 21.6-4 5.4-11 7.6-17.4 6.4-6.2-1.2-10.6-6.2-12.6-12.4-2.2-7-1.4-14.6.4-21.4 1.4-5.4.8-10.8 2.6-15.4 1-2.8 2.6-7.2 4.4-7.6z" fill="${o}"/>${ros(28,18,3.2,i)}${ros(36,32,3.8,i)}${ros(24,40,4.4,i)}${ros(36,49,3.6,i)}`},
+ rosette:(c={})=>{const o=c.mono?(c.bg||"#fff"):OCH,i=c.mono||INK;return `<circle cx="32" cy="32" r="20" fill="none" stroke="${i}" stroke-width="10" stroke-dasharray="27 15" stroke-linecap="round" transform="rotate(-62 32 32)"/><circle cx="32" cy="32" r="9.5" fill="${c.mono?i:o}"/>`},
+ tile:(c={})=>{const t=c.tile||LIME,e=c.ear||OCH,i=c.ink||INK,ei=c.earIn||(t===INK&&e!==INK?INK:i);return `<circle cx="16.5" cy="15" r="9" fill="${e}"/><circle cx="47.5" cy="15" r="9" fill="${e}"/><circle cx="16.5" cy="15.6" r="4.4" fill="${ei}"/><circle cx="47.5" cy="15.6" r="4.4" fill="${ei}"/>
+  <rect x="6" y="13" width="52" height="47" rx="16" fill="${t}"/>
+  <circle cx="23.5" cy="35" r="3.6" fill="${i}"/><circle cx="40.5" cy="35" r="3.6" fill="${i}"/><path d="M28.2 42.4h7.6l-3.8 4.8z" fill="${i}" stroke="${i}" stroke-width="1.8" stroke-linejoin="round"/>${c.small?"":ros(32,24,3.4,i)+ros(14.5,46.5,3.2,i)+ros(49.5,46.5,3.2,i)}`}
+};
+const svg=(inner,vb="0 0 64 64",label="")=>`<svg viewBox="${vb}" ${label?`role="img" aria-label="${label}"`:'aria-hidden="true"'} xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+// lockup: mark + outlined wordmark; cap height = 0.5 x mark
+function lock(mark,c={},label="MadeForSriLanka"){c=Object.assign({small:!c.big},c);const s=32/WM.cap,w=WM.width*s,tx=74,base=44;
+ const made=c.made||INK,sri=c.sri||INK;
+ return svg(`${MARKS[mark](c)}<g transform="translate(${tx} ${base}) scale(${s.toFixed(4)})"><path d="${WM.made}" fill="${made}"/><path d="${WM.sri}" fill="${sri}" opacity="${c.sriOp||1}"/></g>`,`0 0 ${Math.ceil(tx+w+2)} 64`,label)}
+// favicon tiles at real pixel sizes (drawn as SVG, shown 1:1)
+const FAV={face:i=>`<rect width="64" height="64" rx="14" fill="${LIME}"/><g transform="translate(4 5) scale(.875)">${MARKS.face()}</g>`,
+ island:i=>`<rect width="64" height="64" rx="14" fill="${INK}"/><g transform="translate(5 4) scale(.86)">${MARKS.island()}</g>`,
+ rosette:i=>`<rect width="64" height="64" rx="14" fill="${LIME}"/><g transform="translate(5 5) scale(.84)">${MARKS.rosette()}</g>`,
+ tile:n=>MARKS.tile({small:n<=32})};
+const favRow=k=>[16,32,48].map(n=>`<figure><span class="px" style="width:${n}px;height:${n}px">${svg(FAV[k](n)).replace("<svg ",`<svg width="${n}" height="${n}" `)}</span>${n}px</figure>`).join("")+`<div class="tab"><span class="px" style="width:16px;height:16px;flex:0 0 auto">${svg(FAV[k](16)).replace("<svg ",'<svg width="16" height="16" ')}</span><span>MadeForSriLanka · Private trips</span></div>`;
+
+const C=[
+ ["face","Kotiya Face","Kotiya's head, simplified.",[["+","Friendliest, instantly Kotiya"],["−","A cartoon face sits on payment and Help pages"],["−","Two Kotiyas on quiz screens"],["−","Busy at 16 px"]],{},{mono:STONE,bg:INK}],
+ ["island","Spotted Island","Sri Lanka's shape with leopard rosettes.",[["+","Says Sri Lanka and leopard at once"],["+","Calm on every page"],["−","Many Sri Lankan tour logos use the island outline"],["−","Spots vanish at 16 px, only a blob is left"]],{},{mono:STONE,bg:INK}],
+ ["rosette","Rosette","One leopard spot, made geometric.",[["+","Very simple, easy to stamp and embroider"],["+","Unusual among tour brands"],["−","People must learn that it means leopard"],["−","Little warmth on its own"]],{},{mono:STONE,bg:INK}],
+ ["tile","Kotiya Tile","Our lime square with Kotiya's ears and face.",[["+","Clear at 16 px: square plus two ears"],["+","Keeps the lime you already use"],["+","Links to Kotiya without the full cartoon"],["−","Ear shapes must stay leopard-like (dark backs, rosette) to avoid looking like a cat app"]],{},{tile:LIME,ear:OCH,ink:INK}]];
+document.getElementById("cons").innerHTML=C.map(c=>{const k=c[0],dark=k==="tile"?{tile:LIME,ear:OCH,ink:INK,made:STONE,sri:STONE,sriOp:.7}:Object.assign({},c[5],{made:STONE,sri:STONE,sriOp:.7}),onLime=k==="tile"?{tile:INK,ear:OCH,ink:LIME}:{};
+ return `<article class="con ${k==="tile"?"pick":""}">${k==="tile"?'<span class="rec">Recommended</span>':""}
+ <div class="stage"><div class="big">${svg(MARKS[k](),"0 0 64 64",c[1]+" mark")}</div>
+  <div class="lock" style="background:#fff">${lock(k,{sriOp:1})}</div><div class="lock on-ink">${lock(k,dark)}</div>
+  <div class="lock on-lime" style="grid-column:1/-1">${lock(k,onLime)}</div></div>
+ <div class="fav">${favRow(k)}</div>
+ <div class="in"><h3>${c[1]}</h3><p class="mute" style="font-size:15px">${c[2]}</p><ul>${c[3].map(l=>`<li><i style="color:${l[0]==="+"?"inherit":"var(--clay)"}">${l[0]}</i><span>${l[1]}</span></li>`).join("")}</ul></div></article>`}).join("");
+
+// construction grid for the tile
+const g=[];for(let i=0;i<=64;i+=8)g.push(`<path d="M${i} 0V64M0 ${i}H64" stroke="#14140F" stroke-opacity=".08" stroke-width=".3"/>`);
+document.getElementById("grid").innerHTML=svg(`<rect x="-6" y="-6" width="76" height="76" fill="#fff"/>${g.join("")}${MARKS.tile()}
+ <g fill="none" stroke="#A4472A" stroke-width=".35" stroke-dasharray="1.2 1"><circle cx="16.5" cy="15" r="9"/><circle cx="47.5" cy="15" r="9"/><rect x="6" y="13" width="52" height="47" rx="16"/><path d="M32 6V62"/></g>`,"-6 -6 76 76","Construction grid of the Kotiya Tile");
+
+const V=[["On white",{},"#fff","#6E6E64"],["On ink",{made:STONE,sri:STONE,sriOp:.7},INK,"#C9C9BE"],["On lime",{tile:INK,ear:OCH,ink:LIME},LIME,"#3A3A32"],["On a photo",{made:"#fff",sri:"#fff",sriOp:.85},"linear-gradient(135deg,#3f5f36,#8a6a3a)","#fff"],["One colour ink",{tile:INK,ear:INK,ink:"#fff"},"#fff","#6E6E64"],["One colour white",{tile:"#fff",ear:"#fff",ink:INK,made:"#fff",sri:"#fff"},INK,"#C9C9BE"]];
+document.getElementById("vars").innerHTML=V.map(v=>`<div style="background:${v[2]}"><span style="display:block;width:100%">${lock("tile",v[1],"MadeForSriLanka logo, "+v[0].toLowerCase())}</span><span class="cap" style="color:${v[3]}">${v[0]}</span></div>`).join("");
+
+document.getElementById("sizes").innerHTML=[16,24,32,48,64,128].map(n=>`<figure>${svg(MARKS.tile({small:n<=32})).replace("<svg ",`<svg width="${n}" height="${n}" `)}${n}px</figure>`).join("");
+const app=`<rect width="64" height="64" fill="${LIME}"/><g transform="translate(5 9) scale(.84)">${MARKS.tile({tile:LIME})}</g>`;
+const appUrl="data:image/svg+xml,"+encodeURIComponent(svg(app));
+document.getElementById("home").innerHTML=["Maps","Mail","","Photos","Notes","MadeFor","Camera","Clock"].map((n,i)=>i===5?`<div><img src="${appUrl}" alt="MadeForSriLanka app icon">${n}</div>`:`<div><i></i>${n||"Weather"}</div>`).join("");
+})();
+</script>

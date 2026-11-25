@@ -1,0 +1,172 @@
+<meta charset="utf-8">
+<title>Phone Menu Options</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: three working phone frames side by side (stack on phones), each a mini copy of our home page with a different menu; tap the menu button to open it. Then real references and a recommendation. Phones show the site's fixed light design. */
+:root{
+  --page:#F5F5EB; --card:#FFFFFF; --line:rgba(25,25,15,.1); --fg:#14140F; --mute:#6E6E64; --chip:#ECECE2; --lime:#BEFF50; --sand:#D2D2C8;
+  --f:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#121210;--card:#1C1C18;--line:rgba(245,245,235,.12);--fg:#F2F2E8;--mute:#A9A99C;--chip:#262620;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--fg);font:400 16px/1.5 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.04;margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:52px 0}
+header.top h1{font-size:clamp(40px,5.2vw,72px);line-height:.98}
+.lead{font-size:18px;color:var(--mute);max-width:64ch;margin-top:14px}
+section{padding-block:56px 0}
+h2{font-size:clamp(28px,3.4vw,40px)}
+.sub{color:var(--mute);margin-top:8px;max-width:64ch}
+.opts{display:grid;gap:20px;margin-top:26px;justify-items:center}
+@media(min-width:1000px){.opts{grid-template-columns:repeat(3,1fr);align-items:start}}
+.opt{display:grid;gap:14px;width:100%;max-width:340px}
+.opt h3{font-size:24px}
+.opt .tag{display:inline-block;background:var(--lime);color:#14140F;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:500;margin-left:6px;vertical-align:4px}
+.opt p.d{color:var(--mute);font-size:15px}
+.opt ul{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:14.5px}
+.opt li{display:grid;grid-template-columns:16px 1fr;gap:6px}
+.opt li i{font-style:normal;font-weight:600}
+.opt li.n i{color:#A4472A}
+.try{justify-self:start;background:var(--fg);color:var(--page);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500}
+
+/* phone frame (always light, like the site) */
+.phone{width:100%;max-width:340px;aspect-ratio:340/700;background:#14140F;border-radius:44px;padding:9px;box-shadow:0 24px 50px rgba(20,20,15,.22)}
+.scr{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#F5F5EB;color:#14140F;font-family:var(--f)}
+.notch{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:96px;height:26px;border-radius:14px;background:#14140F;z-index:9}
+.bar{position:absolute;left:0;right:0;top:0;z-index:6;display:flex;align-items:center;gap:8px;padding:46px 14px 10px}
+.bar .lg{display:flex;align-items:center;gap:6px;font:600 14.5px/1 var(--f);letter-spacing:-.02em;white-space:nowrap}
+.bar .lg span{font-weight:400}
+.bar .lg svg{width:24px;height:24px}
+.bar .grow{flex:1}
+.mini-cta{background:#BEFF50;border-radius:999px;padding:8px 11px;font-size:12.5px;font-weight:500;white-space:nowrap}
+.mbtn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:transparent;color:#14140F;position:relative;z-index:7}
+.mbtn:hover{background:rgba(25,25,15,.06)}
+.mbtn svg{width:22px;height:22px}
+.body{position:absolute;inset:0;padding:110px 18px 0;text-align:center;transition:filter .25s}
+.body .hi{font-size:11.5px;color:#6E6E64}
+.body h4{margin:10px 0 0;font:500 32px/.98 var(--f);letter-spacing:-.03em}
+.body p{font-size:13px;color:#6E6E64;margin-top:12px;line-height:1.45}
+.body .b1{display:block;margin:16px auto 0;width:max-content;background:#BEFF50;border-radius:999px;padding:11px 18px;font-size:14px;font-weight:500}
+.body .ph{margin-top:18px;height:220px;border-radius:22px;background:url(img/sigiriya-main.jpg) center/cover}
+.open .body{filter:blur(6px)}
+/* shared */
+.row{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;font-size:16.5px;padding:10px 4px;border-bottom:1px solid rgba(25,25,15,.1)}
+.row:last-of-type{border-bottom:0}
+.row small{font-size:12.5px;color:#6E6E64;display:block;margin-top:2px}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;border-radius:999px;font:500 15.5px/1 var(--f);width:100%}
+.b-lime{background:#BEFF50;color:#14140F}.b-ol{box-shadow:inset 0 0 0 1px #14140F;color:#14140F}
+.util{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:#6E6E64;padding-top:12px}
+.util .seg{display:flex;background:#F5F5EB;border-radius:999px;padding:3px}
+.util .seg b{font-weight:500;padding:5px 10px;border-radius:999px}
+.util .seg b.on{background:#14140F;color:#fff}
+/* A: Perk dropdown card */
+.menuA{position:absolute;left:12px;right:12px;top:94px;z-index:6;background:#fff;border-radius:28px;padding:10px 18px 18px;box-shadow:0 20px 50px rgba(20,20,15,.18);
+ opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;transition:opacity .25s cubic-bezier(.2,.7,.1,1),transform .25s cubic-bezier(.2,.7,.1,1);display:grid;gap:8px}
+.open .menuA{opacity:1;transform:none;pointer-events:auto}
+/* B: full-screen stone */
+.menuB{position:absolute;inset:0;z-index:5;background:#F5F5EB;padding:96px 22px 18px;align-items:stretch;display:flex;flex-direction:column;gap:6px;opacity:0;pointer-events:none;transition:opacity .25s}
+.open .menuB{opacity:1;pointer-events:auto}
+.menuB .big{font:500 30px/1.1 var(--f);letter-spacing:-.03em;text-align:left;padding:6px 0;display:flex;align-items:baseline;justify-content:flex-start;gap:10px;width:100%;flex-wrap:wrap}
+.menuB .big small{font:400 13px var(--f);color:#6E6E64;letter-spacing:0;white-space:nowrap}
+.menuB .foot{margin-top:auto;display:grid;gap:8px}
+/* C: bottom sheet */
+.scrim{position:absolute;inset:0;z-index:5;background:rgba(20,20,15,.42);opacity:0;pointer-events:none;transition:opacity .25s}
+.open .scrim{opacity:1;pointer-events:auto}
+.menuC{position:absolute;left:0;right:0;bottom:0;z-index:6;background:#fff;border-radius:28px 28px 0 0;padding:10px 16px 20px;transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.7,.1,1);display:grid;gap:10px}
+.open .menuC{transform:none}
+.grip{width:44px;height:5px;border-radius:9px;background:#D2D2C8;margin:2px auto 6px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{background:#F5F5EB;border-radius:20px;padding:12px;text-align:left;display:grid;gap:8px}
+.tile i{width:34px;height:34px;border-radius:11px;background:#BEFF50;display:grid;place-items:center}
+.tile b{font-weight:500;font-size:15.5px}
+.tile small{font-size:12px;color:#6E6E64;display:block;margin-top:-4px}
+.links2{display:flex;flex-wrap:wrap;gap:6px}
+.links2 a{background:#F5F5EB;border-radius:999px;padding:8px 12px;font-size:13.5px;text-decoration:none;color:#14140F}
+/* refs + table */
+.refs{display:grid;gap:10px;margin-top:22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
+.ref{background:var(--card);border-radius:20px;padding:16px 18px;display:grid;gap:6px}
+.ref a{color:inherit;font-weight:500}
+.ref p{color:var(--mute);font-size:14.5px}
+.panel{background:var(--card);border-radius:24px;padding:22px;margin-top:22px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--mute);font-size:13px}
+tr:last-child td{border-bottom:0}
+footer{padding-block:56px 48px;color:var(--mute);font-size:14px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<header class="wrap top">
+  <p style="color:var(--mute)">MadeForSriLanka · phone menu</p>
+  <h1>Three phone menus</h1>
+  <p class="lead">Today the phone shows only the logo and "Plan my trip", with no way to reach Trips, Day trips, Guides or the crew. Here are three menus in our design. Tap the menu button in each phone to open it, tap again to close.</p>
+</header>
+
+<section class="wrap" style="padding-top:28px">
+  <div class="opts" id="opts"></div>
+</section>
+
+<section class="wrap">
+  <h2>What real sites do</h2>
+  <div class="refs">
+    <div class="ref"><a href="https://www.perk.com/">Perk (our base)</a><p>Two-line menu button. Opens a white rounded card under the bar with rows and arrows, a lime button and an outline button. The page behind blurs. This is option A.</p></div>
+    <div class="ref"><a href="https://mobbin.com/screens/62bb6e97-1d86-4a73-ac92-8c5723cc246b?utm_source=claude&utm_medium=ai-assistant&utm_source_platform=mcp">Tripadvisor</a><p>Rounded white sheet from the bottom, one dark main button, outline buttons below. The pattern for option C.</p></div>
+    <div class="ref"><a href="https://mobbin.com/screens/c5cacefd-1a46-4de5-9eed-34a77d07d7c1?utm_source=claude&utm_medium=ai-assistant&utm_source_platform=mcp">Kiwi.com</a><p>Menu panel with "My trips" at the top and simple text rows. Like our "My trip" row.</p></div>
+    <div class="ref"><a href="https://mobbin.com/screens/fab9fd81-4397-423b-a03a-0c5c778c92fa?utm_source=claude&utm_medium=ai-assistant&utm_source_platform=mcp">Zara</a><p>Full-screen menu with very large words. Bold and brand-led, like option B.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Compared</h2>
+  <div class="panel"><table><thead><tr><th></th><th>A. Dropdown card</th><th>B. Full screen</th><th>C. Bottom sheet</th></tr></thead><tbody>
+    <tr><td>Feels like</td><td>Perk, our base</td><td>A bold brand moment</td><td>An app, like our booking sheet</td></tr>
+    <tr><td>Thumb reach</td><td>Top of the screen</td><td>Whole screen</td><td>Bottom: easiest with one hand</td></tr>
+    <tr><td>Room for more</td><td>Sub-lists with arrows</td><td>Little</td><td>Tiles plus small links</td></tr>
+    <tr><td>Fits our design</td><td>Matches the floating menu bar</td><td>Strong, but loud next to quiet pages</td><td>Matches our sheets</td></tr>
+  </tbody></table>
+  <p style="margin-top:14px;font-size:15.5px"><b style="font-weight:500">My recommendation: A.</b> It continues the Perk menu you chose (flat at the top, floating bar when scrolling), so the menu card grows straight out of that bar. "Plan my trip" stays as the lime button, and WhatsApp sits right under it. C is a good second choice if most visitors use one hand on the beach.</p></div>
+</section>
+
+<footer class="wrap">Mockup. Menu items follow the agreed main menu: Trips, Day trips, How it works, Guides, Our crew, plus My trip, EN/DE and Plan my trip.</footer>
+
+<script>
+(()=>{
+const chev='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+const burger='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 9h16M4 15h16"/></svg>',close='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const chat='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1121 12z"/></svg>';
+const ic=d=>`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14140F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const logo='<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="16.5" cy="15" r="9" fill="#E3A13B"/><circle cx="47.5" cy="15" r="9" fill="#E3A13B"/><circle cx="16.5" cy="15.6" r="4.4" fill="#14140F"/><circle cx="47.5" cy="15.6" r="4.4" fill="#14140F"/><rect x="6" y="13" width="52" height="47" rx="16" fill="#BEFF50"/><circle cx="23.5" cy="35" r="3.6" fill="#14140F"/><circle cx="40.5" cy="35" r="3.6" fill="#14140F"/><path d="M28.2 42.4h7.6l-3.8 4.8z" fill="#14140F"/></svg>';
+const body='<div class="body" aria-hidden="true"><p class="hi">Ayubowan, welcome</p><h4>Sri Lanka without the tourist traps.</h4><p>Private trips with your own driver, planned by young locals.</p><span class="b1">Plan my trip in 2 minutes</span><div class="ph"></div></div>';
+const util='<div class="util"><span class="seg" role="group" aria-label="Language"><b class="on">EN</b><b>DE</b></span><span>USD</span></div>';
+const MENUS={
+ A:`<div class="menuA" role="menu">
+   ${[["Trips","4 round trips · design your own",1],["Day trips","From your hotel on the coast",1],["How it works","",0],["Guides","Places and planning",1],["Our crew","",0],["My trip","Already booked? Open your trip page",0]].map(r=>`<button class="row" role="menuitem"><span>${r[0]}${r[1]?`<small>${r[1]}</small>`:""}</span>${r[2]?chev:""}</button>`).join("")}
+   <button class="btn b-lime">Plan my trip ${chev}</button><button class="btn b-ol">${chat}WhatsApp us</button>${util}</div>`,
+ B:`<div class="menuB" role="menu">
+   ${[["Trips","4 round trips"],["Day trips","from your hotel"],["How it works",""],["Guides","places and planning"],["Our crew",""]].map(r=>`<button class="big" role="menuitem">${r[0]}${r[1]?`<small>${r[1]}</small>`:""}</button>`).join("")}
+   <button class="row" style="font-size:15px;margin-top:6px">My trip <small style="display:inline;margin:0">· already booked</small></button>
+   <div class="foot"><button class="btn b-lime">Plan my trip ${chev}</button><button class="btn b-ol">${chat}WhatsApp us</button>${util}</div></div>`,
+ C:`<div class="scrim" data-close></div><div class="menuC" role="dialog" aria-label="Menu"><div class="grip"></div>
+   <div class="tiles">${[["Trips","4 round trips",'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/>'],["Day trips","from your hotel",'<path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>'],["Guides","places, planning",'<path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 5v16"/>'],["My trip","already booked",'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>']].map(t=>`<button class="tile"><i>${ic(t[2])}</i><b>${t[0]}</b><small>${t[1]}</small></button>`).join("")}</div>
+   <div class="links2"><a href="#opts">How it works</a><a href="#opts">Our crew</a><a href="#opts">FAQ</a><a href="#opts">Safety</a></div>
+   <button class="btn b-lime">Plan my trip ${chev}</button><button class="btn b-ol">${chat}WhatsApp us</button>${util}</div>`};
+const O=[["A","Dropdown card",1,"Perk's own phone menu. A white card drops from the bar; rows with arrows open sub-lists.",[["+","Same as our base site"],["+","Grows out of the floating bar"],["+","Room for sub-lists"]],[["−","Top of screen is harder to reach with one hand"]]],
+ ["B","Full screen",0,"The whole screen turns into the menu, with very large words.",[["+","Bold, memorable"],["+","Very easy to read"]],[["−","Loud next to our quiet pages"],["−","No room for sub-lists"]]],
+ ["C","Bottom sheet",0,"The menu slides up from the bottom, like our booking sheet: 4 big tiles, small links, buttons.",[["+","Easiest with one hand"],["+","Same sheet as booking"]],[["−","Feels more like an app than a website"],["−","Less like Perk"]]]];
+document.getElementById("opts").innerHTML=O.map(o=>`<div class="opt"><div class="phone"><div class="scr" id="s${o[0]}"><span class="notch"></span>
+  <div class="bar"><span class="lg">${logo}MadeFor<span>SriLanka</span></span><span class="grow"></span>${o[0]==="C"?'':'<span class="mini-cta">Plan my trip</span>'}<button class="mbtn" data-m="${o[0]}" aria-expanded="false" aria-label="Open menu">${burger}</button></div>
+  ${body}${MENUS[o[0]]}</div></div>
+  <h3>${o[0]}. ${o[1]}${o[2]?'<span class="tag">Recommended</span>':""}</h3><p class="d">${o[3]}</p>
+  <ul>${o[4].map(l=>`<li><i>${l[0]}</i><span>${l[1]}</span></li>`).join("")}${o[5].map(l=>`<li class="n"><i>${l[0]}</i><span>${l[1]}</span></li>`).join("")}</ul>
+  <button class="try" data-m="${o[0]}">Open menu ${o[0]}</button></div>`).join("");
+const toggle=k=>{const s=document.getElementById("s"+k),open=!s.classList.contains("open");s.classList.toggle("open",open);const b=s.querySelector(".mbtn");b.innerHTML=open?close:burger;b.setAttribute("aria-expanded",open);b.setAttribute("aria-label",open?"Close menu":"Open menu")};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-m]");if(b)return toggle(b.dataset.m);const c=e.target.closest("[data-close]");if(c)toggle(c.closest(".scr").id.slice(1))});
+setTimeout(()=>toggle("A"),300);
+})();
+</script>
