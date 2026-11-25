@@ -37,7 +37,6 @@ Every change follows the **sns-change-control** skill: change the highest docume
 | `change-requests/`, `addenda/`, `proposal/`, `reference/` | Changes to the frozen proposal, the proposal itself, client material |
 | `audits/` | Dated review records; `audits/README.md` says which findings are still open |
 | `scripts/` | Repository checks and sync tools (Node, no install) |
-| `madeforsrilanka/` | A separate project kept here for safe keeping: Dulan's MadeForSriLanka tour website design. SNS rules do not apply to it |
 | `.claude/skills/`, `.claude/agents/`, `.claude/hooks/` | The harness: skills (index in `.claude/skills/README.md`), subagents, hooks. Other agents can read and follow them too |
 
 ## Work loop
